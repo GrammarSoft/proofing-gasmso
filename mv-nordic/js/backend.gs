@@ -21,15 +21,13 @@
  */
 'use strict';
 
-var gs = {
-	'nr_name': 'gt-comma',
-	};
+var NAMED_RANGE_PREFIX = 'gtdp';
 
 function onOpen(e) {
-	DocumentApp.getUi().createAddonMenu()
+	var ui = DocumentApp.getUi();
+	ui.createAddonMenu()
 		.addItem('Start Ret Mig', 'showSidebar')
 		.addToUi();
-	gs.locale = Session.getActiveUserLocale();
 }
 
 function onInstall(e) {
@@ -41,23 +39,15 @@ function include(filename) {
 }
 
 function showSidebar() {
-	var ui = HtmlService.createTemplateFromFile('sidebar')
+	wipeNamedRanges();
+	var ui = HtmlService.createTemplateFromFile('html/sidebar')
 		.evaluate()
 		.setSandboxMode(HtmlService.SandboxMode.IFRAME)
-		.setTitle('Kommaforslag');
+		.setTitle('Ret Mig');
 	DocumentApp.getUi().showSidebar(ui);
 }
 
-function getPreferences() {
-	var userProperties = PropertiesService.getUserProperties();
-	var languagePrefs = {
-		originLang: userProperties.getProperty('originLang'),
-		destLang: userProperties.getProperty('destLang')
-		};
-	return languagePrefs;
-}
-
-function _empty(obj) {
+function empty(obj) {
 	for (var k in obj) {
 		if (obj.hasOwnProperty(k)) {
 			return false;
@@ -66,56 +56,134 @@ function _empty(obj) {
 	return true;
 }
 
-function _wipeNamedRanges() {
+function wipeNamedRanges() {
+	Logger.log('Wiping ranges');
 	var doc = DocumentApp.getActiveDocument();
-	var nrs = doc.getNamedRanges(gs.nr_name);
+	var nrs = doc.getNamedRanges(NAMED_RANGE_PREFIX);
 	for (var i=0 ; i<nrs.length ; ++i) {
 		nrs[i].remove();
 	}
 }
 
-function _wrapElements(elements) {
+function wrapDocument() {
 	var doc = DocumentApp.getActiveDocument();
-	var texts = {};
+	var nrs = doc.getNamedRanges(NAMED_RANGE_PREFIX);
+	var elms = [];
+	for (var i=0 ; i<nrs.length ; ++i) {
+		var es = nrs[i].getRange().getRangeElements();
+		if (es.length > 1) {
+			Logger.log('NR %s split element', nrs[i].getId());
+			nrs[i].remove();
+			continue;
+		}
+		if (!es[0]) {
+			Logger.log('NR %s missing element', nrs[i].getId());
+			nrs[i].remove();
+			continue;
+		}
+		var e = es[0].getElement();
+		elms.push({i: nrs[i].getId(), t: e.asText().getText().replace(/\s*$/g, '')});
+	}
 
-	for (var i = 0; i < elements.length; ++i) {
-		var element = elements[i];
-		if (element.editAsText) {
-			var elementText = element.asText().getText();
-			if (elementText != '') {
-				var range = doc.newRange();
-				range.addElement(element);
-				var nr = doc.addNamedRange(gs.nr_name, range);
-				texts[nr.getId()] = elementText;
+	var sects = [];
+	if (doc.getHeader()) {
+		sects.push(doc.getHeader().getParagraphs());
+	}
+	if (doc.getBody()) {
+		sects.push(doc.getBody().getParagraphs());
+	}
+	if (doc.getFooter()) {
+		sects.push(doc.getFooter().getParagraphs());
+	}
+
+	for (var i=0 ; i<sects.length ; ++i) {
+		var pars = sects[i];
+		for (var j=0 ; j<pars.length ; ++j) {
+			var p = pars[j];
+			if (!p.editAsText) {
+				Logger.log('Not text paragraph');
+				continue;
 			}
+
+			var t = p.asText().getText().replace(/\s*$/g, '');
+			if (t.length === 0 || t === '') {
+				Logger.log('Empty paragraph');
+				continue;
+			}
+
+			var seen = false;
+			for (var e=0 ; e<elms.length ; ++e) {
+				if (elms[e].t === t) {
+					Logger.log('Seen paragraph text %s', elms[e].i);
+					seen = true;
+					break;
+				}
+			}
+			if (seen) {
+				continue;
+			}
+
+			var range = doc.newRange();
+			range.addElement(p);
+			var nr = doc.addNamedRange(NAMED_RANGE_PREFIX, range.build());
+			var id = nr.getId();
+			elms.push({i: id, t: t});
+			Logger.log('New paragraph %s', id);
 		}
 	}
 
+	return elms;
+}
+
+function expandWrapped(es, hashes) {
+	var texts = [];
+	for (var i=0 ; i<es.length ; ++i) {
+		var h = murmurHash3.x86.hash128(es[i].t);
+		if (hashes.hasOwnProperty(h)) {
+			continue;
+		}
+		texts.push({i: es[i].i, t: es[i].t, h: h});
+	}
 	return texts;
 }
 
 function getSelectedText() {
-	var texts = {};
+	var elms = wrapDocument();
+	var es = [];
 
 	var selection = DocumentApp.getActiveDocument().getSelection();
 	if (selection) {
-		var elems = [];
 		var elements = selection.getRangeElements();
 		for (var i = 0; i < elements.length; ++i) {
-			elems.push(elements[i].getElement());
+			var e = elements[i].getElement();
+			var t = e.asText().getText().replace(/\s*$/g, '');
+			for (var j=0 ; j<elms.length ; ++j) {
+				if (elms[j].t === t) {
+					Logger.log('Selected paragraph text %s', elms[j].i);
+					es.push(elms[j]);
+					break;
+				}
+			}
 		}
-		texts = _wrapElements(elems);
 	}
 
-	return texts;
+	return es;
 }
 
-function getAllText() {
-	return _wrapElements(DocumentApp.getActiveDocument().getBody().getParagraphs());
+function getDocument(hashes) {
+	var es = [];
+	if (DocumentApp.getActiveDocument().getSelection()) {
+		es = getSelectedText();
+		hashes = {};
+	}
+	else {
+		es = wrapDocument();
+	}
+	return expandWrapped(es, hashes);
 }
 
 function check(what) {
-	_wipeNamedRanges();
+	wipeNamedRanges();
 	var texts = null;
 
 	if (what === 'selection') {
@@ -125,7 +193,7 @@ function check(what) {
 		texts = getAllText();
 	}
 
-	if (_empty(texts)) {
+	if (empty(texts)) {
 		throw 'Vælg noget tekst og prøv igen';
 	}
 
@@ -141,7 +209,7 @@ function check(what) {
 			'data': text,
 			},
 		};
-	var rv = UrlFetchApp.fetch('http://alpha.visl.sdu.dk/service.php', options);
+	var rv = UrlFetchApp.fetch('https://alpha.visl.sdu.dk/service.php', options);
 
 	return rv.getContentText();
 }
