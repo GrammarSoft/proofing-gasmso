@@ -1,0 +1,214 @@
+<!--
+ Copyright 2016-2017 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
+ Frontend by Tino Didriksen <mail@tinodidriksen.com>
+
+ This project is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This project is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<script>
+'use strict';
+
+var types = ['%k-list', '%k-list-ADJ', '%k-title', '%k-address', '%k-reference', '%k-appo', '%k-appo-end', '%k-extra', '%k-explain', '%k-explain-end', '%k-rel', '%k-rel-end', '%k-paren', '%ko-men', '%k-men', '%k-men-end', '%k-main', '%nok-main', '%k-quote-end', '%k-quote-start', '%k-ellision', '%k-FSend', '%ko-FSstart', '%k-FSco', '%ko-FSco', '%nok-FSstart', '%ko-ellision-end', '%nok-ellision', '%k', '%k-stop', '%nok-soft'];
+var pars = [];
+var curp = -1;
+
+$(function() {
+	var tlist = $('#typelist');
+	for (var i=0 ; i<types.length ; ++i) {
+		var row = '<tr><td><input type="checkbox" name="opt'+types[i]+'" checked></td><td>'+types[i]+'</td></tr>';
+		tlist.append(row);
+	}
+
+	/*
+	$('#comma-keep').click(commaKeep);
+	$('#comma-remove').click(commaRemove);
+	//*/
+	$('#comma-next').click(commaNext);
+	$('#comma-prev').click(commaPrev);
+	$('#check-selection').click(checkSelection);
+	$('#check-all').click(checkAll);
+	$('#options-open').click(optionsOpen);
+	$('#options-close').click(optionsClose);
+	google.script.run.withSuccessHandler(loadPreferences).withFailureHandler(showError).getPreferences();
+});
+
+function optionsOpen() {
+	$('#sidebar-main').hide();
+	$('#sidebar-options').show();
+}
+
+function optionsClose() {
+	$('#sidebar-options').hide();
+	$('#sidebar-main').show();
+}
+
+function loadPreferences(prefs) {
+}
+
+function commaClear() {
+	$('#commas').text('…');
+	$('#explanation').text('…');
+	$('#examples').text('…');
+}
+
+function commaNext() {
+	commaClear();
+	++curp;
+	if (curp >= pars.length) {
+		curp = 0;
+	}
+	$('#commas').html(pars[curp].ml).find('span').click(commaClick).first().click();
+}
+
+function commaPrev() {
+	commaClear();
+	--curp;
+	if (curp < 0) {
+		curp = pars.length - 1;
+	}
+	$('#commas').html(pars[curp].ml).find('span').click(commaClick).first().click();
+}
+
+function commaClick() {
+	$('#commas').find('span').removeClass('comma-selected');
+	var c = $(this);
+	c.addClass('comma-selected');
+
+	var exp = [];
+	var exs = [];
+	var types = c.attr('data-types').split(/\s+/);
+	for (var i=0 ; i<types.length ; ++i) {
+		exp.push('Forklaring af ' + types[i]);
+		exs.push('Eksempler på ' + types[i]);
+	}
+	$('#explanation').html(exp.join('<br>'));
+	$('#examples').html(exs.join('<br>'));
+}
+
+function parseCommas(txt) {
+	pars = [];
+	curp = -1;
+	commaClear();
+
+	var ps = $.trim(txt).split(/<\/s[^>]+>/);
+	for (var i=0 ; i<ps.length ; ++i) {
+		var cp = $.trim(ps[i]);
+		if (!cp) {
+			continue;
+		}
+
+		var lines = cp.split(/\n/);
+		var id = lines[0].replace(/^<s(.+)>$/, '$1');
+		var p = {
+			'id': id,
+			'ws': [],
+			'ml': '',
+			};
+
+		for (var j=1 ; j<lines.length ; ++j) {
+			var w = lines[j].split(/\t/);
+			w[0] = $.trim(w[0].replace(/(\S)=/g, '$1 '));
+
+			if (w[0] === '') {
+				if (p.ws.length >= 50) {
+					pars.push(p);
+					p = {
+						'id': id,
+						'ws': [],
+						'ml': '',
+						};
+				}
+				continue;
+			}
+
+			if (w.length > 1) {
+				var col = 'error';
+				if (w[1].indexOf('%nok-') === 0) {
+					col = 'no';
+				}
+				else if (w[1].indexOf('%ko-') === 0) {
+					col = 'maybe';
+				}
+				else if (w[1].indexOf('%k-') === 0) {
+					col = 'yes';
+				}
+
+				p.ml += ' <span class="comma comma-'+col+'" data-types="'+w[1]+'">,</span>';
+			}
+			if (w[0] !== ',' || w.length === 1) {
+				p.ml += ' ' + w[0];
+			}
+			p.ws.push(w);
+		}
+
+		pars.push(p);
+	}
+
+	console.log(pars);
+	commaNext();
+}
+
+function check(which, what) {
+	which.disabled = true;
+	$('#error').remove();
+
+	google.script.run
+		.withSuccessHandler(
+			function(rv, element) {
+				parseCommas(rv);
+				element.disabled = false;
+			})
+		.withFailureHandler(
+			function(msg, element) {
+				showError(msg, $('#button-bar'));
+				element.disabled = false;
+			})
+		.withUserObject(which)
+		.check(what);
+}
+
+function checkSelection() {
+	check(this, 'selection');
+}
+
+function checkAll() {
+	check(this, 'all');
+}
+
+/**
+ * Runs a server-side function to insert the translated text into the document
+ * at the user's cursor or selection.
+ */
+function insertText() {
+	this.disabled = true;
+	$('#error').remove();
+	google.script.run
+		.withSuccessHandler(
+			function(returnSuccess, element) {
+				element.disabled = false;
+			})
+		.withFailureHandler(
+			function(msg, element) {
+				showError(msg, $('#button-bar'));
+				element.disabled = false;
+			})
+		.withUserObject(this)
+		.insertText($('#translated-text').val());
+}
+
+function showError(msg, element) {
+	var div = $('<div id="error" class="error">' + msg + '</div>');
+	$(element).after(div);
+}
+</script>
