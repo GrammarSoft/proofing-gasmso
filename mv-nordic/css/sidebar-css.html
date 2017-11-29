@@ -1,0 +1,74 @@
+<!--
+ Copyright 2016-2017 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
+ Frontend by Tino Didriksen <mail@tinodidriksen.com>
+
+ This project is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This project is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<style>
+#button-bar {
+	text-align: right;
+}
+#button-bar button {
+	margin-bottom: 2ex;
+	min-width: 33%;
+}
+
+#commas, #explanation, #examples {
+	width: 100%;
+	overflow: auto;
+	border-bottom: 1px solid #bbb;
+	padding-bottom: 1ex;
+}
+
+.comma {
+	cursor: pointer;
+	color: white;
+	font-size: 150%;
+	line-height: 150%;
+	padding-left: 7px;
+	padding-right: 7px;
+}
+.comma-no {
+	background-color: #800;
+}
+.comma-maybe {
+	background-color: #008;
+}
+.comma-yes {
+	background-color: #080;
+}
+
+.comma-selected {
+	background-color: #fff;
+	padding-left: 6px;
+	padding-right: 6px;
+}
+.comma-selected.comma-no {
+	border: 1px solid #c00;
+	color: #c00;
+}
+.comma-selected.comma-maybe {
+	border: 1px solid #00c;
+	color: #00c;
+}
+.comma-selected.comma-yes {
+	border: 1px solid #0c0;
+	color: #0c0;
+}
+
+#sidebar-options {
+	display: none;
+}
+</style>
