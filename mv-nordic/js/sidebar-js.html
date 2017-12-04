@@ -24,25 +24,44 @@ var GS = {
 	};
 
 function getDocument() {
-	var hashes = {};
-	for (var k in GS.cache) {
-		if (!GS.cache.hasOwnProperty(k)) {
-			continue;
-		}
-		hashes[k] = 1;
-	}
-	google.script.run.withSuccessHandler(gotDocument).withFailureHandler(showError).getDocument(hashes);
+	google.script.run.withSuccessHandler(gotDocument).withFailureHandler(showError).getDocument();
 }
 
 function gotDocument(doc) {
 	for (var i=0 ; i<doc.length ; ++i) {
+		doc[i].h = 'h' + murmurHash3.x86.hash128(doc[i].t) + '-' + doc[i].t.length;
 		GS.cache[doc[i].h] = doc[i];
 	}
 	console.log(doc);
 }
 
+function didReplace() {
+	console.log(this);
+}
+
+function replaceInDocument() {
+	var prefix = $('#prefix').val();
+	var word = $('#word').val();
+	var rpl = $('#rpl').val();
+	var suffix = $('#suffix').val();
+	google.script.run.withSuccessHandler(didReplace).withFailureHandler(showError).replaceInDocument(prefix, word, rpl, suffix);
+}
+
+function didSelect() {
+	console.log(this);
+}
+
+function selectInDocument() {
+	var prefix = $('#prefix').val();
+	var word = $('#word').val();
+	var suffix = $('#suffix').val();
+	google.script.run.withSuccessHandler(didSelect).withFailureHandler(showError).selectInDocument(prefix, word, suffix);
+}
+
 $(function() {
 	$('#load').click(getDocument);
+	$('#replace').click(replaceInDocument);
+	$('#hilite').click(selectInDocument);
 });
 
 function showError(msg, element) {
