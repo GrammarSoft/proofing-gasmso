@@ -27,9 +27,18 @@
 <div class="sidebar">
 	<button class="action" id="load">Load Document</button>
 </div>
+<div class="sidebar">
+	<input type="text" id="prefix" value="Når stormen suser når regnen styrter">
+	<input type="text" id="word" value="ned">
+	<input type="text" id="rpl" value="ø">
+	<input type="text" id="suffix" value="og når tordenen brager er det chefredaktør administrerende direktør Hanne Nielsen der styrer firmaet. De havde en flag stang.">
+	<button class="action" id="replace">Replace</button>
+	<button class="action" id="hilite">Highlight</button>
+</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- <script src="https://signon.mv-nordic.com/sp-js/mvlogin.js"></script> -->
+<?!= include('vendor/murmurhash3js.min'); ?>
 <?!= include('js/sidebar-js'); ?>
 </body>
 </html>
