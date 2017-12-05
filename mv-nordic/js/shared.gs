@@ -32,5 +32,5 @@ function escapeRegExpTokens(txt) {
 	for (var i=0 ; i<ts.length ; ++i) {
 		ts[i] = escapeRegExp(ts[i]);
 	}
-	return ts.join('[\\s\\u200b]+');
+	return ts.join('\\s+');
 }

@@ -116,7 +116,7 @@ function getDocument() {
 	return es;
 }
 
-function replaceInDocument(prefix, word, rpl, suffix) {
+function findElement(prefix, word, suffix) {
 	var sects = [];
 	var doc = DocumentApp.getActiveDocument();
 	if (doc.getHeader()) {
@@ -136,31 +136,57 @@ function replaceInDocument(prefix, word, rpl, suffix) {
 		if (!sel) {
 			continue;
 		}
+		return sel;
 	}
+	return null;
+}
+
+function replaceInDocument(prefix, word, rpl, suffix) {
+	if (!selectInDocument(prefix, word, suffix)) {
+		return false;
+	}
+
+	var doc = DocumentApp.getActiveDocument();
+	var rem = doc.getSelection().getRangeElements()[0];
+	var b = rem.isPartial() ? rem.getStartOffset() : 0;
+	var txt = rem.getElement().editAsText();
+
+	var wi = 0, ri = 0;
+	for (; wi<word.length && ri<rpl.length ; ++wi, ++ri) {
+		txt.insertText(b + ri + 1, rpl.charAt(ri));
+		txt.deleteText(b + wi, b + wi);
+	}
+	if (wi < word.length) {
+		txt.deleteText(b + wi, b + (word.length - wi));
+	}
+	if (ri < rpl.length) {
+		txt.insertText(b + ri, rpl.substr(ri));
+	}
+
+	var rng = doc.newRange();
+	rng.addElement(rem.getElement(), b, b + rpl.length - 1);
+	doc.setSelection(rng.build());
+	return true;
 }
 
 function selectInDocument(prefix, word, suffix) {
-	var sects = [];
-	var doc = DocumentApp.getActiveDocument();
-	if (doc.getHeader()) {
-		sects.push(doc.getHeader());
-	}
-	if (doc.getBody()) {
-		sects.push(doc.getBody());
-	}
-	if (doc.getFooter()) {
-		sects.push(doc.getFooter());
+	var sel = findElement(prefix, word, suffix);
+	if (!sel) {
+		Logger.log('Could not find %s %s %s', prefix, word, suffix);
+		return false;
 	}
 
-	var rx = '^'+prefix.replace(Const.NonLetter, '.*?')+'\\s*'+escapeRegExpTokens(word)+'\\s*'+suffix.replace(Const.NonLetter, '.*?')+'.*?$';
-	Logger.log('Searching regex %s', rx);
-	for (var i=0 ; i<sects.length ; ++i) {
-		var sel = sects[i].findText(rx);
-		if (!sel) {
-			continue;
-		}
-		var rng = doc.newRange();
-		rng.addElement(sel.getElement(), sel.getStartOffset(), sel.getEndOffsetInclusive());
-		doc.setSelection(rng.build());
+	var txt = sel.getElement().asText().getText();
+	var rx = new RegExp('^('+prefix.replace(Const.NonLetter, '.*?')+'\\s*)'+escapeRegExpTokens(word));
+	var m = rx.exec(txt);
+	if (!m) {
+		Logger.log('Did not match regex');
+		return false;
 	}
+
+	var doc = DocumentApp.getActiveDocument();
+	var rng = doc.newRange();
+	rng.addElement(sel.getElement(), m[1].length, m[1].length + word.length - 1);
+	doc.setSelection(rng.build());
+	return true;
 }
