@@ -34,3 +34,21 @@ function escapeRegExpTokens(txt) {
 	}
 	return ts.join('\\s+');
 }
+
+function empty(obj) {
+	for (var k in obj) {
+		if (obj.hasOwnProperty(k)) {
+			return false;
+		}
+	}
+	return true;
+}
+
+function hasSurrogatePair(s) {
+	for (var i=0 ; i<s.length ; ++i) {
+		if (s.charCodeAt(i) >= 0xD800 && s.charCodeAt(i) <= 0xDBFF) {
+			return true;
+		}
+	}
+	return false;
+}

@@ -35,8 +35,8 @@ function gotDocument(doc) {
 	console.log(doc);
 }
 
-function didReplace() {
-	console.log(this);
+function didReplace(rv) {
+	console.log(rv);
 }
 
 function replaceInDocument() {
@@ -47,8 +47,8 @@ function replaceInDocument() {
 	google.script.run.withSuccessHandler(didReplace).withFailureHandler(showError).replaceInDocument(prefix, word, rpl, suffix);
 }
 
-function didSelect() {
-	console.log(this);
+function didSelect(rv) {
+	console.log(rv);
 }
 
 function selectInDocument() {
@@ -59,13 +59,13 @@ function selectInDocument() {
 }
 
 $(function() {
-	$('#load').click(getDocument);
-	$('#replace').click(replaceInDocument);
-	$('#hilite').click(selectInDocument);
+	$('#error').hide();
+	$('.sidebar').hide();
+	$('#welcome').show();
 });
 
-function showError(msg, element) {
-	var div = $('<div id="error" class="error">' + msg + '</div>');
-	$(element).after(div);
+function showError(msg) {
+	$('#error').show();
+	$('#error-text').text(div);
 }
 </script>

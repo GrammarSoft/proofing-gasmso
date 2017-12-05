@@ -19,25 +19,64 @@
 -->
 <html>
 <head>
+	<meta charset="UTF-8">
 	<base target="_top">
-	<link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+	<link href="../css/sidebar-css.html" rel="stylesheet" type="text/css">
 	<?!= include('css/sidebar-css'); ?>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!-- script src="https://signon.mv-nordic.com/sp-js/mvlogin.js"></script -->
 </head>
 <body>
-<div class="sidebar">
-	<button class="action" id="load">Load Document</button>
-</div>
-<div class="sidebar">
-	<input type="text" id="prefix" value="Når stormen suser når regnen styrter">
-	<input type="text" id="word" value="ned">
-	<input type="text" id="rpl" value="ø">
-	<input type="text" id="suffix" value="og når tordenen brager er det chefredaktør administrerende direktør Hanne Nielsen der styrer firmaet. De havde en flag stang.">
-	<button class="action" id="replace">Replace</button>
-	<button class="action" id="hilite">Highlight</button>
+
+<!--
+<div id="error closable">
+<div class="closer">&times;</div>
+<div id="error-text">…</div>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!-- <script src="https://signon.mv-nordic.com/sp-js/mvlogin.js"></script> -->
+<div class="sidebar" id="welcome">
+<h1>Hvordan skal din tekst tjekkes for stavning og grammatik?</h1>
+<div class="buttonbar">
+	<button class="btn-blue" id="btnCheckAuto">Løbende</button>
+	<button class="btn-orange" id="btnCheckSelected">Markering</button>
+	<button class="btn-lightblue" id="btnCheckAll">Alt</button>
+</div>
+<div class="text">
+Ønsker du efterfølgende at få tjekket din tegnsætning?
+<label><input type="checkbox" id="optComma" checked> Kommaforslag</label>
+</div>
+</div>
+-->
+
+<div class="sidebar" id="checking">
+<h1 id="chkType">…</h1>
+<div class="text" id="chkContext">…</div>
+<div class="text" id="chkExplain">
+	<div id="chkExplainShort"><div id="chkExplainShortText">…</div><div>Vis mere ▽</div></div>
+	<div id="chkExplainLong"><div id="chkExplainLongText">…</div><div>Skjul △</div></div>
+</div>
+<div class="buttonbar backed">
+	<button class="btn-blue" id="btnInput">Ret selv</button>
+	<button class="btn-orange" id="btnIgnore">Ignorer</button>
+	<button class="btn-orange" id="btnIgnoreAll">Ignorer alle</button>
+	<button class="btn-lightblue" id="btnPrev">Forrige</button>
+	<button class="btn-lightblue" id="btnNext">Næste</button>
+</div>
+<div class="text closable backed" id="chkInput">
+	<div class="closer">&times;</div>
+	<h2>Ret selv</h2>
+	<div><input type="text" id="chkInputText"></div>
+	<div>
+		<button class="btn-blue" id="btnInputOne">Ret denne</button>
+		<button class="btn-blue" id="btnInputAll">Ret alle</button>
+	</div>
+</div>
+<div class="text center">
+	<button class="btn-lightblue btn-big" id="btnAddWord">Føj til stavekontrol</button>
+	<button class="btn-lightblue btn-big" id="btnDictionary">IntoWords Ordbog</button>
+</div>
+</div>
+
 <?!= include('vendor/murmurhash3js.min'); ?>
 <?!= include('js/sidebar-js'); ?>
 </body>
