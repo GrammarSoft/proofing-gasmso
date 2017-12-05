@@ -33,7 +33,7 @@ function onInstall(e) {
 }
 
 function include(filename) {
-	return HtmlService.createHtmlOutputFromFile(filename).getContent();
+	return HtmlService.createHtmlOutputFromFile(filename).getContent().replace(/<!--.*?-->/g, '');
 }
 
 function showSidebar() {
@@ -42,15 +42,6 @@ function showSidebar() {
 		.setSandboxMode(HtmlService.SandboxMode.IFRAME)
 		.setTitle('Ret Mig');
 	DocumentApp.getUi().showSidebar(ui);
-}
-
-function empty(obj) {
-	for (var k in obj) {
-		if (obj.hasOwnProperty(k)) {
-			return false;
-		}
-	}
-	return true;
 }
 
 function getParagraphs() {
@@ -152,12 +143,17 @@ function replaceInDocument(prefix, word, rpl, suffix) {
 	var txt = rem.getElement().editAsText();
 
 	var wi = 0, ri = 0;
-	for (; wi<word.length && ri<rpl.length ; ++wi, ++ri) {
-		txt.insertText(b + ri + 1, rpl.charAt(ri));
-		txt.deleteText(b + wi, b + wi);
+	if (hasSurrogatePair(word) || hasSurrogatePair(rpl)) {
+		Logger.log('Found surrogate in: %s %s', word, rpl);
+	}
+	else {
+		for (; wi<word.length && ri<rpl.length ; ++wi, ++ri) {
+			txt.insertText(b + ri + 1, rpl.charAt(ri));
+			txt.deleteText(b + wi, b + wi);
+		}
 	}
 	if (wi < word.length) {
-		txt.deleteText(b + wi, b + (word.length - wi));
+		txt.deleteText(b + wi, b + word.length - 1);
 	}
 	if (ri < rpl.length) {
 		txt.insertText(b + ri, rpl.substr(ri));
