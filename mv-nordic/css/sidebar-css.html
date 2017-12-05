@@ -17,58 +17,162 @@
  along with this project.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <style>
-#button-bar {
-	text-align: right;
-}
-#button-bar button {
-	margin-bottom: 2ex;
-	min-width: 33%;
+.dummy {
 }
 
-#commas, #explanation, #examples {
-	width: 100%;
-	overflow: auto;
-	border-bottom: 1px solid #bbb;
-	padding-bottom: 1ex;
+html, body {
+	margin: 0;
+	padding: 0;
+	font-family: Verdana, sans-serif;
+	font-size: 14px;
+	max-width: 300px;
 }
 
-.comma {
+.whiteblue {
+	color: #eaf7fe;
+}
+.lightblue {
+	color: #0da9f6;
+}
+.lightblue_dis {
+	color: #99ddfc;
+}
+.gray_dis {
+	color: #9b9b9b;
+}
+.blue {
+	color: #4a90e2;
+}
+.orange {
+	color: #f5a623;
+}
+
+#error {
+	display: flex;
+	background-color: #fee;
+	margin: 0 0 10px;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+#error, .sidebar {
+	padding: 0 18px;
+	border-bottom: 1px dotted #ccc;
+}
+
+#error-text {
+	padding: 18px 0;
+	color: #f00;
+}
+
+.closable {
+	position: relative;
+}
+.closer {
 	cursor: pointer;
-	color: white;
-	font-size: 150%;
-	line-height: 150%;
-	padding-left: 7px;
-	padding-right: 7px;
-}
-.comma-no {
-	background-color: #800;
-}
-.comma-maybe {
-	background-color: #008;
-}
-.comma-yes {
-	background-color: #080;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	font-weight: bold;
 }
 
-.comma-selected {
-	background-color: #fff;
-	padding-left: 6px;
-	padding-right: 6px;
-}
-.comma-selected.comma-no {
-	border: 1px solid #c00;
-	color: #c00;
-}
-.comma-selected.comma-maybe {
-	border: 1px solid #00c;
-	color: #00c;
-}
-.comma-selected.comma-yes {
-	border: 1px solid #0c0;
-	color: #0c0;
+.buttonbar {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-items: center;
 }
 
-#sidebar-options {
-	display: none;
+.center {
+	text-align: center;
+}
+
+button {
+	vertical-align: middle;
+	text-align: center;
+	border-radius: 3px;
+	border: 0px;
+	margin: 5px 0;
+	padding: 0 10px;
+	min-height: 30px;
+	min-width: 70px;
+	color: #fff;
+	cursor: pointer;
+}
+
+.btn-big {
+	font-size: 16px;
+	border-radius: 6px;
+	margin: 5px;
+	min-height: 50px;
+	min-width: 220px;
+	display: inline-block;
+	clear: both;
+}
+
+.btn-blue {
+	background-color: #4a90e2;
+}
+
+.btn-orange {
+	background-color: #f5a623;
+}
+
+.btn-lightblue {
+	background-color: #0da9f6;
+}
+
+.disabled {
+	cursor: auto;
+}
+
+button.disabled {
+	background-color: #9b9b9b;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+	color: #0da9f6;
+	margin: 0;
+	padding: 0;
+}
+h1 {
+	font-size: 16px;
+}
+
+h2 {
+	font-size: 14px;
+	font-weight: bold;
+	color: #000;
+}
+
+h1, .text {
+	margin: 18px 0;
+}
+
+.backed {
+	padding: 18px 0;
+	margin: 10px 0;
+	background-color: #eaf7fe;
+	margin-left: -18px;
+	margin-right: -18px;
+	padding-left: 18px;
+	padding-right: 18px;
+}
+
+label {
+	cursor: pointer;
+	display: block;
+	clear: both;
+	margin: 9px 0;
+	color: #0da9f6;
+}
+input {
+	border-radius: 5px;
+	border: 2px solid #4a90e2;
+	width: 100%;
+	padding: 3px;
+	margin: 0;
 }
 </style>
