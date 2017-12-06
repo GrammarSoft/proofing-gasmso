@@ -139,7 +139,7 @@ function findElement(prefix, word, suffix) {
 
 function replaceInDocument(prefix, word, rpl, suffix) {
 	if (!selectInDocument(prefix, word, suffix)) {
-		return false;
+		throw 'ERR_REPLACE_NOSELECT';
 	}
 
 	var doc = DocumentApp.getActiveDocument();
@@ -174,7 +174,7 @@ function selectInDocument(prefix, word, suffix) {
 	var sel = findElement(prefix, word, suffix);
 	if (!sel) {
 		Logger.log('Could not find %s %s %s', prefix, word, suffix);
-		return false;
+		throw 'ERR_SELECT_NOTFOUND';
 	}
 
 	var txt = sel.getElement().asText().getText();
@@ -182,7 +182,7 @@ function selectInDocument(prefix, word, suffix) {
 	var m = rx.exec(txt);
 	if (!m) {
 		Logger.log('Did not match regex');
-		return false;
+		throw 'ERR_SELECT_NOMATCH';
 	}
 
 	var doc = DocumentApp.getActiveDocument();
