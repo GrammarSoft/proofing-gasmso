@@ -19,11 +19,15 @@
 <script>
 'use strict';
 
+var g_conf = Object.assign({}, g_conf_defaults);
 var session = {};
 var cache = {};
 var to_send = null;
 var to_send_b = 0;
 var to_send_i = 0;
+var ts_xhr = null;
+var ts_slow = null;
+var ts_fail = 0;
 
 function _parseResult(rv) {
 	$('#gtdp-progress-bar').attr('value', to_send_i);
@@ -33,10 +37,6 @@ function _parseResult(rv) {
 		$.featherlight.close();
 		console.log(rv);
 		return;
-	}
-
-	if (!floater) {
-		floaterSetup();
 	}
 
 	var rs = '';
@@ -77,8 +77,6 @@ function _parseResult(rv) {
 				break;
 			}
 		}
-
-		$('#gtdp-markings').find(`[data-id="s${id}"]`).remove();
 
 		rs += '<p id="s'+id+'">';
 		var space = 0;
@@ -201,6 +199,7 @@ function _parseResult(rv) {
 				}
 			}
 
+			/*
 			if (w.length > 1) {
 				var rv = createMarking(w);
 				rs += rv.html;
@@ -224,10 +223,12 @@ function _parseResult(rv) {
 				rs += escHTML(w[0]);
 				txt += w[0];
 			}
+			//*/
 		}
 		rs += '</p>';
 	}
 
+	/*
 	var ms = [];
 	if (context.ggl) {
 		ms = $('#gtdp-markings').find('span.marking');
@@ -243,16 +244,19 @@ function _parseResult(rv) {
 		ms = $(floater_doc).find('span.marking');
 	}
 	ms.off().click(markingClick);
+	//*/
 
 	if (to_send_i < to_send.length) {
 		sendTexts();
 	}
+	/*
 	else {
 		$('#gtdp-progress').hide();
 		if (ms.length === 0) {
 			setTimeout(msgNoMarkingsFound, 100);
 		}
 	}
+	//*/
 }
 
 function parseResult(rv) {
@@ -295,7 +299,7 @@ function sendTexts() {
 		};
 		ts_xhr = $.post('https://retmig.dk/callback.php?a=danproof', data).done(parseResult).fail(() => {
 			console.log(this);
-			alert(l10n.t('errPostback'));
+			showError('ERR_POSTBACK');
 		});
 	}
 	else {
