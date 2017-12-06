@@ -62,6 +62,14 @@ $(function() {
 	$('.closer').click(function() {
 		$(this).closest('.closable').hide();
 	});
+	$('#chkExplainMore').click(function() {
+		$('#chkExplainShort').hide();
+		$('#chkExplainLong').show();
+	});
+	$('#chkExplainLess').click(function() {
+		$('#chkExplainLong').hide();
+		$('#chkExplainShort').show();
+	});
 	$('#error').hide();
 	$('.sidebar').hide();
 	$('#welcome').show();
