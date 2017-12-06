@@ -36,6 +36,17 @@ function include(filename) {
 	return HtmlService.createHtmlOutputFromFile(filename).getContent().replace(/<!--.*?-->/g, '');
 }
 
+function getSession() {
+	var rv = {
+		active: Session.getActiveUser().getEmail(),
+		effective: Session.getEffectiveUser().getEmail(),
+		tz: Session.getScriptTimeZone(),
+		key: Session.getTemporaryActiveUserKey(),
+		locale: Session.getActiveUserLocale(),
+	};
+	return rv;
+}
+
 function showSidebar() {
 	var ui = HtmlService.createTemplateFromFile('html/sidebar')
 		.evaluate()
@@ -44,7 +55,7 @@ function showSidebar() {
 	DocumentApp.getUi().showSidebar(ui);
 }
 
-function getParagraphs() {
+function getAllPars() {
 	var sects = [];
 	var doc = DocumentApp.getActiveDocument();
 	if (doc.getHeader()) {
@@ -80,30 +91,24 @@ function getParagraphs() {
 	return elms;
 }
 
-function getSelectedText(elms) {
+function getSelectedPars(elms) {
 	var es = [];
+	var sel = DocumentApp.getActiveDocument().getSelection();
+	if (!sel) {
+		throw 'ERR_NO_SELECTION';
+	}
 
-	var elements = DocumentApp.getActiveDocument().getSelection().getRangeElements();
+	var elements = sel.getRangeElements();
 	for (var i = 0; i < elements.length; ++i) {
 		var e = elements[i].getElement();
 		var t = e.asText().getText().replace(/\s*$/g, '');
-		for (var j=0 ; j<elms.length ; ++j) {
-			if (elms[j].t === t) {
-				Logger.log('Selected paragraph text %s', elms[j].i);
-				es.push(elms[j]);
-				break;
-			}
+		if (t.length === 0 || t === '') {
+			Logger.log('Empty paragraph');
+			continue;
 		}
+		es.push({i: i+1, t: t});
 	}
 
-	return es;
-}
-
-function getDocument() {
-	var es = getParagraphs();
-	if (DocumentApp.getActiveDocument().getSelection()) {
-		es = getSelectedText(es);
-	}
 	return es;
 }
 
