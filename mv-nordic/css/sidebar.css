@@ -74,7 +74,7 @@ body {
 
 #error, .sidebar {
 	padding: 0 18px;
-	border-bottom: 1px dotted #ccc;
+	/* border-bottom: 1px dotted #ccc; */
 }
 
 #error-text {
@@ -229,4 +229,38 @@ footer {
 	bottom: 0;
 	right: 0;
 	left: 0;
+}
+
+.marking {
+	display: inline-block;
+	padding-left: 3px;
+	padding-right: 3px;
+	margin-left: 1px;
+	margin-right: 1px;
+	font-weight: 900;
+	border-radius: 3px;
+}
+.marking-red {
+	color: #c12e2a;
+	border: 1px dotted #c12e2a;
+}
+.marking-red.alt:after {
+	content: " ✗";
+}
+.marking-yellow {
+	color: #eb9316;
+	border: 1px dotted #eb9316;
+}
+.marking-yellow.alt:after {
+	content: " ?";
+}
+.marking-green {
+	color: #419641;
+	border: 1px dotted #419641;
+}
+.marking-green.alt:after {
+	content: " ✓";
+}
+.marking-selected {
+	border-style: solid;
 }

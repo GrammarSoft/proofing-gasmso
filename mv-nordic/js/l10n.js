@@ -23,6 +23,9 @@ var l10n = {};
 l10n.s = {
 	da: {
 		ERR_NO_SELECTION: 'Der var ingen markering. Du skal markere noget tekst før den funktion virker.',
+		ERR_SELECT_NOTFOUND: 'Kunne ikke finde konteksten. Det kan være du eller en anden har ændret i dokumentet siden tjekket blev kørt.',
+		ERR_SELECT_NOMATCH: 'Konteksten matchede ikke. Denne fejl bør ikke kunne ske.',
+		ERR_REPLACE_NOSELECT: 'Kunne ikke vælge stedet i konteksten. Det kan være du eller en anden har ændret i dokumentet siden tjekket blev kørt.',
 		},
 	en: {
 		ERR_NO_SELECTION: 'No selection found. You must select some text before that button will work.',

@@ -20,8 +20,8 @@
 
 if (!Array.prototype.unique) {
 	Array.prototype.unique = function() {
-		let unique = [];
-		for (let i=0; i<this.length; ++i) {
+		var unique = [];
+		for (var i=0; i<this.length; ++i) {
 			if (unique.indexOf(this[i]) == -1) {
 				unique.push(this[i]);
 			}
@@ -30,6 +30,7 @@ if (!Array.prototype.unique) {
 	};
 }
 
+/* exported Defs */
 var Defs = {
 	CAP_ADMIN:	  (1 <<	 0),
 	CAP_COMMA:	  (1 <<	 1),
@@ -65,6 +66,7 @@ var Defs = {
 };
 Defs.OPT_DP_IGNORE_UNKNOWN = Defs.OPT_DP_IGNORE_NAMES|Defs.OPT_DP_IGNORE_COMP|Defs.OPT_DP_IGNORE_ABBR|Defs.OPT_DP_IGNORE_OTHER;
 
+/* exported g_conf_defaults */
 var g_conf_defaults = {
 	opt_onlyConfident: false,
 	opt_ignUNames: false,
@@ -76,6 +78,31 @@ var g_conf_defaults = {
 	opt_colorBlind: false,
 };
 
+/* exported is_upper */
+function is_upper(ch) {
+	return (ch === ch.toUpperCase() && ch !== ch.toLowerCase());
+}
+
+/* exported uc_first */
+function uc_first(str) {
+	return str.substr(0, 1).toUpperCase() + str.substr(1);
+}
+
+/* exported escHTML */
+function escHTML(t) {
+	var nt = t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+	//console.log([t, nt]);
+	return nt;
+}
+
+/* exported decHTML */
+function decHTML(t) {
+	var nt = t.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&');
+	//console.log([t, nt]);
+	return nt;
+}
+
+/* exported sanitize_result */
 function sanitize_result(txt) {
 	// Swap markers that the backend has mangled due to sentence-ending parentheticals
 	for (var i=0 ; i<Defs.MAX_RQ_SIZE ; ++i) {

@@ -20,6 +20,8 @@
 
 var g_conf = Object.assign({}, g_conf_defaults);
 var session = {};
+var markings = {};
+var cmarking = {s: 0, w: 0};
 var cache = {};
 var to_send = null;
 var to_send_b = 0;
@@ -27,6 +29,106 @@ var to_send_i = 0;
 var ts_xhr = null;
 var ts_slow = null;
 var ts_fail = 0;
+
+function renderMarking() {
+	$('.sidebar').hide();
+	$('#checking').show();
+	var s = cmarking.s;
+	var marking = markings[s][cmarking.w];
+
+	var col = 'green';
+	var types = marking[1].split(/ /g);
+	for (var i=0 ; i<types.length ; ++i) {
+		if (types_yellow.hasOwnProperty(types[i])) {
+			col = 'yellow';
+		}
+		if (types_red.hasOwnProperty(types[i])) {
+			col = 'red';
+			break;
+		}
+	}
+	for (var i=0 ; i<types.length ; ++i) {
+		if (types[i] === '@green') {
+			col = 'green';
+		}
+	}
+
+	var alt = '';
+	if (g_conf.opt_colorBlind) {
+		alt = ' alt';
+	}
+
+	var b = cmarking.w;
+	for (; b>0 ; --b) {
+		if (markings[s][b-1][0].length === 0) {
+			--b;
+			break;
+		}
+	}
+	var e = cmarking.w;
+	for (; e<markings[s].length ; ++e) {
+		if (markings[s][e][0].length === 0) {
+			break;
+		}
+	}
+
+	var context = '';
+	for (var i=b; i<e ; ++i) {
+		if (i === cmarking.w) {
+			context += '<span class="marking marking-'+col+alt+'">' + escHTML(markings[s][i][0]) + '</span> ';
+		}
+		else {
+			context += escHTML(markings[s][i][0]) + ' ';
+		}
+	}
+	$('#chkContext').html(context);
+
+	if (marking[2].length === 0) {
+		$('#chkDidYouMean').hide();
+	}
+	else {
+		var suggs = '';
+		var ss = marking[2].split(/\t/g);
+		for (var i=0 ; i<ss.length ; ++i) {
+			suggs += '<a class="flow-item link">' + escHTML(ss[i]) + '</a>';
+		}
+		$('#chkDidYouMeanItems').html(suggs);
+		$('#chkDidYouMean').show();
+	}
+
+	cmarking.prefix = '';
+	for (var i=0 ; i<cmarking.w ; ++i) {
+		cmarking.prefix += markings[s][i][0] + ' ';
+	}
+
+	cmarking.suffix = '';
+	for (var i=cmarking.w+1 ; i<markings[s].length ; ++i) {
+		cmarking.suffix += markings[s][i][0] + ' ';
+	}
+
+	google.script.run.withSuccessHandler(didSelect).withFailureHandler(showError).selectInDocument(cmarking.prefix, markings[s][cmarking.w][0], cmarking.suffix);
+}
+
+function btnNext() {
+	for (var s in markings) {
+		if (!markings.hasOwnProperty(s)) {
+			continue;
+		}
+
+		for (var w=0 ; w<markings[s].length ; ++w) {
+			if (markings[s][w].length > 1) {
+				cmarking.s = s;
+				cmarking.w = w;
+				break;
+			}
+		}
+
+		if (cmarking.s) {
+			renderMarking();
+			break;
+		}
+	}
+}
 
 function _parseResult(rv) {
 	$('#gtdp-progress-bar').attr('value', to_send_i);
@@ -80,6 +182,7 @@ function _parseResult(rv) {
 		rs += '<p id="s'+id+'">';
 		var space = 0;
 		var txt = '';
+		markings[id] = [];
 
 		for (var j=1 ; j<lines.length ; ++j) {
 			// Ignore duplicate opening tags
@@ -91,6 +194,7 @@ function _parseResult(rv) {
 			w[0] = $.trim(w[0].replace(/(\S)=/g, '$1 '));
 
 			if (w[0] === '') {
+				markings[id].push(w);
 				continue;
 			}
 
@@ -197,53 +301,15 @@ function _parseResult(rv) {
 					w.pop();
 				}
 			}
-
-			/*
-			if (w.length > 1) {
-				var rv = createMarking(w);
-				rs += rv.html;
-				space = rv.space;
-
-				if (context.ggl) {
-					if (rv.html.charAt(0) === ' ') {
-						txt += ' ';
-						rv.html = rv.html.substr(1);
-					}
-					ggl_createMarking(id, txt, w[0], rv.html);
-					txt += w[0];
-				}
-			}
-			else if (w[0] !== ',' || w.length === 1) {
-				if (txt.length && space === 0 && w[0].search(/^[-,.:;?!$*½§£$%&()={}+]$/) === -1) {
-					rs += ' ';
-					txt += ' ';
-				}
-				space = 0;
-				rs += escHTML(w[0]);
-				txt += w[0];
-			}
-			//*/
+			markings[id].push(w);
 		}
 		rs += '</p>';
 	}
 
-	/*
-	var ms = [];
-	if (context.ggl) {
-		ms = $('#gtdp-markings').find('span.marking');
+	if (cmarking.s === 0) {
+		cmarking.w = 0;
+		btnNext();
 	}
-	else {
-		if (!floater_doc) {
-			floater_doc = floater.contentWindow.document;
-			$(floater_doc).find('#btn-close').off().click(() => {
-				$.featherlight.close();
-			});
-		}
-		$(floater_doc).find('#result').get(0).innerHTML += rs;
-		ms = $(floater_doc).find('span.marking');
-	}
-	ms.off().click(markingClick);
-	//*/
 
 	if (to_send_i < to_send.length) {
 		sendTexts();
@@ -313,6 +379,8 @@ function checkParagraphs(doc) {
 	to_send = doc;
 	to_send_i = 0;
 	to_send_b = 0;
+	markings = {};
+	cmarking = {s: 0, w: 0};
 	sendTexts();
 }
 
@@ -379,6 +447,7 @@ $(function() {
 	$('#error').hide();
 	$('.sidebar').hide();
 	$('#welcome').show();
+	$('#placeholder').remove();
 });
 
 function showError(msg) {
