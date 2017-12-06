@@ -21,15 +21,12 @@
 <head>
 	<meta charset="UTF-8">
 	<base target="_top">
-	<link href="../css/sidebar-css.html" rel="stylesheet" type="text/css">
-	<?!= include('css/sidebar-css'); ?>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<!-- script src="https://signon.mv-nordic.com/sp-js/mvlogin.js"></script -->
+	<?!= include('js/load-remotes'); ?>
 </head>
 <body>
 
-<!--
--->
 <div class="closable" id="error">
 <div class="closer" tabindex="1">&times;</div>
 <div id="error-text">…</div>
@@ -93,10 +90,5 @@
 	<button class="btn-lightblue btn-big" id="btnOptions" tabindex="200">Mine indstillinger</button>
 </footer>
 
-<?!= include('vendor/murmurhash3js.min'); ?>
-<?!= include('js/mark-types'); ?>
-<?!= include('js/shared-front'); ?>
-<?!= include('js/l10n'); ?>
-<?!= include('js/sidebar-js'); ?>
 </body>
 </html>

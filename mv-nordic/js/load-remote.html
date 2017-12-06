@@ -19,35 +19,28 @@
 <script>
 'use strict';
 
-var l10n = {};
+function _loadRemotes() {
+	var prefix = 'https://retmig.dk/gas/dev/';
+	var remotes = ['css/sidebar.css', 'vendor/murmurhash3js.min.js', 'js/mark-types.js', 'js/l10n.js', 'js/shared.js', 'js/sidebar.js'];
 
-l10n.s = {
-	da: {
-		ERR_NO_SELECTION: 'Der var ingen markering. Du skal markere noget tekst før den funktion virker.',
-		},
-	en: {
-		ERR_NO_SELECTION: 'No selection found. You must select some text before that button will work.',
-		},
-	};
+	for (var i=0 ; i<remotes.length ; ++i) {
+		var f = remotes[i];
+		console.log('Loading ' + prefix + f);
 
-l10n.t = function(s) {
-	s = '' + s; // Coerce to string
-
-	var l = session.locale;
-	// If the string doesn't exist in the locale, fall back
-	if (!l10n.s[session.locale].hasOwnProperty(s)) {
-		// Try English
-		if (l10n.s.en.hasOwnProperty(s)) {
-			return l10n.s.en[s];
+		if (/\.css$/.test(f)) {
+			var css = document.createElement('link');
+			css.rel = 'stylesheet';
+			css.type = 'text/css';
+			css.href = prefix + f;
+			document.head.appendChild(css);
 		}
-		// ...then Danish
-		if (l10n.s.da.hasOwnProperty(s)) {
-			return l10n.s.en[s];
+		else {
+			var script = document.createElement('script');
+			script.src = prefix + f;
+			document.head.appendChild(script);
 		}
-		// ...give up and return as-is
-		return s;
 	}
-	return l10n.s[l][s];
-};
+}
+_loadRemotes();
 
 </script>
