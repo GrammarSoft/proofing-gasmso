@@ -59,6 +59,9 @@ function selectInDocument() {
 }
 
 $(function() {
+	$('.closer').click(function() {
+		$(this).closest('.closable').hide();
+	});
 	$('#error').hide();
 	$('.sidebar').hide();
 	$('#welcome').show();

@@ -20,12 +20,27 @@
 .dummy {
 }
 
+html {
+	height: 100%;
+	box-sizing: border-box;
+}
+
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
 html, body {
 	margin: 0;
 	padding: 0;
 	font-family: Verdana, sans-serif;
 	font-size: 14px;
 	max-width: 300px;
+}
+
+body {
+	min-height: 100%;
+	position: relative;
+	padding-bottom: 86px;
 }
 
 .whiteblue {
@@ -77,10 +92,24 @@ html, body {
 	font-weight: bold;
 }
 
+.row {
+	margin-top: 18px;
+}
+
+.flow-50 {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+}
+.flow-50 .flow-item {
+	width: 50%;
+}
+
 .buttonbar {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-evenly;
+	justify-content: space-between;
 	align-items: center;
 }
 
@@ -96,7 +125,7 @@ button {
 	margin: 5px 0;
 	padding: 0 10px;
 	min-height: 30px;
-	min-width: 70px;
+	min-width: 80px;
 	color: #fff;
 	cursor: pointer;
 }
@@ -129,6 +158,11 @@ button {
 
 button.disabled {
 	background-color: #9b9b9b;
+}
+button.disabled.selected {
+	border: 1px solid #9b9b9b;
+	background-color: #fff;
+	color: #9b9b9b;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -168,11 +202,19 @@ label {
 	margin: 9px 0;
 	color: #0da9f6;
 }
-input {
+
+input[type="text"] {
 	border-radius: 5px;
 	border: 2px solid #4a90e2;
-	width: 100%;
+	width: 254px;
 	padding: 3px;
 	margin: 0;
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	left: 0;
 }
 </style>

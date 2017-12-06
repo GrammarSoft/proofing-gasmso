@@ -29,6 +29,7 @@
 <body>
 
 <!--
+-->
 <div id="error closable">
 <div class="closer">&times;</div>
 <div id="error-text">…</div>
@@ -36,21 +37,31 @@
 
 <div class="sidebar" id="welcome">
 <h1>Hvordan skal din tekst tjekkes for stavning og grammatik?</h1>
-<div class="buttonbar">
+<div class="buttonbar backed">
 	<button class="btn-blue" id="btnCheckAuto">Løbende</button>
 	<button class="btn-orange" id="btnCheckSelected">Markering</button>
 	<button class="btn-lightblue" id="btnCheckAll">Alt</button>
 </div>
 <div class="text">
-Ønsker du efterfølgende at få tjekket din tegnsætning?
-<label><input type="checkbox" id="optComma" checked> Kommaforslag</label>
+<label><input type="checkbox" id="optComma" checked> Ønsker du efterfølgende at få tjekket din tegnsætning?</label>
 </div>
 </div>
--->
 
 <div class="sidebar" id="checking">
 <h1 id="chkType">…</h1>
 <div class="text" id="chkContext">…</div>
+<div class="text" id="chkSuggestions">…</div>
+<div class="text backed closable" id="chkDidYouMean">
+	<div class="closer">&times;</div>
+	<h2>Mente du</h2>
+	<div class="row flow-50" id="chkDidYouMeanItems">
+		<span class="flow-item">…</span>
+		<span class="flow-item">…</span>
+		<span class="flow-item">…</span>
+		<span class="flow-item">…</span>
+		<span class="flow-item">…</span>
+	</div>
+</div>
 <div class="text" id="chkExplain">
 	<div id="chkExplainShort"><div id="chkExplainShortText">…</div><div>Vis mere ▽</div></div>
 	<div id="chkExplainLong"><div id="chkExplainLongText">…</div><div>Skjul △</div></div>
@@ -58,15 +69,16 @@
 <div class="buttonbar backed">
 	<button class="btn-blue" id="btnInput">Ret selv</button>
 	<button class="btn-orange" id="btnIgnore">Ignorer</button>
-	<button class="btn-orange" id="btnIgnoreAll">Ignorer alle</button>
+	<button class="btn-lightblue" id="btnReplace">Erstat ord</button>
 	<button class="btn-lightblue" id="btnPrev">Forrige</button>
+	<button class="btn-orange" id="btnIgnoreAll">Ignorer alle</button>
 	<button class="btn-lightblue" id="btnNext">Næste</button>
 </div>
 <div class="text closable backed" id="chkInput">
 	<div class="closer">&times;</div>
 	<h2>Ret selv</h2>
-	<div><input type="text" id="chkInputText"></div>
-	<div>
+	<div class="row"><input type="text" id="chkInputText"></div>
+	<div class="row">
 		<button class="btn-blue" id="btnInputOne">Ret denne</button>
 		<button class="btn-blue" id="btnInputAll">Ret alle</button>
 	</div>
@@ -76,6 +88,10 @@
 	<button class="btn-lightblue btn-big" id="btnDictionary">IntoWords Ordbog</button>
 </div>
 </div>
+
+<footer class="text center">
+	<button class="btn-lightblue btn-big" id="btnOptions">Mine indstillinger</button>
+</footer>
 
 <?!= include('vendor/murmurhash3js.min'); ?>
 <?!= include('js/sidebar-js'); ?>
