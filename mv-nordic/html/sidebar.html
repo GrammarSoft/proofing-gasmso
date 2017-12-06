@@ -30,20 +30,20 @@
 
 <!--
 -->
-<div id="error closable">
-<div class="closer">&times;</div>
+<div class="closable" id="error">
+<div class="closer" tabindex="1">&times;</div>
 <div id="error-text">…</div>
 </div>
 
 <div class="sidebar" id="welcome">
 <h1>Hvordan skal din tekst tjekkes for stavning og grammatik?</h1>
 <div class="buttonbar backed">
-	<button class="btn-blue" id="btnCheckAuto">Løbende</button>
-	<button class="btn-orange" id="btnCheckSelected">Markering</button>
-	<button class="btn-lightblue" id="btnCheckAll">Alt</button>
+	<button class="btn-blue" id="btnCheckAuto" tabindex="10">Løbende</button>
+	<button class="btn-orange" id="btnCheckSelected" tabindex="20">Markering</button>
+	<button class="btn-lightblue" id="btnCheckAll" tabindex="30">Alt</button>
 </div>
 <div class="text">
-<label><input type="checkbox" id="optComma" checked> Ønsker du efterfølgende at få tjekket din tegnsætning?</label>
+<label><input type="checkbox" id="optComma" tabindex="40" checked> Ønsker du efterfølgende at få tjekket din tegnsætning?</label>
 </div>
 </div>
 
@@ -52,45 +52,45 @@
 <div class="text" id="chkContext">…</div>
 <div class="text" id="chkSuggestions">…</div>
 <div class="text backed closable" id="chkDidYouMean">
-	<div class="closer">&times;</div>
+	<div class="closer" tabindex="50">&times;</div>
 	<h2>Mente du</h2>
 	<div class="row flow-50" id="chkDidYouMeanItems">
-		<span class="flow-item">…</span>
-		<span class="flow-item">…</span>
-		<span class="flow-item">…</span>
-		<span class="flow-item">…</span>
-		<span class="flow-item">…</span>
+		<a class="flow-item link">…</a>
+		<a class="flow-item link">…</a>
+		<a class="flow-item link">…</a>
+		<a class="flow-item link">…</a>
+		<a class="flow-item link">…</a>
 	</div>
 </div>
 <div class="text" id="chkExplain">
-	<div id="chkExplainShort"><div id="chkExplainShortText">…</div><div>Vis mere ▽</div></div>
-	<div id="chkExplainLong"><div id="chkExplainLongText">…</div><div>Skjul △</div></div>
+	<div id="chkExplainShort"><div id="chkExplainShortText">…</div><a class="link" id="chkExplainMore" tabindex="60">Vis mere ▽</a></div>
+	<div id="chkExplainLong"><div id="chkExplainLongText">…</div><a class="link" id="chkExplainLess" tabindex="70">Skjul △</a></div>
 </div>
 <div class="buttonbar backed">
-	<button class="btn-blue" id="btnInput">Ret selv</button>
-	<button class="btn-orange" id="btnIgnore">Ignorer</button>
-	<button class="btn-lightblue" id="btnReplace">Erstat ord</button>
-	<button class="btn-lightblue" id="btnPrev">Forrige</button>
-	<button class="btn-orange" id="btnIgnoreAll">Ignorer alle</button>
-	<button class="btn-lightblue" id="btnNext">Næste</button>
+	<button class="btn-blue" id="btnInput" tabindex="80">Ret selv</button>
+	<button class="btn-orange" id="btnIgnore" tabindex="90">Ignorer</button>
+	<button class="btn-lightblue" id="btnReplace" tabindex="100">Erstat ord</button>
+	<button class="btn-lightblue" id="btnPrev" tabindex="110">Forrige</button>
+	<button class="btn-orange" id="btnIgnoreAll" tabindex="120">Ignorer alle</button>
+	<button class="btn-lightblue" id="btnNext" tabindex="130">Næste</button>
 </div>
 <div class="text closable backed" id="chkInput">
-	<div class="closer">&times;</div>
+	<div class="closer" tabindex="140">&times;</div>
 	<h2>Ret selv</h2>
-	<div class="row"><input type="text" id="chkInputText"></div>
+	<div class="row"><input type="text" id="chkInputText" tabindex="150"></div>
 	<div class="row">
-		<button class="btn-blue" id="btnInputOne">Ret denne</button>
-		<button class="btn-blue" id="btnInputAll">Ret alle</button>
+		<button class="btn-blue" id="btnInputOne" tabindex="160">Ret denne</button>
+		<button class="btn-blue" id="btnInputAll" tabindex="170">Ret alle</button>
 	</div>
 </div>
 <div class="text center">
-	<button class="btn-lightblue btn-big" id="btnAddWord">Føj til stavekontrol</button>
-	<button class="btn-lightblue btn-big" id="btnDictionary">IntoWords Ordbog</button>
+	<button class="btn-lightblue btn-big" id="btnAddWord" tabindex="180">Føj til stavekontrol</button>
+	<button class="btn-lightblue btn-big" id="btnDictionary" tabindex="190">IntoWords Ordbog</button>
 </div>
 </div>
 
 <footer class="text center">
-	<button class="btn-lightblue btn-big" id="btnOptions">Mine indstillinger</button>
+	<button class="btn-lightblue btn-big" id="btnOptions" tabindex="200">Mine indstillinger</button>
 </footer>
 
 <?!= include('vendor/murmurhash3js.min'); ?>
