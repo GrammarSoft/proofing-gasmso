@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!--
+ Copyright 2016-2017 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
+ Frontend by Tino Didriksen <mail@tinodidriksen.com>
+
+ This project is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This project is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<html>
+<head>
+	<meta charset="UTF-8">
+	<base target="_top">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!-- script src="https://signon.mv-nordic.com/sp-js/mvlogin.js"></script -->
+	<?!= include('js/load-remote'); ?>
+</head>
+<body>
+
+<div id="placeholder" style="height: 3000px; width: 100%;">… loading …</div>
+
+<div class="closable" id="error">
+<div class="closer" tabindex="1">&times;</div>
+<div id="error-text">…</div>
+</div>
+
+<div class="sidebar" id="welcome">
+<h1>Hvordan skal din tekst tjekkes for stavning og grammatik?</h1>
+<div class="buttonbar backed">
+	<button class="btn-blue" id="btnCheckAuto" tabindex="10">Løbende</button>
+	<button class="btn-orange" id="btnCheckSelected" tabindex="20">Markering</button>
+	<button class="btn-lightblue" id="btnCheckAll" tabindex="30">Alt</button>
+</div>
+<div class="text">
+<label><input type="checkbox" id="optComma" tabindex="40" checked> Ønsker du efterfølgende at få tjekket din tegnsætning?</label>
+</div>
+<div class="text chkProgress">
+	<progress value="0" max="100" class="chkProgressBar">…</progress>
+</div>
+</div>
+
+<div class="sidebar" id="checking">
+<div class="buttonbar backed">
+	<button class="btn-lightblue" id="btnAccept" tabindex="100">Erstat ord</button>
+	<button class="btn-lightblue" id="btnPrev" tabindex="110">Forrige</button>
+	<button class="btn-lightblue" id="btnNext" tabindex="130">Næste</button>
+	<button class="btn-blue" id="btnInput" tabindex="80">Ret selv</button>
+	<button class="btn-orange" id="btnIgnore" tabindex="90">Ignorer</button>
+	<button class="btn-orange" id="btnIgnoreAll" tabindex="120">Ignorer alle</button>
+</div>
+<div class="text closable backed" id="chkInput">
+	<div class="closer" tabindex="140">&times;</div>
+	<h2>Ret selv</h2>
+	<div class="row"><input type="text" id="chkInputText" tabindex="150"></div>
+	<div class="row">
+		<button class="btn-blue" id="btnInputOne" tabindex="160">Ret denne</button>
+		<button class="btn-blue" id="btnInputAll" tabindex="170">Ret alle</button>
+	</div>
+</div>
+<h1 id="chkType">…</h1>
+<div class="text" id="chkContext">…</div>
+<div class="text backed" id="chkDidYouMean">
+	<h2>Erstat med …</h2>
+	<div id="chkDidYouMeanItems">
+	</div>
+</div>
+<div class="text" id="chkExplain">
+	<div id="chkExplainShort"><div id="chkExplainShortText">…</div><a class="link" id="chkExplainMore" tabindex="60">Vis mere ▽</a></div>
+	<div id="chkExplainLong"><div id="chkExplainLongText">…</div><a class="link" id="chkExplainLess" tabindex="70">Skjul △</a></div>
+</div>
+<div class="text center">
+	<button class="btn-lightblue btn-big" id="btnAddWord" tabindex="180">Føj til ordbogen</button>
+	<button class="btn-lightblue btn-big" id="btnDictionary" tabindex="190">IntoWords Ordbog</button>
+</div>
+<div class="text chkProgress">
+	<progress value="0" max="100" class="chkProgressBar">…</progress>
+</div>
+</div>
+
+<div class="sidebar" id="done">
+<h1>Din tekst er blevet tjekket, og der er ikke flere stave- eller grammatikforslag.</h1>
+<div class="buttonbar backed">
+	<button class="btn-blue" id="btnCheckAgain" tabindex="200">Tjek igen</button>
+	<button class="btn-orange" id="btnCheckCommas" tabindex="210">Tjek kommaforslag</button>
+</div>
+</div>
+
+<footer class="text center">
+	<button class="btn-lightblue btn-big" id="btnOptions" tabindex="1000">Indstillinger</button>
+</footer>
+
+</body>
+</html>
