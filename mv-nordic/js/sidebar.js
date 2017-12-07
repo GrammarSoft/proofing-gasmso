@@ -20,8 +20,8 @@
 
 var g_conf = Object.assign({}, g_conf_defaults);
 var session = {};
-var markings = {};
-var cmarking = {s: 0, w: 0};
+var markings = [];
+var cmarking = {s: -1, w: -1};
 var cache = {};
 var to_send = null;
 var to_send_b = 0;
@@ -30,7 +30,20 @@ var ts_xhr = null;
 var ts_slow = null;
 var ts_fail = 0;
 
-function renderMarking() {
+function markingSetContext() {
+	cmarking.prefix = '';
+	for (var i=0 ; i<cmarking.w ; ++i) {
+		cmarking.prefix += markings[cmarking.s][i][0] + ' ';
+	}
+
+	cmarking.suffix = '';
+	for (var i=cmarking.w+1 ; i<markings[cmarking.s].length ; ++i) {
+		cmarking.suffix += markings[cmarking.s][i][0] + ' ';
+	}
+}
+
+function markingRender() {
+	$('#error').hide();
 	$('.sidebar').hide();
 	$('#checking').show();
 	var s = cmarking.s;
@@ -53,10 +66,41 @@ function renderMarking() {
 		}
 	}
 
+	if (col === 'yellow') {
+		$('#btnAddWord').removeClass('disabled');
+	}
+	else {
+		$('#btnAddWord').addClass('disabled');
+	}
+
+	var es = {};
+	var el = {};
+	for (var i=0 ; i<types.length ; ++i) {
+		var et = marking_types[types[i]] ? marking_types[types[i]][1] : (ts[i] + ' ');
+		et = '<p>'+et.replace(/(<\/h\d>)/g, '$1<br><br>').replace(/(<br>\s*)+<br>\s*/g, '</p><p>')+'</p>';
+		es[et] = et.replace(/<p>\s*<\/p>/g, '');
+
+		var et = marking_types[types[i]] ? marking_types[types[i]][2] : (ts[i] + ' ');
+		et = '<p>'+et.replace(/(<\/h\d>)/g, '$1<br><br>').replace(/(<br>\s*)+<br>\s*/g, '</p><p>')+'</p>';
+		el[et] = et.replace(/<p>\s*<\/p>/g, '');
+	}
+	es = $.map(es, function(v) {
+		return v;
+	}).join('<hr>');
+	el = $.map(el, function(v) {
+		return v;
+	}).join('<hr>');
+	$('#chkExplainLong').hide();
+	$('#chkExplainShortText').html(es);
+	$('#chkExplainLongText').html(el);
+	$('#chkExplainShort').show();
+
 	var alt = '';
 	if (g_conf.opt_colorBlind) {
 		alt = ' alt';
 	}
+
+	$('#chkType').html(marking[1]);
 
 	var b = cmarking.w;
 	for (; b>0 ; --b) {
@@ -84,63 +128,212 @@ function renderMarking() {
 	$('#chkContext').html(context);
 
 	if (marking[2].length === 0) {
+		$('#chkSuggestions').hide();
 		$('#chkDidYouMean').hide();
+		$('#btnAccept').addClass('disabled');
 	}
 	else {
+		var all_upper = is_upper(marking[0]);
+		var first_upper = all_upper || is_upper(marking[0].charAt(0));
+
+		if (marking[1].indexOf('@lower') !== -1) {
+			all_upper = first_upper = false;
+		}
+
 		var suggs = '';
 		var ss = marking[2].split(/\t/g);
 		for (var i=0 ; i<ss.length ; ++i) {
-			suggs += '<a class="flow-item link">' + escHTML(ss[i]) + '</a>';
+			var t = ss[i];
+			if (all_upper) {
+				t = t.toUpperCase();
+			}
+			else if (first_upper) {
+				t = uc_first(t);
+			}
+			suggs += '<a class="flow-item link">' + escHTML(t) + '</a>';
 		}
 		$('#chkDidYouMeanItems').html(suggs);
+		$('#chkDidYouMeanItems').find('a').off().click(markingAccept);
+		$('#chkSuggestions').html('<span>' + escHTML(marking[0]) + '</span> → ' + escHTML(ss[0])).show();
 		$('#chkDidYouMean').show();
+		$('#btnAccept').removeClass('disabled');
 	}
 
-	cmarking.prefix = '';
-	for (var i=0 ; i<cmarking.w ; ++i) {
-		cmarking.prefix += markings[s][i][0] + ' ';
-	}
+	$('#chkInput').hide();
 
-	cmarking.suffix = '';
-	for (var i=cmarking.w+1 ; i<markings[s].length ; ++i) {
-		cmarking.suffix += markings[s][i][0] + ' ';
-	}
+	markingSetContext();
 
 	google.script.run.withSuccessHandler(didSelect).withFailureHandler(showError).selectInDocument(cmarking.prefix, markings[s][cmarking.w][0], cmarking.suffix);
 }
 
-function btnNext() {
-	for (var s in markings) {
-		if (!markings.hasOwnProperty(s)) {
-			continue;
-		}
+function btnAccept() {
+	if ($(this).hasClass('disabled')) {
+		return;
+	}
+	$('#chkDidYouMeanItems').find('a').first().click();
+}
 
+function btnInput() {
+	$('#chkInputText').val(markings[cmarking.s][cmarking.w][0]);
+	$('#chkInput').show();
+	$('#chkInputText').focus();
+}
+
+function btnIgnore() {
+	markings[cmarking.s][cmarking.w] = [markings[cmarking.s][cmarking.w][0]];
+	btnNext();
+}
+
+function btnIgnoreAll() {
+	var word = markings[cmarking.s][cmarking.w][0];
+	var ts = markings[cmarking.s][cmarking.w][1];
+	for (var s=0 ; s<markings.length ; ++s) {
 		for (var w=0 ; w<markings[s].length ; ++w) {
-			if (markings[s][w].length > 1) {
-				cmarking.s = s;
-				cmarking.w = w;
-				break;
+			if (markings[s][w][0] === word && markings[s][w][1] && markings[s][w][1] === ts) {
+				markings[s][w] = [markings[s][w][0]];
 			}
 		}
+	}
+	btnNext();
+}
 
-		if (cmarking.s) {
-			renderMarking();
+function btnPrev() {
+	var found = false;
+	for (;;) {
+		for (var s=cmarking.s ; s>=0 ; --s) {
+			if (!markings[s]) {
+				continue;
+			}
+
+			for (var w=Math.min(cmarking.w, markings[s].length)-1 ; w>=0 ; --w) {
+				//console.log(`${s} ${w}`);
+				if (!markings[s][w]) {
+					continue;
+				}
+
+				if (markings[s][w].length > 1) {
+					cmarking.s = s;
+					cmarking.w = w;
+					found = true;
+					break;
+				}
+			}
+			if (found) {
+				break;
+			}
+			cmarking.w = 9999999;
+		}
+		if (found) {
 			break;
 		}
+		// If no marking was found and we are searching from the end, give up
+		if (!found && cmarking.s === markings.length) {
+			break;
+		}
+		// If no marking was found going backward, loop around and try from the end
+		cmarking.s = markings.length;
+	}
+
+	if (cmarking.s !== markings.length) {
+		markingRender();
+	}
+	else {
+		console.log('No more errors');
 	}
 }
 
+function btnNext() {
+	var found = false;
+	for (;;) {
+		for (var s=cmarking.s ; s<markings.length ; ++s) {
+			if (!markings[s]) {
+				continue;
+			}
+
+			for (var w=cmarking.w+1 ; w<markings[s].length ; ++w) {
+				//console.log(`${s} ${w}`);
+				if (!markings[s][w]) {
+					continue;
+				}
+
+				if (markings[s][w].length > 1) {
+					cmarking.s = s;
+					cmarking.w = w;
+					found = true;
+					break;
+				}
+			}
+			if (found) {
+				break;
+			}
+			cmarking.w = -1;
+		}
+		if (found) {
+			break;
+		}
+		// If no marking was found and we are searching from the start, give up
+		if (!found && cmarking.s === -1) {
+			break;
+		}
+		// If no marking was found going forward, loop around and try from the start
+		cmarking.s = -1;
+	}
+
+	if (cmarking.s !== -1) {
+		markingRender();
+	}
+	else {
+		console.log('No more errors');
+	}
+}
+
+function btnInputOne() {
+	var rpl = $('#chkInputText').val();
+	if (rpl.length === 0) {
+		rpl = ' ';
+	}
+	google.script.run.withSuccessHandler(didReplace).withFailureHandler(showError).replaceInDocument(cmarking.prefix, markings[cmarking.s][cmarking.w][0], rpl, cmarking.suffix);
+}
+
+function btnInputAll() {
+	var rpl = $('#chkInputText').val();
+	if (rpl.length === 0) {
+		rpl = ' ';
+	}
+	var word = markings[cmarking.s][cmarking.w][0];
+	var ts = markings[cmarking.s][cmarking.w][1];
+	var os = cmarking.s;
+	var ow = cmarking.w;
+
+	for (var s=0 ; s<markings.length ; ++s) {
+		for (var w=0 ; w<markings[s].length ; ++w) {
+			if (markings[s][w][0] === word && markings[s][w][1] && markings[s][w][1] === ts) {
+				cmarking.s = s;
+				cmarking.w = w;
+				markingSetContext();
+				google.script.run.withSuccessHandler(didSelect).withFailureHandler(showError).replaceInDocument(cmarking.prefix, markings[cmarking.s][cmarking.w][0], $('#chkInputText').val(), cmarking.suffix);
+				markings[cmarking.s][cmarking.w] = [rpl];
+			}
+		}
+	}
+
+	cmarking.s = os;
+	cmarking.w = ow;
+	btnNext();
+}
+
+function markingAccept() {
+	google.script.run.withSuccessHandler(didReplace).withFailureHandler(showError).replaceInDocument(cmarking.prefix, markings[cmarking.s][cmarking.w][0], $(this).text(), cmarking.suffix);
+}
+
 function _parseResult(rv) {
-	$('#gtdp-progress-bar').attr('value', to_send_i);
+	$('.chkProgressBar').attr('value', to_send_i);
 
 	if (!rv.hasOwnProperty('c')) {
-		$('#gtdp-progress').hide();
-		$.featherlight.close();
+		$('.chkProgress').hide();
 		console.log(rv);
 		return;
 	}
-
-	var rs = '';
 
 	var txt = sanitize_result(rv.c);
 	var ps = [];
@@ -179,10 +372,8 @@ function _parseResult(rv) {
 			}
 		}
 
-		rs += '<p id="s'+id+'">';
-		var space = 0;
-		var txt = '';
-		markings[id] = [];
+		var words = [];
+		var had_mark = false;
 
 		for (var j=1 ; j<lines.length ; ++j) {
 			// Ignore duplicate opening tags
@@ -194,7 +385,7 @@ function _parseResult(rv) {
 			w[0] = $.trim(w[0].replace(/(\S)=/g, '$1 '));
 
 			if (w[0] === '') {
-				markings[id].push(w);
+				words.push(w);
 				continue;
 			}
 
@@ -296,32 +487,29 @@ function _parseResult(rv) {
 					if (!w[2] || w[2].length === 0) {
 						w[2] = '';
 					}
+					had_mark = true;
 				}
 				else {
 					w.pop();
 				}
 			}
-			markings[id].push(w);
+			words.push(w);
 		}
-		rs += '</p>';
+		if (had_mark) {
+			markings.push(words);
+		}
 	}
 
-	if (cmarking.s === 0) {
-		cmarking.w = 0;
+	if (cmarking.s === -1) {
 		btnNext();
 	}
 
 	if (to_send_i < to_send.length) {
 		sendTexts();
 	}
-	/*
 	else {
-		$('#gtdp-progress').hide();
-		if (ms.length === 0) {
-			setTimeout(msgNoMarkingsFound, 100);
-		}
+		$('.chkProgress').hide();
 	}
-	//*/
 }
 
 function parseResult(rv) {
@@ -330,13 +518,13 @@ function parseResult(rv) {
 	}
 	catch (e) {
 		console.log(e);
-		$('#gtdp-progress').hide();
+		$('.chkProgress').hide();
 	}
 }
 
 function sendTexts() {
-	$('#gtdp-progress').show();
-	$('#gtdp-progress-bar').attr('max', to_send.length);
+	$('.chkProgress').show();
+	$('.chkProgressBar').attr('max', to_send.length);
 	var text = '';
 
 	for (to_send_b = to_send_i ; to_send_i < to_send.length ; ++to_send_i) {
@@ -371,6 +559,7 @@ function sendTexts() {
 		setTimeout(() => {
 			parseResult({c:''});
 		}, 500);
+		$('.chkProgress').hide();
 	}
 }
 
@@ -379,32 +568,20 @@ function checkParagraphs(doc) {
 	to_send = doc;
 	to_send_i = 0;
 	to_send_b = 0;
-	markings = {};
-	cmarking = {s: 0, w: 0};
+	markings = [];
+	cmarking = {s: -1, w: -1};
+	$('.chkProgressBar').attr('value', 0);
 	sendTexts();
 }
 
-function didReplace(rv) {
-	console.log(rv);
-}
-
-function replaceInDocument() {
-	var prefix = $('#prefix').val();
-	var word = $('#word').val();
-	var rpl = $('#rpl').val();
-	var suffix = $('#suffix').val();
-	google.script.run.withSuccessHandler(didReplace).withFailureHandler(showError).replaceInDocument(prefix, word, rpl, suffix);
+function didReplace(rpl) {
+	console.log(rpl);
+	markings[cmarking.s][cmarking.w] = [rpl];
+	btnNext();
 }
 
 function didSelect(rv) {
 	console.log(rv);
-}
-
-function selectInDocument() {
-	var prefix = $('#prefix').val();
-	var word = $('#word').val();
-	var suffix = $('#suffix').val();
-	google.script.run.withSuccessHandler(didSelect).withFailureHandler(showError).selectInDocument(prefix, word, suffix);
 }
 
 function getSession(s) {
@@ -444,7 +621,18 @@ $(function() {
 		google.script.run.withSuccessHandler(checkParagraphs).withFailureHandler(showError).getAllPars();
 	});
 
+	$('#btnAccept').click(btnAccept);
+	$('#btnInput').click(btnInput);
+	$('#btnIgnore').click(btnIgnore);
+	$('#btnIgnoreAll').click(btnIgnoreAll);
+	$('#btnPrev').click(btnPrev);
+	$('#btnNext').click(btnNext);
+
+	$('#btnInputOne').click(btnInputOne);
+	$('#btnInputAll').click(btnInputAll);
+
 	$('#error').hide();
+	$('.chkProgress').hide();
 	$('.sidebar').hide();
 	$('#welcome').show();
 	$('#placeholder').remove();

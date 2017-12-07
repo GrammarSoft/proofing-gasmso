@@ -37,6 +37,7 @@ function _loadRemotes() {
 		else {
 			var script = document.createElement('script');
 			script.src = prefix + f;
+			script.defer = true;
 			document.head.appendChild(script);
 		}
 	}

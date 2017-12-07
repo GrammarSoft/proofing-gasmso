@@ -22,6 +22,7 @@ var l10n = {};
 
 l10n.s = {
 	da: {
+		ERR_POSTBACK: 'Der opstod en serverfejl under tjekning af teksten. Prøv evt. igen.',
 		ERR_NO_SELECTION: 'Der var ingen markering. Du skal markere noget tekst før den funktion virker.',
 		ERR_SELECT_NOTFOUND: 'Kunne ikke finde konteksten. Det kan være du eller en anden har ændret i dokumentet siden tjekket blev kørt.',
 		ERR_SELECT_NOMATCH: 'Konteksten matchede ikke. Denne fejl bør ikke kunne ske.',
@@ -44,7 +45,7 @@ l10n.t = function(s) {
 		}
 		// ...then Danish
 		if (l10n.s.da.hasOwnProperty(s)) {
-			return l10n.s.en[s];
+			return l10n.s.da[s];
 		}
 		// ...give up and return as-is
 		return s;
