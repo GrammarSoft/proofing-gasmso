@@ -44,31 +44,16 @@
 <div class="text">
 <label><input type="checkbox" id="optComma" tabindex="40" checked> Ønsker du efterfølgende at få tjekket din tegnsætning?</label>
 </div>
+<div class="text chkProgress">
+	<progress value="0" max="100" class="chkProgressBar">…</progress>
+</div>
 </div>
 
 <div class="sidebar" id="checking">
-<h1 id="chkType">…</h1>
-<div class="text" id="chkContext">…</div>
-<div class="text" id="chkSuggestions">…</div>
-<div class="text backed closable" id="chkDidYouMean">
-	<div class="closer" tabindex="50">&times;</div>
-	<h2>Mente du</h2>
-	<div class="row flow-50" id="chkDidYouMeanItems">
-		<a class="flow-item link">…</a>
-		<a class="flow-item link">…</a>
-		<a class="flow-item link">…</a>
-		<a class="flow-item link">…</a>
-		<a class="flow-item link">…</a>
-	</div>
-</div>
-<div class="text" id="chkExplain">
-	<div id="chkExplainShort"><div id="chkExplainShortText">…</div><a class="link" id="chkExplainMore" tabindex="60">Vis mere ▽</a></div>
-	<div id="chkExplainLong"><div id="chkExplainLongText">…</div><a class="link" id="chkExplainLess" tabindex="70">Skjul △</a></div>
-</div>
 <div class="buttonbar backed">
 	<button class="btn-blue" id="btnInput" tabindex="80">Ret selv</button>
 	<button class="btn-orange" id="btnIgnore" tabindex="90">Ignorer</button>
-	<button class="btn-lightblue" id="btnReplace" tabindex="100">Erstat ord</button>
+	<button class="btn-lightblue" id="btnAccept" tabindex="100">Erstat ord</button>
 	<button class="btn-lightblue" id="btnPrev" tabindex="110">Forrige</button>
 	<button class="btn-orange" id="btnIgnoreAll" tabindex="120">Ignorer alle</button>
 	<button class="btn-lightblue" id="btnNext" tabindex="130">Næste</button>
@@ -82,14 +67,34 @@
 		<button class="btn-blue" id="btnInputAll" tabindex="170">Ret alle</button>
 	</div>
 </div>
+<h1 id="chkType">…</h1>
+<div class="text divider" id="chkContext">…</div>
+<div class="text" id="chkSuggestions">…</div>
+<div class="text backed" id="chkDidYouMean">
+	<h2>Erstat med …</h2>
+	<div class="flow-50" id="chkDidYouMeanItems">
+		<a class="flow-item link">…</a>
+		<a class="flow-item link">…</a>
+		<a class="flow-item link">…</a>
+		<a class="flow-item link">…</a>
+		<a class="flow-item link">…</a>
+	</div>
+</div>
+<div class="text" id="chkExplain">
+	<div id="chkExplainShort"><div id="chkExplainShortText">…</div><a class="link" id="chkExplainMore" tabindex="60">Vis mere ▽</a></div>
+	<div id="chkExplainLong"><div id="chkExplainLongText">…</div><a class="link" id="chkExplainLess" tabindex="70">Skjul △</a></div>
+</div>
 <div class="text center">
-	<button class="btn-lightblue btn-big" id="btnAddWord" tabindex="180">Føj til stavekontrol</button>
+	<button class="btn-lightblue btn-big" id="btnAddWord" tabindex="180">Føj til ordbogen</button>
 	<button class="btn-lightblue btn-big" id="btnDictionary" tabindex="190">IntoWords Ordbog</button>
+</div>
+<div class="text chkProgress">
+	<progress value="0" max="100" class="chkProgressBar">…</progress>
 </div>
 </div>
 
 <footer class="text center">
-	<button class="btn-lightblue btn-big" id="btnOptions" tabindex="200">Mine indstillinger</button>
+	<button class="btn-lightblue btn-big" id="btnOptions" tabindex="200">Indstillinger</button>
 </footer>
 
 </body>
