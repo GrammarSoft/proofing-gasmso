@@ -32,7 +32,7 @@ html, body {
 	padding: 0;
 	font-family: Verdana, sans-serif;
 	font-size: 14px;
-	max-width: 300px;
+	width: 100%;
 }
 
 body {
@@ -106,6 +106,16 @@ body {
 
 .flow-50 .flow-item {
 	min-width: 50%;
+	margin-top: 18px;
+}
+
+.divider {
+	border-bottom: 1px dotted #ccc;
+	padding-bottom: 9px;
+}
+
+.chkProgressBar {
+	width: 100%;
 }
 
 .center {
@@ -170,11 +180,11 @@ a:hover, a:focus, .link:hover, .link:focus {
 }
 
 button.disabled {
-	background-color: #9b9b9b;
+	background-color: #9b9b9b !important;
 }
 button.disabled.selected {
 	border: 1px solid #9b9b9b;
-	background-color: #fff;
+	background-color: #fff !important;
 	color: #9b9b9b;
 }
 
@@ -237,30 +247,34 @@ footer {
 	padding-right: 3px;
 	margin-left: 1px;
 	margin-right: 1px;
-	font-weight: 900;
+	font-style: italic;
 	border-radius: 3px;
 }
 .marking-red {
 	color: #c12e2a;
-	border: 1px dotted #c12e2a;
 }
 .marking-red.alt:after {
 	content: " ✗";
 }
 .marking-yellow {
 	color: #eb9316;
-	border: 1px dotted #eb9316;
 }
 .marking-yellow.alt:after {
 	content: " ?";
 }
 .marking-green {
 	color: #419641;
-	border: 1px dotted #419641;
 }
 .marking-green.alt:after {
 	content: " ✓";
 }
 .marking-selected {
 	border-style: solid;
+}
+
+#chkSuggestions {
+	font-size: 16px;
+}
+#chkSuggestions span {
+	color: #c12e2a;
 }

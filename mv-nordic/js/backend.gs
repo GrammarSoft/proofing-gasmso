@@ -125,7 +125,7 @@ function findElement(prefix, word, suffix) {
 		sects.push(doc.getFooter());
 	}
 
-	var rx = '^'+prefix.replace(Const.NonLetter, '.*?')+'\\s*'+escapeRegExpTokens(word)+'\\s*'+suffix.replace(Const.NonLetter, '.*?')+'.*?$';
+	var rx = '^\\s*'+prefix.replace(Const.NonLetter, '.*?')+'\\s*'+escapeRegExpTokens(word)+'\\s*'+suffix.replace(Const.NonLetter, '.*?')+'\\s*$';
 	Logger.log('Searching regex %s', rx);
 	for (var i=0 ; i<sects.length ; ++i) {
 		var sel = sects[i].findText(rx);
@@ -167,7 +167,8 @@ function replaceInDocument(prefix, word, rpl, suffix) {
 	var rng = doc.newRange();
 	rng.addElement(rem.getElement(), b, b + rpl.length - 1);
 	doc.setSelection(rng.build());
-	return true;
+
+	return rpl;
 }
 
 function selectInDocument(prefix, word, suffix) {
@@ -178,7 +179,7 @@ function selectInDocument(prefix, word, suffix) {
 	}
 
 	var txt = sel.getElement().asText().getText();
-	var rx = new RegExp('^('+prefix.replace(Const.NonLetter, '.*?')+'\\s*)'+escapeRegExpTokens(word));
+	var rx = new RegExp('^(\\s*'+prefix.replace(Const.NonLetter, '.*?')+'\\s*)'+escapeRegExpTokens(word));
 	var m = rx.exec(txt);
 	if (!m) {
 		Logger.log('Did not match regex');
@@ -189,5 +190,6 @@ function selectInDocument(prefix, word, suffix) {
 	var rng = doc.newRange();
 	rng.addElement(sel.getElement(), m[1].length, m[1].length + word.length - 1);
 	doc.setSelection(rng.build());
+
 	return true;
 }
