@@ -27,7 +27,7 @@
 </head>
 <body>
 
-<div id="placeholder" style="height: 3000px; width: 100%;">&nbsp;</div>
+<div id="placeholder" style="height: 3000px; width: 100%;">… loading …</div>
 
 <div class="closable" id="error">
 <div class="closer" tabindex="1">&times;</div>
@@ -51,12 +51,12 @@
 
 <div class="sidebar" id="checking">
 <div class="buttonbar backed">
-	<button class="btn-blue" id="btnInput" tabindex="80">Ret selv</button>
-	<button class="btn-orange" id="btnIgnore" tabindex="90">Ignorer</button>
 	<button class="btn-lightblue" id="btnAccept" tabindex="100">Erstat ord</button>
 	<button class="btn-lightblue" id="btnPrev" tabindex="110">Forrige</button>
-	<button class="btn-orange" id="btnIgnoreAll" tabindex="120">Ignorer alle</button>
 	<button class="btn-lightblue" id="btnNext" tabindex="130">Næste</button>
+	<button class="btn-blue" id="btnInput" tabindex="80">Ret selv</button>
+	<button class="btn-orange" id="btnIgnore" tabindex="90">Ignorer</button>
+	<button class="btn-orange" id="btnIgnoreAll" tabindex="120">Ignorer alle</button>
 </div>
 <div class="text closable backed" id="chkInput">
 	<div class="closer" tabindex="140">&times;</div>
@@ -68,16 +68,10 @@
 	</div>
 </div>
 <h1 id="chkType">…</h1>
-<div class="text divider" id="chkContext">…</div>
-<div class="text" id="chkSuggestions">…</div>
+<div class="text" id="chkContext">…</div>
 <div class="text backed" id="chkDidYouMean">
 	<h2>Erstat med …</h2>
-	<div class="flow-50" id="chkDidYouMeanItems">
-		<a class="flow-item link">…</a>
-		<a class="flow-item link">…</a>
-		<a class="flow-item link">…</a>
-		<a class="flow-item link">…</a>
-		<a class="flow-item link">…</a>
+	<div id="chkDidYouMeanItems">
 	</div>
 </div>
 <div class="text" id="chkExplain">
@@ -93,8 +87,16 @@
 </div>
 </div>
 
+<div class="sidebar" id="done">
+<h1>Din tekst er blevet tjekket, og der er ikke flere stave- eller grammatikforslag.</h1>
+<div class="buttonbar backed">
+	<button class="btn-blue" id="btnCheckAgain" tabindex="200">Tjek igen</button>
+	<button class="btn-orange" id="btnCheckCommas" tabindex="210">Tjek kommaforslag</button>
+</div>
+</div>
+
 <footer class="text center">
-	<button class="btn-lightblue btn-big" id="btnOptions" tabindex="200">Indstillinger</button>
+	<button class="btn-lightblue btn-big" id="btnOptions" tabindex="1000">Indstillinger</button>
 </footer>
 
 </body>
