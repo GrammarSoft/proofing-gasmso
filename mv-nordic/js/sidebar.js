@@ -18,7 +18,7 @@
  */
 'use strict';
 
-var g_conf = Object.assign({}, g_conf_defaults);
+var g_conf = {};
 var session = {};
 var markings = [];
 var cmarking = {s: -1, w: -1};
@@ -128,8 +128,8 @@ function markingRender() {
 	$('#chkContext').html(context);
 
 	if (marking[2].length === 0) {
-		$('#chkSuggestions').hide();
 		$('#chkDidYouMean').hide();
+		$('#chkContext').addClass('divider');
 		$('#btnAccept').addClass('disabled');
 	}
 	else {
@@ -150,12 +150,14 @@ function markingRender() {
 			else if (first_upper) {
 				t = uc_first(t);
 			}
-			suggs += '<a class="flow-item link">' + escHTML(t) + '</a>';
+			// \uD83D\uDD0D = 🔍
+			suggs += '<div class="suggestion"><span class="link" tabindex="'+(50+i*2)+'">' + escHTML(t) + '</span><a class="suggestion-lookup link" tabindex="'+(50+i*2+1)+'">\uD83D\uDD0D</a></div>';
 		}
 		$('#chkDidYouMeanItems').html(suggs);
-		$('#chkDidYouMeanItems').find('a').off().click(markingAccept);
-		$('#chkSuggestions').html('<span>' + escHTML(marking[0]) + '</span> → ' + escHTML(ss[0])).show();
+		$('#chkDidYouMeanItems').find('span').off().click(markingAccept);
+		$('#chkDidYouMeanItems').find('.suggestion-lookup').off().click(function() { alert($(this).text()); });
 		$('#chkDidYouMean').show();
+		$('#chkContext').removeClass('divider');
 		$('#btnAccept').removeClass('disabled');
 	}
 
@@ -237,8 +239,8 @@ function btnPrev() {
 	if (cmarking.s !== markings.length) {
 		markingRender();
 	}
-	else {
-		console.log('No more errors');
+	else if (to_send_i >= to_send.length) {
+		checkDone();
 	}
 }
 
@@ -282,8 +284,8 @@ function btnNext() {
 	if (cmarking.s !== -1) {
 		markingRender();
 	}
-	else {
-		console.log('No more errors');
+	else if (to_send_i >= to_send.length) {
+		checkDone();
 	}
 }
 
@@ -574,6 +576,11 @@ function checkParagraphs(doc) {
 	sendTexts();
 }
 
+function checkDone() {
+	$('.sidebar').hide();
+	$('#done').show();
+}
+
 function didReplace(rpl) {
 	console.log(rpl);
 	markings[cmarking.s][cmarking.w] = [rpl];
@@ -600,6 +607,7 @@ function getSession(s) {
 }
 
 $(function() {
+	g_conf = Object.assign({}, g_conf_defaults);
 	google.script.run.withSuccessHandler(getSession).withFailureHandler(showError).getSession();
 
 	$('.closer').click(function() {

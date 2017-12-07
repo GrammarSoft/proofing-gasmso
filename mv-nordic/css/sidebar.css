@@ -97,21 +97,37 @@ body {
 	margin-top: 18px;
 }
 
-.flow-50, .buttonbar {
+.buttonbar {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
 	align-items: center;
 }
 
-.flow-50 .flow-item {
-	min-width: 50%;
+.suggestion {
+	position: relative;
+	display: block;
 	margin-top: 18px;
+	padding-right: 38px;
+}
+.suggestion span {
+	display: block;
+	overflow-wrap: break-word;
+}
+.suggestion:first-child span {
+	font-weight: bold;
+	font-style: italic;
+}
+.suggestion-lookup {
+	display: block;
+	position: absolute;
+	right: 0;
+	top: 0;
 }
 
 .divider {
 	border-bottom: 1px dotted #ccc;
-	padding-bottom: 9px;
+	padding-bottom: 18px;
 }
 
 .chkProgressBar {

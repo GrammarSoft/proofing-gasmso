@@ -24,7 +24,8 @@
 function onOpen(e) {
 	var ui = DocumentApp.getUi();
 	ui.createAddonMenu()
-		.addItem('Start Ret Mig', 'showSidebar')
+		.addItem('Start Ret Mig', 'showGrammar')
+		.addItem('Start Kommaforslag', 'showComma')
 		.addToUi();
 }
 
@@ -47,11 +48,29 @@ function getSession() {
 	return rv;
 }
 
-function showSidebar() {
-	var ui = HtmlService.createTemplateFromFile('html/sidebar')
-		.evaluate()
-		.setSandboxMode(HtmlService.SandboxMode.IFRAME)
-		.setTitle('Ret Mig');
+function showGrammar(mode, auto) {
+	var ui = HtmlService.createTemplateFromFile('html/sidebar-grammar').evaluate();
+	var html = ui.getContent();
+	if (mode) {
+		html = html.replace('</body>', '<script>var g_mode = "'+mode+'";</script>');
+	}
+	if (auto) {
+		html = html.replace('</body>', '<script>var g_auto = true;</script>');
+	}
+	ui.setContent(html).setSandboxMode(HtmlService.SandboxMode.IFRAME).setTitle('Ret Mig');
+	DocumentApp.getUi().showSidebar(ui);
+}
+
+function showComma(mode) {
+	var ui = HtmlService.createTemplateFromFile('html/sidebar-comma').evaluate();
+	var html = ui.getContent();
+	if (mode) {
+		html = html.replace('</body>', '<script>var g_mode = "'+mode+'";</script>');
+	}
+	if (auto) {
+		html = html.replace('</body>', '<script>var g_auto = true;</script>');
+	}
+	ui.setContent(html).setSandboxMode(HtmlService.SandboxMode.IFRAME).setTitle('Kommaforslag');
 	DocumentApp.getUi().showSidebar(ui);
 }
 
