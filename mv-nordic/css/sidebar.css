@@ -23,6 +23,10 @@ html {
 	position: relative;
 }
 
+* {
+	vertical-align: top;
+}
+
 *, *:before, *:after {
 	box-sizing: inherit;
 }
@@ -240,6 +244,18 @@ label {
 	clear: both;
 	margin: 9px 0;
 	color: #0da9f6;
+}
+
+label * {
+	display: inline-block;
+}
+
+label input[type="checkbox"] {
+	margin: 2px 9px 0 0;
+}
+
+label span {
+	max-width: calc(100% - 30px);
 }
 
 input[type="text"] {

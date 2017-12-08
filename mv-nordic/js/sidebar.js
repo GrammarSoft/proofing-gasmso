@@ -29,6 +29,37 @@ var to_send_i = 0;
 var ts_xhr = null;
 var ts_slow = null;
 var ts_fail = 0;
+var ignores = {};
+
+function markingSetSentence() {
+	var s = cmarking.s;
+	var b = cmarking.w;
+	for (; b>0 ; --b) {
+		if (markings[s][b-1][0].length === 0) {
+			--b;
+			break;
+		}
+	}
+	var e = cmarking.w;
+	for (; e<markings[s].length ; ++e) {
+		if (markings[s][e][0].length === 0) {
+			break;
+		}
+	}
+
+	var sentence = '';
+	cmarking.sentence = '';
+	for (var i=b; i<e ; ++i) {
+		if (i === cmarking.w) {
+			sentence += '<span class="marking">' + escHTML(markings[s][i][0]) + '</span> ';
+		}
+		else {
+			sentence += escHTML(markings[s][i][0]) + ' ';
+		}
+		cmarking.sentence += markings[s][i][0] + ' ';
+	}
+	return sentence;
+}
 
 function markingSetContext() {
 	cmarking.prefix = '';
@@ -42,12 +73,26 @@ function markingSetContext() {
 	}
 }
 
-function markingRender() {
+function markingRender(skipact) {
+	var s = cmarking.s;
+	var marking = markings[s][cmarking.w];
+	var sentence = markingSetSentence();
+	var ik = marking[0] + '\t' + marking[1];
+	if (ignores.hasOwnProperty(ik) && ignores[ik].hasOwnProperty(cmarking.sentence) && ignores[ik][cmarking.sentence] === true) {
+		console.log(`Skip ignored ${ik} : ${cmarking.sentence}`);
+		markings[s][cmarking.w] = [marking[0]];
+		if (skipact === 'prev') {
+			btnPrev();
+		}
+		else {
+			btnNext();
+		}
+		return;
+	}
+
 	$('#error').hide();
 	$('.sidebar').hide();
 	$('#checking').show();
-	var s = cmarking.s;
-	var marking = markings[s][cmarking.w];
 
 	var col = 'green';
 	var types = marking[1].split(/ /g);
@@ -102,34 +147,12 @@ function markingRender() {
 
 	$('#chkType').html(marking[1]);
 
-	var b = cmarking.w;
-	for (; b>0 ; --b) {
-		if (markings[s][b-1][0].length === 0) {
-			--b;
-			break;
-		}
-	}
-	var e = cmarking.w;
-	for (; e<markings[s].length ; ++e) {
-		if (markings[s][e][0].length === 0) {
-			break;
-		}
-	}
-
-	var context = '';
-	for (var i=b; i<e ; ++i) {
-		if (i === cmarking.w) {
-			context += '<span class="marking marking-'+col+alt+'">' + escHTML(markings[s][i][0]) + '</span> ';
-		}
-		else {
-			context += escHTML(markings[s][i][0]) + ' ';
-		}
-	}
-	$('#chkContext').html(context);
+	sentence = sentence.replace(' class="marking"', ' class="marking marking-'+col+alt+'"');
+	$('#chkSentence').html(sentence);
 
 	if (marking[2].length === 0) {
 		$('#chkDidYouMean').hide();
-		$('#chkContext').addClass('divider');
+		$('#chkSentence').addClass('divider');
 		$('#btnAccept').addClass('disabled');
 	}
 	else {
@@ -157,7 +180,7 @@ function markingRender() {
 		$('#chkDidYouMeanItems').find('span').off().click(markingAccept);
 		$('#chkDidYouMeanItems').find('.suggestion-lookup').off().click(function() { alert($(this).text()); });
 		$('#chkDidYouMean').show();
-		$('#chkContext').removeClass('divider');
+		$('#chkSentence').removeClass('divider');
 		$('#btnAccept').removeClass('disabled');
 	}
 
@@ -181,18 +204,34 @@ function btnInput() {
 	$('#chkInputText').focus();
 }
 
-function btnIgnore() {
+function markingIgnore() {
+	var ik = markings[cmarking.s][cmarking.w][0] + '\t' + markings[cmarking.s][cmarking.w][1];
+	if (!ignores[ik]) {
+		ignores[ik] = {};
+	}
+	ignores[ik][cmarking.sentence] = true;
+	console.log(`Ignoring ${ik} in ${cmarking.sentence}`);
+
 	markings[cmarking.s][cmarking.w] = [markings[cmarking.s][cmarking.w][0]];
+}
+
+function btnIgnore() {
+	markingIgnore();
 	btnNext();
 }
 
 function btnIgnoreAll() {
+	var s = cmarking.s;
+	var w = cmarking.w;
 	var word = markings[cmarking.s][cmarking.w][0];
 	var ts = markings[cmarking.s][cmarking.w][1];
 	for (var s=0 ; s<markings.length ; ++s) {
 		for (var w=0 ; w<markings[s].length ; ++w) {
 			if (markings[s][w][0] === word && markings[s][w][1] && markings[s][w][1] === ts) {
-				markings[s][w] = [markings[s][w][0]];
+				cmarking.s = s;
+				cmarking.w = w;
+				markingSetSentence();
+				markingIgnore();
 			}
 		}
 	}
@@ -237,7 +276,7 @@ function btnPrev() {
 	}
 
 	if (cmarking.s !== markings.length) {
-		markingRender();
+		markingRender('prev');
 	}
 	else if (to_send_i >= to_send.length) {
 		checkDone();
@@ -282,7 +321,7 @@ function btnNext() {
 	}
 
 	if (cmarking.s !== -1) {
-		markingRender();
+		markingRender('next');
 	}
 	else if (to_send_i >= to_send.length) {
 		checkDone();
