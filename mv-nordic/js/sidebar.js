@@ -73,6 +73,10 @@ function markingSetSentence() {
 			sentence += '<span class="marking">' + escHTML(markings[s][i][0]) + '</span> ';
 		}
 		else {
+			if (markings[s][i].length > 1 && /(@insert|%ko-|%k-)/.test(markings[s][i][1])) {
+				//console.log(`Skipping ${s} ${i}: ${markings[s][i][1]}`);
+				continue;
+			}
 			sentence += escHTML(markings[s][i][0]) + ' ';
 		}
 		cmarking.sentence += markings[s][i][0] + ' ';
@@ -83,11 +87,19 @@ function markingSetSentence() {
 function markingSetContext() {
 	cmarking.prefix = '';
 	for (let i=0 ; i<cmarking.w ; ++i) {
+		if (markings[cmarking.s][i].length > 1 && /(@insert|%ko-|%k-)/.test(markings[cmarking.s][i][1])) {
+			//console.log(`Skipping ${cmarking.s} ${i}: ${markings[cmarking.s][i][1]}`);
+			continue;
+		}
 		cmarking.prefix += markings[cmarking.s][i][0] + ' ';
 	}
 
 	cmarking.suffix = '';
 	for (let i=cmarking.w+1 ; i<markings[cmarking.s].length ; ++i) {
+		if (markings[cmarking.s][i].length > 1 && /(@insert|%ko-|%k-)/.test(markings[cmarking.s][i][1])) {
+			//console.log(`Skipping ${cmarking.s} ${i}: ${markings[cmarking.s][i][1]}`);
+			continue;
+		}
 		cmarking.suffix += markings[cmarking.s][i][0] + ' ';
 	}
 }
@@ -167,7 +179,7 @@ function markingRender(skipact) {
 
 	$('#chkType').html(marking[1]);
 
-	sentence = sentence.replace(' class="marking"', ' class="marking marking-'+col+alt+'"');
+	sentence = sentence.replace(' class="marking"', ' class="marking marking-'+col+alt+' marking-'+g_tool+'"');
 	$('#chkSentence').html(sentence);
 
 	if (marking[2].length === 0) {
@@ -210,7 +222,14 @@ function markingRender(skipact) {
 
 	markingSetContext();
 
-	google.script.run.withFailureHandler(showError).selectInDocument(cmarking.prefix, markings[s][cmarking.w][0], cmarking.suffix);
+	if (/(@insert|%ko-|%k-)/.test(markings[s][cmarking.w][1])) {
+		let px = /^(.*?)(\S+\s?)$/.exec(cmarking.prefix);
+		let sx = /^(\s?\S+)(.*)$/.exec(cmarking.suffix);
+		google.script.run.withFailureHandler(showError).selectInDocument(px[1], px[2] + sx[1], sx[2]);
+	}
+	else {
+		google.script.run.withFailureHandler(showError).selectInDocument(cmarking.prefix, markings[s][cmarking.w][0], cmarking.suffix);
+	}
 }
 
 function btnAccept() {
@@ -384,7 +403,17 @@ function btnInputAll() {
 }
 
 function markingAccept() {
-	google.script.run.withSuccessHandler(didReplace).withFailureHandler(showError).replaceInDocument(cmarking.prefix, markings[cmarking.s][cmarking.w][0], $(this).text(), cmarking.suffix);
+	if (/(@insert|%ko-|%k-)/.test(markings[cmarking.s][cmarking.w][1])) {
+		let px = /^(.*?)(\S+)(\s?)$/.exec(cmarking.prefix);
+		let sx = /^(\s?\S+)(.*)$/.exec(cmarking.suffix);
+		google.script.run.withSuccessHandler(didReplace).withFailureHandler(showError).replaceInDocument(px[1], px[2] + px[3] + sx[1], px[2] + markings[cmarking.s][cmarking.w][0] + px[3] + sx[1], sx[2]);
+	}
+	else if (/(@nil|%nok-)/.test(markings[cmarking.s][cmarking.w][1])) {
+		google.script.run.withSuccessHandler(didReplace).withFailureHandler(showError).replaceInDocument(cmarking.prefix, markings[cmarking.s][cmarking.w][0], '', cmarking.suffix);
+	}
+	else {
+		google.script.run.withSuccessHandler(didReplace).withFailureHandler(showError).replaceInDocument(cmarking.prefix, markings[cmarking.s][cmarking.w][0], $(this).text(), cmarking.suffix);
+	}
 }
 
 function _parseResult(rv) {
@@ -483,7 +512,17 @@ function _parseResult(rv) {
 					}
 					else {
 						console.log('Unknown marking: '+ws[k]);
-						nws.push('@unknown-marking');
+						if (g_tool === 'grammar') {
+							nws.push('@unknown-marking');
+						}
+						else {
+							if (ws[k].indexOf('%nok-') === 0) {
+								nws.push('%nok-soft');
+							}
+							else {
+								nws.push('%k');
+							}
+						}
 					}
 				}
 				// Remove @sentsplit from last token
@@ -498,27 +537,34 @@ function _parseResult(rv) {
 
 				ws = [];
 				for (let k=0 ; k<nws.length ; ++k) {
-					if (nws[k] === '@green') {
-						ws.push(nws[k]);
-						continue;
+					if (g_tool === 'grammar') {
+						if (nws[k] === '@green') {
+							ws.push(nws[k]);
+							continue;
+						}
+						if (g_conf.opt_onlyConfident && !types_red.hasOwnProperty(nws[k])) {
+							continue;
+						}
+						if (g_conf.opt_ignUNames && nws[k] === '@proper') {
+							continue;
+						}
+						if (g_conf.opt_ignUComp && nws[k] === '@new') {
+							continue;
+						}
+						if (g_conf.opt_ignUAbbr && nws[k] === '@abbreviation') {
+							continue;
+						}
+						if (g_conf.opt_ignUOther && nws[k] === '@check!') {
+							continue;
+						}
+						if (g_conf.opt_ignMaj && (nws[k] === '@upper' || nws[k] === '@lower')) {
+							continue;
+						}
 					}
-					if (g_conf.opt_onlyConfident && !types_red.hasOwnProperty(nws[k])) {
-						continue;
-					}
-					if (g_conf.opt_ignUNames && nws[k] === '@proper') {
-						continue;
-					}
-					if (g_conf.opt_ignUComp && nws[k] === '@new') {
-						continue;
-					}
-					if (g_conf.opt_ignUAbbr && nws[k] === '@abbreviation') {
-						continue;
-					}
-					if (g_conf.opt_ignUOther && nws[k] === '@check!') {
-						continue;
-					}
-					if (g_conf.opt_ignMaj && (nws[k] === '@upper' || nws[k] === '@lower')) {
-						continue;
+					else {
+						if (marking_types[nws[k]][2] > g_conf.opt_level) {
+							continue;
+						}
 					}
 					ws.push(nws[k]);
 				}
@@ -553,6 +599,15 @@ function _parseResult(rv) {
 				else {
 					w.pop();
 				}
+			}
+			if (w.length > 1 && (w[1].indexOf('%k-') !== -1 || w[1].indexOf('%ko-') !== -1)) {
+				let wo = w[0];
+				w[0] = ',';
+				if (w[1].indexOf('%k-stop') !== -1) {
+					w[0] = '.';
+				}
+				words.push(w);
+				w = [wo];
 			}
 			words.push(w);
 		}
