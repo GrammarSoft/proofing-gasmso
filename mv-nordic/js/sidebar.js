@@ -209,7 +209,7 @@ function markingRender(skipact) {
 			suggs += '<div class="suggestion"><span class="link" tabindex="'+(50+i*2)+'">' + escHTML(t) + '</span><a class="suggestion-lookup link" tabindex="'+(50+i*2+1)+'">\uD83D\uDD0D</a></div>';
 		}
 		$('#chkDidYouMeanItems').html(suggs);
-		$('#chkDidYouMeanItems').find('span').off().click(markingAccept);
+		$('#chkDidYouMeanItems').find('span').off().click(markingAcceptSuggestion);
 		$('#chkDidYouMeanItems').find('.suggestion-lookup').off().click(function() {
 			alert($(this).text());
 		});
@@ -236,7 +236,7 @@ function btnAccept() {
 	if ($(this).hasClass('disabled')) {
 		return;
 	}
-	$('#chkDidYouMeanItems').find('a').first().click();
+	markingAccept();
 }
 
 function btnInput() {
@@ -402,17 +402,21 @@ function btnInputAll() {
 	btnNext();
 }
 
+function markingAcceptSuggestion() {
+	google.script.run.withSuccessHandler(didReplace).withFailureHandler(showError).replaceInDocument(cmarking.prefix, markings[cmarking.s][cmarking.w][0], $(this).text(), cmarking.suffix);
+}
+
 function markingAccept() {
 	if (/(@insert|%ko-|%k-)/.test(markings[cmarking.s][cmarking.w][1])) {
 		let px = /^(.*?)(\S+)(\s?)$/.exec(cmarking.prefix);
 		let sx = /^(\s?\S+)(.*)$/.exec(cmarking.suffix);
-		google.script.run.withSuccessHandler(didReplace).withFailureHandler(showError).replaceInDocument(px[1], px[2] + px[3] + sx[1], px[2] + markings[cmarking.s][cmarking.w][0] + px[3] + sx[1], sx[2]);
+		google.script.run.withSuccessHandler(didInsert).withFailureHandler(showError).replaceInDocument(px[1], px[2] + px[3] + sx[1], px[2] + markings[cmarking.s][cmarking.w][0] + px[3] + sx[1], sx[2]);
 	}
 	else if (/(@nil|%nok-)/.test(markings[cmarking.s][cmarking.w][1])) {
-		google.script.run.withSuccessHandler(didReplace).withFailureHandler(showError).replaceInDocument(cmarking.prefix, markings[cmarking.s][cmarking.w][0], '', cmarking.suffix);
+		google.script.run.withSuccessHandler(didRemove).withFailureHandler(showError).replaceInDocument(cmarking.prefix, markings[cmarking.s][cmarking.w][0], ' ', cmarking.suffix);
 	}
 	else {
-		google.script.run.withSuccessHandler(didReplace).withFailureHandler(showError).replaceInDocument(cmarking.prefix, markings[cmarking.s][cmarking.w][0], $(this).text(), cmarking.suffix);
+		$('#chkDidYouMeanItems').find('a').first().click();
 	}
 }
 
@@ -702,6 +706,18 @@ function checkDone() {
 function didReplace(rpl) {
 	console.log(rpl);
 	markings[cmarking.s][cmarking.w] = [rpl];
+	btnNext();
+}
+
+function didInsert(rpl) {
+	console.log(rpl);
+	markings[cmarking.s][cmarking.w] = [markings[cmarking.s][cmarking.w][0]];
+	btnNext();
+}
+
+function didRemove(rpl) {
+	console.log(rpl);
+	markings[cmarking.s][cmarking.w] = [''];
 	btnNext();
 }
 
