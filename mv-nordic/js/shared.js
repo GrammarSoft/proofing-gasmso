@@ -20,8 +20,8 @@
 
 if (!Array.prototype.unique) {
 	Array.prototype.unique = function() {
-		var unique = [];
-		for (var i=0; i<this.length; ++i) {
+		let unique = [];
+		for (let i=0; i<this.length; ++i) {
 			if (unique.indexOf(this[i]) == -1) {
 				unique.push(this[i]);
 			}
@@ -31,7 +31,7 @@ if (!Array.prototype.unique) {
 }
 
 /* exported Defs */
-var Defs = {
+const Defs = {
 	CAP_ADMIN:	  (1 <<	 0),
 	CAP_COMMA:	  (1 <<	 1),
 	CAP_DANPROOF: (1 <<	 2),
@@ -67,7 +67,7 @@ var Defs = {
 Defs.OPT_DP_IGNORE_UNKNOWN = Defs.OPT_DP_IGNORE_NAMES|Defs.OPT_DP_IGNORE_COMP|Defs.OPT_DP_IGNORE_ABBR|Defs.OPT_DP_IGNORE_OTHER;
 
 /* exported g_conf_defaults */
-var g_conf_defaults = {
+const g_conf_defaults = {
 	opt_onlyConfident: false,
 	opt_ignUNames: false,
 	opt_ignUComp: false,
@@ -90,14 +90,14 @@ function uc_first(str) {
 
 /* exported escHTML */
 function escHTML(t) {
-	var nt = t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+	let nt = t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
 	//console.log([t, nt]);
 	return nt;
 }
 
 /* exported decHTML */
 function decHTML(t) {
-	var nt = t.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&');
+	let nt = t.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&');
 	//console.log([t, nt]);
 	return nt;
 }
@@ -105,11 +105,11 @@ function decHTML(t) {
 /* exported sanitize_result */
 function sanitize_result(txt) {
 	// Swap markers that the backend has mangled due to sentence-ending parentheticals
-	for (var i=0 ; i<Defs.MAX_RQ_SIZE ; ++i) {
-		var t1 = '</s'+i+'>';
-		var t2 = '<s'+(i+1)+'>';
-		var s1 = txt.indexOf(t1);
-		var s2 = txt.indexOf(t2);
+	for (let i=0 ; i<Defs.MAX_RQ_SIZE ; ++i) {
+		let t1 = '</s'+i+'>';
+		let t2 = '<s'+(i+1)+'>';
+		let s1 = txt.indexOf(t1);
+		let s2 = txt.indexOf(t2);
 		if (s1 !== -1 && s2 !== -1 && s2 < s1) {
 			txt = txt.replace(new RegExp('('+t2+')((.|\\s)*?'+t1+')', 'g'), '$2\n\n$1\n');
 			console.log('Swapped markers '+i+' with '+(i+1));
