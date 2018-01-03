@@ -95,7 +95,7 @@ let marking_types = {
 	],
 	"@new": [
 		"Nyt ord, der sandsynligvis er ok",
-		"Du har skrevet et ord, der ikke findes i ordbogen, men som ser ud til at være rigtigt. Kig på det en ekstra gang for at være sikker på, at du har skrevet det rigtigt<span style=\"color: #ff0000\">.</span>",
+		"Du har skrevet et ord, der ikke findes i ordbogen, men som ser ud til at være rigtigt. Kig på det en ekstra gang for at være sikker på, at du har skrevet det rigtigt.",
 	],
 	"@green": [
 		"Ord, der er forkert i sammenhængen",
