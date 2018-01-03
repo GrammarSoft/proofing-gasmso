@@ -48,15 +48,21 @@ function getSession() {
 	return rv;
 }
 
+function injectVariables(html, mode, auto) {
+	html = html.replace('</body>', '<script>var g_mode = null; var g_auto = false;</script></body>');
+	if (mode) {
+		html = html.replace('</body>', '<script>g_mode = "'+mode+'";</script></body>');
+	}
+	if (auto) {
+		html = html.replace('</body>', '<script>g_auto = true;</script></body>');
+	}
+	return html;
+}
+
 function showGrammar(mode, auto) {
 	var ui = HtmlService.createTemplateFromFile('html/sidebar-grammar').evaluate();
 	var html = ui.getContent();
-	if (mode) {
-		html = html.replace('</body>', '<script>var g_mode = "'+mode+'";</script>');
-	}
-	if (auto) {
-		html = html.replace('</body>', '<script>var g_auto = true;</script>');
-	}
+	html = injectVariables(html, mode, auto);
 	ui.setContent(html).setSandboxMode(HtmlService.SandboxMode.IFRAME).setTitle('Ret Mig');
 	DocumentApp.getUi().showSidebar(ui);
 }
@@ -64,12 +70,7 @@ function showGrammar(mode, auto) {
 function showComma(mode) {
 	var ui = HtmlService.createTemplateFromFile('html/sidebar-comma').evaluate();
 	var html = ui.getContent();
-	if (mode) {
-		html = html.replace('</body>', '<script>var g_mode = "'+mode+'";</script>');
-	}
-	if (auto) {
-		html = html.replace('</body>', '<script>var g_auto = true;</script>');
-	}
+	html = injectVariables(html, mode, auto);
 	ui.setContent(html).setSandboxMode(HtmlService.SandboxMode.IFRAME).setTitle('Kommaforslag');
 	DocumentApp.getUi().showSidebar(ui);
 }

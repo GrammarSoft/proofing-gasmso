@@ -77,6 +77,7 @@ function markingRender(skipact) {
 	var s = cmarking.s;
 	var marking = markings[s][cmarking.w];
 	var sentence = markingSetSentence();
+
 	var ik = marking[0] + '\t' + marking[1];
 	if (ignores.hasOwnProperty(ik) && ignores[ik].hasOwnProperty(cmarking.sentence) && ignores[ik][cmarking.sentence] === true) {
 		console.log(`Skip ignored ${ik} : ${cmarking.sentence}`);
@@ -188,7 +189,7 @@ function markingRender(skipact) {
 
 	markingSetContext();
 
-	google.script.run.withSuccessHandler(didSelect).withFailureHandler(showError).selectInDocument(cmarking.prefix, markings[s][cmarking.w][0], cmarking.suffix);
+	google.script.run.withFailureHandler(showError).selectInDocument(cmarking.prefix, markings[s][cmarking.w][0], cmarking.suffix);
 }
 
 function btnAccept() {
@@ -352,7 +353,7 @@ function btnInputAll() {
 				cmarking.s = s;
 				cmarking.w = w;
 				markingSetContext();
-				google.script.run.withSuccessHandler(didSelect).withFailureHandler(showError).replaceInDocument(cmarking.prefix, markings[cmarking.s][cmarking.w][0], $('#chkInputText').val(), cmarking.suffix);
+				google.script.run.withFailureHandler(showError).replaceInDocument(cmarking.prefix, markings[cmarking.s][cmarking.w][0], $('#chkInputText').val(), cmarking.suffix);
 				markings[cmarking.s][cmarking.w] = [rpl];
 			}
 		}
@@ -624,10 +625,6 @@ function didReplace(rpl) {
 	console.log(rpl);
 	markings[cmarking.s][cmarking.w] = [rpl];
 	btnNext();
-}
-
-function didSelect(rv) {
-	console.log(rv);
 }
 
 function getSession(s) {
