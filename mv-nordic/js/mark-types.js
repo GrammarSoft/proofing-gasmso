@@ -43,7 +43,7 @@ let marking_types = {
 	],
 	"@x-etype-sær": [
 		"Manglende sammenskrivning",
-		"Du har undladt at skrive to ord sammen, som i denne sammenhæng skal være skrevet sammen. Grammatisk kan ordene stå hver for sig, men betydningen ændres, når de skrives sammen. Der er fx stor forskel på en <i>engelsk</i> <i>lærer</i> (som altså ikke er hverken dansker eller tysker) og en<i> engelsklærer</i>, som underviser i engelsk.",
+		"Du har undladt at skrive to ord sammen, som i denne sammenhæng skal være skrevet sammen. Grammatisk kan ordene stå hver for sig, men betydningen ændres, når de skrives sammen. Der er fx stor forskel på en <i>engelsk lærer</i> (som altså ikke er hverken dansker eller tysker) og en<i> engelsklærer</i>, som underviser i engelsk.",
 	],
 	"@x-etype-flex": [
 		"Bøjningsfejl",
@@ -59,7 +59,7 @@ let marking_types = {
 	],
 	"@x-etype-gemination": [
 		"Bøjningsfejl ved bogstavsfordobling",
-		"Du har bøjet ord ved at bruge dobbeltkonsonant, fx <i>en dal</i> <i>→</i><i> to daller,</i> hvor brugen af et -<i>l</i> bevarer en lang vokal. Eller du har undladt dobbeltvokal, når en kort vokal skal bevares, som fx <i>en hal → to haller.</i>",
+		"Du har bøjet ord ved at bruge dobbeltkonsonant, fx <i>en dal → to daller,</i> hvor brugen af et -<i>l</i> bevarer en lang vokal. Eller du har undladt dobbeltvokal, når en kort vokal skal bevares, som fx <i>en hal → to haller.</i>",
 	],
 	"@x-etype-hyphen": [
 		"Overflødig eller manglende bindestreg inde i ordet",
@@ -107,7 +107,7 @@ let marking_types = {
 	],
 	"@abbreviation": [
 		"Ukendt forkortelse",
-		"Du har skrevet en forkortelse, som ikke er almindelig kendt. Kig på den igen for at være sikker på, at du har skrevet forkortelsen rigtigt.<br>\n<br>\nFx <i>se</i> <i>kap.</i><i> 5</i>",
+		"Du har skrevet en forkortelse, som ikke er almindelig kendt. Kig på den igen for at være sikker på, at du har skrevet forkortelsen rigtigt.<br>\n<br>\nFx <i>se kap. 5</i>",
 	],
 	"@hyphen-prefix": [
 		"Manglende bindestreg efter forreste orddel i sideordning",
@@ -119,11 +119,11 @@ let marking_types = {
 	],
 	"@apostrophe": [
 		"Manglende apostrof",
-		"Du har undladt at bruge apostrof i forbindelse med bøjning af forkortelser.<br>\n<br>\nFx <i>pc’en,</i> tal som <i>1960’erne</i><br>\n<br>\nEller du mangler apostrof til at markere genitiv efter s, z eller x.<br>\n<br>\nFx <i>Jens</i> → <i>Jens’</i><br>\n<br>\nHusk, at du på dansk ikke må bruge apostrof som genitiv-s. Altså nej til <i>Jensen’</i>. Det hedder <i>Jensens</i>.",
+		"Du har undladt at bruge apostrof i forbindelse med bøjning af forkortelser.<br>\n<br>\nFx <i>pc'en,</i> tal som <i>1960'erne</i><br>\n<br>\nEller du mangler apostrof til at markere genitiv efter s, z eller x.<br>\n<br>\nFx <i>Jens</i> → <i>Jens'</i><br>\n<br>\nHusk, at du på dansk ikke må bruge apostrof som genitiv-s. Altså nej til <i>Jensen'</i>. Det hedder <i>Jensens</i>.",
 	],
 	"@no-apostrophe": [
 		"Overflødig apostrof",
-		"Du har brugt apostrof forkert, som fx <i>Jensen’s</i>. Det hedder <i>Jensens.</i>",
+		"Du har brugt apostrof forkert, som fx <i>Jensen's</i>. Det hedder <i>Jensens.</i>",
 	],
 	"@upper": [
 		"Første bogstav bør være med stort",
@@ -139,107 +139,107 @@ let marking_types = {
 	],
 	"@neu": [
 		"Bøjningsfejl - intetkøn",
-		"Du har skrevet en forkert bøjningsform af ordet. Ordet burde være bøjet i intetkøn i stedet for fælleskøn.<br>\n<br>\nFx <i>Den</i><i></i> <i>røde hus ved</i> <i>vanden</i><i> →</i><i></i> <i>Det</i><i> røde ved</i> <i>vandet</i>",
+		"Du har skrevet en forkert bøjningsform af ordet. Ordet burde være bøjet i intetkøn i stedet for fælleskøn.<br>\n<br>\nFx <i>Den røde hus ved vanden → Det røde ved vandet</i>",
 	],
 	"@neu-sc": [
 		"Bøjningsfejl - intetkøn",
-		"Du har skrevet en forkert bøjningsform af ordet. Ordet burde være bøjet i intetkøn i stedet for fælleskøn.<br>\n<br>\nFx <i>Huset er</i> <i>rød</i><i> → Huset er</i><i> rødt</i>",
+		"Du har skrevet en forkert bøjningsform af ordet. Ordet burde være bøjet i intetkøn i stedet for fælleskøn.<br>\n<br>\nFx <i>Huset er rød → Huset er rødt</i>",
 	],
 	"@utr": [
 		"Bøjningsfejl - fælleskøn",
-		"Du har skrevet en forkert bøjningsform af ordet. Ordet burde være bøjet i fælleskøn i stedet for intetkøn.<br>\n<br>\nFx <i>Det</i><i></i> <i>gamle hest i</i> <i>staldet</i><i> →</i> <i>Den</i><i></i> <i>gamle hest i</i> <i>stalden</i>",
+		"Du har skrevet en forkert bøjningsform af ordet. Ordet burde være bøjet i fælleskøn i stedet for intetkøn.<br>\n<br>\nFx <i>Det gamle hest i staldet → Den gamle hest i stalden</i>",
 	],
 	"@utr-sc": [
 		"Bøjningsfejl – fælleskøn",
-		"Du har skrevet en forkert bøjningsform af ordet. Ordet burde være bøjet i fælleskøn i stedet for intetkøn.<br>\n<br>\nFx <i>Hesten er</i> <i>gammelt</i><i> → Hesten er</i> <i>gammel</i>",
+		"Du har skrevet en forkert bøjningsform af ordet. Ordet burde være bøjet i fælleskøn i stedet for intetkøn.<br>\n<br>\nFx <i>Hesten er gammelt → Hesten er gammel</i>",
 	],
 	"@pl": [
 		"Bøjningsfejl – ental/flertal",
-		"Du har skrevet en forkert bøjningsform af ordet. Du har brugt ental i stedet for flertal.<br>\n<br>\nFx <i>mange</i> <i>hest</i><i> →</i><i> mange</i> <i>heste</i>",
+		"Du har skrevet en forkert bøjningsform af ordet. Du har brugt ental i stedet for flertal.<br>\n<br>\nFx <i>mange hest → mange heste</i>",
 	],
 	"@pl-sc": [
 		"Bøjningsfejl – ental/flertal",
-		"Du har skrevet en forkert bøjningsform af ordet. Du har brugt flertal i stedet for ental.<br>\n<br>\nFx <i>hestene er</i> <i>gammel</i><i> →</i><i> hestene er</i> <i>gamle</i>",
+		"Du har skrevet en forkert bøjningsform af ordet. Du har brugt flertal i stedet for ental.<br>\n<br>\nFx <i>hestene er gammel → hestene er gamle</i>",
 	],
 	"@sg": [
 		"Bøjningsfejl – ental/flertal",
-		"Du har skrevet en forkert bøjningsform af ordet. Du har brugt flertal i stedet for ental.<br>\n<br>\nFx <i>en ung</i> <i>lærere</i><i> →</i><i> en ung</i> <i>lærer</i>",
+		"Du har skrevet en forkert bøjningsform af ordet. Du har brugt flertal i stedet for ental.<br>\n<br>\nFx <i>en ung lærere → en ung lærer</i>",
 	],
 	"@sg-sc": [
 		"Bøjningsfejl – ental/flertal",
-		"Du har skrevet en forkert bøjningsform af ordet. Du har brugt flertal i stedet for ental.<br>\n<br>\nFx <i>huset er</i> <i>store</i><i> → huset er</i> <i>stort</i>",
+		"Du har skrevet en forkert bøjningsform af ordet. Du har brugt flertal i stedet for ental.<br>\n<br>\nFx <i>huset er store → huset er stort</i>",
 	],
 	"@idf": [
 		"Bøjningsfejl – bestemt/ubestemt",
-		"Du har skrevet en forkert bøjningsform af ordet. Du har brugt ubestemt form i stedet for bestemt form.<br>\n<br>\nFx <i>et</i> <i>røde</i><i> æble → et</i><i></i> <i>rødt</i><i> æble</i>",
+		"Du har skrevet en forkert bøjningsform af ordet. Du har brugt ubestemt form i stedet for bestemt form.<br>\n<br>\nFx <i>et røde æble → et rødt æble</i>",
 	],
 	"@idf-sc": [
 		"Bøjningsfejl – bestemt/ubestemt",
-		"Du har skrevet en forkert bøjningsform af ordet. Du har Du har brugt ubestemt form i stedet for bestemt form.<br>\n<br>\nFx <i>huset er</i> <i>gamle</i><i> → huset er</i> <i>gammelt</i>",
+		"Du har skrevet en forkert bøjningsform af ordet. Du har Du har brugt ubestemt form i stedet for bestemt form.<br>\n<br>\nFx <i>huset er gamle → huset er gammelt</i>",
 	],
 	"@idf-pl": [
 		"Bøjningsfejl – bestemt/ubestemt",
-		"Du har skrevet en forkert bøjningsform af ordet. Du har brugt bestemt form i stedet for ubestemt form.<br>\n<br>\nFx <i>mange</i> <i>helten</i><i></i> <i>i film → mange</i> <i>helte</i><i> i film</i>",
+		"Du har skrevet en forkert bøjningsform af ordet. Du har brugt bestemt form i stedet for ubestemt form.<br>\n<br>\nFx <i>mange helten i film → mange helte i film</i>",
 	],
 	"@def": [
 		"Bøjningsfejl – bestemt/ubestemt",
-		"Du har skrevet en forkert bøjningsform af ordet. Du har brugt ubestemt form i stedet for bestemt form.<br>\n<br>\nFx <i>hele</i> <i>skole</i><i> → hele</i> <i>skolen</i>",
+		"Du har skrevet en forkert bøjningsform af ordet. Du har brugt ubestemt form i stedet for bestemt form.<br>\n<br>\nFx <i>hele skole → hele skolen</i>",
 	],
 	"@vfin": [
 		"Bøjningsfejl – navneform/nutidsform",
-		"Du har skrevet en forkert bøjningsform af ordet. Du har brugt navneform (uden -r) i stedet for nutidsform ( med -r).<br>\n<br>\nFx <i>han</i> <i>høre</i><i> aldrig efter → han</i> <i>hører</i><i> aldrig efter</i>",
+		"Du har skrevet en forkert bøjningsform af ordet. Du har brugt navneform (uden -r) i stedet for nutidsform ( med -r).<br>\n<br>\nFx <i>han høre aldrig efter → han hører aldrig efter</i>",
 	],
 	"@inf": [
 		"Bøjningsfejl – navneform/nutidsform",
-		"Du har skrevet en forkert bøjningsform af ordet. Du har brugt nutidsform (med -r) i stedet for navneform (uden -r).<br>\n<br>\nFx <i>Han begyndte at</i> <i>hører</i><i></i> <i>efter → Han begyndte at</i> <i>høre</i><i></i> <i>efter</i>",
+		"Du har skrevet en forkert bøjningsform af ordet. Du har brugt nutidsform (med -r) i stedet for navneform (uden -r).<br>\n<br>\nFx <i>Han begyndte at hører efter → Han begyndte at høre efter</i>",
 	],
 	"@impf": [
 		"Bøjningsfejl - datidsform",
-		"Du har skrevet en forkert bøjningsform af ordet. Du har brugt en forkert datidsform.<br>\n<br>\nFx <i>vi sad og</i> <i>snakket</i><i> →</i><i> vi sad og</i> <i>snakkede</i>",
+		"Du har skrevet en forkert bøjningsform af ordet. Du har brugt en forkert datidsform.<br>\n<br>\nFx <i>vi sad og snakket → vi sad og snakkede</i>",
 	],
 	"@pcp2-akt": [
 		"Bøjningsfejl - tillægsform",
-		"Du har skrevet en forkert bøjningsform af ordet. Måske har du glemt et –t.<br>\n<br>\nFx <i>Han har også</i> <i>spille</i><i> på holdet. → Han har også</i> <i>spillet</i><i></i> <i>på holdet.</i>",
+		"Du har skrevet en forkert bøjningsform af ordet. Måske har du glemt et –t.<br>\n<br>\nFx <i>Han har også spille på holdet. → Han har også spillet på holdet.</i>",
 	],
 	"@pas": [
 		"Bøjningsfejl – passiv",
-		"Du har skrevet en forkert bøjningsform af ordet. Verbet skal være i passiv.<br>\n<br>\nFx <i>Hammeren</i> <i>bruger</i><i> til mange ting → Hammeren</i> <i>bruges</i><i> til mange ting</i>",
+		"Du har skrevet en forkert bøjningsform af ordet. Verbet skal være i passiv.<br>\n<br>\nFx <i>Hammeren bruger til mange ting → Hammeren bruges til mange ting</i>",
 	],
 	"@ene": [
 		"Forveksling af -ene/-ende",
-		"Du har forvekslet to ord, der lyder ens, men som betyder noget meget forskelligt.<br>\n<br>\nFx <i>Husende</i><i> let smukke →</i> <i>Husene</i><i> let smukke</i><br>\n<br>\n’Husene’ er den mest almindelige bestemte flertalsform for navneord, mens ’Husende’ er en tillægsform, der udtrykker processer og egenskaber.",
+		"Du har forvekslet to ord, der lyder ens, men som betyder noget meget forskelligt.<br>\n<br>\nFx <i>Husende let smukke → Husene let smukke</i><br>\n<br>\n'Husene' er den mest almindelige bestemte flertalsform for navneord, mens 'Husende' er en tillægsform, der udtrykker processer og egenskaber.",
 	],
 	"@ende": [
 		"Forveksling af -ene/-ende",
-		"Du har forvekslet to ord, der lyder ens, men som betyder noget meget forskelligt.<br>\n<br>\nFx <i>Han kom</i> <i>løbene</i><i></i> <i>ned ad gaden. → Han kom</i> <i>løbende</i><i> ned ad gaden.</i><br>\n<br>\n’løbene’ er den mest almindelige bestemte flertalsform for navneord, mens ’løbende’ er en tillægsform, der udtrykker processer og egenskaber.",
+		"Du har forvekslet to ord, der lyder ens, men som betyder noget meget forskelligt.<br>\n<br>\nFx <i>Han kom løbene ned ad gaden. → Han kom løbende ned ad gaden.</i><br>\n<br>\n'løbene' er den mest almindelige bestemte flertalsform for navneord, mens 'løbende' er en tillægsform, der udtrykker processer og egenskaber.",
 	],
 	"@nom": [
 		"Bøjningsfejl – stedord og kasus",
-		"Du har brugt et stedord med forkert kasus (fald).<br>\n<br>\nFx <i>Dem</i><i></i> <i>kommer i morgen →</i> <i>De</i><i> kommer i morgen</i>",
+		"Du har brugt et stedord med forkert kasus (fald).<br>\n<br>\nFx <i>Dem kommer i morgen → De kommer i morgen</i>",
 	],
 	"@acc": [
 		"Bøjningsfejl – stedord og kasus",
-		"Du har brugt et stedord med forkert kasus (fald).<br>\n<br>\nFx <i>Jeg har talt med</i> <i>hun</i><i> →</i><i> Jeg har talt med</i> <i>hende</i>",
+		"Du har brugt et stedord med forkert kasus (fald).<br>\n<br>\nFx <i>Jeg har talt med hun → Jeg har talt med hende</i>",
 	],
 	"@gen": [
 		"Manglende markering af ejefald.",
-		"Du har glemt at markere ejefald (genitiv) med et -s.<br>\n<br>\nFx <i>bogen</i><i> titel →</i> <i>bogens</i><i> titel</i>",
+		"Du har glemt at markere ejefald (genitiv) med et -s.<br>\n<br>\nFx <i>bogen titel → bogens titel</i>",
 	],
 	"@adv": [
 		"Manglende -t i biord",
-		"Du har undladt et -t i biord<i>.</i><br>\n<br>\nFx <i>han er</i> <i>enorm</i><i> træt → han er</i> <i>enorm</i><i>t træt</i>",
+		"Du har undladt et -t i biord<i>.</i><br>\n<br>\nFx <i>han er enorm træt → han er enormt træt</i>",
 	],
 	"@nil": [
 		"Overflødigt ord",
-		"Du har anvendt et overflødigt ord.<br>\n<br>\nFx <i>Han gad ikke</i> <i>at</i><i> lege. → Han gad ikke lege.</i>",
+		"Du har anvendt et overflødigt ord.<br>\n<br>\nFx <i>Han gad ikke at lege. → Han gad ikke lege.</i>",
 	],
 	"@insert": [
 		"Manglende ord",
-		"Du mangler at skrive et ord. Indsæt selv det manglende ord.<br>\n<br>\nFx <i>Han begyndte råbe. → Han begyndte</i> <i>at</i><i></i> <i>råbe.</i>",
+		"Du mangler at skrive et ord. Indsæt selv det manglende ord.<br>\n<br>\nFx <i>Han begyndte råbe. → Han begyndte at råbe.</i>",
 	],
 	"@sentsplit": [
 		"Manglende punktum eller andet tegn",
-		"Du mangler at sætte punktum eller evt. komma.<br>\n<br>\nFx <i>Han kommer ikke han er syg. → Han kommer ikke</i><i>. Han</i><i> er syg</i>.",
+		"Du mangler at sætte punktum eller evt. komma.<br>\n<br>\nFx <i>Han kommer ikke han er syg. → Han kommer ikke. Han er syg</i>.",
 	],
 };
 

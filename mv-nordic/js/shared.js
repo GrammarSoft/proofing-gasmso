@@ -76,6 +76,7 @@ const g_conf_defaults = {
 	opt_ignMaj: false,
 	opt_useDictionary: true,
 	opt_colorBlind: false,
+	opt_level: 3,
 };
 
 /* exported is_upper */
