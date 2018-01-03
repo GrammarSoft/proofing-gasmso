@@ -60,7 +60,7 @@ function injectVariables(html, mode, auto) {
 }
 
 function showGrammar(mode, auto) {
-	var ui = HtmlService.createTemplateFromFile('html/sidebar-grammar').evaluate();
+	var ui = HtmlService.createTemplateFromFile('html/sidebar').evaluate();
 	var html = ui.getContent();
 	html = injectVariables(html, mode, auto);
 	ui.setContent(html).setSandboxMode(HtmlService.SandboxMode.IFRAME).setTitle('Ret Mig');
@@ -68,7 +68,7 @@ function showGrammar(mode, auto) {
 }
 
 function showComma(mode) {
-	var ui = HtmlService.createTemplateFromFile('html/sidebar-comma').evaluate();
+	var ui = HtmlService.createTemplateFromFile('html/sidebar').evaluate();
 	var html = ui.getContent();
 	html = injectVariables(html, mode, auto);
 	ui.setContent(html).setSandboxMode(HtmlService.SandboxMode.IFRAME).setTitle('Kommaforslag');
