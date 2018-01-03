@@ -185,6 +185,8 @@ function replaceInDocument(prefix, word, rpl, suffix) {
 	rng.addElement(rem.getElement(), b, b + rpl.length - 1);
 	doc.setSelection(rng.build());
 
+	txt.replaceText('  +', ' ');
+
 	return rpl;
 }
 
