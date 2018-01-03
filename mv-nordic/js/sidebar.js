@@ -18,38 +18,57 @@
  */
 'use strict';
 
-var g_conf = {};
-var session = {};
-var markings = [];
-var cmarking = {s: -1, w: -1};
-var cache = {};
-var to_send = null;
-var to_send_b = 0;
-var to_send_i = 0;
-var ts_xhr = null;
-var ts_slow = null;
-var ts_fail = 0;
-var ignores = {};
+/* globals Defs */
+/* globals escHTML */
+/* globals g_conf_defaults */
+/* globals is_upper */
+/* globals marking_types */
+/* globals murmurHash3 */
+/* globals sanitize_result */
+/* globals types_red */
+/* globals types_yellow */
+/* globals uc_first */
+/* globals google */
+/* globals g_tool:true */
+/* globals g_mode:true */
+/* globals l10n */
+
+let g_conf = {};
+/* exported session */
+let session = {};
+let markings = [];
+let cmarking = {s: -1, w: -1};
+let cache = {
+	grammar: {},
+	comma: {},
+};
+let to_send = null;
+let to_send_b = 0;
+let to_send_i = 0;
+let ts_xhr = null;
+let ts_slow = null;
+let ts_fail = 0;
+let ignores = {};
 
 function markingSetSentence() {
-	var s = cmarking.s;
-	var b = cmarking.w;
+	let s = cmarking.s;
+	let b = cmarking.w;
 	for (; b>0 ; --b) {
 		if (markings[s][b-1][0].length === 0) {
 			--b;
 			break;
 		}
 	}
-	var e = cmarking.w;
+	let e = cmarking.w;
 	for (; e<markings[s].length ; ++e) {
 		if (markings[s][e][0].length === 0) {
 			break;
 		}
 	}
 
-	var sentence = '';
+	let sentence = '';
 	cmarking.sentence = '';
-	for (var i=b; i<e ; ++i) {
+	for (let i=b; i<e ; ++i) {
 		if (i === cmarking.w) {
 			sentence += '<span class="marking">' + escHTML(markings[s][i][0]) + '</span> ';
 		}
@@ -63,22 +82,22 @@ function markingSetSentence() {
 
 function markingSetContext() {
 	cmarking.prefix = '';
-	for (var i=0 ; i<cmarking.w ; ++i) {
+	for (let i=0 ; i<cmarking.w ; ++i) {
 		cmarking.prefix += markings[cmarking.s][i][0] + ' ';
 	}
 
 	cmarking.suffix = '';
-	for (var i=cmarking.w+1 ; i<markings[cmarking.s].length ; ++i) {
+	for (let i=cmarking.w+1 ; i<markings[cmarking.s].length ; ++i) {
 		cmarking.suffix += markings[cmarking.s][i][0] + ' ';
 	}
 }
 
 function markingRender(skipact) {
-	var s = cmarking.s;
-	var marking = markings[s][cmarking.w];
-	var sentence = markingSetSentence();
+	let s = cmarking.s;
+	let marking = markings[s][cmarking.w];
+	let sentence = markingSetSentence();
 
-	var ik = marking[0] + '\t' + marking[1];
+	let ik = marking[0] + '\t' + marking[1];
 	if (ignores.hasOwnProperty(ik) && ignores[ik].hasOwnProperty(cmarking.sentence) && ignores[ik][cmarking.sentence] === true) {
 		console.log(`Skip ignored ${ik} : ${cmarking.sentence}`);
 		markings[s][cmarking.w] = [marking[0]];
@@ -93,11 +112,11 @@ function markingRender(skipact) {
 
 	$('#error').hide();
 	$('.sidebar').hide();
-	$('#checking').show();
+	$('#chkChecking').show();
 
-	var col = 'green';
-	var types = marking[1].split(/ /g);
-	for (var i=0 ; i<types.length ; ++i) {
+	let col = 'green';
+	let types = marking[1].split(/ /g);
+	for (let i=0 ; i<types.length ; ++i) {
 		if (types_yellow.hasOwnProperty(types[i])) {
 			col = 'yellow';
 		}
@@ -106,7 +125,7 @@ function markingRender(skipact) {
 			break;
 		}
 	}
-	for (var i=0 ; i<types.length ; ++i) {
+	for (let i=0 ; i<types.length ; ++i) {
 		if (types[i] === '@green') {
 			col = 'green';
 		}
@@ -119,14 +138,14 @@ function markingRender(skipact) {
 		$('#btnAddWord').addClass('disabled');
 	}
 
-	var es = {};
-	var el = {};
-	for (var i=0 ; i<types.length ; ++i) {
-		var et = marking_types[types[i]] ? marking_types[types[i]][1] : (ts[i] + ' ');
+	let es = {};
+	let el = {};
+	for (let i=0 ; i<types.length ; ++i) {
+		let et = marking_types[types[i]] ? marking_types[types[i]][0] : (types[i] + ' ');
 		et = '<p>'+et.replace(/(<\/h\d>)/g, '$1<br><br>').replace(/(<br>\s*)+<br>\s*/g, '</p><p>')+'</p>';
 		es[et] = et.replace(/<p>\s*<\/p>/g, '');
 
-		var et = marking_types[types[i]] ? marking_types[types[i]][2] : (ts[i] + ' ');
+		et = marking_types[types[i]] ? marking_types[types[i]][1] : (types[i] + ' ');
 		et = '<p>'+et.replace(/(<\/h\d>)/g, '$1<br><br>').replace(/(<br>\s*)+<br>\s*/g, '</p><p>')+'</p>';
 		el[et] = et.replace(/<p>\s*<\/p>/g, '');
 	}
@@ -141,7 +160,7 @@ function markingRender(skipact) {
 	$('#chkExplainLongText').html(el);
 	$('#chkExplainShort').show();
 
-	var alt = '';
+	let alt = '';
 	if (g_conf.opt_colorBlind) {
 		alt = ' alt';
 	}
@@ -157,17 +176,17 @@ function markingRender(skipact) {
 		$('#btnAccept').addClass('disabled');
 	}
 	else {
-		var all_upper = is_upper(marking[0]);
-		var first_upper = all_upper || is_upper(marking[0].charAt(0));
+		let all_upper = is_upper(marking[0]);
+		let first_upper = all_upper || is_upper(marking[0].charAt(0));
 
 		if (marking[1].indexOf('@lower') !== -1) {
 			all_upper = first_upper = false;
 		}
 
-		var suggs = '';
-		var ss = marking[2].split(/\t/g);
-		for (var i=0 ; i<ss.length ; ++i) {
-			var t = ss[i];
+		let suggs = '';
+		let ss = marking[2].split(/\t/g);
+		for (let i=0 ; i<ss.length ; ++i) {
+			let t = ss[i];
 			if (all_upper) {
 				t = t.toUpperCase();
 			}
@@ -179,7 +198,9 @@ function markingRender(skipact) {
 		}
 		$('#chkDidYouMeanItems').html(suggs);
 		$('#chkDidYouMeanItems').find('span').off().click(markingAccept);
-		$('#chkDidYouMeanItems').find('.suggestion-lookup').off().click(function() { alert($(this).text()); });
+		$('#chkDidYouMeanItems').find('.suggestion-lookup').off().click(function() {
+			alert($(this).text());
+		});
 		$('#chkDidYouMean').show();
 		$('#chkSentence').removeClass('divider');
 		$('#btnAccept').removeClass('disabled');
@@ -206,7 +227,7 @@ function btnInput() {
 }
 
 function markingIgnore() {
-	var ik = markings[cmarking.s][cmarking.w][0] + '\t' + markings[cmarking.s][cmarking.w][1];
+	let ik = markings[cmarking.s][cmarking.w][0] + '\t' + markings[cmarking.s][cmarking.w][1];
 	if (!ignores[ik]) {
 		ignores[ik] = {};
 	}
@@ -222,12 +243,10 @@ function btnIgnore() {
 }
 
 function btnIgnoreAll() {
-	var s = cmarking.s;
-	var w = cmarking.w;
-	var word = markings[cmarking.s][cmarking.w][0];
-	var ts = markings[cmarking.s][cmarking.w][1];
-	for (var s=0 ; s<markings.length ; ++s) {
-		for (var w=0 ; w<markings[s].length ; ++w) {
+	let word = markings[cmarking.s][cmarking.w][0];
+	let ts = markings[cmarking.s][cmarking.w][1];
+	for (let s=0 ; s<markings.length ; ++s) {
+		for (let w=0 ; w<markings[s].length ; ++w) {
 			if (markings[s][w][0] === word && markings[s][w][1] && markings[s][w][1] === ts) {
 				cmarking.s = s;
 				cmarking.w = w;
@@ -240,14 +259,14 @@ function btnIgnoreAll() {
 }
 
 function btnPrev() {
-	var found = false;
+	let found = false;
 	for (;;) {
-		for (var s=cmarking.s ; s>=0 ; --s) {
+		for (let s=cmarking.s ; s>=0 ; --s) {
 			if (!markings[s]) {
 				continue;
 			}
 
-			for (var w=Math.min(cmarking.w, markings[s].length)-1 ; w>=0 ; --w) {
+			for (let w=Math.min(cmarking.w, markings[s].length)-1 ; w>=0 ; --w) {
 				//console.log(`${s} ${w}`);
 				if (!markings[s][w]) {
 					continue;
@@ -285,14 +304,14 @@ function btnPrev() {
 }
 
 function btnNext() {
-	var found = false;
+	let found = false;
 	for (;;) {
-		for (var s=cmarking.s ; s<markings.length ; ++s) {
+		for (let s=cmarking.s ; s<markings.length ; ++s) {
 			if (!markings[s]) {
 				continue;
 			}
 
-			for (var w=cmarking.w+1 ; w<markings[s].length ; ++w) {
+			for (let w=cmarking.w+1 ; w<markings[s].length ; ++w) {
 				//console.log(`${s} ${w}`);
 				if (!markings[s][w]) {
 					continue;
@@ -330,7 +349,7 @@ function btnNext() {
 }
 
 function btnInputOne() {
-	var rpl = $('#chkInputText').val();
+	let rpl = $('#chkInputText').val();
 	if (rpl.length === 0) {
 		rpl = ' ';
 	}
@@ -338,17 +357,17 @@ function btnInputOne() {
 }
 
 function btnInputAll() {
-	var rpl = $('#chkInputText').val();
+	let rpl = $('#chkInputText').val();
 	if (rpl.length === 0) {
 		rpl = ' ';
 	}
-	var word = markings[cmarking.s][cmarking.w][0];
-	var ts = markings[cmarking.s][cmarking.w][1];
-	var os = cmarking.s;
-	var ow = cmarking.w;
+	let word = markings[cmarking.s][cmarking.w][0];
+	let ts = markings[cmarking.s][cmarking.w][1];
+	let os = cmarking.s;
+	let ow = cmarking.w;
 
-	for (var s=0 ; s<markings.length ; ++s) {
-		for (var w=0 ; w<markings[s].length ; ++w) {
+	for (let s=0 ; s<markings.length ; ++s) {
+		for (let w=0 ; w<markings[s].length ; ++w) {
 			if (markings[s][w][0] === word && markings[s][w][1] && markings[s][w][1] === ts) {
 				cmarking.s = s;
 				cmarking.w = w;
@@ -377,14 +396,14 @@ function _parseResult(rv) {
 		return;
 	}
 
-	var txt = sanitize_result(rv.c);
-	var ps = [];
-	var nps = $.trim(txt.replace(/\n+<\/s>\n+/g, "\n\n")).split(/<\/s\d+>/);
+	let txt = sanitize_result(rv.c);
+	let ps = [];
+	let nps = $.trim(txt.replace(/\n+<\/s>\n+/g, "\n\n")).split(/<\/s\d+>/);
 
 	// Where missing in result, copy from the cache
-	for (var k = to_send_b, p=0 ; k<to_send_i ; ++k) {
-		var found = false;
-		for (var i=p ; i<nps.length ; ++i) {
+	for (let k = to_send_b, p=0 ; k<to_send_i ; ++k) {
+		let found = false;
+		for (let i=p ; i<nps.length ; ++i) {
 			if (nps[i].indexOf('<s'+to_send[k].i+'>\n') !== -1) {
 				//console.log(`Par ${k} found in result`);
 				ps.push(nps[i]);
@@ -393,37 +412,37 @@ function _parseResult(rv) {
 				break;
 			}
 		}
-		if (!found && to_send[k].h in cache) {
+		if (!found && to_send[k].h in cache[g_tool]) {
 			//console.log(`Par ${k} found in cache`);
-			ps.push('<s'+to_send[k].i+'>\n'+cache[to_send[k].h]);
+			ps.push('<s'+to_send[k].i+'>\n'+cache[g_tool][to_send[k].h]);
 		}
 	}
 
-	for (var i=0 ; i<ps.length ; ++i) {
-		var cp = $.trim(ps[i]);
+	for (let i=0 ; i<ps.length ; ++i) {
+		let cp = $.trim(ps[i]);
 		if (!cp) {
 			continue;
 		}
 
-		var lines = cp.split(/\n/);
-		var id = parseInt(lines[0].replace(/^<s(.+)>$/, '$1'));
-		for (var k = to_send_b ; k<to_send_i ; ++k) {
+		let lines = cp.split(/\n/);
+		let id = parseInt(lines[0].replace(/^<s(.+)>$/, '$1'));
+		for (let k = to_send_b ; k<to_send_i ; ++k) {
 			if (to_send[k].i === id) {
-				cache[to_send[k].h] = $.trim(cp.replace(/^<s.+>/g, ''));
+				cache[g_tool][to_send[k].h] = $.trim(cp.replace(/^<s.+>/g, ''));
 				break;
 			}
 		}
 
-		var words = [];
-		var had_mark = false;
+		let words = [];
+		let had_mark = false;
 
-		for (var j=1 ; j<lines.length ; ++j) {
+		for (let j=1 ; j<lines.length ; ++j) {
 			// Ignore duplicate opening tags
 			if (/^<s\d+>$/.test(lines[j])) {
 				continue;
 			}
 
-			var w = lines[j].split(/\t/);
+			let w = lines[j].split(/\t/);
 			w[0] = $.trim(w[0].replace(/(\S)=/g, '$1 '));
 
 			if (w[0] === '') {
@@ -433,13 +452,13 @@ function _parseResult(rv) {
 
 			if (w.length > 1) {
 				// Strip marking types belonging to higher than current critique level
-				var ws = w[1].split(/ /g);
-				var nws = [];
-				var crs = [];
-				var had_r = false;
-				for (var k=0 ; k<ws.length ; ++k) {
+				let ws = w[1].split(/ /g);
+				let nws = [];
+				let crs = [];
+				let had_r = false;
+				for (let k=0 ; k<ws.length ; ++k) {
 					if (ws[k].indexOf('<R:') === 0) {
-						var n = ws[k].substr(3);
+						let n = ws[k].substr(3);
 						n = n.substr(0, n.length-1).replace(/(\S)=/g, '$1 ');
 						if (n === w[0]) {
 							console.log(n);
@@ -450,7 +469,7 @@ function _parseResult(rv) {
 						continue;
 					}
 					if (ws[k].indexOf('<AFR:') === 0) {
-						var n = ws[k].substr(5);
+						let n = ws[k].substr(5);
 						n = n.substr(0, n.length-1).replace(/(\S)=/g, '$1 ');
 						if (n === w[0]) {
 							console.log(n);
@@ -478,7 +497,7 @@ function _parseResult(rv) {
 				}
 
 				ws = [];
-				for (var k=0 ; k<nws.length ; ++k) {
+				for (let k=0 ; k<nws.length ; ++k) {
 					if (nws[k] === '@green') {
 						ws.push(nws[k]);
 						continue;
@@ -510,8 +529,8 @@ function _parseResult(rv) {
 
 				if (crs.length) {
 					// Only show addfejl suggestions if the real suggestion icase-matches one of them
-					var use_adf = false;
-					for (var c=1 ; c<crs.length ; ++c) {
+					let use_adf = false;
+					for (let c=1 ; c<crs.length ; ++c) {
 						if (crs[0].toUpperCase() == crs[c].toUpperCase()) {
 							use_adf = true;
 							break;
@@ -567,16 +586,16 @@ function parseResult(rv) {
 function sendTexts() {
 	$('.chkProgress').show();
 	$('.chkProgressBar').attr('max', to_send.length);
-	var text = '';
+	let text = '';
 
 	for (to_send_b = to_send_i ; to_send_i < to_send.length ; ++to_send_i) {
-		var par = to_send[to_send_i];
+		let par = to_send[to_send_i];
 
 		if (!par.hasOwnProperty('h')) {
 			par.h = 'h-'+murmurHash3.x86.hash128(par.t) + '-' + par.t.length;
 		}
 
-		if (par.h in cache) {
+		if (par.h in cache[g_tool]) {
 			//console.log(`Par ${par.i} found in cache`);
 			continue;
 		}
@@ -588,11 +607,15 @@ function sendTexts() {
 	}
 
 	if (text) {
-		var data = {
+		let data = {
 			t: text,
 			r: ts_fail,
 		};
-		ts_xhr = $.post('https://retmig.dk/callback.php?a=danproof', data).done(parseResult).fail(() => {
+		let url = 'https://retmig.dk/callback.php?a=danproof';
+		if (g_tool === 'comma') {
+			url = 'https://kommaer.dk/dev2/callback.php?a=comma&gac-override=1';
+		}
+		ts_xhr = $.post(url, data).done(parseResult).fail(() => {
 			console.log(this);
 			showError('ERR_POSTBACK');
 		});
@@ -618,7 +641,7 @@ function checkParagraphs(doc) {
 
 function checkDone() {
 	$('.sidebar').hide();
-	$('#done').show();
+	$('#chkDone').show();
 }
 
 function didReplace(rpl) {
@@ -643,6 +666,9 @@ function getSession(s) {
 }
 
 $(function() {
+	if (g_tool !== 'grammar' && g_tool !== 'comma') {
+		g_tool = 'grammar';
+	}
 	g_conf = Object.assign({}, g_conf_defaults);
 	google.script.run.withSuccessHandler(getSession).withFailureHandler(showError).getSession();
 
@@ -658,10 +684,15 @@ $(function() {
 		$('#chkExplainShort').show();
 	});
 
+	$('#btnCheckAuto').click(function() {
+		g_mode = 'auto';
+	});
 	$('#btnCheckSelected').click(function() {
+		g_mode = 'selected';
 		google.script.run.withSuccessHandler(checkParagraphs).withFailureHandler(showError).getSelectedPars();
 	});
 	$('#btnCheckAll').click(function() {
+		g_mode = 'all';
 		google.script.run.withSuccessHandler(checkParagraphs).withFailureHandler(showError).getAllPars();
 	});
 
@@ -678,7 +709,7 @@ $(function() {
 	$('#error').hide();
 	$('.chkProgress').hide();
 	$('.sidebar').hide();
-	$('#welcome').show();
+	$('#chkWelcome').show();
 	$('#placeholder').remove();
 });
 

@@ -2,10 +2,11 @@ module.exports = {
 	"root": true,
 	"extends": "eslint:recommended",
 	"env": {
+		"browser": true,
 		"jquery": true,
 	},
 	"parserOptions": {
-		"ecmaVersion": 5,
+		"ecmaVersion": 6,
 	},
 	"rules": {
 		"block-scoped-var": "error",
@@ -22,8 +23,8 @@ module.exports = {
 		"no-multiple-empty-lines": "error",
 		"no-new-object": "error",
 		"no-trailing-spaces": "error",
-		"no-use-before-define": ["error", { "functions": false, "classes": true, "variables": true }],
 		"no-var": "error",
+		"no-use-before-define": ["error", { "functions": false, "classes": true, "variables": true }],
 		"prefer-numeric-literals": "error",
 		"semi": ["error", "always"],
 		"strict": ["error", "global"],

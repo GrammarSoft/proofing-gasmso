@@ -18,25 +18,28 @@
  */
 'use strict';
 
-var l10n = {};
+/* globals session */
+
+/* exported l10n */
+let l10n = {};
 
 l10n.s = {
 	da: {
 		ERR_POSTBACK: 'Der opstod en serverfejl under tjekning af teksten. Prøv evt. igen.',
-		ERR_NO_SELECTION: 'Der var ingen markering. Du skal markere noget tekst før den funktion virker.',
+		ERR_NO_SELECTION: 'Der let ingen markering. Du skal markere noget tekst før den funktion virker.',
 		ERR_SELECT_NOTFOUND: 'Kunne ikke finde konteksten. Det kan være du eller en anden har ændret i dokumentet siden tjekket blev kørt.',
 		ERR_SELECT_NOMATCH: 'Konteksten matchede ikke. Denne fejl bør ikke kunne ske.',
 		ERR_REPLACE_NOSELECT: 'Kunne ikke vælge stedet i konteksten. Det kan være du eller en anden har ændret i dokumentet siden tjekket blev kørt.',
-		},
+	},
 	en: {
 		ERR_NO_SELECTION: 'No selection found. You must select some text before that button will work.',
-		},
-	};
+	},
+};
 
 l10n.t = function(s) {
 	s = '' + s; // Coerce to string
 
-	var l = session.locale;
+	let l = session.locale;
 	// If the string doesn't exist in the locale, fall back
 	if (!l10n.s[session.locale].hasOwnProperty(s)) {
 		// Try English
