@@ -34,16 +34,22 @@
 <div id="error-text">…</div>
 </div>
 
-<div class="sidebar" id="chkWelcome">
+<!-- Grammar -->
+
+<div class="sidebar" id="chkWelcomeGrammar">
 <h1>Hvordan skal din tekst tjekkes for stavning og grammatik?</h1>
 <div class="buttonbar backed">
-	<button class="btn-blue" id="btnCheckAuto" tabindex="10">Løbende</button>
-	<button class="btn-orange" id="btnCheckSelected" tabindex="20">Markering</button>
-	<button class="btn-lightblue" id="btnCheckAll" tabindex="30">Alt</button>
+	<!--
+	<button class="btn-blue btnCheckAuto" tabindex="10">Løbende</button>
+	-->
+	<button class="btn-orange btnCheckSelected" tabindex="20">Markering</button>
+	<button class="btn-lightblue btnCheckAll" tabindex="30">Alt</button>
 </div>
+<!--
 <div class="text">
 <label><input type="checkbox" id="optComma" tabindex="40" checked><span>Ønsker du efterfølgende at få tjekket din tegnsætning?</span></label>
 </div>
+-->
 <div class="text chkProgress">
 	<progress value="0" max="100" class="chkProgressBar">…</progress>
 </div>
@@ -51,20 +57,20 @@
 
 <div class="sidebar" id="chkChecking">
 <div class="buttonbar backed">
-	<button class="btn-lightblue" id="btnAccept" tabindex="100">Erstat ord</button>
-	<button class="btn-lightblue" id="btnPrev" tabindex="110">Forrige</button>
-	<button class="btn-lightblue" id="btnNext" tabindex="130">Næste</button>
-	<button class="btn-blue" id="btnInput" tabindex="80">Ret selv</button>
-	<button class="btn-orange" id="btnIgnore" tabindex="90">Ignorer</button>
-	<button class="btn-orange" id="btnIgnoreAll" tabindex="120">Ignorer alle</button>
+	<button class="btn-lightblue btnAccept" tabindex="100">Erstat ord</button>
+	<button class="btn-lightblue btnPrev" tabindex="110">Forrige</button>
+	<button class="btn-lightblue btnNext" tabindex="130">Næste</button>
+	<button class="btn-blue btnInput" tabindex="80">Ret selv</button>
+	<button class="btn-orange btnIgnore" tabindex="90">Ignorer</button>
+	<button class="btn-orange btnIgnoreAll" tabindex="120">Ignorer alle</button>
 </div>
 <div class="text closable backed" id="chkInput">
 	<div class="closer" tabindex="140">&times;</div>
 	<h2>Ret selv</h2>
 	<div class="row"><input type="text" id="chkInputText" tabindex="150"></div>
 	<div class="row">
-		<button class="btn-blue" id="btnInputOne" tabindex="160">Ret denne</button>
-		<button class="btn-blue" id="btnInputAll" tabindex="170">Ret alle</button>
+		<button class="btn-blue btnInputOne" tabindex="160">Ret denne</button>
+		<button class="btn-blue btnInputAll" tabindex="170">Ret alle</button>
 	</div>
 </div>
 <h1 id="chkType">…</h1>
@@ -79,24 +85,48 @@
 	<div id="chkExplainLong"><div id="chkExplainLongText">…</div><a class="link" id="chkExplainLess" tabindex="70">Skjul △</a></div>
 </div>
 <div class="text center">
-	<button class="btn-lightblue btn-big" id="btnAddWord" tabindex="180">Føj til ordbogen</button>
-	<button class="btn-lightblue btn-big" id="btnDictionary" tabindex="190">IntoWords Ordbog</button>
+	<button class="btn-lightblue btn-big btnAddWord" tabindex="180">Føj til ordbogen</button>
+	<button class="btn-lightblue btn-big btnDictionary" tabindex="190">IntoWords Ordbog</button>
 </div>
 <div class="text chkProgress">
 	<progress value="0" max="100" class="chkProgressBar">…</progress>
 </div>
 </div>
 
-<div class="sidebar" id="chkDone">
+<div class="sidebar" id="chkDoneGrammar">
 <h1>Din tekst er blevet tjekket, og der er ikke flere stave- eller grammatikforslag.</h1>
 <div class="buttonbar backed">
-	<button class="btn-blue" id="btnCheckAgain" tabindex="200">Tjek igen</button>
-	<button class="btn-orange" id="btnCheckCommas" tabindex="210">Tjek kommaforslag</button>
+	<button class="btn-blue btnCheckAgain" tabindex="200">Tjek igen</button>
+	<button class="btn-orange btnCheckCommas" tabindex="210">Tjek kommaforslag</button>
+</div>
+</div>
+
+<!-- Comma -->
+
+<div class="sidebar" id="chkWelcomeComma">
+<h1>Hvordan skal din tekst tjekkes for tegnsætning?</h1>
+<div class="buttonbar backed">
+	<!--
+	<button class="btn-blue btnCheckAuto" tabindex="10">Løbende</button>
+	-->
+	<button class="btn-orange btnCheckSelected" tabindex="20">Markering</button>
+	<button class="btn-lightblue btnCheckAll" tabindex="30">Alt</button>
+</div>
+<div class="text chkProgress">
+	<progress value="0" max="100" class="chkProgressBar">…</progress>
+</div>
+</div>
+
+<div class="sidebar" id="chkDoneComma">
+<h1>Din tekst er blevet tjekket, og der er ikke flere forslag til tegnsætning.</h1>
+<div class="buttonbar backed">
+	<button class="btn-blue btnCheckAgain" tabindex="200">Tjek igen</button>
+	<button class="btn-orange btnCheckGrammar" tabindex="210">Tjek stavning og grammatik</button>
 </div>
 </div>
 
 <footer class="text center">
-	<button class="btn-lightblue btn-big" id="btnOptions" tabindex="1000">Indstillinger</button>
+	<button class="btn-lightblue btn-big btnOptions" tabindex="1000">Indstillinger</button>
 </footer>
 
 </body>
