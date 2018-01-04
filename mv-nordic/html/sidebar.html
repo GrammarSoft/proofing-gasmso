@@ -39,30 +39,32 @@
 <div class="sidebar" id="chkWelcomeGrammar">
 <h1>Hvordan skal din tekst tjekkes for stavning og grammatik?</h1>
 <div class="buttonbar backed">
-	<!--
 	<button class="btn-blue btnCheckAuto" tabindex="10">Løbende</button>
-	-->
 	<button class="btn-orange btnCheckSelected" tabindex="20">Markering</button>
 	<button class="btn-lightblue btnCheckAll" tabindex="30">Alt</button>
 </div>
-<!--
-<div class="text">
+<div class="text chkGrammarToComma">
 <label><input type="checkbox" id="optComma" tabindex="40" checked><span>Ønsker du efterfølgende at få tjekket din tegnsætning?</span></label>
 </div>
--->
 <div class="text chkProgress">
-	<progress value="0" max="100" class="chkProgressBar">…</progress>
+	<div class="chkProgressContainer"><div class="chkProgressBar"></div></div>
 </div>
 </div>
 
-<div class="sidebar" id="chkChecking">
-<div class="buttonbar backed">
-	<button class="btn-lightblue btnAccept" tabindex="100">Erstat ord</button>
-	<button class="btn-lightblue btnPrev" tabindex="110">Forrige</button>
-	<button class="btn-lightblue btnNext" tabindex="130">Næste</button>
+<div class="sidebar" id="chkCheckingGrammar">
+<div class="backed">
+<div class="buttonbar buttonbar-edges">
+	<button class="btn-link left btnPrev" tabindex="110"><span>❬</span> Forrige</button>
+	<button class="btn-link right btnNext" tabindex="130">Næste <span>❭</span></button>
+</div>
+<div class="buttonbar buttonbar-edges">
+	<button class="btn-lightblue btnAccept" tabindex="100">…</button>
 	<button class="btn-blue btnInput" tabindex="80">Ret selv</button>
 	<button class="btn-orange btnIgnore" tabindex="90">Ignorer</button>
+	<!--
 	<button class="btn-orange btnIgnoreAll" tabindex="120">Ignorer alle</button>
+	-->
+</div>
 </div>
 <div class="text closable backed" id="chkInput">
 	<div class="closer" tabindex="140">&times;</div>
@@ -73,23 +75,23 @@
 		<button class="btn-blue btnInputAll" tabindex="170">Ret alle</button>
 	</div>
 </div>
-<h1 id="chkType">…</h1>
-<div class="text" id="chkSentence">…</div>
+<h1 class="chkType">…</h1>
+<div class="text chkSentence">…</div>
 <div class="text backed" id="chkDidYouMean">
 	<h2>Erstat med …</h2>
 	<div id="chkDidYouMeanItems">
 	</div>
 </div>
-<div class="text" id="chkExplain">
-	<div id="chkExplainShort"><div id="chkExplainShortText">…</div><a class="link" id="chkExplainMore" tabindex="60">Vis mere ▽</a></div>
-	<div id="chkExplainLong"><div id="chkExplainLongText">…</div><a class="link" id="chkExplainLess" tabindex="70">Skjul △</a></div>
+<div class="text chkExplain">
+	<div class="chkExplainShort"><div class="chkExplainShortText">…</div><a class="link chkExplainMore" tabindex="60">Vis mere ▽</a></div>
+	<div class="chkExplainLong"><div class="chkExplainLongText">…</div><a class="link chkExplainLess" tabindex="70">Skjul △</a></div>
 </div>
 <div class="text center">
 	<button class="btn-lightblue btn-big btnAddWord" tabindex="180">Føj til ordbogen</button>
 	<button class="btn-lightblue btn-big btnDictionary" tabindex="190">IntoWords Ordbog</button>
 </div>
 <div class="text chkProgress">
-	<progress value="0" max="100" class="chkProgressBar">…</progress>
+	<div class="chkProgressContainer"><div class="chkProgressBar"></div></div>
 </div>
 </div>
 
@@ -106,14 +108,37 @@
 <div class="sidebar" id="chkWelcomeComma">
 <h1>Hvordan skal din tekst tjekkes for tegnsætning?</h1>
 <div class="buttonbar backed">
-	<!--
 	<button class="btn-blue btnCheckAuto" tabindex="10">Løbende</button>
-	-->
 	<button class="btn-orange btnCheckSelected" tabindex="20">Markering</button>
 	<button class="btn-lightblue btnCheckAll" tabindex="30">Alt</button>
 </div>
 <div class="text chkProgress">
-	<progress value="0" max="100" class="chkProgressBar">…</progress>
+	<div class="chkProgressContainer"><div class="chkProgressBar"></div></div>
+</div>
+</div>
+
+<div class="sidebar" id="chkCheckingComma">
+<div class="backed">
+<div class="buttonbar buttonbar-edges">
+	<button class="btn-link left btnPrev" tabindex="110"><span>❬</span> Forrige</button>
+	<button class="btn-link right btnNext" tabindex="130">Næste <span>❭</span></button>
+</div>
+<div class="buttonbar">
+	<button class="btn-lightblue btnAccept" tabindex="100">…</button>
+	<button class="btn-orange btnIgnore" tabindex="90">Ignorer</button>
+	<!--
+	<button class="btn-orange btnIgnoreAll" tabindex="120">Ignorer alle</button>
+	-->
+</div>
+</div>
+<h1 class="chkType">…</h1>
+<div class="text chkSentence">…</div>
+<div class="text chkExplain">
+	<div class="chkExplainShort"><div class="chkExplainShortText">…</div><a class="link chkExplainMore" tabindex="60">Vis mere ▽</a></div>
+	<div class="chkExplainLong"><div class="chkExplainLongText">…</div><a class="link chkExplainLess" tabindex="70">Skjul △</a></div>
+</div>
+<div class="text chkProgress">
+	<div class="chkProgressContainer"><div class="chkProgressBar"></div></div>
 </div>
 </div>
 

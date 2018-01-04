@@ -124,7 +124,12 @@ function markingRender(skipact) {
 
 	$('#error').hide();
 	$('.sidebar').hide();
-	$('#chkChecking').show();
+	$('#chkChecking'+g_tool).show();
+
+	let btn_lbl = 'BTN_GRAMMAR_';
+	if (g_tool === 'Comma') {
+		btn_lbl = 'BTN_COMMA_';
+	}
 
 	let col = 'green';
 	let types = marking[1].split(/ /g);
@@ -167,24 +172,24 @@ function markingRender(skipact) {
 	el = $.map(el, function(v) {
 		return v;
 	}).join('<hr>');
-	$('#chkExplainLong').hide();
-	$('#chkExplainShortText').html(es);
-	$('#chkExplainLongText').html(el);
-	$('#chkExplainShort').show();
+	$('.chkExplainLong').hide();
+	$('.chkExplainShortText').html(es);
+	$('.chkExplainLongText').html(el);
+	$('.chkExplainShort').show();
 
 	let alt = '';
 	if (g_conf.opt_colorBlind) {
 		alt = ' alt';
 	}
 
-	$('#chkType').html(marking[1]);
+	$('.chkType').html(marking[1]);
 
-	sentence = sentence.replace(' class="marking"', ' class="marking marking-'+col+alt+' marking-'+g_tool+'"');
-	$('#chkSentence').html(sentence);
+	sentence = sentence.replace(' class="marking"', ' class="marking marking-'+col+alt+' marking-'+g_tool.toLowerCase()+'"');
+	$('.chkSentence').html(sentence);
 
 	if (marking[2].length === 0) {
 		$('#chkDidYouMean').hide();
-		$('#chkSentence').addClass('divider');
+		$('.chkSentence').addClass('divider');
 		$('.btnAccept').addClass('disabled');
 	}
 	else {
@@ -214,7 +219,7 @@ function markingRender(skipact) {
 			alert($(this).text());
 		});
 		$('#chkDidYouMean').show();
-		$('#chkSentence').removeClass('divider');
+		$('.chkSentence').removeClass('divider');
 		$('.btnAccept').removeClass('disabled');
 	}
 
@@ -222,13 +227,24 @@ function markingRender(skipact) {
 
 	markingSetContext();
 
-	if (/(@insert|%ko-|%k-)/.test(markings[s][cmarking.w][1])) {
+	if (/(@insert|%ko-|%k-)/.test(marking[1])) {
 		let px = /^(.*?)(\S+\s?)$/.exec(cmarking.prefix);
 		let sx = /^(\s?\S+)(.*)$/.exec(cmarking.suffix);
 		google.script.run.withFailureHandler(showError).selectInDocument(px[1], px[2] + sx[1], sx[2]);
+		$('.btnAccept').text(l10n.t(btn_lbl + 'INSERT'));
+		if (marking[1].indexOf('%k-stop') !== -1) {
+			$('.btnAccept').text(l10n.t(btn_lbl + 'INSERT_STOP'));
+		}
+		$('.btnAccept').removeClass('disabled');
+	}
+	else if (/(@nil|%nok-)/.test(marking[1])) {
+		$('.btnAccept').text(l10n.t(btn_lbl + 'REMOVE'));
+		$('.btnAccept').removeClass('disabled');
+		google.script.run.withFailureHandler(showError).selectInDocument(cmarking.prefix, marking[0], cmarking.suffix);
 	}
 	else {
-		google.script.run.withFailureHandler(showError).selectInDocument(cmarking.prefix, markings[s][cmarking.w][0], cmarking.suffix);
+		$('.btnAccept').text(l10n.t(btn_lbl + 'REPLACE'));
+		google.script.run.withFailureHandler(showError).selectInDocument(cmarking.prefix, marking[0], cmarking.suffix);
 	}
 }
 
@@ -425,7 +441,7 @@ function markingAccept() {
 }
 
 function _parseResult(rv) {
-	$('.chkProgressBar').attr('value', to_send_i);
+	$('.chkProgressBar').css('width', (to_send_i/to_send.length*100.0) + '%');
 
 	if (!rv.hasOwnProperty('c')) {
 		$('.chkProgress').hide();
@@ -648,7 +664,6 @@ function parseResult(rv) {
 
 function sendTexts() {
 	$('.chkProgress').show();
-	$('.chkProgressBar').attr('max', to_send.length);
 	let text = '';
 
 	for (to_send_b = to_send_i ; to_send_i < to_send.length ; ++to_send_i) {
@@ -698,7 +713,7 @@ function checkParagraphs(doc) {
 	to_send_b = 0;
 	markings = [];
 	cmarking = {s: -1, w: -1};
-	$('.chkProgressBar').attr('value', 0);
+	$('.chkProgressBar').css('width', '0%');
 	sendTexts();
 }
 
@@ -750,13 +765,13 @@ $(function() {
 	$('.closer').click(function() {
 		$(this).closest('.closable').hide();
 	});
-	$('#chkExplainMore').click(function() {
-		$('#chkExplainShort').hide();
-		$('#chkExplainLong').show();
+	$('.chkExplainMore').click(function() {
+		$('.chkExplainShort').hide();
+		$('.chkExplainLong').show();
 	});
-	$('#chkExplainLess').click(function() {
-		$('#chkExplainLong').hide();
-		$('#chkExplainShort').show();
+	$('.chkExplainLess').click(function() {
+		$('.chkExplainLong').hide();
+		$('.chkExplainShort').show();
 	});
 
 	$('.btnCheckAuto').click(function() {
