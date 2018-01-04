@@ -30,6 +30,13 @@ l10n.s = {
 		ERR_SELECT_NOTFOUND: 'Kunne ikke finde konteksten. Det kan være du eller en anden har ændret i dokumentet siden tjekket blev kørt.',
 		ERR_SELECT_NOMATCH: 'Konteksten matchede ikke. Denne fejl bør ikke kunne ske.',
 		ERR_REPLACE_NOSELECT: 'Kunne ikke vælge stedet i konteksten. Det kan være du eller en anden har ændret i dokumentet siden tjekket blev kørt.',
+		BTN_GRAMMAR_REPLACE: 'Erstat ord',
+		BTN_GRAMMAR_INSERT: 'Indsæt ord',
+		BTN_GRAMMAR_REMOVE: 'Fjern ord',
+		BTN_COMMA_REPLACE: 'Erstat komma',
+		BTN_COMMA_INSERT: 'Indsæt komma',
+		BTN_COMMA_INSERT_STOP: 'Indsæt punktum',
+		BTN_COMMA_REMOVE: 'Fjern komma',
 	},
 	en: {
 		ERR_NO_SELECTION: 'No selection found. You must select some text before that button will work.',
