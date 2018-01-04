@@ -107,6 +107,9 @@ body {
 	justify-content: space-around;
 	align-items: center;
 }
+.buttonbar-edges {
+	justify-content: space-between;
+}
 
 .suggestion {
 	position: relative;
@@ -134,10 +137,26 @@ body {
 	padding-bottom: 18px;
 }
 
-.chkProgressBar {
+.chkProgressContainer {
 	width: 100%;
+	height: 15px;
+	background-color: #eee;
+	border-radius: 7px;
+	position: relative;
+}
+.chkProgressBar {
+	height: 100%;
+	background-color: #0da9f6;
+	border-radius: 7px;
+	position: absolute;
 }
 
+.left {
+	text-align: left;
+}
+.right {
+	text-align: right;
+}
 .center {
 	text-align: center;
 }
@@ -163,6 +182,19 @@ button {
 	min-width: 220px;
 	display: inline-block;
 	clear: both;
+}
+
+.btn-link {
+	padding: 0;
+	background-color: transparent;
+	font-weight: bold;
+	color: #0da9f6;
+}
+.btn-link.left span {
+	margin-right: 5px;
+}
+.btn-link.right span {
+	margin-left: 5px;
 }
 
 .btn-blue {
@@ -280,6 +312,12 @@ footer {
 	margin-left: 1px;
 	margin-right: 1px;
 	font-style: italic;
+}
+.marking-grammar {
+}
+.marking-comma {
+	font-style: normal;
+	border: 1px solid;
 	border-radius: 3px;
 }
 .marking-red {
@@ -300,13 +338,14 @@ footer {
 .marking-green.alt:after {
 	content: " ✓";
 }
-.marking-selected {
-	border-style: solid;
-}
 
 #chkSuggestions {
 	font-size: 16px;
 }
 #chkSuggestions span {
 	color: #c12e2a;
+}
+
+.btnCheckAuto, .chkGrammarToComma {
+	display: none;
 }
