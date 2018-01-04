@@ -774,6 +774,10 @@ $(function() {
 		$('.chkExplainShort').show();
 	});
 
+	$('.btnOptions').click(function() {
+		google.script.run.withFailureHandler(showError).showOptions(g_tool);
+	});
+
 	$('.btnCheckAuto').click(function() {
 		g_mode = 'auto';
 	});

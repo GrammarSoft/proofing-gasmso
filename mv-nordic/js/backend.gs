@@ -26,6 +26,7 @@ function onOpen(e) {
 	ui.createAddonMenu()
 		.addItem('Start Ret Mig', 'showGrammar')
 		.addItem('Start Kommaforslag', 'showComma')
+		.addItem('Indstillinger', 'showOptions')
 		.addToUi();
 }
 
@@ -64,12 +65,24 @@ function showGrammar(mode) {
 	DocumentApp.getUi().showSidebar(ui);
 }
 
-function showComma(mode, auto) {
+function showComma(mode) {
 	var ui = HtmlService.createTemplateFromFile('html/sidebar').evaluate();
 	var html = ui.getContent();
 	html = injectVariables(html, 'Comma', mode);
 	ui.setContent(html).setSandboxMode(HtmlService.SandboxMode.IFRAME).setTitle('Kommaforslag');
 	DocumentApp.getUi().showSidebar(ui);
+}
+
+function showOptions(tool) {
+	if (!tool) {
+		tool = 'Grammar';
+	}
+
+	var ui = HtmlService.createTemplateFromFile('html/options').evaluate();
+	var html = ui.getContent();
+	html = injectVariables(html, tool);
+	ui.setContent(html).setWidth(800).setHeight(600);
+	DocumentApp.getUi().showModalDialog(ui, 'Indstillinger');
 }
 
 function getAllPars() {
