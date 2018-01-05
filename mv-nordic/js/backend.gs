@@ -26,6 +26,7 @@ function onOpen(e) {
 	ui.createAddonMenu()
 		.addItem('Start Ret Mig', 'showGrammar')
 		.addItem('Start Kommaforslag', 'showComma')
+		.addSeparator()
 		.addItem('Indstillinger', 'showOptions')
 		.addToUi();
 }
@@ -38,7 +39,7 @@ function include(filename) {
 	return HtmlService.createHtmlOutputFromFile(filename).getContent().replace(/<!--.*?-->/g, '');
 }
 
-function getSession() {
+function getState() {
 	var rv = {
 		active: Session.getActiveUser().getEmail(),
 		effective: Session.getEffectiveUser().getEmail(),
@@ -46,11 +47,15 @@ function getSession() {
 		key: Session.getTemporaryActiveUserKey(),
 		locale: Session.getActiveUserLocale(),
 	};
-	return rv;
+
+	return {
+		session: rv,
+		storage: PropertiesService.getUserProperties().getProperties(),
+	};
 }
 
 function injectVariables(html, tool, mode) {
-	html = html.replace('</body>', '<script>var g_tool = "'+tool+'"; var g_mode = null;</script></body>');
+	html = html.replace('</body>', '<script>g_tool = "'+tool+'"; g_mode = null;</script></body>');
 	if (mode) {
 		html = html.replace('</body>', '<script>g_mode = "'+mode+'";</script></body>');
 	}
