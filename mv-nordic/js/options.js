@@ -25,12 +25,15 @@
 /* globals g_tool:true */
 /* globals l10n */
 
+let g_tool = null;
+let g_mode = null;
 let g_conf = {};
 /* exported session */
 let session = {};
 
-function getSession(s) {
-	console.log(s);
+function getState(data) {
+	console.log(data);
+	let s = data.session;
 	// If the locale doesn't exist, trim it and try again
 	if (!l10n.s.hasOwnProperty(s.locale)) {
 		console.log('No such locale ' + s.locale);
@@ -49,15 +52,28 @@ $(function() {
 		g_tool = 'Grammar';
 	}
 	g_conf = Object.assign({}, g_conf_defaults);
-	google.script.run.withSuccessHandler(getSession).withFailureHandler(showError).getSession();
+	//google.script.run.withSuccessHandler(getState).withFailureHandler(showError).getState();
 
 	$('.closer').click(function() {
 		$(this).closest('.closable').hide();
 	});
 
+	$('.tab-grammar').click(function() {
+		$(this).closest('.tabbar').find('.tab').removeClass('selected');
+		$(this).addClass('selected');
+		$('.pane').hide();
+		$('.pane-grammar').show();
+	});
+	$('.tab-comma').click(function() {
+		$(this).closest('.tabbar').find('.tab').removeClass('selected');
+		$(this).addClass('selected');
+		$('.pane').hide();
+		$('.pane-comma').show();
+	});
+
 	$('#error').hide();
-	$('.sidebar').hide();
-	$('#chkWelcome' + g_tool).show();
+	$('.pane').hide();
+	$('.tab-' + g_tool.toLowerCase()).click();
 	$('#placeholder').remove();
 });
 

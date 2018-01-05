@@ -16,3 +16,45 @@
  * You should have received a copy of the GNU General Public License
  * along with this project.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+.tabbar {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	height: 60px;
+	margin-bottom: 18px;
+}
+.tab {
+	display: block;
+	text-align: center;
+	flex-grow: 1;
+	height: 100%;
+	line-height: 60px;
+	border: 1px solid #ddd;
+	color: #000;
+	font-size: 16px;
+}
+.tab:hover {
+	background-color: #eaf7fe;
+}
+.tab.selected {
+	background-color: #4a90e2;
+	color: #fff;
+}
+
+.pane {
+	position: relative;
+}
+
+.sidebar {
+	position: absolute;
+	width: 250px;
+	left: 18px;
+	padding: 0;
+}
+.column {
+	position: absolute;
+	left: calc(250px + 18px + 18px);
+	right: 18px;
+}
