@@ -33,6 +33,8 @@
 /* globals g_mode:true */
 /* globals l10n */
 
+let g_tool = null;
+let g_mode = null;
 let g_conf = {};
 /* exported session */
 let session = {};
@@ -740,8 +742,9 @@ function didRemove(rpl) {
 	btnNext();
 }
 
-function getSession(s) {
-	console.log(s);
+function getState(data) {
+	console.log(data);
+	let s = data.session;
 	// If the locale doesn't exist, trim it and try again
 	if (!l10n.s.hasOwnProperty(s.locale)) {
 		console.log('No such locale ' + s.locale);
@@ -760,7 +763,7 @@ $(function() {
 		g_tool = 'Grammar';
 	}
 	g_conf = Object.assign({}, g_conf_defaults);
-	google.script.run.withSuccessHandler(getSession).withFailureHandler(showError).getSession();
+	google.script.run.withSuccessHandler(getState).withFailureHandler(showError).getState();
 
 	$('.closer').click(function() {
 		$(this).closest('.closable').hide();
