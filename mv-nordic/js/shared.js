@@ -76,6 +76,8 @@ const g_conf_defaults = {
 	opt_ignMaj: false,
 	opt_useDictionary: true,
 	opt_colorBlind: false,
+	opt_longExplanations: true,
+	opt_mvNordic: true,
 	opt_level: 3,
 };
 
@@ -101,6 +103,20 @@ function decHTML(t) {
 	let nt = t.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&');
 	//console.log([t, nt]);
 	return nt;
+}
+
+/* exported haveLocalStorage */
+function haveLocalStorage() {
+	try {
+		var storage = window.localStorage;
+		var x = 'LocalStorageTest';
+		storage.setItem(x, x);
+		storage.removeItem(x);
+	}
+	catch(e) {
+		return false;
+	}
+	return true;
 }
 
 /* exported sanitize_result */

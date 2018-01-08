@@ -25,6 +25,7 @@
 /* globals marking_types */
 /* globals murmurHash3 */
 /* globals sanitize_result */
+/* globals types_mv */
 /* globals types_red */
 /* globals types_yellow */
 /* globals uc_first */
@@ -161,12 +162,11 @@ function markingRender(skipact) {
 	let el = {};
 	for (let i=0 ; i<types.length ; ++i) {
 		let et = marking_types[types[i]] ? marking_types[types[i]][0] : (types[i] + ' ');
-		et = '<p>'+et.replace(/(<\/h\d>)/g, '$1<br><br>').replace(/(<br>\s*)+<br>\s*/g, '</p><p>')+'</p>';
-		es[et] = et.replace(/<p>\s*<\/p>/g, '');
+		es[i] = '<h2>'+et+'</h2>';
 
 		et = marking_types[types[i]] ? marking_types[types[i]][1] : (types[i] + ' ');
-		et = '<p>'+et.replace(/(<\/h\d>)/g, '$1<br><br>').replace(/(<br>\s*)+<br>\s*/g, '</p><p>')+'</p>';
-		el[et] = et.replace(/<p>\s*<\/p>/g, '');
+		et = '<p>'+et.replace(/(<br>\s*)+<br>\s*/g, '</p><p>')+'</p>';
+		el[i] = es[i] + et.replace(/<p>\s*<\/p>/g, '');
 	}
 	es = $.map(es, function(v) {
 		return v;
@@ -174,17 +174,15 @@ function markingRender(skipact) {
 	el = $.map(el, function(v) {
 		return v;
 	}).join('<hr>');
-	$('.chkExplainLong').hide();
 	$('.chkExplainShortText').html(es);
 	$('.chkExplainLongText').html(el);
-	$('.chkExplainShort').show();
 
 	let alt = '';
 	if (g_conf.opt_colorBlind) {
 		alt = ' alt';
 	}
 
-	$('.chkType').html(marking[1]);
+	$('.chkType').attr('title', marking[1]);
 
 	sentence = sentence.replace(' class="marking"', ' class="marking marking-'+col+alt+' marking-'+g_tool.toLowerCase()+'"');
 	$('.chkSentence').html(sentence);
@@ -490,6 +488,7 @@ function _parseResult(rv) {
 
 		let words = [];
 		let had_mark = false;
+		let prev_sentsplit = false;
 
 		for (let j=1 ; j<lines.length ; ++j) {
 			// Ignore duplicate opening tags
@@ -562,8 +561,23 @@ function _parseResult(rv) {
 				}
 
 				ws = [];
+				let had_sentsplit = false;
+				let none = (g_tool === 'Grammar' && g_conf.opt_mvNordic);
+
 				for (let k=0 ; k<nws.length ; ++k) {
 					if (g_tool === 'Grammar') {
+						if (nws[k] === '@sentsplit') {
+							had_sentsplit = true;
+						}
+						if (g_conf.opt_mvNordic) {
+							if (nws[k] === '@upper' && prev_sentsplit) {
+								console.log(`Skipping @upper due to @sentsplit`);
+								continue;
+							}
+							if (types_mv.hasOwnProperty(nws[k])) {
+								none = false;
+							}
+						}
 						if (nws[k] === '@green') {
 							ws.push(nws[k]);
 							continue;
@@ -594,6 +608,12 @@ function _parseResult(rv) {
 					}
 					ws.push(nws[k]);
 				}
+
+				prev_sentsplit = had_sentsplit;
+				if (ws.length && none) {
+					console.log(`MV Nordic whitelist no-match: ${ws}`);
+					ws = [];
+				}
 				nws = ws;
 				if (nws.length == 0) {
 					crs = [];
@@ -619,6 +639,9 @@ function _parseResult(rv) {
 					w[1] = nws.join(' ');
 					if (!w[2] || w[2].length === 0) {
 						w[2] = '';
+					}
+					if (w[1].indexOf(' ') !== -1) {
+						w[1] = w[1].replace(/ @error /g, ' ').replace(/ @error$/g, '').replace(/^@error /g, '');
 					}
 					had_mark = true;
 				}
@@ -776,6 +799,15 @@ $(function() {
 		$('.chkExplainLong').hide();
 		$('.chkExplainShort').show();
 	});
+
+	if (g_conf.opt_longExplanations) {
+		$('.chkExplainLong').show();
+		$('.chkExplainShort').hide();
+	}
+	else {
+		$('.chkExplainLong').hide();
+		$('.chkExplainShort').show();
+	}
 
 	$('.btnOptions').click(function() {
 		google.script.run.withFailureHandler(showError).showOptions(g_tool);
