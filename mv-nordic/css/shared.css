@@ -67,6 +67,10 @@ body {
 	color: #f5a623;
 }
 
+ul {
+	list-style-type: none;
+}
+
 #error {
 	display: flex;
 	background-color: #fee;
@@ -111,6 +115,10 @@ body {
 	justify-content: space-between;
 }
 
+.spacer {
+	display: block;
+	height: 18px;
+}
 .divider {
 	border-bottom: 1px dotted #ccc;
 	padding-bottom: 18px;
@@ -214,7 +222,6 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
 	font-size: 16px;
 }
-
 h2 {
 	font-size: 14px;
 	font-weight: bold;

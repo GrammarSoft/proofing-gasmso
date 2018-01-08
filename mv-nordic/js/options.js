@@ -47,34 +47,73 @@ function getState(data) {
 	session = s;
 }
 
+function showPane(e, w) {
+	$('.tab.selected').removeClass('selected');
+	$(e).addClass('selected');
+	$('.pane,.column').hide();
+	$('.pane-'+w).show();
+	$('.pane-'+w).find('.sidebar .link').first().click();
+}
+
+function showColumn(e, w) {
+	$('.sidebar .selected').removeClass('selected');
+	$(e).addClass('selected');
+	$('.column').hide();
+	$('.'+w).show();
+}
+
 $(function() {
 	if (g_tool !== 'Grammar' && g_tool !== 'Comma') {
 		g_tool = 'Grammar';
 	}
 	g_conf = Object.assign({}, g_conf_defaults);
-	//google.script.run.withSuccessHandler(getState).withFailureHandler(showError).getState();
+	/*
+	google.script.run.withSuccessHandler(getState).withFailureHandler(showError).getState();
+	/*/
+	session = {locale: 'da'};
+	//*/
 
 	$('.closer').click(function() {
 		$(this).closest('.closable').hide();
 	});
 
+	$('.btnOptionsGrammar').click(function() {
+		showColumn(this, 'column-options-grammar');
+	});
+	$('.btnWords').click(function() {
+		showColumn(this, 'column-words');
+	});
+	$('.btnAboutGrammar').click(function() {
+		showColumn(this, 'column-about-grammar');
+	});
+	$('.btnWordsButton').click(function() {
+		$('.btnWords').click();
+	});
+
+	$('.btnOptionsComma').click(function() {
+		showColumn(this, 'column-options-comma');
+	});
+	$('.btnLinks').click(function() {
+		showColumn(this, 'column-links');
+	});
+	$('.btnAboutComma').click(function() {
+		showColumn(this, 'column-about-comma');
+	});
+
 	$('.tab-grammar').click(function() {
-		$(this).closest('.tabbar').find('.tab').removeClass('selected');
-		$(this).addClass('selected');
-		$('.pane').hide();
-		$('.pane-grammar').show();
+		showPane(this, 'grammar');
 	});
 	$('.tab-comma').click(function() {
-		$(this).closest('.tabbar').find('.tab').removeClass('selected');
-		$(this).addClass('selected');
-		$('.pane').hide();
-		$('.pane-comma').show();
+		showPane(this, 'comma');
 	});
 
 	$('#error').hide();
-	$('.pane').hide();
 	$('.tab-' + g_tool.toLowerCase()).click();
 	$('#placeholder').remove();
+
+	if (!haveLocalStorage()) {
+		showError('ERR_NO_STORAGE');
+	}
 });
 
 function showError(msg) {

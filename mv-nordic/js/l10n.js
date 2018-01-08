@@ -30,6 +30,7 @@ l10n.s = {
 		ERR_SELECT_NOTFOUND: 'Kunne ikke finde konteksten. Det kan være du eller en anden har ændret i dokumentet siden tjekket blev kørt.',
 		ERR_SELECT_NOMATCH: 'Konteksten matchede ikke. Denne fejl bør ikke kunne ske.',
 		ERR_REPLACE_NOSELECT: 'Kunne ikke vælge stedet i konteksten. Det kan være du eller en anden har ændret i dokumentet siden tjekket blev kørt.',
+		ERR_NO_STORAGE: 'Din browser understøtter ikke HTML5 Local Storage. Dette gør desværre at indstillinger og brugerordbog ikke kan fungere optimalt.',
 		BTN_GRAMMAR_REPLACE: 'Erstat ord',
 		BTN_GRAMMAR_INSERT: 'Indsæt ord',
 		BTN_GRAMMAR_REMOVE: 'Fjern ord',

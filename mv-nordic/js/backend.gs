@@ -24,7 +24,7 @@
 function onOpen(e) {
 	var ui = DocumentApp.getUi();
 	ui.createAddonMenu()
-		.addItem('Start Ret Mig', 'showGrammar')
+		.addItem('Start GrammarGuide', 'showGrammar')
 		.addItem('Start Kommaforslag', 'showComma')
 		.addSeparator()
 		.addItem('Indstillinger', 'showOptions')
@@ -55,6 +55,7 @@ function getState() {
 }
 
 function injectVariables(html, tool, mode) {
+	html = html.replace(/<!--.*?-->/g, '').replace(/>[\s\n]+</g, '><');
 	html = html.replace('</body>', '<script>g_tool = "'+tool+'"; g_mode = null;</script></body>');
 	if (mode) {
 		html = html.replace('</body>', '<script>g_mode = "'+mode+'";</script></body>');
