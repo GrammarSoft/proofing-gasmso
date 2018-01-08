@@ -17,6 +17,11 @@
  * along with this project.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+label {
+	display: inline-block;
+	margin: 7px 0;
+}
+
 .tabbar {
 	display: flex;
 	flex-wrap: wrap;
@@ -57,4 +62,15 @@
 	position: absolute;
 	left: calc(250px + 18px + 18px);
 	right: 18px;
+}
+
+.sidebar .link {
+	color: #000;
+	display: block;
+	padding: 9px 18px 9px 18px;
+}
+.sidebar .link.selected {
+	color: #0da9f6;
+	padding-left: 13px;
+	border-left: 5px solid;
 }

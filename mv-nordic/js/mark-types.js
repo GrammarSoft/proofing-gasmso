@@ -8,6 +8,28 @@
  */
 'use strict';
 
+/* exported types_mv */
+let types_mv = {
+	"@vfin": "@vfin",
+	"@inf": "@inf",
+	"@ene": "@ene",
+	"@ende": "@ende",
+	"@comp-": "@comp-",
+	"@comp-:-": "@comp-:-",
+	"@-comp": "@-comp",
+	"@comp": "@comp",
+	"@error": "@error",
+	"@apostrophe": "@apostrophe",
+	"@no-apostrophe": "@no-apostrophe",
+	"@check!": "@check!",
+	"@new": "@new",
+	"@green": "@green",
+	"@proper": "@proper",
+	"@abbreviation": "@abbreviation",
+	"@upper": "@upper",
+	"@lower": "@lower",
+};
+
 /* exported types_red */
 let types_red = {
 	"@error": "@error",
