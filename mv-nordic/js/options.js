@@ -31,6 +31,72 @@ let g_conf = {};
 /* exported session */
 let session = {};
 
+function saveConfig() {
+	g_conf.opt_ignUnknown = false;
+	if (g_conf.opt_ignUNames && g_conf.opt_ignUComp && g_conf.opt_ignUAbbr && g_conf.opt_ignUOther) {
+		g_conf.opt_ignUnknown = true;
+	}
+	if (g_conf.opt_ignUnknown) {
+		g_conf.opt_ignUNames = g_conf.opt_ignUComp = g_conf.opt_ignUAbbr = g_conf.opt_ignUOther = true;
+	}
+
+	for (let k in g_conf) {
+		if (!g_conf.hasOwnProperty(k)) {
+			continue;
+		}
+		if (typeof g_conf[k] === 'boolean') {
+			$('.'+k).prop('checked', g_conf[k]);
+		}
+		else if (typeof g_conf[k] === 'number') {
+			$('.'+k+'[value='+g_conf[k]+']').prop('checked', g_conf[k]);
+		}
+	}
+
+	let nv = JSON.stringify(g_conf);
+	if (nv !== g_conf_json) {
+		window.localStorage.setItem('config', nv);
+		g_conf_json = nv;
+	}
+}
+
+function attachDictionaryClicks() {
+	$('.formWordAdd').off().submit(function(e) {
+		let w = $.trim($(this).find('input').val());
+		if (addToDictionary(w)) {
+			$('.words').append('<form class="word formWordEdit" data-word="'+escHTML(w)+'"><input type="text" value="'+escHTML(w)+'"> <button type="button" class="btnWordDelete">X</button></form>');
+			attachDictionaryClicks();
+			$(this).find('input').val('');
+		}
+		else {
+			alert('Kunne ikke tilføje ordet "'+w+'" til stavekontrollen!');
+		}
+
+		e.preventDefault();
+		return false;
+	});
+	$('.formWordEdit').off().submit(function(e) {
+		let ow = $.trim($(this).attr('data-word'));
+		let w = $.trim($(this).find('input').val());
+		if (ow != w && addToDictionary(w) && removeFromDictionary(ow)) {
+		}
+		else {
+			alert('Kunne ikke ændre ordet "'+ow+'" til '+w+' i stavekontrollen!');
+		}
+
+		e.preventDefault();
+		return false;
+	});
+	$('.btnWordDelete').off().click(function() {
+		let w = $.trim($(this).closest('form').find('input').val());
+		if (removeFromDictionary(w)) {
+			$(this).closest('form').remove();
+		}
+		else {
+			alert('Kunne ikke slette ordet "'+w+'" fra stavekontrollen!');
+		}
+	});
+}
+
 function getState(data) {
 	console.log(data);
 	let s = data.session;
@@ -45,6 +111,19 @@ function getState(data) {
 		s.locale = 'da';
 	}
 	session = s;
+
+	loadConfig();
+	loadDictionary();
+
+	$('.words').html('<form class="word formWordAdd"><input type="text" value=""> <button type="button" class="btnWordAdd">+</button></form>');
+	let ws = Object.keys(g_dictionary);
+	ws.sort();
+	for (let i=0 ; i<ws.length ; ++i) {
+		$('.words').append('<form class="word formWordEdit" data-word="'+escHTML(ws[i])+'"><input type="text" value="'+escHTML(ws[i])+'"> <button type="button" class="btnWordDelete">X</button></form>');
+	}
+	attachDictionaryClicks();
+
+	saveConfig();
 }
 
 function showPane(e, w) {
@@ -70,7 +149,7 @@ $(function() {
 	/*
 	google.script.run.withSuccessHandler(getState).withFailureHandler(showError).getState();
 	/*/
-	session = {locale: 'da'};
+	getState({session: {locale: 'da'}});
 	//*/
 
 	$('.closer').click(function() {
@@ -105,6 +184,34 @@ $(function() {
 	});
 	$('.tab-comma').click(function() {
 		showPane(this, 'comma');
+	});
+
+	$('input[type="checkbox"],input[type="radio"]').change(function() {
+		let k = /(opt_\S+)/.exec($(this).attr('class'));
+		if (!k) {
+			return;
+		}
+
+		k = k[1];
+
+		let v = null;
+		if ($(this).attr('type') === 'checkbox') {
+			v = $(this).prop('checked');
+		}
+		else if ($(this).attr('type') === 'radio') {
+			v = $(this).val();
+		}
+		if (typeof v === 'string' && /^\d+$/.test(v)) {
+			v = parseInt(v);
+		}
+
+		if (k === 'opt_ignUnknown') {
+			g_conf.opt_ignUNames = g_conf.opt_ignUComp = g_conf.opt_ignUAbbr = g_conf.opt_ignUOther = v;
+		}
+
+		g_conf[k] = v;
+		console.log([k, v, g_conf]);
+		saveConfig();
 	});
 
 	$('#error').hide();

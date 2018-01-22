@@ -53,6 +53,10 @@ let ts_slow = null;
 let ts_fail = 0;
 let ignores = {};
 
+function isInDictionary(word) {
+	return _live_dictionary.hasOwnProperty(word);
+}
+
 function markingSetSentence() {
 	let s = cmarking.s;
 	let b = cmarking.w;
@@ -609,6 +613,23 @@ function _parseResult(rv) {
 					ws.push(nws[k]);
 				}
 
+				if (g_tool === 'Grammar') {
+					let col = 'green';
+					for (let k=0 ; k<ws.length ; ++k) {
+						if (types_yellow.hasOwnProperty(ws[k])) {
+							col = 'yellow';
+						}
+						if (types_red.hasOwnProperty(ws[k])) {
+							col = 'red';
+							break;
+						}
+					}
+					if (col === 'yellow' && g_conf.opt_useDictionary && isInDictionary(w[0])) {
+						console.log(`Found ${w[0]} in dictionary`);
+						ws = [];
+					}
+				}
+
 				prev_sentsplit = had_sentsplit;
 				if (ws.length && none) {
 					console.log(`MV Nordic whitelist no-match: ${ws}`);
@@ -732,6 +753,9 @@ function sendTexts() {
 }
 
 function checkParagraphs(doc) {
+	loadConfig();
+	loadDictionary();
+
 	console.log(doc);
 	to_send = doc;
 	to_send_i = 0;
@@ -779,6 +803,9 @@ function getState(data) {
 		s.locale = 'da';
 	}
 	session = s;
+
+	loadConfig();
+	loadDictionary();
 }
 
 $(function() {
@@ -848,6 +875,15 @@ $(function() {
 		g_tool = 'Comma';
 		$('.sidebar').hide();
 		$('#chkWelcome' + g_tool).show();
+	});
+
+	$('.btnAddWord').click(function() {
+		if ($(this).hasClass('disabled')) {
+			return false;
+		}
+		addToDictionary(markings[cmarking.s][cmarking.w][0]);
+		$('#chkInputText').val(markings[cmarking.s][cmarking.w][0]);
+		$('.btnInputOne').click();
 	});
 
 	$('#error').hide();
