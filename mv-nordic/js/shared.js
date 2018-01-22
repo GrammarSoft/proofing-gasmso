@@ -66,9 +66,17 @@ const Defs = {
 };
 Defs.OPT_DP_IGNORE_UNKNOWN = Defs.OPT_DP_IGNORE_NAMES|Defs.OPT_DP_IGNORE_COMP|Defs.OPT_DP_IGNORE_ABBR|Defs.OPT_DP_IGNORE_OTHER;
 
+/* exported g_dictionary */
+let g_dictionary = {};
+/* exported g_dictionary_json */
+let g_dictionary_json = '{}';
+/* exported _live_dictionary */
+let _live_dictionary = {};
+
 /* exported g_conf_defaults */
 const g_conf_defaults = {
 	opt_onlyConfident: false,
+	opt_ignUnknown: false,
 	opt_ignUNames: false,
 	opt_ignUComp: false,
 	opt_ignUAbbr: false,
@@ -80,6 +88,98 @@ const g_conf_defaults = {
 	opt_mvNordic: true,
 	opt_level: 3,
 };
+
+/* exported g_conf_json */
+let g_conf_json = JSON.stringify(g_conf_defaults);
+
+/* exported loadConfig */
+function loadConfig() {
+	let nv = window.localStorage.getItem('config');
+	if (!nv) {
+		return;
+	}
+	if (nv === g_conf_json) {
+		return;
+	}
+
+	g_conf_json = nv;
+	nv = JSON.parse(nv);
+	for (let k in nv) {
+		if (!nv.hasOwnProperty(k)) {
+			continue;
+		}
+		if (g_conf[k] !== nv[k]) {
+			console.log([k, g_conf[k], nv[k]]);
+			g_conf[k] = nv[k];
+		}
+	}
+}
+
+/* exported loadDictionary */
+function loadDictionary() {
+	let nv = window.localStorage.getItem('dictionary');
+	if (!nv) {
+		return;
+	}
+	if (nv === g_dictionary_json) {
+		return;
+	}
+
+	_live_dictionary = {};
+
+	g_dictionary_json = nv;
+	g_dictionary = JSON.parse(g_dictionary_json);
+	for (let word in g_dictionary) {
+		if (!g_dictionary.hasOwnProperty(word)) {
+			continue;
+		}
+		_live_dictionary[word] = true;
+		_live_dictionary[uc_first(word)] = true;
+		_live_dictionary[word.toUpperCase()] = true;
+	}
+}
+
+/* exported addToDictionary */
+function addToDictionary(word) {
+	if ($.trim(word).length === 0) {
+		return false;
+	}
+
+	if (!g_dictionary.hasOwnProperty(word)) {
+		console.log(`Add to dict: ${word}`);
+		g_dictionary[word] = true;
+		_live_dictionary[word] = true;
+		_live_dictionary[uc_first(word)] = true;
+		_live_dictionary[word.toUpperCase()] = true;
+
+		g_dictionary_json = JSON.stringify(g_dictionary);
+		window.localStorage.setItem('dictionary', g_dictionary_json);
+		return true;
+	}
+
+	return false;
+}
+
+/* exported addToDictionary */
+function removeFromDictionary(word) {
+	if ($.trim(word).length === 0) {
+		return false;
+	}
+
+	if (g_dictionary.hasOwnProperty(word)) {
+		console.log(`Remove from dict: ${word}`);
+		delete g_dictionary[word];
+		delete _live_dictionary[word];
+		delete _live_dictionary[uc_first(word)];
+		delete _live_dictionary[word.toUpperCase()];
+
+		g_dictionary_json = JSON.stringify(g_dictionary);
+		window.localStorage.setItem('dictionary', g_dictionary_json);
+		return true;
+	}
+
+	return false;
+}
 
 /* exported is_upper */
 function is_upper(ch) {

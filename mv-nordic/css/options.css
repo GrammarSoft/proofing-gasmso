@@ -22,6 +22,11 @@ label {
 	margin: 7px 0;
 }
 
+button {
+	background-color: #4a90e2;
+	color: #fff;
+}
+
 .tabbar {
 	display: flex;
 	flex-wrap: wrap;
@@ -73,4 +78,32 @@ label {
 	color: #0da9f6;
 	padding-left: 13px;
 	border-left: 5px solid;
+}
+
+.words {
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	margin: 0.75rem 0;
+	padding: 1.75rem 0 0.75rem 0;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+.word * {
+	display: inline-block;
+}
+.word {
+	white-space: nowrap;
+	margin-bottom: 1rem;
+	vertical-align: top;
+}
+.word input {
+	min-height: 30px;
+	width: 14rem;
+}
+.word button {
+	margin-top: 0;
+	margin-bottom: 0;
+	min-width: 2rem;
+	width: 2rem;
 }
