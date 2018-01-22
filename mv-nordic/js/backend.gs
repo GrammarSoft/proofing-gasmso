@@ -24,7 +24,7 @@
 function onOpen(e) {
 	var ui = DocumentApp.getUi();
 	ui.createAddonMenu()
-		.addItem('Start GrammarGuide', 'showGrammar')
+		.addItem('Start Grammateket', 'showGrammar')
 		.addItem('Start Kommaforslag', 'showComma')
 		.addSeparator()
 		.addItem('Indstillinger', 'showOptions')

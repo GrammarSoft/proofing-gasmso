@@ -74,6 +74,7 @@ function attachDictionaryClicks() {
 		e.preventDefault();
 		return false;
 	});
+
 	$('.formWordEdit').off().submit(function(e) {
 		let ow = $.trim($(this).attr('data-word'));
 		let w = $.trim($(this).find('input').val());
@@ -86,6 +87,7 @@ function attachDictionaryClicks() {
 		e.preventDefault();
 		return false;
 	});
+
 	$('.btnWordDelete').off().click(function() {
 		let w = $.trim($(this).closest('form').find('input').val());
 		if (removeFromDictionary(w)) {
