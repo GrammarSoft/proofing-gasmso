@@ -65,7 +65,7 @@ function attachDictionaryClicks() {
 		if (addToDictionary(w)) {
 			$('.words').append('<form class="word formWordEdit" data-word="'+escHTML(w)+'"><input type="text" value="'+escHTML(w)+'"> <button type="button" class="btnWordDelete">X</button></form>');
 			attachDictionaryClicks();
-			$(this).find('input').val('');
+			$(this).find('input').val('').focus();
 		}
 		else {
 			alert('Kunne ikke tilføje ordet "'+w+'" til stavekontrollen!');
@@ -117,7 +117,7 @@ function getState(data) {
 	loadConfig();
 	loadDictionary();
 
-	$('.words').html('<form class="word formWordAdd"><input type="text" value=""> <button type="button" class="btnWordAdd">+</button></form>');
+	$('.words').html('<form class="word formWordAdd"><input type="text" value=""> <button type="submit">+</button></form>');
 	let ws = Object.keys(g_dictionary);
 	ws.sort();
 	for (let i=0 ; i<ws.length ; ++i) {
@@ -186,6 +186,10 @@ $(function() {
 	});
 	$('.tab-comma').click(function() {
 		showPane(this, 'comma');
+	});
+
+	$('.btnAddWord').click(() => {
+		$('.formWordAdd').find('input').focus();
 	});
 
 	$('input[type="checkbox"],input[type="radio"]').change(function() {

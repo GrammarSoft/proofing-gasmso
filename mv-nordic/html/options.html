@@ -20,6 +20,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<title>Indstillinger</title>
 	<base target="_top">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<!-- script src="https://signon.mv-nordic.com/sp-js/mvlogin.js"></script -->
@@ -54,38 +55,56 @@
 <div class="column column-options-grammar">
 	<h2>Fejltyper</h2>
 	<ul>
-		<li><label><input type="checkbox" class="opt_mvNordic"> Vis kun typer udvalgt af MV-Nordic</label></li>
-		<li><label><input type="checkbox" class="opt_onlyConfident"> Vis kun sikre fejl</label></li>
-		<li><label><input type="checkbox" class="opt_ignUnknown"> Kritiser ikke ukendte ord</label>
+		<li><label class="crbox"><input type="checkbox" class="opt_mvNordic"><span class="checkbox"></span> Vis kun typer udvalgt af MV-Nordic</label></li>
+		<li><label class="crbox"><input type="checkbox" class="opt_onlyConfident"><span class="checkbox"></span> Vis kun sikre fejl</label></li>
+		<li><label class="crbox"><input type="checkbox" class="opt_ignUnknown"><span class="checkbox"></span> Kritiser ikke ukendte ord</label>
 			<ul>
-				<li><label><input type="checkbox" class="opt_ignUNames"> Kritiser ikke ukendte navne</label></li>
-				<li><label><input type="checkbox" class="opt_ignUComp"> Kritiser ikke ukendte komposita</label></li>
-				<li><label><input type="checkbox" class="opt_ignUAbbr"> Kritiser ikke ukendte forkortelser</label></li>
-				<li><label><input type="checkbox" class="opt_ignUOther"> Kritiser ikke andre ukendte ord</label></li>
+				<li><label class="crbox"><input type="checkbox" class="opt_ignUNames"><span class="checkbox"></span> Kritiser ikke ukendte navne</label></li>
+				<li><label class="crbox"><input type="checkbox" class="opt_ignUComp"><span class="checkbox"></span> Kritiser ikke ukendte komposita</label></li>
+				<li><label class="crbox"><input type="checkbox" class="opt_ignUAbbr"><span class="checkbox"></span> Kritiser ikke ukendte forkortelser</label></li>
+				<li><label class="crbox"><input type="checkbox" class="opt_ignUOther"><span class="checkbox"></span> Kritiser ikke andre ukendte ord</label></li>
 			</ul>
 		</li>
-		<li><label><input type="checkbox" class="opt_ignMaj"> Kritiser ikke majuskel/minuskel-fejl</label></li>
+		<li><label class="crbox"><input type="checkbox" class="opt_ignMaj"><span class="checkbox"></span> Kritiser ikke majuskel/minuskel-fejl</label></li>
 	</ul>
 
 	<h2>Visning</h2>
 	<ul>
-		<li><label><input type="checkbox" class="opt_color"> Farveblind/alternativ visning</label></li>
+		<li><label class="crbox"><input type="checkbox" class="opt_color"><span class="checkbox"></span> Farveblind/alternativ visning</label></li>
 	</ul>
 
 	<h2>Brugerordbog</h2>
 	<ul>
-		<li><label><input type="checkbox" class="opt_useDictionary"> Brug din ordbog</label> &nbsp; <button type="button" class="btnWordsButton">Rediger din ordbog</button></li>
+		<li><label class="crbox"><input type="checkbox" class="opt_useDictionary"><span class="checkbox"></span> Brug din ordbog</label> &nbsp; <button type="button" class="btnWordsButton">Rediger din ordbog</button></li>
 	</ul>
 </div>
 <div class="column column-words">
 	<h2>Min stavekontrol</h2>
+
 	<p>Her kan du redigere de ord som du selv har oprettet i din stavekontrol.
 	Du kan rette og fjerne ord ved at klikke på ordet. Vil du tilføje et ord, så klik på "Tilføj ord" nedenfor.</p>
 	<button type="button" class="btnAddWord">Tilføj ord</button>
+
 	<div class="words"></div>
 </div>
 <div class="column column-about-grammar">
-…
+	<h2>Om Grammateket</h2>
+
+	<p>Grammateket er et dansk retskrivningsprogram udviklet til personer med læse- og skrivevanskeligheder.</p>
+
+	<p><button type="button" class="disabled">Version 1.2.3</button> <button type="button">Få hjælp til Grammateket</button></p>
+
+	<hr>
+
+	<h3>Grammateket</h3>
+
+	<p>Copyright 2016-2018 GrammarSoft ApS. Alle rettigheder forbeholdt.<br>
+	Distribueret af MV-Nordic, Vitec.</p>
+
+	<p>Besøg vores website på <a href="https://www.mv-nordic.com/" target="_blank">mv-nordic.com</a>.<br>
+	Grammateket <a href="https://www.mv-nordic.com/" target="_blank">hjælp</a>.</p>
+
+	<footer><a href="https://www.mv-nordic.com/" target="_blank"><img class="logo logo-mv" src="../imgs/logo-mv-nordic.png"></a></footer>
 </div>
 </div>
 
@@ -98,18 +117,18 @@
 	<a class="link btnAboutComma">Om Kommaforslag</a>
 </div>
 <div class="column column-options-comma">
-	<h2>Færdighedsniveau</h2>
-	<ul>
-		<li><label><input type="radio" class="opt_level" name="opt_level" value="1"> <b>Niveau 1</b>: De 9 nemmeste kommatyper, svarende til folkeskolens nederste klassetrin.</label></li>
-		<li><label><input type="radio" class="opt_level" name="opt_level" value="2"> <b>Niveau 2</b>: 20 kommatyper, svarende til folkeskolens øverste klassetrin.</label></li>
-		<li><label><input type="radio" class="opt_level" name="opt_level" value="3"> <b>Niveau 3</b>: Alle 34 kommatyper, svarende til gymnasiet og højere.</label></li>
-	</ul>
-
 	<h2>Kommavisning</h2>
 	<ul>
-		<li><label><input type="checkbox" class="opt_green"> Vis kun manglende kommaer</label></li>
-		<li><label><input type="checkbox" class="opt_maybe"> Fremhæv valgfrie kommaer</label></li>
-		<li><label><input type="checkbox" class="opt_color"> Farveblind/alternativ visning</label></li>
+		<li><label class="crbox"><input type="checkbox" class="opt_green"><span class="checkbox"></span> Vis kun manglende kommaer</label></li>
+		<li><label class="crbox"><input type="checkbox" class="opt_maybe"><span class="checkbox"></span> Fremhæv valgfrie kommaer</label></li>
+		<li><label class="crbox"><input type="checkbox" class="opt_color"><span class="checkbox"></span> Farveblind/alternativ visning</label></li>
+	</ul>
+
+	<h2>Færdighedsniveau</h2>
+	<ul>
+		<li><label class="crbox"><input type="radio" class="opt_level" name="opt_level" value="1"><span class="radio"></span> <b>Niveau 1</b>: De 9 nemmeste kommatyper, svarende til folkeskolens nederste klassetrin.</label></li>
+		<li><label class="crbox"><input type="radio" class="opt_level" name="opt_level" value="2"><span class="radio"></span> <b>Niveau 2</b>: 20 kommatyper, svarende til folkeskolens øverste klassetrin.</label></li>
+		<li><label class="crbox"><input type="radio" class="opt_level" name="opt_level" value="3"><span class="radio"></span> <b>Niveau 3</b>: Alle 34 kommatyper, svarende til gymnasiet og højere.</label></li>
 	</ul>
 </div>
 <div class="column column-links">

@@ -45,7 +45,6 @@ body {
 	top: 0;
 	right: 0;
 	left: 0;
-	padding-bottom: 86px;
 }
 
 .whiteblue {
@@ -268,6 +267,43 @@ input[type="text"] {
 	width: 100%;
 	padding: 3px;
 	margin: 0;
+}
+
+.crbox {
+	position: relative;
+	padding-left: 27px;
+}
+.crbox input {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+}
+.crbox .checkbox, .crbox .radio {
+	background-repeat: no-repeat;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+	width: 20px;
+	height: 17px;
+}
+.crbox .radio {
+	width: 19px;
+	height: 19px;
+}
+.crbox input ~ .checkbox {
+	background-image: url('../imgs/checkbox-unchecked.png');
+	top: 1px;
+}
+.crbox input:checked ~ .checkbox {
+	background-image: url('../imgs/checkbox-checked.png');
+	top: 0;
+}
+.crbox input ~ .radio {
+	background-image: url('../imgs/radio-unchecked.png');
+}
+.crbox input:checked ~ .radio {
+	background-image: url('../imgs/radio-checked.png');
 }
 
 footer {
