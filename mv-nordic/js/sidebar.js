@@ -214,8 +214,7 @@ function markingRender(skipact) {
 			else if (first_upper) {
 				t = uc_first(t);
 			}
-			// \uD83D\uDD0D = 🔍
-			suggs += '<div class="suggestion"><span class="link" tabindex="'+(50+i*2)+'">' + escHTML(t) + '</span><a class="suggestion-lookup link" tabindex="'+(50+i*2+1)+'">\uD83D\uDD0D</a></div>';
+			suggs += '<div class="suggestion"><span class="link" tabindex="'+(50+i*2)+'">' + escHTML(t) + '</span><a class="suggestion-lookup link" tabindex="'+(50+i*2+1)+'"><span class="icon icon-lookup"></span></a></div>';
 		}
 		$('#chkDidYouMeanItems').html(suggs);
 		$('#chkDidYouMeanItems').find('span').off().click(markingAcceptSuggestion);
@@ -235,19 +234,19 @@ function markingRender(skipact) {
 		let px = /^(.*?)(\S+\s?)$/.exec(cmarking.prefix);
 		let sx = /^(\s?\S+)(.*)$/.exec(cmarking.suffix);
 		google.script.run.withFailureHandler(showError).selectInDocument(px[1], px[2] + sx[1], sx[2]);
-		$('.btnAccept').text(l10n.t(btn_lbl + 'INSERT'));
+		$('.txtAccept').text(l10n.t(btn_lbl + 'INSERT'));
 		if (marking[1].indexOf('%k-stop') !== -1) {
-			$('.btnAccept').text(l10n.t(btn_lbl + 'INSERT_STOP'));
+			$('.txtAccept').text(l10n.t(btn_lbl + 'INSERT_STOP'));
 		}
 		$('.btnAccept').removeClass('disabled');
 	}
 	else if (/(@nil|%nok-)/.test(marking[1])) {
-		$('.btnAccept').text(l10n.t(btn_lbl + 'REMOVE'));
+		$('.txtAccept').text(l10n.t(btn_lbl + 'REMOVE'));
 		$('.btnAccept').removeClass('disabled');
 		google.script.run.withFailureHandler(showError).selectInDocument(cmarking.prefix, marking[0], cmarking.suffix);
 	}
 	else {
-		$('.btnAccept').text(l10n.t(btn_lbl + 'REPLACE'));
+		$('.txtAccept').text(l10n.t(btn_lbl + 'REPLACE'));
 		google.script.run.withFailureHandler(showError).selectInDocument(cmarking.prefix, marking[0], cmarking.suffix);
 	}
 }
@@ -274,6 +273,21 @@ function markingIgnore() {
 	console.log(`Ignoring ${ik} in ${cmarking.sentence}`);
 
 	markings[cmarking.s][cmarking.w] = [markings[cmarking.s][cmarking.w][0]];
+}
+
+function btnIgnorePopup() {
+	let p = $('#popupIgnore');
+	if (p.is(':visible')) {
+		p.hide();
+	}
+	else {
+		p.show();
+		let btn = $(this);
+		let off = btn.offset();
+		off.top += btn.height() + 5;
+		off.left = (off.left + btn.width()) - p.width();
+		p.offset(off);
+	}
 }
 
 function btnIgnore() {
@@ -854,6 +868,7 @@ $(function() {
 
 	$('.btnAccept').click(btnAccept);
 	$('.btnInput').click(btnInput);
+	$('.btnIgnorePopup').click(btnIgnorePopup);
 	$('.btnIgnore').click(btnIgnore);
 	$('.btnIgnoreAll').click(btnIgnoreAll);
 	$('.btnPrev').click(btnPrev);
@@ -886,6 +901,7 @@ $(function() {
 		$('.btnInputOne').click();
 	});
 
+	$('#popupIgnore').hide();
 	$('#error').hide();
 	$('.chkProgress').hide();
 	$('.sidebar').hide();
