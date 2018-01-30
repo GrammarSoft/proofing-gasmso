@@ -17,9 +17,19 @@
  * along with this project.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+h1, h2 {
+	color: #0da9f6;
+}
+h3 {
+	font-size: 14px;
+	font-weight: bold;
+	color: #000;
+}
+
 label {
 	display: inline-block;
 	margin: 7px 0;
+	color: #000;
 }
 
 button {
@@ -54,7 +64,11 @@ button {
 }
 
 .pane {
-	position: relative;
+	position: absolute;
+	top: 78px;
+	left: 0;
+	right: 0;
+	bottom: 0;
 }
 
 .sidebar {
@@ -67,6 +81,8 @@ button {
 	position: absolute;
 	left: calc(250px + 18px + 18px);
 	right: 18px;
+	height: 100%;
+	padding-bottom: 86px;
 }
 
 .sidebar .link {
@@ -106,4 +122,13 @@ button {
 	margin-bottom: 0;
 	min-width: 2rem;
 	width: 2rem;
+}
+
+.column footer {
+	text-align: right;
+	height: 80px;
+}
+
+footer .logo-mv {
+	width: 150px;
 }
