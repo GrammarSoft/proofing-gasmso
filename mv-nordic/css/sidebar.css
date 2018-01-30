@@ -17,6 +17,10 @@
  * along with this project.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+body {
+	padding-bottom: 86px;
+}
+
 .suggestion {
 	position: relative;
 	display: block;
