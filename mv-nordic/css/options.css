@@ -37,6 +37,10 @@ button {
 	color: #fff;
 }
 
+.formWordAdd button, .formWordEdit button {
+	font-size: 20px;
+}
+
 .tabbar {
 	display: flex;
 	flex-wrap: wrap;

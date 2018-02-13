@@ -128,6 +128,10 @@ body {
 	color: #c12e2a;
 }
 
+.font-icon {
+	font-size: 18px;
+}
+
 .icon {
 	display: inline-block;
 	background-repeat: no-repeat;
@@ -169,6 +173,16 @@ body {
 	background-image: url('../imgs/icon-options.png');
 	width: 20px;
 	height: 21px;
+}
+.btnAddWord .icon-add {
+	background-image: url('../imgs/icon-add.png');
+	width: 30px;
+	height: 23px;
+	margin-top: -2px;
+}
+.btnAddWord.disabled .icon-add {
+	background-image: url('../imgs/icon-add-disabled.png');
+	margin-top: 3px;
 }
 
 .btnCheckAuto, .chkGrammarToComma {
