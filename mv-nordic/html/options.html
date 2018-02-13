@@ -48,7 +48,7 @@
 <div class="pane pane-grammar">
 <div class="sidebar">
 	<a class="link btnOptionsGrammar">Generelt</a>
-	<a class="link btnWords">Min stavekontrol</a>
+	<a class="link btnWords">Min ordbog</a>
 	<div class="spacer"></div>
 	<a class="link btnAboutGrammar">Om Grammateket</a>
 </div>
@@ -57,32 +57,31 @@
 	<ul>
 		<li><label class="crbox"><input type="checkbox" class="opt_mvNordic"><span class="checkbox"></span> Vis kun typer udvalgt af MV-Nordic</label></li>
 		<li><label class="crbox"><input type="checkbox" class="opt_onlyConfident"><span class="checkbox"></span> Vis kun sikre fejl</label></li>
-		<li><label class="crbox"><input type="checkbox" class="opt_ignUnknown"><span class="checkbox"></span> Kritiser ikke ukendte ord</label>
+		<li><label class="crbox"><input type="checkbox" class="opt_ignUnknown"><span class="checkbox"></span> Ret ikke fejl med ukendte ord</label>
 			<ul>
-				<li><label class="crbox"><input type="checkbox" class="opt_ignUNames"><span class="checkbox"></span> Kritiser ikke ukendte navne</label></li>
-				<li><label class="crbox"><input type="checkbox" class="opt_ignUComp"><span class="checkbox"></span> Kritiser ikke ukendte komposita</label></li>
-				<li><label class="crbox"><input type="checkbox" class="opt_ignUAbbr"><span class="checkbox"></span> Kritiser ikke ukendte forkortelser</label></li>
-				<li><label class="crbox"><input type="checkbox" class="opt_ignUOther"><span class="checkbox"></span> Kritiser ikke andre ukendte ord</label></li>
+				<li><label class="crbox"><input type="checkbox" class="opt_ignUNames"><span class="checkbox"></span> Ret ikke fejl med ukendte navne</label></li>
+				<li><label class="crbox"><input type="checkbox" class="opt_ignUComp"><span class="checkbox"></span> Ret ikke fejl med særskrivning/sammensatte ord</label></li>
+				<li><label class="crbox"><input type="checkbox" class="opt_ignUAbbr"><span class="checkbox"></span> Ret ikke fejl med ukendte forkortelser</label></li>
+				<li><label class="crbox"><input type="checkbox" class="opt_ignUOther"><span class="checkbox"></span> Ret ikke fejl med andre ukendte ord</label></li>
 			</ul>
 		</li>
-		<li><label class="crbox"><input type="checkbox" class="opt_ignMaj"><span class="checkbox"></span> Kritiser ikke majuskel/minuskel-fejl</label></li>
+		<li><label class="crbox"><input type="checkbox" class="opt_ignMaj"><span class="checkbox"></span> Ret ikke fejl ved store/små bogstaver</label></li>
 	</ul>
 
 	<h2>Visning</h2>
 	<ul>
-		<li><label class="crbox"><input type="checkbox" class="opt_color"><span class="checkbox"></span> Farveblind/alternativ visning</label></li>
+		<li><label class="crbox"><input type="checkbox" class="opt_color"><span class="checkbox"></span> Fremhæv rettelser</label></li>
 	</ul>
 
-	<h2>Brugerordbog</h2>
+	<h2>Min ordbog</h2>
 	<ul>
-		<li><label class="crbox"><input type="checkbox" class="opt_useDictionary"><span class="checkbox"></span> Brug din ordbog</label> &nbsp; <button type="button" class="btnWordsButton">Rediger din ordbog</button></li>
+		<li><label class="crbox"><input type="checkbox" class="opt_useDictionary"><span class="checkbox"></span> Brug Min ordbog</label> &nbsp; <button type="button" class="btnWordsButton">Rediger Min ordbog</button></li>
 	</ul>
 </div>
 <div class="column column-words">
-	<h2>Min stavekontrol</h2>
+	<h2>Min ordbog</h2>
 
-	<p>Her kan du redigere de ord som du selv har oprettet i din stavekontrol.
-	Du kan rette og fjerne ord ved at klikke på ordet. Vil du tilføje et ord, så klik på "Tilføj ord" nedenfor.</p>
+	<p>Her kan du tilføje, rette eller fjerne ord fra din ordbog.</p>
 	<button type="button" class="btnAddWord">Tilføj ord</button>
 
 	<div class="words"></div>
@@ -90,16 +89,27 @@
 <div class="column column-about-grammar">
 	<h2>Om Grammateket</h2>
 
-	<p>Grammateket er et dansk retskrivningsprogram udviklet til personer med læse- og skrivevanskeligheder.</p>
+	<p>Med Grammateket kan du tjekke din tekst for stavning, grammatik og efterfølgende for kommatering vha. Kommaforslag.</p>
 
-	<p><button type="button" class="disabled">Version 1.2.3</button> <button type="button">Få hjælp til Grammateket</button></p>
+	<p>Du får hjælp til:</p>
+	<ul>
+		<li>Stavekontrol</li>
+		<li>Sammensatte ord</li>
+		<li>Nutids-r</li>
+		<li>Kort og lang tillægsform</li>
+		<li>Kommatering</li>
+	</ul>
+
+	<p>Grammateket kan bruges når du arbejder med læse- og skriveværktøjerne IntoWords og CD-ORD. Grammateket giver også adgang til nemt opslag i IntoWords Ordbog (baseret på Den Danske Ordbog).</p>
+
+	<p><button type="button" class="disabled">Version 1.2.3</button> &nbsp; <button type="button">Få hjælp til Grammateket</button></p>
 
 	<hr>
 
 	<h3>Grammateket</h3>
 
 	<p>Copyright 2016-2018 GrammarSoft ApS. Alle rettigheder forbeholdt.<br>
-	Distribueret af MV-Nordic, Vitec.</p>
+	Distribueret af MV-Nordic, Part of Vitec Software Group.</p>
 
 	<p>Besøg vores website på <a href="https://www.mv-nordic.com/" target="_blank">mv-nordic.com</a>.<br>
 	Grammateket <a href="https://www.mv-nordic.com/" target="_blank">hjælp</a>.</p>
@@ -121,18 +131,21 @@
 	<ul>
 		<li><label class="crbox"><input type="checkbox" class="opt_green"><span class="checkbox"></span> Vis kun manglende kommaer</label></li>
 		<li><label class="crbox"><input type="checkbox" class="opt_maybe"><span class="checkbox"></span> Fremhæv valgfrie kommaer</label></li>
-		<li><label class="crbox"><input type="checkbox" class="opt_color"><span class="checkbox"></span> Farveblind/alternativ visning</label></li>
+		<li><label class="crbox"><input type="checkbox" class="opt_color"><span class="checkbox"></span> Fremhæv rettelser</label></li>
 	</ul>
 
 	<h2>Færdighedsniveau</h2>
 	<ul>
-		<li><label class="crbox"><input type="radio" class="opt_level" name="opt_level" value="1"><span class="radio"></span> <b>Niveau 1</b>: De 9 nemmeste kommatyper, svarende til folkeskolens nederste klassetrin.</label></li>
-		<li><label class="crbox"><input type="radio" class="opt_level" name="opt_level" value="2"><span class="radio"></span> <b>Niveau 2</b>: 20 kommatyper, svarende til folkeskolens øverste klassetrin.</label></li>
-		<li><label class="crbox"><input type="radio" class="opt_level" name="opt_level" value="3"><span class="radio"></span> <b>Niveau 3</b>: Alle 34 kommatyper, svarende til gymnasiet og højere.</label></li>
+		<li><label class="crbox"><input type="radio" class="opt_level" name="opt_level" value="1"><span class="radio"></span> <b>Niveau 1</b>: Du kan sætte tegn, og har viden om punktum, spørgsmålstegn og udråbstegn.</label></li>
+		<li><label class="crbox"><input type="radio" class="opt_level" name="opt_level" value="2"><span class="radio"></span> <b>Niveau 2</b>: Du kan sætte tegn, og har viden om punktum, spørgsmålstegn og udråbstegn.</label></li>
+		<li><label class="crbox"><input type="radio" class="opt_level" name="opt_level" value="3"><span class="radio"></span> <b>Niveau 3</b>: Du kan fremstille tekster med korrekt grammatik, stavning, tegnsætning og layout.</label></li>
 	</ul>
 </div>
 <div class="column column-links">
-…
+<h2>Inspirationsmateriale til Kommaforslag</h2>
+<p>Fra 4. klasse kan eleverne bruge forslagene til at reflektere over egen kommasætning. De tre niveauer i indstillingsmenuen leder frem mod videns- og færdighedsmål efter 6. klasse (niveau 1-2) og efter 9.-10. klasse (niveau 3).</p>
+
+<p>Har du brug for inspiration til brug af Kommaforslag i undervisningen, så <a href="https://www.mv-nordic.com/dk/support/kommaforslag/inspirationsmateriale-til-kommaforslag" target="_blank">følg linket</a>.</p>
 </div>
 <div class="column column-about-comma">
 …
