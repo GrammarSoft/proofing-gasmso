@@ -63,7 +63,7 @@ function attachDictionaryClicks() {
 	$('.formWordAdd').off().submit(function(e) {
 		let w = $.trim($(this).find('input').val());
 		if (addToDictionary(w)) {
-			$('.words').append('<form class="word formWordEdit" data-word="'+escHTML(w)+'"><input type="text" value="'+escHTML(w)+'"> <button type="button" class="btnWordDelete">X</button></form>');
+			$('.words').append('<form class="word formWordEdit" data-word="'+escHTML(w)+'"><input type="text" value="'+escHTML(w)+'"> <button type="button" class="btnWordDelete">&times;</button></form>');
 			attachDictionaryClicks();
 			$(this).find('input').val('').focus();
 		}
@@ -121,7 +121,7 @@ function getState(data) {
 	let ws = Object.keys(g_dictionary);
 	ws.sort();
 	for (let i=0 ; i<ws.length ; ++i) {
-		$('.words').append('<form class="word formWordEdit" data-word="'+escHTML(ws[i])+'"><input type="text" value="'+escHTML(ws[i])+'"> <button type="button" class="btnWordDelete">X</button></form>');
+		$('.words').append('<form class="word formWordEdit" data-word="'+escHTML(ws[i])+'"><input type="text" value="'+escHTML(ws[i])+'"> <button type="button" class="btnWordDelete">&times;</button></form>');
 	}
 	attachDictionaryClicks();
 

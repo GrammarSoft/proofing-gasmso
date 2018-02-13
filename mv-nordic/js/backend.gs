@@ -67,7 +67,7 @@ function showGrammar(mode) {
 	var ui = HtmlService.createTemplateFromFile('html/sidebar').evaluate();
 	var html = ui.getContent();
 	html = injectVariables(html, 'Grammar', mode);
-	ui.setContent(html).setSandboxMode(HtmlService.SandboxMode.IFRAME).setTitle('Ret Mig');
+	ui.setContent(html).setSandboxMode(HtmlService.SandboxMode.IFRAME).setTitle('Grammateket');
 	DocumentApp.getUi().showSidebar(ui);
 }
 
