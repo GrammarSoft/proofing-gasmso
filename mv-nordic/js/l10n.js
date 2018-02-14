@@ -26,7 +26,7 @@ let l10n = {};
 l10n.s = {
 	da: {
 		ERR_POSTBACK: 'Der opstod en serverfejl under tjekning af teksten. Prøv evt. igen.',
-		ERR_NO_SELECTION: 'Der let ingen markering. Du skal markere noget tekst før den funktion virker.',
+		ERR_NO_SELECTION: 'Der var ingen markering. Du skal markere noget tekst før den funktion virker.',
 		ERR_SELECT_NOTFOUND: 'Kunne ikke finde konteksten. Det kan være du eller en anden har ændret i dokumentet siden tjekket blev kørt.',
 		ERR_SELECT_NOMATCH: 'Konteksten matchede ikke. Denne fejl bør ikke kunne ske.',
 		ERR_REPLACE_NOSELECT: 'Kunne ikke vælge stedet i konteksten. Det kan være du eller en anden har ændret i dokumentet siden tjekket blev kørt.',
@@ -34,7 +34,6 @@ l10n.s = {
 		BTN_GRAMMAR_REPLACE: 'Erstat',
 		BTN_GRAMMAR_INSERT: 'Indsæt',
 		BTN_GRAMMAR_REMOVE: 'Fjern',
-		BTN_COMMA_REPLACE: 'Erstat komma',
 		BTN_COMMA_INSERT: 'Indsæt komma',
 		BTN_COMMA_INSERT_STOP: 'Indsæt punktum',
 		BTN_COMMA_REMOVE: 'Fjern komma',

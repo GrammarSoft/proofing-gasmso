@@ -454,7 +454,7 @@ function markingAccept() {
 		google.script.run.withSuccessHandler(didRemove).withFailureHandler(showError).replaceInDocument(cmarking.prefix, markings[cmarking.s][cmarking.w][0], ' ', cmarking.suffix);
 	}
 	else {
-		$('#chkDidYouMeanItems').find('a').first().click();
+		$('#chkDidYouMeanItems').find('.link').first().click();
 	}
 }
 
