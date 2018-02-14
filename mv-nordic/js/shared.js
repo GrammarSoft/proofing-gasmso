@@ -208,8 +208,8 @@ function decHTML(t) {
 /* exported haveLocalStorage */
 function haveLocalStorage() {
 	try {
-		var storage = window.localStorage;
-		var x = 'LocalStorageTest';
+		let storage = window.localStorage;
+		let x = 'LocalStorageTest';
 		storage.setItem(x, x);
 		storage.removeItem(x);
 	}
