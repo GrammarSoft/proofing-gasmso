@@ -118,7 +118,7 @@ function markingRender(skipact) {
 
 	let ik = marking[0] + '\t' + marking[1];
 	if (ignores.hasOwnProperty(ik) && ignores[ik].hasOwnProperty(cmarking.sentence) && ignores[ik][cmarking.sentence] === true) {
-		console.log(`Skip ignored ${ik} : ${cmarking.sentence}`);
+		//console.log(`Skip ignored ${ik} : ${cmarking.sentence}`);
 		markings[s][cmarking.w] = [marking[0]];
 		if (skipact === 'prev') {
 			btnPrev();
@@ -233,7 +233,7 @@ function markingRender(skipact) {
 	if (/(@insert|%ko-|%k-)/.test(marking[1])) {
 		let px = /^(.*?)(\S+\s?)$/.exec(cmarking.prefix);
 		let sx = /^(\s?\S+)(.*)$/.exec(cmarking.suffix);
-		google.script.run.withFailureHandler(showError).selectInDocument(px[1], px[2] + sx[1], sx[2]);
+		impl_selectInDocument(px[1], px[2] + sx[1], sx[2]);
 		$('.txtAccept').text(l10n.t(btn_lbl + 'INSERT'));
 		if (marking[1].indexOf('%k-stop') !== -1) {
 			$('.txtAccept').text(l10n.t(btn_lbl + 'INSERT_STOP'));
@@ -243,11 +243,11 @@ function markingRender(skipact) {
 	else if (/(@nil|%nok-)/.test(marking[1])) {
 		$('.txtAccept').text(l10n.t(btn_lbl + 'REMOVE'));
 		$('.btnAccept').removeClass('disabled');
-		google.script.run.withFailureHandler(showError).selectInDocument(cmarking.prefix, marking[0], cmarking.suffix);
+		impl_selectInDocument(cmarking.prefix, marking[0], cmarking.suffix);
 	}
 	else {
 		$('.txtAccept').text(l10n.t(btn_lbl + 'REPLACE'));
-		google.script.run.withFailureHandler(showError).selectInDocument(cmarking.prefix, marking[0], cmarking.suffix);
+		impl_selectInDocument(cmarking.prefix, marking[0], cmarking.suffix);
 	}
 }
 
@@ -270,7 +270,7 @@ function markingIgnore() {
 		ignores[ik] = {};
 	}
 	ignores[ik][cmarking.sentence] = true;
-	console.log(`Ignoring ${ik} in ${cmarking.sentence}`);
+	//console.log(`Ignoring ${ik} in ${cmarking.sentence}`);
 
 	markings[cmarking.s][cmarking.w] = [markings[cmarking.s][cmarking.w][0]];
 }
@@ -406,7 +406,7 @@ function btnInputOne() {
 	if (rpl.length === 0) {
 		rpl = ' ';
 	}
-	google.script.run.withSuccessHandler(didReplace).withFailureHandler(showError).replaceInDocument(cmarking.prefix, markings[cmarking.s][cmarking.w][0], rpl, cmarking.suffix);
+	impl_replaceInDocument(cmarking.prefix, markings[cmarking.s][cmarking.w][0], rpl, cmarking.suffix);
 }
 
 function btnInputAll() {
@@ -425,7 +425,7 @@ function btnInputAll() {
 				cmarking.s = s;
 				cmarking.w = w;
 				markingSetContext();
-				google.script.run.withFailureHandler(showError).replaceInDocument(cmarking.prefix, markings[cmarking.s][cmarking.w][0], $('#chkInputText').val(), cmarking.suffix);
+				impl_replaceInDocumentSilent(cmarking.prefix, markings[cmarking.s][cmarking.w][0], $('#chkInputText').val(), cmarking.suffix);
 				markings[cmarking.s][cmarking.w] = [rpl];
 			}
 		}
@@ -437,7 +437,7 @@ function btnInputAll() {
 }
 
 function markingAcceptSuggestion() {
-	google.script.run.withSuccessHandler(didReplace).withFailureHandler(showError).replaceInDocument(cmarking.prefix, markings[cmarking.s][cmarking.w][0], $(this).text(), cmarking.suffix);
+	impl_replaceInDocument(cmarking.prefix, markings[cmarking.s][cmarking.w][0], $(this).text(), cmarking.suffix);
 }
 
 function markingAccept() {
@@ -448,10 +448,10 @@ function markingAccept() {
 		if (/@insert/.test(markings[cmarking.s][cmarking.w][1])) {
 			rpl = ' ' + rpl;
 		}
-		google.script.run.withSuccessHandler(didInsert).withFailureHandler(showError).replaceInDocument(px[1], px[2] + px[3] + sx[1], px[2] + rpl + px[3] + sx[1], sx[2]);
+		impl_insertInDocument(px[1], px[2] + px[3] + sx[1], px[2] + rpl + px[3] + sx[1], sx[2]);
 	}
 	else if (/(@nil|%nok-)/.test(markings[cmarking.s][cmarking.w][1])) {
-		google.script.run.withSuccessHandler(didRemove).withFailureHandler(showError).replaceInDocument(cmarking.prefix, markings[cmarking.s][cmarking.w][0], ' ', cmarking.suffix);
+		impl_removeInDocument(cmarking.prefix, markings[cmarking.s][cmarking.w][0], ' ', cmarking.suffix);
 	}
 	else {
 		$('#chkDidYouMeanItems').find('.link').first().click();
@@ -589,7 +589,7 @@ function _parseResult(rv) {
 						}
 						if (g_conf.opt_mvNordic) {
 							if (nws[k] === '@upper' && prev_sentsplit) {
-								console.log(`Skipping @upper due to @sentsplit`);
+								//console.log(`Skipping @upper due to @sentsplit`);
 								continue;
 							}
 							if (types_mv.hasOwnProperty(nws[k])) {
@@ -639,14 +639,14 @@ function _parseResult(rv) {
 						}
 					}
 					if (col === 'yellow' && g_conf.opt_useDictionary && isInDictionary(w[0])) {
-						console.log(`Found ${w[0]} in dictionary`);
+						//console.log(`Found ${w[0]} in dictionary`);
 						ws = [];
 					}
 				}
 
 				prev_sentsplit = had_sentsplit;
 				if (ws.length && none) {
-					console.log(`MV Nordic whitelist no-match: ${ws}`);
+					//console.log(`MV Nordic whitelist no-match: ${ws}`);
 					ws = [];
 				}
 				nws = ws;
@@ -738,7 +738,7 @@ function sendTexts() {
 			continue;
 		}
 
-		text += `<s${par.i}>\n${par.t}\n</s${par.i}>\n\n`;
+		text += '<s'+par.i+'>\n'+par.t+'\n</s'+par.i+'>\n\n';
 		if (text.length >= Defs.MAX_RQ_SIZE) {
 			break;
 		}
@@ -753,13 +753,13 @@ function sendTexts() {
 		if (g_tool === 'Comma') {
 			url = 'https://kommaer.dk/dev2/callback.php?a=comma&gac-override=1';
 		}
-		ts_xhr = $.post(url, data).done(parseResult).fail(() => {
+		ts_xhr = $.post(url, data).done(parseResult).fail(function() {
 			console.log(this);
 			showError('ERR_POSTBACK');
 		});
 	}
 	else {
-		setTimeout(() => {
+		setTimeout(function() {
 			parseResult({c:''});
 		}, 500);
 		$('.chkProgress').hide();
@@ -827,7 +827,7 @@ $(function() {
 		g_tool = 'Grammar';
 	}
 	g_conf = Object.assign({}, g_conf_defaults);
-	google.script.run.withSuccessHandler(getState).withFailureHandler(showError).getState();
+	impl_getState();
 
 	$('.closer').click(function() {
 		$(this).closest('.closable').hide();
@@ -851,7 +851,7 @@ $(function() {
 	}
 
 	$('.btnOptions').click(function() {
-		google.script.run.withFailureHandler(showError).showOptions(g_tool);
+		impl_showOptions(g_tool);
 	});
 
 	$('.btnCheckAuto').click(function() {
@@ -859,11 +859,11 @@ $(function() {
 	});
 	$('.btnCheckSelected').click(function() {
 		g_mode = 'selected';
-		google.script.run.withSuccessHandler(checkParagraphs).withFailureHandler(showError).getSelectedPars();
+		impl_getSelectedPars();
 	});
 	$('.btnCheckAll').click(function() {
 		g_mode = 'all';
-		google.script.run.withSuccessHandler(checkParagraphs).withFailureHandler(showError).getAllPars();
+		impl_getAllPars();
 	});
 
 	$('.btnAccept').click(btnAccept);

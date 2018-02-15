@@ -30,6 +30,37 @@ if (!Array.prototype.unique) {
 	};
 }
 
+// From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign#Polyfill
+if (typeof Object.assign != 'function') {
+	// Must be writable: true, enumerable: false, configurable: true
+	Object.defineProperty(Object, "assign", {
+		value: function assign(target, varArgs) { // .length of function is 2
+			'use strict';
+			if (target == null) { // TypeError if undefined or null
+				throw new TypeError('Cannot convert undefined or null to object');
+			}
+
+			let to = Object(target);
+
+			for (let index = 1; index < arguments.length; index++) {
+				let nextSource = arguments[index];
+
+				if (nextSource != null) { // Skip over if undefined or null
+					for (let nextKey in nextSource) {
+						// Avoid bugs when hasOwnProperty is shadowed
+						if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+							to[nextKey] = nextSource[nextKey];
+						}
+					}
+				}
+			}
+			return to;
+		},
+		writable: true,
+		configurable: true,
+	});
+}
+
 /* exported Defs */
 const Defs = {
 	CAP_ADMIN:	  (1 <<	 0),
@@ -146,7 +177,7 @@ function addToDictionary(word) {
 	}
 
 	if (!g_dictionary.hasOwnProperty(word)) {
-		console.log(`Add to dict: ${word}`);
+		//console.log(`Add to dict: ${word}`);
 		g_dictionary[word] = true;
 		_live_dictionary[word] = true;
 		_live_dictionary[uc_first(word)] = true;
@@ -167,7 +198,7 @@ function removeFromDictionary(word) {
 	}
 
 	if (g_dictionary.hasOwnProperty(word)) {
-		console.log(`Remove from dict: ${word}`);
+		//console.log(`Remove from dict: ${word}`);
 		delete g_dictionary[word];
 		delete _live_dictionary[word];
 		delete _live_dictionary[uc_first(word)];
