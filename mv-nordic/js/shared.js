@@ -123,6 +123,29 @@ const g_conf_defaults = {
 /* exported g_conf_json */
 let g_conf_json = JSON.stringify(g_conf_defaults);
 
+/* exported Const */
+const Const = {
+	NonLetter: /[^\d\wa-zA-ZéÉöÖæÆøØåÅ.,!;:]+/ig,
+	Split_String: ' ,.?!"#¤%&/()=@£${}|*^¨~/\\½§<>:;-',
+};
+Const.Split_Array = Const.Split_String.split('');
+Const.Split_Regex = new RegExp('(['+Const.Split_String+'])');
+
+// From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+/* exported escapeRegExp */
+function escapeRegExp(string) {
+	return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+}
+
+/* exported escapeRegExpTokens */
+function escapeRegExpTokens(txt) {
+	let ts = txt.split(/\s+/g);
+	for (var i=0 ; i<ts.length ; ++i) {
+		ts[i] = escapeRegExp(ts[i]);
+	}
+	return ts.join('\\s+');
+}
+
 /* exported loadConfig */
 function loadConfig() {
 	let nv = window.localStorage.getItem('config');
