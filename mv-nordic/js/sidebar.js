@@ -738,7 +738,10 @@ function sendTexts() {
 			continue;
 		}
 
-		text += '<s'+par.i+'>\n'+par.t+'\n</s'+par.i+'>\n\n';
+		// MS Word Online sends a Narrow No-Break Space
+		let t = par.t.replace('\u202F', ' ');
+
+		text += '<s'+par.i+'>\n'+t+'\n</s'+par.i+'>\n\n';
 		if (text.length >= Defs.MAX_RQ_SIZE) {
 			break;
 		}
@@ -823,6 +826,9 @@ function getState(data) {
 }
 
 $(function() {
+	if (window.location.href.indexOf('tool=Comma') !== -1) {
+		g_tool = 'Comma';
+	}
 	if (g_tool !== 'Grammar' && g_tool !== 'Comma') {
 		g_tool = 'Grammar';
 	}

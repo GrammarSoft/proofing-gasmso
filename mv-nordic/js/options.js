@@ -184,7 +184,7 @@ $(function() {
 		showPane(this, 'comma');
 	});
 
-	$('.btnAddWord').click(() => {
+	$('.btnAddWord').click(function() {
 		$('.formWordAdd').find('input').focus();
 	});
 
