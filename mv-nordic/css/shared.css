@@ -247,7 +247,7 @@ button.disabled.selected {
 h1, h2, h3, h4, h5, h6 {
 	font-weight: normal;
 	color: #0da9f6;
-	margin: 0;
+	margin: 10px 0;
 	padding: 0;
 }
 h1 {
@@ -265,7 +265,7 @@ h1, .text {
 
 .backed {
 	padding: 18px 0;
-	margin: 10px 0;
+	margin: 0 0 10px 0;
 	background-color: #eaf7fe;
 	margin-left: -18px;
 	margin-right: -18px;

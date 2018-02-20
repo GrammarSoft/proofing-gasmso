@@ -182,6 +182,7 @@ function replaceInDocument(prefix, word, rpl, suffix) {
 	var rem = doc.getSelection().getRangeElements()[0];
 	var b = rem.isPartial() ? rem.getStartOffset() : 0;
 	var txt = rem.getElement().editAsText();
+	var before = txt.getText();
 
 	var wi = 0, ri = 0;
 	if (hasSurrogatePair(word) || hasSurrogatePair(rpl)) {
@@ -206,7 +207,7 @@ function replaceInDocument(prefix, word, rpl, suffix) {
 
 	txt.replaceText('  +', ' ');
 
-	return rpl;
+	return {before: before, after: txt.getText(), rpl: rpl};
 }
 
 function selectInDocument(prefix, word, suffix) {
