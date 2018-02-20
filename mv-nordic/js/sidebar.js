@@ -230,6 +230,8 @@ function markingRender(skipact) {
 
 	markingSetContext();
 
+	$('.icon-accept,.icon-discard').addClass('icon-accept').removeClass('icon-discard');
+
 	if (/(@insert|%ko-|%k-)/.test(marking[1])) {
 		let px = /^(.*?)(\S+\s?)$/.exec(cmarking.prefix);
 		let sx = /^(\s?\S+)(.*)$/.exec(cmarking.suffix);
@@ -241,6 +243,7 @@ function markingRender(skipact) {
 		$('.btnAccept').removeClass('disabled');
 	}
 	else if (/(@nil|%nok-)/.test(marking[1])) {
+		$('.icon-accept,.icon-discard').addClass('icon-discard').removeClass('icon-accept');
 		$('.txtAccept').text(l10n.t(btn_lbl + 'REMOVE'));
 		$('.btnAccept').removeClass('disabled');
 		impl_selectInDocument(cmarking.prefix, marking[0], cmarking.suffix);
@@ -784,24 +787,53 @@ function checkParagraphs(doc) {
 }
 
 function checkDone() {
-	$('.sidebar').hide();
-	$('#chkDone' + g_tool).show();
+	if (g_tool === 'Grammar' && $('.optComma').prop('checked')) {
+		g_tool = 'Comma';
+		if (g_mode === 'all' || g_mode === 'selected') {
+			checkParagraphs(to_send);
+		}
+		else {
+			$('.btnCheckComma').click();
+		}
+	}
+	else {
+		$('.sidebar').hide();
+		$('#chkDone' + g_tool).show();
+	}
 }
 
-function didReplace(rpl) {
-	console.log(rpl);
-	markings[cmarking.s][cmarking.w] = [rpl];
+function _did_helper(before, after) {
+	for (let i=0 ; i<to_send.length ; ++i) {
+		if (to_send[i].t === before) {
+			//console.log([before, after]);
+			to_send[i].t = after;
+			delete to_send[i].h;
+		}
+	}
+}
+
+function didReplace(rv) {
+	console.log(rv);
+	_did_helper(rv.before, rv.after);
+	markings[cmarking.s][cmarking.w] = [rv.rpl];
 	btnNext();
 }
 
-function didInsert(rpl) {
-	console.log(rpl);
+function didReplaceSilent(rv) {
+	console.log(rv);
+	_did_helper(rv.before, rv.after);
+}
+
+function didInsert(rv) {
+	console.log(rv);
+	_did_helper(rv.before, rv.after);
 	markings[cmarking.s][cmarking.w] = [markings[cmarking.s][cmarking.w][0]];
 	btnNext();
 }
 
-function didRemove(rpl) {
-	console.log(rpl);
+function didRemove(rv) {
+	console.log(rv);
+	_did_helper(rv.before, rv.after);
 	markings[cmarking.s][cmarking.w] = [''];
 	btnNext();
 }
@@ -826,9 +858,6 @@ function getState(data) {
 }
 
 $(function() {
-	if (window.location.href.indexOf('tool=Comma') !== -1) {
-		g_tool = 'Comma';
-	}
 	if (g_tool !== 'Grammar' && g_tool !== 'Comma') {
 		g_tool = 'Grammar';
 	}
@@ -859,15 +888,37 @@ $(function() {
 	$('.btnOptions').click(function() {
 		impl_showOptions(g_tool);
 	});
+	$('.optComma').click(function() {
+		let v = $(this).prop('checked');
+		$('.optComma').prop('checked', v);
+	});
 
 	$('.btnCheckAuto').click(function() {
+		if ($(this).hasClass('toolGrammar')) {
+			g_tool = 'Grammar';
+		}
+		else if ($(this).hasClass('toolComma')) {
+			g_tool = 'Comma';
+		}
 		g_mode = 'auto';
 	});
 	$('.btnCheckSelected').click(function() {
+		if ($(this).hasClass('toolGrammar')) {
+			g_tool = 'Grammar';
+		}
+		else if ($(this).hasClass('toolComma')) {
+			g_tool = 'Comma';
+		}
 		g_mode = 'selected';
 		impl_getSelectedPars();
 	});
 	$('.btnCheckAll').click(function() {
+		if ($(this).hasClass('toolGrammar')) {
+			g_tool = 'Grammar';
+		}
+		else if ($(this).hasClass('toolComma')) {
+			g_tool = 'Comma';
+		}
 		g_mode = 'all';
 		impl_getAllPars();
 	});
@@ -911,7 +962,12 @@ $(function() {
 	$('#error').hide();
 	$('.chkProgress').hide();
 	$('.sidebar').hide();
-	$('#chkWelcome' + g_tool).show();
+	if (window.location.href.indexOf('combined=1') !== -1) {
+		$('#chkWelcomeShared').show();
+	}
+	else {
+		$('#chkWelcome' + g_tool).show();
+	}
 	$('#placeholder').remove();
 });
 

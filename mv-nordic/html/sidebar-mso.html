@@ -35,8 +35,8 @@
 	<script src="https://retmig.dk/gas/dev/js/jsonwspclient.js"></script>
 	<script src="https://retmig.dk/gas/dev/js/sidebar.js"></script>
 
-    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-    <script src="https://retmig.dk/gas/dev/js/impl-officejs.js"></script>
+	<script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+	<script src="https://retmig.dk/gas/dev/js/impl-officejs.js"></script>
 </head>
 <body>
 
@@ -45,6 +45,32 @@
 <div class="closable" id="error">
 <div class="closer">&times;</div>
 <div id="error-text">…</div>
+</div>
+
+<!-- Shared -->
+
+<div class="sidebar" id="chkWelcomeShared">
+<h1>Grammateket</h1>
+<h2>Hvordan skal din tekst tjekkes for stavning og grammatik?</h2>
+<div class="buttonbar backed">
+	<button class="btn-blue btnCheckAuto toolGrammar">Løbende</button>
+	<button class="btn-orange btnCheckSelected toolGrammar">Markering</button>
+	<button class="btn-lightblue btnCheckAll toolGrammar">Alt</button>
+</div>
+<div class="text chkGrammarToComma">
+<label class="crbox"><input type="checkbox" class="optComma" checked><span class="checkbox"></span><span>Ønsker du efterfølgende at få tjekket din tegnsætning?</span></label>
+</div>
+
+<h1>Kommaforslag</h1>
+<h2>Hvordan skal din tekst tjekkes for tegnsætning?</h2>
+<div class="buttonbar backed">
+	<button class="btn-blue btnCheckAuto toolComma">Løbende</button>
+	<button class="btn-orange btnCheckSelected toolComma">Markering</button>
+	<button class="btn-lightblue btnCheckAll toolComma">Alt</button>
+</div>
+<div class="text chkProgress">
+	<div class="chkProgressContainer"><div class="chkProgressBar"></div></div>
+</div>
 </div>
 
 <!-- Grammar -->
@@ -57,7 +83,7 @@
 	<button class="btn-lightblue btnCheckAll">Alt</button>
 </div>
 <div class="text chkGrammarToComma">
-<label class="crbox"><input type="checkbox" id="optComma" checked><span class="checkbox"></span><span>Ønsker du efterfølgende at få tjekket din tegnsætning?</span></label>
+<label class="crbox"><input type="checkbox" class="optComma" checked><span class="checkbox"></span><span>Ønsker du efterfølgende at få tjekket din tegnsætning?</span></label>
 </div>
 <div class="text chkProgress">
 	<div class="chkProgressContainer"><div class="chkProgressBar"></div></div>

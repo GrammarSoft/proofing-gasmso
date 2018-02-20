@@ -18,24 +18,45 @@
  */
 'use strict';
 
+function _impl_findElement(prefix, word, suffix) {
+	let rx = new RegExp('^(\\s*'+prefix.replace(Const.NonLetter, '.*?')+'\\s*)('+escapeRegExpTokens(word)+')(\\s*'+suffix.replace(Const.NonLetter, '.*?')+'\\s*)$', 'i');
+	console.log('Searching regex %s', rx);
+
+	for (let i=0 ; i<to_send.length ; ++i) {
+		let t = to_send[i].t;
+		let m = rx.exec(t);
+		if (m) {
+			return {prefix: m[1], middle: m[2], suffix: m[3]};
+		}
+	}
+
+	showError('ERR_SELECT_NOTFOUND');
+	return false;
+}
+
 function impl_selectInDocument(prefix, middle, suffix) {
-	return google.script.run.withFailureHandler(showError).selectInDocument(prefix, middle, suffix);
+	let rv = _impl_findElement(prefix, middle, suffix);
+	return google.script.run.withFailureHandler(showError).selectInDocument(rv.prefix, rv.middle, rv.suffix);
 }
 
 function impl_replaceInDocument(prefix, find, rpl, suffix) {
-	return google.script.run.withSuccessHandler(didReplace).withFailureHandler(showError).replaceInDocument(prefix, find, rpl, suffix);
+	let rv = _impl_findElement(prefix, find, suffix);
+	return google.script.run.withSuccessHandler(didReplace).withFailureHandler(showError).replaceInDocument(rv.prefix, rv.middle, rpl, rv.suffix);
 }
 
 function impl_replaceInDocumentSilent(prefix, find, rpl, suffix) {
-	return google.script.run.withFailureHandler(showError).replaceInDocument(prefix, find, rpl, suffix);
+	let rv = _impl_findElement(prefix, find, suffix);
+	return google.script.run.withSuccessHandler(didReplaceSilent).withFailureHandler(showError).replaceInDocument(rv.prefix, rv.middle, rpl, rv.suffix);
 }
 
 function impl_insertInDocument(prefix, find, rpl, suffix) {
-	return google.script.run.withSuccessHandler(didInsert).withFailureHandler(showError).replaceInDocument(prefix, find, rpl, suffix);
+	let rv = _impl_findElement(prefix, find, suffix);
+	return google.script.run.withSuccessHandler(didInsert).withFailureHandler(showError).replaceInDocument(rv.prefix, rv.middle, rpl, rv.suffix);
 }
 
 function impl_removeInDocument(prefix, find, rpl, suffix) {
-	return google.script.run.withSuccessHandler(didRemove).withFailureHandler(showError).replaceInDocument(prefix, find, rpl, suffix);
+	let rv = _impl_findElement(prefix, find, suffix);
+	return google.script.run.withSuccessHandler(didRemove).withFailureHandler(showError).replaceInDocument(rv.prefix, rv.middle, rpl, rv.suffix);
 }
 
 function impl_getState() {

@@ -151,6 +151,12 @@ body {
 	height: 18px;
 	margin-left: 0;
 }
+.icon-discard {
+	background-image: url('../imgs/icon-discard.png');
+	width: 18px;
+	height: 18px;
+	margin-left: 1px;
+}
 .icon-ignore {
 	background-image: url('../imgs/icon-ignore.png');
 	width: 18px;
@@ -172,7 +178,7 @@ body {
 .icon-options {
 	background-image: url('../imgs/icon-options.png');
 	width: 20px;
-	height: 21px;
+	height: 20px;
 }
 .btnAddWord .icon-add {
 	background-image: url('../imgs/icon-add.png');
@@ -185,6 +191,6 @@ body {
 	margin-top: 3px;
 }
 
-.btnCheckAuto, .chkGrammarToComma {
+.btnCheckAuto {
 	display: none;
 }
