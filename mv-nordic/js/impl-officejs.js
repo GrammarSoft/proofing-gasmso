@@ -21,7 +21,7 @@
 let _impl_options = null;
 
 function _impl_findElement(prefix, word, suffix, func) {
-	let rx = new RegExp('^(\\s*'+prefix.replace(Const.NonLetter, '.*?')+'\\s*)('+escapeRegExpTokens(word)+')\\s*'+suffix.replace(Const.NonLetter, '.*?')+'\\s*$');
+	let rx = new RegExp('^(\\s*'+prefix.replace(Const.NonLetter, '.*?')+'\\s*)('+escapeRegExpTokens(word)+')(\\s*'+suffix.replace(Const.NonLetter, '.*?')+'\\s*)$', 'i');
 	console.log('Searching regex %s', rx);
 
 	let txt = null;
@@ -31,6 +31,7 @@ function _impl_findElement(prefix, word, suffix, func) {
 		if (m) {
 			prefix = m[1];
 			word = m[2];
+			suffix = m[3];
 			txt = t;
 			break;
 		}
@@ -120,18 +121,22 @@ function impl_selectInDocument(prefix, word, suffix) {
 }
 
 function _impl_reloadPar(context, par, rpl, func) {
-	for (let i=0 ; i<to_send.length ; ++i) {
-		if (to_send[i].t === par.text) {
-			context.load(par, 'text');
-			return context.sync().then(function() {
-				to_send[i].t = par.text;
-				delete to_send[i].h;
-				if (func) {
-					func(rpl);
-				}
-			});
+	let before = par.text;
+	let ss = par.search('  ');
+	context.load(ss, 'text');
+	return context.sync().then(function() {
+		ss = ss.items;
+		for (let si=0 ; si<ss.length ; ++si) {
+			ss[si].insertText(' ', 'Replace');
 		}
-	}
+
+		context.load(par, 'text');
+		return context.sync().then(function() {
+			if (func) {
+				func({before: before, after: par.text, rpl: rpl});
+			}
+		});
+	});
 	return context.sync();
 }
 
@@ -145,7 +150,7 @@ function impl_replaceInDocument(prefix, word, rpl, suffix) {
 function impl_replaceInDocumentSilent(prefix, word, rpl, suffix) {
 	_impl_findElement(prefix, word, suffix, function(context, par, rng) {
 		rng.insertText(rpl, 'Replace');
-		return _impl_reloadPar(context, par, rpl);
+		return _impl_reloadPar(context, par, rpl, didReplaceSilent);
 	});
 }
 

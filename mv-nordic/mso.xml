@@ -41,8 +41,6 @@
             <LearnMoreUrl resid="Danproof.GetStarted.LearnMoreUrl"/>
           </GetStarted>
 
-          <FunctionFile resid="Danproof.FunctionFile" />
-
           <ExtensionPoint xsi:type="PrimaryCommandSurface">
             <OfficeTab id="TabHome">
               <Group id="Danproof.Group1">
@@ -55,11 +53,11 @@
                   <bt:Image size="80" resid="Danproof.tpicon_80x80" />
                 </Icon>
 
-                <Control xsi:type="Menu" id="Danproof.TaskpaneMenu">
-                  <Label resid="Danproof.TaskpaneMenu.Label" />
+                <Control xsi:type="Button" id="Danproof.TaskpaneButton">
+                  <Label resid="Danproof.TaskpaneButton.Label" />
                   <Supertip>
-                    <Title resid="Danproof.TaskpaneMenu.Label" />
-                    <Description resid="Danproof.TaskpaneMenu.Tooltip" />
+                    <Title resid="Danproof.TaskpaneButton.Label" />
+                    <Description resid="Danproof.TaskpaneButton.Tooltip" />
                   </Supertip>
                   <Icon>
                     <bt:Image size="16" resid="Danproof.tpicon_16x16" />
@@ -67,45 +65,10 @@
                     <bt:Image size="80" resid="Danproof.tpicon_80x80" />
                   </Icon>
 
-                  <Items>
-                    <Item id="Danproof.GrammarMenu">
-                      <Label resid="Danproof.GrammarLabel"></Label>
-                      <Supertip>
-                        <Title resid="Danproof.GrammarTipTitle"></Title>
-                        <Description resid="Danproof.GrammarTipText"></Description>
-                      </Supertip>
-                      <Action xsi:type="ShowTaskpane">
-                        <SourceLocation resid="Danproof.GrammarPane"></SourceLocation>
-                      </Action>
-                    </Item>
-                    <Item id="Danproof.CommaMenu">
-                      <Label resid="Danproof.CommaLabel"></Label>
-                      <Supertip>
-                        <Title resid="Danproof.CommaTipTitle"></Title>
-                        <Description resid="Danproof.CommaTipText"></Description>
-                      </Supertip>
-                      <Action xsi:type="ShowTaskpane">
-                        <SourceLocation resid="Danproof.CommaPane"></SourceLocation>
-                      </Action>
-                    </Item>
-                    <Item id="Danproof.OptionsMenu">
-                      <Label resid="Danproof.OptionsLabel"></Label>
-                      <Supertip>
-                        <Title resid="Danproof.OptionsTipTitle"></Title>
-                        <Description resid="Danproof.OptionsTipText"></Description>
-                      </Supertip>
-                      <Action xsi:type="ExecuteFunction">
-                        <FunctionName>impl_showOptions</FunctionName>
-                      </Action>
-                    </Item>
-                  </Items>
-
-                  <!--
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>ButtonId1</TaskpaneId>
-                    <SourceLocation resid="Danproof.GrammarPane" />
+                    <SourceLocation resid="Danproof.Taskpane" />
                   </Action>
-                  -->
                 </Control>
               </Group>
             </OfficeTab>
@@ -121,30 +84,19 @@
         <bt:Image id="Danproof.tpicon_80x80" DefaultValue="https://retmig.dk/gas/dev/imgs/radio-checked.png" />
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="Danproof.GrammarPane" DefaultValue="https://retmig.dk/gas/dev/html/sidebar-mso.html?tool=Grammar" />
-        <bt:Url id="Danproof.CommaPane" DefaultValue="https://retmig.dk/gas/dev/html/sidebar-mso.html?tool=Comma" />
+        <bt:Url id="Danproof.Taskpane" DefaultValue="https://retmig.dk/gas/dev/html/sidebar-mso.html?combined=1" />
         <bt:Url id="Danproof.GetStarted.LearnMoreUrl" DefaultValue="https://grammarsoft.com/" />
-        <bt:Url id="Danproof.FunctionFile" DefaultValue="https://retmig.dk/gas/dev/html/functions-mso.html" />
       </bt:Urls>
       <!-- ShortStrings max characters==125. -->
       <bt:ShortStrings>
-        <bt:String id="Danproof.TaskpaneMenu.Label" DefaultValue="Show Taskpane" />
-        <bt:String id="Danproof.Group1Label" DefaultValue="Commands Group" />
-        <bt:String id="Danproof.GetStarted.Title" DefaultValue="Get started with your sample add-in!" />
-        <bt:String id="Danproof.GrammarLabel" DefaultValue="Grammateket" />
-        <bt:String id="Danproof.CommaLabel" DefaultValue="Kommaforslag" />
-        <bt:String id="Danproof.OptionsLabel" DefaultValue="Indstillinger" />
-        <bt:String id="Danproof.GrammarTipTitle" DefaultValue="Grammateket" />
-        <bt:String id="Danproof.CommaTipTitle" DefaultValue="Kommaforslag" />
-        <bt:String id="Danproof.OptionsTipTitle" DefaultValue="Indstillinger" />
+        <bt:String id="Danproof.TaskpaneButton.Label" DefaultValue="Grammateket" />
+        <bt:String id="Danproof.Group1Label" DefaultValue="Grammateket" />
+        <bt:String id="Danproof.GetStarted.Title" DefaultValue="Kom godt i gang med Grammateket &amp; Kommaforslag!" />
       </bt:ShortStrings>
       <!-- LongStrings max characters==250. -->
       <bt:LongStrings>
-        <bt:String id="Danproof.TaskpaneMenu.Tooltip" DefaultValue="Click to Show a Taskpane" />
-        <bt:String id="Danproof.GetStarted.Description" DefaultValue="Your sample add-in loaded succesfully. Go to the HOME tab and click the 'Show Taskpane' button to get started." />
-        <bt:String id="Danproof.GrammarTipText" DefaultValue="Grammateket" />
-        <bt:String id="Danproof.CommaTipText" DefaultValue="Kommaforslag" />
-        <bt:String id="Danproof.OptionsTipText" DefaultValue="Indstillinger" />
+        <bt:String id="Danproof.TaskpaneButton.Tooltip" DefaultValue="Klik for at åbne Grammateket &amp; Kommaforslag" />
+        <bt:String id="Danproof.GetStarted.Description" DefaultValue="Grammateket er nu installeret. Gå til fanen Hjem og klik på Grammateket for at komme i gang." />
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>
