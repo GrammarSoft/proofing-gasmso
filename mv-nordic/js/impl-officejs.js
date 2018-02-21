@@ -19,6 +19,7 @@
 'use strict';
 
 let _impl_options = null;
+let _impl_login = null;
 
 function _impl_findElement(prefix, word, suffix, func) {
 	let rx = new RegExp('^(\\s*'+prefix.replace(Const.NonLetter, '.*?')+'\\s*)('+escapeRegExpTokens(word)+')(\\s*'+suffix.replace(Const.NonLetter, '.*?')+'\\s*)$', 'i');
@@ -222,7 +223,61 @@ function _impl_showOptions_cb(asyncResult) {
 }
 
 function impl_showOptions(g_tool) {
-	Office.context.ui.displayDialogAsync(ROOT_URL_SELF + 'html/options-mso.html', { width: 800, height: 600, displayInIframe: true }, _impl_showOptions_cb);
+	Office.context.ui.displayDialogAsync(ROOT_URL_SELF + '/html/options-mso.html?tool='+g_tool, { width: 800, height: 600, displayInIframe: true }, _impl_showOptions_cb);
+}
+
+function _impl_showLogin_mh(arg) {
+	console.log(arg);
+	//_impl_options.close();
+	//showError(arg.message);
+}
+
+function _impl_showLogin_eh(arg) {
+	// In addition to general system errors, there are 2 specific errors
+	// and one event that you can handle individually.
+	switch (arg.error) {
+	case 12002:
+		showError('Cannot load URL, no such page or bad URL syntax.');
+		break;
+	case 12003:
+		showError('HTTPS is required.');
+		break;
+	case 12006:
+		// The dialog was closed, typically because the user the pressed X button.
+		break;
+	default:
+		showError('Undefined error in dialog window');
+		break;
+	}
+}
+
+function _impl_showLogin_cb(asyncResult) {
+	if (asyncResult.status == 'failed') {
+		switch (asyncResult.error.code) {
+		case 12004:
+			showError('Domain is not trusted');
+			break;
+		case 12005:
+			showError('HTTPS is required');
+			break;
+		case 12007:
+			showError('A dialog is already opened.');
+			break;
+		default:
+			showError(asyncResult.error.message);
+			break;
+		}
+	}
+	else {
+		_impl_login = asyncResult.value;
+		_impl_login.addEventHandler(Office.EventType.DialogMessageReceived, _impl_showLogin_mh);
+		_impl_login.addEventHandler(Office.EventType.DialogEventReceived, _impl_showLogin_eh);
+		console.log(_impl_login);
+	}
+}
+
+function impl_showLogin(g_tool) {
+	Office.context.ui.displayDialogAsync(ROOT_URL_SELF + '/html/login-mso.html?tool='+g_tool, { width: 800, height: 600, displayInIframe: true }, _impl_showLogin_cb);
 }
 
 function _impl_getPars(context, pars) {
@@ -266,13 +321,15 @@ function impl_getAllPars() {
 	});
 }
 
-$(function() {
+function impl_Init(func) {
 	Office.initialize = function(reason) {
 		$(document).ready(function() {
+			func();
+
 			if (!Office.context.requirements.isSetSupported('WordApi', '1.1')) {
 				//showError('Requires Word 2016 or later!');
 				return;
 			}
 		});
 	};
-});
+}

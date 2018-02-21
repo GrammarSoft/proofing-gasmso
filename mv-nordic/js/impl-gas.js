@@ -67,10 +67,18 @@ function impl_showOptions(g_tool) {
 	return google.script.run.withFailureHandler(showError).showOptions(g_tool);
 }
 
+function impl_showLogin(g_tool) {
+	return google.script.run.withFailureHandler(showError).showLogin(g_tool);
+}
+
 function impl_getSelectedPars() {
 	return google.script.run.withSuccessHandler(checkParagraphs).withFailureHandler(showError).getSelectedPars();
 }
 
 function impl_getAllPars() {
 	return google.script.run.withSuccessHandler(checkParagraphs).withFailureHandler(showError).getAllPars();
+}
+
+function impl_Init(func) {
+	func();
 }
