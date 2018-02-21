@@ -19,8 +19,8 @@
 'use strict';
 
 const ROOT_URL_SELF = 'https://retmig.dk/gas/dev/';
-const ROOT_URL_GRAMMAR = 'https://retmig.dk/';
-const ROOT_URL_COMMA = 'https://kommaer.dk/dev2/';
+const ROOT_URL_GRAMMAR = 'https://kommaer.dk/mv-grammar/';
+const ROOT_URL_COMMA = 'https://kommaer.dk/mv-comma/';
 
 if (!Array.prototype.unique) {
 	Array.prototype.unique = function() {
@@ -107,6 +107,11 @@ let g_dictionary = {};
 let g_dictionary_json = '{}';
 /* exported _live_dictionary */
 let _live_dictionary = {};
+
+/* exported g_access_grammar */
+let g_access_grammar = false;
+/* exported g_access_comma */
+let g_access_comma = false;
 
 /* exported g_conf_defaults */
 const g_conf_defaults = {
@@ -277,6 +282,23 @@ function haveLocalStorage() {
 	return true;
 }
 
+/* exported ls_get */
+function ls_get(key, def) {
+	let v = window.localStorage.getItem(key);
+	if (v === null) {
+		v = def;
+	}
+	else {
+		v = JSON.parse(v);
+	}
+	return v;
+}
+
+/* exported ls_set */
+function ls_set(key, val) {
+	window.localStorage.setItem(key, JSON.stringify(val));
+}
+
 /* exported sanitize_result */
 function sanitize_result(txt) {
 	// Swap markers that the backend has mangled due to sentence-ending parentheticals
@@ -301,3 +323,21 @@ function sanitize_result(txt) {
 	txt = txt.replace(/(\n<\/s\d+>)[^]*?(<s\d+>\n)/g, '$1\n\n$2');
 	return txt;
 }
+
+function loginMessage(msg) {
+	if (ROOT_URL_GRAMMAR.indexOf(msg.origin) === 0 || ROOT_URL_COMMA.indexOf(msg.origin) === 0) {
+		console.log(msg.data);
+	}
+}
+
+$(function() {
+	if ($('iframe.login').length) {
+		window.addEventListener('message', loginMessage, false);
+
+		let url = ROOT_URL_GRAMMAR + '/login.php?embedded=1';
+		if (window.location.search.indexOf('tool=Comma') !== -1) {
+			url = ROOT_URL_COMMA + '/login.php?embedded=1';
+		}
+		$('iframe.login').attr('src', url);
+	}
+});

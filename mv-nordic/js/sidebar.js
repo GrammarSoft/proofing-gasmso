@@ -857,7 +857,7 @@ function getState(data) {
 	loadDictionary();
 }
 
-$(function() {
+function initSidebar() {
 	if (g_tool !== 'Grammar' && g_tool !== 'Comma') {
 		g_tool = 'Grammar';
 	}
@@ -969,6 +969,81 @@ $(function() {
 		$('#chkWelcome' + g_tool).show();
 	}
 	$('#placeholder').remove();
+
+	if (!haveLocalStorage()) {
+		showError('ERR_NO_STORAGE');
+		return;
+	}
+
+	g_access_grammar = ls_get('access-grammar', {hmac: '', sessionid: ''});
+	g_access_comma = ls_get('access-comma', {hmac: '', sessionid: ''});
+	g_access_grammar.hmac = g_access_grammar.hmac || g_access_comma.hmac;
+	g_access_grammar.sessionid = g_access_grammar.sessionid || g_access_comma.sessionid;
+	g_access_comma.hmac = g_access_comma.hmac || g_access_grammar.hmac;
+	g_access_comma.sessionid = g_access_comma.sessionid || g_access_grammar.sessionid;
+
+	$.ajax({
+		url: ROOT_URL_GRAMMAR+'/callback.php',
+		type: 'POST',
+		dataType: 'json',
+		headers: {HMAC: g_access_grammar.hmac},
+		data: {a: 'keepalive', SessionID: g_access_grammar.sessionid},
+	}).done(function(rv) {
+		delete rv.a;
+		g_access_grammar = rv;
+		ls_set('access-grammar', g_access_grammar);
+		g_access_comma.hmac = g_access_comma.hmac || g_access_grammar.hmac;
+		g_access_comma.sessionid = g_access_comma.sessionid || g_access_grammar.sessionid;
+
+		$.ajax({
+			url: ROOT_URL_COMMA+'/callback.php',
+			type: 'POST',
+			dataType: 'json',
+			headers: {HMAC: g_access_comma.hmac},
+			data: {a: 'keepalive', SessionID: g_access_comma.sessionid},
+		}).done(function(rv) {
+			delete rv.a;
+			g_access_comma = rv;
+			ls_set('access-comma', g_access_comma);
+		}).fail(function() {
+			g_access_comma = {hmac: '', sessionid: ''};
+			ls_set('access-comma', g_access_comma);
+
+			if (g_tool === 'Comma') {
+				g_tool = 'Grammar';
+				$('#chkWelcome' + g_tool).show();
+			}
+		});
+	}).fail(function() {
+		g_access_grammar = {hmac: '', sessionid: ''};
+		ls_set('access-grammar', g_access_grammar);
+
+		$.ajax({
+			url: ROOT_URL_COMMA+'/callback.php',
+			type: 'POST',
+			dataType: 'json',
+			headers: {HMAC: g_access_comma.hmac},
+			data: {a: 'keepalive', SessionID: g_access_comma.sessionid},
+		}).done(function(rv) {
+			delete rv.a;
+			g_access_comma = rv;
+			ls_set('access-comma', g_access_comma);
+
+			if (g_tool === 'Grammar') {
+				g_tool = 'Comma';
+				$('#chkWelcome' + g_tool).show();
+			}
+		}).fail(function() {
+			g_access_comma = {hmac: '', sessionid: ''};
+			ls_set('access-comma', g_access_comma);
+
+			impl_showLogin(g_tool);
+		});
+	});
+}
+
+$(function() {
+	impl_Init(initSidebar);
 });
 
 function showError(msg) {
