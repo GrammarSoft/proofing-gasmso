@@ -47,6 +47,11 @@ body {
 	left: 0;
 }
 
+iframe {
+	width: 100%;
+	height: 100%;
+}
+
 .whiteblue {
 	color: #eaf7fe;
 }

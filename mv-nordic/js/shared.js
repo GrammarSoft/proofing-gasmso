@@ -18,6 +18,10 @@
  */
 'use strict';
 
+const ROOT_URL_SELF = 'https://retmig.dk/gas/dev/';
+const ROOT_URL_GRAMMAR = 'https://retmig.dk/';
+const ROOT_URL_COMMA = 'https://kommaer.dk/dev2/';
+
 if (!Array.prototype.unique) {
 	Array.prototype.unique = function() {
 		let unique = [];

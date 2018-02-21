@@ -755,9 +755,9 @@ function sendTexts() {
 			t: text,
 			r: ts_fail,
 		};
-		let url = 'https://retmig.dk/callback.php?a=danproof';
+		let url = ROOT_URL_GRAMMAR + 'callback.php?a=danproof';
 		if (g_tool === 'Comma') {
-			url = 'https://kommaer.dk/dev2/callback.php?a=comma&gac-override=1';
+			url = ROOT_URL_COMMA + 'callback.php?a=comma&gac-override=1';
 		}
 		ts_xhr = $.post(url, data).done(parseResult).fail(function() {
 			console.log(this);
