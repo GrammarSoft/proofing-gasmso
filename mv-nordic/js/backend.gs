@@ -91,6 +91,18 @@ function showOptions(tool) {
 	DocumentApp.getUi().showModalDialog(ui, 'Indstillinger');
 }
 
+function showLogin(tool) {
+	if (!tool) {
+		tool = 'Grammar';
+	}
+
+	var ui = HtmlService.createTemplateFromFile('html/login').evaluate();
+	var html = ui.getContent();
+	html = injectVariables(html, tool);
+	ui.setContent(html).setWidth(800).setHeight(600);
+	DocumentApp.getUi().showModalDialog(ui, 'Login');
+}
+
 function getAllPars() {
 	var sects = [];
 	var doc = DocumentApp.getActiveDocument();

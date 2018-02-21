@@ -143,7 +143,7 @@ function showColumn(e, w) {
 	$('.'+w).show();
 }
 
-$(function() {
+function initOptions() {
 	if (g_tool !== 'Grammar' && g_tool !== 'Comma') {
 		g_tool = 'Grammar';
 	}
@@ -219,10 +219,10 @@ $(function() {
 	$('#error').hide();
 	$('.tab-' + g_tool.toLowerCase()).click();
 	$('#placeholder').remove();
+}
 
-	if (!haveLocalStorage()) {
-		showError('ERR_NO_STORAGE');
-	}
+$(function() {
+	impl_Init(initOptions);
 });
 
 function showError(msg) {
