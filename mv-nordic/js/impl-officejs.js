@@ -222,7 +222,7 @@ function _impl_showOptions_cb(asyncResult) {
 }
 
 function impl_showOptions(g_tool) {
-	Office.context.ui.displayDialogAsync('https://retmig.dk/gas/dev/html/options-mso.html', { width: 800, height: 600, displayInIframe: true }, _impl_showOptions_cb);
+	Office.context.ui.displayDialogAsync(ROOT_URL_SELF + 'html/options-mso.html', { width: 800, height: 600, displayInIframe: true }, _impl_showOptions_cb);
 }
 
 function _impl_getPars(context, pars) {
