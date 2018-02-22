@@ -866,7 +866,7 @@ function getState(data) {
 	loadDictionary();
 }
 
-function loginCheck() {
+function loginKeepalive(init) {
 	g_access_grammar = ls_get('access-grammar', {hmac: '', sessionid: ''});
 	g_access_comma = ls_get('access-comma', {hmac: '', sessionid: ''});
 	g_access_grammar.hmac = g_access_grammar.hmac || g_access_comma.hmac;
@@ -899,12 +899,16 @@ function loginCheck() {
 			delete rv.a;
 			g_access_comma = rv;
 			ls_set('access-comma', g_access_comma);
+			if (init) {
+				$('.sidebar').hide();
+				$('#chkWelcomeShared').show();
+			}
 		}).fail(function() {
 			console.log('Login Comma fail');
 			g_access_comma = {hmac: '', sessionid: ''};
 			ls_set('access-comma', g_access_comma);
 
-			if (g_tool === 'Comma') {
+			if (init) {
 				g_tool = 'Grammar';
 				$('.sidebar').hide();
 				$('#chkWelcome' + g_tool).show();
@@ -927,7 +931,7 @@ function loginCheck() {
 			g_access_comma = rv;
 			ls_set('access-comma', g_access_comma);
 
-			if (g_tool === 'Grammar') {
+			if (init) {
 				g_tool = 'Comma';
 				$('.sidebar').hide();
 				$('#chkWelcome' + g_tool).show();
@@ -937,12 +941,32 @@ function loginCheck() {
 			g_access_comma = {hmac: '', sessionid: ''};
 			ls_set('access-comma', g_access_comma);
 
-			impl_showLogin(g_tool);
+			$('.sidebar').hide();
+			$('#chkWelcomeLogin').show();
 		});
 	});
 }
 
+function loginMessage(msg) {
+	if (ROOT_URL_GRAMMAR.indexOf(msg.origin) === 0 || ROOT_URL_COMMA.indexOf(msg.origin) === 0) {
+		if (msg.data.access) {
+			delete msg.data.access;
+			if (ROOT_URL_GRAMMAR.indexOf(msg.origin) === 0) {
+				g_access_grammar = msg.data;
+				ls_set('access-grammar', g_access_grammar);
+			}
+			else if (ROOT_URL_COMMA.indexOf(msg.origin) === 0) {
+				g_access_comma = msg.data;
+				ls_set('access-comma', g_access_comma);
+			}
+			loginKeepalive();
+		}
+	}
+}
+
 function initSidebar() {
+	window.addEventListener('message', loginMessage, false);
+
 	if (g_tool !== 'Grammar' && g_tool !== 'Comma') {
 		g_tool = 'Grammar';
 	}
@@ -1043,16 +1067,17 @@ function initSidebar() {
 		$('.btnInputOne').click();
 	});
 
+	$('.btnLoginGrammar').click(function() {
+		window.open(ROOT_URL_GRAMMAR + '/login.php?popup=1', 'Login');
+	});
+	$('.btnLoginComma').click(function() {
+		window.open(ROOT_URL_COMMA + '/login.php?popup=1', 'Login');
+	});
+
 	$('#popupIgnore').hide();
 	$('#error').hide();
 	$('.chkProgress').hide();
 	$('.sidebar').hide();
-	if (window.location.href.indexOf('combined=1') !== -1) {
-		$('#chkWelcomeShared').show();
-	}
-	else {
-		$('#chkWelcome' + g_tool).show();
-	}
 	$('#placeholder').remove();
 
 	if (!haveLocalStorage()) {
@@ -1060,7 +1085,8 @@ function initSidebar() {
 		return;
 	}
 
-	loginCheck();
+	loginKeepalive(true);
+	setInverval(loginKeepalive, 5*60*1000); // 5 minute keepalive
 }
 
 $(function() {
