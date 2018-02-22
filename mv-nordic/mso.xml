@@ -5,12 +5,12 @@
   <Id>fa9e1dcc-6133-4351-86b8-f0da7f28ad6c</Id>
 
   <!--Version. Updates from the store only get triggered if there is a version change. -->
-  <Version>1.0.0.0</Version>
+  <Version>1.0.0</Version>
   <ProviderName>GrammarSoft ApS</ProviderName>
   <DefaultLocale>da-DK</DefaultLocale>
   <DisplayName DefaultValue="Grammateket" />
   <Description DefaultValue="Grammateket" />
-  <IconUrl DefaultValue="https://retmig.dk/gas/dev/imgs/radio-checked.png" />
+  <IconUrl DefaultValue="https://retmig.dk/gas/dev/imgs/logo-80.png" />
 
   <SupportUrl DefaultValue="https://grammarsoft.com/" />
   <AppDomains>
@@ -48,9 +48,9 @@
                 <!-- Icons. Required sizes 16,32,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX. -->
                 <!-- Use PNG icons. All URLs on the resources section must use HTTPS. -->
                 <Icon>
-                  <bt:Image size="16" resid="Danproof.tpicon_16x16" />
-                  <bt:Image size="32" resid="Danproof.tpicon_32x32" />
-                  <bt:Image size="80" resid="Danproof.tpicon_80x80" />
+                  <bt:Image size="16" resid="Danproof.logo16" />
+                  <bt:Image size="32" resid="Danproof.logo32" />
+                  <bt:Image size="80" resid="Danproof.logo80" />
                 </Icon>
 
                 <Control xsi:type="Button" id="Danproof.TaskpaneButton">
@@ -60,9 +60,9 @@
                     <Description resid="Danproof.TaskpaneButton.Tooltip" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="Danproof.tpicon_16x16" />
-                    <bt:Image size="32" resid="Danproof.tpicon_32x32" />
-                    <bt:Image size="80" resid="Danproof.tpicon_80x80" />
+                    <bt:Image size="16" resid="Danproof.logo16" />
+                    <bt:Image size="32" resid="Danproof.logo32" />
+                    <bt:Image size="80" resid="Danproof.logo80" />
                   </Icon>
 
                   <Action xsi:type="ShowTaskpane">
@@ -79,9 +79,9 @@
 
     <Resources>
       <bt:Images>
-        <bt:Image id="Danproof.tpicon_16x16" DefaultValue="https://retmig.dk/gas/dev/imgs/radio-checked.png" />
-        <bt:Image id="Danproof.tpicon_32x32" DefaultValue="https://retmig.dk/gas/dev/imgs/radio-checked.png" />
-        <bt:Image id="Danproof.tpicon_80x80" DefaultValue="https://retmig.dk/gas/dev/imgs/radio-checked.png" />
+        <bt:Image id="Danproof.logo16" DefaultValue="https://retmig.dk/gas/dev/imgs/logo-16.png" />
+        <bt:Image id="Danproof.logo32" DefaultValue="https://retmig.dk/gas/dev/imgs/logo-32.png" />
+        <bt:Image id="Danproof.logo80" DefaultValue="https://retmig.dk/gas/dev/imgs/logo-80.png" />
       </bt:Images>
       <bt:Urls>
         <bt:Url id="Danproof.Taskpane" DefaultValue="https://retmig.dk/gas/dev/html/sidebar-mso.html" />
