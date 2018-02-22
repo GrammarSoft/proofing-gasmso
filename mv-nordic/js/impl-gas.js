@@ -18,6 +18,8 @@
  */
 'use strict';
 
+let _impl_loginTimer = null;
+
 function _impl_findElement(prefix, word, suffix) {
 	let rx = new RegExp('^(\\s*'+prefix.replace(Const.NonLetter, '.*?')+'\\s*)('+escapeRegExpTokens(word)+')(\\s*'+suffix.replace(Const.NonLetter, '.*?')+'\\s*)$', 'i');
 	console.log('Searching regex %s', rx);
@@ -67,8 +69,35 @@ function impl_showOptions(g_tool) {
 	return google.script.run.withFailureHandler(showError).showOptions(g_tool);
 }
 
+function _impl_checkLogin() {
+	g_access_grammar = ls_get('access-grammar', {hmac: '', sessionid: ''});
+	g_access_comma = ls_get('access-comma', {hmac: '', sessionid: ''});
+
+	if (g_access_grammar.sessionid || g_access_comma.sessionid) {
+		clearInterval(_impl_loginTimer);
+		_impl_loginTimer = null;
+	}
+	else {
+		console.log('Not yet logged in');
+	}
+}
+
 function impl_showLogin(g_tool) {
+	_impl_loginTimer = setInterval(_impl_checkLogin, 250);
 	return google.script.run.withFailureHandler(showError).showLogin(g_tool);
+}
+
+function impl_closeLogin(tool, data) {
+	delete data.access;
+	if (tool === 'Grammar') {
+		g_access_grammar = data;
+		ls_set('access-grammar', g_access_grammar);
+	}
+	else if (tool === 'Comma') {
+		g_access_comma = data;
+		ls_set('access-comma', g_access_comma);
+	}
+	return google.script.host.close();
 }
 
 function impl_getSelectedPars() {
