@@ -84,7 +84,7 @@
         <bt:Image id="Danproof.tpicon_80x80" DefaultValue="https://retmig.dk/gas/dev/imgs/radio-checked.png" />
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="Danproof.Taskpane" DefaultValue="https://retmig.dk/gas/dev/html/sidebar-mso.html?combined=1" />
+        <bt:Url id="Danproof.Taskpane" DefaultValue="https://retmig.dk/gas/dev/html/sidebar-mso.html" />
         <bt:Url id="Danproof.GetStarted.LearnMoreUrl" DefaultValue="https://grammarsoft.com/" />
       </bt:Urls>
       <!-- ShortStrings max characters==125. -->

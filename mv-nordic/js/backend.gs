@@ -25,7 +25,6 @@ function onOpen(e) {
 	var ui = DocumentApp.getUi();
 	ui.createAddonMenu()
 		.addItem('Start Grammateket', 'showGrammar')
-		.addItem('Start Kommaforslag', 'showComma')
 		.addSeparator()
 		.addItem('Indstillinger', 'showOptions')
 		.addToUi();
@@ -71,14 +70,6 @@ function showGrammar(mode) {
 	DocumentApp.getUi().showSidebar(ui);
 }
 
-function showComma(mode) {
-	var ui = HtmlService.createTemplateFromFile('html/sidebar').evaluate();
-	var html = ui.getContent();
-	html = injectVariables(html, 'Comma', mode);
-	ui.setContent(html).setSandboxMode(HtmlService.SandboxMode.IFRAME).setTitle('Kommaforslag');
-	DocumentApp.getUi().showSidebar(ui);
-}
-
 function showOptions(tool) {
 	if (!tool) {
 		tool = 'Grammar';
@@ -89,18 +80,6 @@ function showOptions(tool) {
 	html = injectVariables(html, tool);
 	ui.setContent(html).setWidth(800).setHeight(600);
 	DocumentApp.getUi().showModalDialog(ui, 'Indstillinger');
-}
-
-function showLogin(tool) {
-	if (!tool) {
-		tool = 'Grammar';
-	}
-
-	var ui = HtmlService.createTemplateFromFile('html/login').evaluate();
-	var html = ui.getContent();
-	html = injectVariables(html, tool);
-	ui.setContent(html).setWidth(800).setHeight(600);
-	DocumentApp.getUi().showModalDialog(ui, 'Login');
 }
 
 function getAllPars() {
