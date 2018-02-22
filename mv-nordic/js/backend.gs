@@ -78,7 +78,7 @@ function showOptions(tool) {
 	var ui = HtmlService.createTemplateFromFile('html/options').evaluate();
 	var html = ui.getContent();
 	html = injectVariables(html, tool);
-	ui.setContent(html).setWidth(800).setHeight(600);
+	ui.setContent(html).setWidth(800).setHeight(800);
 	DocumentApp.getUi().showModalDialog(ui, 'Indstillinger');
 }
 

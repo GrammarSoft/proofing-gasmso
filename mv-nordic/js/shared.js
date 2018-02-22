@@ -18,9 +18,14 @@
  */
 'use strict';
 
+const VERSION_MAJOR = 1;
+const VERSION_MINOR = 0;
+const VERSION_PATCH = 0;
 const ROOT_URL_SELF = 'https://retmig.dk/gas/dev/';
 const ROOT_URL_GRAMMAR = 'https://kommaer.dk/mv-grammar/';
 const ROOT_URL_COMMA = 'https://kommaer.dk/mv-comma/';
+
+const VERSION = ''+VERSION_MAJOR+'.'+VERSION_MINOR+'.'+VERSION_PATCH;
 
 if (!Array.prototype.unique) {
 	Array.prototype.unique = function() {
