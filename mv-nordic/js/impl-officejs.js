@@ -228,7 +228,17 @@ function impl_showOptions(g_tool) {
 
 function _impl_showLogin_mh(arg) {
 	console.log(arg);
-	//_impl_options.close();
+	let msg = JSON.parse(arg.message);
+	delete msg.data.access;
+	if (msg.tool === 'Grammar') {
+		g_access_grammar = msg.data;
+		ls_set('access-grammar', g_access_grammar);
+	}
+	else if (msg.tool === 'Comma') {
+		g_access_comma = msg.data;
+		ls_set('access-comma', g_access_comma);
+	}
+	_impl_login.close();
 	//showError(arg.message);
 }
 
@@ -278,6 +288,10 @@ function _impl_showLogin_cb(asyncResult) {
 
 function impl_showLogin(g_tool) {
 	Office.context.ui.displayDialogAsync(ROOT_URL_SELF + '/html/login-mso.html?tool='+g_tool, { width: 800, height: 600, displayInIframe: true }, _impl_showLogin_cb);
+}
+
+function impl_closeLogin(g_tool, data) {
+	Office.context.ui.messageParent(JSON.stringify({tool: g_tool, data: data}));
 }
 
 function _impl_getPars(context, pars) {
