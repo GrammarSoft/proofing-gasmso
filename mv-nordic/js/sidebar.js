@@ -751,15 +751,24 @@ function sendTexts() {
 	}
 
 	if (text) {
+		let url = ROOT_URL_GRAMMAR + 'callback.php?a=danproof';
+		let token = g_access_grammar;
+		if (g_tool === 'Comma') {
+			url = ROOT_URL_COMMA + 'callback.php?a=comma';
+			token = g_access_comma;
+		}
 		let data = {
 			t: text,
 			r: ts_fail,
+			SessionID: token.sessionid,
 		};
-		let url = ROOT_URL_GRAMMAR + 'callback.php?a=danproof';
-		if (g_tool === 'Comma') {
-			url = ROOT_URL_COMMA + 'callback.php?a=comma&gac-override=1';
-		}
-		ts_xhr = $.post(url, data).done(parseResult).fail(function() {
+		ts_xhr = $.ajax({
+			url: url,
+			type: 'POST',
+			dataType: 'json',
+			headers: {HMAC: token.hmac},
+			data: data,
+		}).done(parseResult).fail(function() {
 			console.log(this);
 			showError('ERR_POSTBACK');
 		});
@@ -855,6 +864,82 @@ function getState(data) {
 
 	loadConfig();
 	loadDictionary();
+}
+
+function loginCheck() {
+	g_access_grammar = ls_get('access-grammar', {hmac: '', sessionid: ''});
+	g_access_comma = ls_get('access-comma', {hmac: '', sessionid: ''});
+	g_access_grammar.hmac = g_access_grammar.hmac || g_access_comma.hmac;
+	g_access_grammar.sessionid = g_access_grammar.sessionid || g_access_comma.sessionid;
+	g_access_comma.hmac = g_access_comma.hmac || g_access_grammar.hmac;
+	g_access_comma.sessionid = g_access_comma.sessionid || g_access_grammar.sessionid;
+
+	$.ajax({
+		url: ROOT_URL_GRAMMAR+'/callback.php',
+		type: 'POST',
+		dataType: 'json',
+		headers: {HMAC: g_access_grammar.hmac},
+		data: {a: 'keepalive', SessionID: g_access_grammar.sessionid},
+	}).done(function(rv) {
+		console.log('Login Grammar success');
+		delete rv.a;
+		g_access_grammar = rv;
+		ls_set('access-grammar', g_access_grammar);
+		g_access_comma.hmac = g_access_comma.hmac || g_access_grammar.hmac;
+		g_access_comma.sessionid = g_access_comma.sessionid || g_access_grammar.sessionid;
+
+		$.ajax({
+			url: ROOT_URL_COMMA+'/callback.php',
+			type: 'POST',
+			dataType: 'json',
+			headers: {HMAC: g_access_comma.hmac},
+			data: {a: 'keepalive', SessionID: g_access_comma.sessionid},
+		}).done(function(rv) {
+			console.log('Login Comma success');
+			delete rv.a;
+			g_access_comma = rv;
+			ls_set('access-comma', g_access_comma);
+		}).fail(function() {
+			console.log('Login Comma fail');
+			g_access_comma = {hmac: '', sessionid: ''};
+			ls_set('access-comma', g_access_comma);
+
+			if (g_tool === 'Comma') {
+				g_tool = 'Grammar';
+				$('.sidebar').hide();
+				$('#chkWelcome' + g_tool).show();
+			}
+		});
+	}).fail(function() {
+		console.log('Login Grammar fail');
+		g_access_grammar = {hmac: '', sessionid: ''};
+		ls_set('access-grammar', g_access_grammar);
+
+		$.ajax({
+			url: ROOT_URL_COMMA+'/callback.php',
+			type: 'POST',
+			dataType: 'json',
+			headers: {HMAC: g_access_comma.hmac},
+			data: {a: 'keepalive', SessionID: g_access_comma.sessionid},
+		}).done(function(rv) {
+			console.log('Login Comma success');
+			delete rv.a;
+			g_access_comma = rv;
+			ls_set('access-comma', g_access_comma);
+
+			if (g_tool === 'Grammar') {
+				g_tool = 'Comma';
+				$('.sidebar').hide();
+				$('#chkWelcome' + g_tool).show();
+			}
+		}).fail(function() {
+			console.log('Login Comma fail');
+			g_access_comma = {hmac: '', sessionid: ''};
+			ls_set('access-comma', g_access_comma);
+
+			impl_showLogin(g_tool);
+		});
+	});
 }
 
 function initSidebar() {
@@ -975,71 +1060,7 @@ function initSidebar() {
 		return;
 	}
 
-	g_access_grammar = ls_get('access-grammar', {hmac: '', sessionid: ''});
-	g_access_comma = ls_get('access-comma', {hmac: '', sessionid: ''});
-	g_access_grammar.hmac = g_access_grammar.hmac || g_access_comma.hmac;
-	g_access_grammar.sessionid = g_access_grammar.sessionid || g_access_comma.sessionid;
-	g_access_comma.hmac = g_access_comma.hmac || g_access_grammar.hmac;
-	g_access_comma.sessionid = g_access_comma.sessionid || g_access_grammar.sessionid;
-
-	$.ajax({
-		url: ROOT_URL_GRAMMAR+'/callback.php',
-		type: 'POST',
-		dataType: 'json',
-		headers: {HMAC: g_access_grammar.hmac},
-		data: {a: 'keepalive', SessionID: g_access_grammar.sessionid},
-	}).done(function(rv) {
-		delete rv.a;
-		g_access_grammar = rv;
-		ls_set('access-grammar', g_access_grammar);
-		g_access_comma.hmac = g_access_comma.hmac || g_access_grammar.hmac;
-		g_access_comma.sessionid = g_access_comma.sessionid || g_access_grammar.sessionid;
-
-		$.ajax({
-			url: ROOT_URL_COMMA+'/callback.php',
-			type: 'POST',
-			dataType: 'json',
-			headers: {HMAC: g_access_comma.hmac},
-			data: {a: 'keepalive', SessionID: g_access_comma.sessionid},
-		}).done(function(rv) {
-			delete rv.a;
-			g_access_comma = rv;
-			ls_set('access-comma', g_access_comma);
-		}).fail(function() {
-			g_access_comma = {hmac: '', sessionid: ''};
-			ls_set('access-comma', g_access_comma);
-
-			if (g_tool === 'Comma') {
-				g_tool = 'Grammar';
-				$('#chkWelcome' + g_tool).show();
-			}
-		});
-	}).fail(function() {
-		g_access_grammar = {hmac: '', sessionid: ''};
-		ls_set('access-grammar', g_access_grammar);
-
-		$.ajax({
-			url: ROOT_URL_COMMA+'/callback.php',
-			type: 'POST',
-			dataType: 'json',
-			headers: {HMAC: g_access_comma.hmac},
-			data: {a: 'keepalive', SessionID: g_access_comma.sessionid},
-		}).done(function(rv) {
-			delete rv.a;
-			g_access_comma = rv;
-			ls_set('access-comma', g_access_comma);
-
-			if (g_tool === 'Grammar') {
-				g_tool = 'Comma';
-				$('#chkWelcome' + g_tool).show();
-			}
-		}).fail(function() {
-			g_access_comma = {hmac: '', sessionid: ''};
-			ls_set('access-comma', g_access_comma);
-
-			impl_showLogin(g_tool);
-		});
-	});
+	loginCheck();
 }
 
 $(function() {

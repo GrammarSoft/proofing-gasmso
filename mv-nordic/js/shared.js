@@ -323,21 +323,3 @@ function sanitize_result(txt) {
 	txt = txt.replace(/(\n<\/s\d+>)[^]*?(<s\d+>\n)/g, '$1\n\n$2');
 	return txt;
 }
-
-function loginMessage(msg) {
-	if (ROOT_URL_GRAMMAR.indexOf(msg.origin) === 0 || ROOT_URL_COMMA.indexOf(msg.origin) === 0) {
-		console.log(msg.data);
-	}
-}
-
-$(function() {
-	if ($('iframe.login').length) {
-		window.addEventListener('message', loginMessage, false);
-
-		let url = ROOT_URL_GRAMMAR + '/login.php?embedded=1';
-		if (window.location.search.indexOf('tool=Comma') !== -1) {
-			url = ROOT_URL_COMMA + '/login.php?embedded=1';
-		}
-		$('iframe.login').attr('src', url);
-	}
-});
