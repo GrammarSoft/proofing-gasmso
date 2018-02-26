@@ -24,6 +24,7 @@ const VERSION_PATCH = 0;
 const ROOT_URL_SELF = 'https://retmig.dk/gas/dev/';
 const ROOT_URL_GRAMMAR = 'https://kommaer.dk/mv-grammar/';
 const ROOT_URL_COMMA = 'https://kommaer.dk/mv-comma/';
+const CADUCEUS_URL = 'wss://gramtrans.com/caduceus/';
 
 const VERSION = ''+VERSION_MAJOR+'.'+VERSION_MINOR+'.'+VERSION_PATCH;
 
@@ -117,6 +118,12 @@ let _live_dictionary = {};
 let g_access_grammar = false;
 /* exported g_access_comma */
 let g_access_comma = false;
+/* exported g_keepalive */
+let g_keepalive = null;
+/* exported g_login_channel */
+let g_login_channel = '';
+/* exported g_login_ws */
+let g_login_ws = null;
 
 /* exported g_conf_defaults */
 const g_conf_defaults = {
