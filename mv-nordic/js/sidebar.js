@@ -957,13 +957,9 @@ function loginKeepalive(init) {
 			g_access_comma = {hmac: '', sessionid: ''};
 			ls_set('access-comma', g_access_comma);
 
-			$.post(ROOT_URL_GRAMMAR+'/callback.php', {a: 'login-channel'}).done(function(rv) {
-				g_login_channel = rv.name;
-				$('.sidebar').hide();
-				$('#chkWelcomeLogin').show();
-			}).fail(function() {
-				showError('ERR_LOGIN_CHANNEL');
-			});
+			loginListener();
+			$('.sidebar').hide();
+			$('#chkWelcomeLogin').show();
 		});
 	});
 }
@@ -990,18 +986,30 @@ function loginListener() {
 		g_login_ws.close();
 	}
 	g_login_ws = new WebSocket(CADUCEUS_URL);
+	$('.btnLoginGrammar,.btnLoginComma').addClass('disabled');
 
 	g_login_ws.addEventListener('open', function() {
-		g_login_ws.send(JSON.stringify({
-			a: 'listen-channel',
-			name: g_login_channel,
-		}));
+		g_login_ws.send(JSON.stringify({a: 'create-channel'}));
+	});
+
+	g_login_ws.addEventListener('close', function() {
+		g_login_ws = null;
+		if (!(g_access_grammar.hmac || g_access_comma.hmac)) {
+			console.log('Caduceus connection timed out - reconnecting...');
+			loginListener();
+		}
+	});
+
+	g_login_ws.addEventListener('error', function() {
+		showError('ERR_CADUCEUS_FAILED');
 	});
 
 	g_login_ws.addEventListener('message', function(message) {
 		let msg = JSON.parse(message.data);
-		if (msg.a === 'listen-channel') {
-			console.log('Listening...');
+		if (msg.a === 'create-channel') {
+			$('.btnLoginGrammar,.btnLoginComma').removeClass('disabled');
+			g_login_channel = msg.r;
+			console.log('Listening on channel %s ...', g_login_channel);
 		}
 		else if (msg.hmac && msg.sessionid) {
 			console.log('Got HMAC and SessionID');
@@ -1123,13 +1131,15 @@ function initSidebar() {
 	});
 
 	$('.btnLoginGrammar').click(function() {
-		console.log(this);
-		loginListener();
+		if ($(this).hasClass('disabled')) {
+			return false;
+		}
 		window.open(ROOT_URL_GRAMMAR + '/login.php?popup=1&channel='+g_login_channel, 'Login');
 	});
 	$('.btnLoginComma').click(function() {
-		console.log(this);
-		loginListener();
+		if ($(this).hasClass('disabled')) {
+			return false;
+		}
 		window.open(ROOT_URL_COMMA + '/login.php?popup=1&channel='+g_login_channel, 'Login');
 	});
 
