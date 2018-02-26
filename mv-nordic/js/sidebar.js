@@ -867,6 +867,12 @@ function getState(data) {
 }
 
 function loginKeepalive(init) {
+	if (g_login_ws) {
+		g_login_ws.close();
+	}
+	g_login_ws = null;
+	g_login_channel = '';
+
 	g_access_grammar = ls_get('access-grammar', {hmac: '', sessionid: ''});
 	g_access_comma = ls_get('access-comma', {hmac: '', sessionid: ''});
 	g_access_grammar.hmac = g_access_grammar.hmac || g_access_comma.hmac;
@@ -881,6 +887,11 @@ function loginKeepalive(init) {
 		headers: {HMAC: g_access_grammar.hmac},
 		data: {a: 'keepalive', SessionID: g_access_grammar.sessionid},
 	}).done(function(rv) {
+		if (g_keepalive) {
+			clearInterval(g_keepalive);
+		}
+		g_keepalive = setInterval(loginKeepalive, 5*60*1000); // 5 minute keepalive
+
 		console.log('Login Grammar success');
 		delete rv.a;
 		g_access_grammar = rv;
@@ -926,6 +937,11 @@ function loginKeepalive(init) {
 			headers: {HMAC: g_access_comma.hmac},
 			data: {a: 'keepalive', SessionID: g_access_comma.sessionid},
 		}).done(function(rv) {
+			if (g_keepalive) {
+				clearInterval(g_keepalive);
+			}
+			g_keepalive = setInterval(loginKeepalive, 5*60*1000); // 5 minute keepalive
+
 			console.log('Login Comma success');
 			delete rv.a;
 			g_access_comma = rv;
@@ -941,8 +957,13 @@ function loginKeepalive(init) {
 			g_access_comma = {hmac: '', sessionid: ''};
 			ls_set('access-comma', g_access_comma);
 
-			$('.sidebar').hide();
-			$('#chkWelcomeLogin').show();
+			$.post(ROOT_URL_GRAMMAR+'/callback.php', {a: 'login-channel'}).done(function(rv) {
+				g_login_channel = rv.name;
+				$('.sidebar').hide();
+				$('#chkWelcomeLogin').show();
+			}).fail(function() {
+				showError('ERR_LOGIN_CHANNEL');
+			});
 		});
 	});
 }
@@ -962,6 +983,40 @@ function loginMessage(msg) {
 			loginKeepalive();
 		}
 	}
+}
+
+function loginListener() {
+	if (g_login_ws) {
+		g_login_ws.close();
+	}
+	g_login_ws = new WebSocket(CADUCEUS_URL);
+
+	g_login_ws.addEventListener('open', function() {
+		g_login_ws.send(JSON.stringify({
+			a: 'listen-channel',
+			name: g_login_channel,
+		}));
+	});
+
+	g_login_ws.addEventListener('message', function(message) {
+		let msg = JSON.parse(message.data);
+		if (msg.a === 'listen-channel') {
+			console.log('Listening...');
+		}
+		else if (msg.hmac && msg.sessionid) {
+			console.log('Got HMAC and SessionID');
+			g_access_grammar = msg;
+			ls_set('access-grammar', g_access_grammar);
+			g_access_comma = msg;
+			ls_set('access-comma', g_access_comma);
+			loginKeepalive(true);
+		}
+		else {
+			console.log('Error: Unknown message %s', message.data);
+		}
+	});
+
+	console.log(g_login_ws);
 }
 
 function initSidebar() {
@@ -1068,10 +1123,14 @@ function initSidebar() {
 	});
 
 	$('.btnLoginGrammar').click(function() {
-		window.open(ROOT_URL_GRAMMAR + '/login.php?popup=1', 'Login');
+		console.log(this);
+		loginListener();
+		window.open(ROOT_URL_GRAMMAR + '/login.php?popup=1&channel='+g_login_channel, 'Login');
 	});
 	$('.btnLoginComma').click(function() {
-		window.open(ROOT_URL_COMMA + '/login.php?popup=1', 'Login');
+		console.log(this);
+		loginListener();
+		window.open(ROOT_URL_COMMA + '/login.php?popup=1&channel='+g_login_channel, 'Login');
 	});
 
 	$('#popupIgnore').hide();
@@ -1086,7 +1145,6 @@ function initSidebar() {
 	}
 
 	loginKeepalive(true);
-	setInverval(loginKeepalive, 5*60*1000); // 5 minute keepalive
 }
 
 $(function() {
