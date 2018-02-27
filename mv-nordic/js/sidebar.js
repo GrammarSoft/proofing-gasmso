@@ -80,7 +80,7 @@ function markingSetSentence() {
 			sentence += '<span class="marking">' + escHTML(markings[s][i][0]) + '</span> ';
 		}
 		else {
-			if (markings[s][i].length > 1 && /(@insert|%ko-|%k-)/.test(markings[s][i][1])) {
+			if (markings[s][i].length > 1 && /(@insert|%ko-|%k-|%k\b)/.test(markings[s][i][1])) {
 				//console.log(`Skipping ${s} ${i}: ${markings[s][i][1]}`);
 				continue;
 			}
@@ -94,7 +94,7 @@ function markingSetSentence() {
 function markingSetContext() {
 	cmarking.prefix = '';
 	for (let i=0 ; i<cmarking.w ; ++i) {
-		if (markings[cmarking.s][i].length > 1 && /(@insert|%ko-|%k-)/.test(markings[cmarking.s][i][1])) {
+		if (markings[cmarking.s][i].length > 1 && /(@insert|%ko-|%k-|%k\b)/.test(markings[cmarking.s][i][1])) {
 			//console.log(`Skipping ${cmarking.s} ${i}: ${markings[cmarking.s][i][1]}`);
 			continue;
 		}
@@ -103,7 +103,7 @@ function markingSetContext() {
 
 	cmarking.suffix = '';
 	for (let i=cmarking.w+1 ; i<markings[cmarking.s].length ; ++i) {
-		if (markings[cmarking.s][i].length > 1 && /(@insert|%ko-|%k-)/.test(markings[cmarking.s][i][1])) {
+		if (markings[cmarking.s][i].length > 1 && /(@insert|%ko-|%k-|%k\b)/.test(markings[cmarking.s][i][1])) {
 			//console.log(`Skipping ${cmarking.s} ${i}: ${markings[cmarking.s][i][1]}`);
 			continue;
 		}
@@ -232,7 +232,7 @@ function markingRender(skipact) {
 
 	$('.icon-accept,.icon-discard').addClass('icon-accept').removeClass('icon-discard');
 
-	if (/(@insert|%ko-|%k-)/.test(marking[1])) {
+	if (/(@insert|%ko-|%k-|%k\b)/.test(marking[1])) {
 		let px = /^(.*?)(\S+\s?)$/.exec(cmarking.prefix);
 		let sx = /^(\s?\S+)(.*)$/.exec(cmarking.suffix);
 		impl_selectInDocument(px[1], px[2] + sx[1], sx[2]);
@@ -444,7 +444,7 @@ function markingAcceptSuggestion() {
 }
 
 function markingAccept() {
-	if (/(@insert|%ko-|%k-)/.test(markings[cmarking.s][cmarking.w][1])) {
+	if (/(@insert|%ko-|%k-|%k\b)/.test(markings[cmarking.s][cmarking.w][1])) {
 		let px = /^(.*?)(\S+)(\s?)$/.exec(cmarking.prefix);
 		let sx = /^(\s?\S+)(.*)$/.exec(cmarking.suffix);
 		let rpl = markings[cmarking.s][cmarking.w][0];
@@ -687,7 +687,7 @@ function _parseResult(rv) {
 					w.pop();
 				}
 			}
-			if (w.length > 1 && (w[1].indexOf('%k-') !== -1 || w[1].indexOf('%ko-') !== -1)) {
+			if (w.length > 1 && /(%ko-|%k-|%k\b)/.test(w[1])) {
 				let wo = w[0];
 				w[0] = ',';
 				if (w[1].indexOf('%k-stop') !== -1) {
@@ -1017,6 +1017,7 @@ function loginListener() {
 			ls_set('access-grammar', g_access_grammar);
 			g_access_comma = msg;
 			ls_set('access-comma', g_access_comma);
+			g_login_ws.close();
 			loginKeepalive(true);
 		}
 		else {
