@@ -867,6 +867,10 @@ function getState(data) {
 }
 
 function loginKeepalive(init) {
+	if (g_keepalive) {
+		clearInterval(g_keepalive);
+		g_keepalive = null;
+	}
 	if (g_login_ws) {
 		g_login_ws.close();
 	}
@@ -889,6 +893,7 @@ function loginKeepalive(init) {
 	}).done(function(rv) {
 		if (g_keepalive) {
 			clearInterval(g_keepalive);
+			g_keepalive = null;
 		}
 		g_keepalive = setInterval(loginKeepalive, 5*60*1000); // 5 minute keepalive
 
@@ -939,6 +944,7 @@ function loginKeepalive(init) {
 		}).done(function(rv) {
 			if (g_keepalive) {
 				clearInterval(g_keepalive);
+				g_keepalive = null;
 			}
 			g_keepalive = setInterval(loginKeepalive, 5*60*1000); // 5 minute keepalive
 
@@ -976,7 +982,7 @@ function loginMessage(msg) {
 				g_access_comma = msg.data;
 				ls_set('access-comma', g_access_comma);
 			}
-			loginKeepalive();
+			loginKeepalive(true);
 		}
 	}
 }
@@ -993,6 +999,7 @@ function loginListener() {
 	});
 
 	g_login_ws.addEventListener('close', function() {
+		console.log('Closed Caduceus connection');
 		g_login_ws = null;
 		if (!(g_access_grammar.hmac || g_access_comma.hmac)) {
 			console.log('Caduceus connection timed out - reconnecting...');
