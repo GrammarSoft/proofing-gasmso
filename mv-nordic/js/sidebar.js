@@ -217,9 +217,10 @@ function markingRender(skipact) {
 			suggs += '<div class="suggestion"><span class="link" tabindex="'+(50+i*2)+'">' + escHTML(t) + '</span><a class="suggestion-lookup link" tabindex="'+(50+i*2+1)+'"><span class="icon icon-lookup"></span></a></div>';
 		}
 		$('#chkDidYouMeanItems').html(suggs);
-		$('#chkDidYouMeanItems').find('span').off().click(markingAcceptSuggestion);
+		$('#chkDidYouMeanItems').find('span.link').off().click(markingAcceptSuggestion);
 		$('#chkDidYouMeanItems').find('.suggestion-lookup').off().click(function() {
-			alert($(this).text());
+			// ToDo: Temporary lookup using Den Danske Ordbog instead of MV-Nordic's
+			window.open('http://ordnet.dk/ddo/ordbog?query='+encodeURIComponent($(this).closest('div').text()), 'dictionary');
 		});
 		$('#chkDidYouMean').show();
 		$('.chkSentence').removeClass('divider');
