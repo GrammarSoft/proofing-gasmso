@@ -77,7 +77,14 @@ function markingSetSentence() {
 	cmarking.sentence = '';
 	for (let i=b; i<e ; ++i) {
 		if (i === cmarking.w) {
-			sentence += '<span class="marking">' + escHTML(markings[s][i][0]) + '</span> ';
+			let w = markings[s][i][0];
+			if (markings[s][i][1].indexOf('@-comp') !== -1) {
+				w = '_' + w;
+			}
+			else if (markings[s][i][1].indexOf('@comp-') !== -1) {
+				w = w + '_';
+			}
+			sentence += '<span class="marking">' + escHTML(w) + '</span> ';
 		}
 		else {
 			if (markings[s][i].length > 1 && /(@insert|%ko-|%k-|%k\b)/.test(markings[s][i][1])) {
@@ -199,6 +206,7 @@ function markingRender(skipact) {
 	else {
 		let all_upper = is_upper(marking[0]);
 		let first_upper = all_upper || is_upper(marking[0].charAt(0));
+		let hyphen = (marking[1].indexOf('@comp-:-') !== -1);
 
 		if (marking[1].indexOf('@lower') !== -1) {
 			all_upper = first_upper = false;
@@ -213,6 +221,9 @@ function markingRender(skipact) {
 			}
 			else if (first_upper) {
 				t = uc_first(t);
+			}
+			if (hyphen) {
+				t += '‐';
 			}
 			suggs += '<div class="suggestion"><span class="link" tabindex="'+(50+i*2)+'">' + escHTML(t) + '</span><a class="suggestion-lookup link" tabindex="'+(50+i*2+1)+'"><span class="icon icon-lookup"></span></a></div>';
 		}
@@ -251,7 +262,14 @@ function markingRender(skipact) {
 	}
 	else {
 		$('.txtAccept').text(l10n.t(btn_lbl + 'REPLACE'));
-		impl_selectInDocument(cmarking.prefix, marking[0], cmarking.suffix);
+		let middle = marking[0];
+		if (marking[1].indexOf('@-comp') !== -1) {
+			middle = ' ' + middle;
+		}
+		else if (marking[1].indexOf('@comp-') !== -1) {
+			middle = middle + ' ';
+		}
+		impl_selectInDocument(cmarking.prefix, middle, cmarking.suffix);
 	}
 }
 
@@ -443,7 +461,14 @@ function btnInputAll() {
 }
 
 function markingAcceptSuggestion() {
-	impl_replaceInDocument(cmarking.prefix, markings[cmarking.s][cmarking.w][0], $(this).text(), cmarking.suffix);
+	let middle = markings[cmarking.s][cmarking.w][0];
+	if (/@-comp/.test(markings[cmarking.s][cmarking.w][1])) {
+		middle = ' '+middle;
+	}
+	else if (/@comp-/.test(markings[cmarking.s][cmarking.w][1])) {
+		middle = middle+' ';
+	}
+	impl_replaceInDocument(cmarking.prefix, middle, $(this).text(), cmarking.suffix);
 }
 
 function markingAccept() {
@@ -680,6 +705,9 @@ function _parseResult(rv) {
 					w[1] = nws.join(' ');
 					if (!w[2] || w[2].length === 0) {
 						w[2] = '';
+						if (w[1].indexOf('@-comp') !== -1 || w[1].indexOf('@comp-') !== -1) {
+							w[2] = w[0];
+						}
 					}
 					if (w[1].indexOf(' ') !== -1) {
 						w[1] = w[1].replace(/ @error /g, ' ').replace(/ @error$/g, '').replace(/^@error /g, '');
