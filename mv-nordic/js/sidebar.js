@@ -1070,6 +1070,11 @@ function initSidebar() {
 	$('.btnOptions').click(function() {
 		impl_showOptions(g_tool);
 	});
+	$('.btnRestart').click(function() {
+		$('#error').hide();
+		ignores = {};
+		loginKeepalive(true);
+	});
 	$('.optComma').click(function() {
 		let v = $(this).prop('checked');
 		$('.optComma').prop('checked', v);
