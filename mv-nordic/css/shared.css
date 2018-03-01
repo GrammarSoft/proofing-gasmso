@@ -266,6 +266,10 @@ h1, .text {
 	margin: 18px 0;
 }
 
+hr.tall {
+	margin: 36px 0;
+}
+
 .backed {
 	padding: 18px 0;
 	margin: 0 0 10px 0;
