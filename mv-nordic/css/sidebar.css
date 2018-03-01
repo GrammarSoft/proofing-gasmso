@@ -180,6 +180,18 @@ body {
 	width: 20px;
 	height: 20px;
 }
+.icon-previous {
+	background-image: url('../imgs/icon-previous.png');
+	width: 10px;
+	height: 18px;
+	margin: 0;
+}
+.icon-next {
+	background-image: url('../imgs/icon-next.png');
+	width: 10px;
+	height: 18px;
+	margin: 0;
+}
 .btnAddWord .icon-add {
 	background-image: url('../imgs/icon-add.png');
 	width: 30px;

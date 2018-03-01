@@ -198,7 +198,11 @@ function replaceInDocument(prefix, word, rpl, suffix) {
 
 	txt.replaceText('  +', ' ');
 
-	return {before: before, after: txt.getText(), rpl: rpl};
+	return {
+		before: before.replace(/\s*$/g, ''),
+		after: txt.getText().replace(/\s*$/g, ''),
+		rpl: rpl,
+	};
 }
 
 function selectInDocument(prefix, word, suffix) {

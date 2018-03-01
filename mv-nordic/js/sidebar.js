@@ -294,11 +294,13 @@ function btnIgnorePopup() {
 }
 
 function btnIgnore() {
+	$('#popupIgnore').hide();
 	markingIgnore();
 	btnNext();
 }
 
 function btnIgnoreAll() {
+	$('#popupIgnore').hide();
 	let word = markings[cmarking.s][cmarking.w][0];
 	let ts = markings[cmarking.s][cmarking.w][1];
 	for (let s=0 ; s<markings.length ; ++s) {
