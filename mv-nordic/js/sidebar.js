@@ -856,6 +856,8 @@ function checkParagraphs(doc) {
 }
 
 function checkDone() {
+	$('#working').hide();
+
 	if (g_tool === 'Grammar' && $('.optComma').prop('checked')) {
 		g_tool = 'Comma';
 		if (g_mode === 'all' || g_mode === 'selected') {
@@ -883,6 +885,7 @@ function _did_helper(before, after) {
 
 function didSelect() {
 	$('#error').hide();
+	$('#working').hide();
 	select_fail = false;
 }
 
@@ -1135,6 +1138,7 @@ function initSidebar() {
 	});
 	$('.btnRestart').click(function() {
 		$('#error').hide();
+		$('#working').hide();
 		ignores = {};
 		loginKeepalive(true);
 	});
@@ -1243,6 +1247,7 @@ $(function() {
 function showError(msg) {
 	if (!select_fail && msg == 'ERR_SELECT_NOTFOUND') {
 		console.log('Retrying select...');
+		$('#working').show();
 		select_fail = true;
 		setTimeout(markingRender, 250);
 		return;
