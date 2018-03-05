@@ -164,7 +164,7 @@ function markingRender(skipact) {
 		}
 	}
 
-	if (col === 'yellow') {
+	if (col === 'yellow' || marking[1].indexOf('@error') !== -1) {
 		$('.btnAddWord').removeClass('disabled');
 	}
 	else {
@@ -698,7 +698,7 @@ function _parseResult(rv) {
 							break;
 						}
 					}
-					if (col === 'yellow' && g_conf.opt_useDictionary && isInDictionary(w[0])) {
+					if ((col === 'yellow' || ws[0] === '@error') && g_conf.opt_useDictionary && isInDictionary(w[0])) {
 						//console.log(`Found ${w[0]} in dictionary`);
 						ws = [];
 					}
