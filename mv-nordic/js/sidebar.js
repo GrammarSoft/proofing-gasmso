@@ -52,6 +52,8 @@ let ts_xhr = null;
 let ts_slow = null;
 let ts_fail = 0;
 let ignores = {};
+let act_queue = [];
+let select_fail = false;
 
 function isInDictionary(word) {
 	return _live_dictionary.hasOwnProperty(word);
@@ -430,7 +432,7 @@ function btnInputOne() {
 	if (rpl.length === 0) {
 		rpl = ' ';
 	}
-	impl_replaceInDocument(cmarking.prefix, markings[cmarking.s][cmarking.w][0], rpl, cmarking.suffix);
+	processQueue({f: impl_replaceInDocument, s: cmarking.s, w: cmarking.w, rpl: rpl});
 }
 
 function btnInputAll() {
@@ -446,18 +448,12 @@ function btnInputAll() {
 	for (let s=0 ; s<markings.length ; ++s) {
 		for (let w=0 ; w<markings[s].length ; ++w) {
 			if (markings[s][w][0] === word && markings[s][w][1] && markings[s][w][1] === ts) {
-				cmarking.s = s;
-				cmarking.w = w;
-				markingSetContext();
-				impl_replaceInDocumentSilent(cmarking.prefix, markings[cmarking.s][cmarking.w][0], $('#chkInputText').val(), cmarking.suffix);
-				markings[cmarking.s][cmarking.w] = [rpl];
+				appendQueue({f: impl_replaceInDocument, s: s, w: w, rpl: rpl});
 			}
 		}
 	}
 
-	cmarking.s = os;
-	cmarking.w = ow;
-	btnNext();
+	processQueue({f: btnNext, s: os, w: ow});
 }
 
 function markingAcceptSuggestion() {
@@ -468,7 +464,7 @@ function markingAcceptSuggestion() {
 	else if (/@comp-/.test(markings[cmarking.s][cmarking.w][1])) {
 		middle = middle+' ';
 	}
-	impl_replaceInDocument(cmarking.prefix, middle, $(this).text(), cmarking.suffix);
+	processQueue({f: impl_replaceInDocument, s: cmarking.s, w: cmarking.w, middle: middle, rpl: $(this).text()});
 }
 
 function markingAccept() {
@@ -479,14 +475,47 @@ function markingAccept() {
 		if (/@insert/.test(markings[cmarking.s][cmarking.w][1])) {
 			rpl = ' ' + rpl;
 		}
-		impl_insertInDocument(px[1], px[2] + px[3] + sx[1], px[2] + rpl + px[3] + sx[1], sx[2]);
+		processQueue({f: impl_insertInDocument, s: cmarking.s, w: cmarking.w, prefix: px[1], middle: px[2] + px[3] + sx[1], rpl: px[2] + rpl + px[3] + sx[1], suffix: sx[2]});
 	}
 	else if (/(@nil|%nok-)/.test(markings[cmarking.s][cmarking.w][1])) {
-		impl_removeInDocument(cmarking.prefix, markings[cmarking.s][cmarking.w][0], ' ', cmarking.suffix);
+		processQueue({f: impl_removeInDocument, s: cmarking.s, w: cmarking.w, rpl: ' '});
 	}
 	else {
 		$('#chkDidYouMeanItems').find('.link').first().click();
 	}
+}
+
+function appendQueue(action) {
+	if (action) {
+		act_queue.push(Object.assign({s:0,w:0,prefix:null,middle:null,rpl:null,suffix:null}, action));
+	}
+}
+
+function processQueue(action) {
+	appendQueue(action);
+
+	if (act_queue.length === 0) {
+		$('#working').hide();
+		return btnNext();
+	}
+
+	$('#working').show();
+	let act = act_queue.shift();
+	cmarking.s = act.s;
+	cmarking.w = act.w;
+
+	if (act.f === btnNext) {
+		$('#working').hide();
+		return act.f();
+	}
+
+	markingSetContext();
+
+	let prefix = act.prefix || cmarking.prefix;
+	let middle = act.middle || markings[cmarking.s][cmarking.w][0];
+	let suffix = act.suffix || cmarking.suffix;
+
+	return act.f(prefix, middle, act.rpl, suffix);
 }
 
 function _parseResult(rv) {
@@ -845,18 +874,23 @@ function checkDone() {
 function _did_helper(before, after) {
 	for (let i=0 ; i<to_send.length ; ++i) {
 		if (to_send[i].t === before) {
-			//console.log([before, after]);
+			console.log('Replaced %s', i);
 			to_send[i].t = after;
 			delete to_send[i].h;
 		}
 	}
 }
 
+function didSelect() {
+	$('#error').hide();
+	select_fail = false;
+}
+
 function didReplace(rv) {
 	console.log(rv);
 	_did_helper(rv.before, rv.after);
 	markings[cmarking.s][cmarking.w] = [rv.rpl];
-	btnNext();
+	processQueue();
 }
 
 function didReplaceSilent(rv) {
@@ -868,14 +902,14 @@ function didInsert(rv) {
 	console.log(rv);
 	_did_helper(rv.before, rv.after);
 	markings[cmarking.s][cmarking.w] = [markings[cmarking.s][cmarking.w][0]];
-	btnNext();
+	processQueue();
 }
 
 function didRemove(rv) {
 	console.log(rv);
 	_did_helper(rv.before, rv.after);
 	markings[cmarking.s][cmarking.w] = [''];
-	btnNext();
+	processQueue();
 }
 
 function getState(data) {
@@ -1189,6 +1223,7 @@ function initSidebar() {
 
 	$('#popupIgnore').hide();
 	$('#error').hide();
+	$('#working').hide();
 	$('.chkProgress').hide();
 	$('.sidebar').hide();
 	$('#placeholder').remove();
@@ -1206,6 +1241,12 @@ $(function() {
 });
 
 function showError(msg) {
+	if (!select_fail && msg == 'ERR_SELECT_NOTFOUND') {
+		console.log('Retrying select...');
+		select_fail = true;
+		setTimeout(markingRender, 250);
+		return;
+	}
 	console.log(msg);
 	$('#error').show();
 	$('#error-text').text(l10n.t(msg));

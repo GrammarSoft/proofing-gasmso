@@ -38,7 +38,7 @@ function _impl_findElement(prefix, word, suffix) {
 
 function impl_selectInDocument(prefix, middle, suffix) {
 	let rv = _impl_findElement(prefix, middle, suffix);
-	return google.script.run.withFailureHandler(showError).selectInDocument(rv.prefix, rv.middle, rv.suffix);
+	return google.script.run.withSuccessHandler(didSelect).withFailureHandler(showError).selectInDocument(rv.prefix, rv.middle, rv.suffix);
 }
 
 function impl_replaceInDocument(prefix, find, rpl, suffix) {
