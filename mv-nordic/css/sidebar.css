@@ -27,6 +27,20 @@ body {
 	margin-top: 10px;
 }
 
+#working {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background-color: #fff;
+	opacity: 0.75;
+	z-index: 9999999;
+	text-align: center;
+	padding-top: 200px;
+	font-size: 24px;
+}
+
 .arrow-orange {
 	border-color: #f5a623;
 	color: #f5a623;

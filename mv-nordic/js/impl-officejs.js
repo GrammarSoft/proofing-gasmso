@@ -118,7 +118,7 @@ function _impl_findElement(prefix, word, suffix, func) {
 }
 
 function impl_selectInDocument(prefix, word, suffix) {
-	_impl_findElement(prefix, word, suffix);
+	_impl_findElement(prefix, word, suffix, didSelect);
 }
 
 function _impl_reloadPar(context, par, rpl, func) {
