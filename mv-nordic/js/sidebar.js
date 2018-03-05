@@ -1249,5 +1249,6 @@ function showError(msg) {
 	}
 	console.log(msg);
 	$('#error').show();
+	$('#working').hide();
 	$('#error-text').text(l10n.t(msg));
 }
