@@ -23,7 +23,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Grammateket / Kommaforslag</title>
 	<base target="_top">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://retmig.dk/gas/dev/css/shared.css">
 	<link rel="stylesheet" type="text/css" href="https://retmig.dk/gas/dev/css/sidebar.css">
 	<link rel="stylesheet" type="text/css" href="https://retmig.dk/gas/dev/css/sidebar-mv.css">
@@ -65,7 +65,8 @@
 <div class="sidebar" id="chkWelcomeShared">
 <h1>Grammateket</h1>
 <div class="text">
-	Hvordan skal din tekst tjekkes for stavning og grammatik?
+	<p>Først skal du tjekke din tekst for stavning og grammatik.</p>
+	<p>Vil du have tjekket din markering eller hele teksten?</p>
 </div>
 <div class="buttonbar backed">
 	<button class="btn-blue btnCheckAuto toolGrammar">Løbende</button>
@@ -73,14 +74,15 @@
 	<button class="btn-lightblue btnCheckAll toolGrammar">Alt</button>
 </div>
 <div class="text chkGrammarToComma">
-<label class="crbox"><input type="checkbox" class="optComma" checked><span class="checkbox"></span><span>Ønsker du efterfølgende at få tjekket din tegnsætning?</span></label>
+<label class="crbox"><input type="checkbox" class="optComma" checked><span class="checkbox"></span><span>Sæt flueben i boksen hvis du vil have tjekket dine kommaer bagefter.</span></label>
 </div>
 
 <hr class="tall">
 
 <h1>Kommaforslag</h1>
 <div class="text">
-	Hvordan skal din tekst tjekkes for tegnsætning?
+	<p>Du kan også vælge at springe direkte til Kommaforslag for at få tjekket dine kommaer.</p>
+	<p>Vil du have tjekket din markering eller hele teksten?</p>
 </div>
 <div class="buttonbar backed">
 	<button class="btn-blue btnCheckAuto toolComma">Løbende</button>
@@ -95,14 +97,17 @@
 <!-- Grammar -->
 
 <div class="sidebar" id="chkWelcomeGrammar">
-<h1>Hvordan skal din tekst tjekkes for stavning og grammatik?</h1>
+<h1>Grammateket</h1>
+<div class="text">
+	<p>Vil du have tjekket din markering eller hele teksten?</p>
+</div>
 <div class="buttonbar backed">
 	<button class="btn-blue btnCheckAuto">Løbende</button>
 	<button class="btn-orange btnCheckSelected">Markering</button>
 	<button class="btn-lightblue btnCheckAll">Alt</button>
 </div>
 <div class="text chkGrammarToComma">
-<label class="crbox"><input type="checkbox" class="optComma" checked><span class="checkbox"></span><span>Ønsker du efterfølgende at få tjekket din tegnsætning?</span></label>
+<label class="crbox"><input type="checkbox" class="optComma" checked><span class="checkbox"></span><span>Sæt flueben i boksen hvis du vil have tjekket dine kommaer bagefter.</span></label>
 </div>
 <div class="text chkProgress">
 	<div class="chkProgressContainer"><div class="chkProgressBar"></div></div>
@@ -157,14 +162,17 @@
 <h1>Din tekst er blevet tjekket, og der er ikke flere stave- eller grammatikforslag.</h1>
 <div class="buttonbar backed">
 	<button class="btn-blue btnCheckAgain">Tjek stavning og grammatik igen</button>
-	<button class="btn-orange btnCheckCommas">Tjek tegnsætning</button>
+	<button class="btn-orange btnCheckComma">Tjek kommatering</button>
 </div>
 </div>
 
 <!-- Comma -->
 
 <div class="sidebar" id="chkWelcomeComma">
-<h1>Hvordan skal din tekst tjekkes for tegnsætning?</h1>
+<h1>Kommaforslag</h1>
+<div class="text">
+	<p>Vil du have tjekket din markering eller hele teksten?</p>
+</div>
 <div class="buttonbar backed">
 	<button class="btn-blue btnCheckAuto">Løbende</button>
 	<button class="btn-orange btnCheckSelected">Markering</button>
@@ -198,9 +206,9 @@
 </div>
 
 <div class="sidebar" id="chkDoneComma">
-<h1>Din tekst er blevet tjekket, og der er ikke flere forslag til tegnsætning.</h1>
+<h1>Din tekst er blevet tjekket, og der er ikke flere forslag til kommatering.</h1>
 <div class="buttonbar backed">
-	<button class="btn-blue btnCheckAgain">Tjek tegnsætning igen</button>
+	<button class="btn-blue btnCheckAgain">Tjek kommatering igen</button>
 	<button class="btn-orange btnCheckGrammar">Tjek stavning og grammatik</button>
 </div>
 </div>
