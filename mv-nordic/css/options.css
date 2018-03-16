@@ -37,7 +37,12 @@ button {
 	color: #fff;
 }
 
-.formWordAdd button, .formWordEdit button {
+.formWordAdd input {
+	max-width: 50%;
+	margin: 5px 10px 5px 0;
+}
+
+.formWordEdit button {
 	font-size: 20px;
 }
 
