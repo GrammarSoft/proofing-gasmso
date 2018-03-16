@@ -214,6 +214,11 @@ function loadDictionary() {
 	}
 }
 
+/* exported isInDictionary */
+function isInDictionary(word) {
+	return _live_dictionary.hasOwnProperty(word);
+}
+
 /* exported addToDictionary */
 function addToDictionary(word) {
 	if ($.trim(word).length === 0) {

@@ -55,10 +55,6 @@ let ignores = {};
 let act_queue = [];
 let select_fail = false;
 
-function isInDictionary(word) {
-	return _live_dictionary.hasOwnProperty(word);
-}
-
 function markingSetSentence() {
 	let s = cmarking.s;
 	let b = cmarking.w;
@@ -1214,8 +1210,7 @@ function initSidebar() {
 			return false;
 		}
 		addToDictionary(markings[cmarking.s][cmarking.w][0]);
-		$('#chkInputText').val(markings[cmarking.s][cmarking.w][0]);
-		$('.btnInputOne').click();
+		$('.btnIgnoreAll').click();
 	});
 
 	$('.btnLoginGrammar').click(function() {
