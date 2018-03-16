@@ -21,7 +21,7 @@
 let _impl_loginTimer = null;
 
 function _impl_findElement(prefix, word, suffix) {
-	let rx = new RegExp('^(\\s*'+prefix.replace(Const.NonLetter, '.*?')+'\\s*)('+escapeRegExpTokens(word)+')(\\s*'+suffix.replace(Const.NonLetter, '.*?')+'\\s*)$', 'i');
+	let rx = new RegExp('^(\\s*'+prefix.replace(Const.NonLetter, '.*?')+'\\s*)('+word.replace(Const.NonLetter, '.+?')+')(\\s*'+suffix.replace(Const.NonLetter, '.*?')+'\\s*)$', 'i');
 	console.log('Searching regex %s', rx);
 
 	for (let i=0 ; i<to_send.length ; ++i) {
