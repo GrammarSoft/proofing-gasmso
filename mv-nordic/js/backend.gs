@@ -121,19 +121,29 @@ function getAllPars() {
 function getSelectedPars(elms) {
 	var es = [];
 	var sel = DocumentApp.getActiveDocument().getSelection();
-	if (!sel) {
-		throw 'ERR_NO_SELECTION';
-	}
-
-	var elements = sel.getRangeElements();
-	for (var i = 0; i < elements.length; ++i) {
-		var e = elements[i].getElement();
-		var t = e.asText().getText().replace(/\s*$/g, '');
-		if (t.length === 0 || t === '') {
-			Logger.log('Empty paragraph');
-			continue;
+	if (sel) {
+		var elements = sel.getRangeElements();
+		for (var i = 0; i < elements.length; ++i) {
+			var e = elements[i].getElement();
+			var t = e.asText().getText().replace(/\s*$/g, '');
+			if (t.length === 0 || t === '') {
+				Logger.log('Empty paragraph');
+				continue;
+			}
+			es.push({i: i+1, t: t});
 		}
-		es.push({i: i+1, t: t});
+	}
+	else {
+		Logger.log('No selection - using cursor position');
+		var c = DocumentApp.getActiveDocument().getCursor();
+		if (!c) {
+			throw 'ERR_NO_SELECTION';
+		}
+		var t = c.getElement().asText().getText().replace(/\s*$/g, '');
+		if (t.length === 0 || t === '') {
+			throw 'ERR_NO_SELECTION';
+		}
+		es.push({i: 1, t: t});
 	}
 
 	return es;
