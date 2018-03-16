@@ -60,21 +60,6 @@ function saveConfig() {
 }
 
 function attachDictionaryClicks() {
-	$('.formWordAdd').off().submit(function(e) {
-		let w = $.trim($(this).find('input').val());
-		if (addToDictionary(w)) {
-			$('.words').append('<form class="word formWordEdit" data-word="'+escHTML(w)+'"><input type="text" value="'+escHTML(w)+'"> <button type="button" class="btnWordDelete">&times;</button></form>');
-			attachDictionaryClicks();
-			$(this).find('input').val('').focus();
-		}
-		else {
-			alert('Kunne ikke tilføje ordet "'+w+'" til stavekontrollen!');
-		}
-
-		e.preventDefault();
-		return false;
-	});
-
 	$('.formWordEdit').off().submit(function(e) {
 		let ow = $.trim($(this).attr('data-word'));
 		let w = $.trim($(this).find('input').val());
@@ -117,7 +102,7 @@ function getState(data) {
 	loadConfig();
 	loadDictionary();
 
-	$('.words').html('<form class="word formWordAdd"><input type="text" value=""> <button type="submit">+</button></form>');
+	$('.words').html('');
 	let ws = Object.keys(g_dictionary);
 	ws.sort();
 	for (let i=0 ; i<ws.length ; ++i) {
@@ -187,8 +172,19 @@ function initOptions() {
 		showPane(this, 'comma');
 	});
 
-	$('.btnAddWord').click(function() {
-		$('.formWordAdd').find('input').focus();
+	$('.formWordAdd').submit(function(e) {
+		let w = $.trim($('.inputAddWord').val());
+		if (addToDictionary(w)) {
+			$('.words').append('<form class="word formWordEdit" data-word="'+escHTML(w)+'"><input type="text" value="'+escHTML(w)+'"> <button type="button" class="btnWordDelete">&times;</button></form>');
+			attachDictionaryClicks();
+			$('.inputAddWord').val('').focus();
+		}
+		else {
+			alert('Kunne ikke tilføje ordet "'+w+'" til stavekontrollen!');
+		}
+
+		e.preventDefault();
+		return false;
 	});
 
 	$('input[type="checkbox"],input[type="radio"]').change(function() {
