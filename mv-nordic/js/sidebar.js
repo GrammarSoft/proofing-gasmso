@@ -289,14 +289,20 @@ function btnInput() {
 }
 
 function markingIgnore() {
-	let ik = markings[cmarking.s][cmarking.w][0] + '\t' + markings[cmarking.s][cmarking.w][1];
+	let marking = markings[cmarking.s][cmarking.w];
+	let ik = marking[0] + '\t' + marking[1];
 	if (!ignores[ik]) {
 		ignores[ik] = {};
 	}
 	ignores[ik][cmarking.sentence] = true;
-	//console.log(`Ignoring ${ik} in ${cmarking.sentence}`);
+	console.log('Ignoring %s in %s', ik, cmarking.sentence);
 
-	markings[cmarking.s][cmarking.w] = [markings[cmarking.s][cmarking.w][0]];
+	if (/(@insert|%ko-|%k-|%k\b)/.test(marking[1])) {
+		markings[cmarking.s][cmarking.w] = [' '];
+	}
+	else {
+		markings[cmarking.s][cmarking.w] = [marking[0]];
+	}
 }
 
 function btnIgnorePopup() {

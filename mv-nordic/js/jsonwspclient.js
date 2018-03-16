@@ -43,7 +43,7 @@ function JSONWSPClient() {
 			content_type_valist.push("charset=" + this.force_charset);
 		}
 		req.setRequestHeader("Content-Type", content_type_valist.join("; "));
-		req.setRequestHeader("Content-Length", data.length);
+		//req.setRequestHeader("Content-Length", data.length);
 		if (this.via_proxy==true) {
 			req.setRequestHeader("Ladon-Proxy-Path", this.url);
 		}
