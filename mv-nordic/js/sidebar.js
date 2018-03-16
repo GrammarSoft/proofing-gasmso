@@ -987,6 +987,7 @@ function loginKeepalive(init) {
 			ls_set('access-comma', g_access_comma);
 			if (init) {
 				$('.sidebar').hide();
+				g_tool = 'Grammar';
 				$('#chkWelcomeShared').show();
 			}
 		}).fail(function() {
@@ -1035,6 +1036,7 @@ function loginKeepalive(init) {
 
 			loginListener();
 			$('.sidebar').hide();
+			g_tool = 'Grammar';
 			$('#chkWelcomeLogin').show();
 		});
 	});
