@@ -54,6 +54,8 @@ let ts_fail = 0;
 let ignores = {};
 let act_queue = [];
 let select_fail = false;
+let grammar_retried = false;
+let comma_retried = false;
 
 function markingSetSentence() {
 	let s = cmarking.s;
@@ -761,6 +763,8 @@ function _parseResult(rv) {
 			words.push(w);
 		}
 		if (had_mark) {
+			grammar_retried = false;
+			comma_retried = false;
 			markings.push(words);
 		}
 	}
@@ -860,16 +864,28 @@ function checkParagraphs(doc) {
 function checkDone() {
 	$('#working').hide();
 
-	if (g_tool === 'Grammar' && $('.optComma').prop('checked')) {
-		g_tool = 'Comma';
-		if (g_mode === 'all' || g_mode === 'selected') {
+	if (g_tool === 'Grammar') {
+		if (!grammar_retried) {
+			console.log('Retrying grammar');
+			grammar_retried = true;
 			checkParagraphs(to_send);
 		}
-		else {
-			$('.btnCheckComma').click();
+		else if ($('.optComma').prop('checked')) {
+			g_tool = 'Comma';
+			if (g_mode === 'all' || g_mode === 'selected') {
+				checkParagraphs(to_send);
+			}
+			else {
+				$('.btnCheckComma').click();
+			}
 		}
 	}
 	else {
+		if (!comma_retried) {
+			console.log('Retrying comma');
+			comma_retried = true;
+			checkParagraphs(to_send);
+		}
 		$('.sidebar').hide();
 		$('#chkDone' + g_tool).show();
 	}

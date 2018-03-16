@@ -22,7 +22,7 @@ let _impl_options = null;
 let _impl_login = null;
 
 function _impl_findElement(prefix, word, suffix, func) {
-	let rx = new RegExp('^(\\s*'+prefix.replace(Const.NonLetter, '.*?')+'\\s*)('+escapeRegExpTokens(word)+')(\\s*'+suffix.replace(Const.NonLetter, '.*?')+'\\s*)$', 'i');
+	let rx = new RegExp('^(\\s*'+prefix.replace(Const.NonLetter, '.*?')+'\\s*)('+word.replace(Const.NonLetter, '.+?')+')(\\s*'+suffix.replace(Const.NonLetter, '.*?')+'\\s*)$', 'i');
 	console.log('Searching regex %s', rx);
 
 	let txt = null;
