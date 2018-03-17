@@ -36,38 +36,38 @@
       <Host xsi:type="Document">
         <DesktopFormFactor>
           <GetStarted>
-            <Title resid="Danproof.GetStarted.Title"/>
-            <Description resid="Danproof.GetStarted.Description"/>
-            <LearnMoreUrl resid="Danproof.GetStarted.LearnMoreUrl"/>
+            <Title resid="MVGrammar.GetStarted.Title"/>
+            <Description resid="MVGrammar.GetStarted.Description"/>
+            <LearnMoreUrl resid="MVGrammar.GetStarted.LearnMoreUrl"/>
           </GetStarted>
 
           <ExtensionPoint xsi:type="PrimaryCommandSurface">
             <OfficeTab id="TabHome">
-              <Group id="Danproof.Group1">
-                <Label resid="Danproof.Group1Label" />
+              <Group id="MVGrammar.Group1">
+                <Label resid="MVGrammar.Group1Label" />
                 <!-- Icons. Required sizes 16,32,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX. -->
                 <!-- Use PNG icons. All URLs on the resources section must use HTTPS. -->
                 <Icon>
-                  <bt:Image size="16" resid="Danproof.logo16" />
-                  <bt:Image size="32" resid="Danproof.logo32" />
-                  <bt:Image size="80" resid="Danproof.logo80" />
+                  <bt:Image size="16" resid="MVGrammar.logo16" />
+                  <bt:Image size="32" resid="MVGrammar.logo32" />
+                  <bt:Image size="80" resid="MVGrammar.logo80" />
                 </Icon>
 
-                <Control xsi:type="Button" id="Danproof.TaskpaneButton">
-                  <Label resid="Danproof.TaskpaneButton.Label" />
+                <Control xsi:type="Button" id="MVGrammar.TaskpaneButton">
+                  <Label resid="MVGrammar.TaskpaneButton.Label" />
                   <Supertip>
-                    <Title resid="Danproof.TaskpaneButton.Label" />
-                    <Description resid="Danproof.TaskpaneButton.Tooltip" />
+                    <Title resid="MVGrammar.TaskpaneButton.Label" />
+                    <Description resid="MVGrammar.TaskpaneButton.Tooltip" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="Danproof.logo16" />
-                    <bt:Image size="32" resid="Danproof.logo32" />
-                    <bt:Image size="80" resid="Danproof.logo80" />
+                    <bt:Image size="16" resid="MVGrammar.logo16" />
+                    <bt:Image size="32" resid="MVGrammar.logo32" />
+                    <bt:Image size="80" resid="MVGrammar.logo80" />
                   </Icon>
 
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>ButtonId1</TaskpaneId>
-                    <SourceLocation resid="Danproof.Taskpane" />
+                    <SourceLocation resid="MVGrammar.Taskpane" />
                   </Action>
                 </Control>
               </Group>
@@ -79,24 +79,24 @@
 
     <Resources>
       <bt:Images>
-        <bt:Image id="Danproof.logo16" DefaultValue="https://retmig.dk/gas/dev/imgs/logo-16.png" />
-        <bt:Image id="Danproof.logo32" DefaultValue="https://retmig.dk/gas/dev/imgs/logo-32.png" />
-        <bt:Image id="Danproof.logo80" DefaultValue="https://retmig.dk/gas/dev/imgs/logo-80.png" />
+        <bt:Image id="MVGrammar.logo16" DefaultValue="https://retmig.dk/gas/dev/imgs/logo-16.png" />
+        <bt:Image id="MVGrammar.logo32" DefaultValue="https://retmig.dk/gas/dev/imgs/logo-32.png" />
+        <bt:Image id="MVGrammar.logo80" DefaultValue="https://retmig.dk/gas/dev/imgs/logo-80.png" />
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="Danproof.Taskpane" DefaultValue="https://retmig.dk/gas/dev/html/sidebar-mso.html" />
-        <bt:Url id="Danproof.GetStarted.LearnMoreUrl" DefaultValue="https://grammarsoft.com/" />
+        <bt:Url id="MVGrammar.Taskpane" DefaultValue="https://retmig.dk/gas/dev/html/sidebar-mso.html" />
+        <bt:Url id="MVGrammar.GetStarted.LearnMoreUrl" DefaultValue="https://grammarsoft.com/" />
       </bt:Urls>
       <!-- ShortStrings max characters==125. -->
       <bt:ShortStrings>
-        <bt:String id="Danproof.TaskpaneButton.Label" DefaultValue="Grammateket" />
-        <bt:String id="Danproof.Group1Label" DefaultValue="Grammateket" />
-        <bt:String id="Danproof.GetStarted.Title" DefaultValue="Kom godt i gang med Grammateket &amp; Kommaforslag!" />
+        <bt:String id="MVGrammar.TaskpaneButton.Label" DefaultValue="Grammateket" />
+        <bt:String id="MVGrammar.Group1Label" DefaultValue="Grammateket" />
+        <bt:String id="MVGrammar.GetStarted.Title" DefaultValue="Kom godt i gang med Grammateket &amp; Kommaforslag!" />
       </bt:ShortStrings>
       <!-- LongStrings max characters==250. -->
       <bt:LongStrings>
-        <bt:String id="Danproof.TaskpaneButton.Tooltip" DefaultValue="Klik for at åbne Grammateket &amp; Kommaforslag" />
-        <bt:String id="Danproof.GetStarted.Description" DefaultValue="Grammateket er nu installeret. Gå til fanen Hjem og klik på Grammateket for at komme i gang." />
+        <bt:String id="MVGrammar.TaskpaneButton.Tooltip" DefaultValue="Klik for at åbne Grammateket &amp; Kommaforslag" />
+        <bt:String id="MVGrammar.GetStarted.Description" DefaultValue="Grammateket er nu installeret. Gå til fanen Hjem og klik på Grammateket for at komme i gang." />
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>
