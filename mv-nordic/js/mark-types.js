@@ -12,6 +12,8 @@
 let types_mv = {
 	"@vfin": "@vfin",
 	"@inf": "@inf",
+	"@impf": "@impf",
+	"@pcp2-akt": "@pcp2-akt",
 	"@ene": "@ene",
 	"@ende": "@ende",
 	"@comp-": "@comp-",
