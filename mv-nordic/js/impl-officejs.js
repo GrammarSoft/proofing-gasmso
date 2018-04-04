@@ -267,6 +267,10 @@ function impl_getAllPars() {
 	});
 }
 
+function impl_showDictionary(text) {
+	console.log(text);
+}
+
 function impl_Init(func) {
 	Office.initialize = function(reason) {
 		$(document).ready(function() {

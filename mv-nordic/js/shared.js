@@ -380,10 +380,9 @@ function itw_speak(text) {
 	}
 
 	let data = {
-		t: text,
-		SessionID: g_access_grammar.sessionid,
+		t: text
 	};
-	$.post(ROOT_URL_GRAMMAR + 'callback.php?a=speak', data).done(function(rv) {
+	$.post(ROOT_URL_GRAMMAR + 'callback.php?a=itw-speak', data).done(function(rv) {
 		if (!rv.hasOwnProperty('result') || !rv.result.hasOwnProperty('value') || !rv.result.value.hasOwnProperty('mp3_url') || !rv.result.value.mp3_url) {
 			console.log(this);
 			//showError('ERR_ITW_SPEAK');

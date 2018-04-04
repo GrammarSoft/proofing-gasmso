@@ -230,8 +230,7 @@ function markingRender(skipact) {
 		$('#chkDidYouMeanItems').html(suggs);
 		$('#chkDidYouMeanItems').find('span.link').off().click(markingAcceptSuggestion);
 		$('#chkDidYouMeanItems').find('.suggestion-lookup').off().click(function() {
-			// ToDo: Temporary lookup using Den Danske Ordbog instead of MV-Nordic's
-			window.open('http://ordnet.dk/ddo/ordbog?query='+encodeURIComponent($(this).closest('div').text()), 'dictionary');
+			impl_showDictionary($(this).closest('div').text());
 		});
 		itw_speak_attach($('#chkDidYouMeanItems').get(0));
 		$('#chkDidYouMean').show();

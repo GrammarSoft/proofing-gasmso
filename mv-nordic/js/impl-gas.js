@@ -77,6 +77,10 @@ function impl_getAllPars() {
 	return google.script.run.withSuccessHandler(checkParagraphs).withFailureHandler(showError).getAllPars();
 }
 
+function impl_showDictionary(text) {
+	return google.script.run.withFailureHandler(showError).showDictionary(text);
+}
+
 function impl_Init(func) {
 	func();
 }

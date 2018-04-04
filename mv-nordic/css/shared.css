@@ -39,7 +39,7 @@ html, body {
 	width: 100%;
 }
 
-body {
+body, iframe {
 	min-height: 100%;
 	position: absolute;
 	top: 0;
@@ -49,6 +49,14 @@ body {
 
 audio {
 	display: none;
+}
+
+iframe {
+	border: 0;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 100%;
 }
 
 .whiteblue {
