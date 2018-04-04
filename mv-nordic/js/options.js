@@ -129,6 +129,12 @@ function showColumn(e, w) {
 }
 
 function initOptions() {
+	$.ajaxSetup({
+		xhrFields: {
+			withCredentials: true,
+		},
+	});
+
 	if (window.location.search.indexOf('tool=Comma') !== -1) {
 		g_tool = 'Comma';
 	}
@@ -228,6 +234,8 @@ function initOptions() {
 			e.attr('src', e.attr('src').replace('{ROOT_URL_SELF}', ROOT_URL_SELF));
 		}
 	});
+
+	itw_speak_attach(document.body);
 }
 
 $(function() {

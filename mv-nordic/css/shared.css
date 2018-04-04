@@ -47,6 +47,10 @@ body {
 	left: 0;
 }
 
+audio {
+	display: none;
+}
+
 .whiteblue {
 	color: #eaf7fe;
 }

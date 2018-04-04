@@ -107,6 +107,9 @@ const Defs = {
 };
 Defs.OPT_DP_IGNORE_UNKNOWN = Defs.OPT_DP_IGNORE_NAMES|Defs.OPT_DP_IGNORE_COMP|Defs.OPT_DP_IGNORE_ABBR|Defs.OPT_DP_IGNORE_OTHER;
 
+// Upper-case because we compare them to DOM nodeName
+let text_nodes = {'ADDRESS': true, 'ARTICLE': true, 'ASIDE': true, 'AUDIO': true, 'BLOCKQUOTE': true, 'BODY': true, 'CANVAS': true, 'DD': true, 'DIV': true, 'DL': true, 'FIELDSET': true, 'FIGCAPTION': true, 'FIGURE': true, 'FOOTER': true, 'FORM': true, 'H1': true, 'H2': true, 'H3': true, 'H4': true, 'H5': true, 'H6': true, 'HEADER': true, 'HGROUP': true, 'HTML': true, 'HR': true, 'LI': true, 'MAIN': true, 'NAV': true, 'NOSCRIPT': true, 'OL': true, 'OUTPUT': true, 'P': true, 'PRE': true, 'SECTION': true, 'TABLE': true, 'TD': true, 'TH': true, 'UL': true, 'VIDEO': true};
+
 /* exported g_dictionary */
 let g_dictionary = {};
 /* exported g_dictionary_json */
@@ -125,6 +128,8 @@ let g_login_channel = '';
 /* exported g_login_ws */
 let g_login_ws = null;
 
+let g_itw_speaker = null;
+
 /* exported g_conf_defaults */
 const g_conf_defaults = {
 	opt_onlyConfident: false,
@@ -138,6 +143,7 @@ const g_conf_defaults = {
 	opt_colorBlind: false,
 	opt_longExplanations: true,
 	opt_mvNordic: true,
+	opt_speak: true,
 	opt_level: 3,
 };
 
@@ -316,6 +322,32 @@ function ls_set(key, val) {
 	window.localStorage.setItem(key, JSON.stringify(val));
 }
 
+function findTextNodes(nodes) {
+	var tns = [], wsx = /\S/;
+
+	if (!$.isArray(nodes)) {
+		nodes = [nodes];
+	}
+
+	function _findTextNodes(node) {
+		if (node.nodeType == 3) {
+			if (wsx.test(node.nodeValue)) {
+				tns.push(node);
+			}
+		}
+		else {
+			for (var i=0 ; i < node.childNodes.length ; ++i) {
+				_findTextNodes(node.childNodes[i]);
+			}
+		}
+	}
+
+	for (var i=0 ; i<nodes.length ; ++i) {
+		_findTextNodes(nodes[i]);
+	}
+	return tns;
+}
+
 /* exported sanitize_result */
 function sanitize_result(txt) {
 	// Swap markers that the backend has mangled due to sentence-ending parentheticals
@@ -339,4 +371,56 @@ function sanitize_result(txt) {
 	// Remove noise between sentences
 	txt = txt.replace(/(\n<\/s\d+>)[^]*?(<s\d+>\n)/g, '$1\n\n$2');
 	return txt;
+}
+
+/* exported itw_speak */
+function itw_speak(text) {
+	if (!g_conf.opt_speak) {
+		return;
+	}
+
+	let data = {
+		t: text,
+		SessionID: g_access_grammar.sessionid,
+	};
+	$.post(ROOT_URL_GRAMMAR + 'callback.php?a=speak', data).done(function(rv) {
+		if (!rv.hasOwnProperty('result') || !rv.result.hasOwnProperty('value') || !rv.result.value.hasOwnProperty('mp3_url') || !rv.result.value.mp3_url) {
+			console.log(this);
+			//showError('ERR_ITW_SPEAK');
+			return;
+		}
+
+		$('#speaker').attr('src', 'https://online.intowords.com' + rv.result.value.mp3_url).get(0).play();
+	}).fail(function() {
+		console.log(this);
+		//showError('ERR_ITW_SPEAK');
+	});
+}
+
+/* exported itw_speak_attach */
+function itw_speak_attach(node) {
+	let tns = findTextNodes(node);
+	let ns = [];
+	for (let i=0 ; i<tns.length ; ++i) {
+		let n = tns[i];
+		do {
+			n = n.parentNode;
+		} while(n && n.parentNode && !text_nodes.hasOwnProperty(n.parentNode.nodeName));
+		ns.push(n);
+	}
+
+	$(ns).mouseover(function() {
+		let txt = $(this).text();
+		if (g_itw_speaker) {
+			clearTimeout(g_itw_speaker);
+		}
+		g_itw_speaker = setTimeout(function() {
+			itw_speak(txt);
+		}, 500);
+	}).mouseout(function() {
+		if (g_itw_speaker) {
+			clearTimeout(g_itw_speaker);
+		}
+		g_itw_speaker = null;
+	});
 }

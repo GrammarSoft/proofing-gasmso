@@ -233,6 +233,7 @@ function markingRender(skipact) {
 			// ToDo: Temporary lookup using Den Danske Ordbog instead of MV-Nordic's
 			window.open('http://ordnet.dk/ddo/ordbog?query='+encodeURIComponent($(this).closest('div').text()), 'dictionary');
 		});
+		itw_speak_attach($('#chkDidYouMeanItems').get(0));
 		$('#chkDidYouMean').show();
 		$('.chkSentence').removeClass('divider');
 		$('.btnAccept').removeClass('disabled');
@@ -1124,6 +1125,12 @@ function loginListener() {
 }
 
 function initSidebar() {
+	$.ajaxSetup({
+		xhrFields: {
+			withCredentials: true,
+		},
+	});
+
 	window.addEventListener('message', loginMessage, false);
 
 	if (g_tool !== 'Grammar' && g_tool !== 'Comma') {
@@ -1257,6 +1264,7 @@ function initSidebar() {
 	}
 
 	loginKeepalive(true);
+	itw_speak_attach(document.body);
 }
 
 $(function() {
