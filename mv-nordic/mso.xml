@@ -20,6 +20,7 @@
     <AppDomain>grammarsoft.com</AppDomain>
     <AppDomain>mv-nordic.com</AppDomain>
     <AppDomain>online.intowords.com</AppDomain>
+    <AppDomain>dictionary.intowords.com</AppDomain>
   </AppDomains>
 
   <Hosts>
