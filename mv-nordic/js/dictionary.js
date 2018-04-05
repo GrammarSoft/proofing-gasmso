@@ -27,26 +27,38 @@ $(function() {
 		},
 	});
 
+	loadConfig();
+
 	let text = g_text;
 	if (window.location.search.indexOf('text=') !== -1) {
-		text = window.location.search.substr(window.location.search.indexOf('text=')+5);
+		let b = window.location.search.indexOf('text=') + 5;
+		let e = window.location.search.indexOf('&', b);
+		text = window.location.search.substring(b, e);
 	}
 	console.log(text);
 
 	let data = {
-		t: text
+		t: text,
 	};
 	$.post(ROOT_URL_GRAMMAR + 'callback.php?a=itw-dict', data).done(function(rv) {
 		if (!rv.hasOwnProperty('result') || !rv.result.hasOwnProperty('value') || !rv.result.value) {
 			console.log(this);
-			//showError('ERR_ITW_SPEAK');
+			$('iframe').attr('srcdoc', 'Kunne ikke finde '+text+' i ordbogen.');
 			return;
 		}
 
 		rv.result.value = rv.result.value.replace('</title>', '</title><base href="https://dictionary.intowords.com/">');
 		$('iframe').attr('srcdoc', rv.result.value);
+
+		setTimeout(function() {
+			$('iframe').get(0).contentWindow.webReader = {
+				webReaderRead: function(text, val) { return itw_speak(text); },
+				webReaderStop: function() { $('#speaker').stop(); },
+				webReaderChange: function() {},
+			};
+		}, 250);
 	}).fail(function() {
 		console.log(this);
-		//showError('ERR_ITW_SPEAK');
+		$('iframe').attr('srcdoc', 'Kunne ikke finde '+text+' i ordbogen.');
 	});
 });

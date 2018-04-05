@@ -357,6 +357,14 @@ input[type="text"] {
 	background-image: url('../imgs/radio-checked.png');
 }
 
+.itw_tts {
+	transition: background-color 1s linear, color 1s linear;
+}
+.itw_tts:hover {
+	background-color: yellow;
+	color: #000;
+}
+
 footer {
 	position: absolute;
 	bottom: 0;
