@@ -25,12 +25,6 @@
 /* globals g_tool:true */
 /* globals l10n */
 
-let g_tool = null;
-let g_mode = null;
-let g_conf = {};
-/* exported session */
-let session = {};
-
 function saveConfig() {
 	g_conf.opt_ignUnknown = false;
 	if (g_conf.opt_ignUNames && g_conf.opt_ignUComp && g_conf.opt_ignUAbbr && g_conf.opt_ignUOther) {
@@ -111,6 +105,7 @@ function getState(data) {
 	attachDictionaryClicks();
 
 	saveConfig();
+	itw_speak_attach(document.body);
 }
 
 function showPane(e, w) {
@@ -234,8 +229,6 @@ function initOptions() {
 			e.attr('src', e.attr('src').replace('{ROOT_URL_SELF}', ROOT_URL_SELF));
 		}
 	});
-
-	itw_speak_attach(document.body);
 }
 
 $(function() {

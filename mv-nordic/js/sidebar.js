@@ -34,11 +34,7 @@
 /* globals g_mode:true */
 /* globals l10n */
 
-let g_tool = null;
 let g_mode = null;
-let g_conf = {};
-/* exported session */
-let session = {};
 let markings = [];
 let cmarking = {s: -1, w: -1};
 let cache = {
@@ -950,6 +946,7 @@ function getState(data) {
 
 	loadConfig();
 	loadDictionary();
+	itw_speak_attach(document.body);
 }
 
 function loginKeepalive(init) {
@@ -1263,7 +1260,6 @@ function initSidebar() {
 	}
 
 	loginKeepalive(true);
-	itw_speak_attach(document.body);
 }
 
 $(function() {

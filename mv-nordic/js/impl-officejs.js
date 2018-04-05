@@ -268,7 +268,7 @@ function impl_getAllPars() {
 }
 
 function impl_showDictionary(text) {
-	console.log(text);
+	Office.context.ui.displayDialogAsync(ROOT_URL_SELF + '/html/dictionary.html?text='+text, { width: 800, height: 600, displayInIframe: true });
 }
 
 function impl_Init(func) {
