@@ -129,6 +129,7 @@ let g_login_channel = '';
 let g_login_ws = null;
 
 let g_itw_speaker = null;
+let g_itw_tap = 0;
 
 /* exported g_conf_defaults */
 const g_conf_defaults = {
@@ -432,5 +433,22 @@ function itw_speak_attach(node) {
 			clearTimeout(g_itw_speaker);
 		}
 		g_itw_speaker = null;
+	}).on('touchstart', function() {
+		++g_itw_tap;
+	}).on('touchmove', function() {
+		g_itw_tap = 0;
+	}).on('touchend', function(e) {
+		if (g_itw_tap >= 2) {
+			if (g_itw_speaker) {
+				clearTimeout(g_itw_speaker);
+			}
+			g_itw_speaker = null;
+
+			itw_speak($(this).text());
+			g_itw_tap = 0;
+
+			e.preventDefault();
+			return false;
+		}
 	});
 }
