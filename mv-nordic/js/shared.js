@@ -158,6 +158,13 @@ const Const = {
 Const.Split_Array = Const.Split_String.split('');
 Const.Split_Regex = new RegExp('(['+Const.Split_String+'])');
 
+/* exported g_tool */
+let g_tool = null;
+/* exported g_conf */
+let g_conf = {};
+/* exported session */
+let session = {};
+
 // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 /* exported escapeRegExp */
 function escapeRegExp(string) {
@@ -398,6 +405,10 @@ function itw_speak(text) {
 
 /* exported itw_speak_attach */
 function itw_speak_attach(node) {
+	if (!g_conf.opt_speak) {
+		return;
+	}
+
 	let tns = findTextNodes(node);
 	let ns = [];
 	for (let i=0 ; i<tns.length ; ++i) {
@@ -408,14 +419,14 @@ function itw_speak_attach(node) {
 		ns.push(n);
 	}
 
-	$(ns).mouseover(function() {
+	$(ns).addClass('itw_tts').mouseover(function() {
 		let txt = $(this).text();
 		if (g_itw_speaker) {
 			clearTimeout(g_itw_speaker);
 		}
 		g_itw_speaker = setTimeout(function() {
 			itw_speak(txt);
-		}, 500);
+		}, 1000);
 	}).mouseout(function() {
 		if (g_itw_speaker) {
 			clearTimeout(g_itw_speaker);
