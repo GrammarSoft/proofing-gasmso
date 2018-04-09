@@ -875,6 +875,10 @@ function checkDone() {
 				$('.btnCheckComma').click();
 			}
 		}
+		else {
+			$('.sidebar').hide();
+			$('#chkDone' + g_tool).show();
+		}
 	}
 	else {
 		if (!comma_retried) {
