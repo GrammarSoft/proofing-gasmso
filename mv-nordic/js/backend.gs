@@ -86,7 +86,7 @@ function showDictionary(text) {
 	var ui = HtmlService.createTemplateFromFile('html/dictionary').evaluate();
 	var html = ui.getContent().replace(/<!--.*?-->/g, '').replace(/>[\s\n]+</g, '><').replace('</body>', '<script>g_text = '+JSON.stringify(text)+';</script></body>');
 	ui.setContent(html).setWidth(800).setHeight(800);
-	DocumentApp.getUi().showModalDialog(ui, 'Ordbog');
+	DocumentApp.getUi().showModalDialog(ui, 'IntoWords Ordbog');
 }
 
 function getAllPars() {

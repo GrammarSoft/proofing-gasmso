@@ -50,13 +50,19 @@ $(function() {
 		rv.result.value = rv.result.value.replace('</title>', '</title><base href="https://dictionary.intowords.com/">');
 		$('iframe').attr('srcdoc', rv.result.value);
 
-		setTimeout(function() {
-			$('iframe').get(0).contentWindow.webReader = {
-				webReaderRead: function(text, val) { return itw_speak(text); },
-				webReaderStop: function() { $('#speaker').stop(); },
-				webReaderChange: function() {},
-			};
-		}, 250);
+		for (let i=250 ; i<1500 ; i+=500) {
+			setTimeout(function() {
+				let win = $('iframe').get(0).contentWindow;
+				win.webReader = {
+					webReaderRead: function(text, val) { return itw_speak(text); },
+					webReaderStop: function() { $('#speaker').stop(); },
+					webReaderChange: function() {},
+				};
+				if (!g_conf.opt_speak) {
+					$(win.document.body).append('<style>span:hover { background-color: inherit !important; }</style>');
+				}
+			}, i);
+		}
 	}).fail(function() {
 		console.log(this);
 		$('iframe').attr('srcdoc', 'Kunne ikke finde '+text+' i ordbogen.');
