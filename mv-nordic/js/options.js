@@ -53,11 +53,34 @@ function saveConfig() {
 	}
 }
 
+function dictionaryDelete() {
+	let w = $.trim($(this).closest('form').find('input').val());
+	if (removeFromDictionary(w)) {
+		$(this).closest('form').remove();
+	}
+	else {
+		alert('Kunne ikke slette ordet "'+w+'" fra stavekontrollen!');
+	}
+}
+
+function dictionaryChanged() {
+	let f = $(this).closest('form');
+	let b = f.find('button');
+	if (!b.hasClass('btnWordDelete')) {
+		return;
+	}
+	b.removeClass('btnWordDelete').addClass('btnWordEdit').text('Gem').off().click(function() {
+		b.removeClass('btnWordEdit').addClass('btnWordDelete').html('&times;').off().click(dictionaryDelete);
+		f.submit();
+	});
+}
+
 function attachDictionaryClicks() {
 	$('.formWordEdit').off().submit(function(e) {
 		let ow = $.trim($(this).attr('data-word'));
 		let w = $.trim($(this).find('input').val());
 		if (ow != w && addToDictionary(w) && removeFromDictionary(ow)) {
+			$(this).attr('data-word', w);
 		}
 		else {
 			alert('Kunne ikke ændre ordet "'+ow+'" til '+w+' i stavekontrollen!');
@@ -67,15 +90,8 @@ function attachDictionaryClicks() {
 		return false;
 	});
 
-	$('.btnWordDelete').off().click(function() {
-		let w = $.trim($(this).closest('form').find('input').val());
-		if (removeFromDictionary(w)) {
-			$(this).closest('form').remove();
-		}
-		else {
-			alert('Kunne ikke slette ordet "'+w+'" fra stavekontrollen!');
-		}
-	});
+	$('.formWordEdit').find('input').off().keyup(dictionaryChanged).change(dictionaryChanged);
+	$('.btnWordDelete').off().click(dictionaryDelete);
 }
 
 function getState(data) {
