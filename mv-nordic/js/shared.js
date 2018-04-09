@@ -358,6 +358,9 @@ function findTextNodes(nodes) {
 
 /* exported sanitize_result */
 function sanitize_result(txt) {
+	// Special case
+	txt = txt.replace(/@x-etype-case/g, '@upper');
+
 	// Swap markers that the backend has mangled due to sentence-ending parentheticals
 	for (let i=0 ; i<Defs.MAX_RQ_SIZE ; ++i) {
 		let t1 = '</s'+i+'>';
