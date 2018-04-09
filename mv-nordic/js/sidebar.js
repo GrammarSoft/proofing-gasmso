@@ -511,9 +511,9 @@ function processQueue(action) {
 
 	markingSetContext();
 
-	let prefix = act.prefix || cmarking.prefix;
-	let middle = act.middle || markings[cmarking.s][cmarking.w][0];
-	let suffix = act.suffix || cmarking.suffix;
+	let prefix = (act.prefix === null) ? cmarking.prefix : act.prefix;
+	let middle = (act.middle === null) ? markings[cmarking.s][cmarking.w][0] : act.middle;
+	let suffix = (act.suffix === null) ? cmarking.suffix : act.suffix;
 
 	return act.f(prefix, middle, act.rpl, suffix);
 }
