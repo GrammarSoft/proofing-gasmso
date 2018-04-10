@@ -22,6 +22,11 @@ let _impl_options = null;
 let _impl_login = null;
 
 function _impl_findElement(prefix, word, suffix, func) {
+	let rx_p = ('\\s*'+prefix.replace(Const.NonLetter, '.').replace(/(.)/g, '$1.*?')+'\\s*');
+	let rx_w = word.replace(Const.NonLetter, '.').replace(/(.)/g, '$1.*?').replace(/\.\.\*\?/g, '.+?').replace(/\.\*\?$/, '');
+	let rx_s = ('\\s*'+suffix.replace(Const.NonLetter, '.').replace(/(.)/g, '$1.*?')+'\\s*');
+	let rx_invis = new RegExp(('^('+rx_p+')('+rx_w+')('+rx_s+')$').replace(/\.\.\*\?/g, '.*?').replace(/\.\*\?(\.\*\?)+/g, '.*?').replace(/\.\*\?\.\+\?/g, '.+?').replace(/\.\+\?\.\*\?/g, '.+?').replace(/\.\*\?\\s\*/g, '.*?').replace(/\\s\*\.\*\?/g, '.*?'), 'i');
+
 	let rx = new RegExp('^(\\s*'+prefix.replace(Const.NonLetter, '.*?')+'\\s*)('+word.replace(Const.NonLetter, '.+?')+')(\\s*'+suffix.replace(Const.NonLetter, '.*?')+'\\s*)$', 'i');
 	console.log('Searching regex %s', rx);
 
@@ -30,6 +35,19 @@ function _impl_findElement(prefix, word, suffix, func) {
 		let t = to_send[i].t;
 		let m = rx.exec(t);
 		if (m) {
+			prefix = m[1];
+			word = m[2];
+			suffix = m[3];
+			txt = t;
+			break;
+		}
+	}
+
+	for (let i=0 ; i<to_send.length ; ++i) {
+		let t = to_send[i].t;
+		let m = rx_invis.exec(t);
+		if (m) {
+			console.log('Invisible character match');
 			prefix = m[1];
 			word = m[2];
 			suffix = m[3];

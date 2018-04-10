@@ -132,6 +132,9 @@ function markingRender(skipact) {
 		return;
 	}
 
+	grammar_retried = false;
+	comma_retried = false;
+
 	$('#error').hide();
 	$('.sidebar').hide();
 	$('#chkChecking'+g_tool).show();
@@ -759,8 +762,6 @@ function _parseResult(rv) {
 			words.push(w);
 		}
 		if (had_mark) {
-			grammar_retried = false;
-			comma_retried = false;
 			markings.push(words);
 		}
 	}
@@ -805,6 +806,8 @@ function sendTexts() {
 
 		// MS Word Online sends a Narrow No-Break Space
 		let t = par.t.replace('\u202F', ' ');
+
+		t = t.replace('\u00AD', ''); // Soft Hyphen
 
 		text += '<s'+par.i+'>\n'+t+'\n</s'+par.i+'>\n\n';
 		if (text.length >= Defs.MAX_RQ_SIZE) {
