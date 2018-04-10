@@ -431,6 +431,10 @@ function btnNext() {
 }
 
 function btnInputOne() {
+	if ($('#working').css('display') !== 'none') {
+		return;
+	}
+
 	let rpl = $('#chkInputText').val();
 	if (rpl.length === 0) {
 		rpl = ' ';
@@ -439,6 +443,10 @@ function btnInputOne() {
 }
 
 function btnInputAll() {
+	if ($('#working').css('display') !== 'none') {
+		return;
+	}
+
 	let rpl = $('#chkInputText').val();
 	if (rpl.length === 0) {
 		rpl = ' ';
@@ -460,6 +468,10 @@ function btnInputAll() {
 }
 
 function markingAcceptSuggestion() {
+	if ($('#working').css('display') !== 'none') {
+		return;
+	}
+
 	let middle = markings[cmarking.s][cmarking.w][0];
 	if (/@-comp/.test(markings[cmarking.s][cmarking.w][1])) {
 		middle = ' '+middle;
@@ -471,6 +483,10 @@ function markingAcceptSuggestion() {
 }
 
 function markingAccept() {
+	if ($('#working').css('display') !== 'none') {
+		return;
+	}
+
 	if (/(@insert|%ko-|%k-|%k\b)/.test(markings[cmarking.s][cmarking.w][1])) {
 		let px = /^(.*?)(\S+)(\s?)$/.exec(cmarking.prefix);
 		let sx = /^(\s?\S+)(.*)$/.exec(cmarking.suffix);
