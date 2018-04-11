@@ -276,6 +276,7 @@ function btnAccept() {
 	if ($(this).hasClass('disabled')) {
 		return;
 	}
+	$(this).addClass('disabled');
 	markingAccept();
 }
 
