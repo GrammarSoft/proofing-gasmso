@@ -431,7 +431,8 @@ function btnNext() {
 }
 
 function btnInputOne() {
-	if ($('#working').css('display') !== 'none') {
+	if (act_queue.length || $('#working').css('display') !== 'none') {
+		console.log('Prevented double action');
 		return;
 	}
 
@@ -443,7 +444,8 @@ function btnInputOne() {
 }
 
 function btnInputAll() {
-	if ($('#working').css('display') !== 'none') {
+	if (act_queue.length || $('#working').css('display') !== 'none') {
+		console.log('Prevented double action');
 		return;
 	}
 
@@ -468,7 +470,8 @@ function btnInputAll() {
 }
 
 function markingAcceptSuggestion() {
-	if ($('#working').css('display') !== 'none') {
+	if (act_queue.length || $('#working').css('display') !== 'none') {
+		console.log('Prevented double action');
 		return;
 	}
 
@@ -483,7 +486,8 @@ function markingAcceptSuggestion() {
 }
 
 function markingAccept() {
-	if ($('#working').css('display') !== 'none') {
+	if (act_queue.length || $('#working').css('display') !== 'none') {
+		console.log('Prevented double action');
 		return;
 	}
 
