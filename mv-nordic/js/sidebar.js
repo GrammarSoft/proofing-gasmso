@@ -168,6 +168,10 @@ function markingRender(skipact) {
 		$('.btnAddWord').addClass('disabled');
 	}
 
+	if (g_tool === 'Comma' && col === 'yellow' && g_conf.opt_maybe == false) {
+		col = 'green';
+	}
+
 	let es = {};
 	let el = {};
 	for (let i=0 ; i<types.length ; ++i) {
@@ -188,7 +192,7 @@ function markingRender(skipact) {
 	$('.chkExplainLongText').html(el);
 
 	let alt = '';
-	if (g_conf.opt_colorBlind) {
+	if (g_conf.opt_color) {
 		alt = ' alt';
 	}
 
@@ -705,6 +709,9 @@ function _parseResult(rv) {
 					}
 					else {
 						if (marking_types[nws[k]][2] > g_conf.opt_level) {
+							continue;
+						}
+						else if (g_conf.opt_green && /^%nok-/.test(nws[k])) {
 							continue;
 						}
 					}
