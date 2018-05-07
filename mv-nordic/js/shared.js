@@ -117,10 +117,8 @@ let g_dictionary_json = '{}';
 /* exported _live_dictionary */
 let _live_dictionary = {};
 
-/* exported g_access_grammar */
-let g_access_grammar = false;
-/* exported g_access_comma */
-let g_access_comma = false;
+/* exported g_access_token */
+let g_access_token = false;
 /* exported g_keepalive */
 let g_keepalive = null;
 /* exported g_login_channel */
