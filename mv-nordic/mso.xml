@@ -26,6 +26,13 @@
   <Hosts>
     <Host Name="Document" />
   </Hosts>
+  <Requirements>
+    <Methods>
+      <Method Name="Range.expandTo" />
+      <Method Name="Range.getRange" />
+      <Method Name="Range.split" />
+    </Methods>
+  </Requirements>
   <DefaultSettings>
     <SourceLocation DefaultValue="https://retmig.dk/gas/dev/html/sidebar-mso.html" />
   </DefaultSettings>
