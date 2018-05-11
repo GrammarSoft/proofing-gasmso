@@ -10,7 +10,7 @@
   <DefaultLocale>da-DK</DefaultLocale>
   <DisplayName DefaultValue="Grammateket" />
   <Description DefaultValue="Grammateket" />
-  <IconUrl DefaultValue="https://retmig.dk/gas/dev/imgs/logo-80.png" />
+  <IconUrl DefaultValue="https://retmig.dk/gas/dev/imgs/logo-32.png" />
 
   <SupportUrl DefaultValue="https://grammarsoft.com/" />
   <AppDomains>
