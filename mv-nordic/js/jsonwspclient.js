@@ -142,10 +142,12 @@ function JSONWSPClient() {
 				mparams.splice(mpidx,1);
 			}
 			continue;
+			/* ESLint doesn't like unreachable code
 			let opidx = indexOf(oparams,pname);
 			if (opidx==-1) {
 				unidentified.push(pname);
 			}
+			//*/
 		}
 		if (mparams.length>0) {
 			errorinfo("Error: Missing mandatory parameters");

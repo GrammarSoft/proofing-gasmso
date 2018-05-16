@@ -175,7 +175,7 @@ function escapeRegExp(string) {
 /* exported escapeRegExpTokens */
 function escapeRegExpTokens(txt) {
 	let ts = txt.split(/\s+/g);
-	for (var i=0 ; i<ts.length ; ++i) {
+	for (let i=0 ; i<ts.length ; ++i) {
 		ts[i] = escapeRegExp(ts[i]);
 	}
 	return ts.join('\\s+');
@@ -330,8 +330,13 @@ function ls_set(key, val) {
 	window.localStorage.setItem(key, JSON.stringify(val));
 }
 
+/* exported ls_del */
+function ls_del(key) {
+	window.localStorage.removeItem(key);
+}
+
 function findTextNodes(nodes) {
-	var tns = [], wsx = /\S/;
+	let tns = [], wsx = /\S/;
 
 	if (!$.isArray(nodes)) {
 		nodes = [nodes];
@@ -344,13 +349,13 @@ function findTextNodes(nodes) {
 			}
 		}
 		else {
-			for (var i=0 ; i < node.childNodes.length ; ++i) {
+			for (let i=0 ; i < node.childNodes.length ; ++i) {
 				_findTextNodes(node.childNodes[i]);
 			}
 		}
 	}
 
-	for (var i=0 ; i<nodes.length ; ++i) {
+	for (let i=0 ; i<nodes.length ; ++i) {
 		_findTextNodes(nodes[i]);
 	}
 	return tns;
@@ -391,7 +396,7 @@ function itw_speak(text) {
 	}
 
 	let data = {
-		t: text
+		t: text,
 	};
 	$.post(ROOT_URL_GRAMMAR + 'callback.php?a=itw-speak', data).done(function(rv) {
 		if (!rv.hasOwnProperty('result') || !rv.result.hasOwnProperty('value') || !rv.result.value.hasOwnProperty('mp3_url') || !rv.result.value.mp3_url) {

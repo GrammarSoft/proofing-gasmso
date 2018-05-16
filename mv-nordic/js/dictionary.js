@@ -54,9 +54,14 @@ $(function() {
 			setTimeout(function() {
 				let win = $('iframe').get(0).contentWindow;
 				win.webReader = {
-					webReaderRead: function(text, val) { return itw_speak(text); },
-					webReaderStop: function() { $('#speaker').stop(); },
-					webReaderChange: function() {},
+					webReaderRead: function(text, val) {
+						return itw_speak(text);
+					},
+					webReaderStop: function() {
+						$('#speaker').stop();
+					},
+					webReaderChange: function() {
+					},
 				};
 				if (!g_conf.opt_speak) {
 					$(win.document.body).append('<style>span:hover { background-color: inherit !important; }</style>');

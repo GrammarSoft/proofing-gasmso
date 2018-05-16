@@ -18,8 +18,6 @@
  */
 'use strict';
 
-let _impl_loginTimer = null;
-
 function _impl_findElement(prefix, word, suffix) {
 	let rx_p = ('\\s*'+prefix.replace(Const.NonLetter, '.').replace(/(.)/g, '$1.*?')+'\\s*');
 	let rx_w = word.replace(Const.NonLetter, '.').replace(/(.)/g, '$1.*?').replace(/\.\.\*\?/g, '.+?').replace(/\.\*\?$/, '');

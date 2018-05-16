@@ -19,7 +19,6 @@
 'use strict';
 
 let _impl_options = null;
-let _impl_login = null;
 
 function _impl_findElement(prefix, word, suffix, func) {
 	let rx_p = ('\\s*'+prefix.replace(Const.NonLetter, '.').replace(/(.)/g, '$1.*?')+'\\s*');
@@ -126,8 +125,7 @@ function _impl_findElement(prefix, word, suffix, func) {
 				return context.sync();
 			});
 		});
-	})
-	.catch(function(error) {
+	}).catch(function(error) {
 		showError(JSON.stringify(error));
 		if (error instanceof OfficeExtension.Error) {
 			console.log('Debug info: ' + JSON.stringify(error.debugInfo));
@@ -156,7 +154,6 @@ function _impl_reloadPar(context, par, rpl, func) {
 			}
 		});
 	});
-	return context.sync();
 }
 
 function impl_replaceInDocument(prefix, word, rpl, suffix) {
@@ -263,8 +260,7 @@ function impl_getSelectedPars() {
 	Word.run(function(context) {
 		let pars = context.document.getSelection().paragraphs;
 		return _impl_getPars(context, pars);
-	})
-	.catch(function(error) {
+	}).catch(function(error) {
 		showError(JSON.stringify(error));
 		if (error instanceof OfficeExtension.Error) {
 			console.log('Debug info: ' + JSON.stringify(error.debugInfo));
@@ -276,8 +272,7 @@ function impl_getAllPars() {
 	Word.run(function(context) {
 		let pars = context.document.body.paragraphs;
 		return _impl_getPars(context, pars);
-	})
-	.catch(function(error) {
+	}).catch(function(error) {
 		showError(JSON.stringify(error));
 		if (error instanceof OfficeExtension.Error) {
 			console.log('Debug info: ' + JSON.stringify(error.debugInfo));
