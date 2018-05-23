@@ -844,10 +844,10 @@ function sendTexts() {
 	}
 
 	if (text) {
-		let url = ROOT_URL_GRAMMAR + 'callback.php?a=danproof';
+		let url = ROOT_URL_GRAMMAR + '/callback.php?a=danproof';
 		let token = g_access_token;
 		if (g_tool === 'Comma') {
-			url = ROOT_URL_GRAMMAR + 'callback.php?a=comma';
+			url = ROOT_URL_GRAMMAR + '/callback.php?a=comma';
 		}
 		let data = {
 			t: text,
@@ -1097,6 +1097,8 @@ function logout() {
 			clearInterval(g_keepalive);
 			g_keepalive = null;
 		}
+		window.open(MVID_SIGNOUT_URL+g_access_token.sessionid, 'Logout');
+
 		g_access_token = {hmac: '', sessionid: ''};
 		ls_set('access-token', g_access_token);
 

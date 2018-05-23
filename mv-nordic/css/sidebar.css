@@ -208,6 +208,13 @@ body {
 	margin-left: 0;
 	margin-right: 5px;
 }
+.icon-logout-blue {
+	background-image: url('../imgs/icon-logout-blue.png');
+	width: 24px;
+	height: 21px;
+	margin-left: 0;
+	margin-right: 5px;
+}
 .icon-previous {
 	background-image: url('../imgs/icon-previous.png');
 	width: 10px;
@@ -237,10 +244,19 @@ body {
 
 footer {
 	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
 	background-color: #eaf7fe;
 }
 footer .btn-panel {
 	display: inline-block;
+	flex-grow: 1;
 	width: 50%;
-	padding: 18px 0;
+	padding: 9px 0;
+	background-color: #f4f4f4;
+}
+footer .btn-panel-wide {
+	flex-grow: 2;
+	width: 100%;
+	background-color: #eaf7fe;
 }
