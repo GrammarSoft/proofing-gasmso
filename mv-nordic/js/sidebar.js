@@ -1086,26 +1086,28 @@ function loginListener() {
 }
 
 function logout() {
+	window.open(MVID_SIGNOUT_URL+g_access_token.sessionid, 'Logout');
+
 	$.ajax({
 		url: ROOT_URL_GRAMMAR+'/callback.php',
 		type: 'POST',
 		dataType: 'json',
 		data: {a: 'logout'},
-	}).done(function(rv) {
+	}).done(function() {
 		console.log('Logged out');
-		if (g_keepalive) {
-			clearInterval(g_keepalive);
-			g_keepalive = null;
-		}
-		window.open(MVID_SIGNOUT_URL+g_access_token.sessionid, 'Logout');
-
-		g_access_token = {hmac: '', sessionid: ''};
-		ls_set('access-token', g_access_token);
-
-		loginListener();
-		$('.sidebar').hide();
-		$('#chkWelcomeLogin').show();
 	});
+
+	if (g_keepalive) {
+		clearInterval(g_keepalive);
+		g_keepalive = null;
+	}
+
+	g_access_token = {hmac: '', sessionid: ''};
+	ls_set('access-token', g_access_token);
+
+	loginListener();
+	$('.sidebar').hide();
+	$('#chkWelcomeLogin').show();
 }
 
 function initSidebar() {
