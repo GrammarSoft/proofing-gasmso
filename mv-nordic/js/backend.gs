@@ -178,6 +178,17 @@ function findElement(prefix, word, suffix) {
 		}
 		return sel;
 	}
+
+	// Retry without anchors, which is needed for cases where there are newlines inside a paragraph
+	rx = '\\s*'+prefix.replace(Const.NonLetter, '.*?')+'\\s*'+escapeRegExpTokens(word)+'\\s*'+suffix.replace(Const.NonLetter, '.*?')+'\\s*';
+	Logger.log('Searching regex %s', rx);
+	for (var i=0 ; i<sects.length ; ++i) {
+		var sel = sects[i].findText(rx);
+		if (!sel) {
+			continue;
+		}
+		return sel;
+	}
 	return null;
 }
 
