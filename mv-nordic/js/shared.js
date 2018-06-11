@@ -163,7 +163,7 @@ Const.Split_Regex = new RegExp('(['+Const.Split_String+'])');
 /* exported g_tool */
 let g_tool = null;
 /* exported g_conf */
-let g_conf = {};
+let g_conf = Object.assign({}, g_conf_defaults);
 /* exported session */
 let session = {};
 
@@ -184,6 +184,11 @@ function escapeRegExpTokens(txt) {
 
 /* exported loadConfig */
 function loadConfig() {
+	if (!g_conf.hasOwnProperty('opt_color')) {
+		console.log('Initializing g_conf');
+		g_conf = Object.assign({}, g_conf_defaults);
+	}
+
 	let nv = window.localStorage.getItem('config');
 	if (!nv) {
 		return;

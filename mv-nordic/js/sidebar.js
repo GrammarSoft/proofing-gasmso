@@ -1122,7 +1122,6 @@ function initSidebar() {
 	if (g_tool !== 'Grammar' && g_tool !== 'Comma') {
 		g_tool = 'Grammar';
 	}
-	g_conf = Object.assign({}, g_conf_defaults);
 	impl_getState();
 
 	$('.closer').click(function() {
