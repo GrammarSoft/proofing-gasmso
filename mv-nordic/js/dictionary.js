@@ -48,7 +48,14 @@ $(function() {
 		}
 
 		rv.result.value = rv.result.value.replace('</title>', '</title><base href="https://dictionary.intowords.com/">');
+		rv.result.value = rv.result.value.replace('href="C', 'href="https://dictionary.intowords.com/C');
+		rv.result.value = rv.result.value.replace('</head>', '<script>webReader = {webReaderRead: function(t,v) {}, webReaderStop: function() {}, webReaderChange: function() {}};</script></head>');
 		$('iframe').attr('srcdoc', rv.result.value);
+		if (!('srcdoc' in document.createElement('iframe'))) {
+			let m = /<head[^>]*>([^]+?)<\/head>[^]*<body[^>]*>([^]+?)<\/body>/.exec(rv.result.value);
+			$($('iframe').get(0).contentWindow.document.head).html(m[1]);
+			$($('iframe').get(0).contentWindow.document.body).html(m[2]);
+		}
 
 		for (let i=250 ; i<1500 ; i+=500) {
 			setTimeout(function() {
