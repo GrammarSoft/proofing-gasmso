@@ -45,7 +45,7 @@
           <GetStarted>
             <Title resid="MVGrammar.GetStarted.Title"/>
             <Description resid="MVGrammar.GetStarted.Description"/>
-            <LearnMoreUrl resid="MVGrammar.GetStarted.LearnMoreUrl"/>
+            <LearnMoreUrl resid="MVGrammar.GetStarted.LearnMore"/>
           </GetStarted>
 
           <ExtensionPoint xsi:type="PrimaryCommandSurface">
@@ -92,7 +92,7 @@
       </bt:Images>
       <bt:Urls>
         <bt:Url id="MVGrammar.Taskpane" DefaultValue="https://retmig.dk/gas/dev/html/sidebar-mso.html" />
-        <bt:Url id="MVGrammar.GetStarted.LearnMoreUrl" DefaultValue="https://grammarsoft.com/" />
+        <bt:Url id="MVGrammar.GetStarted.LearnMore" DefaultValue="https://grammarsoft.com/" />
       </bt:Urls>
       <!-- ShortStrings max characters==125. -->
       <bt:ShortStrings>
