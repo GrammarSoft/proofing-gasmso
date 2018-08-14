@@ -154,7 +154,11 @@ let g_conf_json = JSON.stringify(g_conf_defaults);
 
 /* exported Const */
 const Const = {
+	SpaceOrEmpty: /^\s*$/,
+	LetterT: /[\d\wa-zA-ZéÉöÖæÆøØåÅ.,!;:]+/i,
 	NonLetter: /[^\d\wa-zA-ZéÉöÖæÆøØåÅ.,!;:]+/ig,
+	NonLetterT: /[^\d\wa-zA-ZéÉöÖæÆøØåÅ.,!;:]+/i,
+	OnlyNonLetterT: /^[^\d\wa-zA-ZéÉöÖæÆøØåÅ.,!;:]*$/i,
 	Split_String: ' ,.?!"#¤%&/()=@£${}|*^¨~/\\½§<>:;-',
 };
 Const.Split_Array = Const.Split_String.split('');
@@ -465,4 +469,142 @@ function itw_speak_attach(node) {
 			return false;
 		}
 	});
+}
+
+/* exported findToSend */
+function findToSend(prefix, word, suffix) {
+	let prefix_s = prefix.replace(Const.NonLetter, '');
+	let word_s = word.replace(Const.NonLetter, '');
+	let suffix_s = suffix.replace(Const.NonLetter, '');
+
+	for (let i=0 ; i<to_send.length ; ++i) {
+		let t = to_send[i].t;
+		let found = true;
+
+		let p_off = 0;
+		for (let j=0 ; j<prefix_s.length ; ++j) {
+			let f = prefix_s.charAt(j);
+			if (Const.SpaceOrEmpty.test(f)) {
+				continue;
+			}
+			let nof = t.indexOf(f, p_off);
+			if (nof === -1) {
+				found = false;
+				break;
+			}
+			if (p_off === 0 && Const.LetterT.test(t.substring(0, nof))) {
+				// There is something substantial before the prefix
+				console.log('Prefix: '+t.substring(0, nof));
+				found = false;
+				break;
+			}
+			p_off = nof + f.length;
+		}
+		if (!found) {
+			console.log('Not-found: prefix');
+			continue;
+		}
+		while (p_off < t.length && Const.SpaceOrEmpty.test(t.charAt(p_off))) {
+			++p_off;
+		}
+
+		let w_off = p_off;
+		for (let j=0 ; j<word_s.length ; ++j) {
+			let f = word_s.charAt(j);
+			if (Const.SpaceOrEmpty.test(f)) {
+				continue;
+			}
+			let nof = t.indexOf(f, w_off);
+			if (nof === -1) {
+				found = false;
+				break;
+			}
+			w_off = nof + f.length;
+		}
+		if (!found) {
+			console.log('Not-found: word');
+			continue;
+		}
+		if (Const.NonLetterT.test(word.charAt(word.length-1))) {
+			while (w_off < t.length && Const.NonLetterT.test(t.charAt(w_off))) {
+				++w_off;
+			}
+		}
+
+		let s_off = w_off;
+		while (s_off < t.length && Const.SpaceOrEmpty.test(t.charAt(s_off))) {
+			++s_off;
+		}
+		for (let j=0 ; j<suffix_s.length ; ++j) {
+			let f = suffix_s.charAt(j);
+			if (Const.SpaceOrEmpty.test(f)) {
+				continue;
+			}
+			let nof = t.indexOf(f, s_off);
+			if (nof === -1) {
+				found = false;
+				break;
+			}
+			s_off = nof + f.length;
+		}
+		if (!found) {
+			console.log('Not-found: suffix');
+			continue;
+		}
+		while (s_off < t.length && Const.SpaceOrEmpty.test(t.charAt(s_off))) {
+			++s_off;
+		}
+
+		if (Const.LetterT.test(t.substring(s_off))) {
+			// There is something substantial after the suffix
+			console.log('Suffix: '+t.substring(s_off));
+			continue;
+		}
+
+		if (/^\s/.test(word)) {
+			while (p_off > 1 && Const.SpaceOrEmpty.test(t.charAt(p_off-1))) {
+				--p_off;
+			}
+		}
+		else {
+			while (p_off < t.length && Const.SpaceOrEmpty.test(t.charAt(p_off))) {
+				++p_off;
+			}
+		}
+
+		if (/\s$/.test(word)) {
+			while (w_off < t.length && Const.SpaceOrEmpty.test(t.charAt(w_off))) {
+				++w_off;
+			}
+		}
+		else {
+			while (w_off > 1 && Const.SpaceOrEmpty.test(t.charAt(w_off-1))) {
+				--w_off;
+			}
+		}
+
+		let rv = {
+			prefix: t.substring(0, p_off),
+			word: t.substring(p_off, w_off),
+			suffix: t.substring(w_off, s_off),
+			t: t,
+			};
+
+		if (rv.prefix.replace(Const.NonLetter, '') !== prefix_s) {
+			console.log('Non-prefix: '+rv.prefix+' != '+prefix_s);
+			continue;
+		}
+		if (rv.word.replace(Const.NonLetter, '') !== word_s) {
+			console.log('Non-word: '+rv.word+' != '+word_s);
+			continue;
+		}
+		if (rv.suffix.replace(Const.NonLetter, '') !== suffix_s) {
+			console.log('Non-suffix: '+rv.suffix+' != '+suffix_s);
+			continue;
+		}
+
+		return rv;
+	}
+
+	return false;
 }
