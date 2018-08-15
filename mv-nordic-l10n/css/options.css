@@ -1,0 +1,147 @@
+/*!
+ * Copyright 2016-2018 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
+ * Frontend by Tino Didriksen <mail@tinodidriksen.com>
+ *
+ * This project is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This project is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this project.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+h1, h2 {
+	color: #0da9f6;
+}
+h3 {
+	font-size: 14px;
+	font-weight: bold;
+	color: #000;
+}
+
+label {
+	display: inline-block;
+	margin: 7px 0;
+	color: #000;
+}
+
+button {
+	background-color: #4a90e2;
+	color: #fff;
+}
+
+.formWordAdd input {
+	max-width: 50%;
+	margin: 5px 10px 5px 0;
+}
+
+.formWordEdit button {
+	font-size: 20px;
+}
+
+.tabbar {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	height: 60px;
+	margin-bottom: 18px;
+}
+.tab {
+	display: block;
+	text-align: center;
+	flex-grow: 1;
+	height: 100%;
+	line-height: 60px;
+	border: 1px solid #ddd;
+	color: #000;
+	font-size: 16px;
+}
+.tab:hover {
+	background-color: #eaf7fe;
+}
+.tab.selected {
+	background-color: #4a90e2;
+	color: #fff;
+}
+
+.pane {
+	position: absolute;
+	top: 78px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.sidebar {
+	position: absolute;
+	width: 250px;
+	left: 18px;
+	padding: 0;
+}
+.column {
+	position: absolute;
+	left: calc(250px + 18px + 18px);
+	right: 18px;
+	height: 100%;
+	padding-bottom: 86px;
+}
+
+.sidebar .link {
+	color: #000;
+	display: block;
+	padding: 9px 18px 9px 18px;
+}
+.sidebar .link.selected {
+	color: #0da9f6;
+	padding-left: 13px;
+	border-left: 5px solid;
+}
+
+.words {
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	margin: 0.75rem 0;
+	padding: 1.75rem 0 0.75rem 0;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+.word * {
+	display: inline-block;
+}
+.word {
+	white-space: nowrap;
+	margin-bottom: 1rem;
+	vertical-align: top;
+}
+.word input {
+	min-height: 30px;
+	width: 14rem;
+}
+.word button {
+	margin-top: 0;
+	margin-bottom: 0;
+	min-width: 2rem;
+	width: 2rem;
+}
+.formWordEdit .btnWordEdit {
+	font-size: 14px;
+	width: auto;
+}
+
+.column footer {
+	text-align: right;
+	height: 80px;
+}
+
+.logo-mv {
+	width: 150px;
+}
