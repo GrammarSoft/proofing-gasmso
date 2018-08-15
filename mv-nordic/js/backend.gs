@@ -59,6 +59,11 @@ function injectVariables(html, tool, mode) {
 	if (mode) {
 		html = html.replace('</body>', '<script>g_mode = "'+mode+'";</script></body>');
 	}
+
+	// Transform MS Office backend to Google
+	html = html.replace('<script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>', '');
+	html = html.replace('/impl-officejs.js"', '/impl-gas.js"');
+
 	return html;
 }
 
