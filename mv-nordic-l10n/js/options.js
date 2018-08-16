@@ -59,7 +59,7 @@ function dictionaryDelete() {
 		$(this).closest('form').remove();
 	}
 	else {
-		alert('Kunne ikke slette ordet "'+w+'" fra stavekontrollen!');
+		alert(sprintf(l10n.t('ERR_DICT_FAIL_DELETE'), w));
 	}
 }
 
@@ -83,7 +83,7 @@ function attachDictionaryClicks() {
 			$(this).attr('data-word', w);
 		}
 		else {
-			alert('Kunne ikke ændre ordet "'+ow+'" til '+w+' i stavekontrollen!');
+			alert(sprintf(l10n.t('ERR_DICT_FAIL_EDIT'), ow, w));
 		}
 
 		e.preventDefault();
@@ -196,7 +196,7 @@ function initOptions() {
 			$('.inputAddWord').val('').focus();
 		}
 		else {
-			alert('Kunne ikke tilføje ordet "'+w+'" til stavekontrollen!');
+			alert(sprintf(l10n.t('ERR_DICT_FAIL_ADD'), w));
 		}
 
 		e.preventDefault();

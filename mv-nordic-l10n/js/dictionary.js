@@ -28,6 +28,7 @@ $(function() {
 	});
 
 	loadConfig();
+	l10n_world();
 
 	let text = g_text;
 	if (window.location.search.indexOf('text=') !== -1) {
@@ -43,7 +44,7 @@ $(function() {
 	$.post(ROOT_URL_GRAMMAR + 'callback.php?a=itw-dict', data).done(function(rv) {
 		if (!rv.hasOwnProperty('result') || !rv.result.hasOwnProperty('value') || !rv.result.value) {
 			console.log(this);
-			$('iframe').attr('srcdoc', 'Kunne ikke finde '+text+' i ordbogen.');
+			$('iframe').attr('srcdoc', sprintf(l10n.t('ERR_DICTIONARY_404'), text));
 			return;
 		}
 
@@ -77,6 +78,6 @@ $(function() {
 		}
 	}).fail(function() {
 		console.log(this);
-		$('iframe').attr('srcdoc', 'Kunne ikke finde '+text+' i ordbogen.');
+		$('iframe').attr('srcdoc', sprintf(l10n.t('ERR_DICTIONARY_404'), text));
 	});
 });

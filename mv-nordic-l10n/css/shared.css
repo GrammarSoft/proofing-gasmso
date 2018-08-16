@@ -308,10 +308,6 @@ label input[type="checkbox"] {
 	margin: 2px 9px 0 0;
 }
 
-label span {
-	max-width: calc(100% - 30px);
-}
-
 input[type="text"] {
 	border-radius: 5px;
 	border: 2px solid #4a90e2;
