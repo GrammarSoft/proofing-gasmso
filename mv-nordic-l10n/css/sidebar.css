@@ -21,6 +21,10 @@ body {
 	padding-bottom: 74px;
 }
 
+label span {
+	max-width: calc(100% - 30px);
+}
+
 #popupIgnore {
 	position: absolute;
 	z-index: 100;

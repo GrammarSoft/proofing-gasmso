@@ -17,3 +17,8 @@ Released as GPLv3+ - except `imgs/*` and `js/mark-types.js`
 * Edit `js/shared.js` lines 24-27
 * Edit `mso.xml` and `html/*` to replace all instances of `https://retmig.dk/gas/dev/` with your chosen `ROOT_URL_SELF` value
 * Remove all lines matching `console.log`
+
+# External Dependencies
+* MurmurHash3js: https://github.com/pid/murmurHash3js as `vendor/murmurhash3js.min.js`
+* JSON WSP Client: http://ladonize.org/resources/jsonwspclient.js as `js/jsonwspclient.js`
+* sprintf.js: https://github.com/alexei/sprintf.js as `vendor/sprintf.min.js`
