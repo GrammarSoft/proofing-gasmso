@@ -21,12 +21,20 @@
  */
 'use strict';
 
+var l10n = {
+	MENU_START: 'Start Grammateket',
+	MENU_OPTIONS: 'Indstillinger',
+	TITLE_DICTIONARY: 'IntoWords Ordbog',
+	TITLE_OPTIONS: 'Indstillinger',
+	TITLE_SIDEBAR: 'Grammateket',
+	};
+
 function onOpen(e) {
 	var ui = DocumentApp.getUi();
 	ui.createAddonMenu()
-		.addItem('Start Grammateket', 'showGrammar')
+		.addItem(l10n.MENU_START, 'showGrammar')
 		.addSeparator()
-		.addItem('Indstillinger', 'showOptions')
+		.addItem(l10n.MENU_OPTIONS, 'showOptions')
 		.addToUi();
 }
 
@@ -71,7 +79,7 @@ function showGrammar(mode) {
 	var ui = HtmlService.createTemplateFromFile('html/sidebar').evaluate();
 	var html = ui.getContent();
 	html = injectVariables(html, 'Grammar', mode);
-	ui.setContent(html).setSandboxMode(HtmlService.SandboxMode.IFRAME).setTitle('Grammateket');
+	ui.setContent(html).setSandboxMode(HtmlService.SandboxMode.IFRAME).setTitle(l10n.TITLE_SIDEBAR);
 	DocumentApp.getUi().showSidebar(ui);
 }
 
@@ -84,14 +92,14 @@ function showOptions(tool) {
 	var html = ui.getContent();
 	html = injectVariables(html, tool);
 	ui.setContent(html).setWidth(800).setHeight(800);
-	DocumentApp.getUi().showModalDialog(ui, 'Indstillinger');
+	DocumentApp.getUi().showModalDialog(ui, l10n.TITLE_OPTIONS);
 }
 
 function showDictionary(text) {
 	var ui = HtmlService.createTemplateFromFile('html/dictionary').evaluate();
 	var html = ui.getContent().replace(/<!--.*?-->/g, '').replace(/>[\s\n]+</g, '><').replace('</body>', '<script>g_text = '+JSON.stringify(text)+';</script></body>');
 	ui.setContent(html).setWidth(800).setHeight(800);
-	DocumentApp.getUi().showModalDialog(ui, 'IntoWords Ordbog');
+	DocumentApp.getUi().showModalDialog(ui, l10n.TITLE_DICTIONARY);
 }
 
 function getAllPars() {

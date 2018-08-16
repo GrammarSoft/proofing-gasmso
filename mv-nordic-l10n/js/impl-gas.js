@@ -75,4 +75,5 @@ function impl_showDictionary(text) {
 
 function impl_Init(func) {
 	func();
+	l10n_world();
 }
