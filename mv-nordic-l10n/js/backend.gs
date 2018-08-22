@@ -37,7 +37,7 @@ l10n.t = function(s) {
 	s = '' + s; // Coerce to string
 
 	var l = 'da';
-	var m = /^([^-]+)/.exec(Session.getActiveUserLocale());
+	var m = /^([a-z]+)/.exec(Session.getActiveUserLocale());
 	if (m) {
 		l = m[1];
 	}
