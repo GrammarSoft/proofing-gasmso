@@ -159,6 +159,10 @@ l10n.t = function(s) {
 	let l = session.locale;
 	let t = '';
 
+	if (!l10n.s.hasOwnProperty(l)) {
+		l = 'da';
+	}
+
 	// If the string doesn't exist in the locale, fall back
 	if (!l10n.s[l].hasOwnProperty(s)) {
 		// Try English
