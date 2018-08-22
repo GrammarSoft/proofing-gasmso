@@ -26,6 +26,7 @@ $(function() {
 			withCredentials: true,
 		},
 	});
+	session.locale = l10n_detectLanguage();
 
 	loadConfig();
 	l10n_world();

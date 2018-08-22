@@ -192,6 +192,17 @@ l10n.t = function(s) {
 	return t;
 };
 
+function l10n_detectLanguage() {
+	let l = navigator.language;
+	if (!l10n.s.hasOwnProperty(l)) {
+		l = l.replace(/^([^-_]+).*$/, '$1');
+	}
+	if (!l10n.s.hasOwnProperty(l)) {
+		l = 'da';
+	}
+	return l;
+}
+
 function l10n_world() {
 	$('[data-l10n]').each(function() {
 		let e = $(this);

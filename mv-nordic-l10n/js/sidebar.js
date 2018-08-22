@@ -965,18 +965,8 @@ function didRemove(rv) {
 
 function getState(data) {
 	console.log(data);
-	let s = data.session;
-	// If the locale doesn't exist, trim it and try again
-	if (!l10n.s.hasOwnProperty(s.locale)) {
-		console.log('No such locale ' + s.locale);
-		s.locale = s.locale.replace(/^([^-_]+).*$/, '$1');
-	}
-	// Still doesn't exist, default to Danish
-	if (!l10n.s.hasOwnProperty(s.locale)) {
-		console.log('No such locale ' + s.locale);
-		s.locale = 'da';
-	}
-	session = s;
+	session = data.session;
+	session.locale = l10n_detectLanguage();
 
 	loadConfig();
 	loadDictionary();
@@ -994,7 +984,7 @@ function loginKeepalive(init) {
 	g_login_ws = null;
 	g_login_channel = '';
 
-	g_access_token = ls_get('access-token', {hmac: '', sessionid: ''});
+	g_access_token = ls_get('access-token', g_access_token_defaults);
 
 	$.ajax({
 		url: ROOT_URL_GRAMMAR+'/callback.php',
@@ -1019,7 +1009,7 @@ function loginKeepalive(init) {
 		}
 	}).fail(function() {
 		console.log('Login fail');
-		g_access_token = {hmac: '', sessionid: ''};
+		g_access_token = Object.assign({}, g_access_token_defaults);
 		ls_set('access-token', g_access_token);
 
 		loginListener();
@@ -1102,7 +1092,7 @@ function logout() {
 		g_keepalive = null;
 	}
 
-	g_access_token = {hmac: '', sessionid: ''};
+	g_access_token = Object.assign({}, g_access_token_defaults);
 	ls_set('access-token', g_access_token);
 
 	loginListener();
