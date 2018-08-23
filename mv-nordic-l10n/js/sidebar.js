@@ -844,7 +844,7 @@ function sendTexts() {
 	}
 
 	if (text) {
-		let url = ROOT_URL_GRAMMAR + '/callback.php?a=danproof';
+		let url = ROOT_URL_GRAMMAR + '/callback.php?a=grammar';
 		let token = g_access_token;
 		if (g_tool === 'Comma') {
 			url = ROOT_URL_GRAMMAR + '/callback.php?a=comma';
