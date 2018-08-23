@@ -97,7 +97,11 @@ function attachDictionaryClicks() {
 function getState(data) {
 	console.log(data);
 	session = data.session;
+
+	g_access_token = ls_get('access-token', g_access_token_defaults);
+	g_access_hmac = JSON.parse(g_access_token.hmac);
 	session.locale = l10n_detectLanguage();
+	l10n_world();
 
 	loadConfig();
 	loadDictionary();

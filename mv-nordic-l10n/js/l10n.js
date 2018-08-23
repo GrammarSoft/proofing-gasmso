@@ -194,6 +194,13 @@ l10n.t = function(s) {
 
 function l10n_detectLanguage() {
 	let l = navigator.language;
+	if (g_access_hmac.hasOwnProperty('ai')) {
+		let m = /\.([a-z]{2})\./.exec(g_access_hmac['ai'].join(','));
+		if (m) {
+			l = m[1];
+			console.log('Set locale from AIs: '+l);
+		}
+	}
 	if (!l10n.s.hasOwnProperty(l)) {
 		l = l.replace(/^([^-_]+).*$/, '$1');
 	}
