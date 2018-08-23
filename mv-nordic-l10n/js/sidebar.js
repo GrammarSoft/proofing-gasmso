@@ -966,7 +966,11 @@ function didRemove(rv) {
 function getState(data) {
 	console.log(data);
 	session = data.session;
+
+	g_access_token = ls_get('access-token', g_access_token_defaults);
+	g_access_hmac = JSON.parse(g_access_token.hmac);
 	session.locale = l10n_detectLanguage();
+	l10n_world();
 
 	loadConfig();
 	loadDictionary();
@@ -1003,6 +1007,15 @@ function loginKeepalive(init) {
 		delete rv.a;
 		g_access_token = rv;
 		ls_set('access-token', g_access_token);
+		g_access_hmac = JSON.parse(g_access_token.hmac);
+
+		let nloc = l10n_detectLanguage();
+		if (nloc !== session.locale) {
+			console.log('Re-translating UI from %s to %s', session.locale, nloc);
+			session.locale = nloc;
+			l10n_world();
+		}
+
 		if (init) {
 			$('.sidebar').hide();
 			$('#chkWelcomeShared').show();

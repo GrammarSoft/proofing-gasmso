@@ -156,12 +156,14 @@ let _live_dictionary = {};
 
 /* exported g_access_token_defaults */
 const g_access_token_defaults = {
-	hmac: '',
+	hmac: '{}',
 	session: '',
 	ai: [],
 };
 /* exported g_access_token */
 let g_access_token = Object.assign({}, g_access_token_defaults);
+/* exported g_access_hmac */
+let g_access_hmac = {};
 /* exported g_keepalive */
 let g_keepalive = null;
 /* exported g_login_channel */
