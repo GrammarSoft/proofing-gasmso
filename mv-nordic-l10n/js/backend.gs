@@ -31,6 +31,13 @@ l10n.s = {
 		TITLE_OPTIONS: 'Indstillinger',
 		TITLE_SIDEBAR: 'Grammateket',
 		},
+	sv: {
+		MENU_START: 'Starta Grammateket',
+		MENU_OPTIONS: 'Inställningar',
+		TITLE_DICTIONARY: 'IntoWords Ordbok',
+		TITLE_OPTIONS: 'Inställningar',
+		TITLE_SIDEBAR: 'Grammateket',
+		},
 	};
 
 l10n.t = function(s) {

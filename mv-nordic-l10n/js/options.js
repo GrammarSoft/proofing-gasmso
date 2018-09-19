@@ -103,6 +103,13 @@ function getState(data) {
 	session.locale = l10n_detectLanguage();
 	l10n_world();
 
+	if (session.locale === 'da') {
+		$('.tabbar').show();
+	}
+	else {
+		$('.tabbar').hide();
+	}
+
 	loadConfig();
 	loadDictionary();
 
