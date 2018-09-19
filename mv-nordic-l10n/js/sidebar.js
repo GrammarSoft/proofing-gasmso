@@ -1018,7 +1018,17 @@ function loginKeepalive(init) {
 
 		if (init) {
 			$('.sidebar').hide();
-			$('#chkWelcomeShared').show();
+			if (nloc === 'da') {
+				$('.chkGrammarToComma').show();
+				$('.btnCheckComma').show();
+				$('#chkWelcomeShared').show();
+			}
+			else {
+				$('.optComma').prop('checked', false);
+				$('.chkGrammarToComma').hide();
+				$('.btnCheckComma').hide();
+				$('#chkWelcomeGrammar').show();
+			}
 		}
 	}).fail(function() {
 		console.log('Login fail');
