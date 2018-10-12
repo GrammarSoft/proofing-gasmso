@@ -52,6 +52,7 @@ let act_queue = [];
 let select_fail = false;
 let grammar_retried = false;
 let comma_retried = false;
+let support_sidebar = null;
 
 function markingSetSentence() {
 	let s = cmarking.s;
@@ -1021,12 +1022,14 @@ function loginKeepalive(init) {
 			if (nloc === 'da') {
 				$('.chkGrammarToComma').show();
 				$('.btnCheckComma').show();
+				$('.comma-specific').show();
 				$('#chkWelcomeShared').show();
 			}
 			else {
 				$('.optComma').prop('checked', false);
 				$('.chkGrammarToComma').hide();
 				$('.btnCheckComma').hide();
+				$('.comma-specific').hide();
 				$('#chkWelcomeGrammar').show();
 			}
 		}
@@ -1167,6 +1170,24 @@ function initSidebar() {
 		ignores = {};
 		loginKeepalive(true);
 	});
+	$('.btnSupport').click(function() {
+		if (support_sidebar) {
+			$('.sidebar').hide();
+			support_sidebar.show();
+			support_sidebar = null;
+		}
+		else {
+			support_sidebar = $('.sidebar:visible');
+			$('.sidebar').hide();
+			$('#chkSupport').show();
+		}
+	});
+	$('.btnCloseSupport').click(function() {
+		$('.sidebar').hide();
+		support_sidebar.show();
+		support_sidebar = null;
+	});
+
 	$('.optComma').click(function() {
 		let v = $(this).prop('checked');
 		$('.optComma').prop('checked', v);
@@ -1251,6 +1272,16 @@ function initSidebar() {
 	$('.chkProgress').hide();
 	$('.sidebar').hide();
 	$('#placeholder').remove();
+
+	$('.rpl-vars').each(function() {
+		let e = $(this);
+		if (e.text()) {
+			e.text(e.text().replace('{VERSION}', VERSION));
+		}
+		if (e.attr('src')) {
+			e.attr('src', e.attr('src').replace('{ROOT_URL_SELF}', ROOT_URL_SELF));
+		}
+	});
 
 	if (!haveLocalStorage()) {
 		showError('ERR_NO_STORAGE');
