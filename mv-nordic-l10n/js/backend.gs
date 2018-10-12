@@ -31,6 +31,13 @@ l10n.s = {
 		TITLE_OPTIONS: 'Indstillinger',
 		TITLE_SIDEBAR: 'Grammateket',
 		},
+	nb: {
+		MENU_START: 'Start Grammateket',
+		MENU_OPTIONS: 'Innstillinger',
+		TITLE_DICTIONARY: 'IntoWords Ordbok',
+		TITLE_OPTIONS: 'Innstillinger',
+		TITLE_SIDEBAR: 'Grammateket',
+		},
 	sv: {
 		MENU_START: 'Starta Grammateket',
 		MENU_OPTIONS: 'Inställningar',
@@ -39,6 +46,9 @@ l10n.s = {
 		TITLE_SIDEBAR: 'Grammateket',
 		},
 	};
+
+l10n.s.no = l10n.s.nb;
+l10n.s.nn = l10n.s.nb;
 
 l10n.t = function(s) {
 	s = '' + s; // Coerce to string

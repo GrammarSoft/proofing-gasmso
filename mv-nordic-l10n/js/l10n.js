@@ -346,6 +346,9 @@ l10n.s = {
 	},
 };
 
+l10n.s.no = l10n.s.nb;
+l10n.s.nn = l10n.s.nb;
+
 l10n.t = function(s) {
 	s = '' + s; // Coerce to string
 
