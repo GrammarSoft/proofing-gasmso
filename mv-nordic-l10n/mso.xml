@@ -5,7 +5,7 @@
   <Id>fa9e1dcc-6133-4351-86b8-f0da7f28ad6c</Id>
 
   <!--Version. Updates from the store only get triggered if there is a version change. -->
-  <Version>1.0.0</Version>
+  <Version>1.1.0</Version>
   <ProviderName>GrammarSoft ApS</ProviderName>
   <DefaultLocale>da-DK</DefaultLocale>
   <DisplayName DefaultValue="Grammateket" />

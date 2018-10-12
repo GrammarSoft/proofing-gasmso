@@ -471,7 +471,7 @@ msgstr "Vill du kontrollera den markerade texten eller hela texten?"
 msgid "TXT_GRAMMAR_INTRO"
 msgstr "Först ska du kontrollera din text för rättstavning och grammatik."
 
-# Besøg vores website på <a href="https://www.mv-nordic.com/" target="_blank">mv-nordic.com</a>.\nKommaforslag <a href="https://www.mv-nordic.com/" target="_blank">hjælp</a>.
+# Besøg vores website på <a href="https://www.mv-nordic.com/" target="_blank">mv-nordic.com</a>. Grammateket <a href="https://www.mv-nordic.com/" target="_blank">hjælp</a>.
 msgid "TXT_GRAMMAR_SUPPORT"
 msgstr "???"
 

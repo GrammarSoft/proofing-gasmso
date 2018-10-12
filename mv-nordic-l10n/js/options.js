@@ -235,16 +235,6 @@ function initOptions() {
 	$('#error').hide();
 	$('.tab-' + g_tool.toLowerCase()).click();
 	$('#placeholder').remove();
-
-	$('.rpl-vars').each(function() {
-		let e = $(this);
-		if (e.text()) {
-			e.text(e.text().replace('{VERSION}', VERSION));
-		}
-		if (e.attr('src')) {
-			e.attr('src', e.attr('src').replace('{ROOT_URL_SELF}', ROOT_URL_SELF));
-		}
-	});
 }
 
 $(function() {

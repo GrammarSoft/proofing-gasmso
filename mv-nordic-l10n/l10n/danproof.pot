@@ -428,7 +428,7 @@ msgstr ""
 msgid "TXT_COMMA_LINKS"
 msgstr ""
 
-# Besøg vores website på <a href="https://www.mv-nordic.com/" target="_blank">mv-nordic.com</a>.\nKommaforslag <a href="https://www.mv-nordic.com/" target="_blank">hjælp</a>.
+# Besøg vores website på <a href="https://www.mv-nordic.com/" target="_blank">mv-nordic.com</a>. Kommaforslag <a href="https://www.mv-nordic.com/" target="_blank">hjælp</a>.
 msgid "TXT_COMMA_SUPPORT"
 msgstr ""
 
@@ -452,7 +452,7 @@ msgstr ""
 msgid "TXT_GRAMMAR_INTRO"
 msgstr ""
 
-# Besøg vores website på <a href="https://www.mv-nordic.com/" target="_blank">mv-nordic.com</a>.\nKommaforslag <a href="https://www.mv-nordic.com/" target="_blank">hjælp</a>.
+# Besøg vores website på <a href="https://www.mv-nordic.com/" target="_blank">mv-nordic.com</a>. Grammateket <a href="https://www.mv-nordic.com/" target="_blank">hjælp</a>.
 msgid "TXT_GRAMMAR_SUPPORT"
 msgstr ""
 
