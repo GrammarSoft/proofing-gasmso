@@ -323,7 +323,7 @@ msgid "TXT_COMMA_LINKS"
 msgstr "Fra 4. klasse kan eleverne bruge forslagene til at reflektere over egen kommasætning. De tre niveauer i indstillingsmenuen leder frem mod videns- og færdighedsmål efter 6. klasse (niveau 1-2) og efter 9.-10. klasse (niveau 3).\n\nHar du brug for inspiration til brug af Kommaforslag i undervisningen, så <a href=\"https://www.mv-nordic.com/dk/support/kommaforslag/inspirationsmateriale-til-kommaforslag\" target=\"_blank\">følg linket</a>."
 
 msgid "TXT_COMMA_SUPPORT"
-msgstr "Besøg vores website på <a href=\"https://www.mv-nordic.com/\" target=\"_blank\">mv-nordic.com</a>.\nKommaforslag <a href=\"https://www.mv-nordic.com/\" target=\"_blank\">hjælp</a>."
+msgstr "Besøg vores website på <a href=\"https://www.mv-nordic.com/\" target=\"_blank\">mv-nordic.com</a>. Kommaforslag <a href=\"https://www.mv-nordic.com/\" target=\"_blank\">hjælp</a>."
 
 msgid "TXT_DICTIONARY_HINT"
 msgstr "Her kan du tilføje, rette eller fjerne ord fra din ordbog."
@@ -341,7 +341,7 @@ msgid "TXT_GRAMMAR_INTRO"
 msgstr "Først skal du tjekke din tekst for stavning og grammatik."
 
 msgid "TXT_GRAMMAR_SUPPORT"
-msgstr "Besøg vores website på <a href=\"https://www.mv-nordic.com/\" target=\"_blank\">mv-nordic.com</a>.\nKommaforslag <a href=\"https://www.mv-nordic.com/\" target=\"_blank\">hjælp</a>."
+msgstr "Besøg vores website på <a href=\"https://www.mv-nordic.com/\" target=\"_blank\">mv-nordic.com</a>. Grammateket <a href=\"https://www.mv-nordic.com/\" target=\"_blank\">hjælp</a>."
 
 msgid "TXT_MUST_LOGIN"
 msgstr "Du skal logge ind for at bruge dette værktøj."

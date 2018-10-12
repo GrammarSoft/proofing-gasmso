@@ -59,6 +59,11 @@ iframe {
 	height: 100%;
 }
 
+.supportBtn {
+	background-color: #4a90e2;
+	color: #fff;
+}
+
 .whiteblue {
 	color: #eaf7fe;
 }
