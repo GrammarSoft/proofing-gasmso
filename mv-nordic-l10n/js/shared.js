@@ -25,7 +25,7 @@ const ROOT_URL_SELF = 'https://retmig.dk/gas/dev/';
 const ROOT_URL_GRAMMAR = 'https://kommaer.dk/mv-grammar/';
 const ROOT_URL_COMMA = 'https://kommaer.dk/mv-comma/';
 const CADUCEUS_URL = 'wss://gramtrans.com/caduceus/';
-const MVID_SIGNOUT_URL = 'https://signon.vitec-mv.com/logout.php?return_to='+encodeURIComponent(ROOT_URL_GRAMMAR+'/logout.php')+'&sessionUid=';
+const MVID_SIGNOUT_URL = 'https://signon-test.vitec-mv.com/logout.php?return_to='+encodeURIComponent(ROOT_URL_GRAMMAR+'/logout.php')+'&sessionUid=';
 
 const VERSION = ''+VERSION_MAJOR+'.'+VERSION_MINOR+'.'+VERSION_PATCH;
 
