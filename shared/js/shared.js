@@ -19,13 +19,13 @@
 'use strict';
 
 const VERSION_MAJOR = 1;
-const VERSION_MINOR = 0;
+const VERSION_MINOR = 1;
 const VERSION_PATCH = 0;
 const ROOT_URL_SELF = 'https://retmig.dk/gas/dev/';
 const ROOT_URL_GRAMMAR = 'https://kommaer.dk/mv-grammar/';
 const ROOT_URL_COMMA = 'https://kommaer.dk/mv-comma/';
 const CADUCEUS_URL = 'wss://gramtrans.com/caduceus/';
-const MVID_SIGNOUT_URL = 'https://signon.vitec-mv.com/logout.php?return_to='+encodeURIComponent(ROOT_URL_GRAMMAR+'/logout.php')+'&sessionUid=';
+const MVID_SIGNOUT_URL = 'https://signon-test.vitec-mv.com/logout.php?return_to='+encodeURIComponent(ROOT_URL_GRAMMAR+'/logout.php')+'&sessionUid=';
 
 const VERSION = ''+VERSION_MAJOR+'.'+VERSION_MINOR+'.'+VERSION_PATCH;
 
@@ -70,6 +70,42 @@ if (typeof Object.assign != 'function') {
 		writable: true,
 		configurable: true,
 	});
+}
+
+// From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/repeat#Polyfill
+if (!String.prototype.repeat) {
+	String.prototype.repeat = function(count) {
+		'use strict';
+		if (this == null) {
+			throw new TypeError('can\'t convert ' + this + ' to object');
+		}
+		let str = '' + this;
+		count = +count;
+		if (count != count) {
+			count = 0;
+		}
+		if (count < 0) {
+			throw new RangeError('repeat count must be non-negative');
+		}
+		if (count == Infinity) {
+			throw new RangeError('repeat count must be less than infinity');
+		}
+		count = Math.floor(count);
+		if (str.length == 0 || count == 0) {
+			return '';
+		}
+		// Ensuring count is a 31-bit integer allows us to heavily optimize the
+		// main part. But anyway, most current (August 2014) browsers can't handle
+		// strings 1 << 28 chars or longer, so:
+		if (str.length * count >= 1 << 28) {
+			throw new RangeError('repeat count must not overflow maximum string size');
+		}
+		let rpt = '';
+		for (let i = 0; i < count; i++) {
+			rpt += str;
+		}
+		return rpt;
+	}
 }
 
 /* exported Defs */
@@ -118,8 +154,16 @@ let g_dictionary_json = '{}';
 /* exported _live_dictionary */
 let _live_dictionary = {};
 
+/* exported g_access_token_defaults */
+const g_access_token_defaults = {
+	hmac: '{}',
+	session: '',
+	ai: [],
+};
 /* exported g_access_token */
-let g_access_token = false;
+let g_access_token = Object.assign({}, g_access_token_defaults);
+/* exported g_access_hmac */
+let g_access_hmac = {};
 /* exported g_keepalive */
 let g_keepalive = null;
 /* exported g_login_channel */
@@ -169,7 +213,7 @@ let g_tool = null;
 /* exported g_conf */
 let g_conf = Object.assign({}, g_conf_defaults);
 /* exported session */
-let session = {};
+let session = {locale: 'da'};
 
 // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 /* exported escapeRegExp */
@@ -327,7 +371,12 @@ function haveLocalStorage() {
 function ls_get(key, def) {
 	let v = window.localStorage.getItem(key);
 	if (v === null) {
-		v = def;
+		if (def !== null && typeof def === 'object') {
+			v = Object.assign({}, def);
+		}
+		else {
+			v = def;
+		}
 	}
 	else {
 		v = JSON.parse(v);

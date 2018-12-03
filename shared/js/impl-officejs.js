@@ -260,6 +260,7 @@ function impl_Init(func) {
 	Office.initialize = function(reason) {
 		$(document).ready(function() {
 			func();
+			l10n_world();
 
 			if (!Office.context.requirements.isSetSupported('WordApi', '1.1')) {
 				//showError('Requires Word 2016 or later!');

@@ -59,7 +59,7 @@ function dictionaryDelete() {
 		$(this).closest('form').remove();
 	}
 	else {
-		alert('Kunne ikke slette ordet "'+w+'" fra stavekontrollen!');
+		alert(sprintf(l10n.t('ERR_DICT_FAIL_DELETE'), w));
 	}
 }
 
@@ -83,7 +83,7 @@ function attachDictionaryClicks() {
 			$(this).attr('data-word', w);
 		}
 		else {
-			alert('Kunne ikke ændre ordet "'+ow+'" til '+w+' i stavekontrollen!');
+			alert(sprintf(l10n.t('ERR_DICT_FAIL_EDIT'), ow, w));
 		}
 
 		e.preventDefault();
@@ -96,18 +96,19 @@ function attachDictionaryClicks() {
 
 function getState(data) {
 	console.log(data);
-	let s = data.session;
-	// If the locale doesn't exist, trim it and try again
-	if (!l10n.s.hasOwnProperty(s.locale)) {
-		console.log('No such locale ' + s.locale);
-		s.locale = s.locale.replace(/^([^-_]+).*$/, '$1');
+	session = data.session;
+
+	g_access_token = ls_get('access-token', g_access_token_defaults);
+	g_access_hmac = JSON.parse(g_access_token.hmac);
+	session.locale = l10n_detectLanguage();
+	l10n_world();
+
+	if (session.locale === 'da') {
+		$('.tabbar').show();
 	}
-	// Still doesn't exist, default to Danish
-	if (!l10n.s.hasOwnProperty(s.locale)) {
-		console.log('No such locale ' + s.locale);
-		s.locale = 'da';
+	else {
+		$('.tabbar').hide();
 	}
-	session = s;
 
 	loadConfig();
 	loadDictionary();
@@ -196,7 +197,7 @@ function initOptions() {
 			$('.inputAddWord').val('').focus();
 		}
 		else {
-			alert('Kunne ikke tilføje ordet "'+w+'" til stavekontrollen!');
+			alert(sprintf(l10n.t('ERR_DICT_FAIL_ADD'), w));
 		}
 
 		e.preventDefault();
@@ -234,16 +235,6 @@ function initOptions() {
 	$('#error').hide();
 	$('.tab-' + g_tool.toLowerCase()).click();
 	$('#placeholder').remove();
-
-	$('.rpl-vars').each(function() {
-		let e = $(this);
-		if (e.text()) {
-			e.text(e.text().replace('{VERSION}', VERSION));
-		}
-		if (e.attr('src')) {
-			e.attr('src', e.attr('src').replace('{ROOT_URL_SELF}', ROOT_URL_SELF));
-		}
-	});
 }
 
 $(function() {
