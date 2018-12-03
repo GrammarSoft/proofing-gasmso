@@ -52,6 +52,7 @@ let act_queue = [];
 let select_fail = false;
 let grammar_retried = false;
 let comma_retried = false;
+let support_sidebar = null;
 
 function markingSetSentence() {
 	let s = cmarking.s;
@@ -844,7 +845,7 @@ function sendTexts() {
 	}
 
 	if (text) {
-		let url = ROOT_URL_GRAMMAR + '/callback.php?a=danproof';
+		let url = ROOT_URL_GRAMMAR + '/callback.php?a=grammar';
 		let token = g_access_token;
 		if (g_tool === 'Comma') {
 			url = ROOT_URL_GRAMMAR + '/callback.php?a=comma';
@@ -965,18 +966,12 @@ function didRemove(rv) {
 
 function getState(data) {
 	console.log(data);
-	let s = data.session;
-	// If the locale doesn't exist, trim it and try again
-	if (!l10n.s.hasOwnProperty(s.locale)) {
-		console.log('No such locale ' + s.locale);
-		s.locale = s.locale.replace(/^([^-_]+).*$/, '$1');
-	}
-	// Still doesn't exist, default to Danish
-	if (!l10n.s.hasOwnProperty(s.locale)) {
-		console.log('No such locale ' + s.locale);
-		s.locale = 'da';
-	}
-	session = s;
+	session = data.session;
+
+	g_access_token = ls_get('access-token', g_access_token_defaults);
+	g_access_hmac = JSON.parse(g_access_token.hmac);
+	session.locale = l10n_detectLanguage();
+	l10n_world();
 
 	loadConfig();
 	loadDictionary();
@@ -994,7 +989,7 @@ function loginKeepalive(init) {
 	g_login_ws = null;
 	g_login_channel = '';
 
-	g_access_token = ls_get('access-token', {hmac: '', sessionid: ''});
+	g_access_token = ls_get('access-token', g_access_token_defaults);
 
 	$.ajax({
 		url: ROOT_URL_GRAMMAR+'/callback.php',
@@ -1013,13 +1008,34 @@ function loginKeepalive(init) {
 		delete rv.a;
 		g_access_token = rv;
 		ls_set('access-token', g_access_token);
+		g_access_hmac = JSON.parse(g_access_token.hmac);
+
+		let nloc = l10n_detectLanguage();
+		if (nloc !== session.locale) {
+			console.log('Re-translating UI from %s to %s', session.locale, nloc);
+			session.locale = nloc;
+			l10n_world();
+		}
+
 		if (init) {
 			$('.sidebar').hide();
-			$('#chkWelcomeShared').show();
+			if (nloc === 'da') {
+				$('.chkGrammarToComma').show();
+				$('.btnCheckComma').show();
+				$('.comma-specific').show();
+				$('#chkWelcomeShared').show();
+			}
+			else {
+				$('.optComma').prop('checked', false);
+				$('.chkGrammarToComma').hide();
+				$('.btnCheckComma').hide();
+				$('.comma-specific').hide();
+				$('#chkWelcomeGrammar').show();
+			}
 		}
 	}).fail(function() {
 		console.log('Login fail');
-		g_access_token = {hmac: '', sessionid: ''};
+		g_access_token = Object.assign({}, g_access_token_defaults);
 		ls_set('access-token', g_access_token);
 
 		loginListener();
@@ -1102,7 +1118,7 @@ function logout() {
 		g_keepalive = null;
 	}
 
-	g_access_token = {hmac: '', sessionid: ''};
+	g_access_token = Object.assign({}, g_access_token_defaults);
 	ls_set('access-token', g_access_token);
 
 	loginListener();
@@ -1154,6 +1170,24 @@ function initSidebar() {
 		ignores = {};
 		loginKeepalive(true);
 	});
+	$('.btnSupport').click(function() {
+		if (support_sidebar) {
+			$('.sidebar').hide();
+			support_sidebar.show();
+			support_sidebar = null;
+		}
+		else {
+			support_sidebar = $('.sidebar:visible');
+			$('.sidebar').hide();
+			$('#chkSupport').show();
+		}
+	});
+	$('.btnCloseSupport').click(function() {
+		$('.sidebar').hide();
+		support_sidebar.show();
+		support_sidebar = null;
+	});
+
 	$('.optComma').click(function() {
 		let v = $(this).prop('checked');
 		$('.optComma').prop('checked', v);
@@ -1238,6 +1272,16 @@ function initSidebar() {
 	$('.chkProgress').hide();
 	$('.sidebar').hide();
 	$('#placeholder').remove();
+
+	$('.rpl-vars').each(function() {
+		let e = $(this);
+		if (e.text()) {
+			e.text(e.text().replace('{VERSION}', VERSION));
+		}
+		if (e.attr('src')) {
+			e.attr('src', e.attr('src').replace('{ROOT_URL_SELF}', ROOT_URL_SELF));
+		}
+	});
 
 	if (!haveLocalStorage()) {
 		showError('ERR_NO_STORAGE');

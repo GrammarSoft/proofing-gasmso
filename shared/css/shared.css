@@ -59,6 +59,11 @@ iframe {
 	height: 100%;
 }
 
+.supportBtn {
+	background-color: #4a90e2;
+	color: #fff;
+}
+
 .whiteblue {
 	color: #eaf7fe;
 }
@@ -306,10 +311,6 @@ label * {
 
 label input[type="checkbox"] {
 	margin: 2px 9px 0 0;
-}
-
-label span {
-	max-width: calc(100% - 30px);
 }
 
 input[type="text"] {
