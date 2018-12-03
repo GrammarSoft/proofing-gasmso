@@ -21,6 +21,10 @@ body {
 	padding-bottom: 74px;
 }
 
+label span {
+	max-width: calc(100% - 30px);
+}
+
 #popupIgnore {
 	position: absolute;
 	z-index: 100;
@@ -201,6 +205,13 @@ body {
 	margin-left: 0;
 	margin-right: 5px;
 }
+.icon-support-blue {
+	background-image: url('../imgs/icon-support-blue.png');
+	width: 15px;
+	height: 20px;
+	margin-left: 0;
+	margin-right: 7px;
+}
 .icon-restart-blue {
 	background-image: url('../imgs/icon-restart-blue.png');
 	width: 16px;
@@ -236,6 +247,10 @@ body {
 .btnAddWord.disabled .icon-add {
 	background-image: url('../imgs/icon-add-disabled.png');
 	margin-top: 3px;
+}
+
+.logo-mv {
+	width: 150px;
 }
 
 .btnCheckAuto {
