@@ -234,7 +234,7 @@ function markingRender(skipact) {
 		$('#chkDidYouMeanItems').html(suggs);
 		$('#chkDidYouMeanItems').find('span.link').off().click(markingAcceptSuggestion);
 		$('#chkDidYouMeanItems').find('.suggestion-lookup').off().click(function() {
-			impl_showDictionary($(this).closest('div').text());
+			impl_openDictionary($(this).closest('div').text());
 		});
 		itw_speak_attach($('#chkDidYouMeanItems').get(0));
 		$('#chkDidYouMean').show();
@@ -846,20 +846,19 @@ function sendTexts() {
 
 	if (text) {
 		let url = ROOT_URL_GRAMMAR + '/callback.php?a=grammar';
-		let token = g_access_token;
 		if (g_tool === 'Comma') {
 			url = ROOT_URL_GRAMMAR + '/callback.php?a=comma';
 		}
 		let data = {
 			t: text,
 			r: ts_fail,
-			SessionID: token.sessionid,
+			SessionID: g_access_token.sessionid,
 		};
 		ts_xhr = $.ajax({
 			url: url,
 			type: 'POST',
 			dataType: 'json',
-			headers: {HMAC: token.hmac},
+			headers: {HMAC: g_access_token.hmac},
 			data: data,
 		}).done(parseResult).fail(function() {
 			console.log(this);
@@ -996,7 +995,7 @@ function loginKeepalive(init) {
 		type: 'POST',
 		dataType: 'json',
 		headers: {HMAC: g_access_token.hmac},
-		data: {a: 'keepalive', SessionID: g_access_token.sessionid},
+		data: impl_dataKeepalive(),
 	}).done(function(rv) {
 		if (g_keepalive) {
 			clearInterval(g_keepalive);
@@ -1019,11 +1018,18 @@ function loginKeepalive(init) {
 
 		if (init) {
 			$('.sidebar').hide();
-			if (nloc === 'da') {
+			if (impl_canGrammar() && impl_canComma()) {
 				$('.chkGrammarToComma').show();
 				$('.btnCheckComma').show();
 				$('.comma-specific').show();
 				$('#chkWelcomeShared').show();
+			}
+			else if (impl_canComma()) {
+				$('.chkGrammarToComma').hide();
+				$('.btnCheckComma').show();
+				$('.comma-specific').show();
+				$('#chkWelcomeComma').show();
+				g_tool = 'Comma';
 			}
 			else {
 				$('.optComma').prop('checked', false);
@@ -1087,8 +1093,9 @@ function loginListener() {
 			console.log('Listening on channel %s ...', g_login_channel);
 		}
 		else if (msg.hmac && msg.sessionid) {
-			console.log('Got HMAC and SessionID');
+			console.log('Got HMAC and SessionID: '+message.data);
 			g_access_token = msg;
+			console.log(g_access_token);
 			ls_set('access-token', g_access_token);
 			g_login_ws.close();
 			loginKeepalive(true);
@@ -1102,12 +1109,13 @@ function loginListener() {
 }
 
 function logout() {
-	window.open(MVID_SIGNOUT_URL+g_access_token.sessionid, 'Logout');
+	window.open(SIGNOUT_URL+g_access_token.sessionid, 'Logout');
 
 	$.ajax({
 		url: ROOT_URL_GRAMMAR+'/callback.php',
 		type: 'POST',
 		dataType: 'json',
+		headers: {HMAC: g_access_token.hmac},
 		data: {a: 'logout'},
 	}).done(function() {
 		console.log('Logged out');

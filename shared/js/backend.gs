@@ -21,68 +21,6 @@
  */
 'use strict';
 
-var l10n = {};
-
-l10n.s = {
-	da: {
-		MENU_START: 'Start Grammateket',
-		MENU_OPTIONS: 'Indstillinger',
-		TITLE_DICTIONARY: 'IntoWords Ordbog',
-		TITLE_OPTIONS: 'Indstillinger',
-		TITLE_SIDEBAR: 'Grammateket',
-		},
-	nb: {
-		MENU_START: 'Start Grammateket',
-		MENU_OPTIONS: 'Innstillinger',
-		TITLE_DICTIONARY: 'IntoWords Ordbok',
-		TITLE_OPTIONS: 'Innstillinger',
-		TITLE_SIDEBAR: 'Grammateket',
-		},
-	sv: {
-		MENU_START: 'Starta Grammateket',
-		MENU_OPTIONS: 'Inställningar',
-		TITLE_DICTIONARY: 'IntoWords Ordbok',
-		TITLE_OPTIONS: 'Inställningar',
-		TITLE_SIDEBAR: 'Grammateket',
-		},
-	};
-
-l10n.s.no = l10n.s.nb;
-l10n.s.nn = l10n.s.nb;
-
-l10n.t = function(s) {
-	s = '' + s; // Coerce to string
-
-	var l = 'da';
-	var m = /^([a-z]+)/.exec(Session.getActiveUserLocale());
-	if (m) {
-		l = m[1];
-	}
-	if (!l10n.s.hasOwnProperty(l)) {
-		l = 'da';
-	}
-	var t = '';
-
-	Logger.log('Locale: '+l);
-
-	// If the string doesn't exist in the locale, fall back
-	if (!l10n.s[l].hasOwnProperty(s)) {
-		// Try Danish
-		if (l10n.s.da.hasOwnProperty(s)) {
-			t = l10n.s.da[s];
-		}
-		// ...give up and return as-is
-		else {
-			t = s;
-		}
-	}
-	else {
-		t = l10n.s[l][s];
-	}
-
-	return t;
-};
-
 function onOpen(e) {
 	var ui = DocumentApp.getUi();
 	ui.createAddonMenu()
