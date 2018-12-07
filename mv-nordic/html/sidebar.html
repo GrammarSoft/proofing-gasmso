@@ -24,18 +24,19 @@
 	<title data-l10n="TITLE_SIDEBAR">Grammateket / Kommaforslag</title>
 	<base target="_top">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="https://retmig.dk/gas/dev/css/shared.css">
-	<link rel="stylesheet" type="text/css" href="https://retmig.dk/gas/dev/css/sidebar.css">
-	<link rel="stylesheet" type="text/css" href="https://retmig.dk/gas/dev/css/sidebar-mv.css">
-	<script src="https://retmig.dk/gas/dev/vendor/murmurhash3js.min.js"></script>
-	<script src="https://retmig.dk/gas/dev/js/mark-types.js"></script>
-	<script src="https://retmig.dk/gas/dev/js/l10n.js"></script>
-	<script src="https://retmig.dk/gas/dev/js/shared.js"></script>
-	<script src="https://retmig.dk/gas/dev/js/jsonwspclient.js"></script>
-	<script src="https://retmig.dk/gas/dev/js/sidebar.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://retmig.dk/gas/dev/mv-nordic/css/shared.css">
+	<link rel="stylesheet" type="text/css" href="https://retmig.dk/gas/dev/mv-nordic/css/sidebar.css">
+	<link rel="stylesheet" type="text/css" href="https://retmig.dk/gas/dev/mv-nordic/css/impl.css">
+	<script src="https://retmig.dk/gas/dev/mv-nordic/vendor/murmurhash3js.min.js"></script>
+	<script src="https://retmig.dk/gas/dev/mv-nordic/js/impl.js"></script>
+	<script src="https://retmig.dk/gas/dev/mv-nordic/js/mark-types.js"></script>
+	<script src="https://retmig.dk/gas/dev/mv-nordic/js/l10n.js"></script>
+	<script src="https://retmig.dk/gas/dev/mv-nordic/js/shared.js"></script>
+	<script src="https://retmig.dk/gas/dev/mv-nordic/js/jsonwspclient.js"></script>
+	<script src="https://retmig.dk/gas/dev/mv-nordic/js/sidebar.js"></script>
 
 	<script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-	<script src="https://retmig.dk/gas/dev/js/impl-officejs.js"></script>
+	<script src="https://retmig.dk/gas/dev/mv-nordic/js/impl-officejs.js"></script>
 </head>
 <body>
 
@@ -183,8 +184,8 @@
 	</div>
 </div>
 <div class="text chkExplain">
-	<div class="chkExplainShort"><div class="chkExplainShortText">…</div><a class="link chkExplainMore"><span data-l10n="BTN_EXPL_MORE">Vis mere</span> <img src="https://retmig.dk/gas/dev/imgs/arrow-blue-down.png"></a></div>
-	<div class="chkExplainLong"><div class="chkExplainLongText">…</div><a class="link chkExplainLess"><span data-l10n="BTN_EXPL_LESS">Skjul</span> <img src="https://retmig.dk/gas/dev/imgs/arrow-blue-up.png"></a></div>
+	<div class="chkExplainShort"><div class="chkExplainShortText">…</div><a class="link chkExplainMore"><span data-l10n="BTN_EXPL_MORE">Vis mere</span> <img src="https://retmig.dk/gas/dev/mv-nordic/imgs/arrow-blue-down.png"></a></div>
+	<div class="chkExplainLong"><div class="chkExplainLongText">…</div><a class="link chkExplainLess"><span data-l10n="BTN_EXPL_LESS">Skjul</span> <img src="https://retmig.dk/gas/dev/mv-nordic/imgs/arrow-blue-up.png"></a></div>
 </div>
 <div class="text center">
 	<button class="btn-lightblue btn-big btnAddWord"><span class="icon icon-add"></span><span data-l10n="BTN_DICT_ADD">Føj til <i>Min ordbog</i></span></button>
@@ -233,8 +234,8 @@
 <h1 class="chkType" data-l10n="HDR_YOUR_TEXT">Din tekst</h1>
 <div class="text chkSentence">…</div>
 <div class="text chkExplain">
-	<div class="chkExplainShort"><div class="chkExplainShortText">…</div><a class="link chkExplainMore"><span data-l10n="BTN_EXPL_MORE">Vis mere</span> <img src="https://retmig.dk/gas/dev/imgs/arrow-blue-down.png"></a></div>
-	<div class="chkExplainLong"><div class="chkExplainLongText">…</div><a class="link chkExplainLess"><span data-l10n="BTN_EXPL_LESS">Skjul</span> <img src="https://retmig.dk/gas/dev/imgs/arrow-blue-up.png"></a></div>
+	<div class="chkExplainShort"><div class="chkExplainShortText">…</div><a class="link chkExplainMore"><span data-l10n="BTN_EXPL_MORE">Vis mere</span> <img src="https://retmig.dk/gas/dev/mv-nordic/imgs/arrow-blue-down.png"></a></div>
+	<div class="chkExplainLong"><div class="chkExplainLongText">…</div><a class="link chkExplainLess"><span data-l10n="BTN_EXPL_LESS">Skjul</span> <img src="https://retmig.dk/gas/dev/mv-nordic/imgs/arrow-blue-up.png"></a></div>
 </div>
 <div class="text chkProgress">
 	<div class="chkProgressContainer"><div class="chkProgressBar"></div></div>
@@ -262,7 +263,7 @@
 	<a class="btn-panel btnLogout"><span class="icon icon-logout-blue"></span><span data-l10n="BTN_LOGOUT">Log ud</span></a>
 </footer>
 
-<audio id="speaker" src="" data-l10n="ERR_NO_AUDIO">Din browser/enhed understøtter ikke HTML5 Audio.</audio>
+<audio id="speaker" data-l10n="ERR_NO_AUDIO">Din browser/enhed understøtter ikke HTML5 Audio.</audio>
 
 </body>
 </html>

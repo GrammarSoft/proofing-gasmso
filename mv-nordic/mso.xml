@@ -10,7 +10,7 @@
   <DefaultLocale>da-DK</DefaultLocale>
   <DisplayName DefaultValue="Grammateket" />
   <Description DefaultValue="Grammateket" />
-  <IconUrl DefaultValue="https://retmig.dk/gas/dev/imgs/logo-32.png" />
+  <IconUrl DefaultValue="https://retmig.dk/gas/dev/mv-nordic/imgs/logo-32.png" />
 
   <SupportUrl DefaultValue="https://grammarsoft.com/" />
   <AppDomains>
@@ -32,7 +32,7 @@
     </Sets>
   </Requirements>
   <DefaultSettings>
-    <SourceLocation DefaultValue="https://retmig.dk/gas/dev/html/sidebar.html" />
+    <SourceLocation DefaultValue="https://retmig.dk/gas/dev/mv-nordic/html/sidebar.html" />
   </DefaultSettings>
 
   <Permissions>ReadWriteDocument</Permissions>
@@ -86,12 +86,12 @@
 
     <Resources>
       <bt:Images>
-        <bt:Image id="MVGrammar.logo16" DefaultValue="https://retmig.dk/gas/dev/imgs/logo-16.png" />
-        <bt:Image id="MVGrammar.logo32" DefaultValue="https://retmig.dk/gas/dev/imgs/logo-32.png" />
-        <bt:Image id="MVGrammar.logo80" DefaultValue="https://retmig.dk/gas/dev/imgs/logo-80.png" />
+        <bt:Image id="MVGrammar.logo16" DefaultValue="https://retmig.dk/gas/dev/mv-nordic/imgs/logo-16.png" />
+        <bt:Image id="MVGrammar.logo32" DefaultValue="https://retmig.dk/gas/dev/mv-nordic/imgs/logo-32.png" />
+        <bt:Image id="MVGrammar.logo80" DefaultValue="https://retmig.dk/gas/dev/mv-nordic/imgs/logo-80.png" />
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="MVGrammar.Taskpane" DefaultValue="https://retmig.dk/gas/dev/html/sidebar.html" />
+        <bt:Url id="MVGrammar.Taskpane" DefaultValue="https://retmig.dk/gas/dev/mv-nordic/html/sidebar.html" />
         <bt:Url id="MVGrammar.GetStarted.LearnMore" DefaultValue="https://grammarsoft.com/" />
       </bt:Urls>
       <!-- ShortStrings max characters==125. -->

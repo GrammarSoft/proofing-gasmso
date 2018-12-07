@@ -103,7 +103,7 @@ function getState(data) {
 	session.locale = l10n_detectLanguage();
 	l10n_world();
 
-	if (session.locale === 'da') {
+	if (impl_canComma() && impl_canGrammar()) {
 		$('.tabbar').show();
 	}
 	else {
