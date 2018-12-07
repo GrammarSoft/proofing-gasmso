@@ -246,7 +246,7 @@ function selectInDocument(prefix, word, suffix) {
 	}
 
 	var txt = sel.getElement().asText().getText();
-	var rx = new RegExp('^(\\s*'+prefix.replace(Const.NonLetter, '.*?')+'\\s*)'+escapeRegExpTokens(word));
+	var rx = new RegExp('^(\\s*'+prefix.replace(Const.NonLetter, '[^]*?')+'\\s*)'+escapeRegExpTokens(word));
 	var m = rx.exec(txt);
 	if (!m) {
 		Logger.log('Did not match regex');
