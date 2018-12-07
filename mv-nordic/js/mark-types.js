@@ -308,7 +308,8 @@ for (let k in ctypes) {
 	if (!ctypes.hasOwnProperty(k)) {
 		continue;
 	}
-	let ms = /^<h3>(.+?)<\/h3>(.+)$/s.exec(ctypes[k][0]);
+	let rx = new RegExp('^<h3>(.+?)<\/h3>(.+)$', 's');
+	let ms = rx.exec(ctypes[k][0]);
 	marking_types[k] = [ms[1], ms[2], ctypes[k][1]];
 
 	if (/^%ko-/.test(k)) {
