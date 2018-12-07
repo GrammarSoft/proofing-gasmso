@@ -24,15 +24,16 @@
 	<title data-l10n="TITLE_OPTIONS">Indstillinger</title>
 	<base target="_top">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="https://retmig.dk/gas/dev/css/shared.css">
-	<link rel="stylesheet" type="text/css" href="https://retmig.dk/gas/dev/css/options.css">
-	<script src="https://retmig.dk/gas/dev/vendor/sprintf.min.js"></script>
-	<script src="https://retmig.dk/gas/dev/js/l10n.js"></script>
-	<script src="https://retmig.dk/gas/dev/js/shared.js"></script>
-	<script src="https://retmig.dk/gas/dev/js/options.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://retmig.dk/gas/dev/mv-nordic/css/shared.css">
+	<link rel="stylesheet" type="text/css" href="https://retmig.dk/gas/dev/mv-nordic/css/options.css">
+	<script src="https://retmig.dk/gas/dev/mv-nordic/vendor/sprintf.min.js"></script>
+	<script src="https://retmig.dk/gas/dev/mv-nordic/js/impl.js"></script>
+	<script src="https://retmig.dk/gas/dev/mv-nordic/js/l10n.js"></script>
+	<script src="https://retmig.dk/gas/dev/mv-nordic/js/shared.js"></script>
+	<script src="https://retmig.dk/gas/dev/mv-nordic/js/options.js"></script>
 
 	<script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-	<script src="https://retmig.dk/gas/dev/js/impl-officejs.js"></script>
+	<script src="https://retmig.dk/gas/dev/mv-nordic/js/impl-officejs.js"></script>
 </head>
 <body>
 
@@ -89,7 +90,7 @@
 	<h2 data-l10n="HDR_DICTIONARY">Min ordbog</h2>
 
 	<span data-l10n="TXT_DICTIONARY_HINT">Her kan du tilføje, rette eller fjerne ord fra din ordbog.</span>
-	<p><form class="formWordAdd"><input type="text" class="inputAddWord"> <button type="submit" class="btnAddWord" data-l10n="BTN_WORD_ADD">Tilføj ord</button></form></p>
+	<form class="formWordAdd"><input type="text" class="inputAddWord"> <button type="submit" class="btnAddWord" data-l10n="BTN_WORD_ADD">Tilføj ord</button></form>
 
 	<div class="words"></div>
 </div>
@@ -122,7 +123,7 @@
 </div>
 </div>
 
-<audio id="speaker" src="" data-l10n="ERR_NO_AUDIO">Din browser/enhed understøtter ikke HTML5 Audio.</audio>
+<audio id="speaker" data-l10n="ERR_NO_AUDIO">Din browser/enhed understøtter ikke HTML5 Audio.</audio>
 
 </body>
 </html>

@@ -1,0 +1,493 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.1.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: sv_SE\n"
+
+# Min ordbog
+msgid "STR_DICTIONARY"
+msgstr "Min ordbok"
+
+# <i>{STR_DICTIONARY}</i>
+msgid "HTML_DICTIONARY"
+msgstr "<i>{STR_DICTIONARY}</i>"
+
+# Tjek kommatering igen
+msgid "BTN_COMMA_AGAIN"
+msgstr "N/A"
+
+# Tjek kommatering
+msgid "BTN_COMMA_GOTO"
+msgstr "N/A"
+
+# Indsæt komma
+msgid "BTN_COMMA_INSERT"
+msgstr "N/A"
+
+# Indsæt punktum
+msgid "BTN_COMMA_INSERT_STOP"
+msgstr "N/A"
+
+# Fjern komma
+msgid "BTN_COMMA_REMOVE"
+msgstr "N/A"
+
+# Få hjælp til Kommaforslag
+msgid "BTN_COMMA_SUPPORT"
+msgstr "N/A"
+
+# Føj til {HTML_DICTIONARY}
+msgid "BTN_DICT_ADD"
+msgstr "Lägg till {HTML_DICTIONARY}"
+
+# Rediger
+msgid "BTN_DICT_EDIT"
+msgstr "Redigera"
+
+# Rediger
+msgid "BTN_EDIT"
+msgstr "Redigera"
+
+# Rediger alle
+msgid "BTN_EDIT_ALL"
+msgstr "Redigera alla"
+
+# Rediger
+msgid "BTN_EDIT_ONE"
+msgstr "Redigera"
+
+# Alt
+msgid "BTN_EXEC_ALL"
+msgstr "Allt"
+
+# Løbende
+msgid "BTN_EXEC_CONTINUOUS"
+msgstr "Löpande"
+
+# Markering
+msgid "BTN_EXEC_SELECTED"
+msgstr "Markerad"
+
+# Skjul
+msgid "BTN_EXPL_LESS"
+msgstr "Dölj"
+
+# Vis mere
+msgid "BTN_EXPL_MORE"
+msgstr "Visa mer"
+
+# Tjek stavning og grammatik igen
+msgid "BTN_GRAMMAR_AGAIN"
+msgstr "Gör om stavning och grammatik"
+
+# Tjek stavning og grammatik
+msgid "BTN_GRAMMAR_GOTO"
+msgstr "Kontrollera stavning och grammatik"
+
+# Indsæt
+msgid "BTN_GRAMMAR_INSERT"
+msgstr "Infoga"
+
+# Fjern
+msgid "BTN_GRAMMAR_REMOVE"
+msgstr "Ta bort"
+
+# Erstat
+msgid "BTN_GRAMMAR_REPLACE"
+msgstr "Ersätt"
+
+# Få hjælp til Grammateket
+msgid "BTN_GRAMMAR_SUPPORT"
+msgstr "Få hjälp med Grammateket"
+
+# Ignorer
+msgid "BTN_IGNORE"
+msgstr "Ignorera"
+
+# Login til Grammateket
+msgid "BTN_LOGIN"
+msgstr "Logga in till Grammateket"
+
+# Log ud
+msgid "BTN_LOGOUT"
+msgstr "Logga ut"
+
+# Næste
+msgid "BTN_NEXT"
+msgstr "Nästa"
+
+# Indstillinger
+msgid "BTN_OPTIONS"
+msgstr "Inställningar"
+
+# Ignorer
+msgid "BTN_POP_IGNORE"
+msgstr "Ignorera"
+
+# Ignorer alle
+msgid "BTN_POP_IGNOREALL"
+msgstr "Ignorera alla"
+
+# Forrige
+msgid "BTN_PREVIOUS"
+msgstr "Föregående"
+
+# Start på ny
+msgid "BTN_RESTART"
+msgstr "Börja om på nytt"
+
+# Version {VERSION}
+msgid "BTN_VERSION"
+msgstr "Version {VERSION}"
+
+# Tilføj ord
+msgid "BTN_WORD_ADD"
+msgstr "Lägg till ord"
+
+# Kunne ikke oprette en kanal til login. Det kan være du ikke er online eller er bag en proxy eller firewall der blokerer for adgang.
+msgid "ERR_CADUCEUS_FAILED"
+msgstr "Kunde inte upprätta en förbindelse till login. Det kan vara att du inte är på nätet eller du är bakom en firewall eller proxy som blockerar tillgång."
+
+# Kunne ikke finde %s i ordbogen.
+msgid "ERR_DICTIONARY_404"
+msgstr "Kunde inte hitta %s i ordboken."
+
+# Kunne ikke tilføje ordet %s til stavekontrollen!
+msgid "ERR_DICT_FAIL_ADD"
+msgstr "Kunde inte lägga till ordet %s i stavningskontrollen."
+
+# Kunne ikke slette ordet %s fra stavekontrollen!
+msgid "ERR_DICT_FAIL_DELETE"
+msgstr "Kunde inte ta bort ordet %s från stavningskontrollen."
+
+# Kunne ikke ændre ordet %1$s til %2$s i stavekontrollen!
+msgid "ERR_DICT_FAIL_EDIT"
+msgstr "Kunde inte ändra ordet %1$s till %2$s i stavningskontrollen."
+
+# Din browser/enhed understøtter ikke HTML5 Audio.
+msgid "ERR_NO_AUDIO"
+msgstr "Din webbläsare eller enhet stödjer inte HTML5 Audio."
+
+# Der var ingen markering. Du skal markere noget tekst før den funktion virker.
+msgid "ERR_NO_SELECTION"
+msgstr "Inget är markerat. Du måste markera något först."
+
+# Din browser understøtter ikke HTML5 Local Storage, men dette program fungerer ikke uden Local Storage. Det kan være du har slået det fra eller benytter privat vindue. Slå Local Storage til og prøv igen.
+msgid "ERR_NO_STORAGE"
+msgstr "Din webbläsare stödjer inte HTML5 Local Storage och detta program kräver det. Det är möjligt att du har valt bort det eller att du använder ett privat fönster. Slå till Local Storage och försök på nytt."
+
+# Der opstod en serverfejl under tjekning af teksten. Prøv evt. igen.
+msgid "ERR_POSTBACK"
+msgstr "Det uppstod ett serverfel vid textkontrollen. Försök igen för att se om det hjälper."
+
+# Kunne ikke vælge stedet i konteksten. Det kan være du eller en anden har ændret i dokumentet siden tjekket blev kørt.
+msgid "ERR_REPLACE_NOSELECT"
+msgstr "Kunde inte markera platsen i kontexten. Det kan hända att du eller någon annan har ändrat i dokumentet sedan det kontrollerades sist."
+
+# Konteksten matchede ikke. Denne fejl bør ikke kunne ske.
+msgid "ERR_SELECT_NOMATCH"
+msgstr "Detta ska inte hända. Vi fick inte träff på kontexten."
+
+# Kunne ikke finde konteksten. Det kan være du eller en anden har ændret i dokumentet siden tjekket blev kørt.
+msgid "ERR_SELECT_NOTFOUND"
+msgstr "Kunde inte hitta kontexten. Det kan hända att du eller någon annan har ändrat i dokumentet sedan det sist kontrollerades."
+
+# Kommaforslag
+msgid "HDR_COMMA"
+msgstr "N/A"
+
+# Kommavisning
+msgid "HDR_COMMA_DISPLAY"
+msgstr "N/A"
+
+# Din tekst er blevet tjekket, og der er ikke flere forslag til kommatering.
+msgid "HDR_COMMA_DONE"
+msgstr "N/A"
+
+# Færdighedsniveau
+msgid "HDR_COMMA_LEVEL"
+msgstr "N/A"
+
+# Inspirationsmateriale til Kommaforslag
+msgid "HDR_COMMA_LINKS"
+msgstr "N/A"
+
+# Min ordbog
+msgid "HDR_DICTIONARY"
+msgstr "Min ordbok"
+
+# Visning
+msgid "HDR_DISPLAY"
+msgstr "Visning"
+
+# Ret selv
+msgid "HDR_EDIT"
+msgstr "Rätta själv"
+
+# Grammateket
+msgid "HDR_GRAMMAR"
+msgstr "Grammateket"
+
+# Om Grammateket
+msgid "HDR_GRAMMAR_ABOUT"
+msgstr "Om Grammateket"
+
+# Din tekst er blevet tjekket, og der er ikke flere stave- eller grammatikforslag.
+msgid "HDR_GRAMMAR_DONE"
+msgstr "Din text har kontrollerats och det finns inte fler stavnings- eller grammatikförslag."
+
+# Fejltyper
+msgid "HDR_GRAMMAR_ETYPES"
+msgstr "Feltyper"
+
+# Login
+msgid "HDR_LOGIN"
+msgstr "Login"
+
+# Erstat med …
+msgid "HDR_REPLACE_WITH"
+msgstr "Ersätt med …"
+
+# Har du ikke Grammateket endnu?
+msgid "HDR_SUBSCRIBE"
+msgstr "Har du inte Grammateket ännu?"
+
+# Oplæsning
+msgid "HDR_TTS"
+msgstr "Uppläsning"
+
+# Hvad er Grammateket?
+msgid "HDR_WHAT_IS"
+msgstr "Vad är Grammateket?"
+
+# Din tekst
+msgid "HDR_YOUR_TEXT"
+msgstr "Din text"
+
+# Sæt flueben i boksen hvis du vil have tjekket dine kommaer bagefter.
+msgid "LBL_COMMA_AFTER"
+msgstr "N/A"
+
+# Fremhæv rettelser
+msgid "LBL_OPT_COLOR"
+msgstr "Markera rättelser"
+
+# Ret ikke fejl ved store/små bogstaver
+msgid "LBL_OPT_IGNORE_MAJ"
+msgstr "Rätta inte fel i stora/små bokstäver"
+
+# Ret ikke fejl med ukendte forkortelser
+msgid "LBL_OPT_IGNORE_UABBR"
+msgstr "Rätta inte fel med okända förkortningar"
+
+# Ret ikke fejl med særskrivning/sammensatte ord
+msgid "LBL_OPT_IGNORE_UCOMP"
+msgstr "Rätta inte särskrivningsfel"
+
+# Ret ikke fejl med ukendte navne
+msgid "LBL_OPT_IGNORE_UNAMES"
+msgstr "Rätta inte fel med okända namn"
+
+# Ret ikke fejl med ukendte ord
+msgid "LBL_OPT_IGNORE_UNKNOWN"
+msgstr "Rätta inte fel med okända ord"
+
+# Ret ikke fejl med andre ukendte ord
+msgid "LBL_OPT_IGNORE_UOTHER"
+msgstr "Rätta inte fel med andra okända ord"
+
+# <b>Niveau 1</b>: Du kan sætte tegn og har viden om punktum, spørgsmålstegn og udråbstegn.
+msgid "LBL_OPT_LEVEL_1"
+msgstr "N/A"
+
+# <b>Niveau 2</b>: Du kan anvende afsnit og sætte komma og har viden om sætnings- og tekststruktur.
+msgid "LBL_OPT_LEVEL_2"
+msgstr "N/A"
+
+# <b>Niveau 3</b>: Du kan fremstille tekster med korrekt grammatik, stavning, tegnsætning og layout.
+msgid "LBL_OPT_LEVEL_3"
+msgstr "N/A"
+
+# Vis kun typer udvalgt af MV-Nordic
+msgid "LBL_OPT_MVNORDIC"
+msgstr "N/A"
+
+# Vis kun manglende kommaer
+msgid "LBL_OPT_ONLYGREEN"
+msgstr "N/A"
+
+# Vis kun sikre fejl
+msgid "LBL_OPT_ONLY_CONFIDENT"
+msgstr "Visa enbart säkra fel N/A"
+
+# Fremhæv valgfrie kommaer
+msgid "LBL_OPT_SHOWOPTIONAL"
+msgstr "N/A"
+
+# Læs skærmteksterne op
+msgid "LBL_OPT_TTS"
+msgstr "Läs texten högt"
+
+# Brug {HTML_DICTIONARY}
+msgid "LBL_OPT_USE_DICT"
+msgstr "Använd {HTML_DICTIONARY}"
+
+# Indstillinger
+msgid "MENU_OPTIONS"
+msgstr "Inställningar"
+
+# Start Grammateket
+msgid "MENU_START"
+msgstr "Starta Grammateket"
+
+# Grammateket er nu installeret. Gå til fanen Hjem og klik på Grammateket for at komme i gang.
+msgid "MSO_INSTALLED_BODY"
+msgstr "Grammateket är nu installerat. Gå till fliken Hem och klicka på Grammateket för att komma i gång."
+
+# Kom godt i gang med Grammateket & Kommaforslag!
+msgid "MSO_INSTALLED_TITLE"
+msgstr "Kom gott i gång med Grammateket!"
+
+# https://www.mv-nordic.com/
+msgid "MSO_LEARNMORE_URL"
+msgstr "https://www.mv-nordic.com/"
+
+# Klik for at åbne Grammateket & Kommaforslag
+msgid "MSO_TOOLTIP"
+msgstr "N/A"
+
+# … loading …
+msgid "POP_LOADING"
+msgstr "… laddar …"
+
+# … arbejder …
+msgid "POP_WORKING"
+msgstr "… arbetar …"
+
+# Kommaforslag
+msgid "TAB_COMMA"
+msgstr "N/A"
+
+# Om Kommaforslag
+msgid "TAB_COMMA_ABOUT"
+msgstr "N/A"
+
+# Generelt
+msgid "TAB_COMMA_GENERAL"
+msgstr "N/A"
+
+# Inspiration til undervisning
+msgid "TAB_COMMA_LINKS"
+msgstr "N/A"
+
+# Min ordbog
+msgid "TAB_DICTIONARY"
+msgstr "Min ordbok"
+
+# Grammateket
+msgid "TAB_GRAMMAR"
+msgstr "Grammateket"
+
+# Om Grammateket
+msgid "TAB_GRAMMAR_ABOUT"
+msgstr "Om Grammateket"
+
+# Generelt
+msgid "TAB_GRAMMAR_GENERAL"
+msgstr "Allmänt"
+
+# IntoWords Ordbog
+msgid "TITLE_DICTIONARY"
+msgstr "IntoWords Ordbok"
+
+# Indstillinger
+msgid "TITLE_OPTIONS"
+msgstr "Inställningar"
+
+# Grammateket
+msgid "TITLE_SIDEBAR"
+msgstr "Grammateket"
+
+# Når du har fået tjekket din tekst for stavning og grammatik, kan du efterfølgende få tjekket din tekst for kommatering. Kommaforslag foreslår kommaer i din tekst eller retter fejl i tekstens kommatering.\n\nDu får en forklaring af reglerne bag de kommaer, programmet foreslår eller markerer som fejl - og kan på den måde lære at sætte komma, samtidig med at du får hjælp. Programmet følger reglerne for kommatering med startkomma - også kendt som grammatisk komma eller 'kryds og bolle'-komma.\n\nKommaforslag er integreret i Grammateket.
+msgid "TXT_COMMA_ABOUT"
+msgstr "N/A"
+
+# Copyright 2016-2018 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af MV-Nordic, Part of Vitec Software Group.
+msgid "TXT_COMMA_COPYRIGHT"
+msgstr "N/A"
+
+# Vil du have tjekket din markering eller hele teksten?
+msgid "TXT_COMMA_HINT"
+msgstr "N/A"
+
+# Du kan også vælge at springe direkte til Kommaforslag for at få tjekket dine kommaer.
+msgid "TXT_COMMA_INTRO"
+msgstr "N/A"
+
+# Fra 4. klasse kan eleverne bruge forslagene til at reflektere over egen kommasætning. De tre niveauer i indstillingsmenuen leder frem mod videns- og færdighedsmål efter 6. klasse (niveau 1-2) og efter 9.-10. klasse (niveau 3).\n\nHar du brug for inspiration til brug af Kommaforslag i undervisningen, så <a href="https://www.mv-nordic.com/dk/support/kommaforslag/inspirationsmateriale-til-kommaforslag" target="_blank">følg linket</a>.
+msgid "TXT_COMMA_LINKS"
+msgstr "N/A"
+
+# Besøg vores website på <a href="https://www.mv-nordic.com/" target="_blank">mv-nordic.com</a>.\nKommaforslag <a href="https://www.mv-nordic.com/" target="_blank">hjælp</a>.
+msgid "TXT_COMMA_SUPPORT"
+msgstr "N/A"
+
+# Her kan du tilføje, rette eller fjerne ord fra din ordbog.
+msgid "TXT_DICTIONARY_HINT"
+msgstr "Här kan du lägga till, rätta eller ta bort ord från din ordbok."
+
+# Med Grammateket kan du tjekke din tekst for stavning, grammatik og efterfølgende for kommatering vha. Kommaforslag.\n\nDu får hjælp til:\n<ul>\n<li>Stavekontrol</li>\n<li>Sammensatte ord</li>\n<li>Nutids-r</li>\n<li>Kort og lang tillægsform</li>\n<li>Kommatering</li>\n</ul>\n\nGrammateket kan bruges når du arbejder med læse- og skriveværktøjerne IntoWords og CD-ORD. Grammateket giver også adgang til nemt opslag i IntoWords Ordbog (baseret på Den Danske Ordbog).
+msgid "TXT_GRAMMAR_ABOUT"
+msgstr ""
+"Med Grammateket kan du kontrollera din text för stavning och vissa vanliga grammtiska fel.\n"
+"\n"
+"Du får hjälp med:\n"
+"<ul>\n"
+"<li>Rättstavning</li>\n"
+"<li>Sammansatta ord</li>\n"
+"<li>Korrekt användning av <b>vart</b></li>\n"
+"<li>Att skilja mellan <b>de</b> och <b>dem</b> istället för \"dom\"</li>\n"
+"</ul>\n"
+"\n"
+"Grammateket kan användas när du arbetar med läs- och skrivverktygen IntoWords och CD-ORD. Grammateket ger också tillgång till lätt uppslag i IntoWords Ordbok."
+
+# Copyright 2016-2018 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af MV-Nordic, Part of Vitec Software Group.
+msgid "TXT_GRAMMAR_COPYRIGHT"
+msgstr "Copyright ???"
+
+# Vil du have tjekket din markering eller hele teksten?
+msgid "TXT_GRAMMAR_HINT"
+msgstr "Vill du kontrollera den markerade texten eller hela texten?"
+
+# Først skal du tjekke din tekst for stavning og grammatik.
+msgid "TXT_GRAMMAR_INTRO"
+msgstr "Först ska du kontrollera din text för rättstavning och grammatik."
+
+# Besøg vores website på <a href="https://www.mv-nordic.com/" target="_blank">mv-nordic.com</a>. Grammateket <a href="https://www.mv-nordic.com/" target="_blank">hjælp</a>.
+msgid "TXT_GRAMMAR_SUPPORT"
+msgstr "???"
+
+# Du skal logge ind for at bruge dette værktøj.
+msgid "TXT_MUST_LOGIN"
+msgstr "Du måste logga in för att kunna använda detta verktyg."
+
+# <a href="https://www.mv-nordic.com/" target="_blank">Kontakt MV-Nordic</a> for at prøve programmet gratis eller for information om abonnement.
+msgid "TXT_SUBSCRIBE"
+msgstr "<a href=\"https://www.mv-nordic.com/\" target=\"_blank\">Kontakta MV-Nordic</a> för att testa programmet kostnadsfritt eller för information om abonnemang."
+
+# Grammateket forbedrer din skriftlighed og støtter dig i din skriveproces ved at komme med forslag til rettelser, beskrivelser af fejlkategorier og mulighed for at slå ord op i ordbogen.\n\nNår du har skrevet en tekst, åbner du Grammateket for at få tjekket din stavning, grammatik og kommaer.\n\nDu får hjælp til stavning, sammensatte ord, nutids-r, kort og lang tillægsform og kommatering.
+msgid "TXT_WHAT_IS"
+msgstr ""
+"Grammateket förbättrar dina skrivkunskaper och stödjer dig i skrivprocessen genom att komma med förslag till rättelser, beskriva felkategorier och ge möjlighet att slå upp ord i ordboken.\n"
+"\n"
+"När du har skrivit en text, öppnar du Grammateket för att kontrollera din stavning och vanliga grammatiska fel.\n"
+"\n"
+"Du får hjälp med stavning, sammansatta ord och korrekt använding av orden 'vart' och 'dom'."
