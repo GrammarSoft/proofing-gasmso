@@ -333,72 +333,92 @@ let types_lang = {
 		comp_right: new RegExp('@comp-|@comp( |$)'),
 	},
 	nb: {
-		comp_right: new RegExp('@(R|Y)-comp\S*( |$)'),
+		comp_right: new RegExp('@(R|Y)-comp[^ ]*( |$)'),
 		types: {
-    "@Lower": [
+    "@R-AQ": [
+        "Særskrivning - bør sammenskrives med følgende ord",
+        "Placeholder - Du har skrevet et sammensat adjektiv som to ord. Ord som <EM>skolefri</EM> eller <EM>kjempefint</EM> er sammensatte adjektiver og skal skrives i et ord.\n"
+    ],
+    "@R-LowerCase": [
         "Stor bokstav etter punktum",
         "En ny setning begynner alltid med stor bokstav. </BR>Punktum avslutter en setning.</BR>Etter et punktum skal det være stor bokstav.</BR>Navn skal alltid ha stor bokstav selv om det ikke er et punktum foran."
     ],
-    "@SPELL": [
+    "@R-SPELL": [
         "Stavefejl",
         "Det har blitt en skrivefeil fordi bokstavene er satt i feil rekkefølge eller det er brukt feil bokstaver."
     ],
-    "@SPELL-Context": [
+    "@R-SPELL-Context": [
         "Ordet forkert i kontekst",
         "Placeholder Du har skrevet et korrekt ord, men ud fra konteksten ser det ud som vil skrive et andet"
     ],
-    "@W-aa-default": [
+    "@R-aa-default": [
         "Forveksling av og - å",
         "Du har skrevet <B>og</B> i stedet for <B>å</B>. Ordene lyder likt, men <B>og</B> er en konjunksjon og <B>å</B> er et infintinivsmerke. </BR>En konjunksjon er et bideord og  binder sammen  like ord, setnningledd eller setninger. For eksempel <EM>hus <B>og</B> hage<EM>, <EM>Frida går på skolen og Ben går i barnehagen</EM>.</BR>Infinitivsmerket <B>å</B> kan vi bare bruke framfor et verb som står i infinitiv.  <EM>Jeg elsker <B>å</B> løpe</EM> eller <EM>Han er redd for <B>å</B> sykle</EM>."
     ],
-    "@W-aa-noninf": [
+    "@R-aa-noninf": [
         "Verbet skal stå i infinitiv",
         "Placeholder"
     ],
-    "@W-aa-nonverb": [
+    "@R-aa-nonverb": [
         "Mangler verb i infinitiv",
         "Placeholder"
     ],
-    "@W-aa-og-begin": [
+    "@R-aa-og-begin": [
         "Forveksling av og – å",
         "Du har skrevet <B>å</B> i stedet for <B>og</B>. Ordene lyder likt, men <B>og</B> er en konjunksjon og <B>å</B> er et infintinivsmerke. </BR>En konjunksjon er et bideord og  binder sammen  like ord, setnningledd eller setninger. For eksempel <EM>hus <B>og</B> hage<EM>, <EM>Frida går på skolen og Ben går i barnehagen</EM>.</BR>Infinitivsmerket <B>å</B> kan vi bare bruke framfor et verb som står i infinitiv.  <EM>Jeg elsker <B>å</B> løpe</EM> eller <EM>Han er redd for <B>å</B> sykle</EM>."
     ],
-    "@W-infinitive-finite": [
+    "@R-comp-NC-NC": [
+        "Særskrivning - bør sammenskrives med følgende ord",
+        "Når to substantiv følger etter hverandre, skriver vi dem som ett ord. Det første substantivet forteller noe om det andre substantivet. <EM>bilbane</EM> er en bane til biler.\nDet andre substantivet bestemmer hvilket kjønn det sammensatte ordet har, og hvordan vi skal bøye det\n<EM>bilbanen</EM> (best form)"
+    ],
+    "@R-infinitive-finite": [
         "Mangler finit verb i sætningen",
-        "Placeholder\n"
+        "Placeholder"
     ],
-    "@W-og-aa-noleft": [
-        "Forveksling av og - å",
-        "Du har skrevet <B>og</B> i stedet for <B>å</B>. Ordene lyder likt, men <B>og</B> er en konjunksjon og <B>å</B> er et inf\nintinivsmerke. </BR>En konjunksjon er et bideord og  binder sammen  like ord, setnningledd eller setninger. For eksempel <EM>hus <B>og</B> h\nage<EM>, <EM>Frida går på skolen og Ben går i barnehagen</EM>.</BR>Infinitivsmerket <B>å</B> kan vi bare bruke framfor et verb som står i infinitiv.  <EM>Jeg elsker <B>å</B> løpe</EM> ell\ner <EM>Han er redd for <B>å</B> sykle</EM>."
-    ],
-    "@W-og-å": [
-        "Forveksling av og - å",
-        "Du har skrevet <B>og</B> i stedet for <B>å</B>. Ordene lyder likt, men <B>og</B> er en konjunksjon og <B>å</B> er et inf\nintinivsmerke. </BR>En konjunksjon er et bideord og  binder sammen  like ord, setnningledd eller setninger. For eksempel <EM>hus <B>og</B> h\nage<EM>, <EM>Frida går på skolen og Ben går i barnehagen</EM>.</BR>Infinitivsmerket <B>å</B> kan vi bare bruke framfor et verb som står i infinitiv.  <EM>Jeg elsker <B>å</B> løpe</EM> ell\ner <EM>Han er redd for <B>å</B> sykle</EM>."
-    ],
-    "@W-og-å-SPS": [
-        "Forveksling av og - å",
-        "Du har skrevet <B>og</B> i stedet for <B>å</B>. Ordene lyder likt, men <B>og</B> er en konjunksjon og <B>å</B> er et inf\nintinivsmerke. </BR>En konjunksjon er et bideord og  binder sammen  like ord, setnningledd eller setninger. For eksempel <EM>hus <B>og</B> h\nage<EM>, <EM>Frida går på skolen og Ben går i barnehagen</EM>.</BR>Infinitivsmerket <B>å</B> kan vi bare bruke framfor et verb som står i infinitiv.  <EM>Jeg elsker <B>å</B> løpe</EM> ell\ner <EM>Han er redd for <B>å</B> sykle</EM>."
-    ],
-    "@W-og-å-får": [
+    "@R-og-aa-noleft": [
         "Forveksling av og - å",
         "Du har skrevet <B>og</B> i stedet for <B>å</B>. Ordene lyder likt, men <B>og</B> er en konjunksjon og <B>å</B> er et inf\nintinivsmerke. </BR>En konjunksjon er et bideord og  binder sammen  like ord, setnningledd eller setninger. For eksempel <EM>hus <B>og</B> hage<EM>, <EM>Frida går på skolen og Ben går i barnehagen</EM>.</BR>Infinitivsmerket <B>å</B> kan vi bare bruke framfor et verb som står i infinitiv.  <EM>Jeg elsker <B>å</B> løpe</EM> ell\ner <EM>Han er redd for <B>å</B> sykle</EM>."
     ],
-    "@W-og-å-verbinset": [
+    "@R-og-å": [
         "Forveksling av og - å",
-        "Du har skrevet <B>og</B> i stedet for <B>å</B>. Ordene lyder likt, men <B>og</B> er en konjunksjon og <B>å</B> er et inf\nintinivsmerke. </BR>En konjunksjon er et bideord og  binder sammen  like ord, setnningledd eller setninger. For eksempel <EM>hus <B>og</B> h\nage<EM>, <EM>Frida går på skolen og Ben går i barnehagen</EM>.</BR>Infinitivsmerket <B>å</B> kan vi bare bruke framfor et verb som står i infinitiv.  <EM>Jeg elsker <B>å</B> løpe</EM> ell\ner <EM>Han er redd for <B>å</B> sykle</EM>."
+        "Du har skrevet <B>og</B> i stedet for <B>å</B>. Ordene lyder likt, men <B>og</B> er en konjunksjon og <B>å</B> er et inf\nintinivsmerke. </BR>En konjunksjon er et bideord og  binder sammen  like ord, setnningledd eller setninger. For eksempel <EM>hus <B>og</B> hage<EM>, <EM>Frida går på skolen og Ben går i barnehagen</EM>.</BR>Infinitivsmerket <B>å</B> kan vi bare bruke framfor et verb som står i infinitiv.  <EM>Jeg elsker <B>å</B> løpe</EM> ell\ner <EM>Han er redd for <B>å</B> sykle</EM>."
     ],
-    "@W-og-å-verbleft": [
+    "@R-og-å-SPS": [
+        "Forveksling av og - å",
+        "Du har skrevet <B>og</B> i stedet for <B>å</B>. Ordene lyder likt, men <B>og</B> er en konjunksjon og <B>å</B> er et inf\nintinivsmerke. </BR>En konjunksjon er et bideord og  binder sammen  like ord, setnningledd eller setninger. For eksempel <EM>hus <B>og</B> hage<EM>, <EM>Frida går på skolen og Ben går i barnehagen</EM>.</BR>Infinitivsmerket <B>å</B> kan vi bare bruke framfor et verb som står i infinitiv.  <EM>Jeg elsker <B>å</B> løpe</EM> ell\ner <EM>Han er redd for <B>å</B> sykle</EM>."
+    ],
+    "@R-og-å-får": [
+        "Forveksling av og - å",
+        "Du har skrevet <B>og</B> i stedet for <B>å</B>. Ordene lyder likt, men <B>og</B> er en konjunksjon og <B>å</B> er et inf\nintinivsmerke. </BR>En konjunksjon er et bideord og  binder sammen  like ord, setnningledd eller setninger. For eksempel <EM>hus <B>og</B> hage<EM>, <EM>Frida går på skolen og Ben går i barnehagen</EM>.</BR>Infinitivsmerket <B>å</B> kan vi bare bruke framfor et verb som står i infinitiv.  <EM>Jeg elsker <B>å</B> løpe</EM> ell\ner <EM>Han er redd for <B>å</B> sykle</EM>."
+    ],
+    "@R-og-å-verbinset": [
+        "Forveksling av og - å",
+        "Du har skrevet <B>og</B> i stedet for <B>å</B>. Ordene lyder likt, men <B>og</B> er en konjunksjon og <B>å</B> er et inf\nintinivsmerke. </BR>En konjunksjon er et bideord og  binder sammen  like ord, setnningledd eller setninger. For eksempel <EM>hus <B>og</B> hage<EM>, <EM>Frida går på skolen og Ben går i barnehagen</EM>.</BR>Infinitivsmerket <B>å</B> kan vi bare bruke framfor et verb som står i infinitiv.  <EM>Jeg elsker <B>å</B> løpe</EM> ell\ner <EM>Han er redd for <B>å</B> sykle</EM>."
+    ],
+    "@R-og-å-verbleft": [
         "Forveksling av og - å",
         "Du har skrevet <B>og</B> i stedet for <B>å</B>. Ordene lyder likt, men <B>og</B> er en konjunksjon og <B>å</B> er et inf\nintinivsmerke. </BR> En konjunksjon er et bideord og  binder sammen  like ord, setnningledd eller setninger. For eksempel <EM>hus <B>og</B> hage<EM>, <EM>Frida går på skolen og Ben går i barnehagen</EM>.</BR>Infinitivsmerket <B>å</B> kan vi bare bruke framfor et verb som står i infinitiv.  <EM>Jeg elsker <B>å</B> løpe</EM> ell\ner <EM>Han er redd for <B>å</B> sykle</EM>."
+    ],
+    "@Y-comp-AQ-NC": [
+        "Særskrivning - tjek om ordet bør sammenskrives med følgende ord",
+        "Du har kanskje særskrevet et sammensatt ord. Sig ordet højt for deg sjølv, hvis du uttaller eit uttrykk som eit ord, med trykk på første leddet skal det skrivast som ett ord. Hvis der er likt trykk på begge ledda, skal det skrivast som to ord. </BR> Eksempler: <EM>billig bok - billigbog </EM>, <EM>stor kjøkken - storkjøkken </EM>, <EM> stor by - storby </EM><EM>småbørn - små børn</EM>, <EM> blåbær - blå bær</EM>"
+    ],
+    "@Y-comp-adverb": [
+        "Særskrivning - tjek om ordet bør sammenskrived med følgende ord",
+        "Du har kanskje særskrevet et sammensatt ord.- Forklaringer om adverber/preposition"
     ]
 }
 	},
 	sv: {
-		comp_right: new RegExp('@R50[01]( |$)'),
+		comp_right: new RegExp('((@R50[01])|(@(R|Y)-comp[^ ]*))( |$)'),
 		types: {
     "@LowerCase": [
         "Stor bokstav i början av en mening.",
         "Man ska börja en mening med stor bokstav."
+    ],
+    "@R-comp-NC-NC": [
+        "Särskrivning",
+        "Dessa två substantiv bildar en sammansättning.\n"
     ],
     "@R11": [
         "Dem är alltid fel som bestämd artikel",
@@ -426,7 +446,7 @@ let types_lang = {
     ],
     "@R710": [
         "Supinum av 'vara'",
-        "Supinum form av <B>vara</B>, dvs formen efter <B>ha</B>, <B>har</B> och <B>hade</B>, stavas <B>varit</B> inte <B>vart</B>.<BR/><BR/><EM>Har du varit i Skövde</EM> och inte <EM>har du <FEL>vart</FEL> i Skövde?\n"
+        "Supinum form av <B>vara</B>, dvs formen efter <B>ha</B>, <B>har</B> och <B>hade</B>, stavas <B>varit</B> inte <B>vart</B>.<BR/><BR/><EM>Har du varit i Skövde</EM> och inte <EM>har du <FEL>vart</FEL> i Skövde?"
     ],
     "@Y10": [
         "De som bestämd artikel",
