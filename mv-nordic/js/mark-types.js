@@ -55,6 +55,9 @@ let types_yellow = {
 	"@check!": "@check!",
 };
 
+/* exported types_comp_right */
+let types_comp_right = null;
+
 /* exported marking_types */
 let marking_types = {
 	"@x-etype-list": [
@@ -308,7 +311,7 @@ for (let k in ctypes) {
 	if (!ctypes.hasOwnProperty(k)) {
 		continue;
 	}
-	let rx = new RegExp('^<h3>(.+?)<\/h3>(.+)$', 's');
+	let rx = new RegExp('^<h3>([^]+?)<\/h3>([^]+)$');
 	let ms = rx.exec(ctypes[k][0]);
 	marking_types[k] = [ms[1], ms[2], ctypes[k][1]];
 
@@ -320,3 +323,173 @@ for (let k in ctypes) {
 	}
 }
 ctypes = null;
+
+let types_lang = {
+	da: {
+		mv: Object.assign({}, types_mv),
+		red: Object.assign({}, types_red),
+		yellow: Object.assign({}, types_yellow),
+		types: Object.assign({}, marking_types),
+		comp_right: new RegExp('@comp-|@comp( |$)'),
+	},
+	nb: {
+		comp_right: new RegExp('@(R|Y)-comp\S*( |$)'),
+		types: {
+    "@Lower": [
+        "Stor bokstav etter punktum",
+        "En ny setning begynner alltid med stor bokstav. </BR>Punktum avslutter en setning.</BR>Etter et punktum skal det være stor bokstav.</BR>Navn skal alltid ha stor bokstav selv om det ikke er et punktum foran."
+    ],
+    "@SPELL": [
+        "Stavefejl",
+        "Det har blitt en skrivefeil fordi bokstavene er satt i feil rekkefølge eller det er brukt feil bokstaver."
+    ],
+    "@SPELL-Context": [
+        "Ordet forkert i kontekst",
+        "Placeholder Du har skrevet et korrekt ord, men ud fra konteksten ser det ud som vil skrive et andet"
+    ],
+    "@W-aa-default": [
+        "Forveksling av og - å",
+        "Du har skrevet <B>og</B> i stedet for <B>å</B>. Ordene lyder likt, men <B>og</B> er en konjunksjon og <B>å</B> er et infintinivsmerke. </BR>En konjunksjon er et bideord og  binder sammen  like ord, setnningledd eller setninger. For eksempel <EM>hus <B>og</B> hage<EM>, <EM>Frida går på skolen og Ben går i barnehagen</EM>.</BR>Infinitivsmerket <B>å</B> kan vi bare bruke framfor et verb som står i infinitiv.  <EM>Jeg elsker <B>å</B> løpe</EM> eller <EM>Han er redd for <B>å</B> sykle</EM>."
+    ],
+    "@W-aa-noninf": [
+        "Verbet skal stå i infinitiv",
+        "Placeholder"
+    ],
+    "@W-aa-nonverb": [
+        "Mangler verb i infinitiv",
+        "Placeholder"
+    ],
+    "@W-aa-og-begin": [
+        "Forveksling av og – å",
+        "Du har skrevet <B>å</B> i stedet for <B>og</B>. Ordene lyder likt, men <B>og</B> er en konjunksjon og <B>å</B> er et infintinivsmerke. </BR>En konjunksjon er et bideord og  binder sammen  like ord, setnningledd eller setninger. For eksempel <EM>hus <B>og</B> hage<EM>, <EM>Frida går på skolen og Ben går i barnehagen</EM>.</BR>Infinitivsmerket <B>å</B> kan vi bare bruke framfor et verb som står i infinitiv.  <EM>Jeg elsker <B>å</B> løpe</EM> eller <EM>Han er redd for <B>å</B> sykle</EM>."
+    ],
+    "@W-infinitive-finite": [
+        "Mangler finit verb i sætningen",
+        "Placeholder\n"
+    ],
+    "@W-og-aa-noleft": [
+        "Forveksling av og - å",
+        "Du har skrevet <B>og</B> i stedet for <B>å</B>. Ordene lyder likt, men <B>og</B> er en konjunksjon og <B>å</B> er et inf\nintinivsmerke. </BR>En konjunksjon er et bideord og  binder sammen  like ord, setnningledd eller setninger. For eksempel <EM>hus <B>og</B> h\nage<EM>, <EM>Frida går på skolen og Ben går i barnehagen</EM>.</BR>Infinitivsmerket <B>å</B> kan vi bare bruke framfor et verb som står i infinitiv.  <EM>Jeg elsker <B>å</B> løpe</EM> ell\ner <EM>Han er redd for <B>å</B> sykle</EM>."
+    ],
+    "@W-og-å": [
+        "Forveksling av og - å",
+        "Du har skrevet <B>og</B> i stedet for <B>å</B>. Ordene lyder likt, men <B>og</B> er en konjunksjon og <B>å</B> er et inf\nintinivsmerke. </BR>En konjunksjon er et bideord og  binder sammen  like ord, setnningledd eller setninger. For eksempel <EM>hus <B>og</B> h\nage<EM>, <EM>Frida går på skolen og Ben går i barnehagen</EM>.</BR>Infinitivsmerket <B>å</B> kan vi bare bruke framfor et verb som står i infinitiv.  <EM>Jeg elsker <B>å</B> løpe</EM> ell\ner <EM>Han er redd for <B>å</B> sykle</EM>."
+    ],
+    "@W-og-å-SPS": [
+        "Forveksling av og - å",
+        "Du har skrevet <B>og</B> i stedet for <B>å</B>. Ordene lyder likt, men <B>og</B> er en konjunksjon og <B>å</B> er et inf\nintinivsmerke. </BR>En konjunksjon er et bideord og  binder sammen  like ord, setnningledd eller setninger. For eksempel <EM>hus <B>og</B> h\nage<EM>, <EM>Frida går på skolen og Ben går i barnehagen</EM>.</BR>Infinitivsmerket <B>å</B> kan vi bare bruke framfor et verb som står i infinitiv.  <EM>Jeg elsker <B>å</B> løpe</EM> ell\ner <EM>Han er redd for <B>å</B> sykle</EM>."
+    ],
+    "@W-og-å-får": [
+        "Forveksling av og - å",
+        "Du har skrevet <B>og</B> i stedet for <B>å</B>. Ordene lyder likt, men <B>og</B> er en konjunksjon og <B>å</B> er et inf\nintinivsmerke. </BR>En konjunksjon er et bideord og  binder sammen  like ord, setnningledd eller setninger. For eksempel <EM>hus <B>og</B> hage<EM>, <EM>Frida går på skolen og Ben går i barnehagen</EM>.</BR>Infinitivsmerket <B>å</B> kan vi bare bruke framfor et verb som står i infinitiv.  <EM>Jeg elsker <B>å</B> løpe</EM> ell\ner <EM>Han er redd for <B>å</B> sykle</EM>."
+    ],
+    "@W-og-å-verbinset": [
+        "Forveksling av og - å",
+        "Du har skrevet <B>og</B> i stedet for <B>å</B>. Ordene lyder likt, men <B>og</B> er en konjunksjon og <B>å</B> er et inf\nintinivsmerke. </BR>En konjunksjon er et bideord og  binder sammen  like ord, setnningledd eller setninger. For eksempel <EM>hus <B>og</B> h\nage<EM>, <EM>Frida går på skolen og Ben går i barnehagen</EM>.</BR>Infinitivsmerket <B>å</B> kan vi bare bruke framfor et verb som står i infinitiv.  <EM>Jeg elsker <B>å</B> løpe</EM> ell\ner <EM>Han er redd for <B>å</B> sykle</EM>."
+    ],
+    "@W-og-å-verbleft": [
+        "Forveksling av og - å",
+        "Du har skrevet <B>og</B> i stedet for <B>å</B>. Ordene lyder likt, men <B>og</B> er en konjunksjon og <B>å</B> er et inf\nintinivsmerke. </BR> En konjunksjon er et bideord og  binder sammen  like ord, setnningledd eller setninger. For eksempel <EM>hus <B>og</B> hage<EM>, <EM>Frida går på skolen og Ben går i barnehagen</EM>.</BR>Infinitivsmerket <B>å</B> kan vi bare bruke framfor et verb som står i infinitiv.  <EM>Jeg elsker <B>å</B> løpe</EM> ell\ner <EM>Han er redd for <B>å</B> sykle</EM>."
+    ]
+}
+	},
+	sv: {
+		comp_right: new RegExp('@R50[01]( |$)'),
+		types: {
+    "@LowerCase": [
+        "Stor bokstav i början av en mening.",
+        "Man ska börja en mening med stor bokstav."
+    ],
+    "@R11": [
+        "Dem är alltid fel som bestämd artikel",
+        "Bestämd artikel i pluralis är alltid <B>de</B>. <B>Dem</B> är objektform av det personliga pronominet i pluralis.<BR/><BR/><BR/><EM>Jag skall se till och spara till ett par till boots då det är <B>de</B> skorna jag använder mest.</EM><BR/><BR/><B>Dem</B> kan aldrig stå som bestämd artikel eller subjekt."
+    ],
+    "@R31": [
+        "Pronomenets subjektform",
+        "Det personliga pronomenets subjektform kan aldrig vara <B>dem</B>. Det är inte vardagligt. Det är helt enkelt fel. Om man vill skriva vardagligt, är formen <B>dom</B> och om man vill skriva mer korrekt, är formen <B>de</B>.<BR/><BR/>Nästan alla uttalar <B>de</B> och <B>dem</B> som 'dom.' Många vet att det finns en mer korrekt form av 'dom', när man menar <B>dem</B>. Men <B>dem</B> kan bara användas som objektform av det personliga pronomenet, inte som bestämd artikel i pluralis och inte som subjektform.<BR/><BR/><EM>Dör så söta <B>de</B> är!</EM> (aldrig ... så söta <FEL>dem</FEL> är!)<BR/><EM>Jag vet inte riktigt hur länge de håller, men ...</EM> (aldrig ... hur länge <FEL>dem</FEL> håller)"
+    ],
+    "@R500": [
+        "Vartannat",
+        "Det ska skrivas ihop, <B>vartannat</B>, inte isär."
+    ],
+    "@R501": [
+        "Vartefter",
+        "Det ska skrivas ihop, <B>vartefter</B>, inte isär."
+    ],
+    "@R550": [
+        "Var inte vart",
+        "Vart används oftast felaktigt. Det ska användas tillsammans med riktningsverb eller uttryck:<BR/><BR/><EM><B>Vart</B> är du på väg?</EM><BR/><BR/><B>Var</B> använder man med befintlighetsverb och verb som inte uttrycker en riktning.<BR/><BR/><EM><B>Var</B> bor du?</EM><BR/><EM><B>Var</B> köpt du skorna?</EM>"
+    ],
+    "@R600": [
+        "Var, inte vart med befintlighetsverb",
+        "Placeholder"
+    ],
+    "@R710": [
+        "Supinum av 'vara'",
+        "Supinum form av <B>vara</B>, dvs formen efter <B>ha</B>, <B>har</B> och <B>hade</B>, stavas <B>varit</B> inte <B>vart</B>.<BR/><BR/><EM>Har du varit i Skövde</EM> och inte <EM>har du <FEL>vart</FEL> i Skövde?\n"
+    ],
+    "@Y10": [
+        "De som bestämd artikel",
+        "Bestämd artikel i pluralis är alltid <B>de</B>, båda i subjektform och i objektform.<BR/><BR/><EM>Klart en av <B>de</B> bästa filmerna jag har sett!</EM><BR/><BR/>De allra flesta säger 'dom', men det är mer korrekt att skriva <B>de</B>."
+    ],
+    "@Y20": [
+        "Pronomenets objektform",
+        "Objektform av pronomenet i pluralis är <B>dem</B>. Objektform av <B>jag</B> är <B>mig</B>, av <B>du</B> är det <B>dig</B>, av <B>hon</B> och <B>han</B> är det <B>henne</B> och <B>honom</B>. Objektform av <B>de</B> är <B>dem</B>. Formen <B>dom</B> istället för <B>dem</B> används ofta i vardagligt tal, men om man vill skriva mer korrekt, ska det vara <B>dem</B>.<BR/><BR/><EM>Jag har hjälpt mamma att tömma typ tre skåp på plastburkar och sorterat <B>dom -> dem</B> idag.</EM><BR/></BR/><B>dem</B> är objekt till <B>sorterat</B>.<BR/><BR/>De allra flesta säger 'dom', men när vi skriver, är det mer korrekt med <B>dem</B>."
+    ],
+    "@Y30": [
+        "Pronomenets subjektform",
+        "Subjektform av pronomenet i pluralis är <B>de</B>. <B>Jag</B>, <B>du</B>, <B>han</B>, <B>hon</B> och <B>de</B> är subjektformer.<BR/><BR/><EM>Jag vet att det är flera härifrån som har köpt dem. Jag får väl hoppas att <B>de</B> finns kvar när jag kommer.</EM><BR/><BR/>De allra flesta säger 'dom' för <B>dem</B> (köpt <B>dem</B>, objektform) och <B>de</B> (<B>de</B> finns kvar, subjektform). Att skriva 'dom' är vardagligt. Det är mer korrekt att skriva <B>de</B>."
+    ],
+    "@Y40": [
+        "Dem i propositionsfraser",
+        "Pluralpronomenet <B>de</B> blir <B>dem</B> i prepositionsfraser.<BR/></BR><EM>Här är iallafall en bild som jag knäppte på <B>dem</B> i somras.</EM><BR/><EM>Vilken storlek har du på <B>dem</B>?</EM>"
+    ],
+    "@Y41": [
+        "Utan, preposotion eller konjunktion",
+        "Det kan vara svårt att avgöra om <B>utan</B> är en preposition och styr <B>dem</B> eller en konjunktion, följt oftast av <B>de</B><BR/><BR/><B>Konjunktion</B>: <EM>Bilderna i headern är inte tagna av mig utan de är lånade för jag älskade dem så mycket.</EM><BR/><B>Preposition</B>: <EM>Utan dem skulle jag bli totalt galen, skulle liksom inte funka.</EM><BR/><B>OBS!</B><BR/>I följande är \"dom\" objekt, och ska skrivas \"dem\" inte subjekt, \"de\":</BR><EM>Pengarna har inte alls gått till pappa, utan dom har han tagit med till skolan och köpt godis.</EM>"
+    ],
+    "@Y42": [
+        "Om, preposition eller konjunktion",
+        "Efter prepositionen \"om\" följer den böjda formen av \"de\", dvs, \"dem\". Efter konjunktionen \"om\" följer subjektformen av \"de\", dvs, \"de\".<BR/></BR/><B>Preposition</B>: <EM>Jag har hört mycket bra om dom så jag ser verkligen fram emot att testa allt!</EM><BR/><B>Preposition</B>: <EM>Jag tycker mer synd om dem.</EM><BR/><B>Konjunktion</B>: <EM>Imorgon ska jag och mamma till butiken och köpa en ny gitarr, om de har den jag vill ha inne.</EM>"
+    ],
+    "@Y43": [
+        "Till(s), preposition eller konjunktion",
+        "Om \"dom\" följer en preposition skriver man oftast objektformen \"dem\". Ibland skriver man \"till\" när man menar \"tills\" som en konjunktion, \"till den tid då\". I sådana fall är efterföljande \"dom\" oftast subjekt och man ska skriva subjektformen \"de\".<BR/><BR/><B>Preposition</B>:<BR/><EM>Flera har frågat om jag vill komma till dom och hälsa på.</EM><BR/><EM>Varför ska jag betala in pengar till dom varje månad och sen inte ens få ett vettigt svar?</EM><BR/><B>Konjunktion</B>:<BR/><EM>Samtidigt hjälper ju dessa mig att hitta mitt mål i livet, vilket helt enkelt får bli att kämpa till dom krossas.</EM><BR/>"
+    ],
+    "@Y44": [
+        "För kan vara prepostion eller konjunktion",
+        "\"Dom\" efter ordet \"för\" som preposition skrivs \"dem\". Om \"dom\" finns efter konjunktionen \"för\", ungefär \"därför att\", så är det oftast subjekt, och man ska skriva \"de\".<BR/><BR/><B>Preposition</B>:<BR/><EM>Här finns bilder för dem som inte tror mig.</EM><BR/><EM>Vi skulle träffa Johan och Axel där, men det tog en himla massa tid för dem så vi bestämde oss för att gå vidare.</EM><BR/><B>Konjunktion</B>:<BR/><EM>Det är synd, för de är inte med i Svenska Kyrkan.</EM><BR/><EM>Sarah och hennes mamma förtjänar en stor eloge av mig för de var så otroligt snälla och fixade Buddy åt mig imorse.</EM><BR/><EM>För de bryr sig inte om sådant.</EM><BR/>"
+    ],
+    "@Y700": [
+        "Vart som verb är gammaldags",
+        "<B>Vart</B> är inte ett verb i normal skriftspråk utan är gammaldags, som i den äldre bibelöversättningen:<BR/><BR/><EM>Och Gud sade: ’Varde ljus’; och det vart ljus</EM> (1917:s bibelöversättning).<BR/><BR/>I vissa dialekter används <B>vart</B> där normalsvenska har <B>blev</B>.<BR/><BR/><EM>Han <B>vart</B> sur.</EM><BR/><BR/>I rikssvenska skriver man:<BR/><BR/><EM>Han blev sur.</EM><BR/><BR/><B>Vart</B> är preteritumform av verbet <B>varda</B>."
+    ]
+}
+	},
+};
+
+function activate_markings(lang) {
+	marking_types = types_lang[lang].types;
+	types_comp_right = types_lang[lang].comp_right;
+
+	if (lang === 'da') {
+		types_mv = types_lang[lang].mv;
+		types_red = types_lang[lang].red;
+		types_yellow = types_lang[lang].yellow;
+	}
+	else {
+		g_conf.opt_mvNordic = false;
+		types_mv = {};
+		types_red = {};
+		types_yellow = {};
+		for (let k in marking_types) {
+			types_mv[k] = k;
+			if (k.indexOf('@R') !== -1) {
+				types_red[k] = k;
+			}
+			if (k.indexOf('@Y') !== -1) {
+				types_yellow[k] = k;
+			}
+		}
+	}
+}

@@ -400,6 +400,11 @@ function l10n_detectLanguage() {
 		if (m) {
 			l = m[1];
 			console.log('Set locale from AIs: '+l);
+			if (l !== 'da') {
+				// Reduce RQ size so that paragraphs are sent serially
+				Defs.MAX_RQ_SIZE = 1;
+			}
+			activate_markings(l);
 		}
 	}
 	if (!l10n.s.hasOwnProperty(l)) {
