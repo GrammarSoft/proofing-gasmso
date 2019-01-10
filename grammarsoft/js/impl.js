@@ -23,7 +23,6 @@ const VERSION_MINOR = 0;
 const VERSION_PATCH = 0;
 const ROOT_URL_SELF = 'https://retmig.dk/gas/dev/grammarsoft/';
 const ROOT_URL_GRAMMAR = 'https://retmig.dk/grammar/';
-const ROOT_URL_COMMA = 'https://kommaer.dk/comma/';
 const CADUCEUS_URL = 'wss://gramtrans.com/caduceus/';
 const SIGNOUT_URL = ROOT_URL_GRAMMAR+'/logout?';
 
