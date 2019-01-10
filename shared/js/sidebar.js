@@ -75,12 +75,6 @@ function markingSetSentence() {
 	for (let i=b; i<e ; ++i) {
 		if (i === cmarking.w) {
 			let w = markings[s][i][0];
-			if (markings[s][i][1].indexOf('@-comp') !== -1) {
-				w = '_' + w;
-			}
-			else if (types_comp_right.test(markings[s][i][1])) {
-				w = w + '_';
-			}
 			sentence += '<span class="marking">' + escHTML(w) + '</span> ';
 		}
 		else {
@@ -210,7 +204,6 @@ function markingRender(skipact) {
 	else {
 		let all_upper = is_upper(marking[0]);
 		let first_upper = all_upper || is_upper(marking[0].charAt(0));
-		let hyphen = (marking[1].indexOf('@comp-:-') !== -1);
 
 		if (marking[1].indexOf('@lower') !== -1) {
 			all_upper = first_upper = false;
@@ -225,9 +218,6 @@ function markingRender(skipact) {
 			}
 			else if (first_upper) {
 				t = uc_first(t);
-			}
-			if (hyphen) {
-				t += '‐';
 			}
 			suggs += '<div class="suggestion"><span class="link" tabindex="'+(50+i*2)+'">' + escHTML(t) + '</span><a class="suggestion-lookup link" tabindex="'+(50+i*2+1)+'"><span class="icon icon-lookup"></span></a></div>';
 		}
@@ -267,12 +257,6 @@ function markingRender(skipact) {
 	else {
 		$('.txtAccept').text(l10n.t(btn_lbl + 'REPLACE'));
 		let middle = marking[0];
-		if (marking[1].indexOf('@-comp') !== -1) {
-			middle = ' ' + middle;
-		}
-		else if (types_comp_right.test(marking[1])) {
-			middle = middle + ' ';
-		}
 		impl_selectInDocument(cmarking.prefix, middle, cmarking.suffix);
 	}
 }
@@ -482,12 +466,6 @@ function markingAcceptSuggestion() {
 	}
 
 	let middle = markings[cmarking.s][cmarking.w][0];
-	if (/@-comp/.test(markings[cmarking.s][cmarking.w][1])) {
-		middle = ' '+middle;
-	}
-	else if (types_comp_right.test(markings[cmarking.s][cmarking.w][1])) {
-		middle = middle+' ';
-	}
 	processQueue({f: impl_replaceInDocument, s: cmarking.s, w: cmarking.w, middle: middle, rpl: $(this).text()});
 }
 
@@ -766,13 +744,22 @@ function _parseResult(rv) {
 					w[1] = nws.join(' ');
 					if (!w[2] || w[2].length === 0) {
 						w[2] = '';
-						if (w[1].indexOf('@-comp') !== -1 || types_comp_right.test(w[1])) {
-							w[2] = w[0];
-						}
 					}
 					if (w[1].indexOf(' ') !== -1) {
 						w[1] = w[1].replace(/ @error /g, ' ').replace(/ @error$/g, '').replace(/^@error /g, '');
 					}
+
+					w[3] = 0;
+					if (w[1].indexOf('@-comp') !== -1) {
+						w[3] |= Defs.TYPE_COMP_LEFT;
+					}
+					if (types_comp_right.test(w[1])) {
+						w[3] |= Defs.TYPE_COMP_RIGHT;
+					}
+					if (w[1].indexOf('@comp-:-') !== -1) {
+						w[3] |= Defs.TYPE_COMP_HYPHEN;
+					}
+
 					had_mark = true;
 				}
 				else {
@@ -791,6 +778,69 @@ function _parseResult(rv) {
 			words.push(w);
 		}
 		if (had_mark) {
+			// Pre-merge compound errors with the token they're supposed to be with, respecting other corrections to either side of the merge
+			for (let j=0 ; j<words.length ; ) {
+				if (words[j].length > 1 && words[j][3] & Defs.TYPE_COMP) {
+					let ts = words[j][1];
+					let wx = '';
+					let px = '';
+					let sx = '';
+					if (words[j][3] & Defs.TYPE_COMP_LEFT) {
+						if (words[j-1].length > 1 && words[j-1][1]) {
+							ts += ' '+words[j-1][1];
+						}
+						wx = words[j-1][0] + ' ' + words[j][0];
+						px = words[j-1][0];
+						if (words[j-1].length > 1 && words[j-1][2]) {
+							px = words[j-1][2];
+						}
+						sx = words[j][0];
+						if (words[j][2]) {
+							sx = words[j][2];
+						}
+					}
+					if (words[j][3] & Defs.TYPE_COMP_RIGHT) {
+						if (words[j+1].length > 1 && words[j+1][1]) {
+							ts += ' '+words[j+1][1];
+						}
+						wx = words[j][0] + ' ' + words[j+1][0];
+						px = words[j][0];
+						if (words[j][2]) {
+							px = words[j][2];
+						}
+						sx = words[j+1][0];
+						if (words[j+1].length > 1 && words[j+1][2]) {
+							sx = words[j+1][2];
+						}
+					}
+
+					px = px.split(/\t/);
+					sx = sx.split(/\t/);
+					let space = '';
+					if (words[j][3] & Defs.TYPE_COMP_HYPHEN) {
+						space = '‐';
+					}
+					let es = [];
+					for (let p=0 ; p<px.length ; ++p) {
+						for (let s=0 ; s<sx.length ; ++s) {
+							es.push(px[p] + space + sx[s]);
+						}
+					}
+					let nw = [wx, ts.split(/ /).unique().join(' '), es.join('\t')];
+					words[j] = nw;
+
+					if (words[j][3] & Defs.TYPE_COMP_LEFT) {
+						words.splice(j-1, 1);
+					}
+					else {
+						words.splice(j+1, 1);
+						++j;
+					}
+				}
+				else {
+					++j;
+				}
+			}
 			markings.push(words);
 		}
 	}

@@ -120,6 +120,9 @@ const Defs = {
 	OPT_DP_IGNORE_MAJ:	   (1 <<  5),
 	OPT_DP_COLOR:		   (1 <<  6),
 	OPT_DP_USE_DICT:	   (1 <<  7),
+	TYPE_COMP_RIGHT:  (1 <<  0),
+	TYPE_COMP_LEFT:   (1 <<  1),
+	TYPE_COMP_HYPHEN: (1 <<  2),
 	MAX_SESSIONS: 5,
 	MAX_RQ_SIZE: 4096,
 	'comma-commercial': 'Kommaforslag Erhverv',
@@ -132,6 +135,7 @@ const Defs = {
 	'akututor-student': 'Akututor Studerende',
 };
 Defs.OPT_DP_IGNORE_UNKNOWN = Defs.OPT_DP_IGNORE_NAMES|Defs.OPT_DP_IGNORE_COMP|Defs.OPT_DP_IGNORE_ABBR|Defs.OPT_DP_IGNORE_OTHER;
+Defs.TYPE_COMP = Defs.TYPE_COMP_LEFT|Defs.TYPE_COMP_RIGHT;
 
 // Upper-case because we compare them to DOM nodeName
 let text_nodes = {'ADDRESS': true, 'ARTICLE': true, 'ASIDE': true, 'AUDIO': true, 'BLOCKQUOTE': true, 'BODY': true, 'CANVAS': true, 'DD': true, 'DIV': true, 'DL': true, 'FIELDSET': true, 'FIGCAPTION': true, 'FIGURE': true, 'FOOTER': true, 'FORM': true, 'H1': true, 'H2': true, 'H3': true, 'H4': true, 'H5': true, 'H6': true, 'HEADER': true, 'HGROUP': true, 'HTML': true, 'HR': true, 'LI': true, 'MAIN': true, 'NAV': true, 'NOSCRIPT': true, 'OL': true, 'OUTPUT': true, 'P': true, 'PRE': true, 'SECTION': true, 'TABLE': true, 'TD': true, 'TH': true, 'UL': true, 'VIDEO': true};
