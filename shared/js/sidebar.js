@@ -78,7 +78,7 @@ function markingSetSentence() {
 			if (markings[s][i][1].indexOf('@-comp') !== -1) {
 				w = '_' + w;
 			}
-			else if (markings[s][i][1].indexOf('@comp-') !== -1) {
+			else if (types_comp_right.test(markings[s][i][1])) {
 				w = w + '_';
 			}
 			sentence += '<span class="marking">' + escHTML(w) + '</span> ';
@@ -270,7 +270,7 @@ function markingRender(skipact) {
 		if (marking[1].indexOf('@-comp') !== -1) {
 			middle = ' ' + middle;
 		}
-		else if (marking[1].indexOf('@comp-') !== -1) {
+		else if (types_comp_right.test(marking[1])) {
 			middle = middle + ' ';
 		}
 		impl_selectInDocument(cmarking.prefix, middle, cmarking.suffix);
@@ -485,7 +485,7 @@ function markingAcceptSuggestion() {
 	if (/@-comp/.test(markings[cmarking.s][cmarking.w][1])) {
 		middle = ' '+middle;
 	}
-	else if (/@comp-/.test(markings[cmarking.s][cmarking.w][1])) {
+	else if (types_comp_right.test(markings[cmarking.s][cmarking.w][1])) {
 		middle = middle+' ';
 	}
 	processQueue({f: impl_replaceInDocument, s: cmarking.s, w: cmarking.w, middle: middle, rpl: $(this).text()});
@@ -645,7 +645,7 @@ function _parseResult(rv) {
 					else {
 						console.log('Unknown marking: '+ws[k]);
 						if (g_tool === 'Grammar') {
-							nws.push('@unknown-marking');
+							nws.push(ws[k]);
 						}
 						else {
 							if (ws[k].indexOf('%nok-') === 0) {
@@ -766,7 +766,7 @@ function _parseResult(rv) {
 					w[1] = nws.join(' ');
 					if (!w[2] || w[2].length === 0) {
 						w[2] = '';
-						if (w[1].indexOf('@-comp') !== -1 || w[1].indexOf('@comp-') !== -1) {
+						if (w[1].indexOf('@-comp') !== -1 || types_comp_right.test(w[1])) {
 							w[2] = w[0];
 						}
 					}
@@ -821,7 +821,7 @@ function sendTexts() {
 	$('.chkProgress').show();
 	let text = '';
 
-	for (to_send_b = to_send_i ; to_send_i < to_send.length ; ++to_send_i) {
+	for (to_send_b = to_send_i ; to_send_i < to_send.length && text.length < Defs.MAX_RQ_SIZE ; ++to_send_i) {
 		let par = to_send[to_send_i];
 
 		if (!par.hasOwnProperty('h')) {
@@ -839,9 +839,6 @@ function sendTexts() {
 		t = t.replace('\u00AD', ''); // Soft Hyphen
 
 		text += '<s'+par.i+'>\n'+t+'\n</s'+par.i+'>\n\n';
-		if (text.length >= Defs.MAX_RQ_SIZE) {
-			break;
-		}
 	}
 
 	if (text) {
