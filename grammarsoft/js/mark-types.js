@@ -31,6 +31,9 @@ let types_yellow = {
 	"@check!": "@check!",
 };
 
+/* exported types_comp_right */
+let types_comp_right = new RegExp('@comp-|@comp( |$)');
+
 /* exported marking_types */
 let marking_types = {
 	"@x-etype-list": [
@@ -422,4 +425,5 @@ for (let k in ctypes) {
 		types_red[k] = k;
 	}
 }
-//ctypes = null;
+
+ctypes = null;
