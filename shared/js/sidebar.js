@@ -54,6 +54,15 @@ let grammar_retried = false;
 let comma_retried = false;
 let support_sidebar = null;
 
+function switchSidebar(which) {
+	$('#popupIgnore').hide();
+	$('.sidebar').hide();
+	if (typeof which === 'string') {
+		which = $(which);
+	}
+	which.show();
+}
+
 function markingSetSentence() {
 	let s = cmarking.s;
 	let b = cmarking.w;
@@ -131,8 +140,7 @@ function markingRender(skipact) {
 	comma_retried = false;
 
 	$('#error').hide();
-	$('.sidebar').hide();
-	$('#chkChecking'+g_tool).show();
+	switchSidebar('#chkChecking'+g_tool);
 
 	let btn_lbl = 'BTN_GRAMMAR_';
 	if (g_tool === 'Comma') {
@@ -331,6 +339,7 @@ function btnIgnoreAll() {
 }
 
 function btnPrev() {
+	$('#popupIgnore').hide();
 	let found = false;
 	for (;;) {
 		for (let s=cmarking.s ; s>=0 ; --s) {
@@ -376,6 +385,7 @@ function btnPrev() {
 }
 
 function btnNext() {
+	$('#popupIgnore').hide();
 	let found = false;
 	for (;;) {
 		for (let s=cmarking.s ; s<markings.length ; ++s) {
@@ -953,8 +963,7 @@ function checkDone() {
 			}
 		}
 		else {
-			$('.sidebar').hide();
-			$('#chkDone' + g_tool).show();
+			switchSidebar('#chkDone' + g_tool);
 		}
 	}
 	else {
@@ -963,8 +972,7 @@ function checkDone() {
 			comma_retried = true;
 			checkParagraphs(to_send);
 		}
-		$('.sidebar').hide();
-		$('#chkDone' + g_tool).show();
+		switchSidebar('#chkDone' + g_tool);
 	}
 }
 
@@ -1064,18 +1072,17 @@ function loginKeepalive(init) {
 		}
 
 		if (init) {
-			$('.sidebar').hide();
 			if (impl_canGrammar() && impl_canComma()) {
 				$('.chkGrammarToComma').show();
 				$('.btnCheckComma').show();
 				$('.comma-specific').show();
-				$('#chkWelcomeShared').show();
+				switchSidebar('#chkWelcomeShared');
 			}
 			else if (impl_canComma()) {
 				$('.chkGrammarToComma').hide();
 				$('.btnCheckComma').show();
 				$('.comma-specific').show();
-				$('#chkWelcomeComma').show();
+				switchSidebar('#chkWelcomeComma');
 				g_tool = 'Comma';
 			}
 			else {
@@ -1083,7 +1090,7 @@ function loginKeepalive(init) {
 				$('.chkGrammarToComma').hide();
 				$('.btnCheckComma').hide();
 				$('.comma-specific').hide();
-				$('#chkWelcomeGrammar').show();
+				switchSidebar('#chkWelcomeGrammar');
 			}
 		}
 	}).fail(function() {
@@ -1092,8 +1099,7 @@ function loginKeepalive(init) {
 		ls_set('access-token', g_access_token);
 
 		loginListener();
-		$('.sidebar').hide();
-		$('#chkWelcomeLogin').show();
+		switchSidebar('#chkWelcomeLogin');
 	});
 }
 
@@ -1177,8 +1183,7 @@ function logout() {
 	ls_set('access-token', g_access_token);
 
 	loginListener();
-	$('.sidebar').hide();
-	$('#chkWelcomeLogin').show();
+	switchSidebar('#chkWelcomeLogin');
 }
 
 function initSidebar() {
@@ -1227,19 +1232,16 @@ function initSidebar() {
 	});
 	$('.btnSupport').click(function() {
 		if (support_sidebar) {
-			$('.sidebar').hide();
-			support_sidebar.show();
+			switchSidebar(support_sidebar);
 			support_sidebar = null;
 		}
 		else {
 			support_sidebar = $('.sidebar:visible');
-			$('.sidebar').hide();
-			$('#chkSupport').show();
+			switchSidebar('#chkSupport');
 		}
 	});
 	$('.btnCloseSupport').click(function() {
-		$('.sidebar').hide();
-		support_sidebar.show();
+		switchSidebar(support_sidebar);
 		support_sidebar = null;
 	});
 
@@ -1290,18 +1292,15 @@ function initSidebar() {
 	$('.btnInputAll').click(btnInputAll);
 
 	$('.btnCheckAgain').click(function() {
-		$('.sidebar').hide();
-		$('#chkWelcome' + g_tool).show();
+		switchSidebar('#chkWelcome' + g_tool);
 	});
 	$('.btnCheckGrammar').click(function() {
 		g_tool = 'Grammar';
-		$('.sidebar').hide();
-		$('#chkWelcome' + g_tool).show();
+		switchSidebar('#chkWelcome' + g_tool);
 	});
 	$('.btnCheckComma').click(function() {
 		g_tool = 'Comma';
-		$('.sidebar').hide();
-		$('#chkWelcome' + g_tool).show();
+		switchSidebar('#chkWelcome' + g_tool);
 	});
 
 	$('.btnAddWord').click(function() {
