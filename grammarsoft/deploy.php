@@ -21,6 +21,7 @@ if (!chdir("../../$where/$version/")) {
 echo "Setting MSO version\n";
 $mso = file_get_contents('mso.xml');
 $mso = preg_replace('~<Version>[^<>]*</Version>~', "<Version>$version</Version>", $mso);
+$mso = str_replace(' (dev)', '', $mso);
 file_put_contents('mso.xml', $mso);
 
 echo "Replacing URI path\n";
