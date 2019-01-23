@@ -8,8 +8,8 @@
   <Version>1.0.0</Version>
   <ProviderName>GrammarSoft ApS</ProviderName>
   <DefaultLocale>da-DK</DefaultLocale>
-  <DisplayName DefaultValue="RetMig &amp; Kommaforslag" />
-  <Description DefaultValue="RetMig &amp; Kommaforslag" />
+  <DisplayName DefaultValue="RetMig og Kommaforslag" />
+  <Description DefaultValue="RetMig og Kommaforslag" />
   <IconUrl DefaultValue="https://retmig.dk/gas/release/1.0.0/imgs/logo-32.png" />
 
   <SupportUrl DefaultValue="https://grammarsoft.com/" />
@@ -93,14 +93,14 @@
       </bt:Urls>
       <!-- ShortStrings max characters==125. -->
       <bt:ShortStrings>
-        <bt:String id="GS.RMKF.TaskpaneButton.Label" DefaultValue="RetMig &amp; Kommaforslag" />
-        <bt:String id="GS.RMKF.Group1Label" DefaultValue="RetMig &amp; Kommaforslag" />
-        <bt:String id="GS.RMKF.GetStarted.Title" DefaultValue="Kom godt i gang med RetMig &amp; Kommaforslag!" />
+        <bt:String id="GS.RMKF.TaskpaneButton.Label" DefaultValue="RetMig og Kommaforslag" />
+        <bt:String id="GS.RMKF.Group1Label" DefaultValue="RetMig og Kommaforslag" />
+        <bt:String id="GS.RMKF.GetStarted.Title" DefaultValue="Kom godt i gang med RetMig og Kommaforslag!" />
       </bt:ShortStrings>
       <!-- LongStrings max characters==250. -->
       <bt:LongStrings>
-        <bt:String id="GS.RMKF.TaskpaneButton.Tooltip" DefaultValue="Klik for at åbne RetMig &amp; Kommaforslag" />
-        <bt:String id="GS.RMKF.GetStarted.Description" DefaultValue="RetMig &amp; Kommaforslag er nu installeret. Gå til fanen Hjem og klik på RetMig &amp; Kommaforslag for at komme i gang." />
+        <bt:String id="GS.RMKF.TaskpaneButton.Tooltip" DefaultValue="Klik for at åbne RetMig og Kommaforslag" />
+        <bt:String id="GS.RMKF.GetStarted.Description" DefaultValue="RetMig og Kommaforslag er nu installeret. Gå til fanen Hjem og klik på RetMig og Kommaforslag for at komme i gang." />
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>
