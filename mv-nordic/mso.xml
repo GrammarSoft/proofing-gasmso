@@ -8,8 +8,8 @@
   <Version>1.1.0</Version>
   <ProviderName>GrammarSoft ApS</ProviderName>
   <DefaultLocale>da-DK</DefaultLocale>
-  <DisplayName DefaultValue="Grammateket" />
-  <Description DefaultValue="Grammateket" />
+  <DisplayName DefaultValue="Grammateket (dev)" />
+  <Description DefaultValue="Grammateket (dev)" />
   <IconUrl DefaultValue="https://retmig.dk/gas/dev/mv-nordic/imgs/logo-32.png" />
 
   <SupportUrl DefaultValue="https://grammarsoft.com/" />
@@ -96,8 +96,8 @@
       </bt:Urls>
       <!-- ShortStrings max characters==125. -->
       <bt:ShortStrings>
-        <bt:String id="MVGrammar.TaskpaneButton.Label" DefaultValue="Grammateket" />
-        <bt:String id="MVGrammar.Group1Label" DefaultValue="Grammateket" />
+        <bt:String id="MVGrammar.TaskpaneButton.Label" DefaultValue="Grammateket (dev)" />
+        <bt:String id="MVGrammar.Group1Label" DefaultValue="Grammateket (dev)" />
         <bt:String id="MVGrammar.GetStarted.Title" DefaultValue="Kom godt i gang med Grammateket &amp; Kommaforslag!" />
       </bt:ShortStrings>
       <!-- LongStrings max characters==250. -->
