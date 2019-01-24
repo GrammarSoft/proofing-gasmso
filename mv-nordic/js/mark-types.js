@@ -337,7 +337,7 @@ let types_lang = {
 		types: {
     "@R-AQ": [
         "Særskrivning - bør sammenskrives med følgende ord",
-        "Placeholder - Du har skrevet et sammensat adjektiv som to ord. Ord som <EM>skolefri</EM> eller <EM>kjempefint</EM> er sammensatte adjektiver og skal skrives i et ord.\n"
+        "Placeholder - Du har skrevet et sammensat adjektiv som to ord. Ord som <EM>skolefri</EM> eller <EM>kjempefint</EM> er sammensatte adjektiver og skal skrives i et ord."
     ],
     "@R-LowerCase": [
         "Stor bokstav etter punktum",
@@ -416,9 +416,13 @@ let types_lang = {
         "Stor bokstav i början av en mening.",
         "Man ska börja en mening med stor bokstav."
     ],
+    "@R-SPELL": [
+        "Stavfel",
+        "Det ser ut att vara ett stavfel. Kontrollera förslagen i så fall."
+    ],
     "@R-comp-NC-NC": [
         "Särskrivning",
-        "Dessa två substantiv bildar en sammansättning.\n"
+        "Dessa två substantiv bildar en sammansättning."
     ],
     "@R11": [
         "Dem är alltid fel som bestämd artikel",
