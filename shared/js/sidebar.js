@@ -52,7 +52,7 @@ let act_queue = [];
 let select_fail = false;
 let grammar_retried = false;
 let comma_retried = false;
-let support_sidebar = null;
+let overlay_sidebars = [];
 
 function switchSidebar(which) {
 	$('#popupIgnore').hide();
@@ -61,6 +61,16 @@ function switchSidebar(which) {
 		which = $(which);
 	}
 	which.show();
+}
+
+function overlay_push(which) {
+	overlay_sidebars.push($('.sidebar:visible'));
+	switchSidebar(which);
+}
+
+function overlay_pop() {
+	switchSidebar(overlay_sidebars[overlay_sidebars.length-1]);
+	overlay_sidebars.pop();
 }
 
 function markingSetSentence() {
@@ -118,6 +128,25 @@ function markingSetContext() {
 	}
 }
 
+function markingColor(types) {
+	let col = 'green';
+	for (let i=0 ; i<types.length ; ++i) {
+		if (types_yellow.hasOwnProperty(types[i])) {
+			col = 'yellow';
+		}
+		if (types_red.hasOwnProperty(types[i])) {
+			col = 'red';
+			break;
+		}
+	}
+	for (let i=0 ; i<types.length ; ++i) {
+		if (types[i] === '@green') {
+			col = 'green';
+		}
+	}
+	return col;
+}
+
 function markingRender(skipact) {
 	let s = cmarking.s;
 	let marking = markings[s][cmarking.w];
@@ -147,22 +176,8 @@ function markingRender(skipact) {
 		btn_lbl = 'BTN_COMMA_';
 	}
 
-	let col = 'green';
 	let types = marking[1].split(/ /g);
-	for (let i=0 ; i<types.length ; ++i) {
-		if (types_yellow.hasOwnProperty(types[i])) {
-			col = 'yellow';
-		}
-		if (types_red.hasOwnProperty(types[i])) {
-			col = 'red';
-			break;
-		}
-	}
-	for (let i=0 ; i<types.length ; ++i) {
-		if (types[i] === '@green') {
-			col = 'green';
-		}
-	}
+	let col = markingColor(types);
 
 	if (col === 'yellow' || marking[1].indexOf('@error') !== -1) {
 		$('.btnAddWord').removeClass('disabled');
@@ -194,10 +209,7 @@ function markingRender(skipact) {
 	$('.chkExplainShortText').html(es);
 	$('.chkExplainLongText').html(el);
 
-	let alt = '';
-	if (g_conf.opt_color) {
-		alt = ' alt';
-	}
+	let alt = (g_conf.opt_color ? ' alt' : '');
 
 	$('.chkType').attr('title', marking[1]);
 
@@ -267,6 +279,46 @@ function markingRender(skipact) {
 		let middle = marking[0];
 		impl_selectInDocument(cmarking.prefix, middle, cmarking.suffix);
 	}
+}
+
+function markingSelect(s, w) {
+	cmarking.s = s;
+	cmarking.w = w;
+	markingRender();
+	window.scrollTo(0, 0);
+}
+
+function btnSeeList() {
+	let html = '';
+	let alt = (g_conf.opt_color ? ' alt' : '');
+
+	for (let s = 0 ; s<markings.length ; ++s) {
+		for (let w = 0 ; w<markings[s].length ; ++w) {
+			if (markings[s][w].length > 1) {
+				html += '<li class="errorListEntry" onclick="markingSelect('+s+','+w+');" title="'+escHTML(markings[s][w][1])+'"><span class="link">';
+				let c = Math.max(w-3, 0);
+				if (c > 0) {
+					html += '…';
+				}
+				for ( ; c<w ; ++c) {
+					html += escHTML(markings[s][c][0]) + ' ';
+				}
+				let col = markingColor(markings[s][w][1].split(/ /g));
+				html += '<span class="marking marking-'+col+alt+' marking-'+g_tool.toLowerCase()+'">'+escHTML(markings[s][w][0])+'</span>';
+				c = w+1;
+				for ( ; c<markings[s].length && c<w+3 ; ++c) {
+					html += ' '+escHTML(markings[s][c][0]);
+				}
+				if (c < markings[s].length) {
+					html += '…';
+				}
+				html += '</span><span class="link suggestion-lookup"><span class="icon icon-lookup"></span></span></li>';
+			}
+		}
+	}
+
+	$('#errorList').html(html);
+	overlay_push('#chkErrorList');
 }
 
 function btnAccept() {
@@ -1231,18 +1283,16 @@ function initSidebar() {
 		loginKeepalive(true);
 	});
 	$('.btnSupport').click(function() {
-		if (support_sidebar) {
-			switchSidebar(support_sidebar);
-			support_sidebar = null;
+		if ($('#chkSupport:visible').length) {
+			overlay_pop();
 		}
 		else {
-			support_sidebar = $('.sidebar:visible');
-			switchSidebar('#chkSupport');
+			overlay_push('#chkSupport');
 		}
 	});
-	$('.btnCloseSupport').click(function() {
-		switchSidebar(support_sidebar);
-		support_sidebar = null;
+	$('.btnSeeList').click(btnSeeList);
+	$('.btnCloseSupport,.btnCloseList').click(function() {
+		overlay_pop();
 	});
 
 	$('.optComma').click(function() {
