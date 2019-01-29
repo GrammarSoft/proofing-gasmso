@@ -744,7 +744,7 @@ function _parseResult(rv) {
 						if (g_conf.opt_ignUOther && nws[k] === '@check!') {
 							continue;
 						}
-						if (g_conf.opt_ignMaj && (nws[k] === '@upper' || nws[k] === '@lower')) {
+						if (g_conf.opt_ignMaj && (types_to_upper.test(nws[k]) || nws[k] === '@lower')) {
 							continue;
 						}
 					}
@@ -784,6 +784,26 @@ function _parseResult(rv) {
 				nws = ws;
 				if (nws.length == 0) {
 					crs = [];
+				}
+
+				// For case-folding, create a correction if none exists and fold all corrections to the desired case
+				for (let k=0 ; k<nws.length ; ++k) {
+					if (types_to_upper.test(nws[k])) {
+						if (crs.length == 0) {
+							crs.push(w[0]);
+						}
+						for (let c=0 ; c<crs.length ; ++c) {
+							crs[c] = uc_first(crs[c]);
+						}
+					}
+					else if (nws[k] == '@lower') {
+						if (crs.length == 0) {
+							crs.push(w[0]);
+						}
+						for (let c=0 ; c<crs.length ; ++c) {
+							crs[c] = lc_first(crs[c]);
+						}
+					}
 				}
 
 				if (crs.length) {
