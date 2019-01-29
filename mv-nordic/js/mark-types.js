@@ -58,6 +58,9 @@ let types_yellow = {
 /* exported types_comp_right */
 let types_comp_right = null;
 
+/* exported types_to_upper */
+let types_to_upper = null;
+
 /* exported marking_types */
 let marking_types = {
 	"@x-etype-list": [
@@ -331,9 +334,11 @@ let types_lang = {
 		yellow: Object.assign({}, types_yellow),
 		types: Object.assign({}, marking_types),
 		comp_right: new RegExp('@comp-|@comp( |$)'),
+		to_upper: new RegExp('@upper( |$)'),
 	},
 	nb: {
 		comp_right: new RegExp('@(R|Y)-comp[^ ]*( |$)'),
+		to_upper: new RegExp('@R-LowerCase( |$)'),
 		types: {
     "@R-AQ": [
         "Særskrivning - bør sammenskrives med følgende ord",
@@ -411,6 +416,7 @@ let types_lang = {
 	},
 	sv: {
 		comp_right: new RegExp('((@R50[01])|(@(R|Y)-comp[^ ]*))( |$)'),
+		to_upper: new RegExp('@R-LowerCase( |$)'),
 		types: {
     "@LowerCase": [
         "Stor bokstav i början av en mening.",
@@ -495,6 +501,7 @@ let types_lang = {
 function activate_markings(lang) {
 	marking_types = types_lang[lang].types;
 	types_comp_right = types_lang[lang].comp_right;
+	types_to_upper = types_lang[lang].to_upper;
 
 	if (lang === 'da') {
 		types_mv = types_lang[lang].mv;

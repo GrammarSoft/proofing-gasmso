@@ -313,6 +313,11 @@ function uc_first(str) {
 	return str.substr(0, 1).toUpperCase() + str.substr(1);
 }
 
+/* exported lc_first */
+function lc_first(str) {
+	return str.substr(0, 1).toLowerCase() + str.substr(1);
+}
+
 /* exported escHTML */
 function escHTML(t) {
 	let nt = t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
