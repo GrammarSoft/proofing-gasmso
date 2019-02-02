@@ -34,6 +34,9 @@ let types_yellow = {
 /* exported types_comp_right */
 let types_comp_right = new RegExp('@comp-|@comp( |$)');
 
+/* exported types_to_upper */
+let types_to_upper = new RegExp('@upper( |$)');
+
 /* exported marking_types */
 let marking_types = {
 	"@x-etype-list": [
@@ -414,7 +417,7 @@ for (let k in ctypes) {
 	if (!ctypes.hasOwnProperty(k)) {
 		continue;
 	}
-	let rx = new RegExp('^<h3>(.+?)<\/h3>(.+)$', 's');
+	let rx = new RegExp('^<h3>([^]+?)<\/h3>([^]+)$');
 	let ms = rx.exec(ctypes[k][0]);
 	marking_types[k] = [ms[1], ms[2], ctypes[k][1]];
 
