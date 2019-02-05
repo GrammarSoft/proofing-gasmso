@@ -170,13 +170,16 @@ let g_itw_tap = 0;
 /* exported g_conf_json */
 let g_conf_json = JSON.stringify(g_conf_defaults);
 
+const Letters = '\\d\\wa-zA-ZéÉöÖæÆøØåÅ.,!;:';
 /* exported Const */
 const Const = {
+	LetterT: new RegExp('['+Letters+']+', 'i'),
+	NonLetter: new RegExp('[^'+Letters+']+', 'ig'),
+	NonLetterT: new RegExp('[^'+Letters+']+', 'i'),
+	PrefixNonLetterT: new RegExp('^[^'+Letters+']+', 'i'),
+	SuffixNonLetterT: new RegExp('[^'+Letters+']+$', 'i'),
+	OnlyNonLetterT: new RegExp('^[^'+Letters+']*$', 'i'),
 	SpaceOrEmpty: /^\s*$/,
-	LetterT: /[\d\wa-zA-ZéÉöÖæÆøØåÅ.,!;:]+/i,
-	NonLetter: /[^\d\wa-zA-ZéÉöÖæÆøØåÅ.,!;:]+/ig,
-	NonLetterT: /[^\d\wa-zA-ZéÉöÖæÆøØåÅ.,!;:]+/i,
-	OnlyNonLetterT: /^[^\d\wa-zA-ZéÉöÖæÆøØåÅ.,!;:]*$/i,
 	Split_String: ' ,.?!"#¤%&/()=@£${}|*^¨~/\\½§<>:;-',
 };
 Const.Split_Array = Const.Split_String.split('');
@@ -522,8 +525,13 @@ function findToSend(prefix, word, suffix) {
 				--p_off;
 			}
 		}
+		else if (Const.PrefixNonLetterT.test(word)) {
+			while (p_off > 1 && Const.NonLetterT.test(t.charAt(p_off-1))) {
+				--p_off;
+			}
+		}
 		else {
-			while (p_off < t.length && Const.SpaceOrEmpty.test(t.charAt(p_off))) {
+			while (p_off < t.length && Const.NonLetterT.test(t.charAt(p_off))) {
 				++p_off;
 			}
 		}
@@ -533,8 +541,13 @@ function findToSend(prefix, word, suffix) {
 				++w_off;
 			}
 		}
+		else if (Const.SuffixNonLetterT.test(word)) {
+			while (w_off < t.length && Const.NonLetterT.test(t.charAt(w_off))) {
+				++w_off;
+			}
+		}
 		else {
-			while (w_off > 1 && Const.SpaceOrEmpty.test(t.charAt(w_off-1))) {
+			while (w_off > 1 && Const.NonLetterT.test(t.charAt(w_off-1))) {
 				--w_off;
 			}
 		}
