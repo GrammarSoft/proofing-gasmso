@@ -349,7 +349,7 @@ let types_lang = {
         "En ny setning begynner alltid med stor bokstav. </BR>Punktum avslutter en setning.</BR>Etter et punktum skal det være stor bokstav.</BR>Navn skal alltid ha stor bokstav selv om det ikke er et punktum foran."
     ],
     "@R-SPELL": [
-        "Stavefejl",
+        "Stavefeil",
         "Det har blitt en skrivefeil fordi bokstavene er satt i feil rekkefølge eller det er brukt feil bokstaver."
     ],
     "@R-SPELL-Context": [
@@ -409,7 +409,7 @@ let types_lang = {
         "Du har kanskje særskrevet et sammensatt ord. Sig ordet højt for deg sjølv, hvis du uttaller eit uttrykk som eit ord, med trykk på første leddet skal det skrivast som ett ord. Hvis der er likt trykk på begge ledda, skal det skrivast som to ord. </BR> Eksempler: <EM>billig bok - billigbog </EM>, <EM>stor kjøkken - storkjøkken </EM>, <EM> stor by - storby </EM><EM>småbørn - små børn</EM>, <EM> blåbær - blå bær</EM>"
     ],
     "@Y-comp-adverb": [
-        "Særskrivning - tjek om ordet bør sammenskrived med følgende ord",
+        "Særskrivning - tjek om ordet bør sammenskrives med følgende ord",
         "Du har kanskje særskrevet et sammensatt ord.- Forklaringer om adverber/preposition"
     ]
 }
