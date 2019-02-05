@@ -1255,6 +1255,8 @@ function logout() {
 		data: {a: 'logout'},
 	}).done(function() {
 		console.log('Logged out');
+		$('.btnOptions').hide();
+		$('.btnLogout').hide();
 	});
 
 	if (g_keepalive) {
