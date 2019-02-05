@@ -564,3 +564,26 @@ function findToSend(prefix, word, suffix) {
 
 	return false;
 }
+
+function object2pot(obj) {
+	let rv = '';
+
+	rv += 'msgid ""\n';
+	rv += 'msgstr ""\n';
+	rv += '"MIME-Version: 1.0\\n"\n';
+	rv += '"Content-Type: text/plain; charset=utf-8\\n"\n';
+	rv += '"Content-Transfer-Encoding: 8bit\\n"\n';
+	rv += '\n';
+
+	for (let k in obj) {
+		if (!obj.hasOwnProperty(k)) {
+			continue;
+		}
+		rv += '# ' + obj[k].replace(/\n/g, '\\n') + '\n';
+		rv += 'msgid "' + k + '"\n';
+		rv += 'msgstr ""\n';
+		rv += '\n';
+	}
+
+	return rv;
+}

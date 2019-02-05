@@ -12,6 +12,10 @@ msgstr ""
 msgid "HTML_DICTIONARY"
 msgstr ""
 
+# Luk
+msgid "BTN_CLOSE"
+msgstr ""
+
 # Tjek kommatering igen
 msgid "BTN_COMMA_AGAIN"
 msgstr ""
@@ -132,6 +136,14 @@ msgstr ""
 msgid "BTN_PREVIOUS"
 msgstr ""
 
+# Se alle
+msgid "BTN_SEEALL"
+msgstr ""
+
+# Support
+msgid "BTN_SUPPORT"
+msgstr ""
+
 # Start på ny
 msgid "BTN_RESTART"
 msgstr ""
@@ -184,7 +196,7 @@ msgstr ""
 msgid "ERR_REPLACE_NOSELECT"
 msgstr ""
 
-# Konteksten matchede ikke. Denne fejl bør ikke kunne ske.
+# Konteksten matchede ikke. Det kan være du eller en anden har ændret i dokumentet siden tjekket blev kørt.
 msgid "ERR_SELECT_NOMATCH"
 msgstr ""
 
@@ -224,6 +236,10 @@ msgstr ""
 msgid "HDR_EDIT"
 msgstr ""
 
+# Alle markeringer
+msgid "HDR_ERRORLIST"
+msgstr ""
+
 # Grammateket
 msgid "HDR_GRAMMAR"
 msgstr ""
@@ -250,6 +266,10 @@ msgstr ""
 
 # Har du ikke Grammateket endnu?
 msgid "HDR_SUBSCRIBE"
+msgstr ""
+
+# Support &amp; Copyright
+msgid "HDR_SUPPORT_COPYRIGHT"
 msgstr ""
 
 # Oplæsning
