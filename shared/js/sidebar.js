@@ -1173,6 +1173,8 @@ function loginKeepalive(init) {
 				$('.comma-specific').hide();
 				switchSidebar('#chkWelcomeGrammar');
 			}
+			$('.btnOptions').show();
+			$('.btnLogout').show();
 		}
 	}).fail(function() {
 		console.log('Login fail');
@@ -1398,6 +1400,8 @@ function initSidebar() {
 	});
 
 	$('.btnLogout').click(logout);
+	$('.btnOptions').hide();
+	$('.btnLogout').hide();
 
 	$('#popupIgnore').hide();
 	$('#error').hide();

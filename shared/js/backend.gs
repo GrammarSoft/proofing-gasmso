@@ -25,8 +25,6 @@ function onOpen(e) {
 	var ui = DocumentApp.getUi();
 	ui.createAddonMenu()
 		.addItem(l10n.t('MENU_START'), 'showGrammar')
-		.addSeparator()
-		.addItem(l10n.t('MENU_OPTIONS'), 'showOptions')
 		.addToUi();
 }
 
