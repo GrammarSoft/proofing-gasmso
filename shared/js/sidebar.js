@@ -291,6 +291,7 @@ function markingSelect(s, w) {
 function btnSeeList() {
 	let html = '';
 	let alt = (g_conf.opt_color ? ' alt' : '');
+	let en = 0;
 
 	for (let s = 0 ; s<markings.length ; ++s) {
 		for (let w = 0 ; w<markings[s].length ; ++w) {
@@ -313,8 +314,16 @@ function btnSeeList() {
 					html += '…';
 				}
 				html += '</span><span class="link suggestion-lookup"><span class="icon icon-lookup"></span></span></li>';
+				++en;
 			}
 		}
+	}
+
+	if (en >= 10) {
+		$('.errorListTopBtn').show();
+	}
+	else {
+		$('.errorListTopBtn').hide();
 	}
 
 	$('#errorList').html(html);
@@ -643,7 +652,7 @@ function _parseResult(rv) {
 				continue;
 			}
 
-			let w = lines[j].split(/\t/);
+			let w = $.trim(lines[j]).split(/\t/);
 			w[0] = $.trim(w[0].replace(/(\S)=/g, '$1 '));
 
 			if (w[0] === '') {
@@ -908,7 +917,7 @@ function _parseResult(rv) {
 							es.push(px[p] + space + sx[s]);
 						}
 					}
-					let nw = [wx, ts.split(/ /).unique().join(' '), es.join('\t')];
+					let nw = [wx, ts.split(/ /).unique().join(' ').replace(/ +/g, ' '), es.join('\t')];
 					words[j] = nw;
 
 					if (words[j][3] & Defs.TYPE_COMP_LEFT) {
