@@ -20,6 +20,10 @@
 
 let g_text = '';
 
+function activate_markings(lang) {
+	// Dummy
+}
+
 $(function() {
 	$.ajaxSetup({
 		xhrFields: {
@@ -39,6 +43,9 @@ $(function() {
 		let b = window.location.search.indexOf('text=') + 5;
 		let e = window.location.search.indexOf('&', b);
 		text = window.location.search.substring(b, e);
+	}
+	if (text.indexOf('%') !== -1) {
+		text = decodeURIComponent(text);
 	}
 	console.log(text);
 

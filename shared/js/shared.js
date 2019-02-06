@@ -170,7 +170,9 @@ let g_itw_tap = 0;
 /* exported g_conf_json */
 let g_conf_json = JSON.stringify(g_conf_defaults);
 
-const Letters = '\\d\\wa-zA-ZéÉöÖæÆøØåÅ.,!;:';
+// Letters we're likely to see in Danish, Norwegian, Swedish, Greenlandic
+// Can't rely on Unicode escapes or /u modifier because of IE11
+const Letters = '\\d\\wa-zA-ZÂâÊêÎîÔôÛûÃãĨĩÕõŨũÀàÈèÌìÒòÙùÁáÉéÍíÓóÚúÄäËëÏïÖöÜüÆæØøÅåĸ.,!;:';
 /* exported Const */
 const Const = {
 	LetterT: new RegExp('['+Letters+']+', 'i'),
