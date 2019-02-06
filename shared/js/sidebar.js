@@ -296,7 +296,7 @@ function btnSeeList() {
 	for (let s = 0 ; s<markings.length ; ++s) {
 		for (let w = 0 ; w<markings[s].length ; ++w) {
 			if (markings[s][w].length > 1) {
-				html += '<li class="errorListEntry" onclick="markingSelect('+s+','+w+');" title="'+escHTML(markings[s][w][1])+'"><span class="link">';
+				html += '<div class="errorListEntry" onclick="markingSelect('+s+','+w+');" title="'+escHTML(markings[s][w][1])+'"><span class="link">';
 				let c = Math.max(w-3, 0);
 				if (c > 0) {
 					html += '…';
@@ -313,7 +313,7 @@ function btnSeeList() {
 				if (c < markings[s].length) {
 					html += '…';
 				}
-				html += '</span><span class="link suggestion-lookup"><span class="icon icon-lookup"></span></span></li>';
+				html += '</span><span class="link suggestion-lookup"><span class="icon icon-lookup"></span></span></div>';
 				++en;
 			}
 		}
@@ -327,6 +327,7 @@ function btnSeeList() {
 	}
 
 	$('#errorList').html(html);
+	itw_speak_attach($('#errorList').get(0));
 	overlay_push('#chkErrorList');
 }
 
