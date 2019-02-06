@@ -665,6 +665,7 @@ function _parseResult(rv) {
 				// Strip marking types belonging to higher than current critique level
 				let ws = w[1].split(/ /g);
 				let nws = [];
+				let rs = [];
 				let crs = [];
 				let had_r = false;
 				for (let k=0 ; k<ws.length ; ++k) {
@@ -675,7 +676,7 @@ function _parseResult(rv) {
 							console.log(n);
 							continue;
 						}
-						crs.unshift(n);
+						rs.push(n);
 						had_r = true;
 						continue;
 					}
@@ -707,6 +708,7 @@ function _parseResult(rv) {
 						}
 					}
 				}
+				crs = rs.concat(crs);
 				// Remove @sentsplit from last token
 				if (j == lines.length-1 && nws.length == 1 && nws[0] === '@sentsplit') {
 					crs = [];
