@@ -61,17 +61,20 @@ label span {
 	border-bottom: 5px solid;
 }
 
-#errorList {
-	padding-left: 18px;
-}
-.suggestion, .errorListEntry {
+.suggestion {
 	position: relative;
 	display: block;
 	margin-top: 18px;
 	padding-right: 38px;
 }
 .errorListEntry {
-	display: list-item;
+	position: relative;
+	display: block;
+	margin-top: 9px;
+	padding: 9px 25px 9px 3px;
+}
+.errorListEntry:nth-child(odd) {
+	background-color: #f4f4f4;
 }
 .suggestion span, .errorListEntry > span {
 	display: block;
