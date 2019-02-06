@@ -426,6 +426,18 @@ let types_lang = {
         "Stavfel",
         "Det ser ut att vara ett stavfel. Kontrollera förslagen i så fall!"
     ],
+    "@R-comp-AQ": [
+        "Särskrivning",
+        "Adjectiv och substantiv kan också bilda en sammansättning."
+    ],
+    "@R-comp-AQ-AF": [
+        "Särskrivning",
+        "Adjectiv och perfektparticip kan också bilda en sammansättning."
+    ],
+    "@R-comp-AQ-NC": [
+        "Särskrivning",
+        "Adjectiv och substantiv kan också bilda en sammansättning."
+    ],
     "@R-comp-NC-NC": [
         "Särskrivning",
         "Dessa två substantiv bildar en sammansättning."
