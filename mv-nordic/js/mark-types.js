@@ -418,9 +418,9 @@ let types_lang = {
 		comp_right: new RegExp('((@R50[01])|(@(R|Y)-comp[^ ]*))( |$)'),
 		to_upper: new RegExp('@R-LowerCase( |$)'),
 		types: {
-    "@LowerCase": [
-        "Stor bokstav i början av en mening.",
-        "Man ska börja en mening med stor bokstav."
+    "@R-LowerCase": [
+        "Stor bokstav",
+        "Man ska börja en mening med en stor bokstav."
     ],
     "@R-SPELL": [
         "Stavfel",
@@ -452,7 +452,7 @@ let types_lang = {
     ],
     "@R600": [
         "Var, inte vart med befintlighetsverb",
-        "Placeholder"
+        "<B>Vart</B> använder man med verb som uttrycker en riktning. Med verb som uttrycker befintlighet, som 'bo', 'befinna sig', 'är' och liknande, använder man <B>var</B>."
     ],
     "@R710": [
         "Supinum av 'vara'",
