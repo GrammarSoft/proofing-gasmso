@@ -2,7 +2,7 @@
 
 Initially developed for use with the https://kommaer.dk/ and https://retmig.dk/ services.
 
-Released as GPLv3+ - except `imgs/*` and `js/mark-types.js`
+Released as GPLv3+ - except `imgs/logo*` and `js/mark-types.js`
 
 ## Development
 ### Google Apps Script

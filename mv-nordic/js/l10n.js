@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2018 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
@@ -133,14 +133,14 @@ l10n.s = {
 		TITLE_OPTIONS: 'Indstillinger',
 		TITLE_SIDEBAR: 'Grammateket',
 		TXT_COMMA_ABOUT: "Når du har fået tjekket din tekst for stavning og grammatik, kan du efterfølgende få tjekket din tekst for kommatering. Kommaforslag foreslår kommaer i din tekst eller retter fejl i tekstens kommatering.\n\nDu får en forklaring af reglerne bag de kommaer, programmet foreslår eller markerer som fejl - og kan på den måde lære at sætte komma, samtidig med at du får hjælp. Programmet følger reglerne for kommatering med startkomma - også kendt som grammatisk komma eller 'kryds og bolle'-komma.\n\nKommaforslag er integreret i Grammateket.",
-		TXT_COMMA_COPYRIGHT: 'Copyright 2016-2018 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af MV-Nordic, Part of Vitec Software Group.',
+		TXT_COMMA_COPYRIGHT: 'Copyright 2016-2019 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af MV-Nordic, Part of Vitec Software Group.',
 		TXT_COMMA_HINT: 'Vil du have tjekket din markering eller hele teksten?',
 		TXT_COMMA_INTRO: 'Du kan også vælge at springe direkte til Kommaforslag for at få tjekket dine kommaer.',
 		TXT_COMMA_LINKS: 'Fra 4. klasse kan eleverne bruge forslagene til at reflektere over egen kommasætning. De tre niveauer i indstillingsmenuen leder frem mod videns- og færdighedsmål efter 6. klasse (niveau 1-2) og efter 9.-10. klasse (niveau 3).\n\nHar du brug for inspiration til brug af Kommaforslag i undervisningen, så <a href="https://www.mv-nordic.com/dk/support/kommaforslag/inspirationsmateriale-til-kommaforslag" target="_blank">følg linket</a>.',
 		TXT_COMMA_SUPPORT: 'Besøg vores website på <a href="https://www.mv-nordic.com/" target="_blank">mv-nordic.com</a>. Kommaforslag <a href="https://www.mv-nordic.com/" target="_blank">hjælp</a>.',
 		TXT_DICTIONARY_HINT: 'Her kan du tilføje, rette eller fjerne ord fra din ordbog.',
 		TXT_GRAMMAR_ABOUT: 'Med Grammateket kan du tjekke din tekst for stavning, grammatik og efterfølgende for kommatering vha. Kommaforslag.\n\nDu får hjælp til:\n<ul>\n<li>Stavekontrol</li>\n<li>Sammensatte ord</li>\n<li>Nutids-r</li>\n<li>Kort og lang tillægsform</li>\n<li>Kommatering</li>\n</ul>\n\nGrammateket kan bruges når du arbejder med læse- og skriveværktøjerne IntoWords og CD-ORD. Grammateket giver også adgang til nemt opslag i IntoWords Ordbog (baseret på Den Danske Ordbog).',
-		TXT_GRAMMAR_COPYRIGHT: 'Copyright 2016-2018 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af MV-Nordic, Part of Vitec Software Group.',
+		TXT_GRAMMAR_COPYRIGHT: 'Copyright 2016-2019 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af MV-Nordic, Part of Vitec Software Group.',
 		TXT_GRAMMAR_HINT: 'Vil du have tjekket din markering eller hele teksten?',
 		TXT_GRAMMAR_INTRO: 'Først skal du tjekke din tekst for stavning og grammatik.',
 		TXT_GRAMMAR_SUPPORT: 'Besøg vores website på <a href="https://www.mv-nordic.com/" target="_blank">mv-nordic.com</a>. Grammateket <a href="https://www.mv-nordic.com/" target="_blank">hjælp</a>.',

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2018 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
@@ -122,13 +122,13 @@ l10n.s = {
 		TITLE_OPTIONS: 'Indstillinger',
 		TITLE_SIDEBAR: 'RetMig &amp; Kommaforslag',
 		TXT_COMMA_ABOUT: 'Kommaforslag hjælper dig med at sætte komma - dvs. tilføjer manglende kommaer og fjerner eller flytter forkerte kommaer. Desuden skelner programmet mellem over 30 forskellige fejltyper og kan derfor tilbyde forklaringer og eksempler for hvert af de ændrede kommaer.',
-		TXT_COMMA_COPYRIGHT: 'Copyright 2016-2018 GrammarSoft ApS. Alle rettigheder forbeholdt.',
+		TXT_COMMA_COPYRIGHT: 'Copyright 2016-2019 GrammarSoft ApS. Alle rettigheder forbeholdt.',
 		TXT_COMMA_HINT: 'Vil du have tjekket din markering eller hele teksten?',
 		TXT_COMMA_INTRO: 'Du kan også vælge at springe direkte til Kommaforslag for at få tjekket dine kommaer.',
 		TXT_COMMA_SUPPORT: 'TODO',
 		TXT_DICTIONARY_HINT: 'Her kan du tilføje, rette eller fjerne ord fra din ordbog.',
 		TXT_GRAMMAR_ABOUT: 'RetMig hjælper dig med at fange og fjerne sproglige fejl i dine tekster. Og ikke kun de almindelige stave- og slåfejl, men også grammatiske fejl og fejl, hvor det forkerte ord findes i ordbogen, men bare er forkert i konteksten. Programmet skelner mellem over 40 forskellige grammatiske fejltyper og kan derfor tilbyde forklaringer og eksempler specifikt for de enkelte fejl.',
-		TXT_GRAMMAR_COPYRIGHT: 'Copyright 2016-2018 GrammarSoft ApS.',
+		TXT_GRAMMAR_COPYRIGHT: 'Copyright 2016-2019 GrammarSoft ApS.',
 		TXT_GRAMMAR_HINT: 'Vil du have tjekket din markering eller hele teksten?',
 		TXT_GRAMMAR_INTRO: 'Først skal du tjekke din tekst for stavning og grammatik.',
 		TXT_GRAMMAR_SUPPORT: 'Du kan få hjælp via <a href="https://retmig.dk/" target="_blank">retmig.dk</a> og <a href="https://kommaer.dk/" target="_blank">kommaer.dk</a>.',
