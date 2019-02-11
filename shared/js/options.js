@@ -1,6 +1,5 @@
 /*!
  * Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
- * Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -99,7 +98,11 @@ function getState(data) {
 	session = data.session;
 
 	g_access_token = ls_get('access-token', g_access_token_defaults);
-	g_access_hmac = JSON.parse(g_access_token.hmac);
+	try {
+		g_access_hmac = JSON.parse(g_access_token.hmac);
+	}
+	catch (e) {
+	}
 	session.locale = l10n_detectLanguage();
 	l10n_world();
 

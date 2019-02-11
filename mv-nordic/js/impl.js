@@ -1,6 +1,6 @@
 /*!
  * Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
- * Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
+ * Linguistic backend by Vitec MV (https://vitec-mv.com/)
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -49,6 +49,10 @@ const g_conf_defaults = {
 
 function impl_dataKeepalive() {
 	return {a: 'keepalive', SessionID: g_access_token.sessionid};
+}
+
+function impl_startLogin() {
+	loginKeepalive(true);
 }
 
 function impl_canGrammar() {
