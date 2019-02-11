@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<!--
+ Copyright 2016-2019 Tino Didriksen Consult <consult@tinodidriksen.com> at https://tinodidriksen.com/
+ Linguistic backend by Oqaasileriffik (https://oqaasileriffik.gl/)
+ Frontend by Tino Didriksen <mail@tinodidriksen.com>
+
+ This project is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This project is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title data-l10n="TITLE_SIDEBAR">…</title>
+	<base target="_top">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://tinodidriksen.com/spell/kal/gas/1.0.0/css/shared.css">
+	<link rel="stylesheet" type="text/css" href="https://tinodidriksen.com/spell/kal/gas/1.0.0/css/sidebar.css">
+	<script src="https://tinodidriksen.com/spell/kal/gas/1.0.0/vendor/murmurhash3js.min.js"></script>
+	<script src="https://tinodidriksen.com/spell/kal/gas/1.0.0/js/impl.js"></script>
+	<script src="https://tinodidriksen.com/spell/kal/gas/1.0.0/js/l10n.js"></script>
+	<script src="https://tinodidriksen.com/spell/kal/gas/1.0.0/js/shared.js"></script>
+	<script src="https://tinodidriksen.com/spell/kal/gas/1.0.0/js/mark-types.js"></script>
+	<script src="https://tinodidriksen.com/spell/kal/gas/1.0.0/js/sidebar.js"></script>
+
+	<script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+	<script src="https://tinodidriksen.com/spell/kal/gas/1.0.0/js/impl-officejs.js"></script>
+</head>
+<body>
+
+<div id="placeholder" style="height: 3000px; width: 100%;" data-l10n="POP_LOADING">…</div>
+<div id="working" data-l10n="POP_WORKING">…</div>
+
+<div class="closable" id="error">
+<div class="closer">&times;</div>
+<div id="error-text">…</div>
+</div>
+
+<div class="sidebar" id="chkSupport">
+<h1 data-l10n="HDR_SUPPORT_COPYRIGHT">…</h1>
+<div class="center backed">
+<form action="https://oqaasileriffik.gl/kukkuniiaat/" target="_blank"><button type="button" disabled class="disabled rpl-vars supportBtn" data-l10n="BTN_VERSION">…</button> &nbsp; <button type="submit" class="supportBtn" data-l10n="BTN_GRAMMAR_SUPPORT">…</button></form>
+</div>
+<span data-l10n="TXT_GRAMMAR_SUPPORT">…</span>
+<span data-l10n="TXT_GRAMMAR_COPYRIGHT">…</span>
+
+<div class="text center">
+	<button class="btn-lightblue btnCloseSupport" data-l10n="BTN_CLOSE">…</button>
+</div>
+
+<span class="grammar-specific">
+<h1 data-l10n="HDR_GRAMMAR">…</h1>
+<span data-l10n="TXT_GRAMMAR_ABOUT">…</span>
+</span>
+
+<span class="comma-specific">
+<h1 data-l10n="HDR_COMMA">…</h1>
+<span data-l10n="TXT_COMMA_ABOUT">…</span>
+
+<h2 data-l10n="HDR_COMMA_LINKS">…</h2>
+<span data-l10n="TXT_COMMA_LINKS">…</span>
+</span>
+
+<div class="center backed"><a href="https://tinodidriksen.com/" target="_blank"><img class="logo rpl-vars" src="{ROOT_URL_SELF}/imgs/logo-tdc.png"></a></div>
+
+<div class="text center">
+	<button class="btn-lightblue btnCloseSupport" data-l10n="BTN_CLOSE">…</button>
+</div>
+</div>
+
+<!-- Login -->
+
+<div class="sidebar" id="chkWelcomeLogin">
+<h1 class="backed" data-l10n="HDR_LOGIN">…</h1>
+<div class="text">
+	<span data-l10n="TXT_MUST_LOGIN">…</span>
+</div>
+<div class="text center">
+	<button class="btn-lightblue btn-big btnLoginGrammar" data-l10n="BTN_LOGIN">…</button>
+</div>
+<div class="text backed">
+	<h2 data-l10n="HDR_WHAT_IS">…</h2>
+	<span data-l10n="TXT_WHAT_IS">…</span>
+</div>
+<div class="text">
+	<h2 data-l10n="HDR_SUBSCRIBE">…</h2>
+	<span data-l10n="TXT_SUBSCRIBE">…</span>
+</div>
+</div>
+
+<!-- Shared -->
+
+<div class="sidebar" id="chkWelcomeShared">
+<h1 data-l10n="HDR_GRAMMAR">…</h1>
+<div class="text">
+	<span data-l10n="TXT_GRAMMAR_INTRO">…</span>
+	<span data-l10n="TXT_GRAMMAR_HINT">…</span>
+</div>
+<div class="buttonbar backed">
+	<button class="btn-blue btnCheckAuto toolGrammar" data-l10n="BTN_EXEC_CONTINUOUS">…</button>
+	<button class="btn-orange btnCheckSelected toolGrammar" data-l10n="BTN_EXEC_SELECTED">…</button>
+	<button class="btn-lightblue btnCheckAll toolGrammar" data-l10n="BTN_EXEC_ALL">…</button>
+</div>
+<div class="text chkGrammarToComma">
+<label class="crbox"><input type="checkbox" class="optComma" checked><span class="checkbox"></span><span data-l10n="LBL_COMMA_AFTER">…</span></label>
+</div>
+
+<hr class="tall">
+
+<h1 data-l10n="HDR_COMMA">…</h1>
+<div class="text">
+	<span data-l10n="TXT_COMMA_INTRO">…</span>
+	<span data-l10n="TXT_COMMA_HINT">…</span>
+</div>
+<div class="buttonbar backed">
+	<button class="btn-blue btnCheckAuto toolComma" data-l10n="BTN_EXEC_CONTINUOUS">…</button>
+	<button class="btn-orange btnCheckSelected toolComma" data-l10n="BTN_EXEC_SELECTED">…</button>
+	<button class="btn-lightblue btnCheckAll toolComma" data-l10n="BTN_EXEC_ALL">…</button>
+</div>
+<div class="text chkProgress">
+	<div class="chkProgressContainer"><div class="chkProgressBar"></div></div>
+</div>
+</div>
+
+<div class="sidebar" id="chkErrorList">
+<h1 data-l10n="HDR_ERRORLIST">…</h1>
+<div class="text center errorListTopBtn">
+	<button class="btn-lightblue btnCloseList" data-l10n="BTN_CLOSE">…</button>
+</div>
+
+<div class="text" id="errorList"></div>
+
+<div class="text center">
+	<button class="btn-lightblue btnCloseList" data-l10n="BTN_CLOSE">…</button>
+</div>
+</div>
+
+<!-- Grammar -->
+
+<div class="sidebar" id="chkWelcomeGrammar">
+<h1 data-l10n="HDR_GRAMMAR">…</h1>
+<div class="text">
+	<span data-l10n="TXT_GRAMMAR_HINT">…</span>
+</div>
+<div class="buttonbar backed">
+	<button class="btn-blue btnCheckAuto" data-l10n="BTN_EXEC_CONTINUOUS">…</button>
+	<button class="btn-orange btnCheckSelected" data-l10n="BTN_EXEC_SELECTED">…</button>
+	<button class="btn-lightblue btnCheckAll" data-l10n="BTN_EXEC_ALL">…</button>
+</div>
+<div class="text chkGrammarToComma">
+<label class="crbox"><input type="checkbox" class="optComma" checked><span class="checkbox"></span><span data-l10n="LBL_COMMA_AFTER">…</span></label>
+</div>
+<div class="text chkProgress">
+	<div class="chkProgressContainer"><div class="chkProgressBar"></div></div>
+</div>
+</div>
+
+<div class="sidebar" id="chkCheckingGrammar">
+<div class="backed">
+<div class="buttonbar buttonbar-edges buttonbar-wide">
+	<button class="btn-link left btnPrev"><span class="icon icon-previous"></span><span data-l10n="BTN_PREVIOUS">…</span></button>
+	<button class="btn-link btnSeeList"><span data-l10n="BTN_SEEALL">…</span></button>
+	<button class="btn-link right btnNext"><span data-l10n="BTN_NEXT">…</span><span class="icon icon-next"></span></button>
+</div>
+<div class="buttonbar buttonbar-edges buttonbar-wide">
+	<button class="btn-lightblue btnAccept"><span class="icon icon-accept"></span><span class="txtAccept">…</span></button>
+	<button class="btn-orange btnIgnorePopup"><span class="icon icon-ignore"></span><span data-l10n="BTN_IGNORE">…</span><span class="icon icon-ignore-caret"></span></button>
+	<button class="btn-blue btnInput"><span class="icon icon-input"></span><span data-l10n="BTN_EDIT">…</span></button>
+</div>
+</div>
+<div class="text closable backed" id="chkInput">
+	<div class="closer">&times;</div>
+	<h2 data-l10n="HDR_EDIT">…</h2>
+	<div class="row"><input type="text" id="chkInputText"></div>
+	<div class="row">
+		<button class="btn-blue btnInputOne" data-l10n="BTN_EDIT_ONE">…</button>
+		&nbsp;
+		<button class="btn-blue btnInputAll" data-l10n="BTN_EDIT_ALL">…</button>
+	</div>
+</div>
+<h1 class="chkType" data-l10n="HDR_YOUR_TEXT">…</h1>
+<div class="text chkSentence">…</div>
+<div class="text backed" id="chkDidYouMean">
+	<h2 data-l10n="HDR_REPLACE_WITH">…</h2>
+	<div id="chkDidYouMeanItems">
+	</div>
+</div>
+<div class="text chkExplain">
+	<div class="chkExplainShort"><div class="chkExplainShortText">…</div><a class="link chkExplainMore"><span data-l10n="BTN_EXPL_MORE">…</span> <img class="rpl-vars" src="{ROOT_URL_SELF}/imgs/arrow-blue-down.png"></a></div>
+	<div class="chkExplainLong"><div class="chkExplainLongText">…</div><a class="link chkExplainLess"><span data-l10n="BTN_EXPL_LESS">…</span> <img class="rpl-vars" src="{ROOT_URL_SELF}/imgs/arrow-blue-up.png"></a></div>
+</div>
+<div class="text center">
+	<button class="btn-lightblue btn-big btnAddWord"><span class="icon icon-add"></span><span data-l10n="BTN_DICT_ADD">…</span></button>
+</div>
+<div class="text chkProgress">
+	<div class="chkProgressContainer"><div class="chkProgressBar"></div></div>
+</div>
+</div>
+
+<div class="sidebar" id="chkDoneGrammar">
+<h1 data-l10n="HDR_GRAMMAR_DONE">…</h1>
+<div class="buttonbar backed">
+	<button class="btn-blue btnCheckAgain" data-l10n="BTN_GRAMMAR_AGAIN">…</button>
+	<button class="btn-orange btnCheckComma" data-l10n="BTN_COMMA_GOTO">…</button>
+</div>
+</div>
+
+<!-- Comma -->
+
+<div class="sidebar" id="chkWelcomeComma">
+<h1 data-l10n="HDR_COMMA">…</h1>
+<div class="text">
+	<span data-l10n="TXT_COMMA_HINT">…</span>
+</div>
+<div class="buttonbar backed">
+	<button class="btn-blue btnCheckAuto" data-l10n="BTN_EXEC_CONTINUOUS">…</button>
+	<button class="btn-orange btnCheckSelected" data-l10n="BTN_EXEC_SELECTED">…</button>
+	<button class="btn-lightblue btnCheckAll" data-l10n="BTN_EXEC_ALL">…</button>
+</div>
+<div class="text chkProgress">
+	<div class="chkProgressContainer"><div class="chkProgressBar"></div></div>
+</div>
+</div>
+
+<div class="sidebar" id="chkCheckingComma">
+<div class="backed">
+<div class="buttonbar buttonbar-edges">
+	<button class="btn-link left btnPrev"><span class="icon icon-previous"></span><span data-l10n="BTN_PREVIOUS">…</span></button>
+	<button class="btn-link btnSeeList"><span data-l10n="BTN_SEEALL">…</span></button>
+	<button class="btn-link right btnNext"><span data-l10n="BTN_NEXT">…</span><span class="icon icon-next"></span></button>
+</div>
+<div class="buttonbar">
+	<button class="btn-lightblue btnAccept"><span class="icon icon-accept"></span><span class="txtAccept">…</span></button>
+	<button class="btn-orange btnIgnorePopup"><span class="icon icon-ignore"></span><span data-l10n="BTN_IGNORE">…</span><span class="icon icon-ignore-caret"></span></button>
+</div>
+</div>
+<h1 class="chkType" data-l10n="HDR_YOUR_TEXT">…</h1>
+<div class="text chkSentence">…</div>
+<div class="text chkExplain">
+	<div class="chkExplainShort"><div class="chkExplainShortText">…</div><a class="link chkExplainMore"><span data-l10n="BTN_EXPL_MORE">…</span> <img class="rpl-vars" src="{ROOT_URL_SELF}/imgs/arrow-blue-down.png"></a></div>
+	<div class="chkExplainLong"><div class="chkExplainLongText">…</div><a class="link chkExplainLess"><span data-l10n="BTN_EXPL_LESS">…</span> <img class="rpl-vars" src="{ROOT_URL_SELF}/imgs/arrow-blue-up.png"></a></div>
+</div>
+<div class="text chkProgress">
+	<div class="chkProgressContainer"><div class="chkProgressBar"></div></div>
+</div>
+</div>
+
+<div class="sidebar" id="chkDoneComma">
+<h1 data-l10n="HDR_COMMA_DONE">…</h1>
+<div class="buttonbar backed">
+	<button class="btn-blue btnCheckAgain" data-l10n="BTN_COMMA_AGAIN">…</button>
+	<button class="btn-orange btnCheckGrammar" data-l10n="BTN_GRAMMAR_GOTO">…</button>
+</div>
+</div>
+
+<div id="popupIgnore">
+	<div class="arrow-up arrow-orange"></div>
+	<div class="btn btn-top btn-orange btnIgnore" data-l10n="BTN_POP_IGNORE">…</div>
+	<div class="btn btn-bottom btn-darkorange btnIgnoreAll" data-l10n="BTN_POP_IGNOREALL">…</div>
+</div>
+
+<footer class="center">
+	<a class="btn-panel btnRestart"><span class="icon icon-restart-blue"></span><span data-l10n="BTN_RESTART">…</span></a>
+	<a class="btn-panel btnSupport"><span class="icon icon-support-blue"></span><span data-l10n="BTN_SUPPORT">…</span></a>
+	<a class="btn-panel btnOptions"><span class="icon icon-options-blue"></span><span data-l10n="BTN_OPTIONS">…</span></a>
+	<a class="btn-panel btnLogout"><span class="icon icon-logout-blue"></span><span data-l10n="BTN_LOGOUT">…</span></a>
+</footer>
+
+<audio id="speaker" data-l10n="ERR_NO_AUDIO">…</audio>
+
+</body>
+</html>
