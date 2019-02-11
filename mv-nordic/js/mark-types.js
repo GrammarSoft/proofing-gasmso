@@ -1,6 +1,6 @@
 /*!
  * Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
- * Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
+ * Linguistic backend by Vitec MV (https://vitec-mv.com/)
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * All rights reserved.

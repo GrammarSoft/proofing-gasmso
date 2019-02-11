@@ -51,6 +51,10 @@ function impl_dataKeepalive() {
 	return {a: 'keepalive'};
 }
 
+function impl_startLogin() {
+	loginKeepalive(true);
+}
+
 function impl_canGrammar() {
 	return (g_access_hmac.sess_caps & (Defs.CAP_DANPROOF | Defs.CAP_ADMIN));
 }

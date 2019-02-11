@@ -1,6 +1,5 @@
 /*!
  * Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
- * Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -819,7 +818,7 @@ function _parseResult(rv) {
 				}
 
 				if (crs.length) {
-					// Only show addfejl suggestions if the real suggestion icase-matches one of them
+					// Only show additional suggestions if the real suggestion icase-matches one of them
 					let use_adf = false;
 					for (let c=1 ; c<crs.length ; ++c) {
 						if (crs[0].toUpperCase() == crs[c].toUpperCase()) {
@@ -1107,7 +1106,11 @@ function getState(data) {
 	session = data.session;
 
 	g_access_token = ls_get('access-token', g_access_token_defaults);
-	g_access_hmac = JSON.parse(g_access_token.hmac);
+	try {
+		g_access_hmac = JSON.parse(g_access_token.hmac);
+	}
+	catch (e) {
+	}
 	session.locale = l10n_detectLanguage();
 	l10n_world();
 
@@ -1316,7 +1319,7 @@ function initSidebar() {
 		$('#error').hide();
 		$('#working').hide();
 		ignores = {};
-		loginKeepalive(true);
+		impl_startLogin();
 	});
 	$('.btnSupport').click(function() {
 		if ($('#chkSupport:visible').length) {
@@ -1430,7 +1433,7 @@ function initSidebar() {
 		return;
 	}
 
-	loginKeepalive(true);
+	impl_startLogin();
 }
 
 $(function() {
