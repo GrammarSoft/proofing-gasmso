@@ -1,4 +1,4 @@
-# Kukkuniaat Proofing Tools for Google Apps Script and Microsoft Office
+# Kukkuniiaat Proofing Tools for Google Apps Script and Microsoft Office
 
 Released as GPLv3+ - except `imgs/logo*` and `js/mark-types.js`
 
@@ -13,7 +13,7 @@ Released as GPLv3+ - except `imgs/logo*` and `js/mark-types.js`
 
 ## Deployment
 * Edit `js/shared.js` lines 24-28
-* Edit `mso.xml` and `html/*` to replace all instances of `https://tinodidriksen.com/spell/kal/gas/1.0.0/` with your chosen `ROOT_URL_SELF` value
+* Edit `mso.xml` and `html/*` to replace all instances of `https://tinodidriksen.com/spell/kal/gas/1.0.1/` with your chosen `ROOT_URL_SELF` value
 * Remove all lines matching `//console.log`
 
 # External Dependencies

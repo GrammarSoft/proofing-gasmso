@@ -22,10 +22,10 @@ var l10n = {};
 
 l10n.s = {
 	da: {
-		MENU_START: 'Start Kukkuniaat',
+		MENU_START: 'Start Kukkuniiaat',
 		MENU_OPTIONS: 'Indstillinger',
 		TITLE_OPTIONS: 'Indstillinger',
-		TITLE_SIDEBAR: 'Kukkuniaat',
+		TITLE_SIDEBAR: 'Kukkuniiaat',
 		},
 	};
 

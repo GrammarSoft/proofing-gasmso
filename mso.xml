@@ -5,12 +5,12 @@
   <Id>3d7dab89-8dcd-4917-a89c-34785844caed</Id>
 
   <!--Version. Updates from the store only get triggered if there is a version change. -->
-  <Version>1.0.0</Version>
+  <Version>1.0.1</Version>
   <ProviderName>Tino Didriksen Consult</ProviderName>
   <DefaultLocale>da-DK</DefaultLocale>
-  <DisplayName DefaultValue="Kukkuniaat" />
-  <Description DefaultValue="Kukkuniaat" />
-  <IconUrl DefaultValue="https://tinodidriksen.com/spell/kal/gas/1.0.0/imgs/logo-32.png" />
+  <DisplayName DefaultValue="Kukkuniiaat" />
+  <Description DefaultValue="Kukkuniiaat" />
+  <IconUrl DefaultValue="https://tinodidriksen.com/spell/kal/gas/1.0.1/imgs/logo-32.png" />
 
   <SupportUrl DefaultValue="https://tinodidriksen.com/spellers/" />
   <AppDomains>
@@ -28,7 +28,7 @@
     </Sets>
   </Requirements>
   <DefaultSettings>
-    <SourceLocation DefaultValue="https://tinodidriksen.com/spell/kal/gas/1.0.0/html/sidebar.html" />
+    <SourceLocation DefaultValue="https://tinodidriksen.com/spell/kal/gas/1.0.1/html/sidebar.html" />
   </DefaultSettings>
 
   <Permissions>ReadWriteDocument</Permissions>
@@ -82,24 +82,24 @@
 
     <Resources>
       <bt:Images>
-        <bt:Image id="TDC.KAL.logo16" DefaultValue="https://tinodidriksen.com/spell/kal/gas/1.0.0/imgs/logo-16.png" />
-        <bt:Image id="TDC.KAL.logo32" DefaultValue="https://tinodidriksen.com/spell/kal/gas/1.0.0/imgs/logo-32.png" />
-        <bt:Image id="TDC.KAL.logo80" DefaultValue="https://tinodidriksen.com/spell/kal/gas/1.0.0/imgs/logo-80.png" />
+        <bt:Image id="TDC.KAL.logo16" DefaultValue="https://tinodidriksen.com/spell/kal/gas/1.0.1/imgs/logo-16.png" />
+        <bt:Image id="TDC.KAL.logo32" DefaultValue="https://tinodidriksen.com/spell/kal/gas/1.0.1/imgs/logo-32.png" />
+        <bt:Image id="TDC.KAL.logo80" DefaultValue="https://tinodidriksen.com/spell/kal/gas/1.0.1/imgs/logo-80.png" />
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="TDC.KAL.Taskpane" DefaultValue="https://tinodidriksen.com/spell/kal/gas/1.0.0/html/sidebar.html" />
+        <bt:Url id="TDC.KAL.Taskpane" DefaultValue="https://tinodidriksen.com/spell/kal/gas/1.0.1/html/sidebar.html" />
         <bt:Url id="TDC.KAL.GetStarted.LearnMore" DefaultValue="https://tinodidriksen.com/spellers/" />
       </bt:Urls>
       <!-- ShortStrings max characters==125. -->
       <bt:ShortStrings>
-        <bt:String id="TDC.KAL.TaskpaneButton.Label" DefaultValue="Kukkuniaat" />
-        <bt:String id="TDC.KAL.Group1Label" DefaultValue="Kukkuniaat" />
-        <bt:String id="TDC.KAL.GetStarted.Title" DefaultValue="Kom godt i gang med Kukkuniaat!" />
+        <bt:String id="TDC.KAL.TaskpaneButton.Label" DefaultValue="Kukkuniiaat" />
+        <bt:String id="TDC.KAL.Group1Label" DefaultValue="Kukkuniiaat" />
+        <bt:String id="TDC.KAL.GetStarted.Title" DefaultValue="Kom godt i gang med Kukkuniiaat!" />
       </bt:ShortStrings>
       <!-- LongStrings max characters==250. -->
       <bt:LongStrings>
-        <bt:String id="TDC.KAL.TaskpaneButton.Tooltip" DefaultValue="Klik for at åbne Kukkuniaat" />
-        <bt:String id="TDC.KAL.GetStarted.Description" DefaultValue="Kukkuniaat er nu installeret. Gå til fanen Hjem og klik på Kukkuniaat for at komme i gang." />
+        <bt:String id="TDC.KAL.TaskpaneButton.Tooltip" DefaultValue="Klik for at åbne Kukkuniiaat" />
+        <bt:String id="TDC.KAL.GetStarted.Description" DefaultValue="Kukkuniiaat er nu installeret. Gå til fanen Hjem og klik på Kukkuniiaat for at komme i gang." />
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>

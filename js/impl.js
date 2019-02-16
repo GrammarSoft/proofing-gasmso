@@ -20,8 +20,8 @@
 
 const VERSION_MAJOR = 1;
 const VERSION_MINOR = 0;
-const VERSION_PATCH = 0;
-const ROOT_URL_SELF = 'https://tinodidriksen.com/spell/kal/gas/1.0.0/';
+const VERSION_PATCH = 1;
+const ROOT_URL_SELF = 'https://tinodidriksen.com/spell/kal/gas/1.0.1/';
 const ROOT_URL_GRAMMAR = 'https://tinodidriksen.com/spell/kal/';
 
 const VERSION = ''+VERSION_MAJOR+'.'+VERSION_MINOR+'.'+VERSION_PATCH;
