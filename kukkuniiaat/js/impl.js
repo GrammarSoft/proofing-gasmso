@@ -21,7 +21,7 @@
 const VERSION_MAJOR = 1;
 const VERSION_MINOR = 0;
 const VERSION_PATCH = 0;
-const ROOT_URL_SELF = 'https://retmig.dk/gas/dev/kukkuniaat/';
+const ROOT_URL_SELF = 'https://retmig.dk/gas/dev/kukkuniiaat/';
 const ROOT_URL_GRAMMAR = 'https://tinodidriksen.com/spell-dev/kal/';
 
 const VERSION = ''+VERSION_MAJOR+'.'+VERSION_MINOR+'.'+VERSION_PATCH;

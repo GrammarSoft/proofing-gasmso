@@ -26,7 +26,7 @@ $mso = str_replace(' (dev)', '', $mso);
 file_put_contents('mso.xml', $mso);
 
 echo "Replacing URI path\n";
-echo shell_exec("replace 'https://retmig.dk/gas/dev/kukkuniaat/' 'https://tinodidriksen.com/spell/kal/gas/$version/' -- $(grep -rl 'https://retmig.dk/gas/dev/kukkuniaat/' *)");
+echo shell_exec("replace 'https://retmig.dk/gas/dev/kukkuniiaat/' 'https://tinodidriksen.com/spell/kal/gas/$version/' -- $(grep -rl 'https://retmig.dk/gas/dev/kukkuniiaat/' *)");
 
 echo "Replacing backend URI\n";
 echo shell_exec("replace 'https://tinodidriksen.com/spell-dev/kal/' 'https://tinodidriksen.com/spell/kal/' -- $(grep -rl 'https://tinodidriksen.com/spell-dev/kal/' *)");
