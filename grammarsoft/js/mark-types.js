@@ -430,3 +430,10 @@ for (let k in ctypes) {
 }
 
 ctypes = null;
+
+/* exported types_dictionary */
+let types_dictionary = [];
+for (let k in types_yellow) {
+	types_dictionary.push('('+escapeRegExp(k)+')');
+}
+types_dictionary = new RegExp('('+types_dictionary.join('|')+')( |$)');

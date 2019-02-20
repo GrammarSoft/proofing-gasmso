@@ -55,6 +55,9 @@ let types_yellow = {
 	"@check!": "@check!",
 };
 
+/* exported types_dictionary */
+let types_dictionary = null;
+
 /* exported types_comp_right */
 let types_comp_right = null;
 
@@ -519,12 +522,19 @@ function activate_markings(lang) {
 		types_mv = types_lang[lang].mv;
 		types_red = types_lang[lang].red;
 		types_yellow = types_lang[lang].yellow;
+
+		let td = ['(@error)'];
+		for (let k in types_yellow) {
+			td.push('('+escapeRegExp(k)+')');
+		}
+		types_dictionary = new RegExp('('+td.join('|')+')( |$)');
 	}
 	else {
 		g_conf.opt_mvNordic = false;
 		types_mv = {};
 		types_red = {};
 		types_yellow = {};
+		types_dictionary = new RegExp('@R-SPELL( |$)');
 		for (let k in marking_types) {
 			types_mv[k] = k;
 			if (k.indexOf('@R') !== -1) {
