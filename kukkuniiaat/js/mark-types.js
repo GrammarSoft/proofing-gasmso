@@ -18,6 +18,9 @@ let types_yellow = {
 	"@unknown": "@unknown",
 };
 
+/* exported types_dictionary */
+let types_dictionary = new RegExp('.*');
+
 /* exported types_comp_right */
 let types_comp_right = new RegExp('@comp-|@comp( |$)');
 
