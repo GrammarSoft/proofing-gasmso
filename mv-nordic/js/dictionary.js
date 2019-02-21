@@ -55,7 +55,7 @@ $(function() {
 	$.post(ROOT_URL_GRAMMAR + 'callback.php?a=itw-dict', data).done(function(rv) {
 		if (!rv.hasOwnProperty('result') || !rv.result.hasOwnProperty('value') || !rv.result.value) {
 			console.log(this);
-			$('iframe').attr('srcdoc', sprintf(l10n.t('ERR_DICTIONARY_404'), text));
+			$('iframe').attr('srcdoc', sprintf(l10n_translate('ERR_DICTIONARY_404'), text));
 			return;
 		}
 
@@ -89,6 +89,6 @@ $(function() {
 		}
 	}).fail(function() {
 		console.log(this);
-		$('iframe').attr('srcdoc', sprintf(l10n.t('ERR_DICTIONARY_404'), text));
+		$('iframe').attr('srcdoc', sprintf(l10n_translate('ERR_DICTIONARY_404'), text));
 	});
 });

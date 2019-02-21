@@ -18,8 +18,8 @@
  */
 'use strict';
 
-const VERSION_MAJOR = 1;
-const VERSION_MINOR = 1;
+const VERSION_MAJOR = 2;
+const VERSION_MINOR = 0;
 const VERSION_PATCH = 0;
 const ROOT_URL_SELF = 'https://retmig.dk/gas/dev/mv-nordic/';
 const ROOT_URL_GRAMMAR = 'https://kommaer.dk/mv-grammar/';
@@ -45,6 +45,12 @@ const g_conf_defaults = {
 	opt_mvNordic: true,
 	opt_speak: true,
 	opt_level: 3,
+	// Swedish
+	opt_ignVartVerb: false,
+	opt_ignDomAll: false,
+	opt_ignDomDefinite: false,
+	opt_ignDomSubjobj: false,
+	opt_ignDomPrep: false,
 };
 
 function impl_dataKeepalive() {

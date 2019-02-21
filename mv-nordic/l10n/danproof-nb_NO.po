@@ -317,9 +317,9 @@ msgstr "<b>Nivå 2 </b>: Du kan lage avsnitt og sette komma og har kjennskal til
 msgid "LBL_OPT_LEVEL_3"
 msgstr "<b> Nivå 3</b>: Du kan produsere tekster med riktig grammatikk, staving, tegnsetting og layout."
 
-# Vis kun typer udvalgt af MV-Nordic
+# Vis kun typer udvalgt af Vitec MV
 msgid "LBL_OPT_MVNORDIC"
-msgstr "Vis kun typer utvalgt av MV-Nordic"
+msgstr "Vis kun typer utvalgt av Vitec MV"
 
 # Vis kun manglende kommaer
 msgid "LBL_OPT_ONLYGREEN"
@@ -433,9 +433,9 @@ msgstr "Først må du sjekke staving i teksten."
 msgid "TXT_MUST_LOGIN"
 msgstr "Du må logge inn for å bruke dette verktøyet."
 
-# <a href="https://www.mv-nordic.com/" target="_blank">Kontakt MV-Nordic</a> for at prøve programmet gratis eller for information om abonnement.
+# <a href="https://www.mv-nordic.com/" target="_blank">Kontakt Vitec MV</a> for at prøve programmet gratis eller for information om abonnement.
 msgid "TXT_SUBSCRIBE"
-msgstr "<a href=\"https://www.mv-nordic.com/\" target=\"_blank\">Kontakt MV-Nordic for å få mer informasjon om abonnement."
+msgstr "<a href=\"https://www.mv-nordic.com/\" target=\"_blank\">Kontakt Vitec MV for å få mer informasjon om abonnement."
 
 # Grammateket forbedrer din skriftlighed og støtter dig i din skriveproces ved at komme med forslag til rettelser, beskrivelser af fejlkategorier og mulighed for at slå ord op i ordbogen.\n\nNår du har skrevet en tekst, åbner du Grammateket for at få tjekket din stavning, grammatik og kommaer.\n\nDu får hjælp til stavning, sammensatte ord, nutids-r, kort og lang tillægsform og kommatering.
 msgid "TXT_WHAT_IS"

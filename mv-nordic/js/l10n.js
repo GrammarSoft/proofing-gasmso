@@ -23,6 +23,8 @@
 /* exported l10n */
 let l10n = {};
 
+l10n.lang = 'da';
+
 l10n.s = {
 	da: {
 		STR_DICTIONARY: 'Min ordbog',
@@ -107,7 +109,7 @@ l10n.s = {
 		LBL_OPT_LEVEL_1: '<b>Niveau 1</b>: Du kan sætte tegn og har viden om punktum, spørgsmålstegn og udråbstegn.',
 		LBL_OPT_LEVEL_2: '<b>Niveau 2</b>: Du kan anvende afsnit og sætte komma og har viden om sætnings- og tekststruktur.',
 		LBL_OPT_LEVEL_3: '<b>Niveau 3</b>: Du kan fremstille tekster med korrekt grammatik, stavning, tegnsætning og layout.',
-		LBL_OPT_MVNORDIC: 'Vis kun typer udvalgt af MV-Nordic',
+		LBL_OPT_MVNORDIC: 'Vis kun typer udvalgt af Vitec MV',
 		LBL_OPT_ONLYGREEN: 'Vis kun manglende kommaer',
 		LBL_OPT_ONLY_CONFIDENT: 'Vis kun sikre fejl',
 		LBL_OPT_SHOWOPTIONAL: 'Fremhæv valgfrie kommaer',
@@ -116,9 +118,9 @@ l10n.s = {
 		MENU_OPTIONS: 'Indstillinger',
 		MENU_START: 'Start Grammateket',
 		MSO_INSTALLED_BODY: 'Grammateket er nu installeret. Gå til fanen Hjem og klik på Grammateket for at komme i gang.',
-		MSO_INSTALLED_TITLE: 'Kom godt i gang med Grammateket & Kommaforslag!',
-		MSO_LEARNMORE_URL: 'https://www.mv-nordic.com/',
-		MSO_TOOLTIP: 'Klik for at åbne Grammateket & Kommaforslag',
+		MSO_INSTALLED_TITLE: 'Kom godt i gang med Grammateket!',
+		MSO_LEARNMORE_URL: 'https://vitec-mv.com/',
+		MSO_TOOLTIP: 'Klik for at åbne Grammateket',
 		POP_LOADING: '… loading …',
 		POP_WORKING: '… arbejder …',
 		TAB_COMMA: 'Kommaforslag',
@@ -133,19 +135,19 @@ l10n.s = {
 		TITLE_OPTIONS: 'Indstillinger',
 		TITLE_SIDEBAR: 'Grammateket',
 		TXT_COMMA_ABOUT: "Når du har fået tjekket din tekst for stavning og grammatik, kan du efterfølgende få tjekket din tekst for kommatering. Kommaforslag foreslår kommaer i din tekst eller retter fejl i tekstens kommatering.\n\nDu får en forklaring af reglerne bag de kommaer, programmet foreslår eller markerer som fejl - og kan på den måde lære at sætte komma, samtidig med at du får hjælp. Programmet følger reglerne for kommatering med startkomma - også kendt som grammatisk komma eller 'kryds og bolle'-komma.\n\nKommaforslag er integreret i Grammateket.",
-		TXT_COMMA_COPYRIGHT: 'Copyright 2016-2019 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af MV-Nordic, Part of Vitec Software Group.',
+		TXT_COMMA_COPYRIGHT: 'Copyright 2016-2019 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af Vitec MV, Part of Vitec Software Group.',
 		TXT_COMMA_HINT: 'Vil du have tjekket din markering eller hele teksten?',
 		TXT_COMMA_INTRO: 'Du kan også vælge at springe direkte til Kommaforslag for at få tjekket dine kommaer.',
 		TXT_COMMA_LINKS: 'Fra 4. klasse kan eleverne bruge forslagene til at reflektere over egen kommasætning. De tre niveauer i indstillingsmenuen leder frem mod videns- og færdighedsmål efter 6. klasse (niveau 1-2) og efter 9.-10. klasse (niveau 3).\n\nHar du brug for inspiration til brug af Kommaforslag i undervisningen, så <a href="https://www.mv-nordic.com/dk/support/kommaforslag/inspirationsmateriale-til-kommaforslag" target="_blank">følg linket</a>.',
-		TXT_COMMA_SUPPORT: 'Besøg vores website på <a href="https://www.mv-nordic.com/" target="_blank">mv-nordic.com</a>. Kommaforslag <a href="https://www.mv-nordic.com/" target="_blank">hjælp</a>.',
+		TXT_COMMA_SUPPORT: 'Besøg vores website på <a href="https://vitec-mv.com/" target="_blank">vitec-mv.com</a>. Kommaforslag <a href="https://vitec-mv.com/" target="_blank">hjælp</a>.',
 		TXT_DICTIONARY_HINT: 'Her kan du tilføje, rette eller fjerne ord fra din ordbog.',
 		TXT_GRAMMAR_ABOUT: 'Med Grammateket kan du tjekke din tekst for stavning, grammatik og efterfølgende for kommatering vha. Kommaforslag.\n\nDu får hjælp til:\n<ul>\n<li>Stavekontrol</li>\n<li>Sammensatte ord</li>\n<li>Nutids-r</li>\n<li>Kort og lang tillægsform</li>\n<li>Kommatering</li>\n</ul>\n\nGrammateket kan bruges når du arbejder med læse- og skriveværktøjerne IntoWords og CD-ORD. Grammateket giver også adgang til nemt opslag i IntoWords Ordbog (baseret på Den Danske Ordbog).',
-		TXT_GRAMMAR_COPYRIGHT: 'Copyright 2016-2019 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af MV-Nordic, Part of Vitec Software Group.',
+		TXT_GRAMMAR_COPYRIGHT: 'Copyright 2016-2019 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af Vitec MV, Part of Vitec Software Group.',
 		TXT_GRAMMAR_HINT: 'Vil du have tjekket din markering eller hele teksten?',
 		TXT_GRAMMAR_INTRO: 'Først skal du tjekke din tekst for stavning og grammatik.',
-		TXT_GRAMMAR_SUPPORT: 'Besøg vores website på <a href="https://www.mv-nordic.com/" target="_blank">mv-nordic.com</a>. Grammateket <a href="https://www.mv-nordic.com/" target="_blank">hjælp</a>.',
+		TXT_GRAMMAR_SUPPORT: 'Besøg vores website på <a href="https://vitec-mv.com/" target="_blank">vitec-mv.com</a>. Grammateket <a href="https://vitec-mv.com/" target="_blank">hjælp</a>.',
 		TXT_MUST_LOGIN: 'Du skal logge ind for at bruge dette værktøj.',
-		TXT_SUBSCRIBE: '<a href="https://www.mv-nordic.com/" target="_blank">Kontakt MV-Nordic</a> for at prøve programmet gratis eller for information om abonnement.',
+		TXT_SUBSCRIBE: '<a href="https://vitec-mv.com/" target="_blank">Kontakt Vitec MV</a> for at prøve programmet gratis eller for information om abonnement.',
 		TXT_WHAT_IS: 'Grammateket forbedrer din skriftlighed og støtter dig i din skriveproces ved at komme med forslag til rettelser, beskrivelser af fejlkategorier og mulighed for at slå ord op i ordbogen.\n\nNår du har skrevet en tekst, åbner du Grammateket for at få tjekket din stavning, grammatik og kommaer.\n\nDu får hjælp til stavning, sammensatte ord, nutids-r, kort og lang tillægsform og kommatering.',
 	},
 	nb: {
@@ -225,7 +227,7 @@ l10n.s = {
 		LBL_OPT_LEVEL_1: '<b>Nivå 1</b>: Du kan sette tegn og kan punktum, spærsmålstegn og utropstegn.',
 		LBL_OPT_LEVEL_2: '<b>Nivå 2 </b>: Du kan lage avsnitt og sette komma og har kjennskal til setningsstruktur.',
 		LBL_OPT_LEVEL_3: '<b> Nivå 3</b>: Du kan produsere tekster med riktig grammatikk, staving, tegnsetting og layout.',
-		LBL_OPT_MVNORDIC: 'Vis kun typer utvalgt av MV-Nordic',
+		LBL_OPT_MVNORDIC: 'Vis kun typer utvalgt av Vitec MV',
 		LBL_OPT_ONLYGREEN: 'Vis kun manglende komma',
 		LBL_OPT_ONLY_CONFIDENT: 'Vis kun sikre feil',
 		LBL_OPT_SHOWOPTIONAL: 'Fremhev valgfrie komma',
@@ -235,7 +237,7 @@ l10n.s = {
 		MENU_START: 'Start Grammateket',
 		MSO_INSTALLED_BODY: 'Grammateket er nå installert. Gå til fanen Hjem og klikk på Grammateket for å komme i gang.',
 		MSO_INSTALLED_TITLE: 'Kom godt i gang med Grammateket!',
-		MSO_LEARNMORE_URL: 'https://www.mv-nordic.com/',
+		MSO_LEARNMORE_URL: 'https://vitec-mv.com/',
 		MSO_TOOLTIP: 'Klikk for å åpne Grammateket',
 		POP_LOADING: '… loading …',
 		POP_WORKING: '… arbeider …',
@@ -254,7 +256,7 @@ l10n.s = {
 		TXT_GRAMMAR_HINT: 'Vil du sjekke det som er markert eller hele teksten?',
 		TXT_GRAMMAR_INTRO: 'Først må du sjekke staving i teksten.',
 		TXT_MUST_LOGIN: 'Du må logge inn for å bruke dette verktøyet.',
-		TXT_SUBSCRIBE: '<a href="https://www.mv-nordic.com/" target="_blank">Kontakt MV-Nordic for å få mer informasjon om abonnement.',
+		TXT_SUBSCRIBE: '<a href="https://vitec-mv.com/" target="_blank">Kontakt Vitec MV for å få mer informasjon om abonnement.',
 		TXT_WHAT_IS: 'Grammateket gjør teksten din bedre og støtter deg i skriveprosessen ved å komme med forslag til rettelser. Når du har skrevet en tekst, åpner du Grammateket for å sjekke staving. Du får hjelp til staving, sammensatte ord og punktum.',
 	},
 	sv: {
@@ -318,12 +320,17 @@ l10n.s = {
 		HDR_WHAT_IS: 'Vad är Grammateket?',
 		HDR_YOUR_TEXT: 'Din text',
 		LBL_OPT_COLOR: 'Markera rättelser',
-		LBL_OPT_IGNORE_MAJ: 'Rätta inte fel i stora/små bokstäver',
-		LBL_OPT_IGNORE_UABBR: 'Rätta inte fel med okända förkortningar',
+		LBL_OPT_IGNORE_MAJ: 'Rätta inte stora och små bokstäver',
+		LBL_OPT_IGNORE_UABBR: 'Rätta inte okända förkortningar',
 		LBL_OPT_IGNORE_UCOMP: 'Rätta inte särskrivningsfel',
-		LBL_OPT_IGNORE_UNAMES: 'Rätta inte fel med okända namn',
-		LBL_OPT_IGNORE_UNKNOWN: 'Rätta inte fel med okända ord',
-		LBL_OPT_IGNORE_UOTHER: 'Rätta inte fel med andra okända ord',
+		LBL_OPT_IGNORE_UNAMES: 'Rätta inte okända namn',
+		LBL_OPT_IGNORE_UNKNOWN: 'Rätta inte okända ord',
+		LBL_OPT_IGNORE_UOTHER: 'Rätta inte andra okända ord',
+		LBL_OPT_IGNORE_VART_VERB: 'Rätta inte verbal användning av "vart" (dialektalt, regionalt)',
+		LBL_OPT_IGNORE_DOM_ALL: 'Rätta inte "dom" som pronomen eller bestämd artikel',
+		LBL_OPT_IGNORE_DOM_DEFINITE: 'Rätta inte "dom" som bestämd artikel',
+		LBL_OPT_IGNORE_DOM_SUBJOBJ: 'Rätta inte "dom" i som subjekt- eller objektposition',
+		LBL_OPT_IGNORE_DOM_PREP: 'Rätta inte "dom" i prepositionsfraser',
 		LBL_OPT_ONLY_CONFIDENT: 'Visa enbart säkra fel',
 		LBL_OPT_TTS: 'Läs texten högt',
 		LBL_OPT_USE_DICT: 'Använd {HTML_DICTIONARY}',
@@ -331,7 +338,8 @@ l10n.s = {
 		MENU_START: 'Starta Grammateket',
 		MSO_INSTALLED_BODY: 'Grammateket är nu installerat. Gå till fliken Hem och klicka på Grammateket för att komma i gång.',
 		MSO_INSTALLED_TITLE: 'Kom gott i gång med Grammateket!',
-		MSO_LEARNMORE_URL: 'https://www.mv-nordic.com/',
+		MSO_LEARNMORE_URL: 'https://vitec-mv.com/',
+		MSO_TOOLTIP: 'Klicka för att öppna Grammateket',
 		POP_LOADING: '… laddar …',
 		POP_WORKING: '… arbetar …',
 		TAB_DICTIONARY: 'Min ordbok',
@@ -346,9 +354,10 @@ l10n.s = {
 		TXT_GRAMMAR_COPYRIGHT: 'Copyright 2019',
 		TXT_GRAMMAR_HINT: 'Vill du kontrollera den markerade texten eller hela texten?',
 		TXT_GRAMMAR_INTRO: 'Först ska du kontrollera din text för rättstavning och grammatik.',
-		TXT_GRAMMAR_SUPPORT: 'Besök vår webbsajt <a href="https://www-mvnordic.com/" target=_blank">mv-nordic.com</a>. Grammateket <a href="https://www.mv-nordic.com/" target="_blank">hjälp</a>',
+		TXT_GRAMMAR_OPTIONS: '<ul><li><label class="crbox"><input type="checkbox" class="opt_onlyConfident"><span class="checkbox"></span><span data-l10n="LBL_OPT_ONLY_CONFIDENT">…</span></label></li><li><label class="crbox"><input type="checkbox" class="opt_ignVartVerb"><span class="checkbox"></span><span data-l10n="LBL_OPT_IGNORE_VART_VERB">…</span></label></li><li><label class="crbox"><input type="checkbox" class="opt_ignDomAll"><span class="checkbox"></span><span data-l10n="LBL_OPT_IGNORE_DOM_ALL">…</span></label><ul><li><label class="crbox"><input type="checkbox" class="opt_ignDomDefinite"><span class="checkbox"></span><span data-l10n="LBL_OPT_IGNORE_DOM_DEFINITE">…</span></label></li><li><label class="crbox"><input type="checkbox" class="opt_ignDomSubjobj"><span class="checkbox"></span><span data-l10n="LBL_OPT_IGNORE_DOM_SUBJOBJ">…</span></label></li><li><label class="crbox"><input type="checkbox" class="opt_ignDomPrep"><span class="checkbox"></span><span data-l10n="LBL_OPT_IGNORE_DOM_PREP">…</span></label></li></ul></li><li><label class="crbox"><input type="checkbox" class="opt_ignMaj"><span class="checkbox"></span><span data-l10n="LBL_OPT_IGNORE_MAJ">…</span></label></li></ul>',
+		TXT_GRAMMAR_SUPPORT: 'Besök vår webbsajt <a href="https://vitec-mv.com/" target=_blank">vitec-mv.com</a>. Grammateket <a href="https://vitec-mv.com/" target="_blank">hjälp</a>',
 		TXT_MUST_LOGIN: 'Du måste logga in för att kunna använda detta verktyg.',
-		TXT_SUBSCRIBE: '<a href="https://www.mv-nordic.com/" target="_blank">Kontakta MV-Nordic</a> för att testa programmet kostnadsfritt eller för information om abonnemang.',
+		TXT_SUBSCRIBE: '<a href="https://vitec-mv.com/" target="_blank">Kontakta Vitec MV</a> för att testa programmet kostnadsfritt eller för information om abonnemang.',
 		TXT_WHAT_IS: 'Grammateket förbättrar dina skrivkunskaper och stödjer dig i skrivprocessen genom att komma med förslag till rättelser, beskriva felkategorier och ge möjlighet att slå upp ord i ordboken.\n\nNär du har skrivit en text, öppnar du Grammateket för att kontrollera din stavning och vanliga grammatiska fel.\n\nDu får hjälp med stavning, sammansatta ord och korrekt använding av orden \'vart\' och \'dom\'.',
 	},
 	en: {
@@ -359,81 +368,25 @@ l10n.s = {
 l10n.s.no = l10n.s.nb;
 l10n.s.nn = l10n.s.nb;
 
-l10n.t = function(s) {
-	s = '' + s; // Coerce to string
-
-	// Special case for the version triad
-	if (s === 'VERSION') {
-		return VERSION;
-	}
-
-	let l = session.locale;
-	let t = '';
-
-	if (!l10n.s.hasOwnProperty(l)) {
-		l = 'da';
-	}
-
-	// If the string doesn't exist in the locale, fall back
-	if (!l10n.s[l].hasOwnProperty(s)) {
-		// Try English
-		if (l10n.s.en.hasOwnProperty(s)) {
-			t = l10n.s.en[s];
-		}
-		// ...then Danish
-		else if (l10n.s.da.hasOwnProperty(s)) {
-			t = l10n.s.da[s];
-		}
-		// ...give up and return as-is
-		else {
-			t = s;
-		}
-	}
-	else {
-		t = l10n.s[l][s];
-	}
-
-	let rx = /\{([A-Z0-9_]+)\}/;
-	let m = null;
-	while ((m = rx.exec(t)) !== null) {
-		let nt = l10n.t(m[1]);
-		t = t.replace(m[0], nt);
-	}
-
-	return t;
-};
-
 function l10n_detectLanguage() {
-	let l = navigator.language;
+	l10n.lang = navigator.language;
 	if (g_access_hmac.hasOwnProperty('ai')) {
 		let m = /\.([a-z]{2})\./.exec(g_access_hmac['ai'].join(','));
 		if (m) {
-			l = m[1];
-			console.log('Set locale from AIs: '+l);
-			if (l !== 'da') {
+			l10n.lang = m[1];
+			console.log('Set locale from AIs: '+l10n.lang);
+			if (l10n.lang !== 'da') {
 				// Reduce RQ size so that paragraphs are sent serially
 				Defs.MAX_RQ_SIZE = 1;
 			}
-			activate_markings(l);
+			activate_markings(l10n.lang);
 		}
 	}
-	if (!l10n.s.hasOwnProperty(l)) {
-		l = l.replace(/^([^-_]+).*$/, '$1');
+	if (!l10n.s.hasOwnProperty(l10n.lang)) {
+		l10n.lang = l10n.lang.replace(/^([^-_]+).*$/, '$1');
 	}
-	if (!l10n.s.hasOwnProperty(l)) {
-		l = 'da';
+	if (!l10n.s.hasOwnProperty(l10n.lang)) {
+		l10n.lang = 'da';
 	}
-	return l;
-}
-
-function l10n_world() {
-	$('[data-l10n]').each(function() {
-		let e = $(this);
-		let k = e.attr('data-l10n');
-		let v = l10n.t(k);
-		if (/^TXT_/.test(k)) {
-			v = '<p>'+v.replace(/\n+<ul>/g, '</p><ul>').replace(/\n+<\/ul>/g, '</ul>').replace(/<\/ul>\n+/g, '</ul><p>').replace(/\n+<li>/g, '<li>').replace(/\n\n+/g, '</p><p>').replace(/\n/g, '<br>')+'</p>';
-		}
-		e.html(v);
-	});
+	return l10n.lang;
 }

@@ -29,7 +29,7 @@ l10n.s = {
 		},
 	};
 
-l10n.t = function(s) {
+function l10n_translate(s) {
 	s = '' + s; // Coerce to string
 
 	var l = 'da';

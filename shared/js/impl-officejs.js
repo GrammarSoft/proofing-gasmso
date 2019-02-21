@@ -155,10 +155,6 @@ function impl_removeInDocument(prefix, word, rpl, suffix) {
 	});
 }
 
-function impl_getState() {
-	getState({session: {locale: 'da'}});
-}
-
 function _impl_showOptions_mh(arg) {
 	_impl_options.close();
 	showError(arg.message);
@@ -259,7 +255,7 @@ function impl_Init(func) {
 	Office.initialize = function(reason) {
 		$(document).ready(function() {
 			func();
-			l10n_world();
+			//l10n_world();
 
 			if (!Office.context.requirements.isSetSupported('WordApi', '1.1')) {
 				//showError('Requires Word 2016 or later!');

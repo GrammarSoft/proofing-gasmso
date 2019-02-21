@@ -261,20 +261,20 @@ function markingRender(skipact) {
 		let px = /^(.*?)(\S+\s?)$/.exec(cmarking.prefix);
 		let sx = /^(\s?\S+)(.*)$/.exec(cmarking.suffix);
 		impl_selectInDocument(px[1], px[2] + sx[1], sx[2]);
-		$('.txtAccept').text(l10n.t(btn_lbl + 'INSERT'));
+		$('.txtAccept').text(l10n_translate(btn_lbl + 'INSERT'));
 		if (marking[1].indexOf('%k-stop') !== -1) {
-			$('.txtAccept').text(l10n.t(btn_lbl + 'INSERT_STOP'));
+			$('.txtAccept').text(l10n_translate(btn_lbl + 'INSERT_STOP'));
 		}
 		$('.btnAccept').removeClass('disabled');
 	}
 	else if (/(@nil|%nok-)/.test(marking[1])) {
 		$('.icon-accept,.icon-discard').addClass('icon-discard').removeClass('icon-accept');
-		$('.txtAccept').text(l10n.t(btn_lbl + 'REMOVE'));
+		$('.txtAccept').text(l10n_translate(btn_lbl + 'REMOVE'));
 		$('.btnAccept').removeClass('disabled');
 		impl_selectInDocument(cmarking.prefix, marking[0], cmarking.suffix);
 	}
 	else {
-		$('.txtAccept').text(l10n.t(btn_lbl + 'REPLACE'));
+		$('.txtAccept').text(l10n_translate(btn_lbl + 'REPLACE'));
 		let middle = marking[0];
 		impl_selectInDocument(cmarking.prefix, middle, cmarking.suffix);
 	}
@@ -740,9 +740,16 @@ function _parseResult(rv) {
 							ws.push(nws[k]);
 							continue;
 						}
+
+						// Common
 						if (g_conf.opt_onlyConfident && !types_red.hasOwnProperty(nws[k])) {
 							continue;
 						}
+						if (g_conf.opt_ignMaj && (types_to_upper.test(nws[k]) || nws[k] === '@lower')) {
+							continue;
+						}
+
+						// Danish
 						if (g_conf.opt_ignUNames && nws[k] === '@proper') {
 							continue;
 						}
@@ -755,7 +762,18 @@ function _parseResult(rv) {
 						if (g_conf.opt_ignUOther && nws[k] === '@check!') {
 							continue;
 						}
-						if (g_conf.opt_ignMaj && (types_to_upper.test(nws[k]) || nws[k] === '@lower')) {
+
+						// Swedish
+						if (g_conf.opt_ignVartVerb && /@Y(700|710)/.test(nws[k])) {
+							continue;
+						}
+						if (g_conf.opt_ignDomDefinite && /@Y10/.test(nws[k])) {
+							continue;
+						}
+						if (g_conf.opt_ignDomSubjobj && /@Y(20|30)/.test(nws[k])) {
+							continue;
+						}
+						if (g_conf.opt_ignDomPrep && /@Y4[0-4]/.test(nws[k])) {
 							continue;
 						}
 					}
@@ -789,7 +807,7 @@ function _parseResult(rv) {
 
 				prev_sentsplit = had_sentsplit;
 				if (ws.length && none) {
-					//console.log(`MV Nordic whitelist no-match: ${ws}`);
+					//console.log(`Vitec MV whitelist no-match: ${ws}`);
 					ws = [];
 				}
 				nws = ws;
@@ -1101,10 +1119,7 @@ function didRemove(rv) {
 	processQueue();
 }
 
-function getState(data) {
-	console.log(data);
-	session = data.session;
-
+function getState() {
 	g_access_token = ls_get('access-token', g_access_token_defaults);
 	try {
 		g_access_hmac = JSON.parse(g_access_token.hmac);
@@ -1289,7 +1304,7 @@ function initSidebar() {
 	if (g_tool !== 'Grammar' && g_tool !== 'Comma') {
 		g_tool = 'Grammar';
 	}
-	impl_getState();
+	getState();
 
 	$('.closer').click(function() {
 		$(this).closest('.closable').hide();
@@ -1451,5 +1466,5 @@ function showError(msg) {
 	console.log(msg);
 	$('#error').show();
 	$('#working').hide();
-	$('#error-text').text(l10n.t(msg));
+	$('#error-text').text(l10n_translate(msg));
 }
