@@ -25,12 +25,16 @@
 /* globals l10n */
 
 function saveConfig() {
+	// Danish
 	g_conf.opt_ignUnknown = false;
 	if (g_conf.opt_ignUNames && g_conf.opt_ignUComp && g_conf.opt_ignUAbbr && g_conf.opt_ignUOther) {
 		g_conf.opt_ignUnknown = true;
 	}
-	if (g_conf.opt_ignUnknown) {
-		g_conf.opt_ignUNames = g_conf.opt_ignUComp = g_conf.opt_ignUAbbr = g_conf.opt_ignUOther = true;
+
+	// Swedish
+	g_conf.opt_ignDomAll = false;
+	if (g_conf.opt_ignDomDefinite && g_conf.opt_ignDomSubjobj && g_conf.opt_ignDomPrep) {
+		g_conf.opt_ignDomAll = true;
 	}
 
 	for (let k in g_conf) {
@@ -58,7 +62,7 @@ function dictionaryDelete() {
 		$(this).closest('form').remove();
 	}
 	else {
-		alert(sprintf(l10n.t('ERR_DICT_FAIL_DELETE'), w));
+		alert(sprintf(l10n_translate('ERR_DICT_FAIL_DELETE'), w));
 	}
 }
 
@@ -82,7 +86,7 @@ function attachDictionaryClicks() {
 			$(this).attr('data-word', w);
 		}
 		else {
-			alert(sprintf(l10n.t('ERR_DICT_FAIL_EDIT'), ow, w));
+			alert(sprintf(l10n_translate('ERR_DICT_FAIL_EDIT'), ow, w));
 		}
 
 		e.preventDefault();
@@ -93,10 +97,7 @@ function attachDictionaryClicks() {
 	$('.btnWordDelete').off().click(dictionaryDelete);
 }
 
-function getState(data) {
-	console.log(data);
-	session = data.session;
-
+function getState() {
 	g_access_token = ls_get('access-token', g_access_token_defaults);
 	try {
 		g_access_hmac = JSON.parse(g_access_token.hmac);
@@ -156,7 +157,7 @@ function initOptions() {
 	if (g_tool !== 'Grammar' && g_tool !== 'Comma') {
 		g_tool = 'Grammar';
 	}
-	impl_getState();
+	getState();
 
 	$('.closer').click(function() {
 		$(this).closest('.closable').hide();
@@ -200,7 +201,7 @@ function initOptions() {
 			$('.inputAddWord').val('').focus();
 		}
 		else {
-			alert(sprintf(l10n.t('ERR_DICT_FAIL_ADD'), w));
+			alert(sprintf(l10n_translate('ERR_DICT_FAIL_ADD'), w));
 		}
 
 		e.preventDefault();
@@ -229,6 +230,9 @@ function initOptions() {
 		if (k === 'opt_ignUnknown') {
 			g_conf.opt_ignUNames = g_conf.opt_ignUComp = g_conf.opt_ignUAbbr = g_conf.opt_ignUOther = v;
 		}
+		if (k === 'opt_ignDomAll') {
+			g_conf.opt_ignDomDefinite = g_conf.opt_ignDomSubjobj = g_conf.opt_ignDomPrep = v;
+		}
 
 		g_conf[k] = v;
 		console.log([k, v, g_conf]);
@@ -247,5 +251,5 @@ $(function() {
 function showError(msg) {
 	console.log(msg);
 	$('#error').show();
-	$('#error-text').text(l10n.t(msg));
+	$('#error-text').text(l10n_translate(msg));
 }

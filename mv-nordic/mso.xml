@@ -6,13 +6,13 @@
 
   <!--Version. Updates from the store only get triggered if there is a version change. -->
   <Version>1.1.0</Version>
-  <ProviderName>GrammarSoft ApS</ProviderName>
+  <ProviderName>Vitec MV</ProviderName>
   <DefaultLocale>da-DK</DefaultLocale>
   <DisplayName DefaultValue="Grammateket (dev)" />
   <Description DefaultValue="Grammateket (dev)" />
   <IconUrl DefaultValue="https://retmig.dk/gas/dev/mv-nordic/imgs/logo-32.png" />
 
-  <SupportUrl DefaultValue="https://grammarsoft.com/" />
+  <SupportUrl DefaultValue="https://vitec-mv.com/" />
   <AppDomains>
     <AppDomain>retmig.dk</AppDomain>
     <AppDomain>kommaer.dk</AppDomain>
@@ -93,18 +93,27 @@
       </bt:Images>
       <bt:Urls>
         <bt:Url id="MVGrammar.Taskpane" DefaultValue="https://retmig.dk/gas/dev/mv-nordic/html/sidebar.html" />
-        <bt:Url id="MVGrammar.GetStarted.LearnMore" DefaultValue="https://grammarsoft.com/" />
+        <bt:Url id="MVGrammar.GetStarted.LearnMore" DefaultValue="https://vitec-mv.com/" />
       </bt:Urls>
       <!-- ShortStrings max characters==125. -->
       <bt:ShortStrings>
         <bt:String id="MVGrammar.TaskpaneButton.Label" DefaultValue="Grammateket (dev)" />
         <bt:String id="MVGrammar.Group1Label" DefaultValue="Grammateket (dev)" />
-        <bt:String id="MVGrammar.GetStarted.Title" DefaultValue="Kom godt i gang med Grammateket &amp; Kommaforslag!" />
+        <bt:String id="MVGrammar.GetStarted.Title" DefaultValue="Kom godt i gang med Grammateket!">
+          <bt:Override Locale="nb-no" Value="MSO_INSTALLED_TITLE" />
+          <bt:Override Locale="sv-se" Value="MSO_INSTALLED_TITLE" />
+        </bt:String>
       </bt:ShortStrings>
       <!-- LongStrings max characters==250. -->
       <bt:LongStrings>
-        <bt:String id="MVGrammar.TaskpaneButton.Tooltip" DefaultValue="Klik for at åbne Grammateket &amp; Kommaforslag" />
-        <bt:String id="MVGrammar.GetStarted.Description" DefaultValue="Grammateket er nu installeret. Gå til fanen Hjem og klik på Grammateket for at komme i gang." />
+        <bt:String id="MVGrammar.TaskpaneButton.Tooltip" DefaultValue="Klik for at åbne Grammateket">
+          <bt:Override Locale="nb-no" Value="MSO_TOOLTIP" />
+          <bt:Override Locale="sv-se" Value="MSO_TOOLTIP" />
+        </bt:String>
+        <bt:String id="MVGrammar.GetStarted.Description" DefaultValue="Grammateket er nu installeret. Gå til fanen Hjem og klik på Grammateket for at komme i gang.">
+          <bt:Override Locale="nb-no" Value="MSO_INSTALLED_BODY" />
+          <bt:Override Locale="sv-se" Value="MSO_INSTALLED_BODY" />
+        </bt:String>
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>
