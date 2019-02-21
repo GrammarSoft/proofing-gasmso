@@ -328,7 +328,7 @@ msgstr ""
 msgid "LBL_OPT_LEVEL_3"
 msgstr ""
 
-# Vis kun typer udvalgt af MV-Nordic
+# Vis kun typer udvalgt af Vitec MV
 msgid "LBL_OPT_MVNORDIC"
 msgstr ""
 
@@ -432,7 +432,7 @@ msgstr ""
 msgid "TXT_COMMA_ABOUT"
 msgstr ""
 
-# Copyright 2016-2019 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af MV-Nordic, Part of Vitec Software Group.
+# Copyright 2016-2019 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af Vitec MV, Part of Vitec Software Group.
 msgid "TXT_COMMA_COPYRIGHT"
 msgstr ""
 
@@ -460,7 +460,7 @@ msgstr ""
 msgid "TXT_GRAMMAR_ABOUT"
 msgstr ""
 
-# Copyright 2016-2019 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af MV-Nordic, Part of Vitec Software Group.
+# Copyright 2016-2019 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af Vitec MV, Part of Vitec Software Group.
 msgid "TXT_GRAMMAR_COPYRIGHT"
 msgstr ""
 
@@ -480,7 +480,7 @@ msgstr ""
 msgid "TXT_MUST_LOGIN"
 msgstr ""
 
-# <a href="https://www.mv-nordic.com/" target="_blank">Kontakt MV-Nordic</a> for at prøve programmet gratis eller for information om abonnement.
+# <a href="https://www.mv-nordic.com/" target="_blank">Kontakt Vitec MV</a> for at prøve programmet gratis eller for information om abonnement.
 msgid "TXT_SUBSCRIBE"
 msgstr ""
 

@@ -23,7 +23,7 @@
 function onOpen(e) {
 	var ui = DocumentApp.getUi();
 	ui.createAddonMenu()
-		.addItem(l10n.t('MENU_START'), 'showGrammar')
+		.addItem(l10n_translate('MENU_START'), 'showGrammar')
 		.addToUi();
 }
 
@@ -68,7 +68,7 @@ function showGrammar(mode) {
 	var ui = HtmlService.createTemplateFromFile('html/sidebar').evaluate();
 	var html = ui.getContent();
 	html = injectVariables(html, 'Grammar', mode);
-	ui.setContent(html).setSandboxMode(HtmlService.SandboxMode.IFRAME).setTitle(l10n.t('TITLE_SIDEBAR'));
+	ui.setContent(html).setSandboxMode(HtmlService.SandboxMode.IFRAME).setTitle(l10n_translate('TITLE_SIDEBAR'));
 	DocumentApp.getUi().showSidebar(ui);
 }
 
@@ -81,14 +81,14 @@ function showOptions(tool) {
 	var html = ui.getContent();
 	html = injectVariables(html, tool);
 	ui.setContent(html).setWidth(800).setHeight(800);
-	DocumentApp.getUi().showModalDialog(ui, l10n.t('TITLE_OPTIONS'));
+	DocumentApp.getUi().showModalDialog(ui, l10n_translate('TITLE_OPTIONS'));
 }
 
 function showDictionary(text) {
 	var ui = HtmlService.createTemplateFromFile('html/dictionary').evaluate();
 	var html = ui.getContent().replace(/<!--.*?-->/g, '').replace(/>[\s\n]+</g, '><').replace('</body>', '<script>g_text = '+JSON.stringify(text)+';</script></body>');
 	ui.setContent(html).setWidth(800).setHeight(800);
-	DocumentApp.getUi().showModalDialog(ui, l10n.t('TITLE_DICTIONARY'));
+	DocumentApp.getUi().showModalDialog(ui, l10n_translate('TITLE_DICTIONARY'));
 }
 
 function getAllPars() {

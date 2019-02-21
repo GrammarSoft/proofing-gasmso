@@ -24,30 +24,6 @@ msgstr "<i>{STR_DICTIONARY}</i>"
 msgid "BTN_CLOSE"
 msgstr "Stäng"
 
-# Tjek kommatering igen
-msgid "BTN_COMMA_AGAIN"
-msgstr "N/A"
-
-# Tjek kommatering
-msgid "BTN_COMMA_GOTO"
-msgstr "N/A"
-
-# Indsæt komma
-msgid "BTN_COMMA_INSERT"
-msgstr "N/A"
-
-# Indsæt punktum
-msgid "BTN_COMMA_INSERT_STOP"
-msgstr "N/A"
-
-# Fjern komma
-msgid "BTN_COMMA_REMOVE"
-msgstr "N/A"
-
-# Få hjælp til Kommaforslag
-msgid "BTN_COMMA_SUPPORT"
-msgstr "N/A"
-
 # Føj til {HTML_DICTIONARY}
 msgid "BTN_DICT_ADD"
 msgstr "Lägg till i {HTML_DICTIONARY}"
@@ -212,26 +188,6 @@ msgstr "Vi fick inte träff på kontexten. Det kan hända att du eller någon an
 msgid "ERR_SELECT_NOTFOUND"
 msgstr "Kunde inte hitta kontexten. Det kan hända att du eller någon annan har ändrat i dokumentet sedan det sist kontrollerades."
 
-# Kommaforslag
-msgid "HDR_COMMA"
-msgstr "N/A"
-
-# Kommavisning
-msgid "HDR_COMMA_DISPLAY"
-msgstr "N/A"
-
-# Din tekst er blevet tjekket, og der er ikke flere forslag til kommatering.
-msgid "HDR_COMMA_DONE"
-msgstr "N/A"
-
-# Færdighedsniveau
-msgid "HDR_COMMA_LEVEL"
-msgstr "N/A"
-
-# Inspirationsmateriale til Kommaforslag
-msgid "HDR_COMMA_LINKS"
-msgstr "N/A"
-
 # Min ordbog
 msgid "HDR_DICTIONARY"
 msgstr "Min ordbok"
@@ -292,21 +248,17 @@ msgstr "Vad är Grammateket?"
 msgid "HDR_YOUR_TEXT"
 msgstr "Din text"
 
-# Sæt flueben i boksen hvis du vil have tjekket dine kommaer bagefter.
-msgid "LBL_COMMA_AFTER"
-msgstr "N/A"
-
 # Fremhæv rettelser
 msgid "LBL_OPT_COLOR"
 msgstr "Markera rättelser"
 
 # Ret ikke fejl ved store/små bogstaver
 msgid "LBL_OPT_IGNORE_MAJ"
-msgstr "Rätta inte fel i stora/små bokstäver"
+msgstr "Rätta inte stora och små bokstäver"
 
 # Ret ikke fejl med ukendte forkortelser
 msgid "LBL_OPT_IGNORE_UABBR"
-msgstr "Rätta inte fel med okända förkortningar"
+msgstr "Rätta inte okända förkortningar"
 
 # Ret ikke fejl med særskrivning/sammensatte ord
 msgid "LBL_OPT_IGNORE_UCOMP"
@@ -314,43 +266,34 @@ msgstr "Rätta inte särskrivningsfel"
 
 # Ret ikke fejl med ukendte navne
 msgid "LBL_OPT_IGNORE_UNAMES"
-msgstr "Rätta inte fel med okända namn"
+msgstr "Rätta inte okända namn"
 
 # Ret ikke fejl med ukendte ord
 msgid "LBL_OPT_IGNORE_UNKNOWN"
-msgstr "Rätta inte fel med okända ord"
+msgstr "Rätta inte okända ord"
 
 # Ret ikke fejl med andre ukendte ord
 msgid "LBL_OPT_IGNORE_UOTHER"
-msgstr "Rätta inte fel med andra okända ord"
+msgstr "Rätta inte andra okända ord"
 
-# <b>Niveau 1</b>: Du kan sætte tegn og har viden om punktum, spørgsmålstegn og udråbstegn.
-msgid "LBL_OPT_LEVEL_1"
-msgstr "N/A"
+msgid "LBL_OPT_IGNORE_VART_VERB"
+msgstr "Rätta inte verbal användning av \"vart\" (dialektalt, regionalt)"
 
-# <b>Niveau 2</b>: Du kan anvende afsnit og sætte komma og har viden om sætnings- og tekststruktur.
-msgid "LBL_OPT_LEVEL_2"
-msgstr "N/A"
+msgid "LBL_OPT_IGNORE_DOM_ALL"
+msgstr "Rätta inte \"dom\" som pronomen eller bestämd artikel"
 
-# <b>Niveau 3</b>: Du kan fremstille tekster med korrekt grammatik, stavning, tegnsætning og layout.
-msgid "LBL_OPT_LEVEL_3"
-msgstr "N/A"
+msgid "LBL_OPT_IGNORE_DOM_DEFINITE"
+msgstr "Rätta inte \"dom\" som bestämd artikel"
 
-# Vis kun typer udvalgt af MV-Nordic
-msgid "LBL_OPT_MVNORDIC"
-msgstr "N/A"
+msgid "LBL_OPT_IGNORE_DOM_SUBJOBJ"
+msgstr "Rätta inte \"dom\" i som subjekt- eller objektposition"
 
-# Vis kun manglende kommaer
-msgid "LBL_OPT_ONLYGREEN"
-msgstr "N/A"
+msgid "LBL_OPT_IGNORE_DOM_PREP"
+msgstr "Rätta inte \"dom\" i prepositionsfraser"
 
 # Vis kun sikre fejl
 msgid "LBL_OPT_ONLY_CONFIDENT"
 msgstr "Visa enbart säkra fel"
-
-# Fremhæv valgfrie kommaer
-msgid "LBL_OPT_SHOWOPTIONAL"
-msgstr "N/A"
 
 # Læs skærmteksterne op
 msgid "LBL_OPT_TTS"
@@ -372,17 +315,17 @@ msgstr "Starta Grammateket"
 msgid "MSO_INSTALLED_BODY"
 msgstr "Grammateket är nu installerat. Gå till fliken Hem och klicka på Grammateket för att komma i gång."
 
-# Kom godt i gang med Grammateket & Kommaforslag!
+# Kom godt i gang med Grammateket!
 msgid "MSO_INSTALLED_TITLE"
 msgstr "Kom gott i gång med Grammateket!"
 
-# https://www.mv-nordic.com/
+# https://vitec-mv.com/
 msgid "MSO_LEARNMORE_URL"
-msgstr "https://www.mv-nordic.com/"
+msgstr "https://vitec-mv.com/"
 
-# Klik for at åbne Grammateket & Kommaforslag
+# Klik for at åbne Grammateket
 msgid "MSO_TOOLTIP"
-msgstr "N/A"
+msgstr "Klicka för att öppna Grammateket"
 
 # … loading …
 msgid "POP_LOADING"
@@ -391,22 +334,6 @@ msgstr "… laddar …"
 # … arbejder …
 msgid "POP_WORKING"
 msgstr "… arbetar …"
-
-# Kommaforslag
-msgid "TAB_COMMA"
-msgstr "N/A"
-
-# Om Kommaforslag
-msgid "TAB_COMMA_ABOUT"
-msgstr "N/A"
-
-# Generelt
-msgid "TAB_COMMA_GENERAL"
-msgstr "N/A"
-
-# Inspiration til undervisning
-msgid "TAB_COMMA_LINKS"
-msgstr "N/A"
 
 # Min ordbog
 msgid "TAB_DICTIONARY"
@@ -436,30 +363,6 @@ msgstr "Inställningar"
 msgid "TITLE_SIDEBAR"
 msgstr "Grammateket"
 
-# Når du har fået tjekket din tekst for stavning og grammatik, kan du efterfølgende få tjekket din tekst for kommatering. Kommaforslag foreslår kommaer i din tekst eller retter fejl i tekstens kommatering.\n\nDu får en forklaring af reglerne bag de kommaer, programmet foreslår eller markerer som fejl - og kan på den måde lære at sætte komma, samtidig med at du får hjælp. Programmet følger reglerne for kommatering med startkomma - også kendt som grammatisk komma eller 'kryds og bolle'-komma.\n\nKommaforslag er integreret i Grammateket.
-msgid "TXT_COMMA_ABOUT"
-msgstr "N/A"
-
-# Copyright 2016-2019 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af MV-Nordic, Part of Vitec Software Group.
-msgid "TXT_COMMA_COPYRIGHT"
-msgstr "N/A"
-
-# Vil du have tjekket din markering eller hele teksten?
-msgid "TXT_COMMA_HINT"
-msgstr "N/A"
-
-# Du kan også vælge at springe direkte til Kommaforslag for at få tjekket dine kommaer.
-msgid "TXT_COMMA_INTRO"
-msgstr "N/A"
-
-# Fra 4. klasse kan eleverne bruge forslagene til at reflektere over egen kommasætning. De tre niveauer i indstillingsmenuen leder frem mod videns- og færdighedsmål efter 6. klasse (niveau 1-2) og efter 9.-10. klasse (niveau 3).\n\nHar du brug for inspiration til brug af Kommaforslag i undervisningen, så <a href="https://www.mv-nordic.com/dk/support/kommaforslag/inspirationsmateriale-til-kommaforslag" target="_blank">følg linket</a>.
-msgid "TXT_COMMA_LINKS"
-msgstr "N/A"
-
-# Besøg vores website på <a href="https://www.mv-nordic.com/" target="_blank">mv-nordic.com</a>.\nKommaforslag <a href="https://www.mv-nordic.com/" target="_blank">hjælp</a>.
-msgid "TXT_COMMA_SUPPORT"
-msgstr "N/A"
-
 # Her kan du tilføje, rette eller fjerne ord fra din ordbog.
 msgid "TXT_DICTIONARY_HINT"
 msgstr "Här kan du lägga till, rätta eller ta bort ord från din ordbok."
@@ -468,7 +371,7 @@ msgstr "Här kan du lägga till, rätta eller ta bort ord från din ordbok."
 msgid "TXT_GRAMMAR_ABOUT"
 msgstr "Med Grammateket kan du kontrollera din text för stavning och vissa vanliga grammtiska fel.\n\nDu får hjälp med:\n<ul>\n<li>Rättstavning</li>\n<li>Sammansatta ord</li>\n<li>Korrekt användning av <b>vart</b></li>\n<li>Att skilja mellan <b>de</b> och <b>dem</b> istället för \"dom\"</li>\n</ul>\n\nGrammateket kan användas när du arbetar med läs- och skrivverktygen IntoWords och CD-ORD. Grammateket ger också tillgång till lätt uppslag i IntoWords Ordbok."
 
-# Copyright 2016-2019 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af MV-Nordic, Part of Vitec Software Group.
+# Copyright 2016-2019 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af Vitec MV, Part of Vitec Software Group.
 msgid "TXT_GRAMMAR_COPYRIGHT"
 msgstr "Copyright 2019"
 
@@ -480,17 +383,20 @@ msgstr "Vill du kontrollera den markerade texten eller hela texten?"
 msgid "TXT_GRAMMAR_INTRO"
 msgstr "Först ska du kontrollera din text för rättstavning och grammatik."
 
-# Besøg vores website på <a href="https://www.mv-nordic.com/" target="_blank">mv-nordic.com</a>. Grammateket <a href="https://www.mv-nordic.com/" target="_blank">hjælp</a>.
+msgid "TXT_GRAMMAR_OPTIONS"
+msgstr "<ul><li><label class=\"crbox\"><input type=\"checkbox\" class=\"opt_onlyConfident\"><span class=\"checkbox\"></span><span data-l10n=\"LBL_OPT_ONLY_CONFIDENT\">…</span></label></li><li><label class=\"crbox\"><input type=\"checkbox\" class=\"opt_ignVartVerb\"><span class=\"checkbox\"></span><span data-l10n=\"LBL_OPT_IGNORE_VART_VERB\">…</span></label></li><li><label class=\"crbox\"><input type=\"checkbox\" class=\"opt_ignDomAll\"><span class=\"checkbox\"></span><span data-l10n=\"LBL_OPT_IGNORE_DOM_ALL\">…</span></label><ul><li><label class=\"crbox\"><input type=\"checkbox\" class=\"opt_ignDomDefinite\"><span class=\"checkbox\"></span><span data-l10n=\"LBL_OPT_IGNORE_DOM_DEFINITE\">…</span></label></li><li><label class=\"crbox\"><input type=\"checkbox\" class=\"opt_ignDomSubjobj\"><span class=\"checkbox\"></span><span data-l10n=\"LBL_OPT_IGNORE_DOM_SUBJOBJ\">…</span></label></li><li><label class=\"crbox\"><input type=\"checkbox\" class=\"opt_ignDomPrep\"><span class=\"checkbox\"></span><span data-l10n=\"LBL_OPT_IGNORE_DOM_PREP\">…</span></label></li></ul></li><li><label class=\"crbox\"><input type=\"checkbox\" class=\"opt_ignMaj\"><span class=\"checkbox\"></span><span data-l10n=\"LBL_OPT_IGNORE_MAJ\">…</span></label></li></ul>"
+
+# Besøg vores website på <a href="https://vitec-mv.com/" target="_blank">vitec-mv.com</a>. Grammateket <a href="https://vitec-mv.com/" target="_blank">hjælp</a>.
 msgid "TXT_GRAMMAR_SUPPORT"
-msgstr "Besök vår webbsajt <a href=\"https://www-mvnordic.com/\" target=_blank\">mv-nordic.com</a>. Grammateket <a href=\"https://www.mv-nordic.com/\" target=\"_blank\">hjälp</a>"
+msgstr "Besök vår webbsajt <a href=\"https://vitec-mv.com/\" target=_blank\">vitec-mv.com</a>. Grammateket <a href=\"https://vitec-mv.com/\" target=\"_blank\">hjälp</a>"
 
 # Du skal logge ind for at bruge dette værktøj.
 msgid "TXT_MUST_LOGIN"
 msgstr "Du måste logga in för att kunna använda detta verktyg."
 
-# <a href="https://www.mv-nordic.com/" target="_blank">Kontakt MV-Nordic</a> for at prøve programmet gratis eller for information om abonnement.
+# <a href="https://vitec-mv.com/" target="_blank">Kontakt Vitec MV</a> for at prøve programmet gratis eller for information om abonnement.
 msgid "TXT_SUBSCRIBE"
-msgstr "<a href=\"https://www.mv-nordic.com/\" target=\"_blank\">Kontakta MV-Nordic</a> för att testa programmet kostnadsfritt eller för information om abonnemang."
+msgstr "<a href=\"https://vitec-mv.com/\" target=\"_blank\">Kontakta Vitec MV</a> för att testa programmet kostnadsfritt eller för information om abonnemang."
 
 # Grammateket forbedrer din skriftlighed og støtter dig i din skriveproces ved at komme med forslag til rettelser, beskrivelser af fejlkategorier og mulighed for at slå ord op i ordbogen.\n\nNår du har skrevet en tekst, åbner du Grammateket for at få tjekket din stavning, grammatik og kommaer.\n\nDu får hjælp til stavning, sammensatte ord, nutids-r, kort og lang tillægsform og kommatering.
 msgid "TXT_WHAT_IS"
