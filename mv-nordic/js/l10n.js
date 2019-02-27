@@ -255,6 +255,7 @@ l10n.s = {
 		TXT_DICTIONARY_HINT: 'Her kan du legge til, rette eller fjerne ord fra ordboken din',
 		TXT_GRAMMAR_HINT: 'Vil du sjekke det som er markert eller hele teksten?',
 		TXT_GRAMMAR_INTRO: 'Først må du sjekke staving i teksten.',
+		TXT_GRAMMAR_OPTIONS: '<ul><li><label class="crbox"><input type="checkbox" class="opt_onlyConfident"><span class="checkbox"></span><span data-l10n="LBL_OPT_ONLY_CONFIDENT">…</span></label></li><li><label class="crbox"><input type="checkbox" class="opt_ignMaj"><span class="checkbox"></span><span data-l10n="LBL_OPT_IGNORE_MAJ">…</span></label></li></ul>',
 		TXT_MUST_LOGIN: 'Du må logge inn for å bruke dette verktøyet.',
 		TXT_SUBSCRIBE: '<a href="https://vitec-mv.com/" target="_blank">Kontakt Vitec MV for å få mer informasjon om abonnement.',
 		TXT_WHAT_IS: 'Grammateket gjør teksten din bedre og støtter deg i skriveprosessen ved å komme med forslag til rettelser. Når du har skrevet en tekst, åpner du Grammateket for å sjekke staving. Du får hjelp til staving, sammensatte ord og punktum.',
