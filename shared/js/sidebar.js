@@ -852,6 +852,7 @@ function _parseResult(rv) {
 					//console.log(crs);
 				}
 				if (nws.length) {
+					nws = nws.unique();
 					w[1] = nws.join(' ');
 					if (!w[2] || w[2].length === 0) {
 						w[2] = '';

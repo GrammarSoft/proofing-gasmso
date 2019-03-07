@@ -330,7 +330,7 @@ l10n.s = {
 		LBL_OPT_IGNORE_VART_VERB: 'Rätta inte verbal användning av "vart" (dialektalt, regionalt)',
 		LBL_OPT_IGNORE_DOM_ALL: 'Rätta inte "dom" som pronomen eller bestämd artikel',
 		LBL_OPT_IGNORE_DOM_DEFINITE: 'Rätta inte "dom" som bestämd artikel',
-		LBL_OPT_IGNORE_DOM_SUBJOBJ: 'Rätta inte "dom" i som subjekt- eller objektposition',
+		LBL_OPT_IGNORE_DOM_SUBJOBJ: 'Rätta inte "dom" i subjekt- eller objektposition',
 		LBL_OPT_IGNORE_DOM_PREP: 'Rätta inte "dom" i prepositionsfraser',
 		LBL_OPT_ONLY_CONFIDENT: 'Visa enbart säkra fel',
 		LBL_OPT_TTS: 'Läs texten högt',

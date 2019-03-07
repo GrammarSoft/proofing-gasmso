@@ -286,7 +286,7 @@ msgid "LBL_OPT_IGNORE_DOM_DEFINITE"
 msgstr "Rätta inte \"dom\" som bestämd artikel"
 
 msgid "LBL_OPT_IGNORE_DOM_SUBJOBJ"
-msgstr "Rätta inte \"dom\" i som subjekt- eller objektposition"
+msgstr "Rätta inte \"dom\" i subjekt- eller objektposition"
 
 msgid "LBL_OPT_IGNORE_DOM_PREP"
 msgstr "Rätta inte \"dom\" i prepositionsfraser"
