@@ -455,11 +455,11 @@ let types_lang = {
     ],
     "@R11": [
         "Dem är alltid fel som bestämd artikel",
-        "Bestämd artikel i plural är alltid <B>de</B>. <B>Dem</B> är objektform av det personliga pronominet i plural.<BR/><BR/><BR/><EM>Jag skall se till och spara till ett par till boots då det är <B>de</B> skorna jag använder mest.</EM><BR/><BR/><B>Dem</B> kan aldrig stå som bestämd artikel eller subjekt."
+        "Bestämd artikel i plural är alltid <B>de</B>. <B>Dem</B> är objektform av det personliga pronominet i plural.<BR><BR><BR><EM>Jag skall se till och spara till ett par till boots då det är <B>de</B> skorna jag använder mest.</EM><BR><BR><B>Dem</B> kan aldrig stå som bestämd artikel eller subjekt."
     ],
     "@R31": [
         "Pronomenets subjektform",
-        "Det personliga pronomenets subjektform kan aldrig vara <B>dem</B>. Det är inte vardagligt. Det är helt enkelt fel. Om man vill skriva vardagligt, är formen <B>dom</B> och om man vill skriva mer korrekt, är formen <B>de</B>.<BR/><BR/>Nästan alla uttalar <B>de</B> och <B>dem</B> som \"dom.\" Många vet att det finns en mer korrekt form av \"dom\", när man menar <B>dem</B>. Men <B>dem</B> kan bara användas som objektform av det personliga pronomenet, inte som bestämd artikel i plural och inte som subjektform.<BR/><BR/><EM>Oj så söta <B>de</B> är!</EM> (aldrig ... så söta <FEL>dem</FEL> är!)<BR/><EM>Jag vet inte riktigt hur länge de håller, men ...</EM> (aldrig ... hur länge <FEL>dem</FEL> håller)"
+        "Det personliga pronomenets subjektform kan aldrig vara <B>dem</B>. Det är inte vardagligt. Det är helt enkelt fel. Om man vill skriva vardagligt, är formen <B>dom</B> och om man vill skriva mer korrekt, är formen <B>de</B>.<BR><BR>Nästan alla uttalar <B>de</B> och <B>dem</B> som \"dom.\" Många vet att det finns en mer korrekt form av \"dom\", när man menar <B>dem</B>. Men <B>dem</B> kan bara användas som objektform av det personliga pronomenet, inte som bestämd artikel i plural och inte som subjektform.<BR><BR><EM>Oj så söta <B>de</B> är!</EM> (aldrig ... så söta <FEL>dem</FEL> är!)<BR><EM>Jag vet inte riktigt hur länge de håller, men ...</EM> (aldrig ... hur länge <FEL>dem</FEL> håller)"
     ],
     "@R500": [
         "Vartannat",
@@ -471,15 +471,15 @@ let types_lang = {
     ],
     "@R550": [
         "Var inte vart",
-        "Vart används oftast felaktigt. Det ska användas tillsammans med riktningsverb eller uttryck:<BR/><BR/><EM><B>Vart</B> är du på väg?</EM><BR/><BR/><B>Var</B> använder man med befintlighetsverb och verb som inte uttrycker en riktning.<BR/><BR/><EM><B>Var</B> bor du?</EM><BR/><EM><B>Var</B> köpte du skorna?</EM>"
+        "Vart används oftast felaktigt. Det ska användas tillsammans med riktningsverb eller uttryck:<BR><BR><EM><B>Vart</B> är du på väg?</EM><BR><BR><B>Var</B> använder man med befintlighetsverb och verb som inte uttrycker en riktning.<BR><BR><EM><B>Var</B> bor du?</EM><BR><EM><B>Var</B> köpte du skorna?</EM>"
     ],
     "@R600": [
         "\"Var\" är korrekt form i kombination med befintlighetsverb.",
-        "För att uttrycka befintlighet använder man ordet \"var\".<BR/><BR/><EM>Jag vet <B>var</B> du är någonstans.</EM><BR/><BR/> För att uttrycka riktning, dvs att man är på väg, använder man \"vart\".<BR/><BR/><EM>Jag vet <B>vart</B> du ska resa.</EM>"
+        "För att uttrycka befintlighet använder man ordet \"var\".<BR><BR><EM>Jag vet <B>var</B> du är någonstans.</EM><BR><BR> För att uttrycka riktning, dvs att man är på väg, använder man \"vart\".<BR><BR><EM>Jag vet <B>vart</B> du ska resa.</EM>"
     ],
     "@R710": [
         "\"Varit\" är den korrekta formen av \"vara\" i supinum.",
-        "När man vill uttrycka sig i skrift med verbet \"vara\" i supinum efter \"ha\", \"har\" och \"hade\", är den rätta formen \"varit\".<BR/><BR/><EM>Han <B>har varit</B> sjuk länge nu. Hans mamma <B>hade varit</B> noga med medicineringen. Kan det <B>ha varit</B så att han fått fel diagnos?</EM>"
+        "När man vill uttrycka sig i skrift med verbet \"vara\" i supinum efter \"ha\", \"har\" och \"hade\", är den rätta formen \"varit\".<BR><BR><EM>Han <B>har varit</B> sjuk länge nu. Hans mamma <B>hade varit</B> noga med medicineringen. Kan det <B>ha varit</B så att han fått fel diagnos?</EM>"
     ],
     "@Y-comp-V-NC": [
         "Sammansättning",
@@ -487,39 +487,39 @@ let types_lang = {
     ],
     "@Y10": [
         "\"De\" som bestämd artikel",
-        "Bestämd artikel är alltid \"de\" i plural, båda i subjekt och i objekt.<BR/><BR/><EM>De är bröder och de har gjort <B>de</B> allra bästa filmerna tillsammans.</EM>"
+        "Bestämd artikel är alltid \"de\" i plural, både i subjekt och i objekt.<BR><BR><EM>De är bröder och de har gjort <B>de</B> allra bästa filmerna tillsammans.</EM>"
     ],
     "@Y20": [
         "Pronomenets objektform",
-        "Objektform av pronomenet i plural är <B>dem</B>. Objektform av <B>jag</B> är <B>mig</B>, av <B>du</B> är det <B>dig</B>, av <B>hon</B> och <B>han</B> är det <B>henne</B> och <B>honom</B>. Objektform av <B>de</B> är <B>dem</B>. För det opersonliga pronomenen <B>det</B> och <B>den</B> använder vi <B>sig</B> som objektform. Formen <B>dom</B> istället för <B>dem</B> används ofta i vardagligt tal, men om man vill skriva mer korrekt, ska det vara <B>dem</B>.<BR/><BR/><EM>Jag har hjälpt mamma att tömma typ tre skåp på plastburkar och sorterat <B>dom -> dem</B> idag.</EM><BR/></BR/><B>dem</B> är objekt till <B>sorterat</B>.<BR/><BR/>De allra flesta säger \"dom\", men när vi skriver, är det mer korrekt med <B>dem</B>."
+        "Objektform av pronomenet i plural är <B>dem</B>. Objektform av <B>jag</B> är <B>mig</B>, av <B>du</B> är det <B>dig</B>, av <B>hon</B> och <B>han</B> är det <B>henne</B> och <B>honom</B>. Objektform av <B>de</B> är <B>dem</B>. För det opersonliga pronomenen <B>det</B> och <B>den</B> använder vi <B>sig</B> som objektform. Formen <B>dom</B> istället för <B>dem</B> används ofta i vardagligt tal, men om man vill skriva mer korrekt, ska det vara <B>dem</B>.<BR><BR><EM>Jag har hjälpt mamma att tömma typ tre skåp på plastburkar och sorterat <B>dom -> dem</B> idag.</EM><BR></BR/><B>dem</B> är objekt till <B>sorterat</B>.<BR><BR>De allra flesta säger \"dom\", men när vi skriver, är det mer korrekt med <B>dem</B>."
     ],
     "@Y30": [
         "\"De\" är korrekt subjektform för personligt pronomen i 3:e person plural.",
-        "I talspråk uttalar nästan alla orden \"de\" och \"dem\" som \"dom\" båda i subjekt och i objekt. När man skriver, är den mer korrekta formen i subjekt \"de\" och i objekt \"dem\".<BR/><BR/> Vissa använder felaktigt objektformen \"dem\" i subjekt, vilket är helt fel. Man kan numera använda formen \"dom\" men aldrig \"dem\".<BR/><BR/><EM><B>De</B> är snygga. Jag gillar <B>dem</B></EM> Eller <EM>Dom är snygga. Jag gillar dom.</EM> men aldrig <EM><FEL>Dem</FEL> är snygga.</EM>"
+        "I talspråk uttalar nästan alla orden \"de\" och \"dem\" som \"dom\" både i subjekt och i objekt. När man skriver, är den mer korrekta formen i subjekt \"de\" och i objekt \"dem\".<BR><BR> Vissa använder felaktigt objektformen \"dem\" i subjekt, vilket är helt fel. Man kan numera använda formen \"dom\" men aldrig \"dem\".<BR><BR><EM><B>De</B> är snygga. Jag gillar <B>dem</B></EM> Eller <EM>Dom är snygga. Jag gillar dom.</EM> men aldrig <EM><FEL>Dem</FEL> är snygga.</EM>"
     ],
     "@Y40": [
-        "Dem i propositionsfraser",
-        "Pluralpronomenet <B>de</B> blir <B>dem</B> i prepositionsfraser.<BR/></BR><EM>Här är iallafall en bild som jag knäppte på <B>dem</B> i somras.</EM><BR/><EM>Vilken storlek har du på <B>dem</B>?</EM>"
+        "Dem i prepositionsfraser",
+        "Pluralpronomenet <B>de</B> blir <B>dem</B> i prepositionsfraser.<BR></BR><EM>Här är iallafall en bild som jag knäppte på <B>dem</B> i somras.</EM><BR><EM>Vilken storlek har du på <B>dem</B>?</EM>"
     ],
     "@Y41": [
         "\"Utan\" kan vara preposition eller konjunktion",
-        "<B>Preposition:</B> När ordet \"utan\" är en preposition, följs det av ordet \"dem\".<BR/><BR/><EM>Utan <B>dem</B> had jag inte klarat det.</EM><BR/><BR/><B>Konjunktion:</B> Om ordet \"utan\" däremot är en konjunktion, följs det av ordet \"de\".<BR/><BR/><EM>Böckerna är inte mina, utan de är lånade från biblioteket.</EM><BR/><BR/>Obs! när \"dom\" är objekt ska det skrivas \"dem\".<BR/><BR/><EM>Pengarna sparades inte, utan dem köpte han godis för.</EM>"
+        "<B>Preposition:</B> När ordet \"utan\" är en preposition, följs det av ordet \"dem\".<BR><BR><EM>Utan <B>dem</B> had jag inte klarat det.</EM><BR><BR><B>Konjunktion:</B> Om ordet \"utan\" däremot är en konjunktion, följs det av ordet \"de\".<BR><BR><EM>Böckerna är inte mina, utan de är lånade från biblioteket.</EM><BR><BR>Obs! när \"dom\" är objekt ska det skrivas \"dem\".<BR><BR><EM>Pengarna sparades inte, utan dem köpte han godis för.</EM>"
     ],
     "@Y42": [
         "\"Om\" kan vara preposition eller konjunktion",
-        "<B>Preposition:</B> När \"om\" står som preposition, följer den böjda formen av \"de\", dvs. \"dem\".<BR/><BR/><EM>De svarta skorna är dyra och jag tycker inte om <B>dem</B>.<BR/><BR/><B>Konjunktion:</B> När \"om\" står som konjunktion, följer subjektformen av \"de\", dvs. \"de\".<BR/><BR/><EM>Jag köper de vita skorna, om <B>de</B> har ett par i min storlek."
+        "<B>Preposition:</B> När \"om\" står som preposition, följer den böjda formen av \"de\", dvs. \"dem\".<BR><BR><EM>De svarta skorna är dyra och jag tycker inte om <B>dem</B>.<BR><BR><B>Konjunktion:</B> När \"om\" står som konjunktion, följer subjektformen av \"de\", dvs. \"de\".<BR><BR><EM>Jag köper de vita skorna, om <B>de</B> har ett par i min storlek."
     ],
     "@Y43": [
         "Till(s), preposition eller konjunktion",
-        "Om \"dom\" följer en preposition skriver man oftast objektformen \"dem\". Ibland skriver man \"till\" när man menar \"tills\" som en konjunktion, \"till den tid då\". I sådana fall är efterföljande \"dom\" oftast subjekt och man ska skriva subjektformen \"de\".<BR/><BR/><B>Preposition</B>:<BR/><EM>Flera har frågat om jag vill komma till dem och hälsa på.</EM><BR/><EM>Varför ska jag betala in pengar till dem varje månad och sen inte ens få ett vettigt svar?</EM><BR/><B>Konjunktion</B>:<BR/><EM>Samtidigt hjälper ju dessa mig att hitta mitt mål i livet, vilket helt enkelt får bli att kämpa tills de krossas.</EM><BR/>"
+        "Om \"dom\" följer en preposition skriver man oftast objektformen \"dem\". Ibland skriver man \"till\" när man menar \"tills\" som en konjunktion, \"till den tid då\". I sådana fall är efterföljande \"dom\" oftast subjekt och man ska skriva subjektformen \"de\".<BR><BR><B>Preposition</B>:<BR><EM>Flera har frågat om jag vill komma till dem och hälsa på.</EM><BR><EM>Varför ska jag betala in pengar till dem varje månad och sen inte ens få ett vettigt svar?</EM><BR><B>Konjunktion</B>:<BR><EM>Samtidigt hjälper ju dessa mig att hitta mitt mål i livet, vilket helt enkelt får bli att kämpa tills de krossas.</EM><BR>"
     ],
     "@Y44": [
         "\"För\" kan vara preposition eller konjunktion",
-        "<B>Preposition:</B> När \"för\" står som preposition, följer \"dem\".<BR/><BR/><EM>Här finns det gott om plats för <B>dem</B>.<BR/><BR/><B>Konjunktion:</B> När \"för\" står som konjunktion och följs av \"dom\" i talspråk, är det oftast subjekt och ska skrivas \"de\".<BR/><BR/><EM>Det är synd, för <B>de</B> får inte plats här.</EM>"
+        "<B>Preposition:</B> När \"för\" står som preposition, följer \"dem\".<BR><BR><EM>Här finns det gott om plats för <B>dem</B>.<BR><BR><B>Konjunktion:</B> När \"för\" står som konjunktion och följs av \"dom\" i talspråk, är det oftast subjekt och ska skrivas \"de\".<BR><BR><EM>Det är synd, för <B>de</B> får inte plats här.</EM>"
     ],
     "@Y700": [
         "\"Vart\" är en ålderdomlig verbform",
-        "\"Vart\" är preteritum av det äldre verbet \"varda\" och används knappt längre.<BR/><BR/><EM>Och Gud sade: \"Varde ljus; och det vart ljus.\"</EM> (Gammal bibelöversättning)<BR/><BR/> I vissa dialekter används \"vart\" som verb istället för \"blev\" i preteritum.<BR/><BR/><EM>Han vart sur</EM> skrivs på korrekt rikssvenska: <EM>Han <B>blev</B> sur.</EM>"
+        "\"Vart\" är preteritum av det äldre verbet \"varda\" och används knappt längre.<BR><BR><EM>Och Gud sade: \"Varde ljus; och det vart ljus.\"</EM> (Gammal bibelöversättning)<BR><BR> I vissa dialekter används \"vart\" som verb istället för \"blev\" i preteritum.<BR><BR><EM>Han vart sur</EM> skrivs på korrekt rikssvenska: <EM>Han <B>blev</B> sur.</EM>"
     ]
 }
 	},
