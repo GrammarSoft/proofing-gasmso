@@ -57,6 +57,7 @@ l10n.s = {
 		BTN_OPTIONS: 'Indstillinger',
 		BTN_POP_IGNORE: 'Ignorer',
 		BTN_POP_IGNOREALL: 'Ignorer alle',
+		BTN_PREFACE_CONTINUE: 'Start Kukkuniiaat',
 		BTN_PREVIOUS: 'Forrige',
 		BTN_SEEALL: 'Se alle',
 		BTN_SUPPORT: 'Support',
@@ -138,7 +139,7 @@ l10n.s = {
 		TXT_GRAMMAR_SUPPORT: 'Du kan få hjælp via <a href="https://oqaasileriffik.gl/kukkuniiaat/" target="_blank">Oqaasileriffik</a> eller <a href="https://tinodidriksen.com/spellers/" target="_blank">Tino Didriksen Consult</a>.',
 		TXT_MUST_LOGIN: 'Du skal logge ind for at bruge dette værktøj.',
 		TXT_SUBSCRIBE: 'Opret abonnement via <a href="https://retmig.dk/" target="_blank">retmig.dk</a> og/eller <a href="https://kommaer.dk/" target="_blank">kommaer.dk</a>',
-		TXT_WHAT_IS: 'Kukkuniiaat hjælper dig med at fange og fjerne stave- og slåfejl i dine tekster.',
+		TXT_WHAT_IS: 'Kukkuniiaat er en stavekontrol for grønlandsk (kalaallisut), der hjælper dig med at fange og fjerne stave- og slåfejl i dine tekster.<br><br>Kukkuniiaat er udviklet af <a href="https://oqaasileriffik.gl/" target="_blank">Grønlands Sprogsekretariat (Oqaasileriffik)</a>.',
 	},
 	en: {
 		ERR_NO_SELECTION: 'No selection found. You must select some text before that button will work.',
