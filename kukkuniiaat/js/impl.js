@@ -20,7 +20,7 @@
 
 const VERSION_MAJOR = 1;
 const VERSION_MINOR = 0;
-const VERSION_PATCH = 1;
+const VERSION_PATCH = 2;
 const ROOT_URL_SELF = 'https://retmig.dk/gas/dev/kukkuniiaat/';
 const ROOT_URL_GRAMMAR = 'https://tinodidriksen.com/spell-dev/kal/';
 
@@ -45,6 +45,9 @@ const g_conf_defaults = {
 	opt_level: 3,
 };
 
+/* exported g_seen_preface */
+let g_seen_preface = false;
+
 function impl_dataKeepalive() {
 	return {a: 'keepalive'};
 }
@@ -56,7 +59,13 @@ function impl_startLogin() {
 	$('.btnCheckComma').hide();
 	$('.comma-specific').hide();
 	//$('.btnOptions').show(); // Not quite ready yet
-	switchSidebar('#chkWelcomeGrammar');
+	if (g_seen_preface) {
+		switchSidebar('#chkWelcomeGrammar');
+	}
+	else {
+		g_seen_preface = true;
+		switchSidebar('#chkWelcomePreface');
+	}
 }
 
 function impl_canGrammar() {

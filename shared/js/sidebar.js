@@ -926,6 +926,8 @@ function _parseResult(rv) {
 						}
 					}
 
+					let has_uc = (wx !== wx.toLowerCase());
+
 					px = px.split(/\t/);
 					sx = sx.split(/\t/);
 					let space = '';
@@ -935,6 +937,10 @@ function _parseResult(rv) {
 					let es = [];
 					for (let p=0 ; p<px.length ; ++p) {
 						for (let s=0 ; s<sx.length ; ++s) {
+							if (!has_uc && sx[s] !== sx[s].toLowerCase()) {
+								console.log('Discarding case-different suffix: ' + sx[s]);
+								continue;
+							}
 							es.push(px[p] + space + sx[s]);
 						}
 					}
