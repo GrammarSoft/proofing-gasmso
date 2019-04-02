@@ -12,8 +12,8 @@ Released as GPLv3+ - except `imgs/logo*` and `js/mark-types.js`
 * macOS and iPad: https://docs.microsoft.com/en-us/office/dev/add-ins/testing/sideload-an-office-add-in-on-ipad-and-mac
 
 ## Deployment
-* Edit `js/shared.js` lines 24-28
-* Edit `mso.xml` and `html/*` to replace all instances of `https://tinodidriksen.com/spell/kal/gas/1.0.1/` with your chosen `ROOT_URL_SELF` value
+* Edit `js/impl.js` lines 21-25
+* Edit `mso.xml` and `html/*` to replace all instances of `https://tinodidriksen.com/spell/kal/gas/1.0.2/` with your chosen `ROOT_URL_SELF` value
 * Remove all lines matching `//console.log`
 
 # External Dependencies

@@ -601,3 +601,109 @@ function object2pot(obj) {
 
 	return rv;
 }
+
+function object2po(obj, base) {
+	let rv = '';
+
+	rv += 'msgid ""\n';
+	rv += 'msgstr ""\n';
+	rv += '"MIME-Version: 1.0\\n"\n';
+	rv += '"Content-Type: text/plain; charset=utf-8\\n"\n';
+	rv += '"Content-Transfer-Encoding: 8bit\\n"\n';
+	rv += '\n';
+
+	let seen = {};
+	for (let k in obj) {
+		if (!obj.hasOwnProperty(k)) {
+			continue;
+		}
+		if (base.hasOwnProperty(k)) {
+			rv += '# ' + base[k].replace(/\n/g, '\\n') + '\n';
+		}
+		seen[k] = true;
+		rv += 'msgid "' + k + '"\n';
+		rv += 'msgstr "' + obj[k].replace(/\n/g, '\\n').replace(/"/g, '\\"') + '"\n';
+		rv += '\n';
+	}
+
+	for (let k in base) {
+		if (!base.hasOwnProperty(k)) {
+			continue;
+		}
+		if (seen.hasOwnProperty(k)) {
+			continue;
+		}
+		rv += '# ' + base[k].replace(/\n/g, '\\n') + '\n';
+		rv += 'msgid "' + k + '"\n';
+		rv += 'msgstr ""\n';
+		rv += '\n';
+	}
+
+	return rv;
+}
+
+function l10n_translate(s) {
+	s = '' + s; // Coerce to string
+
+	// Special case for the version triad
+	if (s === 'VERSION') {
+		return VERSION;
+	}
+
+	let l = session.locale;
+	let t = '';
+
+	if (!l10n.s.hasOwnProperty(l)) {
+		l = 'da';
+	}
+
+	// If the string doesn't exist in the locale, fall back
+	if (!l10n.s[l].hasOwnProperty(s)) {
+		// Try English
+		if (l10n.s.en.hasOwnProperty(s)) {
+			t = l10n.s.en[s];
+		}
+		// ...then Danish
+		else if (l10n.s.da.hasOwnProperty(s)) {
+			t = l10n.s.da[s];
+		}
+		// ...give up and return as-is
+		else {
+			t = s;
+		}
+	}
+	else {
+		t = l10n.s[l][s];
+	}
+
+	let rx = /\{([A-Z0-9_]+)\}/;
+	let m = null;
+	while ((m = rx.exec(t)) !== null) {
+		let nt = l10n_translate(m[1]);
+		t = t.replace(m[0], nt);
+	}
+
+	return t;
+};
+
+function _l10n_world_helper() {
+	let e = $(this);
+	let k = e.attr('data-l10n');
+	let v = l10n_translate(k);
+
+	if (k === v) {
+		return;
+	}
+
+	if (/^TXT_/.test(k)) {
+		v = '<p>'+v.replace(/\n+<ul>/g, '</p><ul>').replace(/\n+<\/ul>/g, '</ul>').replace(/<\/ul>\n+/g, '</ul><p>').replace(/\n+<li>/g, '<li>').replace(/\n\n+/g, '</p><p>').replace(/\n/g, '<br>')+'</p>';
+	}
+	e.html(v);
+	if (/^TXT_/.test(k)) {
+		e.find('[data-l10n]').each(_l10n_world_helper);
+	}
+}
+
+function l10n_world() {
+	$('[data-l10n]').each(_l10n_world_helper);
+}

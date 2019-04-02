@@ -52,10 +52,6 @@ function impl_removeInDocument(prefix, find, rpl, suffix) {
 	return google.script.run.withSuccessHandler(didRemove).withFailureHandler(showError).replaceInDocument(rv.prefix, rv.middle, rpl, rv.suffix);
 }
 
-function impl_getState() {
-	return google.script.run.withSuccessHandler(getState).withFailureHandler(showError).getState();
-}
-
 function impl_showOptions(g_tool) {
 	return google.script.run.withFailureHandler(showError).showOptions(g_tool);
 }
@@ -74,5 +70,5 @@ function impl_showDictionary(text) {
 
 function impl_Init(func) {
 	func();
-	l10n_world();
+	//l10n_world();
 }

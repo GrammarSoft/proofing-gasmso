@@ -23,6 +23,8 @@
 /* exported l10n */
 let l10n = {};
 
+l10n.lang = 'da';
+
 l10n.s = {
 	da: {
 		BTN_CLOSE: 'Luk',
@@ -55,6 +57,7 @@ l10n.s = {
 		BTN_OPTIONS: 'Indstillinger',
 		BTN_POP_IGNORE: 'Ignorer',
 		BTN_POP_IGNOREALL: 'Ignorer alle',
+		BTN_PREFACE_CONTINUE: 'Start Kukkuniiaat',
 		BTN_PREVIOUS: 'Forrige',
 		BTN_SEEALL: 'Se alle',
 		BTN_SUPPORT: 'Support',
@@ -136,76 +139,20 @@ l10n.s = {
 		TXT_GRAMMAR_SUPPORT: 'Du kan få hjælp via <a href="https://oqaasileriffik.gl/kukkuniiaat/" target="_blank">Oqaasileriffik</a> eller <a href="https://tinodidriksen.com/spellers/" target="_blank">Tino Didriksen Consult</a>.',
 		TXT_MUST_LOGIN: 'Du skal logge ind for at bruge dette værktøj.',
 		TXT_SUBSCRIBE: 'Opret abonnement via <a href="https://retmig.dk/" target="_blank">retmig.dk</a> og/eller <a href="https://kommaer.dk/" target="_blank">kommaer.dk</a>',
-		TXT_WHAT_IS: 'Kukkuniiaat hjælper dig med at fange og fjerne stave- og slåfejl i dine tekster.',
+		TXT_WHAT_IS: 'Kukkuniiaat er en stavekontrol for grønlandsk (kalaallisut), der hjælper dig med at fange og fjerne stave- og slåfejl i dine tekster.<br><br>Kukkuniiaat er udviklet af <a href="https://oqaasileriffik.gl/" target="_blank">Grønlands Sprogsekretariat (Oqaasileriffik)</a>.',
 	},
 	en: {
 		ERR_NO_SELECTION: 'No selection found. You must select some text before that button will work.',
 	},
 };
 
-l10n.t = function(s) {
-	s = '' + s; // Coerce to string
-
-	// Special case for the version triad
-	if (s === 'VERSION') {
-		return VERSION;
-	}
-
-	let l = session.locale;
-	let t = '';
-
-	if (!l10n.s.hasOwnProperty(l)) {
-		l = 'da';
-	}
-
-	// If the string doesn't exist in the locale, fall back
-	if (!l10n.s[l].hasOwnProperty(s)) {
-		// Try English
-		if (l10n.s.en.hasOwnProperty(s)) {
-			t = l10n.s.en[s];
-		}
-		// ...then Danish
-		else if (l10n.s.da.hasOwnProperty(s)) {
-			t = l10n.s.da[s];
-		}
-		// ...give up and return as-is
-		else {
-			t = s;
-		}
-	}
-	else {
-		t = l10n.s[l][s];
-	}
-
-	let rx = /\{([A-Z0-9_]+)\}/;
-	let m = null;
-	while ((m = rx.exec(t)) !== null) {
-		let nt = l10n.t(m[1]);
-		t = t.replace(m[0], nt);
-	}
-
-	return t;
-};
-
 function l10n_detectLanguage() {
-	let l = navigator.language;
-	if (!l10n.s.hasOwnProperty(l)) {
-		l = l.replace(/^([^-_]+).*$/, '$1');
+	l10n.lang = navigator.language;
+	if (!l10n.s.hasOwnProperty(l10n.lang)) {
+		l10n.lang = l10n.lang.replace(/^([^-_]+).*$/, '$1');
 	}
-	if (!l10n.s.hasOwnProperty(l)) {
-		l = 'da';
+	if (!l10n.s.hasOwnProperty(l10n.lang)) {
+		l10n.lang = 'da';
 	}
-	return l;
-}
-
-function l10n_world() {
-	$('[data-l10n]').each(function() {
-		let e = $(this);
-		let k = e.attr('data-l10n');
-		let v = l10n.t(k);
-		if (/^TXT_/.test(k)) {
-			v = '<p>'+v.replace(/\n+<ul>/g, '</p><ul>').replace(/\n+<\/ul>/g, '</ul>').replace(/<\/ul>\n+/g, '</ul><p>').replace(/\n+<li>/g, '<li>').replace(/\n\n+/g, '</p><p>').replace(/\n/g, '<br>')+'</p>';
-		}
-		e.html(v);
-	});
+	return l10n.lang;
 }
