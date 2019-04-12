@@ -408,6 +408,9 @@ function sanitize_result(txt) {
 	// Special case
 	txt = txt.replace(/@x-etype-case/g, '@upper');
 
+	// Workaround for bug https://trello.com/c/ixmc92EB
+	txt = txt.replace(/.'.\t@proper\n"/g, '.\n"');
+
 	// Swap markers that the backend has mangled due to sentence-ending parentheticals
 	for (let i=0 ; i<Defs.MAX_RQ_SIZE ; ++i) {
 		let t1 = '</s'+i+'>';
