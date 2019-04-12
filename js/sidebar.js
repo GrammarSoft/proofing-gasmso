@@ -808,6 +808,9 @@ function _parseResult(rv) {
 				prev_sentsplit = had_sentsplit;
 				if (ws.length && none) {
 					////console.log(`Vitec MV whitelist no-match: ${ws}`);
+					if (ws.indexOf('@insert') !== -1) {
+						w[0] = ' ';
+					}
 					ws = [];
 				}
 				nws = ws;
