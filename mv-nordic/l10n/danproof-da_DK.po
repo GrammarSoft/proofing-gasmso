@@ -263,7 +263,7 @@ msgid "MSO_INSTALLED_TITLE"
 msgstr "Kom godt i gang med Grammateket & Kommaforslag!"
 
 msgid "MSO_LEARNMORE_URL"
-msgstr "https://www.mv-nordic.com/"
+msgstr "https://www.vitec-mv.com/"
 
 msgid "MSO_TOOLTIP"
 msgstr "Klik for at åbne Grammateket & Kommaforslag"
@@ -320,10 +320,10 @@ msgid "TXT_COMMA_INTRO"
 msgstr "Du kan også vælge at springe direkte til Kommaforslag for at få tjekket dine kommaer."
 
 msgid "TXT_COMMA_LINKS"
-msgstr "Fra 4. klasse kan eleverne bruge forslagene til at reflektere over egen kommasætning. De tre niveauer i indstillingsmenuen leder frem mod videns- og færdighedsmål efter 6. klasse (niveau 1-2) og efter 9.-10. klasse (niveau 3).\n\nHar du brug for inspiration til brug af Kommaforslag i undervisningen, så <a href=\"https://www.mv-nordic.com/dk/support/kommaforslag/inspirationsmateriale-til-kommaforslag\" target=\"_blank\">følg linket</a>."
+msgstr "Fra 4. klasse kan eleverne bruge forslagene til at reflektere over egen kommasætning. De tre niveauer i indstillingsmenuen leder frem mod videns- og færdighedsmål efter 6. klasse (niveau 1-2) og efter 9.-10. klasse (niveau 3).\n\nHar du brug for inspiration til brug af Kommaforslag i undervisningen, så <a href=\"https://www.vitec-mv.com/dk/support/kommaforslag/inspirationsmateriale-til-kommaforslag\" target=\"_blank\">følg linket</a>."
 
 msgid "TXT_COMMA_SUPPORT"
-msgstr "Besøg vores website på <a href=\"https://www.mv-nordic.com/\" target=\"_blank\">mv-nordic.com</a>. Kommaforslag <a href=\"https://www.mv-nordic.com/\" target=\"_blank\">hjælp</a>."
+msgstr "Besøg vores website på <a href=\"https://www.vitec-mv.com/dk/support/\" target=\"_blank\">vitec-mv.com</a>. Kommaforslag <a href=\"https://www.vitec-mv.com/dk/support/\" target=\"_blank\">hjælp</a>."
 
 msgid "TXT_DICTIONARY_HINT"
 msgstr "Her kan du tilføje, rette eller fjerne ord fra din ordbog."
@@ -341,13 +341,13 @@ msgid "TXT_GRAMMAR_INTRO"
 msgstr "Først skal du tjekke din tekst for stavning og grammatik."
 
 msgid "TXT_GRAMMAR_SUPPORT"
-msgstr "Besøg vores website på <a href=\"https://www.mv-nordic.com/\" target=\"_blank\">mv-nordic.com</a>. Grammateket <a href=\"https://www.mv-nordic.com/\" target=\"_blank\">hjælp</a>."
+msgstr "Besøg vores website på <a href=\"https://www.vitec-mv.com/dk/support/\" target=\"_blank\">vitec-mv.com</a>. Grammateket <a href=\"https://www.vitec-mv.com/dk/support/\" target=\"_blank\">hjælp</a>."
 
 msgid "TXT_MUST_LOGIN"
 msgstr "Du skal logge ind for at bruge dette værktøj."
 
 msgid "TXT_SUBSCRIBE"
-msgstr "<a href=\"https://www.mv-nordic.com/\" target=\"_blank\">Kontakt Vitec MV</a> for at prøve programmet gratis eller for information om abonnement."
+msgstr "<a href=\"https://www.vitec-mv.com/dk/kontakt/\" target=\"_blank\">Kontakt Vitec MV</a> for at prøve programmet gratis eller for information om abonnement."
 
 msgid "TXT_WHAT_IS"
 msgstr "Grammateket forbedrer din skriftlighed og støtter dig i din skriveproces ved at komme med forslag til rettelser, beskrivelser af fejlkategorier og mulighed for at slå ord op i ordbogen.\n\nNår du har skrevet en tekst, åbner du Grammateket for at få tjekket din stavning, grammatik og kommaer.\n\nDu får hjælp til stavning, sammensatte ord, nutids-r, kort og lang tillægsform og kommatering."

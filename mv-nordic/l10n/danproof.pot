@@ -368,7 +368,7 @@ msgstr ""
 msgid "MSO_INSTALLED_TITLE"
 msgstr ""
 
-# https://www.mv-nordic.com/
+# https://www.vitec-mv.com/
 msgid "MSO_LEARNMORE_URL"
 msgstr ""
 
@@ -444,11 +444,11 @@ msgstr ""
 msgid "TXT_COMMA_INTRO"
 msgstr ""
 
-# Fra 4. klasse kan eleverne bruge forslagene til at reflektere over egen kommasætning. De tre niveauer i indstillingsmenuen leder frem mod videns- og færdighedsmål efter 6. klasse (niveau 1-2) og efter 9.-10. klasse (niveau 3).\n\nHar du brug for inspiration til brug af Kommaforslag i undervisningen, så <a href="https://www.mv-nordic.com/dk/support/kommaforslag/inspirationsmateriale-til-kommaforslag" target="_blank">følg linket</a>.
+# Fra 4. klasse kan eleverne bruge forslagene til at reflektere over egen kommasætning. De tre niveauer i indstillingsmenuen leder frem mod videns- og færdighedsmål efter 6. klasse (niveau 1-2) og efter 9.-10. klasse (niveau 3).\n\nHar du brug for inspiration til brug af Kommaforslag i undervisningen, så <a href="https://www.vitec-mv.com/dk/support/kommaforslag/inspirationsmateriale-til-kommaforslag" target="_blank">følg linket</a>.
 msgid "TXT_COMMA_LINKS"
 msgstr ""
 
-# Besøg vores website på <a href="https://www.mv-nordic.com/" target="_blank">mv-nordic.com</a>. Kommaforslag <a href="https://www.mv-nordic.com/" target="_blank">hjælp</a>.
+# Besøg vores website på <a href="https://www.vitec-mv.com/dk/support/" target="_blank">vitec-mv.com</a>. Kommaforslag <a href="https://www.vitec-mv.com/dk/support/" target="_blank">hjælp</a>.
 msgid "TXT_COMMA_SUPPORT"
 msgstr ""
 
@@ -472,7 +472,7 @@ msgstr ""
 msgid "TXT_GRAMMAR_INTRO"
 msgstr ""
 
-# Besøg vores website på <a href="https://www.mv-nordic.com/" target="_blank">mv-nordic.com</a>. Grammateket <a href="https://www.mv-nordic.com/" target="_blank">hjælp</a>.
+# Besøg vores website på <a href="https://www.vitec-mv.com/dk/support/" target="_blank">vitec-mv.com</a>. Grammateket <a href="https://www.vitec-mv.com/dk/support/" target="_blank">hjælp</a>.
 msgid "TXT_GRAMMAR_SUPPORT"
 msgstr ""
 
@@ -480,7 +480,7 @@ msgstr ""
 msgid "TXT_MUST_LOGIN"
 msgstr ""
 
-# <a href="https://www.mv-nordic.com/" target="_blank">Kontakt Vitec MV</a> for at prøve programmet gratis eller for information om abonnement.
+# <a href="https://www.vitec-mv.com/dk/kontakt/" target="_blank">Kontakt Vitec MV</a> for at prøve programmet gratis eller for information om abonnement.
 msgid "TXT_SUBSCRIBE"
 msgstr ""
 
