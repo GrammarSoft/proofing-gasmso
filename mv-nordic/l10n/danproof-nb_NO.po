@@ -357,9 +357,9 @@ msgstr "Grammateket er nå installert. Gå til fanen Hjem og klikk på Grammatek
 msgid "MSO_INSTALLED_TITLE"
 msgstr "Kom godt i gang med Grammateket!"
 
-# https://www.mv-nordic.com/
+# https://www.vitec-mv.com/
 msgid "MSO_LEARNMORE_URL"
-msgstr "https://www.mv-nordic.com/"
+msgstr "https://www.vitec-mv.com/"
 
 # Klik for at åbne Grammateket & Kommaforslag
 msgid "MSO_TOOLTIP"
@@ -433,9 +433,9 @@ msgstr "Først må du sjekke staving i teksten."
 msgid "TXT_MUST_LOGIN"
 msgstr "Du må logge inn for å bruke dette verktøyet."
 
-# <a href="https://www.mv-nordic.com/" target="_blank">Kontakt Vitec MV</a> for at prøve programmet gratis eller for information om abonnement.
+# <a href="https://www.vitec-mv.com/" target="_blank">Kontakt Vitec MV</a> for at prøve programmet gratis eller for information om abonnement.
 msgid "TXT_SUBSCRIBE"
-msgstr "<a href=\"https://www.mv-nordic.com/\" target=\"_blank\">Kontakt Vitec MV for å få mer informasjon om abonnement."
+msgstr "<a href=\"https://www.vitec-mv.com/\" target=\"_blank\">Kontakt Vitec MV for å få mer informasjon om abonnement."
 
 # Grammateket forbedrer din skriftlighed og støtter dig i din skriveproces ved at komme med forslag til rettelser, beskrivelser af fejlkategorier og mulighed for at slå ord op i ordbogen.\n\nNår du har skrevet en tekst, åbner du Grammateket for at få tjekket din stavning, grammatik og kommaer.\n\nDu får hjælp til stavning, sammensatte ord, nutids-r, kort og lang tillægsform og kommatering.
 msgid "TXT_WHAT_IS"
