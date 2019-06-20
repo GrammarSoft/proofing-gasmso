@@ -56,11 +56,11 @@ function impl_startLogin() {
 }
 
 function impl_canGrammar() {
-	return (g_access_hmac.sess_caps & (Defs.CAP_DANPROOF | Defs.CAP_ADMIN));
+	return (g_access_hmac.sess_caps & (Defs.CAP_DANPROOF | Defs.CAP_DANPROOF_TRIAL | Defs.CAP_ADMIN));
 }
 
 function impl_canComma() {
-	return (g_access_hmac.sess_caps & (Defs.CAP_COMMA | Defs.CAP_ADMIN));
+	return (g_access_hmac.sess_caps & (Defs.CAP_COMMA | Defs.CAP_COMMA_TRIAL | Defs.CAP_ADMIN));
 }
 
 function impl_openDictionary(word) {
