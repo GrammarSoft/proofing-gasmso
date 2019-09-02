@@ -435,14 +435,28 @@ function sanitize_result(txt) {
 }
 
 /* exported findToSend */
-function findToSend(prefix, word, suffix) {
+function findToSend(prefix, word, suffix, casing) {
 	let prefix_s = prefix.replace(Const.NonLetter, '');
 	let word_s = word.replace(Const.NonLetter, '');
 	let suffix_s = suffix.replace(Const.NonLetter, '');
+	let prefix_s_org = prefix_s;
+	let word_s_org = word_s;
+	let suffix_s_org = suffix_s;
+
+	if (casing) {
+		prefix_s = prefix_s.toLowerCase();
+		word_s = word_s.toLowerCase();
+		suffix_s = suffix_s.toLowerCase();
+	}
 
 	for (let i=0 ; i<to_send.length ; ++i) {
+		let t_org = to_send[i].t;
 		let t = to_send[i].t;
 		let found = true;
+
+		if (casing) {
+			t = t.toLowerCase();
+		}
 
 		let p_off = 0;
 		for (let j=0 ; j<prefix_s.length ; ++j) {
@@ -557,28 +571,47 @@ function findToSend(prefix, word, suffix) {
 		}
 
 		let rv = {
-			prefix: t.substring(0, p_off),
-			word: t.substring(p_off, w_off),
-			suffix: t.substring(w_off, s_off),
-			t: t,
+			prefix: t_org.substring(0, p_off),
+			word: t_org.substring(p_off, w_off),
+			suffix: t_org.substring(w_off, s_off),
+			t: t_org,
 			};
 
-		if (rv.prefix.replace(Const.NonLetter, '') !== prefix_s) {
-			console.log('Non-prefix: '+rv.prefix+' != '+prefix_s);
-			continue;
+		if (casing) {
+			if (rv.prefix.replace(Const.NonLetter, '').toLowerCase() !== prefix_s) {
+				console.log('Non-prefix: '+rv.prefix+' != '+prefix_s);
+				continue;
+			}
+			if (rv.word.replace(Const.NonLetter, '').toLowerCase() !== word_s) {
+				console.log('Non-word: '+rv.word+' != '+word_s);
+				continue;
+			}
+			if (rv.suffix.replace(Const.NonLetter, '').toLowerCase() !== suffix_s) {
+				console.log('Non-suffix: '+rv.suffix+' != '+suffix_s);
+				continue;
+			}
 		}
-		if (rv.word.replace(Const.NonLetter, '') !== word_s) {
-			console.log('Non-word: '+rv.word+' != '+word_s);
-			continue;
-		}
-		if (rv.suffix.replace(Const.NonLetter, '') !== suffix_s) {
-			console.log('Non-suffix: '+rv.suffix+' != '+suffix_s);
-			continue;
+		else {
+			if (rv.prefix.replace(Const.NonLetter, '') !== prefix_s_org) {
+				console.log('Non-prefix: '+rv.prefix+' != '+prefix_s_org);
+				continue;
+			}
+			if (rv.word.replace(Const.NonLetter, '') !== word_s_org) {
+				console.log('Non-word: '+rv.word+' != '+word_s_org);
+				continue;
+			}
+			if (rv.suffix.replace(Const.NonLetter, '') !== suffix_s_org) {
+				console.log('Non-suffix: '+rv.suffix+' != '+suffix_s_org);
+				continue;
+			}
 		}
 
 		return rv;
 	}
 
+	if (!casing) {
+		return findToSend(prefix, word, suffix, true);
+	}
 	return false;
 }
 
