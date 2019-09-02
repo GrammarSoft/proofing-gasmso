@@ -1,6 +1,11 @@
 #!/usr/bin/env php
 <?php
 
+if (!empty($_SERVER['REMOTE_ADDR'])) {
+	header('HTTP/1.0 400 Not for remote use');
+	die('Not for remote use!');
+}
+
 chdir(__DIR__);
 require_once __DIR__.'/../shared/po.php';
 
