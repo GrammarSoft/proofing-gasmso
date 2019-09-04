@@ -947,10 +947,12 @@ function _parseResult(rv) {
 							es.push(px[p] + space + sx[s]);
 						}
 					}
+					let flags = words[j][3];
+
 					let nw = [wx, ts.split(/ /).unique().join(' ').replace(/ +/g, ' '), es.join('\t')];
 					words[j] = nw;
 
-					if (words[j][3] & Defs.TYPE_COMP_LEFT) {
+					if (flags & Defs.TYPE_COMP_LEFT) {
 						words.splice(j-1, 1);
 					}
 					else {
