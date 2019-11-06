@@ -19,7 +19,7 @@
 'use strict';
 
 const VERSION_MAJOR = 1;
-const VERSION_MINOR = 0;
+const VERSION_MINOR = 1;
 const VERSION_PATCH = 0;
 const ROOT_URL_SELF = 'https://retmig.dk/gas/dev/grammarsoft/';
 const ROOT_URL_GRAMMAR = 'https://retmig.dk/grammar/';
