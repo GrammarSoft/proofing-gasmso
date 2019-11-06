@@ -1,6 +1,5 @@
 /*!
- * Copyright 2016-2018 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
- * Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
+ * Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -97,6 +96,87 @@ if (!String.prototype.repeat) {
 	}
 }
 
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/normalize
+if (!String.prototype.normalize) {
+	String.prototype.normalize = function(form) {
+		if (form && form !== 'NFC') {
+			throw new RangeError('String.normalize() polyfill only knows a tiny subset of NFC');
+		}
+
+		if (!/[AaEeIiOoUuNn][\u0300-\u0303\u0308\u030A]/.test(this)) {
+			return this;
+		}
+
+		let rv = this;
+
+		// Combining Grave Accent U+0300
+		rv = rv.replace(/A\u0300/g, 'À');
+		rv = rv.replace(/a\u0300/g, 'à');
+		rv = rv.replace(/E\u0300/g, 'È');
+		rv = rv.replace(/e\u0300/g, 'è');
+		rv = rv.replace(/I\u0300/g, 'Ì');
+		rv = rv.replace(/i\u0300/g, 'ì');
+		rv = rv.replace(/O\u0300/g, 'Ò');
+		rv = rv.replace(/o\u0300/g, 'ò');
+		rv = rv.replace(/U\u0300/g, 'Ù');
+		rv = rv.replace(/u\u0300/g, 'ù');
+
+		// Combining Acute Accent U+0301
+		rv = rv.replace(/A\u0301/g, 'Á');
+		rv = rv.replace(/a\u0301/g, 'á');
+		rv = rv.replace(/E\u0301/g, 'É');
+		rv = rv.replace(/e\u0301/g, 'é');
+		rv = rv.replace(/I\u0301/g, 'Í');
+		rv = rv.replace(/i\u0301/g, 'í');
+		rv = rv.replace(/O\u0301/g, 'Ó');
+		rv = rv.replace(/o\u0301/g, 'ó');
+		rv = rv.replace(/U\u0301/g, 'Ú');
+		rv = rv.replace(/u\u0301/g, 'ú');
+
+		// Combining Circumflex Accent U+0302
+		rv = rv.replace(/A\u0302/g, 'Â');
+		rv = rv.replace(/a\u0302/g, 'â');
+		rv = rv.replace(/E\u0302/g, 'Ê');
+		rv = rv.replace(/e\u0302/g, 'ê');
+		rv = rv.replace(/I\u0302/g, 'Î');
+		rv = rv.replace(/i\u0302/g, 'î');
+		rv = rv.replace(/O\u0302/g, 'Ô');
+		rv = rv.replace(/o\u0302/g, 'ô');
+		rv = rv.replace(/U\u0302/g, 'Û');
+		rv = rv.replace(/u\u0302/g, 'û');
+
+		// Combining Tilde U+0303
+		rv = rv.replace(/A\u0303/g, 'Ã');
+		rv = rv.replace(/a\u0303/g, 'ã');
+		rv = rv.replace(/I\u0303/g, 'Ĩ');
+		rv = rv.replace(/i\u0303/g, 'ĩ');
+		rv = rv.replace(/O\u0303/g, 'Õ');
+		rv = rv.replace(/o\u0303/g, 'õ');
+		rv = rv.replace(/U\u0303/g, 'Ũ');
+		rv = rv.replace(/u\u0303/g, 'ũ');
+		rv = rv.replace(/N\u0303/g, 'Ñ');
+		rv = rv.replace(/n\u0303/g, 'ñ');
+
+		// Combining Diaeresis U+0308
+		rv = rv.replace(/A\u0308/g, 'Ä');
+		rv = rv.replace(/a\u0308/g, 'ä');
+		rv = rv.replace(/E\u0308/g, 'Ë');
+		rv = rv.replace(/e\u0308/g, 'ë');
+		rv = rv.replace(/I\u0308/g, 'Ï');
+		rv = rv.replace(/i\u0308/g, 'ï');
+		rv = rv.replace(/O\u0308/g, 'Ö');
+		rv = rv.replace(/o\u0308/g, 'ö');
+		rv = rv.replace(/U\u0308/g, 'Ü');
+		rv = rv.replace(/u\u0308/g, 'ü');
+
+		// Combining Ring Above U+030A
+		rv = rv.replace(/A\u030A/g, 'Å');
+		rv = rv.replace(/a\u030A/g, 'å');
+
+		return rv;
+	}
+}
+
 /* exported Defs */
 const Defs = {
 	CAP_ADMIN:	  (1 <<	 0),
@@ -170,13 +250,18 @@ let g_itw_tap = 0;
 /* exported g_conf_json */
 let g_conf_json = JSON.stringify(g_conf_defaults);
 
+// Letters we're likely to see in Danish, Norwegian, Swedish, Greenlandic
+// Can't rely on Unicode escapes or /u modifier because of IE11
+const Letters = '\\d\\wa-zA-ZÂâÊêÎîÔôÛûÃãĨĩÕõŨũÀàÈèÌìÒòÙùÁáÉéÍíÓóÚúÄäËëÏïÖöÜüÆæØøÅåĸ.,!;:';
 /* exported Const */
 const Const = {
+	LetterT: new RegExp('['+Letters+']+', 'i'),
+	NonLetter: new RegExp('[^'+Letters+']+', 'ig'),
+	NonLetterT: new RegExp('[^'+Letters+']+', 'i'),
+	PrefixNonLetterT: new RegExp('^[^'+Letters+']+', 'i'),
+	SuffixNonLetterT: new RegExp('[^'+Letters+']+$', 'i'),
+	OnlyNonLetterT: new RegExp('^[^'+Letters+']*$', 'i'),
 	SpaceOrEmpty: /^\s*$/,
-	LetterT: /[\d\wa-zA-ZéÉöÖæÆøØåÅ.,!;:]+/i,
-	NonLetter: /[^\d\wa-zA-ZéÉöÖæÆøØåÅ.,!;:]+/ig,
-	NonLetterT: /[^\d\wa-zA-ZéÉöÖæÆøØåÅ.,!;:]+/i,
-	OnlyNonLetterT: /^[^\d\wa-zA-ZéÉöÖæÆøØåÅ.,!;:]*$/i,
 	Split_String: ' ,.?!"#¤%&/()=@£${}|*^¨~/\\½§<>:;-',
 };
 Const.Split_Array = Const.Split_String.split('');
@@ -313,6 +398,11 @@ function uc_first(str) {
 	return str.substr(0, 1).toUpperCase() + str.substr(1);
 }
 
+/* exported lc_first */
+function lc_first(str) {
+	return str.substr(0, 1).toLowerCase() + str.substr(1);
+}
+
 /* exported escHTML */
 function escHTML(t) {
 	let nt = t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
@@ -399,6 +489,9 @@ function sanitize_result(txt) {
 	// Special case
 	txt = txt.replace(/@x-etype-case/g, '@upper');
 
+	// Workaround for bug https://trello.com/c/ixmc92EB
+	txt = txt.replace(/.'.\t@proper\n"/g, '.\n"');
+
 	// Swap markers that the backend has mangled due to sentence-ending parentheticals
 	for (let i=0 ; i<Defs.MAX_RQ_SIZE ; ++i) {
 		let t1 = '</s'+i+'>';
@@ -423,14 +516,28 @@ function sanitize_result(txt) {
 }
 
 /* exported findToSend */
-function findToSend(prefix, word, suffix) {
+function findToSend(prefix, word, suffix, casing) {
 	let prefix_s = prefix.replace(Const.NonLetter, '');
 	let word_s = word.replace(Const.NonLetter, '');
 	let suffix_s = suffix.replace(Const.NonLetter, '');
+	let prefix_s_org = prefix_s;
+	let word_s_org = word_s;
+	let suffix_s_org = suffix_s;
+
+	if (casing) {
+		prefix_s = prefix_s.toLowerCase();
+		word_s = word_s.toLowerCase();
+		suffix_s = suffix_s.toLowerCase();
+	}
 
 	for (let i=0 ; i<to_send.length ; ++i) {
+		let t_org = to_send[i].t;
 		let t = to_send[i].t;
 		let found = true;
+
+		if (casing) {
+			t = t.toLowerCase();
+		}
 
 		let p_off = 0;
 		for (let j=0 ; j<prefix_s.length ; ++j) {
@@ -517,8 +624,13 @@ function findToSend(prefix, word, suffix) {
 				--p_off;
 			}
 		}
+		else if (Const.PrefixNonLetterT.test(word)) {
+			while (p_off > 1 && Const.NonLetterT.test(t.charAt(p_off-1))) {
+				--p_off;
+			}
+		}
 		else {
-			while (p_off < t.length && Const.SpaceOrEmpty.test(t.charAt(p_off))) {
+			while (p_off < t.length && Const.NonLetterT.test(t.charAt(p_off))) {
 				++p_off;
 			}
 		}
@@ -528,34 +640,187 @@ function findToSend(prefix, word, suffix) {
 				++w_off;
 			}
 		}
+		else if (Const.SuffixNonLetterT.test(word)) {
+			while (w_off < t.length && Const.NonLetterT.test(t.charAt(w_off))) {
+				++w_off;
+			}
+		}
 		else {
-			while (w_off > 1 && Const.SpaceOrEmpty.test(t.charAt(w_off-1))) {
+			while (w_off > 1 && Const.NonLetterT.test(t.charAt(w_off-1))) {
 				--w_off;
 			}
 		}
 
 		let rv = {
-			prefix: t.substring(0, p_off),
-			word: t.substring(p_off, w_off),
-			suffix: t.substring(w_off, s_off),
-			t: t,
+			prefix: t_org.substring(0, p_off),
+			word: t_org.substring(p_off, w_off),
+			suffix: t_org.substring(w_off, s_off),
+			t: t_org,
 			};
 
-		if (rv.prefix.replace(Const.NonLetter, '') !== prefix_s) {
-			//console.log('Non-prefix: '+rv.prefix+' != '+prefix_s);
-			continue;
+		if (casing) {
+			if (rv.prefix.replace(Const.NonLetter, '').toLowerCase() !== prefix_s) {
+				//console.log('Non-prefix: '+rv.prefix+' != '+prefix_s);
+				continue;
+			}
+			if (rv.word.replace(Const.NonLetter, '').toLowerCase() !== word_s) {
+				//console.log('Non-word: '+rv.word+' != '+word_s);
+				continue;
+			}
+			if (rv.suffix.replace(Const.NonLetter, '').toLowerCase() !== suffix_s) {
+				//console.log('Non-suffix: '+rv.suffix+' != '+suffix_s);
+				continue;
+			}
 		}
-		if (rv.word.replace(Const.NonLetter, '') !== word_s) {
-			//console.log('Non-word: '+rv.word+' != '+word_s);
-			continue;
-		}
-		if (rv.suffix.replace(Const.NonLetter, '') !== suffix_s) {
-			//console.log('Non-suffix: '+rv.suffix+' != '+suffix_s);
-			continue;
+		else {
+			if (rv.prefix.replace(Const.NonLetter, '') !== prefix_s_org) {
+				//console.log('Non-prefix: '+rv.prefix+' != '+prefix_s_org);
+				continue;
+			}
+			if (rv.word.replace(Const.NonLetter, '') !== word_s_org) {
+				//console.log('Non-word: '+rv.word+' != '+word_s_org);
+				continue;
+			}
+			if (rv.suffix.replace(Const.NonLetter, '') !== suffix_s_org) {
+				//console.log('Non-suffix: '+rv.suffix+' != '+suffix_s_org);
+				continue;
+			}
 		}
 
 		return rv;
 	}
 
+	if (!casing) {
+		return findToSend(prefix, word, suffix, true);
+	}
 	return false;
+}
+
+function object2pot(obj) {
+	let rv = '';
+
+	rv += 'msgid ""\n';
+	rv += 'msgstr ""\n';
+	rv += '"MIME-Version: 1.0\\n"\n';
+	rv += '"Content-Type: text/plain; charset=utf-8\\n"\n';
+	rv += '"Content-Transfer-Encoding: 8bit\\n"\n';
+	rv += '\n';
+
+	for (let k in obj) {
+		if (!obj.hasOwnProperty(k)) {
+			continue;
+		}
+		rv += '# ' + obj[k].replace(/\n/g, '\\n') + '\n';
+		rv += 'msgid "' + k + '"\n';
+		rv += 'msgstr ""\n';
+		rv += '\n';
+	}
+
+	return rv;
+}
+
+function object2po(obj, base) {
+	let rv = '';
+
+	rv += 'msgid ""\n';
+	rv += 'msgstr ""\n';
+	rv += '"MIME-Version: 1.0\\n"\n';
+	rv += '"Content-Type: text/plain; charset=utf-8\\n"\n';
+	rv += '"Content-Transfer-Encoding: 8bit\\n"\n';
+	rv += '\n';
+
+	let seen = {};
+	for (let k in obj) {
+		if (!obj.hasOwnProperty(k)) {
+			continue;
+		}
+		if (base.hasOwnProperty(k)) {
+			rv += '# ' + base[k].replace(/\n/g, '\\n') + '\n';
+		}
+		seen[k] = true;
+		rv += 'msgid "' + k + '"\n';
+		rv += 'msgstr "' + obj[k].replace(/\n/g, '\\n').replace(/"/g, '\\"') + '"\n';
+		rv += '\n';
+	}
+
+	for (let k in base) {
+		if (!base.hasOwnProperty(k)) {
+			continue;
+		}
+		if (seen.hasOwnProperty(k)) {
+			continue;
+		}
+		rv += '# ' + base[k].replace(/\n/g, '\\n') + '\n';
+		rv += 'msgid "' + k + '"\n';
+		rv += 'msgstr ""\n';
+		rv += '\n';
+	}
+
+	return rv;
+}
+
+function l10n_translate(s) {
+	s = '' + s; // Coerce to string
+
+	// Special case for the version triad
+	if (s === 'VERSION') {
+		return VERSION;
+	}
+
+	let l = session.locale;
+	let t = '';
+
+	if (!l10n.s.hasOwnProperty(l)) {
+		l = 'da';
+	}
+
+	// If the string doesn't exist in the locale, fall back
+	if (!l10n.s[l].hasOwnProperty(s)) {
+		// Try English
+		if (l10n.s.en.hasOwnProperty(s)) {
+			t = l10n.s.en[s];
+		}
+		// ...then Danish
+		else if (l10n.s.da.hasOwnProperty(s)) {
+			t = l10n.s.da[s];
+		}
+		// ...give up and return as-is
+		else {
+			t = s;
+		}
+	}
+	else {
+		t = l10n.s[l][s];
+	}
+
+	let rx = /\{([A-Z0-9_]+)\}/;
+	let m = null;
+	while ((m = rx.exec(t)) !== null) {
+		let nt = l10n_translate(m[1]);
+		t = t.replace(m[0], nt);
+	}
+
+	return t;
+};
+
+function _l10n_world_helper() {
+	let e = $(this);
+	let k = e.attr('data-l10n');
+	let v = l10n_translate(k);
+
+	if (k === v) {
+		return;
+	}
+
+	if (/^TXT_/.test(k)) {
+		v = '<p>'+v.replace(/\n+<ul>/g, '</p><ul>').replace(/\n+<\/ul>/g, '</ul>').replace(/<\/ul>\n+/g, '</ul><p>').replace(/\n+<li>/g, '<li>').replace(/\n\n+/g, '</p><p>').replace(/\n/g, '<br>')+'</p>';
+	}
+	e.html(v);
+	if (/^TXT_/.test(k)) {
+		e.find('[data-l10n]').each(_l10n_world_helper);
+	}
+}
+
+function l10n_world() {
+	$('[data-l10n]').each(_l10n_world_helper);
 }

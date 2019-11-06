@@ -1,6 +1,5 @@
 /*!
- * Copyright 2016-2018 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
- * Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
+ * Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -156,10 +155,6 @@ function impl_removeInDocument(prefix, word, rpl, suffix) {
 	});
 }
 
-function impl_getState() {
-	getState({session: {locale: 'da'}});
-}
-
 function _impl_showOptions_mh(arg) {
 	_impl_options.close();
 	showError(arg.message);
@@ -260,7 +255,7 @@ function impl_Init(func) {
 	Office.initialize = function(reason) {
 		$(document).ready(function() {
 			func();
-			l10n_world();
+			//l10n_world();
 
 			if (!Office.context.requirements.isSetSupported('WordApi', '1.1')) {
 				//showError('Requires Word 2016 or later!');

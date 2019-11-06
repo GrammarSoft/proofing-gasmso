@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2018 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
@@ -19,9 +19,9 @@
 'use strict';
 
 const VERSION_MAJOR = 1;
-const VERSION_MINOR = 0;
+const VERSION_MINOR = 1;
 const VERSION_PATCH = 0;
-const ROOT_URL_SELF = 'https://retmig.dk/gas/release/1.0.0/';
+const ROOT_URL_SELF = 'https://retmig.dk/gas/release/1.1.0/';
 const ROOT_URL_GRAMMAR = 'https://retmig.dk/';
 const CADUCEUS_URL = 'wss://gramtrans.com/caduceus/';
 const SIGNOUT_URL = ROOT_URL_GRAMMAR+'/logout?';
@@ -51,12 +51,16 @@ function impl_dataKeepalive() {
 	return {a: 'keepalive'};
 }
 
+function impl_startLogin() {
+	loginKeepalive(true);
+}
+
 function impl_canGrammar() {
-	return (g_access_hmac.sess_caps & (Defs.CAP_DANPROOF | Defs.CAP_ADMIN));
+	return (g_access_hmac.sess_caps & (Defs.CAP_DANPROOF | Defs.CAP_DANPROOF_TRIAL | Defs.CAP_ADMIN));
 }
 
 function impl_canComma() {
-	return (g_access_hmac.sess_caps & (Defs.CAP_COMMA | Defs.CAP_ADMIN));
+	return (g_access_hmac.sess_caps & (Defs.CAP_COMMA | Defs.CAP_COMMA_TRIAL | Defs.CAP_ADMIN));
 }
 
 function impl_openDictionary(word) {

@@ -1,6 +1,5 @@
 /*!
- * Copyright 2016-2018 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
- * Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
+ * Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -52,7 +51,7 @@ let act_queue = [];
 let select_fail = false;
 let grammar_retried = false;
 let comma_retried = false;
-let support_sidebar = null;
+let overlay_sidebars = [];
 
 function switchSidebar(which) {
 	$('#popupIgnore').hide();
@@ -61,6 +60,16 @@ function switchSidebar(which) {
 		which = $(which);
 	}
 	which.show();
+}
+
+function overlay_push(which) {
+	overlay_sidebars.push($('.sidebar:visible'));
+	switchSidebar(which);
+}
+
+function overlay_pop() {
+	switchSidebar(overlay_sidebars[overlay_sidebars.length-1]);
+	overlay_sidebars.pop();
 }
 
 function markingSetSentence() {
@@ -118,6 +127,25 @@ function markingSetContext() {
 	}
 }
 
+function markingColor(types) {
+	let col = 'green';
+	for (let i=0 ; i<types.length ; ++i) {
+		if (types_yellow.hasOwnProperty(types[i])) {
+			col = 'yellow';
+		}
+		if (types_red.hasOwnProperty(types[i])) {
+			col = 'red';
+			break;
+		}
+	}
+	for (let i=0 ; i<types.length ; ++i) {
+		if (types[i] === '@green') {
+			col = 'green';
+		}
+	}
+	return col;
+}
+
 function markingRender(skipact) {
 	let s = cmarking.s;
 	let marking = markings[s][cmarking.w];
@@ -147,24 +175,10 @@ function markingRender(skipact) {
 		btn_lbl = 'BTN_COMMA_';
 	}
 
-	let col = 'green';
 	let types = marking[1].split(/ /g);
-	for (let i=0 ; i<types.length ; ++i) {
-		if (types_yellow.hasOwnProperty(types[i])) {
-			col = 'yellow';
-		}
-		if (types_red.hasOwnProperty(types[i])) {
-			col = 'red';
-			break;
-		}
-	}
-	for (let i=0 ; i<types.length ; ++i) {
-		if (types[i] === '@green') {
-			col = 'green';
-		}
-	}
+	let col = markingColor(types);
 
-	if (col === 'yellow' || marking[1].indexOf('@error') !== -1) {
+	if (types_dictionary.test(marking[1])) {
 		$('.btnAddWord').removeClass('disabled');
 	}
 	else {
@@ -194,10 +208,7 @@ function markingRender(skipact) {
 	$('.chkExplainShortText').html(es);
 	$('.chkExplainLongText').html(el);
 
-	let alt = '';
-	if (g_conf.opt_color) {
-		alt = ' alt';
-	}
+	let alt = (g_conf.opt_color ? ' alt' : '');
 
 	$('.chkType').attr('title', marking[1]);
 
@@ -250,23 +261,73 @@ function markingRender(skipact) {
 		let px = /^(.*?)(\S+\s?)$/.exec(cmarking.prefix);
 		let sx = /^(\s?\S+)(.*)$/.exec(cmarking.suffix);
 		impl_selectInDocument(px[1], px[2] + sx[1], sx[2]);
-		$('.txtAccept').text(l10n.t(btn_lbl + 'INSERT'));
+		$('.txtAccept').text(l10n_translate(btn_lbl + 'INSERT'));
 		if (marking[1].indexOf('%k-stop') !== -1) {
-			$('.txtAccept').text(l10n.t(btn_lbl + 'INSERT_STOP'));
+			$('.txtAccept').text(l10n_translate(btn_lbl + 'INSERT_STOP'));
 		}
 		$('.btnAccept').removeClass('disabled');
 	}
 	else if (/(@nil|%nok-)/.test(marking[1])) {
 		$('.icon-accept,.icon-discard').addClass('icon-discard').removeClass('icon-accept');
-		$('.txtAccept').text(l10n.t(btn_lbl + 'REMOVE'));
+		$('.txtAccept').text(l10n_translate(btn_lbl + 'REMOVE'));
 		$('.btnAccept').removeClass('disabled');
 		impl_selectInDocument(cmarking.prefix, marking[0], cmarking.suffix);
 	}
 	else {
-		$('.txtAccept').text(l10n.t(btn_lbl + 'REPLACE'));
+		$('.txtAccept').text(l10n_translate(btn_lbl + 'REPLACE'));
 		let middle = marking[0];
 		impl_selectInDocument(cmarking.prefix, middle, cmarking.suffix);
 	}
+}
+
+function markingSelect(s, w) {
+	cmarking.s = s;
+	cmarking.w = w;
+	markingRender();
+	window.scrollTo(0, 0);
+}
+
+function btnSeeList() {
+	let html = '';
+	let alt = (g_conf.opt_color ? ' alt' : '');
+	let en = 0;
+
+	for (let s = 0 ; s<markings.length ; ++s) {
+		for (let w = 0 ; w<markings[s].length ; ++w) {
+			if (markings[s][w].length > 1) {
+				html += '<div class="errorListEntry" onclick="markingSelect('+s+','+w+');" title="'+escHTML(markings[s][w][1])+'"><span class="link">';
+				let c = Math.max(w-3, 0);
+				if (c > 0) {
+					html += '…';
+				}
+				for ( ; c<w ; ++c) {
+					html += escHTML(markings[s][c][0]) + ' ';
+				}
+				let col = markingColor(markings[s][w][1].split(/ /g));
+				html += '<span class="marking marking-'+col+alt+' marking-'+g_tool.toLowerCase()+'">'+escHTML(markings[s][w][0])+'</span>';
+				c = w+1;
+				for ( ; c<markings[s].length && c<w+3 ; ++c) {
+					html += ' '+escHTML(markings[s][c][0]);
+				}
+				if (c < markings[s].length) {
+					html += '…';
+				}
+				html += '</span><span class="link suggestion-lookup"><span class="icon icon-lookup"></span></span></div>';
+				++en;
+			}
+		}
+	}
+
+	if (en >= 10) {
+		$('.errorListTopBtn').show();
+	}
+	else {
+		$('.errorListTopBtn').hide();
+	}
+
+	$('#errorList').html(html);
+	itw_speak_attach($('#errorList').get(0));
+	overlay_push('#chkErrorList');
 }
 
 function btnAccept() {
@@ -591,7 +652,7 @@ function _parseResult(rv) {
 				continue;
 			}
 
-			let w = lines[j].split(/\t/);
+			let w = $.trim(lines[j]).split(/\t/);
 			w[0] = $.trim(w[0].replace(/(\S)=/g, '$1 '));
 
 			if (w[0] === '') {
@@ -603,6 +664,7 @@ function _parseResult(rv) {
 				// Strip marking types belonging to higher than current critique level
 				let ws = w[1].split(/ /g);
 				let nws = [];
+				let rs = [];
 				let crs = [];
 				let had_r = false;
 				for (let k=0 ; k<ws.length ; ++k) {
@@ -613,7 +675,7 @@ function _parseResult(rv) {
 							//console.log(n);
 							continue;
 						}
-						crs.unshift(n);
+						rs.push(n);
 						had_r = true;
 						continue;
 					}
@@ -645,6 +707,7 @@ function _parseResult(rv) {
 						}
 					}
 				}
+				crs = rs.concat(crs);
 				// Remove @sentsplit from last token
 				if (j == lines.length-1 && nws.length == 1 && nws[0] === '@sentsplit') {
 					crs = [];
@@ -677,9 +740,16 @@ function _parseResult(rv) {
 							ws.push(nws[k]);
 							continue;
 						}
+
+						// Common
 						if (g_conf.opt_onlyConfident && !types_red.hasOwnProperty(nws[k])) {
 							continue;
 						}
+						if (g_conf.opt_ignMaj && (types_to_upper.test(nws[k]) || nws[k] === '@lower')) {
+							continue;
+						}
+
+						// Danish
 						if (g_conf.opt_ignUNames && nws[k] === '@proper') {
 							continue;
 						}
@@ -692,7 +762,18 @@ function _parseResult(rv) {
 						if (g_conf.opt_ignUOther && nws[k] === '@check!') {
 							continue;
 						}
-						if (g_conf.opt_ignMaj && (nws[k] === '@upper' || nws[k] === '@lower')) {
+
+						// Swedish
+						if (g_conf.opt_ignVartVerb && /@Y(700|710)/.test(nws[k])) {
+							continue;
+						}
+						if (g_conf.opt_ignDomDefinite && /@Y10/.test(nws[k])) {
+							continue;
+						}
+						if (g_conf.opt_ignDomSubjobj && /@Y(20|30)/.test(nws[k])) {
+							continue;
+						}
+						if (g_conf.opt_ignDomPrep && /@Y4[0-4]/.test(nws[k])) {
 							continue;
 						}
 					}
@@ -718,7 +799,7 @@ function _parseResult(rv) {
 							break;
 						}
 					}
-					if ((col === 'yellow' || ws[0] === '@error') && g_conf.opt_useDictionary && isInDictionary(w[0])) {
+					if (g_conf.opt_useDictionary && types_dictionary.test(ws[0]) && isInDictionary(w[0])) {
 						////console.log(`Found ${w[0]} in dictionary`);
 						ws = [];
 					}
@@ -726,7 +807,10 @@ function _parseResult(rv) {
 
 				prev_sentsplit = had_sentsplit;
 				if (ws.length && none) {
-					////console.log(`MV Nordic whitelist no-match: ${ws}`);
+					////console.log(`Vitec MV whitelist no-match: ${ws}`);
+					if (ws.indexOf('@insert') !== -1) {
+						w[0] = ' ';
+					}
 					ws = [];
 				}
 				nws = ws;
@@ -734,8 +818,28 @@ function _parseResult(rv) {
 					crs = [];
 				}
 
+				// For case-folding, create a correction if none exists and fold all corrections to the desired case
+				for (let k=0 ; k<nws.length ; ++k) {
+					if (types_to_upper.test(nws[k])) {
+						if (crs.length == 0) {
+							crs.push(w[0]);
+						}
+						for (let c=0 ; c<crs.length ; ++c) {
+							crs[c] = uc_first(crs[c]);
+						}
+					}
+					else if (nws[k] == '@lower') {
+						if (crs.length == 0) {
+							crs.push(w[0]);
+						}
+						for (let c=0 ; c<crs.length ; ++c) {
+							crs[c] = lc_first(crs[c]);
+						}
+					}
+				}
+
 				if (crs.length) {
-					// Only show addfejl suggestions if the real suggestion icase-matches one of them
+					// Only show additional suggestions if the real suggestion icase-matches one of them
 					let use_adf = false;
 					for (let c=1 ; c<crs.length ; ++c) {
 						if (crs[0].toUpperCase() == crs[c].toUpperCase()) {
@@ -751,6 +855,7 @@ function _parseResult(rv) {
 					////console.log(crs);
 				}
 				if (nws.length) {
+					nws = nws.unique();
 					w[1] = nws.join(' ');
 					if (!w[2] || w[2].length === 0) {
 						w[2] = '';
@@ -824,6 +929,8 @@ function _parseResult(rv) {
 						}
 					}
 
+					let has_uc = (wx !== wx.toLowerCase());
+
 					px = px.split(/\t/);
 					sx = sx.split(/\t/);
 					let space = '';
@@ -833,13 +940,19 @@ function _parseResult(rv) {
 					let es = [];
 					for (let p=0 ; p<px.length ; ++p) {
 						for (let s=0 ; s<sx.length ; ++s) {
+							if (!has_uc && sx[s] !== sx[s].toLowerCase()) {
+								//console.log('Discarding case-different suffix: ' + sx[s]);
+								continue;
+							}
 							es.push(px[p] + space + sx[s]);
 						}
 					}
-					let nw = [wx, ts.split(/ /).unique().join(' '), es.join('\t')];
+					let flags = words[j][3];
+
+					let nw = [wx, ts.split(/ /).unique().join(' ').replace(/ +/g, ' '), es.join('\t')];
 					words[j] = nw;
 
-					if (words[j][3] & Defs.TYPE_COMP_LEFT) {
+					if (flags & Defs.TYPE_COMP_LEFT) {
 						words.splice(j-1, 1);
 					}
 					else {
@@ -883,6 +996,15 @@ function sendTexts() {
 
 	for (to_send_b = to_send_i ; to_send_i < to_send.length && text.length < Defs.MAX_RQ_SIZE ; ++to_send_i) {
 		let par = to_send[to_send_i];
+
+		let marks = /((?:\S+\s+){0,2})(\S+?)(\S[\u0300-\u036F]+)((?:\s+\S+){0,2})/.exec(par.t);
+		if (marks && par.t !== par.t.normalize()) {
+			showWarning('WARN_COMBINING_CHARACTER', {
+				chr: marks[3],
+				cntx: marks[0],
+				});
+			continue;
+		}
 
 		if (!par.hasOwnProperty('h')) {
 			par.h = 'h-'+murmurHash3.x86.hash128(par.t) + '-' + par.t.length;
@@ -1018,12 +1140,13 @@ function didRemove(rv) {
 	processQueue();
 }
 
-function getState(data) {
-	//console.log(data);
-	session = data.session;
-
+function getState() {
 	g_access_token = ls_get('access-token', g_access_token_defaults);
-	g_access_hmac = JSON.parse(g_access_token.hmac);
+	try {
+		g_access_hmac = JSON.parse(g_access_token.hmac);
+	}
+	catch (e) {
+	}
 	session.locale = l10n_detectLanguage();
 	l10n_world();
 
@@ -1092,6 +1215,8 @@ function loginKeepalive(init) {
 				$('.comma-specific').hide();
 				switchSidebar('#chkWelcomeGrammar');
 			}
+			$('.btnOptions').show();
+			$('.btnLogout').show();
 		}
 	}).fail(function() {
 		//console.log('Login fail');
@@ -1172,6 +1297,8 @@ function logout() {
 		data: {a: 'logout'},
 	}).done(function() {
 		//console.log('Logged out');
+		$('.btnOptions').hide();
+		$('.btnLogout').hide();
 	});
 
 	if (g_keepalive) {
@@ -1198,7 +1325,7 @@ function initSidebar() {
 	if (g_tool !== 'Grammar' && g_tool !== 'Comma') {
 		g_tool = 'Grammar';
 	}
-	impl_getState();
+	getState();
 
 	$('.closer').click(function() {
 		$(this).closest('.closable').hide();
@@ -1228,21 +1355,19 @@ function initSidebar() {
 		$('#error').hide();
 		$('#working').hide();
 		ignores = {};
-		loginKeepalive(true);
+		impl_startLogin();
 	});
 	$('.btnSupport').click(function() {
-		if (support_sidebar) {
-			switchSidebar(support_sidebar);
-			support_sidebar = null;
+		if ($('#chkSupport:visible').length) {
+			overlay_pop();
 		}
 		else {
-			support_sidebar = $('.sidebar:visible');
-			switchSidebar('#chkSupport');
+			overlay_push('#chkSupport');
 		}
 	});
-	$('.btnCloseSupport').click(function() {
-		switchSidebar(support_sidebar);
-		support_sidebar = null;
+	$('.btnSeeList').click(btnSeeList);
+	$('.btnCloseSupport,.btnCloseList').click(function() {
+		overlay_pop();
 	});
 
 	$('.optComma').click(function() {
@@ -1319,6 +1444,8 @@ function initSidebar() {
 	});
 
 	$('.btnLogout').click(logout);
+	$('.btnOptions').hide();
+	$('.btnLogout').hide();
 
 	$('#popupIgnore').hide();
 	$('#error').hide();
@@ -1342,7 +1469,7 @@ function initSidebar() {
 		return;
 	}
 
-	loginKeepalive(true);
+	impl_startLogin();
 }
 
 $(function() {
@@ -1360,5 +1487,20 @@ function showError(msg) {
 	//console.log(msg);
 	$('#error').show();
 	$('#working').hide();
-	$('#error-text').text(l10n.t(msg));
+	$('#error-text').text(l10n_translate(msg));
+}
+
+function showWarning(msg, args) {
+	if (!$('#warning').length) {
+		$('#error').after('<div class="closable" id="warning"><div class="closer">&times;</div><div id="warning-text">…</div></div>');
+		$('#warning').find('.closer').click(function() {
+			$(this).closest('.closable').hide();
+		});
+	}
+	$('#warning').show();
+	let txt = l10n_translate(msg);
+	for (let k in args) {
+		txt = txt.replace('{'+k+'}', escHTML(args[k]));
+	}
+	$('#warning-text').html(txt);
 }

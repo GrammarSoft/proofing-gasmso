@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2018 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
@@ -29,7 +29,7 @@ l10n.s = {
 		},
 	};
 
-l10n.t = function(s) {
+function l10n_translate(s) {
 	s = '' + s; // Coerce to string
 
 	var l = 'da';

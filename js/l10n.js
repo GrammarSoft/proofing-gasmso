@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2018 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
@@ -22,6 +22,8 @@
 
 /* exported l10n */
 let l10n = {};
+
+l10n.lang = 'da';
 
 l10n.s = {
 	da: {
@@ -56,6 +58,7 @@ l10n.s = {
 		BTN_POP_IGNORE: 'Ignorer',
 		BTN_POP_IGNOREALL: 'Ignorer alle',
 		BTN_PREVIOUS: 'Forrige',
+		BTN_SEEALL: 'Se alle',
 		BTN_SUPPORT: 'Support',
 		BTN_RESTART: 'Start på ny',
 		BTN_VERSION: 'Version {VERSION}',
@@ -79,6 +82,7 @@ l10n.s = {
 		HDR_DICTIONARY: 'Brugerordbog',
 		HDR_DISPLAY: 'Visning',
 		HDR_EDIT: 'Ret selv',
+		HDR_ERRORLIST: 'Alle markeringer',
 		HDR_GRAMMAR: 'RetMig',
 		HDR_GRAMMAR_ABOUT: 'Om RetMig',
 		HDR_GRAMMAR_DONE: 'Din tekst er blevet tjekket, og der er ikke flere stave- eller grammatikforslag.',
@@ -120,88 +124,34 @@ l10n.s = {
 		TITLE_OPTIONS: 'Indstillinger',
 		TITLE_SIDEBAR: 'RetMig &amp; Kommaforslag',
 		TXT_COMMA_ABOUT: 'Kommaforslag hjælper dig med at sætte komma - dvs. tilføjer manglende kommaer og fjerner eller flytter forkerte kommaer. Desuden skelner programmet mellem over 30 forskellige fejltyper og kan derfor tilbyde forklaringer og eksempler for hvert af de ændrede kommaer.',
-		TXT_COMMA_COPYRIGHT: 'Copyright 2016-2018 GrammarSoft ApS. Alle rettigheder forbeholdt.',
+		TXT_COMMA_COPYRIGHT: 'Copyright 2016-2019 GrammarSoft ApS. Alle rettigheder forbeholdt.',
 		TXT_COMMA_HINT: 'Vil du have tjekket din markering eller hele teksten?',
 		TXT_COMMA_INTRO: 'Du kan også vælge at springe direkte til Kommaforslag for at få tjekket dine kommaer.',
 		TXT_COMMA_SUPPORT: 'TODO',
 		TXT_DICTIONARY_HINT: 'Her kan du tilføje, rette eller fjerne ord fra din ordbog.',
 		TXT_GRAMMAR_ABOUT: 'RetMig hjælper dig med at fange og fjerne sproglige fejl i dine tekster. Og ikke kun de almindelige stave- og slåfejl, men også grammatiske fejl og fejl, hvor det forkerte ord findes i ordbogen, men bare er forkert i konteksten. Programmet skelner mellem over 40 forskellige grammatiske fejltyper og kan derfor tilbyde forklaringer og eksempler specifikt for de enkelte fejl.',
-		TXT_GRAMMAR_COPYRIGHT: 'Copyright 2016-2018 GrammarSoft ApS.',
+		TXT_GRAMMAR_COPYRIGHT: 'Copyright 2016-2019 GrammarSoft ApS.',
 		TXT_GRAMMAR_HINT: 'Vil du have tjekket din markering eller hele teksten?',
 		TXT_GRAMMAR_INTRO: 'Først skal du tjekke din tekst for stavning og grammatik.',
 		TXT_GRAMMAR_SUPPORT: 'Du kan få hjælp via <a href="https://retmig.dk/" target="_blank">retmig.dk</a> og <a href="https://kommaer.dk/" target="_blank">kommaer.dk</a>.',
 		TXT_MUST_LOGIN: 'Du skal logge ind for at bruge dette værktøj.',
 		TXT_SUBSCRIBE: 'Opret abonnement via <a href="https://retmig.dk/" target="_blank">retmig.dk</a> og/eller <a href="https://kommaer.dk/" target="_blank">kommaer.dk</a>',
 		TXT_WHAT_IS: 'RetMig hjælper dig med at fange og fjerne sproglige fejl i dine tekster, både almindelige stave- og slåfejl, men også grammatiske fejl og fejl, hvor det forkerte ord findes i ordbogen.\n\nKommaforslag hjælper dig med at sætte komma - dvs. tilføjer manglende kommaer og fjerner eller flytter forkerte kommaer.',
+		WARN_COMBINING_CHARACTER: 'Der er et sammensat tegn "{chr}" i teksten "{cntx}". Programmet kan ikke rette paragraffen før sådanne tegn erstattes med deres <a href="https://unicode.org/reports/tr15/" target="_blank">førkombinerede former (NFC)</a>.',
 	},
 	en: {
 		ERR_NO_SELECTION: 'No selection found. You must select some text before that button will work.',
+		WARN_COMBINING_CHARACTER: 'Combined character "{chr}" found in context "{cntx}". The service cannot correct the paragraph unless such characters are replaced with their <a href="https://unicode.org/reports/tr15/" target="_blank">precomposed forms (NFC)</a>.',
 	},
 };
 
-l10n.t = function(s) {
-	s = '' + s; // Coerce to string
-
-	// Special case for the version triad
-	if (s === 'VERSION') {
-		return VERSION;
-	}
-
-	let l = session.locale;
-	let t = '';
-
-	if (!l10n.s.hasOwnProperty(l)) {
-		l = 'da';
-	}
-
-	// If the string doesn't exist in the locale, fall back
-	if (!l10n.s[l].hasOwnProperty(s)) {
-		// Try English
-		if (l10n.s.en.hasOwnProperty(s)) {
-			t = l10n.s.en[s];
-		}
-		// ...then Danish
-		else if (l10n.s.da.hasOwnProperty(s)) {
-			t = l10n.s.da[s];
-		}
-		// ...give up and return as-is
-		else {
-			t = s;
-		}
-	}
-	else {
-		t = l10n.s[l][s];
-	}
-
-	let rx = /\{([A-Z0-9_]+)\}/;
-	let m = null;
-	while ((m = rx.exec(t)) !== null) {
-		let nt = l10n.t(m[1]);
-		t = t.replace(m[0], nt);
-	}
-
-	return t;
-};
-
 function l10n_detectLanguage() {
-	let l = navigator.language;
-	if (!l10n.s.hasOwnProperty(l)) {
-		l = l.replace(/^([^-_]+).*$/, '$1');
+	l10n.lang = navigator.language;
+	if (!l10n.s.hasOwnProperty(l10n.lang)) {
+		l10n.lang = l10n.lang.replace(/^([^-_]+).*$/, '$1');
 	}
-	if (!l10n.s.hasOwnProperty(l)) {
-		l = 'da';
+	if (!l10n.s.hasOwnProperty(l10n.lang)) {
+		l10n.lang = 'da';
 	}
-	return l;
-}
-
-function l10n_world() {
-	$('[data-l10n]').each(function() {
-		let e = $(this);
-		let k = e.attr('data-l10n');
-		let v = l10n.t(k);
-		if (/^TXT_/.test(k)) {
-			v = '<p>'+v.replace(/\n+<ul>/g, '</p><ul>').replace(/\n+<\/ul>/g, '</ul>').replace(/<\/ul>\n+/g, '</ul><p>').replace(/\n+<li>/g, '<li>').replace(/\n\n+/g, '</p><p>').replace(/\n/g, '<br>')+'</p>';
-		}
-		e.html(v);
-	});
+	return l10n.lang;
 }

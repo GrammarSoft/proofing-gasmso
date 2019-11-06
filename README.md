@@ -2,7 +2,7 @@
 
 Initially developed for use with the https://kommaer.dk/ and https://retmig.dk/ services.
 
-Released as GPLv3+ - except `imgs/*` and `js/mark-types.js`
+Released as GPLv3+ - except `imgs/logo*` and `js/mark-types.js`
 
 ## Development
 ### Google Apps Script
@@ -14,8 +14,8 @@ Released as GPLv3+ - except `imgs/*` and `js/mark-types.js`
 * macOS and iPad: https://docs.microsoft.com/en-us/office/dev/add-ins/testing/sideload-an-office-add-in-on-ipad-and-mac
 
 ## Deployment
-* Edit `js/shared.js` lines 24-28
-* Edit `mso.xml` and `html/*` to replace all instances of `https://retmig.dk/gas/release/1.0.0/` with your chosen `ROOT_URL_SELF` value
+* Edit `js/impl.js` lines 21-27
+* Edit `mso.xml` and `html/*` to replace all instances of `https://retmig.dk/gas/release/1.1.0/` with your chosen `ROOT_URL_SELF` value
 * Remove all lines matching `//console.log`
 
 # External Dependencies

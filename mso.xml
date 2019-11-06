@@ -5,12 +5,12 @@
   <Id>e7fa4ce0-d447-416a-8587-1069e4203e4a</Id>
 
   <!--Version. Updates from the store only get triggered if there is a version change. -->
-  <Version>1.0.0</Version>
+  <Version>1.1.0</Version>
   <ProviderName>GrammarSoft ApS</ProviderName>
   <DefaultLocale>da-DK</DefaultLocale>
   <DisplayName DefaultValue="RetMig og Kommaforslag" />
   <Description DefaultValue="RetMig og Kommaforslag" />
-  <IconUrl DefaultValue="https://retmig.dk/gas/release/1.0.0/imgs/logo-32.png" />
+  <IconUrl DefaultValue="https://retmig.dk/gas/release/1.1.0/imgs/logo-32.png" />
 
   <SupportUrl DefaultValue="https://grammarsoft.com/" />
   <AppDomains>
@@ -29,7 +29,7 @@
     </Sets>
   </Requirements>
   <DefaultSettings>
-    <SourceLocation DefaultValue="https://retmig.dk/gas/release/1.0.0/html/sidebar.html" />
+    <SourceLocation DefaultValue="https://retmig.dk/gas/release/1.1.0/html/sidebar.html" />
   </DefaultSettings>
 
   <Permissions>ReadWriteDocument</Permissions>
@@ -83,12 +83,12 @@
 
     <Resources>
       <bt:Images>
-        <bt:Image id="GS.RMKF.logo16" DefaultValue="https://retmig.dk/gas/release/1.0.0/imgs/logo-16.png" />
-        <bt:Image id="GS.RMKF.logo32" DefaultValue="https://retmig.dk/gas/release/1.0.0/imgs/logo-32.png" />
-        <bt:Image id="GS.RMKF.logo80" DefaultValue="https://retmig.dk/gas/release/1.0.0/imgs/logo-80.png" />
+        <bt:Image id="GS.RMKF.logo16" DefaultValue="https://retmig.dk/gas/release/1.1.0/imgs/logo-16.png" />
+        <bt:Image id="GS.RMKF.logo32" DefaultValue="https://retmig.dk/gas/release/1.1.0/imgs/logo-32.png" />
+        <bt:Image id="GS.RMKF.logo80" DefaultValue="https://retmig.dk/gas/release/1.1.0/imgs/logo-80.png" />
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="GS.RMKF.Taskpane" DefaultValue="https://retmig.dk/gas/release/1.0.0/html/sidebar.html" />
+        <bt:Url id="GS.RMKF.Taskpane" DefaultValue="https://retmig.dk/gas/release/1.1.0/html/sidebar.html" />
         <bt:Url id="GS.RMKF.GetStarted.LearnMore" DefaultValue="https://grammarsoft.com/" />
       </bt:Urls>
       <!-- ShortStrings max characters==125. -->

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2018 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
@@ -33,6 +33,9 @@ let types_yellow = {
 
 /* exported types_comp_right */
 let types_comp_right = new RegExp('@comp-|@comp( |$)');
+
+/* exported types_to_upper */
+let types_to_upper = new RegExp('@upper( |$)');
 
 /* exported marking_types */
 let marking_types = {
@@ -414,7 +417,7 @@ for (let k in ctypes) {
 	if (!ctypes.hasOwnProperty(k)) {
 		continue;
 	}
-	let rx = new RegExp('^<h3>(.+?)<\/h3>(.+)$', 's');
+	let rx = new RegExp('^<h3>([^]+?)<\/h3>([^]+)$');
 	let ms = rx.exec(ctypes[k][0]);
 	marking_types[k] = [ms[1], ms[2], ctypes[k][1]];
 
@@ -427,3 +430,10 @@ for (let k in ctypes) {
 }
 
 ctypes = null;
+
+/* exported types_dictionary */
+let types_dictionary = [];
+for (let k in types_yellow) {
+	types_dictionary.push('('+escapeRegExp(k)+')');
+}
+types_dictionary = new RegExp('('+types_dictionary.join('|')+')( |$)');
