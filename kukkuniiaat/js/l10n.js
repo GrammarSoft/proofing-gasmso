@@ -140,6 +140,7 @@ l10n.s = {
 		TXT_MUST_LOGIN: 'Du skal logge ind for at bruge dette værktøj.',
 		TXT_SUBSCRIBE: 'Opret abonnement via <a href="https://retmig.dk/" target="_blank">retmig.dk</a> og/eller <a href="https://kommaer.dk/" target="_blank">kommaer.dk</a>',
 		TXT_WHAT_IS: 'Kukkuniiaat er en stavekontrol for grønlandsk (kalaallisut), der hjælper dig med at fange og fjerne stave- og slåfejl i dine tekster.<br><br>Kukkuniiaat er udviklet af <a href="https://oqaasileriffik.gl/" target="_blank">Grønlands Sprogsekretariat (Oqaasileriffik)</a>.',
+		WARN_COMBINING_CHARACTER: 'Der er et sammensat tegn "{chr}" i teksten "{cntx}". Programmet kan ikke rette paragraffen før sådanne tegn erstattes med deres <a href="https://unicode.org/reports/tr15/" target="_blank">førkombinerede former (NFC)</a>.',
 	},
 	kl: {
 		BTN_CLOSE: 'Matuguk',
@@ -231,6 +232,7 @@ l10n.s = {
 	},
 	en: {
 		ERR_NO_SELECTION: 'No selection found. You must select some text before that button will work.',
+		WARN_COMBINING_CHARACTER: 'Combined character "{chr}" found in context "{cntx}". The service cannot correct the paragraph unless such characters are replaced with their <a href="https://unicode.org/reports/tr15/" target="_blank">precomposed forms (NFC)</a>.',
 	},
 };
 
