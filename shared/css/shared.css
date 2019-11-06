@@ -36,6 +36,7 @@ html, body {
 	font-family: Verdana, sans-serif;
 	font-size: 14px;
 	width: 100%;
+	background-color: #fff;
 }
 
 body, iframe {
@@ -89,7 +90,7 @@ ul {
 	list-style-type: none;
 }
 
-#error {
+#error, #warning {
 	display: flex;
 	background-color: #fee;
 	margin: 0 0 10px;
@@ -98,14 +99,23 @@ ul {
 	align-items: center;
 }
 
-#error, .sidebar {
+#error, #warning, .sidebar {
 	padding: 0 18px;
 	/* border-bottom: 1px dotted #ccc; */
+}
+
+#warning {
+	background-color: #fef7ea;
 }
 
 #error-text {
 	padding: 18px 0;
 	color: #f00;
+}
+
+#warning-text {
+	padding: 18px 0;
+	color: #f90;
 }
 
 .closable {
