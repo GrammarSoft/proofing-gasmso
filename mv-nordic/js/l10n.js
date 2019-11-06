@@ -149,6 +149,7 @@ l10n.s = {
 		TXT_MUST_LOGIN: 'Du skal logge ind for at bruge dette værktøj.',
 		TXT_SUBSCRIBE: '<a href="https://www.vitec-mv.com/dk/kontakt/" target="_blank">Kontakt Vitec MV</a> for at prøve programmet gratis eller for information om abonnement.',
 		TXT_WHAT_IS: 'Grammateket forbedrer din skriftlighed og støtter dig i din skriveproces ved at komme med forslag til rettelser, beskrivelser af fejlkategorier og mulighed for at slå ord op i ordbogen.\n\nNår du har skrevet en tekst, åbner du Grammateket for at få tjekket din stavning, grammatik og kommaer.\n\nDu får hjælp til stavning, sammensatte ord, nutids-r, kort og lang tillægsform og kommatering.',
+		WARN_COMBINING_CHARACTER: 'Der er et sammensat tegn "{chr}" i teksten "{cntx}". Programmet kan ikke rette paragraffen før sådanne tegn erstattes med deres <a href="https://unicode.org/reports/tr15/" target="_blank">førkombinerede former (NFC)</a>.',
 	},
 	nb: {
 		STR_DICTIONARY: 'Min ordbok',
@@ -363,6 +364,7 @@ l10n.s = {
 	},
 	en: {
 		ERR_NO_SELECTION: 'No selection found. You must select some text before that button will work.',
+		WARN_COMBINING_CHARACTER: 'Combined character "{chr}" found in context "{cntx}". The service cannot correct the paragraph unless such characters are replaced with their <a href="https://unicode.org/reports/tr15/" target="_blank">precomposed forms (NFC)</a>.',
 	},
 };
 
