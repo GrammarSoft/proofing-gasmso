@@ -690,7 +690,15 @@ function findToSend(prefix, word, suffix, casing) {
 		return rv;
 	}
 
+	if (/\w+\. \./.test(prefix) || /\w+\. \./.test(word) || /\w+\. \./.test(suffix)) {
+		//console.log('findToSend snip extra abbreviation full stops');
+		let rv = findToSend(prefix.replace(/(\w+\.) \./g, '$1'), word.replace(/(\w+\.) \./g, '$1'), suffix.replace(/(\w+\.) \./g, '$1'));
+		if (rv !== false) {
+			return rv;
+		}
+	}
 	if (!casing) {
+		//console.log('findToSend case-insensitive');
 		return findToSend(prefix, word, suffix, true);
 	}
 	return false;
