@@ -997,6 +997,15 @@ function sendTexts() {
 	for (to_send_b = to_send_i ; to_send_i < to_send.length && text.length < Defs.MAX_RQ_SIZE ; ++to_send_i) {
 		let par = to_send[to_send_i];
 
+		let marks = /((?:\S+\s+){0,2})(\S+?)(\S[\u0300-\u036F]+)((?:\s+\S+){0,2})/.exec(par.t);
+		if (marks && par.t !== par.t.normalize()) {
+			showWarning('WARN_COMBINING_CHARACTER', {
+				chr: marks[3],
+				cntx: marks[0],
+				});
+			continue;
+		}
+
 		if (!par.hasOwnProperty('h')) {
 			par.h = 'h-'+murmurHash3.x86.hash128(par.t) + '-' + par.t.length;
 		}
@@ -1479,4 +1488,19 @@ function showError(msg) {
 	$('#error').show();
 	$('#working').hide();
 	$('#error-text').text(l10n_translate(msg));
+}
+
+function showWarning(msg, args) {
+	if (!$('#warning').length) {
+		$('#error').after('<div class="closable" id="warning"><div class="closer">&times;</div><div id="warning-text">…</div></div>');
+		$('#warning').find('.closer').click(function() {
+			$(this).closest('.closable').hide();
+		});
+	}
+	$('#warning').show();
+	let txt = l10n_translate(msg);
+	for (let k in args) {
+		txt = txt.replace('{'+k+'}', escHTML(args[k]));
+	}
+	$('#warning-text').html(txt);
 }

@@ -96,6 +96,87 @@ if (!String.prototype.repeat) {
 	}
 }
 
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/normalize
+if (!String.prototype.normalize) {
+	String.prototype.normalize = function(form) {
+		if (form && form !== 'NFC') {
+			throw new RangeError('String.normalize() polyfill only knows a tiny subset of NFC');
+		}
+
+		if (!/[AaEeIiOoUuNn][\u0300-\u0303\u0308\u030A]/.test(this)) {
+			return this;
+		}
+
+		let rv = this;
+
+		// Combining Grave Accent U+0300
+		rv = rv.replace(/A\u0300/g, 'À');
+		rv = rv.replace(/a\u0300/g, 'à');
+		rv = rv.replace(/E\u0300/g, 'È');
+		rv = rv.replace(/e\u0300/g, 'è');
+		rv = rv.replace(/I\u0300/g, 'Ì');
+		rv = rv.replace(/i\u0300/g, 'ì');
+		rv = rv.replace(/O\u0300/g, 'Ò');
+		rv = rv.replace(/o\u0300/g, 'ò');
+		rv = rv.replace(/U\u0300/g, 'Ù');
+		rv = rv.replace(/u\u0300/g, 'ù');
+
+		// Combining Acute Accent U+0301
+		rv = rv.replace(/A\u0301/g, 'Á');
+		rv = rv.replace(/a\u0301/g, 'á');
+		rv = rv.replace(/E\u0301/g, 'É');
+		rv = rv.replace(/e\u0301/g, 'é');
+		rv = rv.replace(/I\u0301/g, 'Í');
+		rv = rv.replace(/i\u0301/g, 'í');
+		rv = rv.replace(/O\u0301/g, 'Ó');
+		rv = rv.replace(/o\u0301/g, 'ó');
+		rv = rv.replace(/U\u0301/g, 'Ú');
+		rv = rv.replace(/u\u0301/g, 'ú');
+
+		// Combining Circumflex Accent U+0302
+		rv = rv.replace(/A\u0302/g, 'Â');
+		rv = rv.replace(/a\u0302/g, 'â');
+		rv = rv.replace(/E\u0302/g, 'Ê');
+		rv = rv.replace(/e\u0302/g, 'ê');
+		rv = rv.replace(/I\u0302/g, 'Î');
+		rv = rv.replace(/i\u0302/g, 'î');
+		rv = rv.replace(/O\u0302/g, 'Ô');
+		rv = rv.replace(/o\u0302/g, 'ô');
+		rv = rv.replace(/U\u0302/g, 'Û');
+		rv = rv.replace(/u\u0302/g, 'û');
+
+		// Combining Tilde U+0303
+		rv = rv.replace(/A\u0303/g, 'Ã');
+		rv = rv.replace(/a\u0303/g, 'ã');
+		rv = rv.replace(/I\u0303/g, 'Ĩ');
+		rv = rv.replace(/i\u0303/g, 'ĩ');
+		rv = rv.replace(/O\u0303/g, 'Õ');
+		rv = rv.replace(/o\u0303/g, 'õ');
+		rv = rv.replace(/U\u0303/g, 'Ũ');
+		rv = rv.replace(/u\u0303/g, 'ũ');
+		rv = rv.replace(/N\u0303/g, 'Ñ');
+		rv = rv.replace(/n\u0303/g, 'ñ');
+
+		// Combining Diaeresis U+0308
+		rv = rv.replace(/A\u0308/g, 'Ä');
+		rv = rv.replace(/a\u0308/g, 'ä');
+		rv = rv.replace(/E\u0308/g, 'Ë');
+		rv = rv.replace(/e\u0308/g, 'ë');
+		rv = rv.replace(/I\u0308/g, 'Ï');
+		rv = rv.replace(/i\u0308/g, 'ï');
+		rv = rv.replace(/O\u0308/g, 'Ö');
+		rv = rv.replace(/o\u0308/g, 'ö');
+		rv = rv.replace(/U\u0308/g, 'Ü');
+		rv = rv.replace(/u\u0308/g, 'ü');
+
+		// Combining Ring Above U+030A
+		rv = rv.replace(/A\u030A/g, 'Å');
+		rv = rv.replace(/a\u030A/g, 'å');
+
+		return rv;
+	}
+}
+
 /* exported Defs */
 const Defs = {
 	CAP_ADMIN:	  (1 <<	 0),
@@ -609,7 +690,15 @@ function findToSend(prefix, word, suffix, casing) {
 		return rv;
 	}
 
+	if (/\w+\. \./.test(prefix) || /\w+\. \./.test(word) || /\w+\. \./.test(suffix)) {
+		//console.log('findToSend snip extra abbreviation full stops');
+		let rv = findToSend(prefix.replace(/(\w+\.) \./g, '$1'), word.replace(/(\w+\.) \./g, '$1'), suffix.replace(/(\w+\.) \./g, '$1'));
+		if (rv !== false) {
+			return rv;
+		}
+	}
 	if (!casing) {
+		//console.log('findToSend case-insensitive');
 		return findToSend(prefix, word, suffix, true);
 	}
 	return false;
