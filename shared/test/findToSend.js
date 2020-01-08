@@ -21,6 +21,10 @@ let tests = [
 	{t: 'abc def ghi', a: ['Abc ', 'def', ' ghi'], e: {word: 'def'}},
 	{t: 'abc def ghi', a: ['abc ', 'Def', ' ghi'], e: {word: 'def'}},
 	{t: 'abc def ghi', a: ['abc ', 'def', ' Ghi'], e: {word: 'def'}},
+	{t: 'abc def ghi.', a: ['abc ', 'def', ' ghi.'], e: {word: 'def'}},
+	{t: 'abc def ghi. .', a: ['abc ', 'def', ' ghi. .'], e: {word: 'def'}},
+	{t: 'abc def ghi..', a: ['abc ', 'def', ' ghi. .'], e: {word: 'def'}},
+	{t: 'abc def ghi.', a: ['abc ', 'def', ' ghi. .'], e: {word: 'def'}},
 	];
 
 for (let i=0 ; i<tests.length ; ++i) {
