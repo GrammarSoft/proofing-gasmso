@@ -51,7 +51,7 @@ function saveConfig() {
 
 	let nv = JSON.stringify(g_conf);
 	if (nv !== g_conf_json) {
-		window.localStorage.setItem('config', nv);
+		ls_set_try('config', nv);
 		g_conf_json = nv;
 	}
 }

@@ -296,7 +296,7 @@ function loadConfig() {
 		g_conf = Object.assign({}, g_conf_defaults);
 	}
 
-	let nv = window.localStorage.getItem('config');
+	let nv = ls_get_try('config');
 	if (!nv) {
 		return;
 	}
@@ -319,7 +319,7 @@ function loadConfig() {
 
 /* exported loadDictionary */
 function loadDictionary() {
-	let nv = window.localStorage.getItem('dictionary');
+	let nv = ls_get_try('dictionary');
 	if (!nv) {
 		return;
 	}
@@ -360,7 +360,7 @@ function addToDictionary(word) {
 		_live_dictionary[word.toUpperCase()] = true;
 
 		g_dictionary_json = JSON.stringify(g_dictionary);
-		window.localStorage.setItem('dictionary', g_dictionary_json);
+		ls_set_try('dictionary', g_dictionary_json);
 		return true;
 	}
 
@@ -381,7 +381,7 @@ function removeFromDictionary(word) {
 		delete _live_dictionary[word.toUpperCase()];
 
 		g_dictionary_json = JSON.stringify(g_dictionary);
-		window.localStorage.setItem('dictionary', g_dictionary_json);
+		ls_set_try('dictionary', g_dictionary_json);
 		return true;
 	}
 
@@ -425,15 +425,26 @@ function haveLocalStorage() {
 		storage.setItem(x, x);
 		storage.removeItem(x);
 	}
-	catch(e) {
+	catch (e) {
 		return false;
 	}
 	return true;
 }
 
+/* exported ls_get_try */
+function ls_get_try(key) {
+	let v = null;
+	try {
+		v = window.localStorage.getItem(key);
+	}
+	catch (e) {
+	}
+	return v;
+}
+
 /* exported ls_get */
 function ls_get(key, def) {
-	let v = window.localStorage.getItem(key);
+	let v = ls_get_try(key);
 	if (v === null) {
 		if (def !== null && typeof def === 'object') {
 			v = Object.assign({}, def);
@@ -448,9 +459,18 @@ function ls_get(key, def) {
 	return v;
 }
 
+/* exported ls_set_try */
+function ls_set_try(key, val) {
+	try {
+		window.localStorage.setItem(key, val);
+	}
+	catch (e) {
+	}
+}
+
 /* exported ls_set */
 function ls_set(key, val) {
-	window.localStorage.setItem(key, JSON.stringify(val));
+	ls_set_try(key, JSON.stringify(val));
 }
 
 /* exported ls_del */
