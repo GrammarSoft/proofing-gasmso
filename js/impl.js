@@ -47,6 +47,19 @@ const g_conf_defaults = {
 	opt_level: 3,
 };
 
+function _impl_callback(data) {
+	if (typeof data === 'undefined' || !data) {
+		data = {};
+	}
+	return $.ajax({
+		url: ROOT_URL_GRAMMAR + '/callback.php',
+		type: 'POST',
+		dataType: 'json',
+		headers: {HMAC: g_access_token.hmac},
+		data: data,
+	});
+}
+
 function impl_dataKeepalive() {
 	return {a: 'keepalive'};
 }
@@ -65,6 +78,37 @@ function impl_canComma() {
 
 function impl_openDictionary(word) {
 	window.open('https://ordnet.dk/ddo/ordbog?query='+encodeURIComponent(word), 'Den Danske Ordbog');
+}
+
+function impl_loadDictionary() {
+	_impl_callback({'a': 'dict-load'}).done(function(rv) {
+		if (!rv.hasOwnProperty('dict')) {
+			return;
+		}
+
+		for (let i=0 ; i<rv.dict.length ; ++i) {
+			let word = rv.dict[i];
+			if (g_dictionary.hasOwnProperty(word)) {
+				continue;
+			}
+			////console.log(`Add to dict: ${word}`);
+			g_dictionary[word] = true;
+			_live_dictionary[word] = true;
+			_live_dictionary[uc_first(word)] = true;
+			_live_dictionary[word.toUpperCase()] = true;
+		}
+
+		g_dictionary_json = JSON.stringify(g_dictionary);
+		ls_set_try('dictionary', g_dictionary_json);
+	});
+}
+
+function impl_addToDictionary(word) {
+	_impl_callback({'a': 'dict-add', 'w': word});
+}
+
+function impl_removeFromDictionary(word) {
+	_impl_callback({'a': 'dict-del', 'w': word});
 }
 
 function itw_speak_attach() {

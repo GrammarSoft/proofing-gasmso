@@ -365,6 +365,9 @@ let marking_types = {
 	]
 };
 
+/* exported types_mv */
+let types_mv = {};
+
 for (let k in marking_types) {
 	let v = [
 		marking_types[k][1],
@@ -374,6 +377,7 @@ for (let k in marking_types) {
 		v[1] = '<i>' + marking_types[k][3] + '</i>';
 	}
 	marking_types[k] = v;
+	types_mv[k] = true;
 }
 
 let ctypes = {
