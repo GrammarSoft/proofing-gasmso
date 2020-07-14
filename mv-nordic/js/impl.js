@@ -73,6 +73,15 @@ function impl_openDictionary(word) {
 	return impl_showDictionary(word);
 }
 
+function impl_loadDictionary() {
+}
+
+function impl_addToDictionary(word) {
+}
+
+function impl_removeFromDictionary(word) {
+}
+
 /* exported itw_speak */
 function itw_speak(text) {
 	if (!g_conf.opt_speak) {

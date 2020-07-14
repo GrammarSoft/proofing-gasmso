@@ -1195,6 +1195,8 @@ function loginKeepalive(init) {
 		}
 
 		if (init) {
+			impl_loadDictionary();
+
 			if (impl_canGrammar() && impl_canComma()) {
 				$('.chkGrammarToComma').show();
 				$('.btnCheckComma').show();

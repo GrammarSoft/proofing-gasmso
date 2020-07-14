@@ -361,13 +361,14 @@ function addToDictionary(word) {
 
 		g_dictionary_json = JSON.stringify(g_dictionary);
 		ls_set_try('dictionary', g_dictionary_json);
+		impl_addToDictionary(word);
 		return true;
 	}
 
 	return false;
 }
 
-/* exported addToDictionary */
+/* exported removeFromDictionary */
 function removeFromDictionary(word) {
 	if ($.trim(word).length === 0) {
 		return false;
@@ -382,6 +383,7 @@ function removeFromDictionary(word) {
 
 		g_dictionary_json = JSON.stringify(g_dictionary);
 		ls_set_try('dictionary', g_dictionary_json);
+		impl_removeFromDictionary(word);
 		return true;
 	}
 
