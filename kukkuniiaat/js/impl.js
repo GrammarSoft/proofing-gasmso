@@ -80,5 +80,14 @@ function impl_openDictionary(word) {
 	window.open('https://oqaasileriffik.gl/ordbogi/?lang=kal&type=lexeme&lookup='+encodeURIComponent(word), 'Oqaasileriffik Katersat');
 }
 
+function impl_loadDictionary() {
+}
+
+function impl_addToDictionary(word) {
+}
+
+function impl_removeFromDictionary(word) {
+}
+
 function itw_speak_attach() {
 }
