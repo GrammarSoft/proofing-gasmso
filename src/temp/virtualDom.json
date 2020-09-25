@@ -1,0 +1,249 @@
+{
+	"sel": "body",
+	"data": {
+		"attrs": {
+			"lang": "EN-US",
+			"link": "#0563C1",
+			"vlink": "#954F72",
+			"style": "tab-interval:.5in;word-wrap:break-word"
+		}
+	},
+	"children": [
+        {
+			"text": "div"
+		}, {
+			"class": "WordSection1"
+		},
+		[{
+			"sel": "p",
+			"data": {
+				"attrs": {
+					"class": "MsoNormal"
+				}
+			},
+			"children": [{
+				"sel": "span",
+				"data": {
+					"attrs": {
+						"style": "mso-ascii-font-family:Calibri;mso-ascii-theme-font:minor-latin;mso-hansi-font-family:Calibri;mso-hansi-theme-font:minor-latin;mso-bidi-font-family:\"Times New Roman\";mso-bidi-theme-font:minor-bidi"
+					}
+				},
+				"children": [{
+					"sel": "o:p",
+					"data": {},
+					"text": " "
+				}]
+			}]
+		}, {
+			"sel": "p",
+			"data": {
+				"attrs": {
+					"class": "MsoNormal"
+				}
+			},
+			"children": [{
+				"sel": "span",
+				"data": {
+					"attrs": {
+						"style": "mso-ascii-font-family:Calibri;mso-ascii-theme-font:minor-latin;mso-hansi-font-family:Calibri;mso-hansi-theme-font:minor-latin;mso-bidi-font-family:\"Times New Roman\";mso-bidi-theme-font:minor-bidi"
+					}
+				},
+				"children": [{
+					"sel": "o:p",
+					"data": {},
+					"text": " "
+				}]
+			}]
+		}, {
+			"sel": "div",
+			"data": {
+				"attrs": {
+					"style": "border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0in 0in 0in"
+				}
+			},
+			"children": [{
+				"sel": "p",
+				"data": {
+					"attrs": {
+						"class": "MsoNormal"
+					}
+				},
+				"children": [{
+					"sel": "a",
+					"data": {
+						"attrs": {
+							"name": "_MailOriginal"
+						}
+					},
+					"children": [{
+						"sel": "b",
+						"data": {},
+						"children": [{
+							"sel": "span",
+							"data": {
+								"attrs": {
+									"style": "mso-fareast-font-family:\"Times New Roman\""
+								}
+							},
+							"text": "From:"
+						}]
+					}]
+				}, {
+					"sel": "span",
+					"data": {
+						"attrs": {
+							"style": "mso-bookmark:_MailOriginal"
+						}
+					},
+					"children": [{
+						"sel": "span",
+						"data": {
+							"attrs": {
+								"style": "mso-fareast-font-family:\"Times New Roman\""
+							}
+						},
+						"children": [{
+							"text": " Anders Dam "
+						}, {
+							"sel": "anders.dam@gmail.com",
+							"data": {},
+							"children": [{
+								"text": " "
+							}, {
+								"sel": "br",
+								"data": {}
+							}, {
+								"sel": "b",
+								"data": {},
+								"text": "Sent:"
+							}, {
+								"text": " Thursday, November 5, 2020 4:29 AM"
+							}, {
+								"sel": "br",
+								"data": {}
+							}, {
+								"sel": "b",
+								"data": {},
+								"text": "To:"
+							}, {
+								"text": " Anders Dam "
+							}, {
+								"sel": "anders@grammarsoft.onmicrosoft.com",
+								"data": {},
+								"children": [{
+									"sel": "br",
+									"data": {}
+								}, {
+									"sel": "b",
+									"data": {},
+									"text": "Subject:"
+								}, {
+									"text": " Hermed en mail"
+								}, {
+									"sel": "o:p",
+									"data": {}
+								}]
+							}]
+						}]
+					}]
+				}, {
+					"sel": "p",
+					"data": {
+						"attrs": {
+							"class": "MsoNormal"
+						}
+					},
+					"children": [{
+						"sel": "span",
+						"data": {
+							"attrs": {
+								"style": "mso-bookmark:_MailOriginal"
+							}
+						},
+						"children": [{
+							"sel": "o:p",
+							"data": {},
+							"text": " "
+						}]
+					}]
+				}, {
+					"sel": "div",
+					"data": {},
+					"children": [{
+						"sel": "div",
+						"data": {},
+						"children": [{
+							"sel": "p",
+							"data": {
+								"attrs": {
+									"class": "MsoNormal"
+								}
+							},
+							"children": [{
+								"sel": "span",
+								"data": {
+									"attrs": {
+										"style": "mso-bookmark:_MailOriginal"
+									}
+								},
+								"children": [{
+									"text": "dette er en mail med et pa feil"
+								}, {
+									"sel": "o:p",
+									"data": {}
+								}]
+							}]
+						}]
+					}, {
+						"sel": "div",
+						"data": {},
+						"children": [{
+							"sel": "p",
+							"data": {
+								"attrs": {
+									"class": "MsoNormal"
+								}
+							},
+							"children": [{
+								"sel": "span",
+								"data": {
+									"attrs": {
+										"style": "mso-bookmark:_MailOriginal"
+									}
+								},
+								"children": [{
+									"sel": "o:p",
+									"data": {},
+									"text": " "
+								}]
+							}]
+						}]
+					}, {
+						"sel": "div",
+						"data": {},
+						"children": [{
+							"sel": "p",
+							"data": {
+								"attrs": {
+									"class": "MsoNormal"
+								}
+							},
+							"children": [{
+								"sel": "span",
+								"data": {
+									"attrs": {
+										"style": "mso-bookmark:_MailOriginal"
+									}
+								},
+								"text": "og et par linjer men mest af alt er det for at teste reply"
+							}, {
+								"sel": "o:p",
+								"data": {}
+							}]
+						}]
+					}]
+				}]
+			}]
+		}]
+	]
+}

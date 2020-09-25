@@ -378,7 +378,12 @@ function btnIgnorePopup() {
 
 function btnIgnore() {
 	$('#popupIgnore').hide();
+	let word = markings[cmarking.s][cmarking.w][0];
 	markingIgnore();
+	if(typeof impl_ignoreCurrent === 'function') {
+		impl_ignoreCurrent(word);
+	}
+
 	btnNext();
 }
 
@@ -395,6 +400,9 @@ function btnIgnoreAll() {
 				markingIgnore();
 			}
 		}
+	}
+	if(typeof impl_ignoreCurrent === 'function') {
+		impl_ignoreCurrent(word);
 	}
 	btnNext();
 }
@@ -1073,11 +1081,21 @@ function checkDone() {
 		if (!grammar_retried) {
 			console.log('Retrying grammar');
 			grammar_retried = true;
+			
+			if(typeof impl_checkDone === 'function') {
+				impl_checkDone();
+			}
+
 			checkParagraphs(to_send);
 		}
 		else if ($('.optComma').prop('checked')) {
 			g_tool = 'Comma';
 			if (g_mode === 'all' || g_mode === 'selected') {
+				
+				if(typeof impl_checkDone === 'function') {
+					impl_checkDone();
+				}
+
 				checkParagraphs(to_send);
 			}
 			else {
@@ -1092,6 +1110,11 @@ function checkDone() {
 		if (!comma_retried) {
 			console.log('Retrying comma');
 			comma_retried = true;
+
+			if(typeof impl_checkDone === 'function') {
+				impl_checkDone();
+			}
+
 			checkParagraphs(to_send);
 		}
 		switchSidebar('#chkDone' + g_tool);
@@ -1289,6 +1312,11 @@ function loginListener() {
 }
 
 function logout() {
+
+	if(typeof impl_checkDone === 'function') {
+		impl_checkDone();
+	}
+
 	window.open(SIGNOUT_URL+g_access_token.sessionid, 'Logout');
 
 	$.ajax({
@@ -1357,6 +1385,9 @@ function initSidebar() {
 		$('#error').hide();
 		$('#working').hide();
 		ignores = {};
+		if(typeof impl_checkDone === 'function') {
+			impl_checkDone();
+		}
 		impl_startLogin();
 	});
 	$('.btnSupport').click(function() {

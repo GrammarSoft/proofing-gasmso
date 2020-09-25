@@ -1,0 +1,68 @@
+{
+  "name": "office-addin-taskpane-js",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OfficeDev/Office-Addin-TaskPane-JS.git"
+  },
+  "license": "MIT",
+  "config": {
+    "app-to-debug": "outlook",
+    "app-type-to-debug": "desktop",
+    "dev-server-port": 3000
+  },
+  "scripts": {
+    "build": "webpack -p --mode production --https false",
+    "build:dev": "webpack --mode development --https false",
+    "build-dev": "webpack --mode development --https false && echo . && echo . && echo . && echo Please use 'build:dev' instead of 'build-dev'.",
+    "dev-server": "webpack-dev-server --mode development",
+    "lint": "office-addin-lint check",
+    "lint:fix": "office-addin-lint fix",
+    "prettier": "office-addin-lint prettier",
+    "start": "office-addin-debugging start manifest.xml",
+    "start:desktop": "office-addin-debugging start manifest.xml desktop",
+    "start:web": "office-addin-debugging start manifest.xml web",
+    "stop": "office-addin-debugging stop manifest.xml",
+    "validate": "office-addin-manifest validate manifest.xml",
+    "watch": "webpack --mode development --watch"
+  },
+  "dependencies": {
+    "dompurify": "^2.2.2",
+    "html-to-vdom": "^0.7.0",
+    "htmlentities": "^1.0.0",
+    "object-path": "^0.11.5",
+    "snabbdom": "^2.1.0",
+    "snabbdom-to-html": "^6.0.0",
+    "snabby": "^2.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "@types/find-process": "1.2.0",
+    "@types/office-js": "^1.0.148",
+    "@types/office-runtime": "^1.0.14",
+    "babel-loader": "^8.2.1",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^6.3.1",
+    "eslint-config-office-addins": "^1.0.19",
+    "file-loader": "^4.2.0",
+    "find-process": "^1.4.4",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^4.3.0",
+    "office-addin-cli": "^1.0.16",
+    "office-addin-debugging": "^3.0.39",
+    "office-addin-dev-certs": "^1.5.9",
+    "office-addin-lint": "^1.0.29",
+    "office-addin-manifest": "1.5.0",
+    "office-addin-prettier-config": "^1.0.12",
+    "source-map-loader": "^0.2.4",
+    "ts-loader": "^6.2.2",
+    "typescript": "^3.9.7",
+    "webpack": "^5.5.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "prettier": "office-addin-prettier-config"
+}
