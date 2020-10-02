@@ -512,6 +512,9 @@ function sanitize_result(txt) {
 	// Workaround for bug https://trello.com/c/ixmc92EB
 	txt = txt.replace(/.'.\t@proper\n"/g, '.\n"');
 
+	// Workaround for bug https://trello.com/c/JbXrn5ub
+	txt = txt.replace(/\n-[LR]\n/g, '\n-\n').replace(/ -[LR] /g, ' - ');
+
 	// Swap markers that the backend has mangled due to sentence-ending parentheticals
 	for (let i=0 ; i<Defs.MAX_RQ_SIZE ; ++i) {
 		let t1 = '</s'+i+'>';
