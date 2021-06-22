@@ -29,7 +29,7 @@
     </Sets>
   </Requirements>
   <DefaultSettings>
-    <SourceLocation DefaultValue="https://retmig.dk/gas/dev/grammarsoft/html/sidebar.html" />
+    <SourceLocation DefaultValue="https://retmig.dk/gas/dev/grammarsoft/html/sidebar.html?host=msoffice" />
   </DefaultSettings>
 
   <Permissions>ReadWriteDocument</Permissions>

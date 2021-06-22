@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
- Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ Copyright 2016-2021 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
  Frontend by Tino Didriksen <mail@tinodidriksen.com>
 
@@ -23,26 +23,25 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title data-l10n="TITLE_OPTIONS">…</title>
 	<base target="_top">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script defer src="https://retmig.dk/gas/dev/grammarsoft/vendor/jquery.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://retmig.dk/gas/dev/grammarsoft/css/shared.css">
 	<link rel="stylesheet" type="text/css" href="https://retmig.dk/gas/dev/grammarsoft/css/options.css">
-	<script src="https://retmig.dk/gas/dev/grammarsoft/vendor/sprintf.min.js"></script>
-	<script src="https://retmig.dk/gas/dev/grammarsoft/js/impl.js"></script>
-	<script src="https://retmig.dk/gas/dev/grammarsoft/js/l10n.js"></script>
-	<script src="https://retmig.dk/gas/dev/grammarsoft/js/shared.js"></script>
-	<script src="https://retmig.dk/gas/dev/grammarsoft/js/mark-types.js"></script>
-	<script src="https://retmig.dk/gas/dev/grammarsoft/js/options.js"></script>
-
-	<script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-	<script src="https://retmig.dk/gas/dev/grammarsoft/js/impl-officejs.js"></script>
+	<script defer src="https://retmig.dk/gas/dev/grammarsoft/vendor/sprintf.min.js"></script>
+	<script defer src="https://retmig.dk/gas/dev/grammarsoft/js/impl.js"></script>
+	<script defer src="https://retmig.dk/gas/dev/grammarsoft/js/l10n.js"></script>
+	<script defer src="https://retmig.dk/gas/dev/grammarsoft/js/l10n-local.js"></script>
+	<script defer src="https://retmig.dk/gas/dev/grammarsoft/js/shared.js"></script>
+	<script defer src="https://retmig.dk/gas/dev/grammarsoft/js/mark-types.js"></script>
 </head>
-<body>
+<body id="options">
 
 <div id="placeholder" style="height: 3000px; width: 100%;" data-l10n="POP_LOADING">…</div>
 
 <div class="tabbar">
-	<a class="link tab tab-grammar" data-l10n="TAB_GRAMMAR">…</a>
-	<a class="link tab tab-comma" data-l10n="TAB_COMMA">…</a>
+	<a class="link tab tab-grammar grammar" data-l10n="TAB_GRAMMAR">…</a>
+	<a class="link tab tab-comma comma" data-l10n="TAB_COMMA">…</a>
+	<a class="link tab tab-grammar-types grammar" data-l10n="TAB_GRAMMAR_TYPES">…</a>
+	<a class="link tab tab-comma-types comma" data-l10n="TAB_COMMA_TYPES">…</a>
 </div>
 
 <div class="closable" id="error">
@@ -59,16 +58,15 @@
 <div class="column column-options-grammar">
 	<h2 data-l10n="HDR_GRAMMAR_ETYPES">…</h2>
 	<ul>
-		<li><label class="crbox"><input type="checkbox" class="opt_onlyConfident"><span class="checkbox"></span> <span data-l10n="LBL_OPT_ONLY_CONFIDENT">…</span></label></li>
-		<li><label class="crbox"><input type="checkbox" class="opt_ignUnknown"><span class="checkbox"></span> <span data-l10n="LBL_OPT_IGNORE_UNKNOWN">…</span></label>
+		<li><label class="crbox"><input type="checkbox" class="auto_toggle" data-types-off="^@(proper|new|abbreviation|check!)$"><span class="checkbox"></span> <span data-l10n="LBL_OPT_IGNORE_UNKNOWN">…</span></label>
 			<ul>
-				<li><label class="crbox"><input type="checkbox" class="opt_ignUNames"><span class="checkbox"></span> <span data-l10n="LBL_OPT_IGNORE_UNAMES">…</span></label></li>
-				<li><label class="crbox"><input type="checkbox" class="opt_ignUComp"><span class="checkbox"></span> <span data-l10n="LBL_OPT_IGNORE_UCOMP">…</span></label></li>
-				<li><label class="crbox"><input type="checkbox" class="opt_ignUAbbr"><span class="checkbox"></span> <span data-l10n="LBL_OPT_IGNORE_UABBR">…</span></label></li>
-				<li><label class="crbox"><input type="checkbox" class="opt_ignUOther"><span class="checkbox"></span> <span data-l10n="LBL_OPT_IGNORE_UOTHER">…</span></label></li>
+				<li><label class="crbox"><input type="checkbox" class="auto_toggle" data-types-off="^@proper$"><span class="checkbox"></span> <span data-l10n="LBL_OPT_IGNORE_UNAMES">…</span></label></li>
+				<li><label class="crbox"><input type="checkbox" class="auto_toggle" data-types-off="^@new$"><span class="checkbox"></span> <span data-l10n="LBL_OPT_IGNORE_UCOMP">…</span></label></li>
+				<li><label class="crbox"><input type="checkbox" class="auto_toggle" data-types-off="^@abbreviation$"><span class="checkbox"></span> <span data-l10n="LBL_OPT_IGNORE_UABBR">…</span></label></li>
+				<li><label class="crbox"><input type="checkbox" class="auto_toggle" data-types-off="^@check!$"><span class="checkbox"></span> <span data-l10n="LBL_OPT_IGNORE_UOTHER">…</span></label></li>
 			</ul>
 		</li>
-		<li><label class="crbox"><input type="checkbox" class="opt_ignMaj"><span class="checkbox"></span> <span data-l10n="LBL_OPT_IGNORE_MAJ">…</span></label></li>
+		<li><label class="crbox"><input type="checkbox" class="auto_toggle" data-types-off="^@(upper|lower)$"><span class="checkbox"></span> <span data-l10n="LBL_OPT_IGNORE_MAJ">…</span></label></li>
 	</ul>
 
 	<h2 data-l10n="HDR_DISPLAY">…</h2>
@@ -91,6 +89,21 @@
 </div>
 </div>
 
+<!-- Grammar Types -->
+<div class="pane pane-grammar-types grammar">
+<div class="column column-fullwidth column-options-types">
+	<span data-l10n="TXT_GRAMMAR_TYPES_HINT">…</span>
+
+	<div>
+	<button type="button" class="btnTypesAllOn" data-l10n="BTN_TYPES_ALL_ON">…</button>
+	<button type="button" class="btnTypesAllDef" data-l10n="BTN_TYPES_ALL_DEFAULT">…</button>
+	<button type="button" class="btnTypesAllOff" data-l10n="BTN_TYPES_ALL_OFF">…</button>
+	</div>
+
+	<div id="grammar-types"></div>
+</div>
+</div>
+
 <!-- Comma -->
 <div class="pane pane-comma">
 <div class="sidebar">
@@ -99,17 +112,32 @@
 <div class="column column-options-comma">
 	<h2 data-l10n="HDR_COMMA_DISPLAY">…</h2>
 	<ul>
-		<li><label class="crbox"><input type="checkbox" class="opt_green"><span class="checkbox"></span> <span data-l10n="LBL_OPT_ONLYGREEN">…</span></label></li>
+		<li><label class="crbox"><input type="checkbox" class="auto_toggle" data-types-off="^%(nko|ok|nok|ko)(-|$)"><span class="checkbox"></span> <span data-l10n="LBL_OPT_ONLYGREEN">…</span></label></li>
+		<li><label class="crbox"><input type="checkbox" class="auto_toggle" data-types-on="^%ko(-|$)"><span class="checkbox"></span> <span data-l10n="LBL_OPT_OPTIONAL">…</span></label></li>
+		<li><label class="crbox"><input type="checkbox" class="auto_toggle" data-types-on="^%(k|nok|ko)-appo(-|$)"><span class="checkbox"></span> <span data-l10n="LBL_OPT_APPOSITION">…</span></label></li>
+		<li><label class="crbox"><input type="checkbox" class="auto_toggle" data-types-on="^%(k|nok|ko)-list(-|$)"><span class="checkbox"></span> <span data-l10n="LBL_OPT_LISTING">…</span></label></li>
+		<li><label class="crbox"><input type="checkbox" class="auto_toggle" data-types-on="^%(k|nok|ko)-paren(-|$)"><span class="checkbox"></span> <span data-l10n="LBL_OPT_PARENTHETICAL">…</span></label></li>
+		<li><label class="crbox"><input type="checkbox" class="auto_toggle" data-types-on="^%(ok|nko)(-|$)"><span class="checkbox"></span> <span data-l10n="LBL_OPT_EXPLANATION">…</span></label></li>
+	</ul>
+	<ul>
 		<li><label class="crbox"><input type="checkbox" class="opt_maybe"><span class="checkbox"></span> <span data-l10n="LBL_OPT_SHOWOPTIONAL">…</span></label></li>
 		<li><label class="crbox"><input type="checkbox" class="opt_color"><span class="checkbox"></span> <span data-l10n="LBL_OPT_COLOR">…</span></label></li>
 	</ul>
+</div>
+</div>
 
-	<h2 data-l10n="HDR_COMMA_LEVEL">…</h2>
-	<ul>
-		<li><label class="crbox"><input type="radio" class="opt_level" name="opt_level" value="1"><span class="radio"></span> <span data-l10n="LBL_OPT_LEVEL_1">…</span></label></li>
-		<li><label class="crbox"><input type="radio" class="opt_level" name="opt_level" value="2"><span class="radio"></span> <span data-l10n="LBL_OPT_LEVEL_2">…</span></label></li>
-		<li><label class="crbox"><input type="radio" class="opt_level" name="opt_level" value="3"><span class="radio"></span> <span data-l10n="LBL_OPT_LEVEL_3">…</span></label></li>
-	</ul>
+<!-- Comma Types -->
+<div class="pane pane-comma-types comma">
+<div class="column column-fullwidth column-options-types">
+	<span data-l10n="TXT_COMMA_TYPES_HINT">…</span>
+
+	<div>
+	<button type="button" class="btnTypesAllOn" data-l10n="BTN_TYPES_ALL_ON">…</button>
+	<button type="button" class="btnTypesAllDef" data-l10n="BTN_TYPES_ALL_DEFAULT">…</button>
+	<button type="button" class="btnTypesAllOff" data-l10n="BTN_TYPES_ALL_OFF">…</button>
+	</div>
+
+	<div id="comma-types"></div>
 </div>
 </div>
 

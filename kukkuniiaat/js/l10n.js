@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2019 Tino Didriksen Consult <consult@tinodidriksen.com> at https://tinodidriksen.com/
+ * Copyright 2016-2021 Tino Didriksen Consult <consult@tinodidriksen.com> at https://tinodidriksen.com/
  * Linguistic backend by Oqaasileriffik (https://oqaasileriffik.gl/)
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
@@ -18,9 +18,7 @@
  */
 'use strict';
 
-/* globals session */
 
-/* exported l10n */
 let l10n = {};
 
 l10n.lang = 'da';
@@ -127,13 +125,13 @@ l10n.s = {
 		TITLE_OPTIONS: 'Indstillinger',
 		TITLE_SIDEBAR: 'Kukkuniiaat',
 		TXT_COMMA_ABOUT: 'Kommaforslag hjælper dig med at sætte komma - dvs. tilføjer manglende kommaer og fjerner eller flytter forkerte kommaer. Desuden skelner programmet mellem over 30 forskellige fejltyper og kan derfor tilbyde forklaringer og eksempler for hvert af de ændrede kommaer.',
-		TXT_COMMA_COPYRIGHT: 'Copyright 2016-2019 Tino Didriksen Consult. Alle rettigheder forbeholdt.',
+		TXT_COMMA_COPYRIGHT: 'Copyright 2016-2021 Tino Didriksen Consult. Alle rettigheder forbeholdt.',
 		TXT_COMMA_HINT: 'Vil du have tjekket din markering eller hele teksten?',
 		TXT_COMMA_INTRO: 'Du kan også vælge at springe direkte til Kommaforslag for at få tjekket dine kommaer.',
 		TXT_COMMA_SUPPORT: 'TODO',
 		TXT_DICTIONARY_HINT: 'Her kan du tilføje, rette eller fjerne ord fra din ordbog.',
 		TXT_GRAMMAR_ABOUT: 'Kukkuniiaat hjælper dig med at fange og fjerne stave- og slåfejl i dine tekster.',
-		TXT_GRAMMAR_COPYRIGHT: 'Copyright 2016-2019 Tino Didriksen Consult.',
+		TXT_GRAMMAR_COPYRIGHT: 'Copyright 2016-2021 Tino Didriksen Consult.',
 		TXT_GRAMMAR_HINT: 'Vil du have tjekket din markering eller hele teksten?',
 		TXT_GRAMMAR_INTRO: 'Først skal du tjekke din tekst for stavning.',
 		TXT_GRAMMAR_SUPPORT: 'Du kan få hjælp via <a href="https://oqaasileriffik.gl/kukkuniiaat/" target="_blank">Oqaasileriffik</a> eller <a href="https://tinodidriksen.com/spellers/" target="_blank">Tino Didriksen Consult</a>.',
@@ -224,7 +222,7 @@ l10n.s = {
 		TITLE_SIDEBAR: 'Kukkuniiaat',
 		TXT_DICTIONARY_HINT: 'Uani oqaatsimik ilanngussisinnaavutit, naqqiillutit peersillutilluunniit.',
 		TXT_GRAMMAR_ABOUT: 'Kukkuniiaatip naqinnerliukkat nassaaralugillu peertassavai.',
-		TXT_GRAMMAR_COPYRIGHT: 'Copyright 2019 Tino Didriksen Consult aamma Oqaasileriffik.',
+		TXT_GRAMMAR_COPYRIGHT: 'Copyright 2019-2020 Tino Didriksen Consult aamma Oqaasileriffik.',
 		TXT_GRAMMAR_HINT: 'Toqqakkat taamaallaat misissortikkusuppiuk imalt. Allataq tamaat?',
 		TXT_GRAMMAR_INTRO: '',
 		TXT_GRAMMAR_SUPPORT: 'Una aqqutigalugu ikiorneqarsinnaavutit <a href="https://oqaasileriffik.gl/kukkuniiaat/" target="_blank">Oqaasileriffik</a> eller <a href="https://tinodidriksen.com/spellers/" target="_blank">Tino Didriksen Consult</a>.',

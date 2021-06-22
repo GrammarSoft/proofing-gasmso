@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2021 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Linguistic backend by Vitec MV (https://vitec-mv.com/)
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
@@ -8,7 +8,6 @@
  */
 'use strict';
 
-/* exported types_mv */
 let types_mv = {
 	"@vfin": "@vfin",
 	"@inf": "@inf",
@@ -32,7 +31,6 @@ let types_mv = {
 	"@lower": "@lower",
 };
 
-/* exported types_red */
 let types_red = {
 	"@error": "@error",
 	"@comp-": "@comp-",
@@ -47,7 +45,6 @@ let types_red = {
 	"@hyphen-suffix": "@hyphen-suffix",
 };
 
-/* exported types_yellow */
 let types_yellow = {
 	"@proper": "@proper",
 	"@new": "@new",
@@ -55,16 +52,13 @@ let types_yellow = {
 	"@check!": "@check!",
 };
 
-/* exported types_dictionary */
 let types_dictionary = null;
 
-/* exported types_comp_right */
-let types_comp_right = null;
+let types_comp_right = new RegExp('@comp-|@comp( |$)');
 
-/* exported types_to_upper */
-let types_to_upper = null;
+let types_to_upper = new RegExp('@upper( |$)');
+let types_to_lower = new RegExp('@lower( |$)');
 
-/* exported marking_types */
 let marking_types = {
 	"@x-etype-list": [
 		"Forkert skrevet ord",

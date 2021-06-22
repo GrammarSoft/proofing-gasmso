@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2019 Tino Didriksen Consult <consult@tinodidriksen.com> at https://tinodidriksen.com/
+ * Copyright 2016-2021 Tino Didriksen Consult <consult@tinodidriksen.com> at https://tinodidriksen.com/
  * Linguistic backend by Oqaasileriffik (https://oqaasileriffik.gl/)
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
