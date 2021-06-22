@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2021 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Linguistic backend by Vitec MV (https://vitec-mv.com/)
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
@@ -28,7 +28,6 @@ const SIGNOUT_URL = 'https://signon-test.vitec-mv.com/logout.php?return_to='+enc
 
 const VERSION = ''+VERSION_MAJOR+'.'+VERSION_MINOR+'.'+VERSION_PATCH;
 
-/* exported g_conf_defaults */
 const g_conf_defaults = {
 	opt_onlyConfident: false,
 	opt_ignUnknown: false,
@@ -62,18 +61,21 @@ function impl_startLogin() {
 }
 
 function impl_canGrammar() {
-	return true;
+	return 'grammar';
 }
 
 function impl_canComma() {
-	return (session.locale === 'da');
+	if (session.locale === 'da') {
+		return 'comma';
+	}
+	return false;
 }
 
 function impl_openDictionary(word) {
 	return impl_showDictionary(word);
 }
 
-function impl_loadDictionary() {
+function impl_loadUserdata() {
 }
 
 function impl_addToDictionary(word) {
@@ -82,7 +84,6 @@ function impl_addToDictionary(word) {
 function impl_removeFromDictionary(word) {
 }
 
-/* exported itw_speak */
 function itw_speak(text) {
 	if (!g_conf.opt_speak) {
 		return;
@@ -105,8 +106,7 @@ function itw_speak(text) {
 	});
 }
 
-/* exported itw_speak_attach */
-function itw_speak_attach(node) {
+function impl_attachTTS(node) {
 	if (!g_conf.opt_speak) {
 		return;
 	}
@@ -123,30 +123,30 @@ function itw_speak_attach(node) {
 
 	$(ns).addClass('itw_tts').mouseover(function() {
 		let txt = $(this).text();
-		if (g_itw_speaker) {
-			clearTimeout(g_itw_speaker);
+		if (g_tts_speaker) {
+			clearTimeout(g_tts_speaker);
 		}
-		g_itw_speaker = setTimeout(function() {
+		g_tts_speaker = setTimeout(function() {
 			itw_speak(txt);
 		}, 1000);
 	}).mouseout(function() {
-		if (g_itw_speaker) {
-			clearTimeout(g_itw_speaker);
+		if (g_tts_speaker) {
+			clearTimeout(g_tts_speaker);
 		}
-		g_itw_speaker = null;
+		g_tts_speaker = null;
 	}).on('touchstart', function() {
-		++g_itw_tap;
+		++g_tts_tap;
 	}).on('touchmove', function() {
-		g_itw_tap = 0;
+		g_tts_tap = 0;
 	}).on('touchend', function(e) {
-		if (g_itw_tap >= 2) {
-			if (g_itw_speaker) {
-				clearTimeout(g_itw_speaker);
+		if (g_tts_tap >= 2) {
+			if (g_tts_speaker) {
+				clearTimeout(g_tts_speaker);
 			}
-			g_itw_speaker = null;
+			g_tts_speaker = null;
 
 			itw_speak($(this).text());
-			g_itw_tap = 0;
+			g_tts_tap = 0;
 
 			e.preventDefault();
 			return false;

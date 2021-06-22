@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2019 Tino Didriksen Consult <consult@tinodidriksen.com> at https://tinodidriksen.com/
+ * Copyright 2016-2021 Tino Didriksen Consult <consult@tinodidriksen.com> at https://tinodidriksen.com/
  * Linguistic backend by Oqaasileriffik (https://oqaasileriffik.gl/)
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
@@ -26,7 +26,6 @@ const ROOT_URL_GRAMMAR = 'https://tinodidriksen.com/spell-dev/kal/';
 
 const VERSION = ''+VERSION_MAJOR+'.'+VERSION_MINOR+'.'+VERSION_PATCH;
 
-/* exported g_conf_defaults */
 const g_conf_defaults = {
 	opt_onlyConfident: false,
 	opt_ignUnknown: false,
@@ -45,7 +44,6 @@ const g_conf_defaults = {
 	opt_level: 3,
 };
 
-/* exported g_seen_preface */
 let g_seen_preface = false;
 
 function impl_dataKeepalive() {
@@ -69,7 +67,7 @@ function impl_startLogin() {
 }
 
 function impl_canGrammar() {
-	return true;
+	return 'grammar';
 }
 
 function impl_canComma() {
@@ -80,7 +78,7 @@ function impl_openDictionary(word) {
 	window.open('https://oqaasileriffik.gl/ordbogi/?lang=kal&type=lexeme&lookup='+encodeURIComponent(word), 'Oqaasileriffik Katersat');
 }
 
-function impl_loadDictionary() {
+function impl_loadUserdata() {
 }
 
 function impl_addToDictionary(word) {
@@ -89,5 +87,5 @@ function impl_addToDictionary(word) {
 function impl_removeFromDictionary(word) {
 }
 
-function itw_speak_attach() {
+function impl_attachTTS() {
 }

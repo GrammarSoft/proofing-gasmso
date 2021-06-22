@@ -1,0 +1,4 @@
+<FilesMatch "^load-.*">
+	Header set Content-Type "application/javascript; charset=utf-8"
+	SetHandler application/x-httpd-php
+</FilesMatch>

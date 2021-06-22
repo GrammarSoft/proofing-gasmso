@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2021 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify

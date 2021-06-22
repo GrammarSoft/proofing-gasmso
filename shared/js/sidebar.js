@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2021 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -17,23 +17,12 @@
  */
 'use strict';
 
-/* globals Defs */
-/* globals escHTML */
-/* globals g_conf_defaults */
-/* globals is_upper */
-/* globals marking_types */
-/* globals murmurHash3 */
-/* globals sanitize_result */
-/* globals types_mv */
-/* globals types_red */
-/* globals types_yellow */
-/* globals uc_first */
-/* globals google */
-/* globals g_tool:true */
-/* globals g_mode:true */
-/* globals l10n */
 
 let g_mode = null;
+let g_tools = {
+	grammar: false,
+	comma: false,
+};
 let markings = [];
 let cmarking = {s: -1, w: -1};
 let cache = {
@@ -52,6 +41,7 @@ let select_fail = false;
 let grammar_retried = false;
 let comma_retried = false;
 let overlay_sidebars = [];
+let rx_insertable = /(@insert|%ko-|%k-|%k\b)/;
 
 function switchSidebar(which) {
 	$('#popupIgnore').hide();
@@ -96,7 +86,7 @@ function markingSetSentence() {
 			sentence += '<span class="marking">' + escHTML(w) + '</span> ';
 		}
 		else {
-			if (markings[s][i].length > 1 && /(@insert|%ko-|%k-|%k\b)/.test(markings[s][i][1])) {
+			if (markings[s][i].length > 1 && rx_insertable.test(markings[s][i][1])) {
 				//console.log(`Skipping ${s} ${i}: ${markings[s][i][1]}`);
 				continue;
 			}
@@ -110,7 +100,7 @@ function markingSetSentence() {
 function markingSetContext() {
 	cmarking.prefix = '';
 	for (let i=0 ; i<cmarking.w ; ++i) {
-		if (markings[cmarking.s][i].length > 1 && /(@insert|%ko-|%k-|%k\b)/.test(markings[cmarking.s][i][1])) {
+		if (markings[cmarking.s][i].length > 1 && rx_insertable.test(markings[cmarking.s][i][1])) {
 			//console.log(`Skipping ${cmarking.s} ${i}: ${markings[cmarking.s][i][1]}`);
 			continue;
 		}
@@ -119,7 +109,7 @@ function markingSetContext() {
 
 	cmarking.suffix = '';
 	for (let i=cmarking.w+1 ; i<markings[cmarking.s].length ; ++i) {
-		if (markings[cmarking.s][i].length > 1 && /(@insert|%ko-|%k-|%k\b)/.test(markings[cmarking.s][i][1])) {
+		if (markings[cmarking.s][i].length > 1 && rx_insertable.test(markings[cmarking.s][i][1])) {
 			//console.log(`Skipping ${cmarking.s} ${i}: ${markings[cmarking.s][i][1]}`);
 			continue;
 		}
@@ -130,6 +120,9 @@ function markingSetContext() {
 function markingColor(types) {
 	let col = 'green';
 	for (let i=0 ; i<types.length ; ++i) {
+		if (types_info.hasOwnProperty(types[i])) {
+			col = 'info';
+		}
 		if (types_yellow.hasOwnProperty(types[i])) {
 			col = 'yellow';
 		}
@@ -168,7 +161,9 @@ function markingRender(skipact) {
 	comma_retried = false;
 
 	$('#error').hide();
-	switchSidebar('#chkChecking'+g_tool);
+	switchSidebar('#chkChecking');
+
+	// l10n strings that otherwise won't exist: 'BTN_COMMA_INSERT' 'BTN_COMMA_INSERT_STOP' 'BTN_COMMA_REMOVE' 'BTN_COMMA_REPLACE' 'BTN_GRAMMAR_INSERT' 'BTN_GRAMMAR_REMOVE' 'BTN_GRAMMAR_REPLACE'
 
 	let btn_lbl = 'BTN_GRAMMAR_';
 	if (g_tool === 'Comma') {
@@ -179,13 +174,15 @@ function markingRender(skipact) {
 	let col = markingColor(types);
 
 	if (types_dictionary.test(marking[1])) {
+		$('#chkAddWord').show();
 		$('.btnAddWord').removeClass('disabled');
 	}
 	else {
+		$('#chkAddWord').hide();
 		$('.btnAddWord').addClass('disabled');
 	}
 
-	if (g_tool === 'Comma' && col === 'yellow' && g_conf.opt_maybe == false) {
+	if (g_tool === 'Comma' && col === 'yellow' && _live_options.config.opt_maybe == false) {
 		col = 'green';
 	}
 
@@ -193,7 +190,7 @@ function markingRender(skipact) {
 	let el = {};
 	for (let i=0 ; i<types.length ; ++i) {
 		let et = marking_types[types[i]] ? marking_types[types[i]][0] : (types[i] + ' ');
-		es[i] = '<h2>'+et+'</h2>';
+		es[i] = '<h2 title="'+escHTML(types[i])+'">'+et+'</h2>';
 
 		et = marking_types[types[i]] ? marking_types[types[i]][1] : (types[i] + ' ');
 		et = '<p>'+et.replace(/(<br>\s*)+<br>\s*/g, '</p><p>')+'</p>';
@@ -208,7 +205,7 @@ function markingRender(skipact) {
 	$('.chkExplainShortText').html(es);
 	$('.chkExplainLongText').html(el);
 
-	let alt = (g_conf.opt_color ? ' alt' : '');
+	let alt = (_live_options.config.opt_color ? ' alt' : '');
 
 	$('.chkType').attr('title', marking[1]);
 
@@ -216,6 +213,7 @@ function markingRender(skipact) {
 	$('.chkSentence').html(sentence);
 
 	if (marking[2].length === 0) {
+		$('.btnInput').hide();
 		$('#chkDidYouMean').hide();
 		$('.chkSentence').addClass('divider');
 		$('.btnAccept').addClass('disabled');
@@ -224,7 +222,7 @@ function markingRender(skipact) {
 		let all_upper = is_upper(marking[0]);
 		let first_upper = all_upper || is_upper(marking[0].charAt(0));
 
-		if (marking[1].indexOf('@lower') !== -1) {
+		if (types_to_lower.test(marking[1])) {
 			all_upper = first_upper = false;
 		}
 
@@ -245,7 +243,8 @@ function markingRender(skipact) {
 		$('#chkDidYouMeanItems').find('.suggestion-lookup').off().click(function() {
 			impl_openDictionary($(this).closest('div').text());
 		});
-		itw_speak_attach($('#chkDidYouMeanItems').get(0));
+		impl_attachTTS($('#chkDidYouMeanItems').get(0));
+		$('.btnInput').show();
 		$('#chkDidYouMean').show();
 		$('.chkSentence').removeClass('divider');
 		$('.btnAccept').removeClass('disabled');
@@ -257,7 +256,7 @@ function markingRender(skipact) {
 
 	$('.icon-accept,.icon-discard').addClass('icon-accept').removeClass('icon-discard');
 
-	if (/(@insert|%ko-|%k-|%k\b)/.test(marking[1])) {
+	if (rx_insertable.test(marking[1])) {
 		let px = /^(.*?)(\S+\s?)$/.exec(cmarking.prefix);
 		let sx = /^(\s?\S+)(.*)$/.exec(cmarking.suffix);
 		impl_selectInDocument(px[1], px[2] + sx[1], sx[2]);
@@ -267,7 +266,7 @@ function markingRender(skipact) {
 		}
 		$('.btnAccept').removeClass('disabled');
 	}
-	else if (/(@nil|%nok-)/.test(marking[1])) {
+	else if (/(@nil|%nok-|%ok-|%nko-)/.test(marking[1])) {
 		$('.icon-accept,.icon-discard').addClass('icon-discard').removeClass('icon-accept');
 		$('.txtAccept').text(l10n_translate(btn_lbl + 'REMOVE'));
 		$('.btnAccept').removeClass('disabled');
@@ -289,7 +288,7 @@ function markingSelect(s, w) {
 
 function btnSeeList() {
 	let html = '';
-	let alt = (g_conf.opt_color ? ' alt' : '');
+	let alt = (_live_options.config.opt_color ? ' alt' : '');
 	let en = 0;
 
 	for (let s = 0 ; s<markings.length ; ++s) {
@@ -326,7 +325,7 @@ function btnSeeList() {
 	}
 
 	$('#errorList').html(html);
-	itw_speak_attach($('#errorList').get(0));
+	impl_attachTTS($('#errorList').get(0));
 	overlay_push('#chkErrorList');
 }
 
@@ -353,7 +352,7 @@ function markingIgnore() {
 	ignores[ik][cmarking.sentence] = true;
 	console.log('Ignoring %s in %s', ik, cmarking.sentence);
 
-	if (/(@insert|%ko-|%k-|%k\b)/.test(marking[1])) {
+	if (rx_insertable.test(marking[1])) {
 		markings[cmarking.s][cmarking.w] = [' '];
 	}
 	else {
@@ -546,7 +545,7 @@ function markingAccept() {
 		return;
 	}
 
-	if (/(@insert|%ko-|%k-|%k\b)/.test(markings[cmarking.s][cmarking.w][1])) {
+	if (rx_insertable.test(markings[cmarking.s][cmarking.w][1])) {
 		let px = /^(.*?)(\S+)(\s?)$/.exec(cmarking.prefix);
 		let sx = /^(\s?\S+)(.*)$/.exec(cmarking.suffix);
 		let rpl = markings[cmarking.s][cmarking.w][0];
@@ -720,89 +719,26 @@ function _parseResult(rv) {
 
 				ws = [];
 				let had_sentsplit = false;
-				let none = (g_tool === 'Grammar' && g_conf.opt_mvNordic);
+				let none = true;
 
 				for (let k=0 ; k<nws.length ; ++k) {
-					if (g_tool === 'Grammar') {
-						if (nws[k] === '@sentsplit') {
-							had_sentsplit = true;
-						}
-						if (g_conf.opt_mvNordic) {
-							if (nws[k] === '@upper' && prev_sentsplit) {
-								//console.log(`Skipping @upper due to @sentsplit`);
-								continue;
-							}
-							if (types_mv.hasOwnProperty(nws[k])) {
-								none = false;
-							}
-						}
-						if (nws[k] === '@green') {
-							ws.push(nws[k]);
-							continue;
-						}
-
-						// Common
-						if (g_conf.opt_onlyConfident && !types_red.hasOwnProperty(nws[k])) {
-							continue;
-						}
-						if (g_conf.opt_ignMaj && (types_to_upper.test(nws[k]) || nws[k] === '@lower')) {
-							continue;
-						}
-
-						// Danish
-						if (g_conf.opt_ignUNames && nws[k] === '@proper') {
-							continue;
-						}
-						if (g_conf.opt_ignUComp && nws[k] === '@new') {
-							continue;
-						}
-						if (g_conf.opt_ignUAbbr && nws[k] === '@abbreviation') {
-							continue;
-						}
-						if (g_conf.opt_ignUOther && nws[k] === '@check!') {
-							continue;
-						}
-
-						// Swedish
-						if (g_conf.opt_ignVartVerb && /@Y(700|710)/.test(nws[k])) {
-							continue;
-						}
-						if (g_conf.opt_ignDomDefinite && /@Y10/.test(nws[k])) {
-							continue;
-						}
-						if (g_conf.opt_ignDomSubjobj && /@Y(20|30)/.test(nws[k])) {
-							continue;
-						}
-						if (g_conf.opt_ignDomPrep && /@Y4[0-4]/.test(nws[k])) {
-							continue;
-						}
+					if (nws[k] === '@sentsplit') {
+						had_sentsplit = true;
 					}
-					else {
-						if (marking_types[nws[k]][2] > g_conf.opt_level) {
-							continue;
-						}
-						else if (g_conf.opt_green && /^%nok-/.test(nws[k])) {
-							continue;
-						}
+					if (nws[k] === '@upper' && prev_sentsplit) {
+						//console.log(`Skipping @upper due to @sentsplit`);
+						continue;
 					}
+					if (_live_options.types.hasOwnProperty(nws[k]) && !_live_options.types[nws[k]]) {
+						continue;
+					}
+					none = false;
 					ws.push(nws[k]);
 				}
 
-				if (g_tool === 'Grammar') {
-					let col = 'green';
-					for (let k=0 ; k<ws.length ; ++k) {
-						if (types_yellow.hasOwnProperty(ws[k])) {
-							col = 'yellow';
-						}
-						if (types_red.hasOwnProperty(ws[k])) {
-							col = 'red';
-							break;
-						}
-					}
-					if (g_conf.opt_useDictionary && types_dictionary.test(ws[0]) && isInDictionary(w[0])) {
-						//console.log(`Found ${w[0]} in dictionary`);
-						ws = [];
-					}
+				if (_live_options.config.opt_useDictionary && types_dictionary.test(ws[0]) && isInDictionary(w[0])) {
+					//console.log(`Found ${w[0]} in dictionary`);
+					ws = [];
 				}
 
 				prev_sentsplit = had_sentsplit;
@@ -828,7 +764,7 @@ function _parseResult(rv) {
 							crs[c] = uc_first(crs[c]);
 						}
 					}
-					else if (nws[k] == '@lower') {
+					else if (types_to_lower.test(nws[k])) {
 						if (crs.length == 0) {
 							crs.push(w[0]);
 						}
@@ -1018,15 +954,18 @@ function sendTexts() {
 		// MS Word Online sends a Narrow No-Break Space
 		let t = par.t.replace('\u202F', ' ');
 
-		t = t.replace('\u00AD', ''); // Soft Hyphen
+		t = t.replace(/\u00AD/g, ''); // Soft Hyphen
+		// Turn <> into ⟨⟩ so that plain-text markup isn't passed through
+		t = t.replace(/</g, '⟨');
+		t = t.replace(/>/g, '⟩');
 
 		text += '<s'+par.i+'>\n'+t+'\n</s'+par.i+'>\n\n';
 	}
 
 	if (text) {
-		let url = ROOT_URL_GRAMMAR + '/callback.php?a=grammar';
+		let url = ROOT_URL_GRAMMAR + '/callback.php?a=' + g_tools.grammar;
 		if (g_tool === 'Comma') {
-			url = ROOT_URL_GRAMMAR + '/callback.php?a=comma';
+			url = ROOT_URL_GRAMMAR + '/callback.php?a=' + g_tools.comma;
 		}
 		let data = {
 			t: text,
@@ -1053,7 +992,7 @@ function sendTexts() {
 }
 
 function checkParagraphs(doc) {
-	loadConfig();
+	loadOptions((g_tool == 'Comma') ? SERVICES.Comma : SERVICES.Grammar);
 	loadDictionary();
 
 	console.log(doc);
@@ -1150,9 +1089,14 @@ function getState() {
 	session.locale = l10n_detectLanguage();
 	l10n_world();
 
-	loadConfig();
+	for (let svc in SERVICES) {
+		if (!SERVICES.hasOwnProperty(svc)) {
+			continue;
+		}
+		loadOptions(svc);
+	}
 	loadDictionary();
-	itw_speak_attach(document.body);
+	impl_attachTTS(document.body);
 }
 
 function loginKeepalive(init) {
@@ -1195,15 +1139,17 @@ function loginKeepalive(init) {
 		}
 
 		if (init) {
-			impl_loadDictionary();
+			impl_loadUserdata();
+			g_tools.grammar = impl_canGrammar();
+			g_tools.comma = impl_canComma();
 
-			if (impl_canGrammar() && impl_canComma()) {
+			if (g_tools.grammar && g_tools.comma) {
 				$('.chkGrammarToComma').show();
 				$('.btnCheckComma').show();
 				$('.comma-specific').show();
 				switchSidebar('#chkWelcomeShared');
 			}
-			else if (impl_canComma()) {
+			else if (g_tools.comma) {
 				$('.chkGrammarToComma').hide();
 				$('.btnCheckComma').show();
 				$('.comma-specific').show();
@@ -1222,7 +1168,7 @@ function loginKeepalive(init) {
 		}
 	}).fail(function() {
 		console.log('Login fail');
-		g_access_token = Object.assign({}, g_access_token_defaults);
+		g_access_token = object_copy(g_access_token_defaults);
 		ls_set('access-token', g_access_token);
 
 		loginListener();
@@ -1308,7 +1254,7 @@ function logout() {
 		g_keepalive = null;
 	}
 
-	g_access_token = Object.assign({}, g_access_token_defaults);
+	g_access_token = object_copy(g_access_token_defaults);
 	ls_set('access-token', g_access_token);
 
 	loginListener();
@@ -1324,6 +1270,12 @@ function initSidebar() {
 
 	window.addEventListener('message', loginMessage, false);
 
+	if (typeof window.g_tool === 'string') {
+		g_tool = window.g_tool;
+	}
+	if (window.location.search.indexOf('tool=Comma') !== -1) {
+		g_tool = 'Comma';
+	}
 	if (g_tool !== 'Grammar' && g_tool !== 'Comma') {
 		g_tool = 'Grammar';
 	}
@@ -1341,7 +1293,7 @@ function initSidebar() {
 		$('.chkExplainShort').show();
 	});
 
-	if (g_conf.opt_longExplanations) {
+	if (_live_options.config.opt_longExplanations) {
 		$('.chkExplainLong').show();
 		$('.chkExplainShort').hide();
 	}
@@ -1367,8 +1319,22 @@ function initSidebar() {
 			overlay_push('#chkSupport');
 		}
 	});
+	$('.btnLanguages').click(function() {
+		if ($('#chkLanguages:visible').length) {
+			overlay_pop();
+		}
+		else {
+			overlay_push('#chkLanguages');
+		}
+	});
 	$('.btnSeeList').click(btnSeeList);
-	$('.btnCloseSupport,.btnCloseList').click(function() {
+	$('.btnCloseSupport,.btnCloseList,.btnCloseLanguages').click(function() {
+		overlay_pop();
+	});
+
+	$('.btnLanguage').click(function() {
+		session.locale = l10n.lang = $(this).attr('data-which');
+		l10n_world();
 		overlay_pop();
 	});
 
@@ -1467,7 +1433,15 @@ function initSidebar() {
 	});
 
 	if (!haveLocalStorage()) {
-		showError('ERR_NO_STORAGE');
+		let doms = {
+			'gramtrans.com': true,
+		};
+		let host = ROOT_URL_SELF.match(/^https:\/\/([^\/]+)/)[1];
+		doms[host] = true;
+		doms[window.location.host] = true;
+		doms = '<ul><li>'+Object.keys(doms).join('</li><li>')+'</li></ul>';
+		console.log(doms);
+		showError('ERR_NO_STORAGE', {TRUSTED_DOMAINS: doms});
 		return;
 	}
 
@@ -1478,7 +1452,7 @@ $(function() {
 	impl_Init(initSidebar);
 });
 
-function showError(msg) {
+function showError(msg, args) {
 	if (!select_fail && msg == 'ERR_SELECT_NOTFOUND') {
 		console.log('Retrying select...');
 		$('#working').show();
@@ -1486,10 +1460,16 @@ function showError(msg) {
 		setTimeout(markingRender, 250);
 		return;
 	}
-	console.log(msg);
+	console.log([msg, args]);
 	$('#error').show();
 	$('#working').hide();
-	$('#error-text').text(l10n_translate(msg));
+	let txt = l10n_translate(msg);
+	if (typeof args !== 'undefined') {
+		for (let k in args) {
+			txt = txt.replace('{'+k+'}', args[k]);
+		}
+	}
+	$('#error-text').html(txt);
 }
 
 function showWarning(msg, args) {
