@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2021 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -17,7 +17,7 @@
  */
 'use strict';
 
-var Const = {
+let Const = {
 	NonLetter: /[^\d\wa-zA-ZéÉöÖæÆøØåÅ.,!;:]+/ig,
 };
 
@@ -27,15 +27,15 @@ function escapeRegExp(string) {
 }
 
 function escapeRegExpTokens(txt) {
-	var ts = txt.split(/\s+/g);
-	for (var i=0 ; i<ts.length ; ++i) {
+	let ts = txt.split(/\s+/g);
+	for (let i=0 ; i<ts.length ; ++i) {
 		ts[i] = escapeRegExp(ts[i]);
 	}
 	return ts.join('\\s+');
 }
 
 function empty(obj) {
-	for (var k in obj) {
+	for (let k in obj) {
 		if (obj.hasOwnProperty(k)) {
 			return false;
 		}
@@ -44,7 +44,7 @@ function empty(obj) {
 }
 
 function hasSurrogatePair(s) {
-	for (var i=0 ; i<s.length ; ++i) {
+	for (let i=0 ; i<s.length ; ++i) {
 		if (s.charCodeAt(i) >= 0xD800 && s.charCodeAt(i) <= 0xDBFF) {
 			return true;
 		}

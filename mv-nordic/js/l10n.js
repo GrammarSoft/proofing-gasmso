@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2021 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Linguistic backend by Vitec MV (https://vitec-mv.com/)
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
@@ -18,9 +18,7 @@
  */
 'use strict';
 
-/* globals session */
 
-/* exported l10n */
 let l10n = {};
 
 l10n.lang = 'da';
@@ -135,14 +133,14 @@ l10n.s = {
 		TITLE_OPTIONS: 'Indstillinger',
 		TITLE_SIDEBAR: 'Grammateket',
 		TXT_COMMA_ABOUT: "Når du har fået tjekket din tekst for stavning og grammatik, kan du efterfølgende få tjekket din tekst for kommatering. Kommaforslag foreslår kommaer i din tekst eller retter fejl i tekstens kommatering.\n\nDu får en forklaring af reglerne bag de kommaer, programmet foreslår eller markerer som fejl - og kan på den måde lære at sætte komma, samtidig med at du får hjælp. Programmet følger reglerne for kommatering med startkomma - også kendt som grammatisk komma eller 'kryds og bolle'-komma.\n\nKommaforslag er integreret i Grammateket.",
-		TXT_COMMA_COPYRIGHT: 'Copyright 2016-2019 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af Vitec MV, Part of Vitec Software Group.',
+		TXT_COMMA_COPYRIGHT: 'Copyright 2016-2021 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af Vitec MV, Part of Vitec Software Group.',
 		TXT_COMMA_HINT: 'Vil du have tjekket din markering eller hele teksten?',
 		TXT_COMMA_INTRO: 'Du kan også vælge at springe direkte til Kommaforslag for at få tjekket dine kommaer.',
 		TXT_COMMA_LINKS: 'Fra 4. klasse kan eleverne bruge forslagene til at reflektere over egen kommasætning. De tre niveauer i indstillingsmenuen leder frem mod videns- og færdighedsmål efter 6. klasse (niveau 1-2) og efter 9.-10. klasse (niveau 3).\n\nHar du brug for inspiration til brug af Kommaforslag i undervisningen, så <a href="https://www.vitec-mv.com/dk/support/kommaforslag/inspirationsmateriale-til-kommaforslag" target="_blank">følg linket</a>.',
 		TXT_COMMA_SUPPORT: 'Besøg vores website på <a href="https://vitec-mv.com/" target="_blank">vitec-mv.com</a>. Kommaforslag <a href="https://vitec-mv.com/" target="_blank">hjælp</a>.',
 		TXT_DICTIONARY_HINT: 'Her kan du tilføje, rette eller fjerne ord fra din ordbog.',
 		TXT_GRAMMAR_ABOUT: 'Med Grammateket kan du tjekke din tekst for stavning, grammatik og efterfølgende for kommatering vha. Kommaforslag.\n\nDu får hjælp til:\n<ul>\n<li>Stavekontrol</li>\n<li>Sammensatte ord</li>\n<li>Nutids-r</li>\n<li>Kort og lang tillægsform</li>\n<li>Kommatering</li>\n</ul>\n\nGrammateket kan bruges når du arbejder med læse- og skriveværktøjerne IntoWords og CD-ORD. Grammateket giver også adgang til nemt opslag i IntoWords Ordbog (baseret på Den Danske Ordbog).',
-		TXT_GRAMMAR_COPYRIGHT: 'Copyright 2016-2019 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af Vitec MV, Part of Vitec Software Group.',
+		TXT_GRAMMAR_COPYRIGHT: 'Copyright 2016-2021 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af Vitec MV, Part of Vitec Software Group.',
 		TXT_GRAMMAR_HINT: 'Vil du have tjekket din markering eller hele teksten?',
 		TXT_GRAMMAR_INTRO: 'Først skal du tjekke din tekst for stavning og grammatik.',
 		TXT_GRAMMAR_SUPPORT: 'Besøg vores website på <a href="https://www.vitec-mv.com/dk/support/grammateket/" target="_blank">vitec-mv.com</a>. Grammateket <a href="https://www.vitec-mv.com/dk/support/grammateket/" target="_blank">hjælp</a>.',
@@ -353,7 +351,7 @@ l10n.s = {
 		TITLE_SIDEBAR: 'Grammateket',
 		TXT_DICTIONARY_HINT: 'Här kan du lägga till, rätta eller ta bort ord från din ordbok.',
 		TXT_GRAMMAR_ABOUT: 'Med Grammateket kan du kontrollera din text för stavning och vissa vanliga grammtiska fel.\n\nDu får hjälp med:\n<ul>\n<li>Rättstavning</li>\n<li>Sammansatta ord</li>\n<li>Korrekt användning av <b>vart</b></li>\n<li>Att skilja mellan <b>de</b> och <b>dem</b> istället för "dom"</li>\n</ul>\n\nGrammateket kan användas när du arbetar med läs- och skrivverktygen IntoWords och CD-ORD. Grammateket ger också tillgång till lätt uppslag i IntoWords Ordbok.',
-		TXT_GRAMMAR_COPYRIGHT: 'Copyright 2019',
+		TXT_GRAMMAR_COPYRIGHT: 'Copyright 2019-2020',
 		TXT_GRAMMAR_HINT: 'Vill du kontrollera den markerade texten eller hela texten?',
 		TXT_GRAMMAR_INTRO: 'Först ska du kontrollera din text för rättstavning och grammatik.',
 		TXT_GRAMMAR_OPTIONS: '<ul><li><label class="crbox"><input type="checkbox" class="opt_onlyConfident"><span class="checkbox"></span><span data-l10n="LBL_OPT_ONLY_CONFIDENT">…</span></label></li><li><label class="crbox"><input type="checkbox" class="opt_ignVartVerb"><span class="checkbox"></span><span data-l10n="LBL_OPT_IGNORE_VART_VERB">…</span></label></li><li><label class="crbox"><input type="checkbox" class="opt_ignDomAll"><span class="checkbox"></span><span data-l10n="LBL_OPT_IGNORE_DOM_ALL">…</span></label><ul><li><label class="crbox"><input type="checkbox" class="opt_ignDomDefinite"><span class="checkbox"></span><span data-l10n="LBL_OPT_IGNORE_DOM_DEFINITE">…</span></label></li><li><label class="crbox"><input type="checkbox" class="opt_ignDomSubjobj"><span class="checkbox"></span><span data-l10n="LBL_OPT_IGNORE_DOM_SUBJOBJ">…</span></label></li><li><label class="crbox"><input type="checkbox" class="opt_ignDomPrep"><span class="checkbox"></span><span data-l10n="LBL_OPT_IGNORE_DOM_PREP">…</span></label></li></ul></li><li><label class="crbox"><input type="checkbox" class="opt_ignMaj"><span class="checkbox"></span><span data-l10n="LBL_OPT_IGNORE_MAJ">…</span></label></li></ul>',

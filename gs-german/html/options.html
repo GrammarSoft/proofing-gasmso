@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!--
+ Copyright 2016-2021 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
+ Frontend by Tino Didriksen <mail@tinodidriksen.com>
+
+ This project is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This project is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title data-l10n="TITLE_OPTIONS">…</title>
+	<base target="_top">
+	<script defer src="https://retmig.dk/gas/dev/gs-german/vendor/jquery.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://retmig.dk/gas/dev/gs-german/css/shared.css">
+	<link rel="stylesheet" type="text/css" href="https://retmig.dk/gas/dev/gs-german/css/options.css">
+	<script defer src="https://retmig.dk/gas/dev/gs-german/vendor/sprintf.min.js"></script>
+	<script defer src="https://retmig.dk/gas/dev/gs-german/js/impl.js"></script>
+	<script defer src="https://retmig.dk/gas/dev/gs-german/js/l10n.js"></script>
+	<script defer src="https://retmig.dk/gas/dev/gs-german/js/mark-types.js"></script>
+	<script defer src="https://retmig.dk/gas/dev/gs-german/js/shared.js"></script>
+</head>
+<body id="options">
+
+<div id="placeholder" style="height: 3000px; width: 100%;" data-l10n="POP_LOADING">…</div>
+
+<div class="tabbar">
+	<a class="link tab tab-grammar grammar" data-l10n="TAB_GRAMMAR">…</a>
+	<a class="link tab tab-grammar-types grammar" data-l10n="TAB_GRAMMAR_TYPES">…</a>
+	<a class="link tab tab-comma comma" data-l10n="TAB_COMMA">…</a>
+	<a class="link tab tab-comma-types comma" data-l10n="TAB_COMMA_TYPES">…</a>
+</div>
+
+<div class="closable" id="error">
+<div class="closer" tabindex="1">&times;</div>
+<div id="error-text">…</div>
+</div>
+
+<!-- Grammar -->
+<div class="pane pane-grammar grammar">
+<div class="sidebar">
+	<a class="link btnOptionsGrammar" data-l10n="TAB_GRAMMAR_GENERAL">…</a>
+	<a class="link btnWords" data-l10n="TAB_DICTIONARY">…</a>
+</div>
+<div class="column column-options-grammar">
+	<h2 data-l10n="HDR_GRAMMAR_ETYPES">…</h2>
+	<ul>
+		<li><label class="crbox"><input type="checkbox" class="opt_onlyConfident"><span class="checkbox"></span> <span data-l10n="LBL_OPT_ONLY_CONFIDENT">…</span></label></li>
+		<li><label class="crbox"><input type="checkbox" class="opt_ignUnknown"><span class="checkbox"></span> <span data-l10n="LBL_OPT_IGNORE_UNKNOWN">…</span></label>
+			<ul>
+				<li><label class="crbox"><input type="checkbox" class="opt_ignUNames"><span class="checkbox"></span> <span data-l10n="LBL_OPT_IGNORE_UNAMES">…</span></label></li>
+				<li><label class="crbox"><input type="checkbox" class="opt_ignUComp"><span class="checkbox"></span> <span data-l10n="LBL_OPT_IGNORE_UCOMP">…</span></label></li>
+				<li><label class="crbox"><input type="checkbox" class="opt_ignUAbbr"><span class="checkbox"></span> <span data-l10n="LBL_OPT_IGNORE_UABBR">…</span></label></li>
+				<li><label class="crbox"><input type="checkbox" class="opt_ignUOther"><span class="checkbox"></span> <span data-l10n="LBL_OPT_IGNORE_UOTHER">…</span></label></li>
+			</ul>
+		</li>
+		<li><label class="crbox"><input type="checkbox" class="opt_ignMaj"><span class="checkbox"></span> <span data-l10n="LBL_OPT_IGNORE_MAJ">…</span></label></li>
+	</ul>
+
+	<h2 data-l10n="HDR_DISPLAY">…</h2>
+	<ul>
+		<li><label class="crbox"><input type="checkbox" class="opt_color"><span class="checkbox"></span> <span data-l10n="LBL_OPT_COLOR">…</span></label></li>
+	</ul>
+
+	<h2 data-l10n="HDR_DICTIONARY">…</h2>
+	<ul>
+		<li><label class="crbox"><input type="checkbox" class="opt_useDictionary"><span class="checkbox"></span> <span data-l10n="LBL_OPT_USE_DICT">…</span></label> &nbsp; <button type="button" class="btnWordsButton"><span data-l10n="BTN_DICT_EDIT">…</span></button></li>
+	</ul>
+</div>
+<div class="column column-words">
+	<h2 data-l10n="HDR_DICTIONARY">…</h2>
+
+	<span data-l10n="TXT_DICTIONARY_HINT">…</span>
+	<form class="formWordAdd"><input type="text" class="inputAddWord"> <button type="submit" class="btnAddWord" data-l10n="BTN_WORD_ADD">…</button></form>
+
+	<div class="words"></div>
+</div>
+</div>
+
+<!-- Grammar Types -->
+<div class="pane pane-grammar-types grammar">
+<div class="column column-fullwidth column-options-types">
+	<span data-l10n="TXT_GRAMMAR_TYPES_HINT">…</span>
+
+	<div>
+	<button type="button" class="btnTypesAllOn" data-l10n="BTN_TYPES_ALL_ON">…</button>
+	<button type="button" class="btnTypesAllDef" data-l10n="BTN_TYPES_ALL_DEFAULT">…</button>
+	<button type="button" class="btnTypesAllOff" data-l10n="BTN_TYPES_ALL_OFF">…</button>
+	</div>
+
+	<div id="grammar-types"></div>
+</div>
+</div>
+
+<!-- Comma -->
+<div class="pane pane-comma comma">
+<div class="column column-options-comma">
+	<h2 data-l10n="HDR_COMMA_DISPLAY">…</h2>
+	<ul>
+		<li><label class="crbox"><input type="checkbox" class="auto_toggle" data-types-off="^%(nko|ok|nok|ko)(-|$)"><span class="checkbox"></span> <span data-l10n="LBL_OPT_ONLYGREEN">…</span></label></li>
+		<li><label class="crbox"><input type="checkbox" class="auto_toggle" data-types-on="^%ko(-|$)"><span class="checkbox"></span> <span data-l10n="LBL_OPT_OPTIONAL">…</span></label></li>
+		<li><label class="crbox"><input type="checkbox" class="auto_toggle" data-types-on="^%(k|nok|ko)-appo(-|$)"><span class="checkbox"></span> <span data-l10n="LBL_OPT_APPOSITION">…</span></label></li>
+		<li><label class="crbox"><input type="checkbox" class="auto_toggle" data-types-on="^%(k|nok|ko)-list(-|$)"><span class="checkbox"></span> <span data-l10n="LBL_OPT_LISTING">…</span></label></li>
+		<li><label class="crbox"><input type="checkbox" class="auto_toggle" data-types-on="^%(k|nok|ko)-paren(-|$)"><span class="checkbox"></span> <span data-l10n="LBL_OPT_PARENTHETICAL">…</span></label></li>
+		<li><label class="crbox"><input type="checkbox" class="auto_toggle" data-types-on="^%(ok|nko)(-|$)"><span class="checkbox"></span> <span data-l10n="LBL_OPT_EXPLANATION">…</span></label></li>
+	</ul>
+	<ul>
+		<li><label class="crbox"><input type="checkbox" class="opt_maybe"><span class="checkbox"></span> <span data-l10n="LBL_OPT_SHOWOPTIONAL">…</span></label></li>
+		<li><label class="crbox"><input type="checkbox" class="opt_color"><span class="checkbox"></span> <span data-l10n="LBL_OPT_COLOR">…</span></label></li>
+	</ul>
+</div>
+</div>
+
+<!-- Comma Types -->
+<div class="pane pane-comma-types comma">
+<div class="column column-fullwidth column-options-types">
+	<span data-l10n="TXT_COMMA_TYPES_HINT">…</span>
+
+	<div>
+	<button type="button" class="btnTypesAllOn" data-l10n="BTN_TYPES_ALL_ON">…</button>
+	<button type="button" class="btnTypesAllDef" data-l10n="BTN_TYPES_ALL_DEFAULT">…</button>
+	<button type="button" class="btnTypesAllOff" data-l10n="BTN_TYPES_ALL_OFF">…</button>
+	</div>
+
+	<div id="comma-types"></div>
+</div>
+</div>
+
+</body>
+</html>
