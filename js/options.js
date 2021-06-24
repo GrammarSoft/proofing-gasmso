@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2021 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -17,43 +17,82 @@
  */
 'use strict';
 
-/* globals escHTML */
-/* globals g_conf_defaults */
-/* globals marking_types */
-/* globals google */
-/* globals g_tool:true */
-/* globals l10n */
+let g_options_dirty = {};
+let g_save_timer = null;
+let g_can_comma = false;
+let g_can_grammar = false;
 
-function saveConfig() {
-	// Danish
-	g_conf.opt_ignUnknown = false;
-	if (g_conf.opt_ignUNames && g_conf.opt_ignUComp && g_conf.opt_ignUAbbr && g_conf.opt_ignUOther) {
-		g_conf.opt_ignUnknown = true;
+function commitOptions(e) {
+	if (e) {
+		delete e['returnValue'];
+	}
+	if (g_save_timer) {
+		clearTimeout(g_save_timer);
+	}
+	if ($.isEmptyObject(g_options_dirty)) {
+		return;
 	}
 
-	// Swedish
-	g_conf.opt_ignDomAll = false;
-	if (g_conf.opt_ignDomDefinite && g_conf.opt_ignDomSubjobj && g_conf.opt_ignDomPrep) {
-		g_conf.opt_ignDomAll = true;
-	}
+	$.ajax({
+		url: ROOT_URL_GRAMMAR + '/callback.php',
+		type: 'POST',
+		dataType: 'json',
+		headers: {HMAC: g_access_token.hmac},
+		data: {
+			a: 'options-save',
+			os: JSON.stringify(g_options_dirty),
+		},
+	});
 
-	for (let k in g_conf) {
-		if (!g_conf.hasOwnProperty(k)) {
+	for (let svc in g_options_dirty) {
+		if (!g_options_dirty.hasOwnProperty(svc)) {
 			continue;
 		}
-		if (typeof g_conf[k] === 'boolean') {
-			$('.'+k).prop('checked', g_conf[k]);
+
+		let nv = ls_get_try('options-'+svc);
+		if (nv) {
+			nv = JSON.parse(nv);
 		}
-		else if (typeof g_conf[k] === 'number') {
-			$('.'+k+'[value='+g_conf[k]+']').prop('checked', g_conf[k]);
+		else {
+			nv = {};
+		}
+
+		for (let key in g_options_dirty[svc]) {
+			if (!g_options_dirty[svc].hasOwnProperty(key)) {
+				continue;
+			}
+			if (!nv.hasOwnProperty(key)) {
+				nv[key] = {};
+			}
+			for (let k in g_options_dirty[svc][key]) {
+				let v = g_options_dirty[svc][key][k];
+				nv[key][k] = v;
+				if (key === 'types' && v === 'd') {
+					delete nv[key][k];
+				}
+			}
+			if ($.isEmptyObject(nv[key])) {
+				delete nv[key];
+			}
+		}
+
+		if ($.isEmptyObject(nv)) {
+			ls_del('options-'+svc);
+		}
+		else {
+			ls_set_try('options-'+svc, JSON.stringify(nv));
 		}
 	}
 
-	let nv = JSON.stringify(g_conf);
-	if (nv !== g_conf_json) {
-		ls_set_try('config', nv);
-		g_conf_json = nv;
+	//console.log(g_options_dirty);
+	g_options_dirty = {};
+}
+
+function commitOptionsLater() {
+	if (g_save_timer) {
+		clearTimeout(g_save_timer);
 	}
+	g_save_timer = setTimeout(commitOptions, 2000);
 }
 
 function dictionaryDelete() {
@@ -97,6 +136,43 @@ function attachDictionaryClicks() {
 	$('.btnWordDelete').off().click(dictionaryDelete);
 }
 
+function queueOption(e, key, k, v) {
+	let comma = $(e).closest('.pane').hasClass('comma');
+	let svc = comma ? g_can_comma : g_can_grammar;
+
+	if (!g_options_dirty.hasOwnProperty(svc)) {
+		g_options_dirty[svc] = {
+			config: {},
+			types: {},
+		};
+	}
+	g_options_dirty[svc][key][k] = v;
+	commitOptionsLater();
+	//console.log([e, svc, k, v]);
+}
+
+function typeChanged() {
+	let k = $(this).attr('name');
+	let v = $(this).val();
+
+	queueOption(this, 'types', k, v);
+
+	toggleAutoToggles();
+}
+
+function typesAllTo(e, v) {
+	e = $(e).closest('.pane');
+	let comma = e.hasClass('comma');
+	let svc = comma ? g_can_comma : g_can_grammar;
+
+	e.find('input[type="radio"][value="'+v+'"]').each(function() {
+		let r = $(this);
+		r.prop('checked', true);
+		queueOption(this, 'types', r.attr('name'), v);
+	});
+	toggleAutoToggles();
+}
+
 function getState() {
 	g_access_token = ls_get('access-token', g_access_token_defaults);
 	try {
@@ -107,14 +183,22 @@ function getState() {
 	session.locale = l10n_detectLanguage();
 	l10n_world();
 
-	if (impl_canComma() && impl_canGrammar()) {
-		$('.tabbar').show();
+	let can_comma = g_can_comma = impl_canComma();
+	let can_grammar = g_can_grammar = impl_canGrammar();
+
+	if (!can_comma) {
+		$('.comma').remove();
 	}
 	else {
-		$('.tabbar').hide();
+		can_comma = loadOptions(can_comma);
+	}
+	if (!can_grammar) {
+		$('.grammar').remove();
+	}
+	else {
+		can_grammar = loadOptions(can_grammar);
 	}
 
-	loadConfig();
 	loadDictionary();
 
 	$('.words').html('');
@@ -125,8 +209,215 @@ function getState() {
 	}
 	attachDictionaryClicks();
 
-	saveConfig();
-	itw_speak_attach(document.body);
+	let iters = [
+		['#comma-types', marking_types_comma, can_comma, g_can_comma],
+		['#grammar-types', marking_types_grammar, can_grammar, g_can_grammar],
+		];
+
+	for (let it=0 ; it<iters.length ; ++it) {
+		if (iters[it][3] && _live_options[iters[it][3]].hasOwnProperty('config')) {
+			let conf = _live_options[iters[it][3]].config;
+			for (let k in conf) {
+				if (!conf.hasOwnProperty(k)) {
+					continue;
+				}
+				if (typeof conf[k] === 'boolean') {
+					$('.'+k).prop('checked', conf[k]);
+				}
+				else if (typeof conf[k] === 'number') {
+					$('.'+k+'[value='+conf[k]+']').prop('checked', conf[k]);
+				}
+			}
+		}
+
+		let types = $(iters[it][0]);
+		if (types.length) {
+			let ts = iters[it][1];
+			let html = '<table class="table-striped">';
+			html += '<thead><tr><th class="left">Type</th><th>+</th><th class="default"></th><th>-</th></tr></thead>';
+			html += '<tfoot><tr><th class="left">Type</th><th>+</th><th class="default"></th><th>-</th></tr></tfoot>';
+			html += '<tbody>';
+			for (let i=0 ; i<ts.length ; ++i) {
+				let t = ts[i];
+				let tt = marking_types[t][0];
+				if (t.indexOf('%nok') === 0) {
+					tt += ' (<span class="type-nok">'+l10n_translate('LBL_CTYPE_PROHIBITED')+'</span>)';
+				}
+				else if (t.indexOf('%ko') === 0) {
+					tt += ' (<span class="type-ko">'+l10n_translate('LBL_CTYPE_OPTIONAL')+'</span>)';
+				}
+				else if (t === '%k' || t.indexOf('%k-') === 0) {
+					tt += ' (<span class="type-k">'+l10n_translate('LBL_CTYPE_REQUIRED')+'</span>)';
+				}
+				else if (t.indexOf('%ok-') === 0) {
+					tt += ' (<span class="type-ok">'+l10n_translate('LBL_CTYPE_INFORMATIVE')+'</span>)';
+				}
+				else if (t.indexOf('%nko-') === 0) {
+					tt += ' (<span class="type-nko">'+l10n_translate('LBL_CTYPE_INFORMATIVE')+'</span>)';
+				}
+				/*
+				else {
+					tt += ' (<span class="type-other">'+l10n_translate('LBL_TYPE_OTHER')+'</span>)';
+				}
+				//*/
+				let ts_s = escHTML(t);
+				let ts_id = slugify(t);
+
+				let sel_on = '';
+				let sel_def = '';
+				let sel_off = '';
+				if (!iters[it][2].hasOwnProperty('types') || !iters[it][2].types.hasOwnProperty(t)) {
+					sel_def = ' checked';
+				}
+				else {
+					if (iters[it][2].types[t]) {
+						sel_on = ' checked';
+					}
+					else {
+						sel_off = ' checked';
+					}
+				}
+
+				let def_on = '';
+				let def_off = '';
+				if (g_options_default.types[t]) {
+					def_on = ' class="default"';
+				}
+				else {
+					def_off = ' class="default"';
+				}
+
+				html += '<tr><td title="'+ts_s+'">'+tt+'</td><td'+def_on+'><input type="radio" name="'+ts_s+'" id="1-'+ts_id+'" value="1"'+sel_on+'></td><td><input type="radio" name="'+ts_s+'" id="d-'+ts_id+'" value="d"'+sel_def+'></td><td'+def_off+'><input type="radio" name="'+ts_s+'" id="0-'+ts_id+'" value="0"'+sel_off+'></td></tr>';
+			}
+			html += '</tbody>';
+			html += '</table>';
+			types.html(html);
+
+			types.find('input[type="radio"]').change(typeChanged);
+		}
+	}
+
+	impl_attachTTS(document.body);
+}
+
+function cache_regexp(e, p, x) {
+	let c_x = e.data(p);
+	if (!c_x) {
+		c_x = new RegExp(x);
+		e.data(p, c_x);
+	}
+	return c_x;
+}
+
+function autoToggleTypes() {
+	let prop = $(this).prop('checked');
+	let on = $(this).attr('data-types-on');
+	let off = $(this).attr('data-types-off');
+
+	if (on) {
+		on = cache_regexp($(this), 'types-on-regex', on);
+
+		let ts = Object.keys(marking_types);
+		for (let i=0 ; i<ts.length ; ++i) {
+			let t = ts[i];
+			let ts_id = slugify(t);
+			if (on.test(t)) {
+				let v = prop ? 1 : 0;
+				let e = $('#'+v+'-'+ts_id);
+				e.prop('checked', true);
+				queueOption(e, 'types', t, v);
+			}
+		}
+	}
+
+	if (off) {
+		off = cache_regexp($(this), 'types-off-regex', off);
+
+		let ts = Object.keys(marking_types);
+		for (let i=0 ; i<ts.length ; ++i) {
+			let t = ts[i];
+			let ts_id = slugify(t);
+			if (off.test(t)) {
+				let v = prop ? 0 : 1;
+				let e = $('#'+v+'-'+ts_id);
+				e.prop('checked', true);
+				queueOption(e, 'types', t, v);
+			}
+		}
+	}
+
+	toggleAutoToggles();
+}
+
+function toggleAutoToggles() {
+	$('.auto_toggle').each(function() {
+		let on = $(this).attr('data-types-on');
+		let off = $(this).attr('data-types-off');
+
+		if (on) {
+			on = cache_regexp($(this), 'types-on-regex', on);
+			$(this).prop('indeterminate', true);
+
+			let all_on = true;
+			let all_off = true;
+			let ts = Object.keys(marking_types);
+			for (let i=0 ; i<ts.length ; ++i) {
+				let t = ts[i];
+				let ts_id = slugify(t);
+				if (on.test(t)) {
+					if ($('#1-'+ts_id).prop('checked') || (g_options_default.types[t] && $('#d-'+ts_id).prop('checked'))) {
+						all_on = all_on & true;
+						all_off = false;
+					}
+					else if ($('#0-'+ts_id).prop('checked') || (!g_options_default.types[t] && $('#d-'+ts_id).prop('checked'))) {
+						all_off = all_off & true;
+						all_on = false;
+					}
+				}
+			}
+
+			if (all_on) {
+				$(this).prop('indeterminate', false);
+				$(this).prop('checked', true);
+			}
+			if (all_off) {
+				$(this).prop('indeterminate', false);
+				$(this).prop('checked', false);
+			}
+		}
+
+		if (off) {
+			off = cache_regexp($(this), 'types-off-regex', off);
+			$(this).prop('indeterminate', true);
+
+			let all_on = true;
+			let all_off = true;
+			let ts = Object.keys(marking_types);
+			for (let i=0 ; i<ts.length ; ++i) {
+				let t = ts[i];
+				let ts_id = slugify(t);
+				if (off.test(t)) {
+					if ($('#1-'+ts_id).prop('checked') || (g_options_default.types[t] && $('#d-'+ts_id).prop('checked'))) {
+						all_on = all_on & true;
+						all_off = false;
+					}
+					else if ($('#0-'+ts_id).prop('checked') || (!g_options_default.types[t] && $('#d-'+ts_id).prop('checked'))) {
+						all_off = all_off & true;
+						all_on = false;
+					}
+				}
+			}
+
+			if (all_on) {
+				$(this).prop('indeterminate', false);
+				$(this).prop('checked', false);
+			}
+			if (all_off) {
+				$(this).prop('indeterminate', false);
+				$(this).prop('checked', true);
+			}
+		}
+	});
 }
 
 function showPane(e, w) {
@@ -134,7 +425,13 @@ function showPane(e, w) {
 	$(e).addClass('selected');
 	$('.pane,.column').hide();
 	$('.pane-'+w).show();
-	$('.pane-'+w).find('.sidebar .link').first().click();
+	let fb = $('.pane-'+w).find('.sidebar .link').first();
+	if (fb.length) {
+		fb.click();
+	}
+	else {
+		$('.pane-'+w).find('.column').first().show();
+	}
 }
 
 function showColumn(e, w) {
@@ -151,6 +448,9 @@ function initOptions() {
 		},
 	});
 
+	if (typeof window.g_tool === 'string') {
+		g_tool = window.g_tool;
+	}
 	if (window.location.search.indexOf('tool=Comma') !== -1) {
 		g_tool = 'Comma';
 	}
@@ -192,6 +492,22 @@ function initOptions() {
 	$('.tab-comma').click(function() {
 		showPane(this, 'comma');
 	});
+	$('.tab-grammar-types').click(function() {
+		showPane(this, 'grammar-types');
+	});
+	$('.tab-comma-types').click(function() {
+		showPane(this, 'comma-types');
+	});
+
+	$('.btnTypesAllOn').click(function() {
+		typesAllTo(this, '1');
+	});
+	$('.btnTypesAllDef').click(function() {
+		typesAllTo(this, 'd');
+	});
+	$('.btnTypesAllOff').click(function() {
+		typesAllTo(this, '0');
+	});
 
 	$('.formWordAdd').submit(function(e) {
 		let w = $.trim($('.inputAddWord').val());
@@ -227,21 +543,25 @@ function initOptions() {
 			v = parseInt(v);
 		}
 
-		if (k === 'opt_ignUnknown') {
-			g_conf.opt_ignUNames = g_conf.opt_ignUComp = g_conf.opt_ignUAbbr = g_conf.opt_ignUOther = v;
-		}
-		if (k === 'opt_ignDomAll') {
-			g_conf.opt_ignDomDefinite = g_conf.opt_ignDomSubjobj = g_conf.opt_ignDomPrep = v;
-		}
-
-		g_conf[k] = v;
-		//console.log([k, v, g_conf]);
-		saveConfig();
+		queueOption(this, 'config', k, v);
 	});
+
+	$('.auto_toggle').change(autoToggleTypes);
+	toggleAutoToggles();
 
 	$('#error').hide();
 	$('.tab-' + g_tool.toLowerCase()).click();
 	$('#placeholder').remove();
+
+	// ToDo: Add https://github.com/GoogleChromeLabs/page-lifecycle ?
+	window.addEventListener('beforeunload', commitOptions);
+	window.addEventListener('unload', commitOptions);
+	window.addEventListener('pagehide', commitOptions);
+	document.addEventListener('visibilitychange', function(e) {
+		if (document.visibilityState !== 'visible') {
+			commitOptions();
+		}
+	});
 }
 
 $(function() {

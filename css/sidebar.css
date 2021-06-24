@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2021 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -17,7 +17,7 @@
  */
 
 body {
-	padding-bottom: 74px;
+	padding-bottom: 150px;
 }
 
 label span {
@@ -140,6 +140,12 @@ label span {
 .marking-yellow.alt:after {
 	content: " ?";
 }
+.marking-info {
+	color: #1693eb;
+}
+.marking-info.alt:after {
+	content: " ⓘ";
+}
 .marking-green {
 	color: #419641;
 }
@@ -213,6 +219,13 @@ label span {
 	margin-left: 0;
 	margin-right: 5px;
 }
+.icon-language-blue {
+	background-image: url('../imgs/icon-lang.png');
+	width: 20px;
+	height: 20px;
+	margin-left: 0;
+	margin-right: 5px;
+}
 .icon-support-blue {
 	background-image: url('../imgs/icon-support-blue.png');
 	width: 15px;
@@ -275,7 +288,7 @@ footer .btn-panel {
 	display: inline-block;
 	flex-grow: 1;
 	width: 50%;
-	padding: 9px 0;
+	padding: 9px 3px;
 	background-color: #f4f4f4;
 }
 footer .btn-panel-wide {

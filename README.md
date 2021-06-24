@@ -15,7 +15,7 @@ Released as GPLv3+ - except `imgs/logo*` and `js/mark-types.js`
 
 ## Deployment
 * Edit `js/impl.js` lines 21-27
-* Edit `mso.xml` and `html/*` to replace all instances of `https://retmig.dk/gas/release/1.1.0/` with your chosen `ROOT_URL_SELF` value
+* Edit `mso.xml` and `html/*` to replace all instances of `https://retmig.dk/gas/rmkf/2.0.0/` with your chosen `ROOT_URL_SELF` value
 * Remove all lines matching `//console.log`
 
 # External Dependencies

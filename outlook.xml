@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="TaskPaneApp">
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="MailApp">
 
   <!-- IMPORTANT! Id must be unique for your add-in, if you reuse this manifest ensure that you change this id to a new GUID. -->
-  <Id>e7fa4ce0-d447-416a-8587-1069e4203e4a</Id>
+  <Id>e7fa4ce0-d447-416a-8587-1069e4203e4b</Id>
 
   <!--Version. Updates from the store only get triggered if there is a version change. -->
-  <Version>2.0.0</Version>
+  <Version>1.0.0</Version>
   <ProviderName>GrammarSoft ApS</ProviderName>
   <DefaultLocale>da-DK</DefaultLocale>
-  <DisplayName DefaultValue="RetMig og Kommaforslag" />
-  <Description DefaultValue="RetMig og Kommaforslag" />
+  <DisplayName DefaultValue="RetMig og Kommaforslag (dev)" />
+  <Description DefaultValue="RetMig og Kommaforslag (dev)" />
   <IconUrl DefaultValue="https://retmig.dk/gas/rmkf/2.0.0/imgs/logo-32.png" />
 
   <SupportUrl DefaultValue="https://grammarsoft.com/" />
@@ -21,42 +21,41 @@
   </AppDomains>
 
   <Hosts>
-    <Host Name="Document" />
+    <Host Name="Mailbox" />
   </Hosts>
   <Requirements>
-    <Sets DefaultMinVersion="1.3">
-      <Set Name="WordApi" MinVersion="1.3"/>
+    <Sets>
+      <Set Name="Mailbox" MinVersion="1.3"/>
     </Sets>
   </Requirements>
-  <DefaultSettings>
-    <SourceLocation DefaultValue="https://retmig.dk/gas/rmkf/2.0.0/html/sidebar.html?host=msoffice" />
-  </DefaultSettings>
 
-  <Permissions>ReadWriteDocument</Permissions>
+  <FormSettings>
+    <Form xsi:type="ItemRead">
+      <DesktopSettings>
+        <SourceLocation DefaultValue="https://retmig.dk/gas/rmkf/2.0.0/html/sidebar.html?host=outlook" />
+        <RequestedHeight>450</RequestedHeight>
+      </DesktopSettings>
+    </Form>
+  </FormSettings>
 
-  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
+  <Permissions>ReadWriteItem</Permissions>
+  <Rule xsi:type="RuleCollection" Mode="Or">
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read"/>
+  </Rule>
 
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <Requirements>
+      <bt:Sets DefaultMinVersion="1.3">
+        <bt:Set Name="Mailbox"/>
+      </bt:Sets>
+    </Requirements>
     <Hosts>
-      <Host xsi:type="Document">
+      <Host xsi:type="MailHost">
         <DesktopFormFactor>
-          <GetStarted>
-            <Title resid="GS.RMKF.GetStarted.Title"/>
-            <Description resid="GS.RMKF.GetStarted.Description"/>
-            <LearnMoreUrl resid="GS.RMKF.GetStarted.LearnMore"/>
-          </GetStarted>
-
-          <ExtensionPoint xsi:type="PrimaryCommandSurface">
+          <ExtensionPoint xsi:type="MessageComposeCommandSurface">
             <OfficeTab id="TabHome">
               <Group id="GS.RMKF.Group1">
                 <Label resid="GS.RMKF.Group1Label" />
-                <!-- Icons. Required sizes 16,32,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX. -->
-                <!-- Use PNG icons. All URLs on the resources section must use HTTPS. -->
-                <Icon>
-                  <bt:Image size="16" resid="GS.RMKF.logo16" />
-                  <bt:Image size="32" resid="GS.RMKF.logo32" />
-                  <bt:Image size="80" resid="GS.RMKF.logo80" />
-                </Icon>
-
                 <Control xsi:type="Button" id="GS.RMKF.TaskpaneButton">
                   <Label resid="GS.RMKF.TaskpaneButton.Label" />
                   <Supertip>
@@ -70,7 +69,6 @@
                   </Icon>
 
                   <Action xsi:type="ShowTaskpane">
-                    <TaskpaneId>ButtonId1</TaskpaneId>
                     <SourceLocation resid="GS.RMKF.Taskpane" />
                   </Action>
                 </Control>
@@ -88,19 +86,16 @@
         <bt:Image id="GS.RMKF.logo80" DefaultValue="https://retmig.dk/gas/rmkf/2.0.0/imgs/logo-80.png" />
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="GS.RMKF.Taskpane" DefaultValue="https://retmig.dk/gas/rmkf/2.0.0/html/sidebar.html" />
-        <bt:Url id="GS.RMKF.GetStarted.LearnMore" DefaultValue="https://grammarsoft.com/" />
+        <bt:Url id="GS.RMKF.Taskpane" DefaultValue="https://retmig.dk/gas/rmkf/2.0.0/html/sidebar.html?host=outlook" />
       </bt:Urls>
       <!-- ShortStrings max characters==125. -->
       <bt:ShortStrings>
-        <bt:String id="GS.RMKF.TaskpaneButton.Label" DefaultValue="RetMig og Kommaforslag" />
-        <bt:String id="GS.RMKF.Group1Label" DefaultValue="RetMig og Kommaforslag" />
-        <bt:String id="GS.RMKF.GetStarted.Title" DefaultValue="Kom godt i gang med RetMig og Kommaforslag!" />
+        <bt:String id="GS.RMKF.TaskpaneButton.Label" DefaultValue="RetMig og Kommaforslag (dev)" />
+        <bt:String id="GS.RMKF.Group1Label" DefaultValue="RetMig og Kommaforslag (dev)" />
       </bt:ShortStrings>
       <!-- LongStrings max characters==250. -->
       <bt:LongStrings>
         <bt:String id="GS.RMKF.TaskpaneButton.Tooltip" DefaultValue="Klik for at åbne RetMig og Kommaforslag" />
-        <bt:String id="GS.RMKF.GetStarted.Description" DefaultValue="RetMig og Kommaforslag er nu installeret. Gå til fanen Hjem og klik på RetMig og Kommaforslag for at komme i gang." />
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>

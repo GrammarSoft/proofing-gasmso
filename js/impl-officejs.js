@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2021 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -205,7 +205,7 @@ function _impl_showOptions_cb(asyncResult) {
 }
 
 function impl_showOptions(g_tool) {
-	Office.context.ui.displayDialogAsync(ROOT_URL_SELF + '/html/options.html?tool='+g_tool, { width: 800, height: 600, displayInIframe: true }, _impl_showOptions_cb);
+	Office.context.ui.displayDialogAsync(ROOT_URL_SELF + '/html/options.html?host=msoffice&tool='+g_tool, { width: 800, height: 600, displayInIframe: true }, _impl_showOptions_cb);
 }
 
 function _impl_getPars(context, pars) {
@@ -248,7 +248,7 @@ function impl_getAllPars() {
 }
 
 function impl_showDictionary(text) {
-	Office.context.ui.displayDialogAsync(ROOT_URL_SELF + '/html/dictionary.html?text='+text, { width: 800, height: 600, displayInIframe: true });
+	Office.context.ui.displayDialogAsync(ROOT_URL_SELF + '/html/dictionary.html?host=msoffice&text='+text, { width: 800, height: 600, displayInIframe: true });
 }
 
 function impl_Init(func) {

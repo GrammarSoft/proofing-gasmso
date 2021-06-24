@@ -1,5 +1,6 @@
 /*!
  * Copyright 2016-2021 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -17,37 +18,8 @@
  */
 'use strict';
 
-let Const = {
-	NonLetter: /[^\d\wa-zA-ZéÉöÖæÆøØåÅ.,!;:]+/ig,
-};
+const html = <?=json_encode(file_get_contents('../../'.preg_replace('~^.+?/([^/]+)/js/load-options\.js$~', '$1', $_SERVER['PHP_SELF']).'/html/options.html'), JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);?>;
 
-// From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-function escapeRegExp(string) {
-	return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
-}
-
-function escapeRegExpTokens(txt) {
-	let ts = txt.split(/\s+/g);
-	for (let i=0 ; i<ts.length ; ++i) {
-		ts[i] = escapeRegExp(ts[i]);
-	}
-	return ts.join('\\s+');
-}
-
-function empty(obj) {
-	for (let k in obj) {
-		if (obj.hasOwnProperty(k)) {
-			return false;
-		}
-	}
-	return true;
-}
-
-function hasSurrogatePair(s) {
-	for (let i=0 ; i<s.length ; ++i) {
-		if (s.charCodeAt(i) >= 0xD800 && s.charCodeAt(i) <= 0xDBFF) {
-			return true;
-		}
-	}
-	return false;
-}
+let doc = document.open('text/html', 'replace');
+doc.write(html);
+doc.close();

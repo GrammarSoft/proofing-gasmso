@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2021 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
@@ -18,33 +18,33 @@
  */
 'use strict';
 
-const VERSION_MAJOR = 1;
-const VERSION_MINOR = 1;
+const VERSION_MAJOR = 2;
+const VERSION_MINOR = 0;
 const VERSION_PATCH = 0;
-const ROOT_URL_SELF = 'https://retmig.dk/gas/release/1.1.0/';
-const ROOT_URL_GRAMMAR = 'https://retmig.dk/';
+const PRODUCT_NAME = 'RetMig & Kommaforslag';
+const PRODUCT_DOMAIN = 'retmig.dk';
+const ROOT_URL_SELF = 'https://'+PRODUCT_DOMAIN+'/gas/rmkf/2.0.0/';
+const ROOT_URL_GRAMMAR = 'https://'+PRODUCT_DOMAIN+'/';
 const CADUCEUS_URL = 'wss://gramtrans.com/caduceus/';
 const SIGNOUT_URL = ROOT_URL_GRAMMAR+'/logout?';
 
 const VERSION = ''+VERSION_MAJOR+'.'+VERSION_MINOR+'.'+VERSION_PATCH;
 
-/* exported g_conf_defaults */
-const g_conf_defaults = {
-	opt_onlyConfident: false,
-	opt_ignUnknown: false,
-	opt_ignUNames: false,
-	opt_ignUComp: false,
-	opt_ignUAbbr: false,
-	opt_ignUOther: false,
-	opt_ignMaj: false,
-	opt_useDictionary: true,
-	opt_color: false,
-	opt_maybe: true,
-	opt_green: false,
-	opt_longExplanations: true,
-	opt_mvNordic: false,
-	opt_speak: true,
-	opt_level: 3,
+const SERVICES = {
+	Comma: 'comma',
+	Grammar: 'danproof',
+};
+
+const g_options_default = {
+	config: {
+		opt_useDictionary: true,
+		opt_color: false,
+		opt_maybe: true,
+		opt_longExplanations: true,
+		opt_speak: false,
+		opt_uiLang: 'da',
+	},
+	types: {},
 };
 
 function _impl_callback(data) {
@@ -65,22 +65,56 @@ function impl_dataKeepalive() {
 }
 
 function impl_startLogin() {
+	$('.btnLanguages').hide();
 	loginKeepalive(true);
 }
 
 function impl_canGrammar() {
-	return (g_access_hmac.sess_caps & (Defs.CAP_DANPROOF | Defs.CAP_DANPROOF_TRIAL | Defs.CAP_ADMIN));
+	if (g_access_hmac.sess_caps & (Defs.CAP_DANPROOF | Defs.CAP_DANPROOF_TRIAL | Defs.CAP_ADMIN)) {
+		return SERVICES.Grammar;
+	}
+	return false;
 }
 
 function impl_canComma() {
-	return (g_access_hmac.sess_caps & (Defs.CAP_COMMA | Defs.CAP_COMMA_TRIAL | Defs.CAP_ADMIN));
+	if (g_access_hmac.sess_caps & (Defs.CAP_COMMA | Defs.CAP_COMMA_TRIAL | Defs.CAP_ADMIN)) {
+		return SERVICES.Comma;
+	}
+	return false;
 }
 
 function impl_openDictionary(word) {
 	window.open('https://ordnet.dk/ddo/ordbog?query='+encodeURIComponent(word), 'Den Danske Ordbog');
 }
 
-function impl_loadDictionary() {
+function impl_loadUserdata() {
+	let svcs = object_join(SERVICES, ',');
+
+	_impl_callback({'a': 'options-load', 's': svcs}).done(function(rv) {
+		if (!rv.hasOwnProperty('options')) {
+			return;
+		}
+
+		let rvs = [];
+
+		for (let s in rv.options) {
+			delete rv.options[s]['_loaded'];
+			g_options[s] = object_copy(rv.options[s]);
+			g_options_json[s] = JSON.stringify(g_options[s]);
+			ls_set_try('options-'+s, g_options_json[s]);
+			rvs.push(loadOptions(s));
+		}
+
+		['config', 'types'].forEach(function(key) {
+			_live_options[key] = object_copy(g_options_default[key]);
+			for (let i=0 ; i<rvs.length ; ++i) {
+				for (let k in rvs[i][key]) {
+					_live_options[key][k] = rvs[i][key][k];
+				}
+			}
+		});
+	});
+
 	_impl_callback({'a': 'dict-load'}).done(function(rv) {
 		if (!rv.hasOwnProperty('dict')) {
 			return;
@@ -111,5 +145,5 @@ function impl_removeFromDictionary(word) {
 	_impl_callback({'a': 'dict-del', 'w': word});
 }
 
-function itw_speak_attach() {
+function impl_attachTTS() {
 }

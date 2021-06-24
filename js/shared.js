@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2021 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -30,7 +30,7 @@ if (!Array.prototype.unique) {
 }
 
 // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign#Polyfill
-if (typeof Object.assign != 'function') {
+if (typeof Object.assign !== 'function') {
 	// Must be writable: true, enumerable: false, configurable: true
 	Object.defineProperty(Object, "assign", {
 		value: function assign(target, varArgs) { // .length of function is 2
@@ -58,6 +58,32 @@ if (typeof Object.assign != 'function') {
 		writable: true,
 		configurable: true,
 	});
+}
+
+function object_copy(a, b, c) {
+	let cp = Object.assign({}, a);
+	if (typeof b === 'object') {
+		cp = Object.assign(cp, b);
+	}
+	if (typeof c === 'object') {
+		cp = Object.assign(cp, c);
+	}
+	return cp;
+}
+
+function object_values(obj) {
+	let vals = [];
+	for (let k in obj) {
+		if (!obj.hasOwnProperty(k)) {
+			continue;
+		}
+		vals.push(obj[k]);
+	}
+	return vals;
+}
+
+function object_join(obj, s) {
+	return object_values(obj).join(s);
 }
 
 // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/repeat#Polyfill
@@ -177,7 +203,6 @@ if (!String.prototype.normalize) {
 	}
 }
 
-/* exported Defs */
 const Defs = {
 	CAP_ADMIN:	  (1 <<	 0),
 	CAP_COMMA:	  (1 <<	 1),
@@ -220,40 +245,31 @@ Defs.TYPE_COMP = Defs.TYPE_COMP_LEFT|Defs.TYPE_COMP_RIGHT;
 // Upper-case because we compare them to DOM nodeName
 let text_nodes = {'ADDRESS': true, 'ARTICLE': true, 'ASIDE': true, 'AUDIO': true, 'BLOCKQUOTE': true, 'BODY': true, 'CANVAS': true, 'DD': true, 'DIV': true, 'DL': true, 'FIELDSET': true, 'FIGCAPTION': true, 'FIGURE': true, 'FOOTER': true, 'FORM': true, 'H1': true, 'H2': true, 'H3': true, 'H4': true, 'H5': true, 'H6': true, 'HEADER': true, 'HGROUP': true, 'HTML': true, 'HR': true, 'LI': true, 'MAIN': true, 'NAV': true, 'NOSCRIPT': true, 'OL': true, 'OUTPUT': true, 'P': true, 'PRE': true, 'SECTION': true, 'TABLE': true, 'TD': true, 'TH': true, 'UL': true, 'VIDEO': true};
 
-/* exported g_dictionary */
 let g_dictionary = {};
-/* exported g_dictionary_json */
 let g_dictionary_json = '{}';
-/* exported _live_dictionary */
 let _live_dictionary = {};
 
-/* exported g_access_token_defaults */
 const g_access_token_defaults = {
 	hmac: '{}',
 	session: '',
 	ai: [],
 };
-/* exported g_access_token */
-let g_access_token = Object.assign({}, g_access_token_defaults);
-/* exported g_access_hmac */
+let g_access_token = object_copy(g_access_token_defaults);
 let g_access_hmac = {};
-/* exported g_keepalive */
 let g_keepalive = null;
-/* exported g_login_channel */
 let g_login_channel = '';
-/* exported g_login_ws */
 let g_login_ws = null;
 
-let g_itw_speaker = null;
-let g_itw_tap = 0;
+let g_tts_speaker = null;
+let g_tts_tap = 0;
 
-/* exported g_conf_json */
-let g_conf_json = JSON.stringify(g_conf_defaults);
+let g_options = {};
+let g_options_json = {};
+let _live_options = {};
 
 // Letters we're likely to see in Danish, Norwegian, Swedish, Greenlandic
 // Can't rely on Unicode escapes or /u modifier because of IE11
 const Letters = '\\d\\wa-zA-ZÂâÊêÎîÔôÛûÃãĨĩÕõŨũÀàÈèÌìÒòÙùÁáÉéÍíÓóÚúÄäËëÏïÖöÜüÆæØøÅåĸ.,!;:';
-/* exported Const */
 const Const = {
 	LetterT: new RegExp('['+Letters+']+', 'i'),
 	NonLetter: new RegExp('[^'+Letters+']+', 'ig'),
@@ -267,20 +283,14 @@ const Const = {
 Const.Split_Array = Const.Split_String.split('');
 Const.Split_Regex = new RegExp('(['+Const.Split_String+'])');
 
-/* exported g_tool */
 let g_tool = null;
-/* exported g_conf */
-let g_conf = Object.assign({}, g_conf_defaults);
-/* exported session */
 let session = {locale: 'da'};
 
 // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-/* exported escapeRegExp */
 function escapeRegExp(string) {
 	return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 }
 
-/* exported escapeRegExpTokens */
 function escapeRegExpTokens(txt) {
 	let ts = txt.split(/\s+/g);
 	for (let i=0 ; i<ts.length ; ++i) {
@@ -289,35 +299,39 @@ function escapeRegExpTokens(txt) {
 	return ts.join('\\s+');
 }
 
-/* exported loadConfig */
-function loadConfig() {
-	if (!g_conf.hasOwnProperty('opt_color')) {
-		//console.log('Initializing g_conf');
-		g_conf = Object.assign({}, g_conf_defaults);
+function loadOptions(s) {
+	let nv = ls_get_try('options-'+s);
+
+	if (nv) {
+		if (g_options_json.hasOwnProperty(s) && nv === g_options_json[s]) {
+			return g_options[s];
+		}
+		g_options_json[s] = nv;
+		nv = JSON.parse(nv);
+	}
+	else {
+		nv = object_copy(g_options_default);
 	}
 
-	let nv = ls_get_try('config');
-	if (!nv) {
-		return;
-	}
-	if (nv === g_conf_json) {
-		return;
-	}
+	_live_options[s] = object_copy(nv);
 
-	g_conf_json = nv;
-	nv = JSON.parse(nv);
-	for (let k in nv) {
-		if (!nv.hasOwnProperty(k)) {
-			continue;
+	['config', 'types'].forEach(function(key) {
+		_live_options[s][key] = object_copy(g_options_default[key]);
+		if (!_live_options.hasOwnProperty(key)) {
+			_live_options[key] = object_copy(g_options_default[key]);
 		}
-		if (g_conf[k] !== nv[k]) {
-			//console.log([k, g_conf[k], nv[k]]);
-			g_conf[k] = nv[k];
+		if (nv.hasOwnProperty(key)) {
+			for (let k in nv[key]) {
+				////console.log([k, nv[key][k]]);
+				_live_options[s][key][k] = nv[key][k];
+				_live_options[key][k] = nv[key][k];
+			}
 		}
-	}
+	});
+
+	return nv;
 }
 
-/* exported loadDictionary */
 function loadDictionary() {
 	let nv = ls_get_try('dictionary');
 	if (!nv) {
@@ -341,12 +355,10 @@ function loadDictionary() {
 	}
 }
 
-/* exported isInDictionary */
 function isInDictionary(word) {
 	return _live_dictionary.hasOwnProperty(word);
 }
 
-/* exported addToDictionary */
 function addToDictionary(word) {
 	if ($.trim(word).length === 0) {
 		return false;
@@ -368,7 +380,6 @@ function addToDictionary(word) {
 	return false;
 }
 
-/* exported removeFromDictionary */
 function removeFromDictionary(word) {
 	if ($.trim(word).length === 0) {
 		return false;
@@ -390,36 +401,35 @@ function removeFromDictionary(word) {
 	return false;
 }
 
-/* exported is_upper */
 function is_upper(ch) {
 	return (ch === ch.toUpperCase() && ch !== ch.toLowerCase());
 }
 
-/* exported uc_first */
 function uc_first(str) {
 	return str.substr(0, 1).toUpperCase() + str.substr(1);
 }
 
-/* exported lc_first */
 function lc_first(str) {
 	return str.substr(0, 1).toLowerCase() + str.substr(1);
 }
 
-/* exported escHTML */
 function escHTML(t) {
 	let nt = t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
 	////console.log([t, nt]);
 	return nt;
 }
 
-/* exported decHTML */
 function decHTML(t) {
 	let nt = t.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&');
 	////console.log([t, nt]);
 	return nt;
 }
 
-/* exported haveLocalStorage */
+function slugify(t) {
+	let nt = t.replace(/%+/g, 'p').replace(/@+/g, 'a').replace(/[^A-Za-z0-9]+/g, '-');
+	return nt;
+}
+
 function haveLocalStorage() {
 	try {
 		let storage = window.localStorage;
@@ -433,7 +443,6 @@ function haveLocalStorage() {
 	return true;
 }
 
-/* exported ls_get_try */
 function ls_get_try(key) {
 	let v = null;
 	try {
@@ -444,12 +453,11 @@ function ls_get_try(key) {
 	return v;
 }
 
-/* exported ls_get */
 function ls_get(key, def) {
 	let v = ls_get_try(key);
 	if (v === null) {
 		if (def !== null && typeof def === 'object') {
-			v = Object.assign({}, def);
+			v = object_copy(def);
 		}
 		else {
 			v = def;
@@ -461,7 +469,6 @@ function ls_get(key, def) {
 	return v;
 }
 
-/* exported ls_set_try */
 function ls_set_try(key, val) {
 	try {
 		window.localStorage.setItem(key, val);
@@ -470,12 +477,10 @@ function ls_set_try(key, val) {
 	}
 }
 
-/* exported ls_set */
 function ls_set(key, val) {
 	ls_set_try(key, JSON.stringify(val));
 }
 
-/* exported ls_del */
 function ls_del(key) {
 	window.localStorage.removeItem(key);
 }
@@ -506,13 +511,24 @@ function findTextNodes(nodes) {
 	return tns;
 }
 
-/* exported sanitize_result */
 function sanitize_result(txt) {
 	// Special case
 	txt = txt.replace(/@x-etype-case/g, '@upper');
 
 	// Workaround for bug https://trello.com/c/ixmc92EB
 	txt = txt.replace(/.'.\t@proper\n"/g, '.\n"');
+
+	// Workaround for bug https://trello.com/c/JbXrn5ub
+	txt = txt.replace(/\n-[LR]\n/g, '\n-\n').replace(/ -[LR] /g, ' - ');
+
+	// Swap markers that the backend has mangled
+	txt = txt.replace(new RegExp('<s(\\d+)>(\n<[^\\d]+?)</s(\\d+)>', 'g'), function(m, p1, p2, p3, o, s) {
+		//console.log([m, p1, p2, p3]);
+		if (parseInt(p1) > parseInt(p3)) {
+			return '</s'+p3+'>'+p2+'<s'+p1+'>';
+		}
+		return m;
+	});
 
 	// Swap markers that the backend has mangled due to sentence-ending parentheticals
 	for (let i=0 ; i<Defs.MAX_RQ_SIZE ; ++i) {
@@ -526,6 +542,8 @@ function sanitize_result(txt) {
 		}
 	}
 
+	txt = txt.replace(/\n_\S+\n/g, '\n');
+
 	// Remove empty sentences
 	txt = txt.replace(/<s\d+>[\s\n]*<\/s\d+>/g, '');
 
@@ -537,8 +555,8 @@ function sanitize_result(txt) {
 	return txt;
 }
 
-/* exported findToSend */
 function findToSend(prefix, word, suffix, casing) {
+	////console.log([prefix, word, suffix, casing]);
 	let prefix_s = prefix.replace(Const.NonLetter, '');
 	let word_s = word.replace(Const.NonLetter, '');
 	let suffix_s = suffix.replace(Const.NonLetter, '');
@@ -726,6 +744,21 @@ function findToSend(prefix, word, suffix, casing) {
 	return false;
 }
 
+function object2tsv(obj) {
+	let rv = '';
+
+	for (let k in obj) {
+		if (!obj.hasOwnProperty(k)) {
+			continue;
+		}
+		rv += k.replace(/\n/g, '\\n').replace(/\t/g, '\\t') + '\t';
+		rv += obj[k].replace(/\n/g, '\\n').replace(/\t/g, '\\t');
+		rv += '\n';
+	}
+
+	return rv;
+}
+
 function object2pot(obj) {
 	let rv = '';
 
@@ -789,12 +822,29 @@ function object2po(obj, base) {
 	return rv;
 }
 
+function l10n_detectLanguage() {
+	l10n.lang = navigator.language;
+	if (!l10n.s.hasOwnProperty(l10n.lang)) {
+		l10n.lang = l10n.lang.replace(/^([^-_]+).*$/, '$1');
+	}
+	if (!l10n.s.hasOwnProperty(l10n.lang)) {
+		l10n.lang = 'da';
+	}
+	return l10n.lang;
+}
+
 function l10n_translate(s) {
 	s = '' + s; // Coerce to string
 
 	// Special case for the version triad
 	if (s === 'VERSION') {
 		return VERSION;
+	}
+	if (s === 'PRODUCT_NAME') {
+		return PRODUCT_NAME;
+	}
+	if (s === 'PRODUCT_DOMAIN') {
+		return PRODUCT_DOMAIN;
 	}
 
 	let l = session.locale;
@@ -807,11 +857,11 @@ function l10n_translate(s) {
 	// If the string doesn't exist in the locale, fall back
 	if (!l10n.s[l].hasOwnProperty(s)) {
 		// Try English
-		if (l10n.s.en.hasOwnProperty(s)) {
+		if (l10n.s.hasOwnProperty('en') && l10n.s.en.hasOwnProperty(s)) {
 			t = l10n.s.en[s];
 		}
 		// ...then Danish
-		else if (l10n.s.da.hasOwnProperty(s)) {
+		else if (l10n.s.hasOwnProperty('da') && l10n.s.da.hasOwnProperty(s)) {
 			t = l10n.s.da[s];
 		}
 		// ...give up and return as-is
@@ -823,12 +873,23 @@ function l10n_translate(s) {
 		t = l10n.s[l][s];
 	}
 
-	let rx = /\{([A-Z0-9_]+)\}/;
-	let m = null;
-	while ((m = rx.exec(t)) !== null) {
-		let nt = l10n_translate(m[1]);
-		t = t.replace(m[0], nt);
-	}
+	let did = false;
+	do {
+		did = false;
+		let rx = /\{([A-Z0-9_]+)\}/g;
+		let ms = [];
+		let m = null;
+		while ((m = rx.exec(t)) !== null) {
+			ms.push(m[1]);
+		}
+		for (let i=0 ; i<ms.length ; ++i) {
+			let nt = l10n_translate(ms[i]);
+			if (nt !== ms[i]) {
+				t = t.replace('{'+ms[i]+'}', nt);
+				did = true;
+			}
+		}
+	} while (did);
 
 	return t;
 };
@@ -853,4 +914,48 @@ function _l10n_world_helper() {
 
 function l10n_world() {
 	$('[data-l10n]').each(_l10n_world_helper);
+	if (typeof l10n_marking_types === 'function') {
+		l10n_marking_types(session.locale);
+	}
 }
+
+function addScript(url) {
+	let script = document.createElement('script');
+	script.src = url;
+	document.body.appendChild(script);
+}
+
+function addScriptDefer(url) {
+	let script = document.createElement('script');
+	script.setAttribute('defer', true);
+	script.src = url;
+	document.body.appendChild(script);
+}
+
+$(window).on('load', function() {
+	if (location.search.indexOf('host=adobe') !== -1) {
+		//console.log('Adobe');
+		addScript('https://retmig.dk/gas/dev/gs-english/vendor/CSInterface.js');
+		addScript('https://retmig.dk/gas/dev/gs-english/vendor/Vulcan.js');
+		addScript('https://retmig.dk/gas/dev/gs-english/js/impl-adobe.js');
+	}
+	else if (location.search.indexOf('host=msoffice') !== -1) {
+		//console.log('MS Office');
+		addScript('https://appsforoffice.microsoft.com/lib/1/hosted/office.js');
+		addScript('https://retmig.dk/gas/dev/gs-english/js/impl-officejs.js');
+	}
+	else if (location.search.indexOf('host=outlook') !== -1) {
+		//console.log('MS Office (Outlook)');
+		addScript('https://appsforoffice.microsoft.com/lib/1/hosted/office.js');
+		addScript('https://retmig.dk/gas/dev/gs-english/js/impl-outlook.js');
+	}
+	else {
+		//console.log('Google');
+		addScript('https://retmig.dk/gas/dev/gs-english/js/impl-gas.js');
+	}
+
+	let id = $(document.body).attr('id');
+	if (id === 'sidebar' || id === 'options' || id === 'dictionary') {
+		addScript('https://retmig.dk/gas/dev/gs-english/js/'+id+'.js');
+	}
+});

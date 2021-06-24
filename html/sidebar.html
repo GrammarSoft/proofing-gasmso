@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
- Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ Copyright 2016-2021 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
  Frontend by Tino Didriksen <mail@tinodidriksen.com>
 
@@ -23,20 +23,17 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title data-l10n="TITLE_SIDEBAR">…</title>
 	<base target="_top">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="https://retmig.dk/gas/release/1.1.0/css/shared.css">
-	<link rel="stylesheet" type="text/css" href="https://retmig.dk/gas/release/1.1.0/css/sidebar.css">
-	<script src="https://retmig.dk/gas/release/1.1.0/vendor/murmurhash3js.min.js"></script>
-	<script src="https://retmig.dk/gas/release/1.1.0/js/impl.js"></script>
-	<script src="https://retmig.dk/gas/release/1.1.0/js/l10n.js"></script>
-	<script src="https://retmig.dk/gas/release/1.1.0/js/shared.js"></script>
-	<script src="https://retmig.dk/gas/release/1.1.0/js/mark-types.js"></script>
-	<script src="https://retmig.dk/gas/release/1.1.0/js/sidebar.js"></script>
-
-	<script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-	<script src="https://retmig.dk/gas/release/1.1.0/js/impl-officejs.js"></script>
+	<script defer src="https://retmig.dk/gas/rmkf/2.0.0/vendor/jquery.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://retmig.dk/gas/rmkf/2.0.0/css/shared.css">
+	<link rel="stylesheet" type="text/css" href="https://retmig.dk/gas/rmkf/2.0.0/css/sidebar.css">
+	<script defer src="https://retmig.dk/gas/rmkf/2.0.0/vendor/murmurhash3js.min.js"></script>
+	<script defer src="https://retmig.dk/gas/rmkf/2.0.0/js/impl.js"></script>
+	<script defer src="https://retmig.dk/gas/rmkf/2.0.0/js/l10n.js"></script>
+	<script defer src="https://retmig.dk/gas/rmkf/2.0.0/js/l10n-local.js"></script>
+	<script defer src="https://retmig.dk/gas/rmkf/2.0.0/js/shared.js"></script>
+	<script defer src="https://retmig.dk/gas/rmkf/2.0.0/js/mark-types.js"></script>
 </head>
-<body>
+<body id="sidebar">
 
 <div id="placeholder" style="height: 3000px; width: 100%;" data-l10n="POP_LOADING">…</div>
 <div id="working" data-l10n="POP_WORKING">…</div>
@@ -70,6 +67,21 @@
 
 <div class="text center">
 	<button class="btn-lightblue btnCloseSupport" data-l10n="BTN_CLOSE">…</button>
+</div>
+</div>
+
+<div class="sidebar" id="chkLanguages">
+<h1 data-l10n="HDR_LANGUAGES">…</h1>
+<div class="center backed">
+	<button class="btn-lightblue btnLanguage" data-which="en"><span class="smallcaps">eng</span><br>English</button>
+	<br>
+	<button class="btn-lightblue btnLanguage" data-which="de"><span class="smallcaps">deu</span><br>Deutsch</button>
+	<br>
+	<button class="btn-lightblue btnLanguage" data-which="da"><span class="smallcaps">dan</span><br>Dansk</button>
+</div>
+
+<div class="text center">
+	<button class="btn-lightblue btnCloseLanguages" data-l10n="BTN_CLOSE">…</button>
 </div>
 </div>
 
@@ -140,34 +152,14 @@
 </div>
 </div>
 
-<!-- Grammar -->
-
-<div class="sidebar" id="chkWelcomeGrammar">
-<h1 data-l10n="HDR_GRAMMAR">…</h1>
-<div class="text">
-	<span data-l10n="TXT_GRAMMAR_HINT">…</span>
-</div>
-<div class="buttonbar backed">
-	<button class="btn-blue btnCheckAuto" data-l10n="BTN_EXEC_CONTINUOUS">…</button>
-	<button class="btn-orange btnCheckSelected" data-l10n="BTN_EXEC_SELECTED">…</button>
-	<button class="btn-lightblue btnCheckAll" data-l10n="BTN_EXEC_ALL">…</button>
-</div>
-<div class="text chkGrammarToComma">
-<label class="crbox"><input type="checkbox" class="optComma" checked><span class="checkbox"></span><span data-l10n="LBL_COMMA_AFTER">…</span></label>
-</div>
-<div class="text chkProgress">
-	<div class="chkProgressContainer"><div class="chkProgressBar"></div></div>
-</div>
-</div>
-
-<div class="sidebar" id="chkCheckingGrammar">
+<div class="sidebar" id="chkChecking">
 <div class="backed">
 <div class="buttonbar buttonbar-edges buttonbar-wide">
 	<button class="btn-link left btnPrev"><span class="icon icon-previous"></span><span data-l10n="BTN_PREVIOUS">…</span></button>
 	<button class="btn-link btnSeeList"><span data-l10n="BTN_SEEALL">…</span></button>
 	<button class="btn-link right btnNext"><span data-l10n="BTN_NEXT">…</span><span class="icon icon-next"></span></button>
 </div>
-<div class="buttonbar buttonbar-edges buttonbar-wide">
+<div class="buttonbar buttonbar-wide">
 	<button class="btn-lightblue btnAccept"><span class="icon icon-accept"></span><span class="txtAccept">…</span></button>
 	<button class="btn-orange btnIgnorePopup"><span class="icon icon-ignore"></span><span data-l10n="BTN_IGNORE">…</span><span class="icon icon-ignore-caret"></span></button>
 	<button class="btn-blue btnInput"><span class="icon icon-input"></span><span data-l10n="BTN_EDIT">…</span></button>
@@ -194,8 +186,28 @@
 	<div class="chkExplainShort"><div class="chkExplainShortText">…</div><a class="link chkExplainMore"><span data-l10n="BTN_EXPL_MORE">…</span> <img class="rpl-vars" src="{ROOT_URL_SELF}/imgs/arrow-blue-down.png"></a></div>
 	<div class="chkExplainLong"><div class="chkExplainLongText">…</div><a class="link chkExplainLess"><span data-l10n="BTN_EXPL_LESS">…</span> <img class="rpl-vars" src="{ROOT_URL_SELF}/imgs/arrow-blue-up.png"></a></div>
 </div>
-<div class="text center">
+<div class="text center" id="chkAddWord">
 	<button class="btn-lightblue btn-big btnAddWord"><span class="icon icon-add"></span><span data-l10n="BTN_DICT_ADD">…</span></button>
+</div>
+<div class="text chkProgress">
+	<div class="chkProgressContainer"><div class="chkProgressBar"></div></div>
+</div>
+</div>
+
+<!-- Grammar -->
+
+<div class="sidebar" id="chkWelcomeGrammar">
+<h1 data-l10n="HDR_GRAMMAR">…</h1>
+<div class="text">
+	<span data-l10n="TXT_GRAMMAR_HINT">…</span>
+</div>
+<div class="buttonbar backed">
+	<button class="btn-blue btnCheckAuto" data-l10n="BTN_EXEC_CONTINUOUS">…</button>
+	<button class="btn-orange btnCheckSelected" data-l10n="BTN_EXEC_SELECTED">…</button>
+	<button class="btn-lightblue btnCheckAll" data-l10n="BTN_EXEC_ALL">…</button>
+</div>
+<div class="text chkGrammarToComma">
+<label class="crbox"><input type="checkbox" class="optComma" checked><span class="checkbox"></span><span data-l10n="LBL_COMMA_AFTER">…</span></label>
 </div>
 <div class="text chkProgress">
 	<div class="chkProgressContainer"><div class="chkProgressBar"></div></div>
@@ -227,29 +239,6 @@
 </div>
 </div>
 
-<div class="sidebar" id="chkCheckingComma">
-<div class="backed">
-<div class="buttonbar buttonbar-edges">
-	<button class="btn-link left btnPrev"><span class="icon icon-previous"></span><span data-l10n="BTN_PREVIOUS">…</span></button>
-	<button class="btn-link btnSeeList"><span data-l10n="BTN_SEEALL">…</span></button>
-	<button class="btn-link right btnNext"><span data-l10n="BTN_NEXT">…</span><span class="icon icon-next"></span></button>
-</div>
-<div class="buttonbar">
-	<button class="btn-lightblue btnAccept"><span class="icon icon-accept"></span><span class="txtAccept">…</span></button>
-	<button class="btn-orange btnIgnorePopup"><span class="icon icon-ignore"></span><span data-l10n="BTN_IGNORE">…</span><span class="icon icon-ignore-caret"></span></button>
-</div>
-</div>
-<h1 class="chkType" data-l10n="HDR_YOUR_TEXT">…</h1>
-<div class="text chkSentence">…</div>
-<div class="text chkExplain">
-	<div class="chkExplainShort"><div class="chkExplainShortText">…</div><a class="link chkExplainMore"><span data-l10n="BTN_EXPL_MORE">…</span> <img class="rpl-vars" src="{ROOT_URL_SELF}/imgs/arrow-blue-down.png"></a></div>
-	<div class="chkExplainLong"><div class="chkExplainLongText">…</div><a class="link chkExplainLess"><span data-l10n="BTN_EXPL_LESS">…</span> <img class="rpl-vars" src="{ROOT_URL_SELF}/imgs/arrow-blue-up.png"></a></div>
-</div>
-<div class="text chkProgress">
-	<div class="chkProgressContainer"><div class="chkProgressBar"></div></div>
-</div>
-</div>
-
 <div class="sidebar" id="chkDoneComma">
 <h1 data-l10n="HDR_COMMA_DONE">…</h1>
 <div class="buttonbar backed">
@@ -267,6 +256,7 @@
 <footer class="center">
 	<a class="btn-panel btnRestart"><span class="icon icon-restart-blue"></span><span data-l10n="BTN_RESTART">…</span></a>
 	<a class="btn-panel btnSupport"><span class="icon icon-support-blue"></span><span data-l10n="BTN_SUPPORT">…</span></a>
+	<a class="btn-panel btnLanguages"><span class="icon icon-language-blue"></span><span data-l10n="BTN_LANGUAGES">…</span></a>
 	<a class="btn-panel btnOptions"><span class="icon icon-options-blue"></span><span data-l10n="BTN_OPTIONS">…</span></a>
 	<a class="btn-panel btnLogout"><span class="icon icon-logout-blue"></span><span data-l10n="BTN_LOGOUT">…</span></a>
 </footer>

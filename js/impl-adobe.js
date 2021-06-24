@@ -69,6 +69,12 @@ function impl_showDictionary(text) {
 }
 
 function impl_Init(func) {
+	let csInterface = new CSInterface();
+	let extPath = csInterface.getSystemPath(SystemPath.EXTENSION);
+
+	csInterface.evalScript('try {$.evalFile("'+extPath+'/jsx/json2.jsx");} catch(e) {}');
+	csInterface.evalScript('try {$.evalFile("'+extPath+'/jsx/impl_csxs.jsx");} catch(e) {}');
+
 	func();
 	//l10n_world();
 }

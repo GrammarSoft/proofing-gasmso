@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2021 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
@@ -8,7 +8,6 @@
  */
 'use strict';
 
-/* exported types_red */
 let types_red = {
 	"@error": "@error",
 	"@comp-": "@comp-",
@@ -23,7 +22,6 @@ let types_red = {
 	"@hyphen-suffix": "@hyphen-suffix",
 };
 
-/* exported types_yellow */
 let types_yellow = {
 	"@proper": "@proper",
 	"@new": "@new",
@@ -31,13 +29,16 @@ let types_yellow = {
 	"@check!": "@check!",
 };
 
-/* exported types_comp_right */
+let types_info = {};
+
 let types_comp_right = new RegExp('@comp-|@comp( |$)');
 
-/* exported types_to_upper */
 let types_to_upper = new RegExp('@upper( |$)');
+let types_to_lower = new RegExp('@lower( |$)');
 
-/* exported marking_types */
+let marking_types_comma = [];
+let marking_types_grammar = [];
+
 let marking_types = {
 	"@x-etype-list": [
 		"@x-etype-list",
@@ -365,7 +366,6 @@ let marking_types = {
 	]
 };
 
-/* exported types_mv */
 let types_mv = {};
 
 for (let k in marking_types) {
@@ -377,6 +377,7 @@ for (let k in marking_types) {
 		v[1] = '<i>' + marking_types[k][3] + '</i>';
 	}
 	marking_types[k] = v;
+	marking_types_grammar.push(k);
 	types_mv[k] = true;
 }
 
@@ -424,6 +425,7 @@ for (let k in ctypes) {
 	let rx = new RegExp('^<h3>([^]+?)<\/h3>([^]+)$');
 	let ms = rx.exec(ctypes[k][0]);
 	marking_types[k] = [ms[1], ms[2], ctypes[k][1]];
+	marking_types_comma.push(k);
 
 	if (/^%ko-/.test(k)) {
 		types_yellow[k] = k;
@@ -435,9 +437,20 @@ for (let k in ctypes) {
 
 ctypes = null;
 
-/* exported types_dictionary */
 let types_dictionary = [];
 for (let k in types_yellow) {
 	types_dictionary.push('('+escapeRegExp(k)+')');
 }
 types_dictionary = new RegExp('('+types_dictionary.join('|')+')( |$)');
+
+function l10n_marking_types(lang) {
+	g_options_default.types = {};
+	for (let k in marking_types) {
+		if (/^%(ok|nko)-/.test(k)) {
+			g_options_default.types[k] = 0;
+		}
+		else {
+			g_options_default.types[k] = 1;
+		}
+	}
+}
