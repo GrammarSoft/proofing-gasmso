@@ -88,7 +88,7 @@
         <bt:Image id="GS.RMKF.logo80" DefaultValue="https://retmig.dk/gas/rmkf/2.0.0/imgs/logo-80.png" />
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="GS.RMKF.Taskpane" DefaultValue="https://retmig.dk/gas/rmkf/2.0.0/html/sidebar.html" />
+        <bt:Url id="GS.RMKF.Taskpane" DefaultValue="https://retmig.dk/gas/rmkf/2.0.0/html/sidebar.html?host=msoffice" />
         <bt:Url id="GS.RMKF.GetStarted.LearnMore" DefaultValue="https://grammarsoft.com/" />
       </bt:Urls>
       <!-- ShortStrings max characters==125. -->
