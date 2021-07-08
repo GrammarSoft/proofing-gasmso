@@ -1,0 +1,298 @@
+/*!
+ * Copyright 2016-2021 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Frontend by Tino Didriksen <mail@tinodidriksen.com>
+ *
+ * This project is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This project is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this project.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+body {
+	padding-bottom: 150px;
+}
+
+label span {
+	max-width: calc(100% - 30px);
+}
+
+#popupIgnore {
+	position: absolute;
+	z-index: 100;
+	margin-top: 10px;
+}
+
+#working {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background-color: #fff;
+	opacity: 0.75;
+	z-index: 9999999;
+	text-align: center;
+	padding-top: 200px;
+	font-size: 24px;
+}
+
+.arrow-orange {
+	border-color: #f5a623;
+	color: #f5a623;
+}
+.arrow-up {
+	position: absolute;
+	top: 0;
+	right: 15px;
+	margin-top: -5px;
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 5px solid;
+}
+
+.suggestion {
+	position: relative;
+	display: block;
+	margin-top: 18px;
+	padding-right: 38px;
+}
+.errorListEntry {
+	position: relative;
+	display: block;
+	margin-top: 9px;
+	padding: 9px 25px 9px 3px;
+}
+.errorListEntry:nth-child(odd) {
+	background-color: #f4f4f4;
+}
+.suggestion span, .errorListEntry > span {
+	display: block;
+	overflow-wrap: break-word;
+}
+.suggestion:first-child span {
+	font-weight: bold;
+	font-style: italic;
+}
+.suggestion-lookup {
+	display: block;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.chkExplainLess img, .chkExplainMore img {
+	margin-top: 4px;
+}
+
+.chkProgressContainer {
+	width: 100%;
+	height: 15px;
+	background-color: #eee;
+	border-radius: 7px;
+	position: relative;
+}
+.chkProgressBar {
+	height: 100%;
+	background-color: #0da9f6;
+	border-radius: 7px;
+	position: absolute;
+}
+
+.chkExplainLongText, .chkExplainShortText {
+	margin-bottom: 14px;
+}
+
+.marking {
+	display: inline-block;
+	padding-left: 3px;
+	padding-right: 3px;
+	margin-left: 1px;
+	margin-right: 1px;
+	font-style: italic;
+	font-weight: bold;
+}
+.marking-grammar {
+}
+.marking-comma {
+	font-style: normal;
+	border: 1px solid;
+	border-radius: 3px;
+}
+.marking-red {
+	color: #c12e2a;
+}
+.marking-red.alt:after {
+	content: " ✗";
+}
+.marking-yellow {
+	color: #eb9316;
+}
+.marking-yellow.alt:after {
+	content: " ?";
+}
+.marking-info {
+	color: #1693eb;
+}
+.marking-info.alt:after {
+	content: " ⓘ";
+}
+.marking-green {
+	color: #419641;
+}
+.marking-green.alt:after {
+	content: " ✓";
+}
+
+#chkSuggestions {
+	font-size: 16px;
+}
+#chkSuggestions span {
+	color: #c12e2a;
+}
+
+.font-icon {
+	font-size: 18px;
+}
+
+.icon {
+	display: inline-block;
+	background-repeat: no-repeat;
+	width: 19px;
+	height: 19px;
+	margin-right: 3px;
+	margin-left: -3px;
+}
+.icon-input {
+	background-image: url('../imgs/icon-input.png');
+	width: 16px;
+	height: 18px;
+}
+.icon-accept {
+	background-image: url('../imgs/icon-accept.png');
+	width: 23px;
+	height: 18px;
+	margin-left: 0;
+}
+.icon-discard {
+	background-image: url('../imgs/icon-discard.png');
+	width: 18px;
+	height: 18px;
+	margin-left: 1px;
+}
+.icon-ignore {
+	background-image: url('../imgs/icon-ignore.png');
+	width: 18px;
+	height: 14px;
+	margin-top: 2px;
+}
+.icon-ignore-caret {
+	background-image: url('../imgs/icon-ignore-caret.png');
+	width: 12px;
+	height: 9px;
+	margin-right: -3px;
+	margin-left: 3px;
+	margin-top: 3px;
+}
+.icon-lookup {
+	background-image: url('../imgs/icon-lookup.png');
+	margin: 0;
+}
+.icon-options {
+	background-image: url('../imgs/icon-options.png');
+	width: 20px;
+	height: 20px;
+}
+.icon-options-blue {
+	background-image: url('../imgs/icon-options-blue.png');
+	width: 20px;
+	height: 20px;
+	margin-left: 0;
+	margin-right: 5px;
+}
+.icon-language-blue {
+	background-image: url('../imgs/icon-lang.png');
+	width: 20px;
+	height: 20px;
+	margin-left: 0;
+	margin-right: 5px;
+}
+.icon-support-blue {
+	background-image: url('../imgs/icon-support-blue.png');
+	width: 15px;
+	height: 20px;
+	margin-left: 0;
+	margin-right: 7px;
+}
+.icon-restart-blue {
+	background-image: url('../imgs/icon-restart-blue.png');
+	width: 16px;
+	height: 20px;
+	margin-left: 0;
+	margin-right: 5px;
+}
+.icon-logout-blue {
+	background-image: url('../imgs/icon-logout-blue.png');
+	width: 24px;
+	height: 21px;
+	margin-left: 0;
+	margin-right: 5px;
+}
+.icon-previous {
+	background-image: url('../imgs/icon-previous.png');
+	width: 10px;
+	height: 18px;
+	margin: 0;
+}
+.icon-next {
+	background-image: url('../imgs/icon-next.png');
+	width: 10px;
+	height: 18px;
+	margin: 0;
+}
+.btnAddWord .icon-add {
+	background-image: url('../imgs/icon-add.png');
+	width: 30px;
+	height: 23px;
+	margin-top: -2px;
+}
+.btnAddWord.disabled .icon-add {
+	background-image: url('../imgs/icon-add-disabled.png');
+	margin-top: 3px;
+}
+
+.logo-mv {
+	width: 150px;
+}
+
+.btnCheckAuto {
+	display: none;
+}
+
+footer {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	background-color: #eaf7fe;
+}
+footer .btn-panel {
+	display: inline-block;
+	flex-grow: 1;
+	width: 50%;
+	padding: 9px 3px;
+	background-color: #f4f4f4;
+}
+footer .btn-panel-wide {
+	flex-grow: 2;
+	width: 100%;
+	background-color: #eaf7fe;
+}
