@@ -485,7 +485,7 @@ function ls_del(key) {
 	window.localStorage.removeItem(key);
 }
 
-function findTextNodes(nodes) {
+function findTextNodes(nodes, filter) {
 	let tns = [], wsx = /\S/;
 
 	if (!$.isArray(nodes)) {
@@ -500,13 +500,17 @@ function findTextNodes(nodes) {
 		}
 		else {
 			for (let i=0 ; i < node.childNodes.length ; ++i) {
-				_findTextNodes(node.childNodes[i]);
+				if (typeof filter !== 'function' || filter(node.childNodes[i])) {
+					_findTextNodes(node.childNodes[i]);
+				}
 			}
 		}
 	}
 
 	for (let i=0 ; i<nodes.length ; ++i) {
-		_findTextNodes(nodes[i]);
+		if (typeof filter !== 'function' || filter(nodes[i])) {
+			_findTextNodes(nodes[i]);
+		}
 	}
 	return tns;
 }
@@ -920,6 +924,7 @@ function l10n_world() {
 }
 
 function addScript(url) {
+	console.log('Loading '+url);
 	let script = document.createElement('script');
 	script.src = url;
 	document.body.appendChild(script);
@@ -935,22 +940,30 @@ function addScriptDefer(url) {
 $(window).on('load', function() {
 	if (location.search.indexOf('host=adobe') !== -1) {
 		console.log('Adobe');
-		addScript('https://retmig.dk/gas/dev/gs-english/vendor/CSInterface.js');
-		addScript('https://retmig.dk/gas/dev/gs-english/vendor/Vulcan.js');
-		addScript('https://retmig.dk/gas/dev/gs-english/js/impl-adobe.js');
+		addScript(ROOT_URL_SELF+'/vendor/CSInterface.js');
+		addScript(ROOT_URL_SELF+'/vendor/Vulcan.js');
+		addScript(ROOT_URL_SELF+'/js/impl-adobe.js');
 	}
 	else if (location.search.indexOf('host=msoffice') !== -1) {
 		console.log('MS Office');
 		addScript('https://appsforoffice.microsoft.com/lib/1/hosted/office.js');
-		addScript('https://retmig.dk/gas/dev/gs-english/js/impl-officejs.js');
+		addScript(ROOT_URL_SELF+'/js/impl-officejs.js');
+	}
+	else if (location.search.indexOf('host=outlook') !== -1) {
+		console.log('MS Office (Outlook)');
+		addScript('https://appsforoffice.microsoft.com/lib/1/hosted/office.js');
+		addScript(ROOT_URL_SELF+'/vendor/findAndReplaceDOMText.js');
+		addScript(ROOT_URL_SELF+'/js/impl-outlook.js');
 	}
 	else {
 		console.log('Google');
-		addScript('https://retmig.dk/gas/dev/gs-english/js/impl-gas.js');
+		addScript(ROOT_URL_SELF+'/js/impl-gas.js');
 	}
 
 	let id = $(document.body).attr('id');
 	if (id === 'sidebar' || id === 'options' || id === 'dictionary') {
-		addScript('https://retmig.dk/gas/dev/gs-english/js/'+id+'.js');
+		// Delay ever so slightly to force other scripts to load first
+		// No, defer doesn't work. No, async doesn't work either.
+		setTimeout(function() {addScript(ROOT_URL_SELF+'/js/'+id+'.js');}, 100);
 	}
 });

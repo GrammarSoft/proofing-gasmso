@@ -23,31 +23,37 @@ if (!chdir("../../$where/$version/")) {
 	die("Could not chdir!\n");
 }
 
-echo "Setting MSO version\n";
+echo "Setting MS Office version\n";
 $mso = file_get_contents('mso.xml');
 $mso = preg_replace('~<Version>[^<>]*</Version>~', "<Version>$version</Version>", $mso);
 $mso = str_replace(' (dev)', '', $mso);
 file_put_contents('mso.xml', $mso);
 
+echo "Setting MS Outlook version\n";
+$mso = file_get_contents('outlook.xml');
+$mso = preg_replace('~<Version>[^<>]*</Version>~', "<Version>$version</Version>", $mso);
+$mso = str_replace(' (dev)', '', $mso);
+file_put_contents('outlook.xml', $mso);
+
+echo "Replacing Grammar URI\n";
+echo shell_exec("replace '/comma-eng/' '/' -- $(grep -rl '/comma-eng/' *)");
+
 echo "Replacing URI path\n";
 echo shell_exec("replace 'https://retmig.dk/gas/dev/' 'https://commatizer.com/gas/dev/' -- $(grep -rl 'https://retmig.dk/gas/dev/' *)");
 echo shell_exec("replace '/dev/gs-english/' '/$where/$version/' -- $(grep -rl '/dev/gs-english/' *)");
 
-echo "Replacing Grammar URI\n";
-echo shell_exec("replace 'https://commatizer.com/comma-eng/' 'https://commatizer.com/' -- $(grep -rl 'https://commatizer.com/comma-eng/' *)");
-
 echo "Commenting console.log\n";
 echo shell_exec("replace 'console.log' '//console.log' -- $(grep -rl 'console.log' *)");
 
-exit(0); // @@@@@@@@@@
 if ($where !== 'comma-eng') {
 	exit(0);
 }
 $cwd = getcwd();
 chdir('/home/komma/repo-gas/git');
-echo shell_exec('git checkout release-gs-eng');
+echo shell_exec('git checkout release-gs-eng || git checkout --orphan release-gs-eng');
+echo shell_exec('rm -rfv * .[a-f]* .[h-z]*');
 echo shell_exec("rsync -avcL --delete '$cwd/' ./ '--exclude=*.php' '--exclude=*.po' '--exclude=*.pot' '--exclude=*.svn' '--exclude=*.git'");
 echo shell_exec('git add -A .');
 echo shell_exec("git commit --all -m 'Release $version'");
-echo shell_exec('git push --all');
+echo shell_exec('git push --all -f');
 echo shell_exec('git checkout master');

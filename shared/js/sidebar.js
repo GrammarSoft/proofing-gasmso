@@ -1270,6 +1270,13 @@ function initSidebar() {
 
 	window.addEventListener('message', loginMessage, false);
 
+	if (!impl_hasSelection()) {
+		$('.btnCheckSelected').hide();
+		$('[data-l10n="TXT_GRAMMAR_HINT"]').attr('data-l10n', 'TXT_GRAMMAR_HINT_NS');
+		$('[data-l10n="TXT_COMMA_HINT"]').attr('data-l10n', 'TXT_COMMA_HINT_NS');
+		$('[data-l10n="BTN_EXEC_ALL"]').attr('data-l10n', 'BTN_EXEC_ALL_NS');
+	}
+
 	if (typeof window.g_tool === 'string') {
 		g_tool = window.g_tool;
 	}

@@ -68,6 +68,10 @@ function impl_showDictionary(text) {
 	return google.script.run.withFailureHandler(showError).showDictionary(text);
 }
 
+function impl_hasSelection() {
+	return true;
+}
+
 function impl_Init(func) {
 	let csInterface = new CSInterface();
 	let extPath = csInterface.getSystemPath(SystemPath.EXTENSION);
