@@ -23,11 +23,17 @@ if (!chdir("../../$where/$version/")) {
 	die("Could not chdir!\n");
 }
 
-echo "Setting MSO version\n";
+echo "Setting MS Office version\n";
 $mso = file_get_contents('mso.xml');
 $mso = preg_replace('~<Version>[^<>]*</Version>~', "<Version>$version</Version>", $mso);
 $mso = str_replace(' (dev)', '', $mso);
 file_put_contents('mso.xml', $mso);
+
+echo "Setting MS Outlook version\n";
+$mso = file_get_contents('outlook.xml');
+$mso = preg_replace('~<Version>[^<>]*</Version>~', "<Version>$version</Version>", $mso);
+$mso = str_replace(' (dev)', '', $mso);
+file_put_contents('outlook.xml', $mso);
 
 echo "Replacing Grammar URI\n";
 echo shell_exec("replace '/comma-deu/' '/' -- $(grep -rl '/comma-deu/' *)");
@@ -39,15 +45,15 @@ echo shell_exec("replace '/dev/gs-german/' '/$where/$version/' -- $(grep -rl '/d
 echo "Commenting console.log\n";
 echo shell_exec("replace 'console.log' '//console.log' -- $(grep -rl 'console.log' *)");
 
-exit(0); // @@@@@@@@@@
 if ($where !== 'comma-deu') {
 	exit(0);
 }
 $cwd = getcwd();
 chdir('/home/komma/repo-gas/git');
-echo shell_exec('git checkout release-gs-deu');
+echo shell_exec('git checkout release-gs-deu || git checkout --orphan release-gs-deu');
+echo shell_exec('rm -rfv * .[a-f]* .[h-z]*');
 echo shell_exec("rsync -avcL --delete '$cwd/' ./ '--exclude=*.php' '--exclude=*.po' '--exclude=*.pot' '--exclude=*.svn' '--exclude=*.git'");
 echo shell_exec('git add -A .');
 echo shell_exec("git commit --all -m 'Release $version'");
-echo shell_exec('git push --all');
+echo shell_exec('git push --all -f');
 echo shell_exec('git checkout master');
