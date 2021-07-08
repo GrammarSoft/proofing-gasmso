@@ -22,186 +22,75 @@ let _impl_storage = {
 	type: null,
 	text: null,
 	dom: null,
+	nodes: [],
+	seenReply: false,
 	};
 
-function _impl_findElement(prefix, word, suffix, func) {
-	$('#working').show();
+function _impl_actInDocument(prefix, word, rpl, suffix, func) {
 	let txt = findToSend(prefix, word, suffix);
 	if (!txt) {
 		showError('ERR_SELECT_NOTFOUND');
 		return false;
 	}
-	console.info('_impl_findElement', txt);
 
-	if (window.outlookContentHandler.findElement(txt)) {
-		if (func) func();
-		_impl_setContentAndReload().then(val => {
-			$('#working').hide();
-		});
-		return true;
-	}
-	else {
-		showError('Could not locate element');
-	}
-}
+	_impl_getEmail(function() {
+		if (/^[ \t]/.test(rpl) && /[ \t]$/.test(txt.prefix)) {
+			rpl = rpl.replace(/^[ \t]+/, '');
+		}
+		if (/^[ \t]/.test(txt.suffix) && /[ \t]$/.test(rpl)) {
+			rpl = rpl.replace(/[ \t]+$/, '');
+		}
 
-function _impl_getPromisifiedBodyContent(coercionType) {
-	let item = Office.context.mailbox.item;
-	let body = item.body;
-	return new Promise((resolve, reject) => {
-		body.getAsync(coercionType, {}, asyncResult => {
-			if (asyncResult.status === "failed") {
-				reject("getAsync(CoercionType.Text) failed with error: " + asyncResult.error.message);
-			}
-			else {
-				resolve(asyncResult.value);
-			}
-		});
-	});
-}
-
-function _impl_setPromisifiedBodyContent(coercionType, content) {
-	let item = Office.context.mailbox.item;
-	let body = item.body;
-	return new Promise((resolve, reject) => {
-		body.setAsync(content, {
-			coercionType: coercionType
-		}, asyncResult => {
-			if (asyncResult.status === "failed") {
-				reject("setAsync() failed with error: " + asyncResult.error.message);
-			}
-			else {
-				resolve(asyncResult);
-			}
-		});
-	});
-
-}
-
-function _impl_getPromisifiedBodyType(body) {
-	return new Promise((resolve, reject) => {
-		body.getTypeAsync(asyncResult => {
-			if (asyncResult.status === "failed") {
-				reject("getTypeAsync failed with error: " + asyncResult.error.message);
-			}
-			else {
-				resolve(asyncResult.value);
-			}
-		});
-	});
-}
-
-function _impl_outlookContentHandlerFactory(coercionType) {
-	switch(coercionType) {
-		case Office.CoercionType.Html:
-			window.outlookContentHandler = new window.outlookHtmlHandler(Office.CoercionType.Html);
-			break;
-		case Office.CoercionType.Text:
-			window.outlookContentHandler = new window.outlookTextHandler(Office.CoercionType.Text);
-			break;
-	}
-}
-
-function _impl_setContentAndReload(before, word, rpl, func) {
-	return new Promise((resolve, reject) => {
-		Office.onReady(info => {
-			let coercionType = window.outlookContentHandler.getCoercionType();
-			let beforeContent = window.outlookContentHandler.getContent();
-			console.info('setContentAndReload set', beforeContent);
-			_impl_setPromisifiedBodyContent(coercionType, beforeContent).then((val) => {
-				_impl_getPromisifiedBodyContent(coercionType).then((content) => {
-					console.info('setContentAndReload get', beforeContent);
-					window.outlookContentHandler.setContent(content, true);
-
-					if (func) {
-						let funcParams = {
-							before: before,
-							after: window.outlookContentHandler.getTextContent(),
-							rpl: rpl,
-						};
-						console.info('_impl_setBodyHTMLAndReload parms', funcParams);
-						func(funcParams);
-					}
-					resolve(true);
-
+		let did_replace = 0;
+		for (let i=0 ; i<_impl_storage.nodes.length ; ++i) {
+			let rv = findAndReplaceDOMText(_impl_storage.nodes[i], {
+				preset: 'prose',
+				find: txt.prefix + txt.word + txt.suffix,
+				replace: txt.prefix + rpl + txt.suffix,
 				});
-			});
+			did_replace += rv.reverts.length;
+		}
+
+		if (!did_replace) {
+			//console.log([rv, txt, rpl]);
+			showError('ERR_SELECT_NOTFOUND');
+			return false;
+		}
+
+		_impl_setEmail(function() {
+			func({before: txt.t, after: txt.prefix + rpl + txt.suffix, rpl: rpl});
 		});
 	});
 }
 
 function impl_selectInDocument(prefix, word, suffix) {
-	_impl_findElement(prefix, word, suffix, didSelect);
+	//console.log('impl_selectInDocument');
+	didSelect();
 }
 
 function impl_replaceInDocument(prefix, word, rpl, suffix) {
-	console.info('impl_replaceInDocument');
-	console.info({
-		prefix: prefix,
-		word: word,
-		rpl: rpl,
-		suffix: suffix});
-
-	if (_impl_findElement(prefix, word, suffix)) {
-		$('#working').show();
-		let before = window.outlookContentHandler.getTextContent();
-		window.outlookContentHandler.replace(word, rpl);
-		_impl_setContentAndReload(before, word, rpl, didReplace).then(val => {
-			$('#working').hide();
-		});
-	}
-	else {
-		showError('Could not find node to replace');
-	}
-
+	//console.log('impl_replaceInDocument');
+	return _impl_actInDocument(prefix, word, rpl, suffix, didReplace);
 }
 
 function impl_replaceInDocumentSilent(prefix, word, rpl, suffix) {
-	console.info('impl_replaceInDocumentSilent');
-	// console.info(prefix, word, rpl, suffix);
-	if (_impl_findElement(prefix, word, suffix)) {
-		$('#working').show();
-		let before = window.outlookContentHandler.getTextContent();
-		window.outlookContentHandler.replace(word, rpl);
-		_impl_setContentAndReload(before, word, rpl, didReplaceSilent).then(val => {
-			$('#working').hide();
-		});
-	}
-	else {
-		showError('Could not find node to replace');
-	}
+	//console.log('impl_replaceInDocumentSilent');
+	return _impl_actInDocument(prefix, word, rpl, suffix, didReplaceSilent);
 }
 
 function impl_insertInDocument(prefix, word, rpl, suffix) {
-	console.info('impl_insertInDocument');
-	// console.info(prefix, word, rpl, suffix);
-	if (_impl_findElement(prefix, word, suffix)) {
-		$('#working').show();
-		let before = window.outlookContentHandler.getTextContent();
-		window.outlookContentHandler.insertText(word, rpl);
-		_impl_setContentAndReload(before, word, rpl, didInsert).then(val => {
-			$('#working').hide();
-		});
-	}
-	else {
-		showError('Could not find node');
-	}
+	//console.log('impl_insertInDocument');
+	return _impl_actInDocument(prefix, word, rpl, suffix, didInsert);
 }
 
 function impl_removeInDocument(prefix, word, rpl, suffix) {
-	console.info('impl_removeInDocument');
-	// console.info(prefix, word, rpl, suffix);
-	if (_impl_findElement(prefix, word, suffix)) {
-		$('#working').show();
-		let before = window.outlookContentHandler.getTextContent();
-		window.outlookContentHandler.replace(word, rpl);
-		_impl_setContentAndReload(before, word, rpl, didRemove).then(val => {
-			$('#working').hide();
-		});
-	}
-	else {
-		showError('Could not find node');
-	}
+	//console.log('impl_removeInDocument');
+	return _impl_actInDocument(prefix, word, rpl, suffix, didRemove);
+}
+
+function _impl_showOptions_mh(arg) {
+	_impl_options.close();
+	showError(arg.message);
 }
 
 function _impl_showOptions_eh(arg) {
@@ -253,28 +142,148 @@ function impl_showOptions(g_tool) {
 }
 
 function impl_getSelectedPars() {
-	showError("Selection is not supported");
+	showError('ERR_CANNOT_SELECT');
 }
 
-function impl_getAllPars() {
+function _impl_filterNodes(node) {
+	if (node.nodeType == 1) {
+		if (node.hasAttribute('id') && node.getAttribute('id') === 'Signature') {
+			return false;
+		}
+		if (node.hasAttribute('name') && node.getAttribute('name') === '_MailAutoSig') {
+			return false;
+		}
+		if (node.hasAttribute('itemtype') && node.getAttribute('itemtype').indexOf('QuotedText') !== -1) {
+			return false;
+		}
+		if (node.hasAttribute('name') && node.getAttribute('name') === '_MailOriginal') {
+			_impl_storage.seenReply = true;
+			return false;
+		}
+	}
+	return !_impl_storage.seenReply;
+}
+
+function _impl_getEmail(func) {
+	let reply = /^\s*>/;
+
 	Office.context.mailbox.item.body.getTypeAsync(function(data) {
 		_impl_storage.type = data.value;
 		Office.context.mailbox.item.body.getAsync(_impl_storage.type, function(data) {
-			_impl_storage.text = data.value;
+			let value = data.value;
+			value = value.replace(/\r\n/g, '\n').replace(/\r+/g, '');
+			//console.log([value]);
+
+			if (_impl_storage.type === Office.CoercionType.Text) {
+				value = escHTML(value);
+				value = value.replace(/[ \t]*\n[ \t]*\n/g, '</p><p>');
+				value = value.replace(/[ \t]*\n/g, '<br>\n');
+				value = '<p>'+value+'</p>';
+			}
+			else {
+				value = value.replace(/(\w)\n(\w)/g, '$1 $2');
+				value = value.replace(/(\w)\n/g, '$1 ');
+				value = value.replace(/\n(\w)/g, ' $1');
+				value = value.replace(/([.,;:!?])\n/g, '$1 ');
+				value = value.replace(/\n([.,;:!?])/g, ' $1');
+				value = value.replace(/\n( )/g, '$1');
+				value = value.replace(/( )\n/g, '$1');
+				value = value.replace(/\n/g, ' ');
+				value = value.replace(/<o:p><\/o:p>/g, '').replace(/<span> <\/span>/g, ' ');
+				value = value.replace(/  +/g, ' ');
+				value = value.replace(/="x_/g, '="').replace(/ x_([A-Z])/g, ' $1');
+			}
+			//console.log([value]);
+
+			_impl_storage.text = value;
+			_impl_storage.dom = (new DOMParser()).parseFromString(value, 'text/html');
+
+			_impl_storage.seenReply = false;
+			let tns = findTextNodes(_impl_storage.dom.body, _impl_filterNodes);
+			let ns = [];
+			for (let i=0 ; i<tns.length ; ++i) {
+				let n = tns[i];
+				do {
+					n = n.parentNode;
+				} while(n && n.parentNode && !text_nodes.hasOwnProperty(n.nodeName));
+
+				if (reply.test(n.textContent)) {
+					continue;
+				}
+
+				// Only add unseen parent nodes
+				if (ns.indexOf(n) === -1) {
+					ns.push(n);
+				}
+			}
+
+			// Deduplicate found parent nodes, and mark the unique ones for tracking
+			_impl_storage.nodes = [];
+			let elms = [];
+			for (let i=0 ; i<ns.length ; ++i) {
+				let p = ns[i];
+				do {
+					p = p.parentNode;
+					if (ns.indexOf(p) !== -1) {
+						//console.log(['Skipping node with a parent already in the set', ns[i]]);
+						ns[i] = null;
+						break;
+					}
+				} while (p && p.parentNode);
+
+				if (ns[i]) {
+					_impl_storage.nodes.push(ns[i]);
+					//ns[i].setAttribute('data-gs-id', elms.length+1);
+					elms.push({i: elms.length+1, t: ns[i].textContent});
+				}
+			}
+
 			//console.log(_impl_storage);
+			func(elms);
 		});
 	});
+}
+
+function _impl_setEmail(func) {
+	let email = '';
+	if (_impl_storage.text.indexOf('</html>') === -1) {
+		email = (new XMLSerializer()).serializeToString(_impl_storage.dom.body);
+		email = email.replace(/^<body[^>]*>/, '').replace(/<\/body>$/g, '');
+	}
+	else {
+		email = (new XMLSerializer()).serializeToString(_impl_storage.dom);
+	}
+	if (_impl_storage.type === Office.CoercionType.Text) {
+		email = email.replace(/<\/p><p>/g, '\n\n');
+		email = email.replace(/<br *\/?>([^\n]+)\n/g, '$1<br>\n');
+		email = email.replace(/[ \t]*<br *\/?>[ \t]*\n*/g, '\n');
+		email = email.replace(/^<p>/g, '');
+		email = email.replace(/<\/p>$/g, '');
+		email = decHTML(email);
+	}
+	//console.log([email]);
+	Office.context.mailbox.item.body.setAsync(email, {coercionType: _impl_storage.type}, func);
+}
+
+function impl_getAllPars() {
+	_impl_getEmail(checkParagraphs);
 }
 
 function impl_showDictionary(text) {
 	Office.context.ui.displayDialogAsync(ROOT_URL_SELF + '/html/dictionary.html?host=outlook&text='+text, { width: 800, height: 600, displayInIframe: true });
 }
 
+function impl_hasSelection() {
+	return false;
+}
+
 function impl_Init(func) {
 	Office.initialize = function(reason) {
 		$(document).ready(function() {
-			_impl_storage.dom = document.implementation.createHTMLDocument('shadow');
 			func();
+
+			// <br> should not block text flow
+			delete findAndReplaceDOMText.NON_CONTIGUOUS_PROSE_ELEMENTS.br;
 
 			if (Office.context.host !== Office.HostType.Outlook) {
 				//showError('Requires MS Outlook!');
@@ -282,40 +291,4 @@ function impl_Init(func) {
 			}
 		});
 	};
-}
-
-function impl_checkDone() {
-	Office.onReady(info => {
-		if (window.outlookContentHandler != null && typeof window.outlookContentHandler.getCoercionType === 'function') {
-			let coercionType = window.outlookContentHandler.getCoercionType();
-			if (coercionType == Office.CoercionType.Html) {
-				/**
-		 		 *  doing get -> set -> get on outlook to make sure that any
-				 * 	changes to the email that the user might have done
-				 *  are included
-				 */
-				_impl_getPromisifiedBodyContent(coercionType).then((content) => {
-					window.outlookContentHandler.setContent(content, false);
-					window.outlookContentHandler.mergeAllGrammarSoftInsertedSpanElementsInVirtualDom();
-					let beforeContent = window.outlookContentHandler.getContent();
-					console.info('impl_checkDone content', beforeContent);
-					_impl_setPromisifiedBodyContent(coercionType, beforeContent).then((val) => {
-						_impl_getPromisifiedBodyContent(coercionType).then((content) => {
-							window.outlookContentHandler.setContent(content, false);
-						});
-					});
-				});
-			}
-		}
-	});
-}
-
-function impl_ignoreCurrent(word) {
-	Office.onReady(info => {
-		let coercionType = window.outlookContentHandler.getCoercionType();
-		if (coercionType == Office.CoercionType.Html) {
-			console.info('impl_ignoreCurrent', word);
-			window.outlookContentHandler.removeCurrentSelection(word);
-		}
-	});
 }
