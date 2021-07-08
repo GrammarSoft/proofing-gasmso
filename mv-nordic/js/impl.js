@@ -117,7 +117,7 @@ function impl_attachTTS(node) {
 		let n = tns[i];
 		do {
 			n = n.parentNode;
-		} while(n && n.parentNode && !text_nodes.hasOwnProperty(n.parentNode.nodeName));
+		} while(n && n.parentNode && !text_nodes.hasOwnProperty(n.nodeName));
 		ns.push(n);
 	}
 
