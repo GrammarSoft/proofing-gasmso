@@ -382,49 +382,805 @@ for (let k in marking_types) {
 }
 
 let ctypes = {
-	"%k-list": ["<h3>§1.1. Opremsningskomma</h3><i>Ung, smuk og provokerende.</i><br>\n<br>\n<i>Spis frugt, ikke kager.</i><br>\n<br>\n<i>Hold op med at ryg, motionér og drik mindre.</i><h3>§1.5. Understregende gentagelse</h3><i>Jeg blev meget, meget glad for hans brev.</i>", 1],
-	"%k-list-ADJ": ["<h3>§1.2. Sideordnede adjektiver</h3><i>En varm, strålende sommerdag.</i>", 1],
-	"%k-title": ["<h3>§1.3. Stillingsbetegnelser og titler</h3><i>Adm. direktør, cand.mag. Torben Taastrup.</i>", 3],
-	"%k-address": ["<h3>§1.4. Adresser og referencer</h3><i>Kommavej 17, 3200 Nykomming</i>", 3],
-	"%k-reference": ["<h3>§1.4. Adresser og referencer</h3><i>Forlaget Kommakunst, 2011, side 20-23</i>", 3],
-	"%ko": ["<h3>§1.4. Adresser og referencer</h3><i>Odense(,) 20. september 2015</i><br>\n<br>\n<i>Torsdag den 20. september 2015(,) kl. 16.00</i>", 3],
-	"%k-appo": ["<h3>§2.2. Apposition (navnetillæg)</h3><i>Der sættes komma omkring forklarende tilføjelser.</i><br>\n<br>\n<i></i><br>\n<br>\n<i>Den længste tyske flod, Rhinen, udspringer i Schweiz.</i>", 3],
-	"%k-appo-end": ["<h3>§2.2. Apposition (navnetillæg)</h3><i>Der sættes komma omkring forklarende tilføjelser.</i><br>\n<br>\n<i></i><br>\n<br>\n<i>Den længste tyske flod, Rhinen, udspringer i Schweiz</i>", 3],
-	"%k-extra": ["<h3>§2.3 Tilføjede sætningsled</h3><br>\n<br>\n<h3>§2.3a. Tiltaleord</h3><br>\n<br>\n<i>Lad være, Maria!</i><br>\n<br>\n<h3>§2.3b. Udråb</h3><br>\n<br>\n<i>Shit, nu skete det igen.</i><br>\n<br>\n<h3>§2.3c. Spørgende tilføjelser</h3><br>\n<br>\n<i>Du har sendt det af sted, vel?</i><br>\n<br>\n<h3>§2.3d. Frie prædikativer</h3><br>\n<br>\n<i>Vi tog hjem, trætte og desillusionerede.</i><br>\n<br>\n<h3>§2.3e. Ekstraposition</h3><br>\n<br>\n<i>Peter, han er sej.</i>", 3],
-	"%k-explain": ["<h3>§2.4. Forklaringer og præciseringer</h3>Der sættes komma før forklaringer eller præciseringer:<br>\n<br>\n<i>Sommetider får han en depression, f.eks. om vinteren.</i>", 3],
-	"%k-explain-evt": ["<h3>§2.4. Forklaringer og præciseringer</h3>Der sættes som regel komma for at adskille forklaringer og præciseringer:<br>\n<br>\n<i>Turen må aflyses, dels på grund af vejret, dels på grund af mangel på tid.</i>", 3],
-	"%k-explain-end": ["<h3>§2.4. Forklaringer og præciseringer</h3>Der sættes komma omkring indskudte forklaringer:<br>\n<br>\n<i>En konstitueret leder, <u>dvs. en midlertidig leder</u>, har som opgave …</i>", 3],
-	"%k-rel": ["<h3>§2.5a Parentetiske relativsætninger</h3>Der står komma før relativsætninger. Det er dog kun obligatorisk før selvstændige relativsætninger, dvs. hvor relativsætningen kan udelades uden at være meningsforstyrrende:<br>\n<br>\n<i>Jeg har læst de to bøger, som jeg i øvrigt allerede havde set som film.</i>", 2],
-	"%k-rel-end": ["<h3>§2.5a. Relativsætninger</h3>Der står altid komma efter en relativsætning:<br>\n<br>\n<i>I en toværelses-lejlighed, hvor der ikke er plads til mange gæster, kan sovesofaer være en idé.</i>", 2],
-	"%k-paren": ["<h3>§2.5b &amp; §4.3. Selvstændige ledsætninger</h3>Der er obligatorisk komma før selvstændige ledsætninger:<br>\n<br>\n<i>Han er altædende, hvorimod hun dyrker sit vegetar-image.</i><br>\n<br>\n<i>Man bør tale således, at der ikke opstår tvivl.</i><br>\n<br>\nDet samme gælder kommentartilføjelser uden konjunktion:<br>\n<br>\n<i>Det er sandt, ville jeg mene.</i>", 2],
-	"%k-paren-end": ["<h3>§2.5b &amp; §4.3. Selvstændige ledsætninger</h3><i>Der er obligatorisk komma efter selvstændige ledsætninger og indskudte kommentarsætninger:</i><br>\n<br>\n<i></i><br>\n<br>\n<i>Selvom en struds har vinger, kan den ikke flyve.</i><br>\n<br>\n<i>De levede, skulle man tro, et helt andet familieliv end vores.</i>", 2],
-	"%ko-men": ["<h3>§2.6. Valgfrit '<i>men</i>'<i>-</i>komma mellem sætningsled</h3>Man kan sætte komma før '<i>men</i>' - også hvor det ikke adskiller to sætninger.<br>\n<br>\n<i>Vi tager snart på ferie, men har ikke bestilt en rejse endnu.</i>", 3],
-	"%k-men": ["<h3>§2.6. Obligatorisk '<i>men</i>'-komma ved særlig fremhævelse</h3>Der sættes komma både før og efter '<i>men</i>'-udtryk for at understrege en modsætning.<br>\n<br>\n<i>En træt, men lykkelig, vinder.</i>", 3],
-	"%k-men-end": ["<h3>§2.6. Obligatorisk '<i>men</i>'-komma ved særlig fremhævelse</h3>Der sættes komma både før og efter '<i>men</i>'-udtryk for at understrege en modsætning.<br>\n<br>\n<i>En træt, men lykkelig, vinder.</i>", 3],
-	"%k-main": ["<h3>§3 Komma mellem helsætninger</h3>Helsætninger skal adskilles med komma (§3.1) - der er så at sige tale om en opremsning af flere udsagn. Hvis der er et bindeord mellem sætningerne (<i>og, eller, men, for, så</i>), står komma før dette.<br>\n<br>\n<i>Folket brøler, og diktatorerne er bange.</i><br>\n<br>\n<i>Vejen er spærret, så vi må køre udenom.</i><br>\n<br>\n<i>Nogle dansede, andre snakkede.</i><br>\n<br>\nGentagelse af verbal og subjekt betragtes også som en hovedsætning (§3.3):<br>\n<br>\n<i>Hun er godt nok yndig, er hun.</i><br>\n<br>\nImperativer (bydemåde) regnes også som hovedsætninger, og medmindre handlingen i den anden imperativ er en direkte konsekvens af den første, sættes komma (§3.4):<br>\n<br>\n<i>Sæt vandet over, og svits løgene!</i>", 1],
-	"%nok-main": ["<h3>§3.1. Ingen helsætningskomma mellem prædikater</h3>Hvis en sideordnet sætning deler subjekt (genstandsled) med den første, er der ikke tale om en hel sætning, men kun et prædikat, og der skal ikke være komma:<br>\n<br>\n<i>De låste huset [,] og tog af sted.</i>", 3],
-	"%k-quote-end": ["<h3>§3.5. Direkte anført tale</h3>Der sættes komma mellem anført tale og den anførende sætning (inquit):<br>\n<br>\n<i>”Akupunktur ved fødsler”, sagde pindsvinepigen, ”får jeg hver gang . Især sædefødsler.”</i>", 1],
-	"%k-quote-start": ["<h3>§3.5. Direkte anført tale</h3>Der sættes komma, når anført tale genoptages efter et anførende indskud (inquit):<br>\n<br>\n<i>”Akupunktur ved fødsler”, sagde pindsvine-pigen, ”får jeg hver gang . Især sædefødsler.”</i>", 1],
-	"%k-ellision": ["<h3>§3.6. Ufuldstændige helsætninger</h3>Der sættes komma før en ny helsætning, også hvis denne mangle sit verbum (udsagnsord):<br>\n<br>\n<i>Mænd er fra Mars, og kvinder fra Venus.</i>", 1],
-	"%k-FSend": ["<h3>§4.1a. Fast slutkomma</h3>Der er <i>altid </i>komma efter en ledsætning:<br>\n<br>\n<i>Hvis du vil vinde, skal du træne.</i>", 2],
-	"%ko-FSstart": ["<h3>§4.1b. Valgfrit startkomma</h3><br>\n<br>\nFor at lette læsningen, kan man markere starten af en ledsætning med komma. Dette er valgfrit i Nyt Komma, men obligatorisk ved brug af Grammatisk Komma.<br>\n<br>\n<i>Jeg tror (,) han lyver.</i><br>\n<br>\n<i>Det er vigtigt (,) at du kommer.</i><br>\n<br>\n<i>Computerne blev stjålet (,) uden at nogen opdagede det.</i><br>\n<br>\n<i>Ved du, hvem der har gjort det?</i><br>\n<br>\nHvis ledsætningen indledes af en underordnende konjunktion <i>(</i>bindeord som <i>at, fordi, selvom etc.) </i>eller hv-ord <i>(hvem, hvad, hvilken, etc.)</i><i>, </i>placeres<i> </i>komma som udgangspunkt umiddelbart før denne. Men hvis der er andre indledende ord eller ordforbindelser før konjunktionen, rykkes komma tilsvarende længere til venstre. Sådanne ord kan være:<br>\n<br>\n<h3>§5.1 Præposition (forholdsord)</h3><br>\n<br>\n<i>De fjernede cyklen, uden at han opdagede det.</i><br>\n<br>\n<i>Du kan også få kage, forudsat der er nok til alle</i><br>\n<br>\n<h3>§5.2 Sammenligningskonjunktion <i>(som, end)</i></h3><br>\n<br>\n<i>D</i><i>et var nemmere, end hvis jeg havde været alene.</i><br>\n<br>\n<h3>§5.3 Adverbial (biled)</h3><br>\n<br>\n<i>Du skal give besked (,) en måned før du skal rejse</i><br>\n<br>\nKomma sættes dog mellem adverbial og konjunktion, hvis denne er en af tidskonjunktionerne <i>da, når </i>eller <i>mens:</i><br>\n<br>\n<i>Du kan kigge forbi en aften, når du har tid.</i><br>\n<br>\n<h3>§4.5. Valgfrit startkomma i sætningsknude</h3><br>\n<br>\n<i>Det tror jeg (,) at han vil støtte.</i><br>\n<br>\n<i>Hvem synes I (,) vi skal spørge?</i>", 2],
-	"%k-FSco": ["<h3>§4.2a. Sideordnede ledsætninger</h3>Der sættes komma mellem sideordnede ledsætninger, til venstre for <i>og/eller:</i><br>\n<br>\n<i>Hvis du har lyst, og hvis vejret er til det, kan vi tage ud at sejle.</i>", 2],
-	"%ko-FSco": ["<h3>§4.2b. Sideordnede ledsætninger der deler konjunktion</h3>Hvis to ledsætninger deler konjunktion, er det optionelt at sætte komma imellem dem:<br>\n<br>\n<i>Hvis han igen er syg (,) og hun ikke vil rejse alene, må vi flytte ferien.</i>", 2],
-	"%nok-FSstart": ["<h3>§4.4. Aldrig komma mellem konjunktion og ledsætning</h3><br>\n<br>\n<i>Han var sulten (,) og [,] fordi køleskabet var tomt, købte han ind.</i><br>\n<br>\n<h3>§5.1-§5.5 Fremrykning af startkomma</h3><br>\n<br>\nStartkomma skal rykkes til venstre, hvis der før en konjunktion eller et <i>hv-</i>ord står en præposition (forholdsord), '<i>som', 'end'</i> eller andet udtryk, der også er del af ledsætningen:<br>\n<br>\n<i>Du kan få rabat (,) mod [,] at du selv afhenter varen.</i><br>\n<br>\n<i>Han inviterede hele landsbyen (,) i anledning af [,] at han blev 50.</i><br>\n<br>\n<i>Hun er ked af det (,) fordi [at] hendes kat har ædt hamstret.</i><br>\n<br>\nMen hvis præpositionen derimod hører til den overordnede sætning <i>(tror på ...)</i>, og ikke til ledsætningen <i>(... at)</i>, står startkomma direkte før konjunktionen:<br>\n<br>\n<i>Jeg tror [,] på, at vi vinder i aften.</i>", 2],
-	"%ko-ellision-end": ["<h3>§4.6a. Valgfrit komma efter ufuldstændige ledsætninger o.l.</h3><i>Som [det] tidligere [blev] nævnt, er bilen næsten ny.</i><br>\n<br>\n<i>Hvor [det er] muligt, vil vi hjælpe med transporten.</i><br>\n<br>\n<i>Hvis ikke (,) finder vi en anden løsning.</i><br>\n<br>\n<i>Skønt gammeldags (,) er det en fin film.</i>", 2],
-	"%nok-ellision": ["<h3>§4.6b. Ikke komma foran ufuldstændige ledsætninger</h3><i>Skabet samles [,] som vist.</i>", 2],
-	"%k": ["<h3>Ikke-klassificeret komma</h3>Programmet mener, at der er et brud i sætningen på dette sted. Overvej at sætte komma, punktum, bindestreg eller anden tegnsætning.", 1],
-	"%k-stop": ["<h3>Periode</h3>Der indsættes punktum, komma, kolon, semikolon eller linjeskift mellem to selvstændige perioder, eller mellem en overskrift og første sætning.<br>\n<br>\n<i>Skammens dag [.,;]Det er skammens dag for tv-selskaberne i Los Angeles</i>", 1],
-	"%nok-soft": ["<h3>Ikke-påkrævet komma</h3>Programmet har ikke fundet nogen regel, der kræver komma dette sted, så der er muligvis tale om en fejl. Gør dig klart, hvorfor du vil sætte dette komma. Falder det naturligt sammen med et ophold i sætningen? Er det nødvendigt for klarhedens skyld?<br>\n<br>\n<i>I det mindste på nuværende tidspunkt [,] kan vi ikke give noget entydigt svar.</i>", 1]
+	"%k-appo": [
+		"%k-appo",
+		"Apposition (navnetillæg)",
+		"<i>En apposition (navnetillæg) er en konstruktion med to parallele nominalfraser, hvor den anden indeholder yderligere information om den første. Appositionen afgrænses med komma.</i><br>\n<br>\n<i>Den længste tyske flod, Rhinen, udspringer i Schweiz.</i><br>\n<br>\n<i>Min bedste ven, Peter, kommer på besøg i weekenden.</i><br>\n<br>\n<i>Der bruges dog kun appositionskomma, hvor der er tale om en parentetisk, forklarende tilføjelse - ikke hvis tilføjelsen er nødvendig for at gøre referencen entydig.</i><br>\n<br>\n<i>Man har fundet ukrudtsmidlet[,] <b>Roundup</b>[,] i grundvandet.</i><br>\n<br>\nSommetider kan brugen af komma derfor gøre en meningsforskel:<br>\n<br>\n<i>Hans bror Peter (Peter er én af flere brødre)</i><br>\n<br>\n<i>Hans bror, Peter (Peter er den eneste bror)</i>",
+		"3",
+		"§47.2"
+	],
+	"%k-appo-end": [
+		"%k-appo-end",
+		"Apposition (navnetillæg)",
+		"<i>En apposition (navnetillæg) er en konstruktion med to parallele nominalfraser, hvor den anden indeholder yderligere information om den første. Appositionen afgrænses med komma.</i><br>\n<br>\n<i>Den længste tyske flod, Rhinen, udspringer i Schweiz.</i><br>\n<br>\n<i>Min bedste ven, Peter, kommer på besøg i weekenden.</i><br>\n<br>\n<i>Der bruges dog kun appositionskomma, hvor der er tale om en parentetisk, forklarende tilføjelse - ikke hvis tilføjelsen er nødvendig for at gøre referencen entydig.</i><br>\n<br>\n<i>Man har fundet ukrudtsmidlet[,] <b>Roundup</b>[,] i grundvandet.</i><br>\n<br>\nSommetider kan brugen af komma derfor gøre en meningsforskel:<br>\n<br>\n<i>Hans bror Peter (Peter er én af flere brødre)</i><br>\n<br>\n<i>Hans bror, Peter (Peter er den eneste bror)</i>",
+		"3",
+		"§47.2"
+	],
+	"%ok-appo": [
+		"%ok-appo",
+		"Apposition (navnetillæg)",
+		"<i>En apposition (navnetillæg) er en konstruktion med to parallele nominalfraser, hvor den anden indeholder yderligere information om den første. Appositionen afgrænses med komma.</i><br>\n<br>\n<i>Den længste tyske flod, Rhinen, udspringer i Schweiz.</i><br>\n<br>\n<i>Min bedste ven, Peter, kommer på besøg i weekenden.</i><br>\n<br>\n<i>Der bruges dog kun appositionskomma, hvor der er tale om en parentetisk, forklarende tilføjelse - ikke hvis tilføjelsen er nødvendig for at gøre referencen entydig.</i><br>\n<br>\n<i>Man har fundet ukrudtsmidlet[,] <b>Roundup</b>[,] i grundvandet.</i><br>\n<br>\nSommetider kan brugen af komma derfor gøre en meningsforskel:<br>\n<br>\n<i>Hans bror Peter (Peter er én af flere brødre)</i><br>\n<br>\n<i>Hans bror, Peter (Peter er den eneste bror)</i>",
+		"3",
+		"§47.2"
+	],
+	"%ok-appo-end": [
+		"%ok-appo-end",
+		"Apposition (navnetillæg)",
+		"<i>En apposition (navnetillæg) er en konstruktion med to parallele nominalfraser, hvor den anden indeholder yderligere information om den første. Appositionen afgrænses med komma.</i><br>\n<br>\n<i>Den længste tyske flod, Rhinen, udspringer i Schweiz.</i><br>\n<br>\n<i>Min bedste ven, Peter, kommer på besøg i weekenden.</i><br>\n<br>\n<i>Der bruges dog kun appositionskomma, hvor der er tale om en parentetisk, forklarende tilføjelse - ikke hvis tilføjelsen er nødvendig for at gøre referencen entydig.</i><br>\n<br>\n<i>Man har fundet ukrudtsmidlet[,] <b>Roundup</b>[,] i grundvandet.</i><br>\n<br>\nSommetider kan brugen af komma derfor gøre en meningsforskel:<br>\n<br>\n<i>Hans bror Peter (Peter er én af flere brødre)</i><br>\n<br>\n<i>Hans bror, Peter (Peter er den eneste bror)</i>",
+		"3",
+		"§47.2"
+	],
+	"%nok-appo": [
+		"%nok-appo",
+		"Forkert appositionskomma",
+		"<i>Der bruges dog kun appositionskomma, hvor der er tale om en parentetisk, forklarende tilføjelse - ikke hvis tilføjelsen er nødvendig for at gøre referencen entydig.</i><br>\n<br>\n<i>Man har fundet ukrudtsmidlet[,] <b>Roundup</b>[,] i grundvandet.</i>",
+		"3",
+		"§47.2"
+	],
+	"%k-list": [
+		"%k-list",
+		"Opremsningskomma",
+		"Et opremsningskomma adskiller elementerne i en liste (sidestilling) - ord, ordgrupper eller sætninger. Man kan sige, at komma her erstatter en konjunktion ('og' eller 'eller'). Konjunktionen er forbeholdt sidste led i listen, og modsat engelsk kan den normalt ikke kombineres med et komma, når der er tale om ord eller ordgrupper.<br>\n<br>\n<i>Gulerødder, porrer, kål, løg og andre grønsager</i><br>\n<br>\n<i>Ung, smuk og provokerende.</i><br>\n<br>\n<i>Spis frugt, ikke kager.</i><br>\n<br>\n<i>De drak cocktails, sang karaoke og dansede.</i><br>\n<br>\nUnderstregende gentagelse behandles på samme måde:<br>\n<br>\n<i>Jeg blev meget, meget glad for hans brev.</i><br>\n<br>\nNår opremsningens elementer er hel- eller ledsætninger, bruges komma også, når der allerede er en konjunktion:<br>\n<br>\n<i>Mia var på facebook med vennerne, Peter så en film, og børnene legede under bordet.</i><br>\n<br>\nDette gælder i princippet også imperativer (bydemåde), der kan anses som helsætninger uden subjekt. Kun når imperativerne er meget tæt forbundet, kan man undlade komma før konjunktionen:<br>\n<br>\n<i>Hold op med at ryge, motionér og drik mindre.</i>",
+		"1",
+		"§46.1<br>\n<br>\n§46.5"
+	],
+	"%ko-list": [
+		"%ko-list",
+		"Opremsningskomma",
+		"Et opremsningskomma adskiller elementerne i en liste (sidestilling) - ord, ordgrupper eller sætninger. Man kan sige, at komma her erstatter en konjunktion ('og' eller 'eller'). Konjunktionen er forbeholdt sidste led i listen, og modsat engelsk kan den normalt ikke kombineres med et komma, når der er tale om ord eller ordgrupper.<br>\n<br>\n<i>Gulerødder, porrer, kål, løg og andre grønsager</i><br>\n<br>\n<i>Ung, smuk og provokerende.</i><br>\n<br>\n<i>Spis frugt, ikke kager.</i><br>\n<br>\n<i>De drak cocktails, sang karaoke og dansede.</i><br>\n<br>\nUnderstregende gentagelse behandles på samme måde:<br>\n<br>\n<i>Jeg blev meget, meget glad for hans brev.</i><br>\n<br>\nNår opremsningens elementer er hel- eller ledsætninger, bruges komma også, når der allerede er en konjunktion:<br>\n<br>\n<i>Mia var på facebook med vennerne, Peter så en film, og børnene legede under bordet.</i><br>\n<br>\nDette gælder i princippet også imperativer (bydemåde), der kan anses som helsætninger uden subjekt. Kun når imperativerne er meget tæt forbundet, kan man undlade komma før konjunktionen:<br>\n<br>\n<i>Hold op med at ryge, motionér og drik mindre.</i>",
+		"1",
+		"§46.1<br>\n<br>\n§46.5"
+	],
+	"%ok-list": [
+		"%ok-list",
+		"Opremsningskomma",
+		"Et opremsningskomma adskiller elementerne i en liste (sidestilling) - ord, ordgrupper eller sætninger. Man kan sige, at komma her erstatter en konjunktion ('og' eller 'eller'). Konjunktionen er forbeholdt sidste led i listen, og modsat engelsk kan den normalt ikke kombineres med et komma, når der er tale om ord eller ordgrupper.<br>\n<br>\n<i>Gulerødder, porrer, kål, løg og andre grønsager</i><br>\n<br>\n<i>Ung, smuk og provokerende.</i><br>\n<br>\n<i>Spis frugt, ikke kager.</i><br>\n<br>\n<i>De drak cocktails, sang karaoke og dansede.</i><br>\n<br>\nUnderstregende gentagelse behandles på samme måde:<br>\n<br>\n<i>Jeg blev meget, meget glad for hans brev.</i><br>\n<br>\nNår opremsningens elementer er hel- eller ledsætninger, bruges komma også, når der allerede er en konjunktion:<br>\n<br>\n<i>Mia var på facebook med vennerne, Peter så en film, og børnene legede under bordet.</i><br>\n<br>\nDette gælder i princippet også imperativer (bydemåde), der kan anses som helsætninger uden subjekt. Kun når imperativerne er meget tæt forbundet, kan man undlade komma før konjunktionen:<br>\n<br>\n<i>Hold op med at ryge, motionér og drik mindre.</i>",
+		"1",
+		"§46.1<br>\n<br>\n§46.5"
+	],
+	"%nko-list": [
+		"%nko-list",
+		"Opremsningskomma",
+		"Et opremsningskomma adskiller elementerne i en liste (sidestilling) - ord, ordgrupper eller sætninger. Man kan sige, at komma her erstatter en konjunktion ('og' eller 'eller'). Konjunktionen er forbeholdt sidste led i listen, og modsat engelsk kan den normalt ikke kombineres med et komma, når der er tale om ord eller ordgrupper.<br>\n<br>\n<i>Gulerødder, porrer, kål, løg og andre grønsager</i><br>\n<br>\n<i>Ung, smuk og provokerende.</i><br>\n<br>\n<i>Spis frugt, ikke kager.</i><br>\n<br>\n<i>De drak cocktails, sang karaoke og dansede.</i><br>\n<br>\nUnderstregende gentagelse behandles på samme måde:<br>\n<br>\n<i>Jeg blev meget, meget glad for hans brev.</i><br>\n<br>\nNår opremsningens elementer er hel- eller ledsætninger, bruges komma også, når der allerede er en konjunktion:<br>\n<br>\n<i>Mia var på facebook med vennerne, Peter så en film, og børnene legede under bordet.</i><br>\n<br>\nDette gælder i princippet også imperativer (bydemåde), der kan anses som helsætninger uden subjekt. Kun når imperativerne er meget tæt forbundet, kan man undlade komma før konjunktionen:<br>\n<br>\n<i>Hold op med at ryge, motionér og drik mindre.</i>",
+		"1",
+		"§46.1<br>\n<br>\n§46.5"
+	],
+	"%k-list-ADJ": [
+		"%k-list-ADJ",
+		"Sideordnede adjektiver",
+		"<i>Der sættes komma mellem sideordnede attributer (bestemmelser), hvis disse tillader et 'og' imellem sig og kan bytte plads uden større meningsforskel.</i><br>\n<br>\n<i>En varm, strålende sommerdag.</i><br>\n<br>\n<i>(en varm og strålende sommerdag - en strålende, varm sommerdag)</i><br>\n<br>\n<i>En lang, udmattende arbejdsdag</i><br>\n<br>\n<i>(en lang og udmattende arbejdsdag - en udmattende, lang arbejdsdag)</i>",
+		"2",
+		"§46.2"
+	],
+	"%ok-list-ADJ": [
+		"%ok-list-ADJ",
+		"Sideordnede adjektiver",
+		"<i>Der sættes komma mellem sideordnede attributer (bestemmelser), hvis disse tillader et 'og' imellem sig og kan bytte plads uden større meningsforskel.</i><br>\n<br>\n<i>En varm, strålende sommerdag.</i><br>\n<br>\n<i>(en varm og strålende sommerdag - en strålende, varm sommerdag)</i><br>\n<br>\n<i>En lang, udmattende arbejdsdag</i><br>\n<br>\n<i>(en lang og udmattende arbejdsdag - en udmattende, lang arbejdsdag)</i>",
+		"2",
+		"§46.2"
+	],
+	"%nok-list-ADJ": [
+		"%nok-list-ADJ",
+		"Forkert adjektiv-komma",
+		"Der bruges ikke komma mellem adjektiver (tillægsord), hvis det første adjektiv lægger sig til en helhed, der består af det andet adjektiv og det efterfølgende substantiv (navneord). Adjektiverne kan i så fald ikke bytte plads, og man kan ikke sætte et 'og' ind.<br>\n<br>\n<i>En dyr italiensk bil (*en italiensk dyr bil, *en dyr og italiensk bil)</i><br>\n<br>\nI særdeleshed må der ikke bruges komma, hvis det andet adjektiv danner et fast udtryk med det efterfølgende substantiv (navneord) eller hvis det andet adjektiv beskriver en central egenskab ved substantivet, og det første ikke gør det.<br>\n<br>\nCentrale egenskaber kan være bl.a. følgende, fra mindst central til mest central:<br>\n<br>\nIkke-centrale egenskaber kan være subjektive vurderinger <i>(populær, træls, ubrugelig, dejlig, god, dårlig</i><i>, irriterende</i><i>)</i> eller selektive udpegninger <i>(første, sidste, øvre, nedre, venste, højre).</i><br>\n<br>\nHvis man kombinerer to centrale egenskaber, og den mindre centrale kommer først, bliver denne tolket som ikke-central, og der står ikke komma:<br>\n<br>\n<i>Høje[,] østrigske bjerge</i><br>\n<br>\n<i>Små[,] røde blomster</i><br>\n<br>\nDet mere centrale adjektiv kommer sjældent først, men hvis det gør, fremtvinger det en sideordning, det første adjektiv får en mere selektiv-beskrivende karakter, og der bruges komma:<br>\n<br>\n<i>Røde, små blomster</i><br>\n<br>\nAdjektiviske pronominer <i>(min, denne, hver, alle)</i>, talord og deiktiske (udpegende) adjektiver <i>(førnævnte, overnnævte, nedenstående)</i> er aldrig sideordnet med et efterfølgende &quot;normalt&quot; adjektiv og får derfor aldrig komma efter sig:<br>\n<br>\n<i>Fire[,] små dværge</i><br>\n<br>\n<i>Det nedenstående[,] berømte citat</i><br>\n<br>\nBemærk, at man ved nogle adjektiver ikke kan se, om de er brugt adverbialt, fordi de ikke kræver - eller slet ikke tillader - den adverbiale <i>t-</i>endelse. Her kan kommaet gør en betydningsforskel. Der må nemlig ikke stå komma mellem et adverbium og det adjektiv, det lægger sig til:<br>\n<br>\n<i>En irriterende, langsom sagsbehandler (adjektiv: sagsbehandleren er irriterende og langsom)</i><br>\n<br>\n<i>En irriterende langsom sagsbehandler (adverbium: det er langsomheden der er irriterende)</i>",
+		"2",
+		"§46.2"
+	],
+	"%k-list-emph": [
+		"%k-list-emph",
+		"Gentagelseskomma",
+		"Der sættes komma ved fremhævende gentagelse:<br>\n<br>\n<i>Jeg blev meget, meget glad for hans brev.</i><br>\n<br>\n<i>Det var en lang, lang rejse.</i>",
+		"",
+		""
+	],
+	"%ok-list-emph": [
+		"%ok-list-emph",
+		"Gentagelseskomma",
+		"Der sættes komma ved fremhævende gentagelse:<br>\n<br>\n<i>Jeg blev meget, meget glad for hans brev.</i><br>\n<br>\n<i>Det var en lang, lang rejse.</i>",
+		"",
+		""
+	],
+	"%k-title": [
+		"%k-title",
+		"Stillingsbetegnelser og titler",
+		"Der sættes komma mellem stillingsbetegnelser og titler, der ikke er forbundet med 'og':<br>\n<br>\n<i>Adm. direktør, cand.mag. Torben Taastrup.</i>",
+		"4.1",
+		"§46.3"
+	],
+	"%k-address": [
+		"%k-address",
+		"Addresser",
+		"De enkelte dele i en adresse adskilles med komma.<br>\n<br>\n<i>Kommavej 17, 3200 Nykomming</i><br>\n<br>\nStår adresseudtrykket inde i en sætning, afsluttes det med appositionskomma, før den omsluttende sætning fortsætter:<br>\n<br>\n<i>Kontakt M. Nordtoft, Søndergade 32 C, 2. tv., snarest muligt.</i>",
+		"4.2",
+		"§46.4"
+	],
+	"%ok-address": [
+		"%ok-address",
+		"Addresser",
+		"De enkelte dele i en adresse adskilles med komma.<br>\n<br>\n<i>Kommavej 17, 3200 Nykomming</i><br>\n<br>\nStår adresseudtrykket inde i en sætning, afsluttes det med appositionskomma, før den omsluttende sætning fortsætter:<br>\n<br>\n<i>Kontakt M. Nordtoft, Søndergade 32 C, 2. tv., snarest muligt.</i>",
+		"4.2",
+		"§46.4"
+	],
+	"%k-reference": [
+		"%k-reference",
+		"Referencer",
+		"Ved kildeangivelser, fx ved literaturhenvisninger eller i lovtekster, adskilles de enkelte dele med komma:<br>\n<br>\n<i>Forlaget Kommakunst, 2011, side 20-23</i><br>\n<br>\n<i>Bistandsloven, § 56, stk 2</i>",
+		"4.3",
+		"§46.4"
+	],
+	"%ok-reference": [
+		"%ok-reference",
+		"Referencer",
+		"Ved kildeangivelser, fx ved literaturhenvisninger eller i lovtekster, adskilles de enkelte dele med komma:<br>\n<br>\n<i>Forlaget Kommakunst, 2011, side 20-23</i><br>\n<br>\n<i>Bistandsloven, § 56, stk 2</i>",
+		"4.3",
+		"§46.4"
+	],
+	"%nko-reference": [
+		"%nko-reference",
+		"Reference-komma",
+		"Ved en henvisning i parentes er det valgfrit at sætte komma mellem forfatternavn og årstal, alt efter det brugte stilsystem. Det skal dog håndteres éns for hele teksten.<br>\n<br>\n<i>(Jensen &amp; Jaspers(,) 2017)</i><br>\n<br>\n<i>(Johannesen et al.(,) 2004:235)</i>",
+		"4.3",
+		""
+	],
+	"%ko-date": [
+		"%ko-date",
+		"Optionelt dato-komma",
+		"Der kan optionelt bruges komma til at separere en dato fra en stedsangivelse eller en anden, præciserende tidsangivelse. Der sættes dog normalt ikke komma mellem ugedag og dato.<br>\n<br>\n<i>Odense(,) 20. september 2015</i><br>\n<br>\n<i>Torsdag[,] den 20. september 2015(,) kl. 16.00</i>",
+		"4.4",
+		""
+	],
+	"%nko-date": [
+		"%nko-date",
+		"Optionelt dato-komma",
+		"Der kan optionelt bruges komma til at separere en dato fra en stedsangivelse eller en anden, præciserende tidsangivelse. Der sættes dog normalt ikke komma mellem ugedag og dato.<br>\n<br>\n<i>Odense(,) 20. september 2015</i><br>\n<br>\n<i>Torsdag[,] den 20. september 2015(,) kl. 16.00</i>",
+		"4.4",
+		""
+	],
+	"%nok-date": [
+		"%nok-date",
+		"Optionelt dato-komma",
+		"Der kan optionelt bruges komma til at separere en dato fra en stedsangivelse eller en anden, præciserende tidsangivelse. Der sættes dog normalt ikke komma mellem ugedag og dato.<br>\n<br>\n<i>Odense(,) 20. september 2015</i><br>\n<br>\n<i>Torsdag[,] den 20. september 2015(,) kl. 16.00</i>",
+		"4.4",
+		""
+	],
+	"%ko": [
+		"%ko",
+		"Optionelt komma",
+		"Her er det ikke påkrævet, men muligt at sætte komma - enten for at lette læsningen eller for at tydeliggøre en bestemt mening.",
+		"",
+		""
+	],
+	"%k-extra": [
+		"%k-extra",
+		"Særfeltskomma, ved sætningstilføjelser (start eller slut)",
+		"Der bruges komma til at markere materiale, der står uden for sætningen, dvs. ikke udgør bundne syntaktiske sætningsled. Der kan være tale om (a) tiltaleord, (b) udråb, (c) hilsner, (d) bekræftelser og afvisninger<i>,</i> (e) spørgetilføjelser, (f) frie prædikativer eller (g) såkaldte topikaliseringer.<br>\n<br>\n(a) <i>Lad være, Maria!</i><br>\n<br>\n<i></i><i>Men kære ven, har du aldrig hørt om gaffatape?</i><br>\n<br>\n(b)<i></i> <i>S</i><i>hit, nu skete det igen.</i><br>\n<br>\n(c) <i>Hej</i> <i>(</i><i>Rasmus</i><i>)</i><i>, vil du lige hjælpe mig?</i><br>\n<br>\n(d) <i>Nej, jeg har ikke set hende i lang tid.</i><br>\n<br>\n<i></i><i>Ok, bare gør det!</i><br>\n<br>\n(e) <i>Du har sendt det af sted, vel?</i><br>\n<br>\n(f) <i>Endelig nåede de tilbage til lejren, lettede over ikke at være faret vild.</i><br>\n<br>\n(g) <i>Peter, han er sej.</i><br>\n<br>\n<i></i><i>Han</i> <i>ligner</i><i> en spøgefugl</i><i>,</i><i></i> <i>ham</i><i> Johannes.</i>",
+		"",
+		"§47.3"
+	],
+	"%ok-extra": [
+		"%ok-extra",
+		"Særfeltskomma, ved sætningstilføjelser (start eller slut)",
+		"Der bruges komma til at markere materiale, der står uden for sætningen, dvs. ikke udgør bundne syntaktiske sætningsled. Der kan være tale om (a) tiltaleord, (b) udråb, (c) hilsner, (d) bekræftelser og afvisninger<i>,</i> (e) spørgetilføjelser, (f) frie prædikativer eller (g) såkaldte topikaliseringer.<br>\n<br>\n(a) <i>Lad være, Maria!</i><br>\n<br>\n<i></i><i>Men kære ven, har du aldrig hørt om gaffatape?</i><br>\n<br>\n(b)<i></i> <i>S</i><i>hit, nu skete det igen.</i><br>\n<br>\n(c) <i>Hej</i> <i>(</i><i>Rasmus</i><i>)</i><i>, vil du lige hjælpe mig?</i><br>\n<br>\n(d) <i>Nej, jeg har ikke set hende i lang tid.</i><br>\n<br>\n<i></i><i>Ok, bare gør det!</i><br>\n<br>\n(e) <i>Du har sendt det af sted, vel?</i><br>\n<br>\n(f) <i>Endelig nåede de tilbage til lejren, lettede over ikke at være faret vild.</i><br>\n<br>\n(g) <i>Peter, han er sej.</i><br>\n<br>\n<i></i><i>Han</i> <i>ligner</i><i> en spøgefugl</i><i>,</i><i></i> <i>ham</i><i> Johannes.</i>",
+		"",
+		"§47.3"
+	],
+	"%nok-extra": [
+		"%nok-extra",
+		"Forkert særfeltskomma",
+		"Der er ikke normalt at sætte komma på dette sted, selvom det føles, som om noget står uden for sætningen her. Problemet opstår især ved hilsner.<br>\n<br>\nKommareglerne ved hilsner (c) er lidt komplicerede. Således skal der være komma mellem fx 'hej' og navnet i et udråb, men ikke, hvis sætningen fortsætter - så kommer kommaet efter navnet.<br>\n<br>\n<i>Hej, Rasmus!</i> (udråb)<br>\n<br>\n<i>Hej Rasmus, har du set Maria?</i> (almindelig sætning)<br>\n<br>\nI en mail, hvor der bruges linjeskift efter navnet, er der slet ikke noget komma, hverken før eller efter navnet. Normalt er der ingenting ud over linjeskift, heller ikke punktum. Især i uformelle mails kan man bruge et udråbstegn, men det gør ikke indledningen til et egentligt udråb, så der skal heller ikke her være komma i midten.<br>\n<br>\nDer fortsættes med stort begyndelsesbogstav, uanset om man har brugt udråbstegn eller bare linjeskift.<br>\n<br>\nBemærk, at sluthilsen håndteres på samme måde - med linjeskift og uden komma.<br>\n<br>\n<i>Hej Rasmus</i><i>(!)</i><br>\n<br>\n<i>Jeg skriver til dig, fordi jeg fylder rundt og gerne vil invitere dig til min fødselsdag.</i>",
+		"",
+		""
+	],
+	"%k-explain": [
+		"%k-explain",
+		"Forklaringer og præciseringer",
+		"Der sættes komma omkring forklarende eller præciserende tilføjelser. Typisk er der et indledende ord eller udtryk som <i>fx, bl.a., herunder, inkl., uanset:</i><br>\n<br>\n<i>Sommetider får han en depression, f.eks. om vinteren.</i><br>\n<br>\n<i>En konstitueret leder, dvs. en midlertidig leder, har som opgave …</i><br>\n<br>\nHvis tilføjelsen indeholder en ledsætning, bortfalder reglen om optionelt startkomma, og kommaet placeres før det indledende forklaringsudtryk:<br>\n<br>\n<i>Jeg kan desværre ikke hjælpe dig med flytningen, bl.a. fordi jeg skal aflevere min opgave på mandag.</i><br>\n<br>\nNogle ord og udtryk <i>(nemlig, også, dels...dels, enten...eller)</i> bruges både inde i sætningen og foran forklarende tilføjelser. Her bruges der kun komma, hvis der er tale om tilføjelser, dvs. hvis resten af sætningen kan stå alene.<br>\n<br>\n<i>Turen må aflyses, dels på grund af vejret, dels på grund af mangel på tid. (Turen må aflyses.)</i><br>\n<br>\n<i>Det gælder dels udlandsrejser, dels rejser til Grønland. (*Det gælder.)</i>",
+		"",
+		"§47.4"
+	],
+	"%k-explain-end": [
+		"%k-explain-end",
+		"Forklaringer og præciseringer",
+		"Der sættes komma omkring forklarende eller præciserende tilføjelser. Typisk er der et indledende ord eller udtryk som <i>fx, bl.a., herunder, inkl., uanset:</i><br>\n<br>\n<i>Sommetider får han en depression, f.eks. om vinteren.</i><br>\n<br>\n<i>En konstitueret leder, dvs. en midlertidig leder, har som opgave …</i><br>\n<br>\nHvis tilføjelsen indeholder en ledsætning, bortfalder reglen om optionelt startkomma, og kommaet placeres før det indledende forklaringsudtryk:<br>\n<br>\n<i>Jeg kan desværre ikke hjælpe dig med flytningen, bl.a. fordi jeg skal aflevere min opgave på mandag.</i><br>\n<br>\nNogle ord og udtryk <i>(nemlig, også, dels...dels, enten...eller)</i> bruges både inde i sætningen og foran forklarende tilføjelser. Her bruges der kun komma, hvis der er tale om tilføjelser, dvs. hvis resten af sætningen kan stå alene.<br>\n<br>\n<i>Turen må aflyses, dels på grund af vejret, dels på grund af mangel på tid. (Turen må aflyses.)</i><br>\n<br>\n<i>Det gælder dels udlandsrejser, dels rejser til Grønland. (*Det gælder.)</i>",
+		"",
+		"§47.4"
+	],
+	"%k-explain-evt": [
+		"%k-explain-evt",
+		"Forklaringer og præciseringer",
+		"Der sættes komma omkring forklarende eller præciserende tilføjelser. Typisk er der et indledende ord eller udtryk som <i>fx, bl.a., herunder, inkl., uanset:</i><br>\n<br>\n<i>Sommetider får han en depression, f.eks. om vinteren.</i><br>\n<br>\n<i>En konstitueret leder, dvs. en midlertidig leder, har som opgave …</i><br>\n<br>\nHvis tilføjelsen indeholder en ledsætning, bortfalder reglen om optionelt startkomma, og kommaet placeres før det indledende forklaringsudtryk:<br>\n<br>\n<i>Jeg kan desværre ikke hjælpe dig med flytningen, bl.a. fordi jeg skal aflevere min opgave på mandag.</i><br>\n<br>\nNogle ord og udtryk <i>(nemlig, også, dels...dels, enten...eller)</i> bruges både inde i sætningen og foran forklarende tilføjelser. Her bruges der kun komma, hvis der er tale om tilføjelser, dvs. hvis resten af sætningen kan stå alene.<br>\n<br>\n<i>Turen må aflyses, dels på grund af vejret, dels på grund af mangel på tid. (Turen må aflyses.)</i><br>\n<br>\n<i>Det gælder dels udlandsrejser, dels rejser til Grønland. (*Det gælder.)</i>",
+		"",
+		"§47.4"
+	],
+	"%ok-explain": [
+		"%ok-explain",
+		"Forklaringer og præciseringer",
+		"Der sættes komma omkring forklarende eller præciserende tilføjelser. Typisk er der et indledende ord eller udtryk som <i>fx, bl.a., herunder, inkl., uanset:</i><br>\n<br>\n<i>Sommetider får han en depression, f.eks. om vinteren.</i><br>\n<br>\n<i>En konstitueret leder, dvs. en midlertidig leder, har som opgave …</i><br>\n<br>\nHvis tilføjelsen indeholder en ledsætning, bortfalder reglen om optionelt startkomma, og kommaet placeres før det indledende forklaringsudtryk:<br>\n<br>\n<i>Jeg kan desværre ikke hjælpe dig med flytningen, bl.a. fordi jeg skal aflevere min opgave på mandag.</i><br>\n<br>\nNogle ord og udtryk <i>(nemlig, også, dels...dels, enten...eller)</i> bruges både inde i sætningen og foran forklarende tilføjelser. Her bruges der kun komma, hvis der er tale om tilføjelser, dvs. hvis resten af sætningen kan stå alene.<br>\n<br>\n<i>Turen må aflyses, dels på grund af vejret, dels på grund af mangel på tid. (Turen må aflyses.)</i><br>\n<br>\n<i>Det gælder dels udlandsrejser, dels rejser til Grønland. (*Det gælder.)</i>",
+		"",
+		"§47.4"
+	],
+	"%nko-explain": [
+		"%nko-explain",
+		"Forklaringer og præciseringer",
+		"Der sættes komma omkring forklarende eller præciserende tilføjelser. Typisk er der et indledende ord eller udtryk som <i>fx, bl.a., herunder, inkl., uanset:</i><br>\n<br>\n<i>Sommetider får han en depression, f.eks. om vinteren.</i><br>\n<br>\n<i>En konstitueret leder, dvs. en midlertidig leder, har som opgave …</i><br>\n<br>\nHvis tilføjelsen indeholder en ledsætning, bortfalder reglen om optionelt startkomma, og kommaet placeres før det indledende forklaringsudtryk:<br>\n<br>\n<i>Jeg kan desværre ikke hjælpe dig med flytningen, bl.a. fordi jeg skal aflevere min opgave på mandag.</i><br>\n<br>\nNogle ord og udtryk <i>(nemlig, også, dels...dels, enten...eller)</i> bruges både inde i sætningen og foran forklarende tilføjelser. Her bruges der kun komma, hvis der er tale om tilføjelser, dvs. hvis resten af sætningen kan stå alene.<br>\n<br>\n<i>Turen må aflyses, dels på grund af vejret, dels på grund af mangel på tid. (Turen må aflyses.)</i><br>\n<br>\n<i>Det gælder dels udlandsrejser, dels rejser til Grønland. (*Det gælder.)</i>",
+		"",
+		"§47.4"
+	],
+	"%nko-explain-end": [
+		"%nko-explain-end",
+		"Forklaringer og præciseringer",
+		"Der sættes komma omkring forklarende eller præciserende tilføjelser. Typisk er der et indledende ord eller udtryk som <i>fx, bl.a., herunder, inkl., uanset:</i><br>\n<br>\n<i>Sommetider får han en depression, f.eks. om vinteren.</i><br>\n<br>\n<i>En konstitueret leder, dvs. en midlertidig leder, har som opgave …</i><br>\n<br>\nHvis tilføjelsen indeholder en ledsætning, bortfalder reglen om optionelt startkomma, og kommaet placeres før det indledende forklaringsudtryk:<br>\n<br>\n<i>Jeg kan desværre ikke hjælpe dig med flytningen, bl.a. fordi jeg skal aflevere min opgave på mandag.</i><br>\n<br>\nNogle ord og udtryk <i>(nemlig, også, dels...dels, enten...eller)</i> bruges både inde i sætningen og foran forklarende tilføjelser. Her bruges der kun komma, hvis der er tale om tilføjelser, dvs. hvis resten af sætningen kan stå alene.<br>\n<br>\n<i>Turen må aflyses, dels på grund af vejret, dels på grund af mangel på tid. (Turen må aflyses.)</i><br>\n<br>\n<i>Det gælder dels udlandsrejser, dels rejser til Grønland. (*Det gælder.)</i>",
+		"",
+		"§47.4"
+	],
+	"%ko-paren-group": [
+		"%ko-paren-group",
+		"Parentetisk indskudskomma",
+		"Ligesom ved parentetiske relativsætninger, selvstændige ledsætninger og markerede forklaringer og præciseringer, kan man også bruge parentetisk komma ved indskudte eller tilføjede ordgrupper, hvis disse fungerer som selvstændige led og bryder sætningsstrømmen. Dette komma er valgfrit og sjældent, men bruges sommetider ved præciserende eller koncessive (indrømmende) præpositions- og participiumsforbindelser. Typiske placeringer er lige efter det bøjede verbum, mellem subjekt og verbum eller efter en ellers afsluttet sætning. Bruger man dette komme ved et indskud midt i sætningen, skal der være komma både før og efter.<br>\n<br>\n<i>Irland</i> <i>er</i><i>(,)</i> <i>bortset fra det regnfulde vejr</i><i>(,)</i> <i>et dejligt feriemål</i><i>.</i><br>\n<br>\n<i>Irland</i> <i>er</i><i></i> <i>et dejligt feriemål</i><i>(,)</i> <i>lige</i> <i>bortset fra det regnfulde</i><i> vejr.</i><br>\n<br>\n<i>James Cook</i><i>(,)</i><i> født i fattige kår</i><i>(,)</i><i> men med mod på livet</i><i>(,)</i><i> elskede at rejse.</i><br>\n<br>\nEfter substantiver kan sådanne indskud minde om appositioner (navnetillæg):<br>\n<br>\n<i></i><br>\n<br>\n<i>Regeringen</i><i>(</i><i>,</i><i>)</i><i> og</i> <i>ikke mindst</i><i> finansministeren</i><i>(</i><i>,</i><i>)</i><i> må have vidst det længe.</i>",
+		"",
+		""
+	],
+	"%nko-paren-group": [
+		"%nko-paren-group",
+		"Parentetisk indskudskomma",
+		"Ligesom ved parentetiske relativsætninger, selvstændige ledsætninger og markerede forklaringer og præciseringer, kan man også bruge parentetisk komma ved indskudte eller tilføjede ordgrupper, hvis disse fungerer som selvstændige led og bryder sætningsstrømmen. Dette komma er valgfrit og sjældent, men bruges sommetider ved præciserende eller koncessive (indrømmende) præpositions- og participiumsforbindelser. Typiske placeringer er lige efter det bøjede verbum, mellem subjekt og verbum eller efter en ellers afsluttet sætning. Bruger man dette komme ved et indskud midt i sætningen, skal der være komma både før og efter.<br>\n<br>\n<i>Irland</i> <i>er</i><i>(,)</i> <i>bortset fra det regnfulde vejr</i><i>(,)</i> <i>et dejligt feriemål</i><i>.</i><br>\n<br>\n<i>Irland</i> <i>er</i><i></i> <i>et dejligt feriemål</i><i>(,)</i> <i>lige</i> <i>bortset fra det regnfulde</i><i> vejr.</i><br>\n<br>\n<i>James Cook</i><i>(,)</i><i> født i fattige kår</i><i>(,)</i><i> men med mod på livet</i><i>(,)</i><i> elskede at rejse.</i><br>\n<br>\nEfter substantiver kan sådanne indskud minde om appositioner (navnetillæg):<br>\n<br>\n<i></i><br>\n<br>\n<i>Regeringen</i><i>(</i><i>,</i><i>)</i><i> og</i> <i>ikke mindst</i><i> finansministeren</i><i>(</i><i>,</i><i>)</i><i> må have vidst det længe.</i>",
+		"",
+		""
+	],
+	"%ko-paren-group-end": [
+		"%ko-paren-group-end",
+		"Parentetisk indskudskomma",
+		"Ligesom ved parentetiske relativsætninger, selvstændige ledsætninger og markerede forklaringer og præciseringer, kan man også bruge parentetisk komma ved indskudte eller tilføjede ordgrupper, hvis disse fungerer som selvstændige led og bryder sætningsstrømmen. Dette komma er valgfrit og sjældent, men bruges sommetider ved præciserende eller koncessive (indrømmende) præpositions- og participiumsforbindelser. Typiske placeringer er lige efter det bøjede verbum, mellem subjekt og verbum eller efter en ellers afsluttet sætning. Bruger man dette komme ved et indskud midt i sætningen, skal der være komma både før og efter.<br>\n<br>\n<i>Irland</i> <i>er</i><i>(,)</i> <i>bortset fra det regnfulde vejr</i><i>(,)</i> <i>et dejligt feriemål</i><i>.</i><br>\n<br>\n<i>Irland</i> <i>er</i><i></i> <i>et dejligt feriemål</i><i>(,)</i> <i>lige</i> <i>bortset fra det regnfulde</i><i> vejr.</i><br>\n<br>\n<i>James Cook</i><i>(,)</i><i> født i fattige kår</i><i>(,)</i><i> men med mod på livet</i><i>(,)</i><i> elskede at rejse.</i><br>\n<br>\nEfter substantiver kan sådanne indskud minde om appositioner (navnetillæg):<br>\n<br>\n<i></i><br>\n<br>\n<i>Regeringen</i><i>(</i><i>,</i><i>)</i><i> og</i> <i>ikke mindst</i><i> finansministeren</i><i>(</i><i>,</i><i>)</i><i> må have vidst det længe.</i>",
+		"",
+		""
+	],
+	"%nko-paren-group-end": [
+		"%nko-paren-group-end",
+		"Parentetisk indskudskomma",
+		"Ligesom ved parentetiske relativsætninger, selvstændige ledsætninger og markerede forklaringer og præciseringer, kan man også bruge parentetisk komma ved indskudte eller tilføjede ordgrupper, hvis disse fungerer som selvstændige led og bryder sætningsstrømmen. Dette komma er valgfrit og sjældent, men bruges sommetider ved præciserende eller koncessive (indrømmende) præpositions- og participiumsforbindelser. Typiske placeringer er lige efter det bøjede verbum, mellem subjekt og verbum eller efter en ellers afsluttet sætning. Bruger man dette komme ved et indskud midt i sætningen, skal der være komma både før og efter.<br>\n<br>\n<i>Irland</i> <i>er</i><i>(,)</i> <i>bortset fra det regnfulde vejr</i><i>(,)</i> <i>et dejligt feriemål</i><i>.</i><br>\n<br>\n<i>Irland</i> <i>er</i><i></i> <i>et dejligt feriemål</i><i>(,)</i> <i>lige</i> <i>bortset fra det regnfulde</i><i> vejr.</i><br>\n<br>\n<i>James Cook</i><i>(,)</i><i> født i fattige kår</i><i>(,)</i><i> men med mod på livet</i><i>(,)</i><i> elskede at rejse.</i><br>\n<br>\nEfter substantiver kan sådanne indskud minde om appositioner (navnetillæg):<br>\n<br>\n<i></i><br>\n<br>\n<i>Regeringen</i><i>(</i><i>,</i><i>)</i><i> og</i> <i>ikke mindst</i><i> finansministeren</i><i>(</i><i>,</i><i>)</i><i> må have vidst det længe.</i>",
+		"",
+		""
+	],
+	"%k-rel": [
+		"%k-rel",
+		"Parentetisk relativsætning",
+		"Der bruges komma omkring parentetiske (selvstændige) relativsætninger. En relativsætning er parentetisk, hvis den kan udelades, uden at det er meningsforstyrrende. Dette er bl.a. tilfældet, hvor relativsætningen indeholder udtryk som <i>ellers, jo, i øvrigt</i><i>, som bekendt,</i> holdningsadverbier <i>(forhåbentlig, beklageligvis</i><i>, desværre</i><i>)</i> eller adverbier, der udtrykker (u)sandsynlighed <i>(sandsynligvis, næppe</i><i>, nok</i><i>).</i><br>\n<br>\n<i>Jeg har læst de to bøger, som jeg i øvrigt allerede havde set som film.</i><br>\n<br>\n<i>I en toværelses-lejlighed, hvor der jo ikke er plads til mange overnattende gæster, kan sovesofaer være en idé.</i><br>\n<br>\nIkke-parentetiske (essentielle/nødvendige) relativsætninger, dvs. relativsætninger, der ikke kan udelades, har obligatorisk slut-komma og optionelt start-komma, ligesom bundne ledsætninger generelt.<br>\n<br>\n<i>Personer (,) der ikke kan fremvise en negativ corona-test, henvises til udendørsservering.</i>",
+		"",
+		"§47.5a"
+	],
+	"%k-rel-end": [
+		"%k-rel-end",
+		"Parentetisk relativsætning",
+		"Der bruges komma omkring parentetiske (selvstændige) relativsætninger. En relativsætning er parentetisk, hvis den kan udelades, uden at det er meningsforstyrrende. Dette er bl.a. tilfældet, hvor relativsætningen indeholder udtryk som <i>ellers, jo, i øvrigt</i><i>, som bekendt,</i> holdningsadverbier <i>(forhåbentlig, beklageligvis</i><i>, desværre</i><i>)</i> eller adverbier, der udtrykker (u)sandsynlighed <i>(sandsynligvis, næppe</i><i>, nok</i><i>).</i><br>\n<br>\n<i>Jeg har læst de to bøger, som jeg i øvrigt allerede havde set som film.</i><br>\n<br>\n<i>I en toværelses-lejlighed, hvor der jo ikke er plads til mange overnattende gæster, kan sovesofaer være en idé.</i><br>\n<br>\nIkke-parentetiske (essentielle/nødvendige) relativsætninger, dvs. relativsætninger, der ikke kan udelades, har obligatorisk slut-komma og optionelt start-komma, ligesom bundne ledsætninger generelt.<br>\n<br>\n<i>Personer (,) der ikke kan fremvise en negativ corona-test, henvises til udendørsservering.</i>",
+		"",
+		"§47.5a"
+	],
+	"%ok-rel": [
+		"%ok-rel",
+		"Parentetisk relativsætning",
+		"Der bruges komma omkring parentetiske (selvstændige) relativsætninger. En relativsætning er parentetisk, hvis den kan udelades, uden at det er meningsforstyrrende. Dette er bl.a. tilfældet, hvor relativsætningen indeholder udtryk som <i>ellers, jo, i øvrigt</i><i>, som bekendt,</i> holdningsadverbier <i>(forhåbentlig, beklageligvis</i><i>, desværre</i><i>)</i> eller adverbier, der udtrykker (u)sandsynlighed <i>(sandsynligvis, næppe</i><i>, nok</i><i>).</i><br>\n<br>\n<i>Jeg har læst de to bøger, som jeg i øvrigt allerede havde set som film.</i><br>\n<br>\n<i>I en toværelses-lejlighed, hvor der jo ikke er plads til mange overnattende gæster, kan sovesofaer være en idé.</i><br>\n<br>\nIkke-parentetiske (essentielle/nødvendige) relativsætninger, dvs. relativsætninger, der ikke kan udelades, har obligatorisk slut-komma og optionelt start-komma, ligesom bundne ledsætninger generelt.<br>\n<br>\n<i>Personer (,) der ikke kan fremvise en negativ corona-test, henvises til udendørsservering.</i>",
+		"",
+		"§47.5a"
+	],
+	"%ok-rel-end": [
+		"%ok-rel-end",
+		"Parentetisk relativsætning",
+		"Der bruges komma omkring parentetiske (selvstændige) relativsætninger. En relativsætning er parentetisk, hvis den kan udelades, uden at det er meningsforstyrrende. Dette er bl.a. tilfældet, hvor relativsætningen indeholder udtryk som <i>ellers, jo, i øvrigt</i><i>, som bekendt,</i> holdningsadverbier <i>(forhåbentlig, beklageligvis</i><i>, desværre</i><i>)</i> eller adverbier, der udtrykker (u)sandsynlighed <i>(sandsynligvis, næppe</i><i>, nok</i><i>).</i><br>\n<br>\n<i>Jeg har læst de to bøger, som jeg i øvrigt allerede havde set som film.</i><br>\n<br>\n<i>I en toværelses-lejlighed, hvor der jo ikke er plads til mange overnattende gæster, kan sovesofaer være en idé.</i><br>\n<br>\nIkke-parentetiske (essentielle/nødvendige) relativsætninger, dvs. relativsætninger, der ikke kan udelades, har obligatorisk slut-komma og optionelt start-komma, ligesom bundne ledsætninger generelt.<br>\n<br>\n<i>Personer (,) der ikke kan fremvise en negativ corona-test, henvises til udendørsservering.</i>",
+		"",
+		"§47.5a"
+	],
+	"%ko-rel": [
+		"%ko-rel",
+		"Ikke-parentetisk relativsætning",
+		"Før en ikke-parentetisk ledsætning er startkomma valgfrit, svarende til andre bundne ledsætninger. Ikke-parentetiske relativsætninger indholder essentiel information og kan ikke droppes uden at forstyrre meningen.<br>\n<br>\n<i>Et firma(,) der ikke tjener penge, vil før eller senere se sin aktiekurs falde.</i><br>\n<br>\n<i>Den bil(,) han havde leaset, var en Porsche.</i>",
+		"",
+		""
+	],
+	"%nko-rel": [
+		"%nko-rel",
+		"Ikke-parentetisk relativsætning",
+		"Før en ikke-parentetisk ledsætning er startkomma valgfrit, svarende til andre bundne ledsætninger. Ikke-parentetiske relativsætninger indholder essentiel information og kan ikke droppes uden at forstyrre meningen.<br>\n<br>\n<i>Et firma(,) der ikke tjener penge, vil før eller senere se sin aktiekurs falde.</i><br>\n<br>\n<i>Den bil(,) han havde leaset, var en Porsche.</i>",
+		"",
+		""
+	],
+	"%nok-rel": [
+		"%nok-rel",
+		"Forkert relativkomma",
+		"Der skal ikke være komma før pronominet 'der', hvis denne bare fungerer som pladsholder efter et interrogativt subjekt, der indleder en ledsætning med 'hvilken' eller 'hvor'.<br>\n<br>\n<i>Det er svært at sige, hvilken af de mange vine[,] der smagte bedst.</i><br>\n<br>\n<i>Det tog lang tid at nå til en beslutning om, hvor stor en del af budgettet[,] der skulle bruges på vedligeholdelse.</i>",
+		"",
+		""
+	],
+	"%k-paren": [
+		"%k-paren",
+		"Selvstændig (parentetisk) ledsætning",
+		"Der sættes obligatorisk komma før og efter parentetiske (selvstændige) ledsætninger, dvs. ledsætninger, der kan udelades uden at ødelægge sætningen. Typiske indledende ord er <i>hvorimod, omend, mens</i> og <i>således at.</i><br>\n<br>\n<i>Han er altædende, hvorimod hun dyrker sit vegetar-image.</i><br>\n<br>\n<i>Man bør sprede sine investeringer, således at aktierne dækker over flere forskellige lande og brancher.</i><br>\n<br>\nOgså kommentartilføjelser adskilles med komma:<br>\n<br>\n<i>De levede, skulle man tro, et helt andet familieliv end vores.</i><br>\n<br>\n<i>Det er sandt, ville jeg mene.</i>",
+		"",
+		"§47.5b<br>\n<br>\n§49.3"
+	],
+	"%k-paren-end": [
+		"%k-paren-end",
+		"Selvstændig (parentetisk) ledsætning",
+		"Der sættes obligatorisk komma før og efter parentetiske (selvstændige) ledsætninger, dvs. ledsætninger, der kan udelades uden at ødelægge sætningen. Typiske indledende ord er <i>hvorimod, omend, mens</i> og <i>således at.</i><br>\n<br>\n<i>Han er altædende, hvorimod hun dyrker sit vegetar-image.</i><br>\n<br>\n<i>Man bør sprede sine investeringer, således at aktierne dækker over flere forskellige lande og brancher.</i><br>\n<br>\nOgså kommentartilføjelser adskilles med komma:<br>\n<br>\n<i>De levede, skulle man tro, et helt andet familieliv end vores.</i><br>\n<br>\n<i>Det er sandt, ville jeg mene.</i>",
+		"",
+		"§47.5b<br>\n<br>\n§49.3"
+	],
+	"%ok-paren": [
+		"%ok-paren",
+		"Selvstændig (parentetisk) ledsætning",
+		"Der sættes obligatorisk komma før og efter parentetiske (selvstændige) ledsætninger, dvs. ledsætninger, der kan udelades uden at ødelægge sætningen. Typiske indledende ord er <i>hvorimod, omend, mens</i> og <i>således at.</i><br>\n<br>\n<i>Han er altædende, hvorimod hun dyrker sit vegetar-image.</i><br>\n<br>\n<i>Man bør sprede sine investeringer, således at aktierne dækker over flere forskellige lande og brancher.</i><br>\n<br>\nOgså kommentartilføjelser adskilles med komma:<br>\n<br>\n<i>De levede, skulle man tro, et helt andet familieliv end vores.</i><br>\n<br>\n<i>Det er sandt, ville jeg mene.</i>",
+		"",
+		"§47.5b<br>\n<br>\n§49.3"
+	],
+	"%ok-paren-end": [
+		"%ok-paren-end",
+		"Selvstændig (parentetisk) ledsætning",
+		"Der sættes obligatorisk komma før og efter parentetiske (selvstændige) ledsætninger, dvs. ledsætninger, der kan udelades uden at ødelægge sætningen. Typiske indledende ord er <i>hvorimod, omend, mens</i> og <i>således at.</i><br>\n<br>\n<i>Han er altædende, hvorimod hun dyrker sit vegetar-image.</i><br>\n<br>\n<i>Man bør sprede sine investeringer, således at aktierne dækker over flere forskellige lande og brancher.</i><br>\n<br>\nOgså kommentartilføjelser adskilles med komma:<br>\n<br>\n<i>De levede, skulle man tro, et helt andet familieliv end vores.</i><br>\n<br>\n<i>Det er sandt, ville jeg mene.</i>",
+		"",
+		"§47.5b<br>\n<br>\n§49.3"
+	],
+	"%ko-men": [
+		"%ko-men",
+		"Valgfrit <i>'men'</i><i>-</i>komma mellem sætningsled",
+		"Man kan sætte komma før '<i>men</i>' - også hvor ordet ikke adskiller to sætninger.<br>\n<br>\n<i>Vi tager snart på ferie(,) men har ikke bestilt en rejse endnu.</i>",
+		"",
+		"§47.6"
+	],
+	"%nko-men": [
+		"%nko-men",
+		"Valgfrit <i>'men'</i><i>-</i>komma mellem sætningsled",
+		"Man kan sætte komma før '<i>men</i>' - også hvor ordet ikke adskiller to sætninger.<br>\n<br>\n<i>Vi tager snart på ferie(,) men har ikke bestilt en rejse endnu.</i>",
+		"",
+		"§47.6"
+	],
+	"%k-men": [
+		"%k-men",
+		"Obligatorisk <i>'men'-</i>komma ved særlig fremhævelse",
+		"Der sættes komma både før og efter '<i>men</i>'-udtryk for at understrege en modsætning.<br>\n<br>\n<i>En træt, men lykkelig, vinder.</i>",
+		"",
+		"§47.6"
+	],
+	"%k-men-end": [
+		"%k-men-end",
+		"Obligatorisk <i>'men'-</i>komma ved særlig fremhævelse",
+		"Der sættes komma både før og efter '<i>men</i>'-udtryk for at understrege en modsætning.<br>\n<br>\n<i>En træt, men lykkelig, vinder.</i>",
+		"",
+		"§47.6"
+	],
+	"%ok-men": [
+		"%ok-men",
+		"Obligatorisk <i>'men'-</i>komma ved særlig fremhævelse",
+		"Der sættes komma både før og efter '<i>men</i>'-udtryk for at understrege en modsætning.<br>\n<br>\n<i>En træt, men lykkelig, vinder.</i>",
+		"",
+		"§47.6"
+	],
+	"%ok-men-end": [
+		"%ok-men-end",
+		"Obligatorisk <i>'men'-</i>komma ved særlig fremhævelse",
+		"Der sættes komma både før og efter '<i>men</i>'-udtryk for at understrege en modsætning.<br>\n<br>\n<i>En træt, men lykkelig, vinder.</i>",
+		"",
+		"§47.6"
+	],
+	"%k-main": [
+		"%k-main",
+		"Komma mellem helsætninger",
+		"Helsætninger skal adskilles med komma (§3.1) - der er så at sige tale om en opremsning af flere udsagn. Hvis der er et bindeord mellem sætningerne (<i>og, eller, men, for, så</i>), står kommaet før dette.<br>\n<br>\n<i>Folket brøler, og diktatorerne er bange.</i><br>\n<br>\n<i>Vejen er spærret, så vi må køre udenom.</i><br>\n<br>\n<i>Nogle dansede, andre snakkede.</i><br>\n<br>\nGentagelse af verbal og subjekt betragtes også som en hovedsætning.<br>\n<br>\n<i>Hun er godt nok yndig, er hun.</i><br>\n<br>\nImperativer (bydemåde) regnes også som hovedsætninger, og medmindre handlingen i den anden imperativ er en direkte konsekvens af den første, sættes komma.<br>\n<br>\n<i>Sæt vandet over, og svits løgene!</i>",
+		"5.1",
+		"§48"
+	],
+	"%ok-main": [
+		"%ok-main",
+		"Komma mellem helsætninger",
+		"Helsætninger skal adskilles med komma (§3.1) - der er så at sige tale om en opremsning af flere udsagn. Hvis der er et bindeord mellem sætningerne (<i>og, eller, men, for, så</i>), står kommaet før dette.<br>\n<br>\n<i>Folket brøler, og diktatorerne er bange.</i><br>\n<br>\n<i>Vejen er spærret, så vi må køre udenom.</i><br>\n<br>\n<i>Nogle dansede, andre snakkede.</i><br>\n<br>\nGentagelse af verbal og subjekt betragtes også som en hovedsætning.<br>\n<br>\n<i>Hun er godt nok yndig, er hun.</i><br>\n<br>\nImperativer (bydemåde) regnes også som hovedsætninger, og medmindre handlingen i den anden imperativ er en direkte konsekvens af den første, sættes komma.<br>\n<br>\n<i>Sæt vandet over, og svits løgene!</i>",
+		"5.1",
+		"§48"
+	],
+	"%k-main-emph": [
+		"%k-main-emph",
+		"Gentagelseskomma",
+		"Der sættes komma før en fremhævende gentagelse af verbal og subjekt sidst i sætningen.<br>\n<br>\n<i>Han er god nok, er han.</i><br>\n<br>\n<i>Han er god nok, han er.</i><br>\n<br>\n<i>Der var ikke meget ved den film, var der?</i><br>\n<br>\n<i>Det hjælper virkelig, det gør.</i>",
+		"5.2",
+		""
+	],
+	"%ok-main-emph": [
+		"%ok-main-emph",
+		"Gentagelseskomma",
+		"Der sættes komma før en fremhævende gentagelse af verbal og subjekt sidst i sætningen.<br>\n<br>\n<i>Han er god nok, er han.</i><br>\n<br>\n<i>Han er god nok, han er.</i><br>\n<br>\n<i>Der var ikke meget ved den film, var der?</i><br>\n<br>\n<i>Det hjælper virkelig, det gør.</i>",
+		"5.2",
+		""
+	],
+	"%k-main-stop": [
+		"%k-main-stop",
+		"Komma mellem sætninger",
+		"Her synes der at være starten på en ny sætning. Alt efter hvor uafhængige sætningerne er, burde der sættes komma eller punktum.",
+		"",
+		""
+	],
+	"%ok-main-stop": [
+		"%ok-main-stop",
+		"Komma mellem sætninger",
+		"Dette komma adskiller to helsætninger. Alt efter hvor uafhængige sætningerne er, kan læsningen evt. lettes ved at sætte punktum i stedet.",
+		"",
+		""
+	],
+	"%nok-main": [
+		"%nok-main",
+		"Forkert helsætningskomma",
+		"Hvis en sideordnet sætning deler subjekt (genstandsled) med den første, er der ikke tale om en hel sætning, men kun et prædikat, og hvis der er et bindeord, bruges der ikke komma.<br>\n<br>\n<i>De slukkede lyset, låste huset[,] og tog af sted.</i>",
+		"",
+		"§48.6"
+	],
+	"%k-quote-end": [
+		"%k-quote-end",
+		"Direkte anført tale, slut-komma",
+		"Der sættes komma mellem anført tale og den anførende sætning (inquit). Kommaet kan placeres såvel (a) før som (b) efter anførselstegnet, hvor (a) er lidt mere almindelig i dag.<br>\n<br>\n<i>(a) ”Akupunktur ved fødsler,” sagde pindsvinepigen, ”får jeg hver gang. Især sædefødsler.”</i><br>\n<br>\n<i>(b) ”Akupunktur ved fødsler”, sagde pindsvinepigen, ”får jeg hver gang. Især sædefødsler.”</i><br>\n<br>\nCitat-slut-komma kan udelades, hvis citatet slutter med et spørgsmålstegn eller udråbstegn.<br>\n<br>\n<i>&quot;Har du set mit kamera?&quot;(,) spurgte hun.</i><br>\n<br>\nHvis den anførte tale slutter med punktum, kan der ikke samtidigt bruges komma.",
+		"10.1",
+		"§48.5"
+	],
+	"%ok-quote-end": [
+		"%ok-quote-end",
+		"Direkte anført tale, slut-komma",
+		"Der sættes komma mellem anført tale og den anførende sætning (inquit). Kommaet kan placeres såvel (a) før som (b) efter anførselstegnet, hvor (a) er lidt mere almindelig i dag.<br>\n<br>\n<i>(a) ”Akupunktur ved fødsler,” sagde pindsvinepigen, ”får jeg hver gang. Især sædefødsler.”</i><br>\n<br>\n<i>(b) ”Akupunktur ved fødsler”, sagde pindsvinepigen, ”får jeg hver gang. Især sædefødsler.”</i><br>\n<br>\nCitat-slut-komma kan udelades, hvis citatet slutter med et spørgsmålstegn eller udråbstegn.<br>\n<br>\n<i>&quot;Har du set mit kamera?&quot;(,) spurgte hun.</i><br>\n<br>\nHvis den anførte tale slutter med punktum, kan der ikke samtidigt bruges komma.",
+		"10.1",
+		"§48.5"
+	],
+	"%nko-quote-end": [
+		"%nko-quote-end",
+		"Direkte anført tale, slut-komma",
+		"Der sættes komma mellem anført tale og den anførende sætning (inquit). Kommaet kan placeres såvel (a) før som (b) efter anførselstegnet, hvor (a) er lidt mere almindelig i dag.<br>\n<br>\n<i>(a) ”Akupunktur ved fødsler,” sagde pindsvinepigen, ”får jeg hver gang. Især sædefødsler.”</i><br>\n<br>\n<i>(b) ”Akupunktur ved fødsler”, sagde pindsvinepigen, ”får jeg hver gang. Især sædefødsler.”</i><br>\n<br>\nCitat-slut-komma kan udelades, hvis citatet slutter med et spørgsmålstegn eller udråbstegn.<br>\n<br>\n<i>&quot;Har du set mit kamera?&quot;(,) spurgte hun.</i><br>\n<br>\nHvis den anførte tale slutter med punktum, kan der ikke samtidigt bruges komma.",
+		"10.1",
+		"§48.5"
+	],
+	"%k-quote-start": [
+		"%k-quote-start",
+		"Direkte anført tale, start-komma",
+		"Der sættes komma, når anført tale genoptages efter et anførende indskud (inquit):<br>\n<br>\n<i>”Akupunktur ved fødsler”, sagde pindsvine-pigen, ”får jeg hver gang . Især sædefødsler.”</i>",
+		"10.1",
+		"§48.5"
+	],
+	"%ok-quote-start": [
+		"%ok-quote-start",
+		"Direkte anført tale, start-komma",
+		"Der sættes komma, når anført tale genoptages efter et anførende indskud (inquit):<br>\n<br>\n<i>”Akupunktur ved fødsler”, sagde pindsvine-pigen, ”får jeg hver gang . Især sædefødsler.”</i>",
+		"10.1",
+		"§48.5"
+	],
+	"%nok-quote": [
+		"%nok-quote",
+		"Forkert anførselskomma",
+		"Der bruges ikke anførselskomma efter direkte tale, der slutter med punktum.<br>\n<br>\n<i>&quot;Jeg er træt.&quot;[,] sagde hun.</i><br>\n<br>\nDer er valgtfrit komma efter direkte tale, der slutter med '?' eller '!'<br>\n<br>\n<i>&quot;Luk døren!&quot;(,) råbte hun.</i><br>\n<br>\nNår et (kortere) citat fungerer som sætningsled (fx subjekt eller objekt) i den overordnede sætning, behøver der ikke at stå komma eller kolon..<br>\n<br>\n<i>&quot;Vi klarer det&quot;[,] er nu et politisk citat. (Subjekt)</i><br>\n<br>\n<i>Hun åndede[,] &quot;ja&quot; og skrev under på MeToo-erklæringen. (Objekt)</i><br>\n<br>\nDer bruges heller ikke komma, når citatet udgør en integreret del af sætningen.<br>\n<br>\n<i>Efter festen indrømmede Martina(,) at Vodka[,] &quot;alligevel indeholder marginalt mere alkohol end øl&quot;.</i>",
+		"10.1",
+		""
+	],
+	"%k-ellision": [
+		"%k-ellision",
+		"Ufuldstændig helsætning",
+		"Der sættes altid komma før en ny helsætning - også hvis denne mangler sit verbum (udsagnsord). Hvis den ufuldstændige sætning starter med et bindeord (<i>og, men, eller</i>), står kommaet foran dette.<br>\n<br>\n<i>Mænd er fra Mars, og kvinder fra Venus.</i><br>\n<br>\n<i>Jeg gik til venstre, han til højre</i><br>\n<br>\nModsat skal der ikke være komma før en sideordnet ufuldstændig (verbumsløs) <b>led</b>sætning. Dette gælder dog kun, hvis der er en konjunktion <i>(og/eller) -</i> ellers er der brug for et opremsningskomma.<br>\n<br>\n<i>De aftalte(,) at han skulle medbringe vin[,] og hun en kage.</i><br>\n<br>\n<i>De aftalte(,) at han skulle medbringe vin, hun en kage.</i>",
+		"7",
+		"§48.6"
+	],
+	"%k-FSend": [
+		"%k-FSend",
+		"Fast slutkomma ved ledsætninger",
+		"Ledsætninger er sætninger, der fungerer som led i en anden, overordnet sætning eller ordgruppe. Der sættes <i>altid</i> komma efter en ledsætning, medmindre ledsætningen står sidst i sætningen.<br>\n<br>\n<i>Hvis du vil vinde, skal du træne.</i><br>\n<br>\n<i>Selvom en struds har vinger, kan den ikke flyve.</i><br>\n<br>\n<i>Når den overordnede sætning fortsætter med en ny ledsætning, er kommaet mellem ledsætningerne et (obligatorisk) slut-komma for den første ledsætning, ikke et (valgfrit) start-komma for den anden.</i><br>\n<br>\n<i>(a) Vi havde allerede hørt(,) at bryllupet var aflyst, da Peter ringede.</i><br>\n<br>\nTil gengæld er kommaet før den anden ledsætning et (valgfrit) startkomma, hvis denne er underordnet den første ledsætning snarere end hovedsætningen:<br>\n<br>\n<i>(b) Vi havde allerede hørt(,) at bryllupet var aflyst(,) fordi Peter havde fået kolde fødder.</i><br>\n<br>\nMed Nyt Komma er tegnsætningen altså forskellig i (a) og (b), mens den er éns med Grammatisk Komma.",
+		"6.1",
+		"§49.1"
+	],
+	"%ok-FSend": [
+		"%ok-FSend",
+		"Fast slutkomma ved ledsætninger",
+		"Ledsætninger er sætninger, der fungerer som led i en anden, overordnet sætning eller ordgruppe. Der sættes <i>altid</i> komma efter en ledsætning, medmindre ledsætningen står sidst i sætningen.<br>\n<br>\n<i>Hvis du vil vinde, skal du træne.</i><br>\n<br>\n<i>Selvom en struds har vinger, kan den ikke flyve.</i><br>\n<br>\n<i>Når den overordnede sætning fortsætter med en ny ledsætning, er kommaet mellem ledsætningerne et (obligatorisk) slut-komma for den første ledsætning, ikke et (valgfrit) start-komma for den anden.</i><br>\n<br>\n<i>(a) Vi havde allerede hørt(,) at bryllupet var aflyst, da Peter ringede.</i><br>\n<br>\nTil gengæld er kommaet før den anden ledsætning et (valgfrit) startkomma, hvis denne er underordnet den første ledsætning snarere end hovedsætningen:<br>\n<br>\n<i>(b) Vi havde allerede hørt(,) at bryllupet var aflyst(,) fordi Peter havde fået kolde fødder.</i><br>\n<br>\nMed Nyt Komma er tegnsætningen altså forskellig i (a) og (b), mens den er éns med Grammatisk Komma.",
+		"6.1",
+		"§49.1"
+	],
+	"%ko-FSstart": [
+		"%ko-FSstart",
+		"Valgfrit startkomma ved ledsætninger",
+		"For at lette læsningen, kan man markere starten af en ledsætning med komma. Dette er i alle tilfælde obligatorisk ved brug af Grammatisk Komma og gør det nemmere at afkode sætningsstrukturen, især når der mangler et bindeord, eller når bindeordet ikke er det første ord i ledsætningen. Bruger man derimod Nyt Komma, anbefales det at udelade kommaet før ikke-selvstændige ledsætninger, dvs. før ledsætninger, der udgør en integreret del af den overordnede sætning.<br>\n<br>\n<i>Jeg tror(,) han lyver.</i><br>\n<br>\n<i>Det er vigtigt(,) at du kommer.</i><br>\n<br>\n<i>Computerne blev stjålet(,) uden at nogen opdagede det.</i><br>\n<br>\n<i>Ved du(,) hvem der har gjort det?</i><br>\n<br>\n<i>Godt(,) du kan lide jordbærtærte.</i><br>\n<br>\n<i>Hun fik mistanke om(,) at noget var galt.</i><br>\n<br>\nUanset om man bruger det valgfrie startkomma eller ej, har ledsætningen altid slutkomma:<br>\n<br>\n<i>Hans bemærkning om(,) at kvinder burde holde sig fra fodbold, faldt ikke i god jord.</i><br>\n<br>\nUanset om man bruger Grammatisk Komma eller Nyt Komma, er startkomma obligatorisk ved selvstændige (parentetiske) ledsætninger, herunder parentetiske relativsætninger. Selvstændige ledsætninger kan udelades uden at ødelægge sætningen og indeholder ofte ord, der markerer dette<i> (i øvrigt)</i> eller udtrykker et forbehold <i>(uanset, omend, hvorimod)</i><i>,</i> en usikkerhed <i>(formodentlig, sandsynligvis, måske)</i> eller en vurdering <i>(heldigvis).</i><br>\n<br>\n<i>Han er altædende, hvorimod hun dyrker sit vegetar-image.</i><br>\n<br>\n<i>Jeg har læst de to bøger, som jeg i øvrigt allerede havde set som film.</i><br>\n<br>\n<i>Når den overordnede sætning fortsætter med en ny ledsætning, er kommaet mellem ledsætningerne et (obligatorisk) slut-komma for den første ledsætning, ikke et (valgfrit) startkomma for den anden.</i><br>\n<br>\n<i>Vi havde allerede hørt(,) at bryllupet var aflyst, da Peter ringede.</i><br>\n<br>\nHvis ledsætningen indledes af en underordnende konjunktion <i>(</i>bindeord som <i>at, fordi, selvom etc.)</i> eller hv-ord <i>(hvem, hvad, hvilken, etc.)</i><i>,</i> placeres<i></i> komma som udgangspunkt umiddelbart før dette underordnende ord. Men hvis der er andre indledende ord eller ordforbindelser før det underordnende ord, rykkes komma tilsvarende længere til venstre. Sådanne ord kan være præpositioner, sammenligningskonjunktioner eller adverbialer:<br>\n<br>\n(a) præposition (forholdsord)<br>\n<br>\n<i>De fjernede cyklen(,) <b>uden</b> at han opdagede det.</i><br>\n<br>\n<i>Du kan få rabat(,) <b>mod</b>[,] at du selv afhenter varen.</i><br>\n<br>\n<i>Han inviterede hele landsbyen(,) <b>i anledning af</b>[,] at han blev 50.</i><br>\n<br>\n(b) sammenligningskonjunktion (<i>som, end</i>)<br>\n<br>\n<i>Det var nemmere</i><i>(</i><i>,</i><i>)</i><i></i> <b><i>end</i></b><i> hvis jeg havde været alene.</i><br>\n<br>\n(c) visse participier og andre udtryk brugt som konjunktion/præposition <i>(uanset, forudsat</i><i>, lige</i><i></i> <i>meget,</i> <i>ligegyldigt,</i> <i>alt efter</i><i>)</i><br>\n<br>\n<i>Du kan også få kage(,) <b>forudsat</b>[,] der er nok til alle.</i><br>\n<br>\n<i>Her får alle hjælp(,) <b>l</b><b>ige</b><b></b> <b>meget</b>[,] hvor de kommer fra.</i><br>\n<br>\n(d) adverbial (biled)<br>\n<br>\n<i>Du skal give besked(,) <b>en måned</b> før du skal rejse.</i><br>\n<br>\nKomma sættes dog efter adverbialet ved tidskonjunktionerne <i>da, når</i> eller <i>mens:</i><br>\n<br>\n<i>Du kan kigge forbi</i> <b><i>en aften</i></b><i>(</i><i>,</i><i>)</i><i> når du har tid.</i><br>\n<br>\nMen hvis tidskonkunktionen er udeladt, er der to muligheder - startkommaet kan så sættes enten før eller efter adverbialet:<br>\n<br>\n<i>Vi er altid på stranden de dage(,) solen skinner.</i><br>\n<br>\n<i>Vi er altid på stranden(,) de dage solen skinner.</i><br>\n<br>\nMan taler om sætningsknuder, når en del af ledsætningen flyttes op foran hovedsætningen, således at denne omsluttes af ledsætninger. Her kan man sætte et valgfrit startkomma til at markere brudet mellem hovedsætning og ledsætning.<br>\n<br>\n<i>Det tror jeg(,) at han vil støtte.</i><br>\n<br>\n<i>Hvem synes I(,) vi skal spørge?</i>",
+		"6.2",
+		"§49.1<br>\n<br>\n§49.5"
+	],
+	"%nko-FSstart": [
+		"%nko-FSstart",
+		"Valgfrit startkomma ved ledsætninger<br>\n<br>\nOptional start comma before subclause, including clefted clauses. <i>To be placed left of subclause-initial adverbial, interrogative or preposition (but directly left of 'da', 'når', 'mens').</i>",
+		"For at lette læsningen, kan man markere starten af en ledsætning med komma. Dette er i alle tilfælde obligatorisk ved brug af Grammatisk Komma og gør det nemmere at afkode sætningsstrukturen, især når der mangler et bindeord, eller når bindeordet ikke er det første ord i ledsætningen. Bruger man derimod Nyt Komma, anbefales det at udelade kommaet før ikke-selvstændige ledsætninger, dvs. før ledsætninger, der udgør en integreret del af den overordnede sætning.<br>\n<br>\n<i>Jeg tror(,) han lyver.</i><br>\n<br>\n<i>Det er vigtigt(,) at du kommer.</i><br>\n<br>\n<i>Computerne blev stjålet(,) uden at nogen opdagede det.</i><br>\n<br>\n<i>Ved du(,) hvem der har gjort det?</i><br>\n<br>\n<i>Godt(,) du kan lide jordbærtærte.</i><br>\n<br>\n<i>Hun fik mistanke om(,) at noget var galt.</i><br>\n<br>\nUanset om man bruger det valgfrie startkomma eller ej, har ledsætningen altid slutkomma:<br>\n<br>\n<i>Hans bemærkning om(,) at kvinder burde holde sig fra fodbold, faldt ikke i god jord.</i><br>\n<br>\nUanset om man bruger Grammatisk Komma eller Nyt Komma, er startkomma obligatorisk ved selvstændige (parentetiske) ledsætninger, herunder parentetiske relativsætninger. Selvstændige ledsætninger kan udelades uden at ødelægge sætningen og indeholder ofte ord, der markerer dette<i> (i øvrigt)</i> eller udtrykker et forbehold <i>(uanset, omend, hvorimod)</i><i>,</i> en usikkerhed <i>(formodentlig, sandsynligvis, måske)</i> eller en vurdering <i>(heldigvis).</i><br>\n<br>\n<i>Han er altædende, hvorimod hun dyrker sit vegetar-image.</i><br>\n<br>\n<i>Jeg har læst de to bøger, som jeg i øvrigt allerede havde set som film.</i><br>\n<br>\n<i>Når den overordnede sætning fortsætter med en ny ledsætning, er kommaet mellem ledsætningerne et (obligatorisk) slut-komma for den første ledsætning, ikke et (valgfrit) startkomma for den anden.</i><br>\n<br>\n<i>Vi havde allerede hørt(,) at bryllupet var aflyst, da Peter ringede.</i><br>\n<br>\nHvis ledsætningen indledes af en underordnende konjunktion <i>(</i>bindeord som <i>at, fordi, selvom etc.)</i> eller hv-ord <i>(hvem, hvad, hvilken, etc.)</i><i>,</i> placeres<i></i> komma som udgangspunkt umiddelbart før dette underordnende ord. Men hvis der er andre indledende ord eller ordforbindelser før det underordnende ord, rykkes komma tilsvarende længere til venstre. Sådanne ord kan være præpositioner, sammenligningskonjunktioner eller adverbialer:<br>\n<br>\n(a) præposition (forholdsord)<br>\n<br>\n<i>De fjernede cyklen(,) <b>uden</b> at han opdagede det.</i><br>\n<br>\n<i>Du kan få rabat(,) <b>mod</b>[,] at du selv afhenter varen.</i><br>\n<br>\n<i>Han inviterede hele landsbyen(,) <b>i anledning af</b>[,] at han blev 50.</i><br>\n<br>\n(b) sammenligningskonjunktion (<i>som, end</i>)<br>\n<br>\n<i>Det var nemmere</i><i>(</i><i>,</i><i>)</i><i></i> <b><i>end</i></b><i> hvis jeg havde været alene.</i><br>\n<br>\n(c) visse participier og andre udtryk brugt som konjunktion/præposition <i>(uanset, forudsat</i><i>, lige</i><i></i> <i>meget,</i> <i>ligegyldigt,</i> <i>alt efter</i><i>)</i><br>\n<br>\n<i>Du kan også få kage(,) <b>forudsat</b>[,] der er nok til alle.</i><br>\n<br>\n<i>Her får alle hjælp(,) <b>l</b><b>ige</b><b></b> <b>meget</b>[,] hvor de kommer fra.</i><br>\n<br>\n(d) adverbial (biled)<br>\n<br>\n<i>Du skal give besked(,) <b>en måned</b> før du skal rejse.</i><br>\n<br>\nKomma sættes dog efter adverbialet ved tidskonjunktionerne <i>da, når</i> eller <i>mens:</i><br>\n<br>\n<i>Du kan kigge forbi</i> <b><i>en aften</i></b><i>(</i><i>,</i><i>)</i><i> når du har tid.</i><br>\n<br>\nMen hvis tidskonkunktionen er udeladt, er der to muligheder - startkommaet kan så sættes enten før eller efter adverbialet:<br>\n<br>\n<i>Vi er altid på stranden de dage(,) solen skinner.</i><br>\n<br>\n<i>Vi er altid på stranden(,) de dage solen skinner.</i><br>\n<br>\nMan taler om sætningsknuder, når en del af ledsætningen flyttes op foran hovedsætningen, således at denne omsluttes af ledsætninger. Her kan man sætte et valgfrit startkomma til at markere brudet mellem hovedsætning og ledsætning.<br>\n<br>\n<i>Det tror jeg(,) at han vil støtte.</i><br>\n<br>\n<i>Hvem synes I(,) vi skal spørge?</i>",
+		"6.2",
+		"§49.1<br>\n<br>\n§49.5"
+	],
+	"%k-FSco": [
+		"%k-FSco",
+		"Komma mellem sideordnede ledsætninger",
+		"Der sættes komma mellem sideordnede ledsætninger, til venstre for <i>og/eller:</i><br>\n<br>\n<i>Hvis du har lyst, og hvis vejret er til det, kan vi tage ud at sejle.</i><br>\n<br>\nDette komma er et sideordningskomma og ikke et startkomma, så det skal derfor bruges, uanset om man er tilhænger af Nyt Komma og derfor ikke har sat komma før den første ledsætning:<br>\n<br>\n<i>Han fortalte(,) at han havde solgt sin bil, og at han regnede med at købe en elcykel i stedet.</i><br>\n<br>\nDog må der ikke stå sideordningskomma, hvis de sideordnede ledsætninger er ufuldstændige (dvs. uden verbum):<br>\n<br>\n<i>De aftalte(,) at han skulle medbringe vin[,] og hun en kage.</i><br>\n<br>\nKommaet mellem sideordnede ledsætninger kan valgfrit udelades, hvis de har fælles indledningsordet.<br>\n<br>\n<i>Hvis du har lyst(,) og vejret er til det, kan vi tage ud at sejle.</i>",
+		"17.1<br>\n<br>\n17.3",
+		"§49.2a"
+	],
+	"%ok-FSco": [
+		"%ok-FSco",
+		"Komma mellem sideordnede ledsætninger",
+		"Der sættes komma mellem sideordnede ledsætninger, til venstre for <i>og/eller:</i><br>\n<br>\n<i>Hvis du har lyst, og hvis vejret er til det, kan vi tage ud at sejle.</i><br>\n<br>\nDette komma er et sideordningskomma og ikke et startkomma, så det skal derfor bruges, uanset om man er tilhænger af Nyt Komma og derfor ikke har sat komma før den første ledsætning:<br>\n<br>\n<i>Han fortalte(,) at han havde solgt sin bil, og at han regnede med at købe en elcykel i stedet.</i><br>\n<br>\nDog må der ikke stå sideordningskomma, hvis de sideordnede ledsætninger er ufuldstændige (dvs. uden verbum):<br>\n<br>\n<i>De aftalte(,) at han skulle medbringe vin[,] og hun en kage.</i><br>\n<br>\nKommaet mellem sideordnede ledsætninger kan valgfrit udelades, hvis de har fælles indledningsordet.<br>\n<br>\n<i>Hvis du har lyst(,) og vejret er til det, kan vi tage ud at sejle.</i>",
+		"17.1<br>\n<br>\n17.3",
+		"§49.2a"
+	],
+	"%ko-FSco": [
+		"%ko-FSco",
+		"Valgfrit komma ved ledsætninger der deler konjunktion",
+		"Hvis to ledsætninger deler konjunktion, er det valgfrit at sætte komma imellem dem:<br>\n<br>\n<i>Hvis han igen er syg(,) og hun ikke vil rejse alene, må vi flytte ferien.</i>",
+		"17.3",
+		"§49.2b"
+	],
+	"%nko-FSco": [
+		"%nko-FSco",
+		"Valgfrit komma ved ledsætninger der deler konjunktion",
+		"Hvis to ledsætninger deler konjunktion, er det valgfrit at sætte komma imellem dem:<br>\n<br>\n<i>Hvis han igen er syg(,) og hun ikke vil rejse alene, må vi flytte ferien.</i>",
+		"17.3",
+		"§49.2b"
+	],
+	"%nok-FSstart": [
+		"%nok-FSstart",
+		"Forkert startkomma",
+		"Uanset om man bruger startkomma, sættes der aldrig komma mellem en konjunktion (<i>og, eller, men</i><i>, for, så,</i> <i>at</i>) og en efterfølgende ledsætning. Hvis der er to konjunktioner i træk, placeres startkommaet før den første.<br>\n<br>\n<i>Han var sulten(,) og[,] fordi køleskabet var tomt, købte han ind.</i><br>\n<br>\n<i>Du skal tage hynderne ind(,) for[,]</i> <i>hvis der falder dug, kan vi ikke bruge dem til morgenmaden.</i><br>\n<br>\n<i>Han sagde(,) at[,] hvis du vil med, skal du skynde dig.</i><br>\n<br>\nStartkomma skal rykkes til venstre eller - i starten af sætningen - droppes helt, hvis der før en konjunktion eller et <i>hv-</i>ord står en præposition (forholdsord), '<i>som', 'end'</i> eller et andet udtryk, der også er del af ledsætningen:<br>\n<br>\n<i>Du kan få rabat(,) mod[,] at du selv afhenter varen.</i><br>\n<br>\n<i>Han inviterede hele landsbyen(,) i anledning af[,] at han blev 50.</i><br>\n<br>\n<i>Hun er ked af det(,) fordi[,] [at] hendes kat har ædt hamstret.</i><br>\n<br>\n<i>Uanset[,] hvem du spørger, vil du få samme svar.</i><br>\n<br>\nHvis præpositionen derimod hører til den overordnede sætning <i>(tror på ...)</i>, og ikke til ledsætningen <i>(... at)</i>, står startkomma direkte før konjunktionen:<br>\n<br>\n<i>Jeg tror[,] på, at vi vinder i aften.</i>",
+		"6.5",
+		"§49.4<br>\n<br>\n§49.1"
+	],
+	"%ko-ellision-end": [
+		"%ko-ellision-end",
+		"Valgfrit komma efter ufuldstændig ledsætning o.l.",
+		"Efter indledende ufuldstændige ledsætninger uden verbal kan der valgfrit sættes slutkomma. Det samme gælder faste udtryk, hvis de kan opfattes som ufuldstændige ledsætninger. Især ved sidstnævnte er der dog en tendens til at droppe slutkomma.<br>\n<br>\n<i>Som [det] tidligere [blev] nævnt(,) er bilen næsten ny.</i><br>\n<br>\n<i>Hvor [det er] muligt(,) vil vi hjælpe med transporten.</i><br>\n<br>\n<i>Hvis ikke (,) finder vi en anden løsning.</i><br>\n<br>\n<i>Skønt gammeldags(,) er det en smuk film.</i>",
+		"7.2.1",
+		"§49.6a"
+	],
+	"%nko-ellision-end": [
+		"%nko-ellision-end",
+		"Valgfrit komma efter ufuldstændig ledsætning o.l.",
+		"Efter indledende ufuldstændige ledsætninger uden verbal kan der valgfrit sættes slutkomma. Det samme gælder faste udtryk, hvis de kan opfattes som ufuldstændige ledsætninger. Især ved sidstnævnte er der dog en tendens til at droppe slutkomma.<br>\n<br>\n<i>Som [det] tidligere [blev] nævnt(,) er bilen næsten ny.</i><br>\n<br>\n<i>Hvor [det er] muligt(,) vil vi hjælpe med transporten.</i><br>\n<br>\n<i>Hvis ikke (,) finder vi en anden løsning.</i><br>\n<br>\n<i>Skønt gammeldags(,) er det en smuk film.</i>",
+		"7.2.1",
+		"§49.6a"
+	],
+	"%nok-ellision": [
+		"%nok-ellision",
+		"Ikke komma før ufuldstændig ledsætning o.l.",
+		"Der bruges normalt ikke komma <i>før</i> ufuldstændige ledsætninger (sætninger uden verbal), heller ikke når de er sideordnet. Det samme gælder faste udtryk, hvis de kan opfattes som ufuldstændige ledsætninger.<br>\n<br>\n<i>De aftalte(,) at han skulle medbringe vin[,] og hun en kage.</i><br>\n<br>\n<i>Skabet samles[,] som vist.</i><br>\n<br>\n<i>Jeg hader rucola lige så meget[,] som du.</i><br>\n<br>\nDette gælder, selv hvor den ufuldstændige ledsætning <i>har</i> fået slutkomma:<br>\n<br>\n<i>Vi forsikrer kun skader[,] opstået under selve rejsen(,) og henviser i øvrigt til forbeholdene i policen.</i><br>\n<br>\nDer sættes heller ikke komma, når en ledsætning er reduceret til et enkelt 'hv-' udtryk.<br>\n<br>\n<i>Vi får gæster. Vi ved bare ikke[,] hvornår / hvor mange</i><br>\n<br>\n<i>Han spiller tennis i aften, men jeg ved ikke[,] med hvem.</i><br>\n<br>\nTil gengæld skal der sættes komma mellem ufuldstændige helsætninger:<br>\n<br>\n<i>Mænd er fra Mars, og kvinder fra Venus.</i><br>\n<br>\nBemærk også, at der naturligvis skal stå opremsningskomma ved sideordning af både hoved- og ledsætninger, hvis der ikke er en konjunktion (<i>og/men</i>) imellem dem:<br>\n<br>\n<i>Jeg gik til venstre, han til højre.</i><br>\n<br>\n<i>De aftalte, at han skulle medbringe vin, hun en kage.</i>",
+		"7.2.2",
+		"§49.6b"
+	],
+	"%ko-ellision": [
+		"%ko-ellision",
+		"Parentetisk ufuldstændig ledsætning",
+		"Normalt sættes ikke komma før ufuldstændige ledsætninger. Men der kan gøres en undtagelse, hvis den ufuldstændige ledsætning er parentetisk, dvs. indskudt eller efterstillet med en høj grad af selvstændighed.<br>\n<br>\n<i>Jeg skal simpelthen på ferie(,) lige meget hvor.</i><br>\n<br>\n<i>Hun elsker at skændes om politik(,) uanset med hvem.</i><br>\n<br>\n<i>Irland er(,) uanset hvornår(,) et dejligt feriemål.</i>",
+		"7.2.4",
+		"§49.6b"
+	],
+	"%nko-ellision": [
+		"%nko-ellision",
+		"Parentetisk ufuldstændig ledsætning",
+		"Normalt sættes ikke komma før ufuldstændige ledsætninger. Men der kan gøres en undtagelse, hvis den ufuldstændige ledsætning er parentetisk, dvs. indskudt eller efterstillet med en høj grad af selvstændighed.<br>\n<br>\n<i>Jeg skal simpelthen på ferie(,) lige meget hvor.</i><br>\n<br>\n<i>Hun elsker at skændes om politik(,) uanset med hvem.</i><br>\n<br>\n<i>Irland er(,) uanset hvornår(,) et dejligt feriemål.</i>",
+		"7.2.4",
+		"§49.6b"
+	],
+	"%ko-tangle": [
+		"%ko-tangle",
+		"Sætningsknude",
+		"Sætningsknuder er konstruktioner, hvor en del af en efterstillet ledsætning er løftet frem foran den overordnede sætning. Man kan lette læsningen ved at sætte et (valgfrit) startkomma dér, hvor brudet er mellem den overordnede sætning og den trunkerede ledsætning.<br>\n<br>\n<i>Peter tror jeg<b>(,)</b> (at) han vil støtte. (= Jeg tror(,) at han vil støtte Peter.)</i><br>\n<br>\n<i>Det er der ikke noget<b>(,)</b> der tyder på. (= Der er ikke noget(,) der tyder på det.)</i><br>\n<br>\nBemærk, at den overordnede sætning selv kan være en (anden) ledsætning:<br>\n<br>\n<i>Jeg har endelig mødt en politiker(,) som jeg kan forsvare<b>(,)</b> at jeg vil støtte.</i><br>\n<br>\n<i>(= Jeg har endelig mødt en politiker(,) hvor jeg kan forsvare(,) at jeg vil støtte ham.)</i><br>\n<br>\n<i>De har oplevet en kontrol(,) som nogle mener(,) nærmer sig sexchikane.</i><br>\n<br>\n<i>(= De har oplevet en kontrol, om hvilken nogle mener, at den nærmer sig sexchikane.)</i><br>\n<br>\nNogle gange bliver det led, der løftes ud af ledsætningen, løftet hele to niveauer op. I nedenstående eksempel stammer det indledende 'det' fra den sidste ledsætning, der er objektsætning i en anden objektsætning, der igen er underordnet hovedsætningen 'tror jeg'.<br>\n<br>\n<i>Det tror jeg(,) at han ved(,) at vi gør.</i><br>\n<br>\nHer er det det første komma, der fungerer som sætningsknude-komma, mens det andet er et almindeligt startkomma.",
+		"8",
+		"49.5"
+	],
+	"%nko-tangle": [
+		"%nko-tangle",
+		"Sætningsknude",
+		"Sætningsknuder er konstruktioner, hvor en del af en efterstillet ledsætning er løftet frem foran den overordnede sætning. Man kan lette læsningen ved at sætte et (valgfrit) startkomma dér, hvor brudet er mellem den overordnede sætning og den trunkerede ledsætning.<br>\n<br>\n<i>Peter tror jeg<b>(,)</b> (at) han vil støtte. (= Jeg tror(,) at han vil støtte Peter.)</i><br>\n<br>\n<i>Det er der ikke noget<b>(,)</b> der tyder på. (= Der er ikke noget(,) der tyder på det.)</i><br>\n<br>\nBemærk, at den overordnede sætning selv kan være en (anden) ledsætning:<br>\n<br>\n<i>Jeg har endelig mødt en politiker(,) som jeg kan forsvare<b>(,)</b> at jeg vil støtte.</i><br>\n<br>\n<i>(= Jeg har endelig mødt en politiker(,) hvor jeg kan forsvare(,) at jeg vil støtte ham.)</i><br>\n<br>\n<i>De har oplevet en kontrol(,) som nogle mener(,) nærmer sig sexchikane.</i><br>\n<br>\n<i>(= De har oplevet en kontrol, om hvilken nogle mener, at den nærmer sig sexchikane.)</i><br>\n<br>\nNogle gange bliver det led, der løftes ud af ledsætningen, løftet hele to niveauer op. I nedenstående eksempel stammer det indledende 'det' fra den sidste ledsætning, der er objektsætning i en anden objektsætning, der igen er underordnet hovedsætningen 'tror jeg'.<br>\n<br>\n<i>Det tror jeg(,) at han ved(,) at vi gør.</i><br>\n<br>\nHer er det det første komma, der fungerer som sætningsknude-komma, mens det andet er et almindeligt startkomma.",
+		"8",
+		"49.5"
+	],
+	"%ko-cleft": [
+		"%ko-cleft",
+		"Kløvningskomma",
+		"En sætningskløvning er en konstruktion, hvor et led i sætningen fremhæves med 'Det er/var'. Resten af sætningen har form af en relativsætning, der efterfølger det fremhævede led. Det letter læsningen, at markere kløvningen med et (valgfrit) komma.<br>\n<br>\n<i>Det var lægehelikopteren(,) (som) vi så.</i><br>\n<br>\n<i>Det er Maria(,) (som) han er vild med.</i><br>\n<br>\n<i>Det er Peter(,) der har sagt det.</i><br>\n<br>\nHvis de fremhævede sætningsled er et adverbial, følger der en <i>at-</i>sætning snarere end en relativsætning:<br>\n<br>\n<i>Det var i Frankrig(,) (at) han mødte hende.</i><br>\n<br>\nBemærk, at det fremhævede element kan stamme fra en efterstillet ledsætning.<br>\n<br>\n<i>Det er så der(,) jeg synes(,) kæden hopper af for ham.</i><br>\n<br>\nHer er det første komma et kløvningskomma, mens det andet er et almindeligt startkomma.",
+		"9",
+		""
+	],
+	"%nko-cleft": [
+		"%nko-cleft",
+		"Kløvningskomma",
+		"En sætningskløvning er en konstruktion, hvor et led i sætningen fremhæves med 'Det er/var'. Resten af sætningen har form af en relativsætning, der efterfølger det fremhævede led. Det letter læsningen, at markere kløvningen med et (valgfrit) komma.<br>\n<br>\n<i>Det var lægehelikopteren(,) (som) vi så.</i><br>\n<br>\n<i>Det er Maria(,) (som) han er vild med.</i><br>\n<br>\n<i>Det er Peter(,) der har sagt det.</i><br>\n<br>\nHvis de fremhævede sætningsled er et adverbial, følger der en <i>at-</i>sætning snarere end en relativsætning:<br>\n<br>\n<i>Det var i Frankrig(,) (at) han mødte hende.</i><br>\n<br>\nBemærk, at det fremhævede element kan stamme fra en efterstillet ledsætning.<br>\n<br>\n<i>Det er så der(,) jeg synes(,) kæden hopper af for ham.</i><br>\n<br>\nHer er det første komma et kløvningskomma, mens det andet er et almindeligt startkomma.",
+		"9",
+		""
+	],
+	"%nok-inf": [
+		"%nok-inf",
+		"Ikke komma før infinitiv",
+		"På dansk sætter man ikke komma før infinitiv-konstruktioner. Man skal i denne forbindelse gøre sig klart, om ordet 'at' fungerer som konjunktion (valgfrit startkomma) eller som infinitiv-markør (uden komma).<br>\n<br>\n<i>Hele formiddagen forsøgte han[,] at komme igennem til Skat på telefonen.</i><br>\n<br>\nDer bruges heller ikke komma før sideordnede infinitiver, når disse lægger sig til et hjælpeverbum uden 'at':<br>\n<br>\n<i>Han lovede at gå tur med hunden[,] og at vande blomsterne.</i>",
+		"11",
+		""
+	],
+	"%nok-inf-end": [
+		"%nok-inf-end",
+		"Ikke komma efter infinitiv",
+		"På dansk sætter man ikke komma efter infinitiv-sætninger. Man skal i denne forbindelse gøre sig klart, om ordet 'at' fungerer som konjunktion (valgfrit startkomma) eller som infinitiv-markør (uden komma).<br>\n<br>\n<i>At følge med i spanske serier på Netflix[,] er en god måde at øve sproget på.</i>",
+		"11",
+		""
+	],
+	"%nok-intro": [
+		"%nok-intro",
+		"Forkert indledningskomma",
+		"I modsætning til engelsk, har dansk ikke noget indledningskomma efter indledende præpositionsforbindelser (a-b) og andre adverbialer (c). Det skal heller ikke være komma efter participiumsforbindelser, hvor participiet fungerer som en præposition (d).<br>\n<br>\n<i>(a) Med moms og afgifter[,] er bensinprisen steget 20% siden nytår.</i><br>\n<br>\n<i>(b) Sent fredag aften[,] meddelte regeringen, at grænserne igen var åbne.</i><br>\n<br>\n<i>(c) Bortset fra det regnfulde vejr[,] er Irland et dejligt feriemål.</i><br>\n<br>\n<i>(d) Uanset vejret[,] skal vi sejle i morgen.</i><br>\n<br>\nKun hvis en indledende participiumsfobindelse kan tolkes som en ufuldstændig sætning, er der mulighed for at sætte et valgfrit slutkomma efter den.<br>\n<br>\n<i>Som [det] tidligere [blev] nævnt(,) er bilen næsten ny.</i><br>\n<br>\n<i>Fratrukket udgifter(,) er der en lille million til udbytte.</i><br>\n<br>\nEn anden undtagelse er topikalisering. Her kan en præpositionsforbindelse i begyndelses af sætningen fremhæves ved at den gøres til &quot;emne&quot; og genoptages med 'der'/'dér' (sted) eller 'da' (tid). Her sætte komma efter præpositionsforbindelsen:<br>\n<br>\n<i>I spejderhytten ved Julsø, dér har vi festest før.</i><br>\n<br>\n<i>Næste jul, da kan vi så komme til jer.</i>",
+		"13.4",
+		""
+	],
+	"%k": [
+		"%k",
+		"Ikke-klassificeret komma",
+		"Programmet mener, at der er et brud i sætningen på dette sted. Overvej at sætte komma, punktum, bindestreg eller anden tegnsætning.",
+		"",
+		""
+	],
+	"%k-stop": [
+		"%k-stop",
+		"Periode",
+		"Overgangen fra en periode til den næste skal markeres med tegnsætning. Overvej, om du vil bruge punktum, komma, kolon, semikolon eller - fx efter overskrifter - linjeskift.<br>\n<br>\n<i>Skammens dag [.,;]Det er skammens dag for tv-selskaberne i Los Angeles</i>",
+		"21.1",
+		"§41"
+	],
+	"%nok-stop": [
+		"%nok-stop",
+		"Periode",
+		"Programmet mener, at der her er to sætninger, der støder sammen. Overvej at skifte komma ud med punktum.<br>\n<br>\n<i>Det ser ud til, at sygdommen skyldes en virusinfektion, her får man ikke meget ud af at bruge antibiotika. (... virusinfektion. Her ...)</i>",
+		"21.1",
+		"§41"
+	],
+	"%nok-co": [
+		"%nok-co",
+		"Forkert sideordningskomma",
+		"Der bruges ikke komma før 'og'/'eller', når det, der sideordnes, er ord, ordgrupper, prædikater (subjektsløse sætninger) eller ufuldstændige ledsætninger.<br>\n<br>\n<i>I morgen besøger vi bedstefar[,] og bedstemor.</i><br>\n<br>\nMed til denne regel hører det, at man på dansk ikke sætter komma foran 'og'/'eller' i slutningen af en liste - noget der på engelsk kendes som <i>Oxford-comma.</i><br>\n<br>\n<i>Gulerødder, porrer, kål, løg[,] og andre grønsager</i><br>\n<br>\nKun sideordnede fuldstændige helsætninger eller ledsætninger, samt ufuldstændige helsætninger får komma før 'og/eller'.<br>\n<br>\n<i>Folket brøler, og diktatorerne er bange.</i><br>\n<br>\n<i>Hvis du har lyst, og hvis vejret er til det, kan vi tage ud at sejle.</i><br>\n<br>\nDog kan kommaet mellem sideordnede ledsætninger valgfrit udelades, hvis de har fælles indledningsord.<br>\n<br>\n<i>Hvis du har lyst(,) og vejret er til det, kan vi tage ud at sejle.</i>",
+		"17.2",
+		"§49.2<br>\n<br>\n§49.6"
+	],
+	"%k-contrast": [
+		"%k-contrast",
+		"Modsætningskomma",
+		"Der sættes komma før 'dog' og 'bare ikke/aldrig' , når de indleder selvstændige tilføjelser, der rummer en modsætning til et forudgående element. Der er som regel tale om et særfeltskommaen sidst i sætningen, hvor kommaet kan skiftes ud med en tankestreg.<br>\n<br>\n<i>Hun elsker at skændes om politik, dog ikke med sin bror.</i><br>\n<br>\n<i>I må gerne sparke bold i pausen, bare ikke her.</i><br>\n<br>\nNår to sætningsled af samme type sidestilles uden konjunktion, sættes der komma - uanset om der er tale om en opremsning på tre eller flere led, en forstærkende gentagelse eller en modsætning mellem to led:<br>\n<br>\n<i>Det er mine penge, ikke dine.</i>",
+		"14.2",
+		""
+	],
+	"%ok-contrast": [
+		"%ok-contrast",
+		"Modsætningskomma",
+		"Der sættes komma før 'dog' og 'bare ikke/aldrig' , når de indleder selvstændige tilføjelser, der rummer en modsætning til et forudgående element. Der er som regel tale om et særfeltskommaen sidst i sætningen, hvor kommaet kan skiftes ud med en tankestreg.<br>\n<br>\n<i>Hun elsker at skændes om politik, dog ikke med sin bror.</i><br>\n<br>\n<i>I må gerne sparke bold i pausen, bare ikke her.</i><br>\n<br>\nNår to sætningsled af samme type sidestilles uden konjunktion, sættes der komma - uanset om der er tale om en opremsning på tre eller flere led, en forstærkende gentagelse eller en modsætning mellem to led:<br>\n<br>\n<i>Det er mine penge, ikke dine.</i>",
+		"14.2",
+		""
+	],
+	"%ko-contrast": [
+		"%ko-contrast",
+		"Valgfrit modsætningskomma",
+		"Der kan stå et valgfrit modsætningskomma ved <i>'og ikke/aldrig'</i>, selv når det ikke er sætninger, der sideordnes.<br>\n<br>\n<i>Det er mine penge(,) og ikke dine.</i><br>\n<br>\n<i>Bogen er frisk(,) og ikke frelst.</i>",
+		"14.2",
+		""
+	],
+	"%nko-contrast": [
+		"%nko-contrast",
+		"Valgfrit modsætningskomma",
+		"Der kan stå et valgfrit modsætningskomma ved <i>'og ikke/aldrig'</i>, selv når det ikke er sætninger, der sideordnes.<br>\n<br>\n<i>Det er mine penge(,) og ikke dine.</i><br>\n<br>\n<i>Bogen er frisk(,) og ikke frelst.</i>",
+		"14.2",
+		""
+	],
+	"%nok-SV": [
+		"%nok-SV",
+		"Ikke komma mellem subjekt og verbum",
+		"Subjekt (grundled) og verbum (udsagnsord) må aldrig adskilles af et komma, sålænge subjektet består af nominale elementer og ikke udgøres af en ledsætning eller en infinitiv-gruppe. Dette er en syntaktisk regel og gælder, selv hvis der gøres ophold i læsestrømmen på dette sted.<br>\n<br>\n<i>Dette maleri fra Skagens guldalder[,] har aldrig været på en auktion.</i><br>\n<br>\nBemærk: Det er selvfølgelig stadigvæk muligt at have et inskud med et kommapar - dvs. to (!) kommas - mellem subjekt og verbum, fx en apposition (navnetillæg) eller en relativsætning med subjektet som referenceord:<br>\n<br>\n<i>Dette guldalermaleri, som for nyligt blev fundet på et gammelt loft, har aldrig været på en auktion.</i><br>\n<br>\nKomplekse subjekter med sideordning eller infinitiv-subjekter er derimod stadigvæk bare subjekter og skal ikke have komme foran et efterfølgende verbum.<br>\n<br>\n<i>Det store oliemaleriet og de små kridttegningerne stammer begge fra samme kunstner tidlige periode.</i><br>\n<br>\n<i>At følge med i spanske serier på Netflix[,] er en god måde at øve sproget på.</i>",
+		"16",
+		""
+	],
+	"%nok-soft": [
+		"%nok-soft",
+		"Ikke-påkrævet komma",
+		"Programmet har ikke fundet nogen regel, der kræver komma dette sted, så der er muligvis tale om en fejl. Gør dig klart, hvorfor du vil sætte dette komma. Falder det naturligt sammen med et ophold i sætningen? Er det nødvendigt for klarhedens skyld? Drop kommaet, hvis der ikke er ophold, og ordene på højre side af kommaet hænger tæt sammen med dem på venstre side.<br>\n<br>\n<i>I det mindste på nuværende tidspunkt [,] kan vi ikke give noget entydigt svar.</i><br>\n<br>\n<i>De har mindre angst, depression og stress[,] end pårørende(,) der ikke mediterer.</i>",
+		"",
+		""
+	],
+	"%fullstop": [
+		"%fullstop",
+		"Sætningspunktum",
+		"Der bruges punktum - eller ved nært forbundne sætninger semikolon - efter afsluttede hovedsætninger, ikke mindst hvis sætningen indeholder et finit (bøjet) verbum. Der sættes dog ikke noget ekstra punktum, hvis der sidst i sætningen står en forkortelse, der selv slutter med punktum.<br>\n<br>\n<i>Alt ser nemt ud i bagklogskabens klare lys.</i><br>\n<br>\n<i>Gartneriet sælger også vaser, krukker, potteskjuler mv.</i><br>\n<br>\nBemærk, at punktum også kan bruges til at afslutte andet end sætninger, fx forkortede sætningsdele eller fremhævede selvstændige sætningsdele, der dermed får karakter af uafhængige ytringer.<br>\n<br>\n<i>Han skulle bare vinde den kamp. Ingen over, ingen ved siden af.</i><br>\n<br>\n<i>Jeg får tit akupunktur. Især mod rygsmerter.</i><br>\n<br>\nSlutpunktum erstatter udråbstegnet, hvis en opfording har karakter af anvisning snarere end udråb.<br>\n<br>\n<i>Skær løgene og svits dem.</i><br>\n<br>\n<i>Ræk mig lige peberkværnet.</i><br>\n<br>\nOgså efter indirekte spørge- eller opfordringssætninger står der punktum, ikke spørgsmålstegn:<br>\n<br>\n<i>Han spurgte hende, om hun ville komme til festen.</i><br>\n<br>\n<i>Guiden har sagt, vi ikke skal gå tæt på dyrene.</i>",
+		"21.1",
+		"§41"
+	],
+	"%fullstop-after": [
+		"%fullstop-after",
+		"Sætningspunktum",
+		"Der bruges punktum - eller ved nært forbundne sætninger semikolon - efter afsluttede hovedsætninger, ikke mindst hvis sætningen indeholder et finit (bøjet) verbum. Der sættes dog ikke noget ekstra punktum, hvis der sidst i sætningen står en forkortelse, der selv slutter med punktum.<br>\n<br>\n<i>Alt ser nemt ud i bagklogskabens klare lys.</i><br>\n<br>\n<i>Gartneriet sælger også vaser, krukker, potteskjuler mv.</i><br>\n<br>\nBemærk, at punktum også kan bruges til at afslutte andet end sætninger, fx forkortede sætningsdele eller fremhævede selvstændige sætningsdele, der dermed får karakter af uafhængige ytringer.<br>\n<br>\n<i>Han skulle bare vinde den kamp. Ingen over, ingen ved siden af.</i><br>\n<br>\n<i>Jeg får tit akupunktur. Især mod rygsmerter.</i><br>\n<br>\nSlutpunktum erstatter udråbstegnet, hvis en opfording har karakter af anvisning snarere end udråb.<br>\n<br>\n<i>Skær løgene og svits dem.</i><br>\n<br>\n<i>Ræk mig lige peberkværnet.</i><br>\n<br>\nOgså efter indirekte spørge- eller opfordringssætninger står der punktum, ikke spørgsmålstegn:<br>\n<br>\n<i>Han spurgte hende, om hun ville komme til festen.</i><br>\n<br>\n<i>Guiden har sagt, vi ikke skal gå tæt på dyrene.</i>",
+		"21.1",
+		"§41"
+	],
+	"%no-fullstop": [
+		"%no-fullstop",
+		"Forkert sætningspunktum",
+		"På dansk kan det afsluttende punktum efter anført direkte tale stå både før og efter det afsluttende anførselstegn, men førstnævnte er langt mere almindeligt.<br>\n<br>\n<i>Hun sagde: &quot;Jeg har hovedpine.&quot; (normalt)</i><br>\n<br>\n<i>Hun sagde: &quot;Jeg har hovedpine&quot;. (sjældent)</i><br>\n<br>\nKun hvis citatet er et almindeligt sætningsled, uden kolon/inquit, skal punktum stå efter det afsluttende anførselstegn, fordi det så tilhører hovedsætningen. Dette er fx tilfældet, når en sætning slutter med titlen på et værk i gåseøjne. Her står punktummet efter, ikke foran, det afsluttende anførselsestegn.<br>\n<br>\n<i>Bogens titel hedder</i><i> &quot;Komma</i> <i>eller kaos</i><i> - e</i><i>n</i> <i>brugsanvisning</i><i>&quot;.</i> (korrekt)<br>\n<br>\n<i>Bogens titel hedder</i><i> &quot;Komma</i> <i>eller kaos - en brugsanvisning</i><i>.&quot;</i> (forkert)<br>\n<br>\nDen anførende sætning mister sit punktum, hvis citatet selv allerede slutter med sætningsafsluttende tegnsætning.<br>\n<br>\n<i>Er råbte: &quot;Kom så, drenge!&quot;[.]</i><br>\n<br>\nOmvendt mister den anførte sætning sit punktum (men ikke spørgsmålstegn eller udråbstegn), hvis den står foran den anførende sætning (inquit):<br>\n<br>\n<i>&quot;</i><i>Jeg er ligeglad</i><i>[.]&quot;, sag</i><i>de han</i><i>.</i><br>\n<br>\nMan sætter ikke slutpunktum efter tekstbider, der står på en linje for sig, med mindre der er tale om hele sætninger i løbende tekst. Detter gælder bl.a. overskrifter og punktopstillinger sam adresseelementer og tidsangivelser, når de står på separate linjer.<br>\n<br>\n<i>Japan: Over 1000 døde efter skælv</i><br>\n<br>\n<i>Kommatrold ApS</i><br>\n<br>\n<i>Kommatorvet 17a</i><br>\n<br>\n<i>9999 Kommingen Ø</i><br>\n<br>\n<i>Kommingen, den 7. april 2021</i><br>\n<br>\nSelv hele sætninger får ikke punktum i en overskrift:<br>\n<br>\n<i>Perseverance lander på Mars</i><br>\n<br>\nPå dansk bruger man hverken komma eller punktum efter indlednings- og sluthilsner i breve og e-mails. Kun udråbstegn efter starthilsen er tilladt - i modsætning til engelsk, der bruger komma begge steder, og tysk, der bruger komma efter åbningshilsen, men ikke efter sluthilsen.<br>\n<br>\n<i></i><i>Hej Rasmus</i><i>(!)</i><br>\n<br>\n<i></i><i>Jeg skriver til dig, fordi jeg fylder rundt og gerne vil invitere dig til min fødselsdag.</i><br>\n<br>\n<i></i><br>\n<br>\n<i></i><i>M</i><i>ed venlig hilsen</i><br>\n<br>\n<i></i><i>Ronja</i>",
+		"21.2",
+		"§41"
+	],
+	"%colon2k": [
+		"%colon2k",
+		"Komma i stedet for kolon",
+		"Der skal bruges komma i stedet for kolon, hvis der følger en uddybende forklaring - altså før <i>d.h. (das heißt), d.i. (das ist), z.B. (zum Beispiel), genauer gesagt, nämlich usw.</i><br>\n<br>\n<i>Jeg har kun et rejseønske i år, nemlig at bestige en vulkan.</i><i></i> (korrekt)<br>\n<br>\n<i>Jeg har kun et rejseønske i år: nemlig at bestige en vulkan. (forkert)</i>",
+		"18.4",
+		"§52"
+	],
+	"%colon": [
+		"%colon",
+		"Kolon i stedet for komma",
+		"Mellem en anførende sætning og efterfølgende direkte tale bruges der kolon, ikke komma:<br>\n<br>\n<i>Han sagde</i><i>: &quot;</i><i>Jeg er ligeglad</i><i>.</i><i>&quot;</i> (korrekt)<br>\n<br>\n<i>Han sagde, &quot;Jeg er ligeglad.&quot; (forkert)</i><br>\n<br>\n<i>Han sagde &quot;Jeg er ligeglad.&quot; (forkert)</i>",
+		"18.4",
+		"§52"
+	],
+	"%colon-after": [
+		"%colon-after",
+		"Manglende kolon",
+		"Mellem en aførende sætning og efterfølgende direkte tale skal der stå et kolon:<br>\n<br>\n<i>Han sagde</i><i>: &quot;</i><i>Jeg er ligeglad</i><i>.</i><i>&quot;</i> (korrekt)<br>\n<br>\n<i>Han sagde &quot;Jeg er ligeglad.&quot; (forkert)</i>",
+		"18.4",
+		"§52"
+	],
+	"%questmark": [
+		"%questmark",
+		"Spørgsmålstegn",
+		"Der bruges spørgsmålstegn ikke bare efter direkte spørgsmål, men også efter høflighedsspørgsmål, rhetoriske spørgsmål og udsagn eller ordgrupper med spørgsmålsintonation.<br>\n<br>\n<i>Hvor har du sovet sidste nat?</i><br>\n<br>\n<i>Med eller uden sukker?</i><br>\n<br>\n<i>Du har inviteret hvem?</i><br>\n<br>\n<i>Und du tror(,) det virker?</i><br>\n<br>\n<i>Mon han kommer?</i><br>\n<br>\n<i>Må jeg få saltet?</i><br>\n<br>\n<i>Du har taget et førstehjælpskursus, ikke sandt?</i><br>\n<br>\nDerimod står der ikke spørgsmålstegn efter indirekte spørgesætninger.<br>\n<br>\n<i>Hun spurgte(,) hvorfor hun ikke måtte se hans frimærkesamling.</i><br>\n<br>\n<i>Ingen idé(,) hvem der har sendt blomsterne.</i>",
+		"19",
+		"§53"
+	],
+	"%questmark-after": [
+		"%questmark-after",
+		"Spørgsmålstegn",
+		"Der bruges spørgsmålstegn ikke bare efter direkte spørgsmål, men også efter høflighedsspørgsmål, rhetoriske spørgsmål og udsagn eller ordgrupper med spørgsmålsintonation.<br>\n<br>\n<i>Hvor har du sovet sidste nat?</i><br>\n<br>\n<i>Med eller uden sukker?</i><br>\n<br>\n<i>Du har inviteret hvem?</i><br>\n<br>\n<i>Und du tror(,) det virker?</i><br>\n<br>\n<i>Mon han kommer?</i><br>\n<br>\n<i>Må jeg få saltet?</i><br>\n<br>\n<i>Du har taget et førstehjælpskursus, ikke sandt?</i><br>\n<br>\nDerimod står der ikke spørgsmålstegn efter indirekte spørgesætninger.<br>\n<br>\n<i>Hun spurgte(,) hvorfor hun ikke måtte se hans frimærkesamling.</i><br>\n<br>\n<i>Ingen idé(,) hvem der har sendt blomsterne.</i>",
+		"19",
+		"§53"
+	],
+	"%exclam": [
+		"%exclam",
+		"Udråbstegn",
+		"Der bruges udråbstegn efter udråb, henstillinger, opfordringer, ønsker og ordrer - lige meget om der er tale om fuldstændige sætninger, ordgrupper eller enkeltord såsom imperativer (bydemåde) og interjektioner (udråbsord).<br>\n<br>\n<i>Lad babyen sove!</i><br>\n<br>\n<i>Ud af min kiosk!</i><br>\n<br>\n<i>At du gider!</i><br>\n<br>\n<i>Bare jeg havde vidst det noget før!</i><br>\n<br>\n<i>Godt Nytår!</i><br>\n<br>\n<i>Puha, hvor ulækkert!</i><br>\n<br>\nBemærk, at udråbstegnet kræver uafhængige sætninger. Efter ikke-uafhængige opfordringssætninger står der bare punktum:<br>\n<br>\n<i>Hun siger(,) du skal tømme opvaskemaskinen.</i><br>\n<br>\nDesuden bruges udråbstegn i tiltale:<br>\n<br>\n<i>Mine damer og herrer!</i><br>\n<br>\n<i>Kære venner!</i><br>\n<br>\n<i>Hej(,) Camilla!</i><br>\n<br>\nUdråbstegnet er i øvrigt det eneste tegn, der er tilladt efter indledningshilsner i breve og e-mails, hvor der - modsat engelsk og tysk - ikke må bruges komma.",
+		"20",
+		"§54"
+	],
+	"%exclam-after": [
+		"%exclam-after",
+		"Udråbstegn",
+		"Der bruges udråbstegn efter udråb, henstillinger, opfordringer, ønsker og ordrer - lige meget om der er tale om fuldstændige sætninger, ordgrupper eller enkeltord såsom imperativer (bydemåde) og interjektioner (udråbsord).<br>\n<br>\n<i>Lad babyen sove!</i><br>\n<br>\n<i>Ud af min kiosk!</i><br>\n<br>\n<i>At du gider!</i><br>\n<br>\n<i>Bare jeg havde vidst det noget før!</i><br>\n<br>\n<i>Godt Nytår!</i><br>\n<br>\n<i>Puha, hvor ulækkert!</i><br>\n<br>\nBemærk, at udråbstegnet kræver uafhængige sætninger. Efter ikke-uafhængige opfordringssætninger står der bare punktum:<br>\n<br>\n<i>Hun siger(,) du skal tømme opvaskemaskinen.</i><br>\n<br>\nDesuden bruges udråbstegn i tiltale:<br>\n<br>\n<i>Mine damer og herrer!</i><br>\n<br>\n<i>Kære venner!</i><br>\n<br>\n<i>Hej(,) Camilla!</i><br>\n<br>\nUdråbstegnet er i øvrigt det eneste tegn, der er tilladt efter indledningshilsner i breve og e-mails, hvor der - modsat engelsk og tysk - ikke må bruges komma.",
+		"20",
+		"§54"
+	],
+	"%k-parenth": [
+		"%k-parenth",
+		"Ikke komma før parentes",
+		"Der må ikke være komma før hverken en venstre eller en højre parentes. Hvis sætningen uden parentes ville have et komma på dette sted, skal det placeres efter hele parentesen.<br>\n<br>\n<i>Der er helt klart tale om en B-film[,] (eller værre) der ikke bør vises i nogen biograf. (forkert)</i><br>\n<br>\n<i>Der er helt klart tale om en B-film (eller værre), der ikke bør vises i nogen biograf. (korrekt)</i>",
+		"24",
+		"§56"
+	],
+	"%nok-parenth": [
+		"%nok-parenth",
+		"Ikke komma før parentes",
+		"Der må ikke være komma før hverken en venstre eller en højre parentes. Hvis sætningen uden parentes ville have et komma på dette sted, skal det placeres efter hele parentesen.<br>\n<br>\n<i>Der er helt klart tale om en B-film[,] (eller værre) der ikke bør vises i nogen biograf. (forkert)</i><br>\n<br>\n<i>Der er helt klart tale om en B-film (eller værre), der ikke bør vises i nogen biograf. (korrekt)</i>",
+		"24",
+		"§56"
+	],
+	"%upper-colon": [
+		"%upper-colon",
+		"Majuskel",
+		"Der staves med stort efter et kolon, hvis der følger direkte tale eller en selvstændig sætning, herunder også infinitiv-sætninger. Enkeltord eller ordgrupper, der ikke er sætninger, staves med småt (medmindre selvfølgelig der er tale om substantiver eller navne)<br>\n<br>\n<i>Hun spurgte: &quot;Hvem har bagt kagen?&quot;</i><br>\n<br>\n<i>Der er ingen anden udvej: Katten skal til dyrlægen.</i><br>\n<br>\n<i>Men: Holdbarhed: en uge i køleskab.</i>",
+		"18.2",
+		"§11.3"
+	],
+	"%lower-colon": [
+		"%lower-colon",
+		"Minuskel",
+		"Der staves med småt efter et kolon, hvis det er efterfulgt af enkeltord eller ordgrupper, der ikke er sætninger (medmindre selvfølgelig der er tale om substantiver eller navne). Modsat fortsættes der med stort, hvis der følger en selvstændig sætning eller direkte tale.<br>\n<br>\n<i>Emil havde hentet alle sine vener i hulen: bamsen, tigerdyret og den udstoppede måge.</i><br>\n<br>\n<i>Holdbarhed: en uge i køleskab.</i><br>\n<br>\nMen: <i>Han tænkte: Det kunne have været nemmere.</i>",
+		"18.2",
+		"§11.3"
+	]
 };
 
 for (let k in ctypes) {
 	if (!ctypes.hasOwnProperty(k)) {
 		continue;
 	}
-	let rx = new RegExp('^<h3>([^]+?)<\/h3>([^]+)$');
-	let ms = rx.exec(ctypes[k][0]);
-	marking_types[k] = [ms[1], ms[2], ctypes[k][1]];
+	let c = ctypes[k];
+	marking_types[k] = [c[1], c[2], [3]];
 	marking_types_comma.push(k);
 
 	if (/^%ko-/.test(k)) {
