@@ -1151,6 +1151,7 @@ function loginKeepalive(init) {
 			}
 			else if (g_tools.comma) {
 				$('.chkGrammarToComma').hide();
+				$('.btnCheckGrammar').hide();
 				$('.btnCheckComma').show();
 				$('.comma-specific').show();
 				switchSidebar('#chkWelcomeComma');
