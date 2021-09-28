@@ -970,6 +970,7 @@ function sendTexts() {
 		let data = {
 			t: text,
 			r: ts_fail,
+			c: g_client,
 			SessionID: g_access_token.sessionid,
 		};
 		ts_xhr = $.ajax({
@@ -1151,6 +1152,7 @@ function loginKeepalive(init) {
 			}
 			else if (g_tools.comma) {
 				$('.chkGrammarToComma').hide();
+				$('.btnCheckGrammar').hide();
 				$('.btnCheckComma').show();
 				$('.comma-specific').show();
 				switchSidebar('#chkWelcomeComma');
