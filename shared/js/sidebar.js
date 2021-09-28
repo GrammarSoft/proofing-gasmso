@@ -970,6 +970,7 @@ function sendTexts() {
 		let data = {
 			t: text,
 			r: ts_fail,
+			c: g_client,
 			SessionID: g_access_token.sessionid,
 		};
 		ts_xhr = $.ajax({
