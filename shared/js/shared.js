@@ -259,6 +259,7 @@ let g_access_hmac = {};
 let g_keepalive = null;
 let g_login_channel = '';
 let g_login_ws = null;
+let g_client = 'unknown';
 
 let g_tts_speaker = null;
 let g_tts_tap = 0;
@@ -939,23 +940,27 @@ function addScriptDefer(url) {
 
 $(window).on('load', function() {
 	if (location.search.indexOf('host=adobe') !== -1) {
+		g_client = 'adobe';
 		console.log('Adobe');
 		addScript(ROOT_URL_SELF+'/vendor/CSInterface.js');
 		addScript(ROOT_URL_SELF+'/vendor/Vulcan.js');
 		addScript(ROOT_URL_SELF+'/js/impl-adobe.js');
 	}
 	else if (location.search.indexOf('host=msoffice') !== -1) {
+		g_client = 'word';
 		console.log('MS Office');
 		addScript('https://appsforoffice.microsoft.com/lib/1/hosted/office.js');
 		addScript(ROOT_URL_SELF+'/js/impl-officejs.js');
 	}
 	else if (location.search.indexOf('host=outlook') !== -1) {
+		g_client = 'outlook';
 		console.log('MS Office (Outlook)');
 		addScript('https://appsforoffice.microsoft.com/lib/1/hosted/office.js');
 		addScript(ROOT_URL_SELF+'/vendor/findAndReplaceDOMText.js');
 		addScript(ROOT_URL_SELF+'/js/impl-outlook.js');
 	}
 	else {
+		g_client = 'gdocs';
 		console.log('Google');
 		addScript(ROOT_URL_SELF+'/js/impl-gas.js');
 	}
