@@ -240,19 +240,19 @@ function getState() {
 			for (let i=0 ; i<ts.length ; ++i) {
 				let t = ts[i];
 				let tt = marking_types[t][0];
-				if (t.indexOf('%nok') === 0) {
+				if (t === '%nok' || t.indexOf('%nok-') === 0) {
 					tt += ' (<span class="type-nok">'+l10n_translate('LBL_CTYPE_PROHIBITED')+'</span>)';
 				}
-				else if (t.indexOf('%ko') === 0) {
+				else if (t === '%ko' || t.indexOf('%ko-') === 0) {
 					tt += ' (<span class="type-ko">'+l10n_translate('LBL_CTYPE_OPTIONAL')+'</span>)';
 				}
 				else if (t === '%k' || t.indexOf('%k-') === 0) {
 					tt += ' (<span class="type-k">'+l10n_translate('LBL_CTYPE_REQUIRED')+'</span>)';
 				}
-				else if (t.indexOf('%ok-') === 0) {
+				else if (t === '%ok' || t.indexOf('%ok-') === 0) {
 					tt += ' (<span class="type-ok">'+l10n_translate('LBL_CTYPE_INFORMATIVE')+'</span>)';
 				}
-				else if (t.indexOf('%nko-') === 0) {
+				else if (t === '%nko' || t.indexOf('%nko-') === 0) {
 					tt += ' (<span class="type-nko">'+l10n_translate('LBL_CTYPE_INFORMATIVE')+'</span>)';
 				}
 				/*
@@ -297,7 +297,7 @@ function getState() {
 		}
 	}
 
-	impl_attachTTS(document.body);
+	g_impl.attachTTS(document.body);
 }
 
 function cache_regexp(e, p, x) {
@@ -565,7 +565,7 @@ function initOptions() {
 }
 
 $(function() {
-	impl_Init(initOptions);
+	g_impl.init(initOptions);
 });
 
 function showError(msg) {

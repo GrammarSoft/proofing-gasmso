@@ -68,11 +68,7 @@ function impl_showDictionary(text) {
 	return google.script.run.withFailureHandler(showError).showDictionary(text);
 }
 
-function impl_hasSelection() {
-	return true;
-}
-
-function impl_Init(func) {
+g_impl.init = function(func) {
 	let csInterface = new CSInterface();
 	let extPath = csInterface.getSystemPath(SystemPath.EXTENSION);
 
@@ -81,4 +77,4 @@ function impl_Init(func) {
 
 	func();
 	//l10n_world();
-}
+};

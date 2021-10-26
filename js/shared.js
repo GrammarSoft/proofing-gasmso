@@ -204,27 +204,17 @@ if (!String.prototype.normalize) {
 }
 
 const Defs = {
-	CAP_ADMIN:	  (1 <<	 0),
-	CAP_COMMA:	  (1 <<	 1),
-	CAP_DANPROOF: (1 <<	 2),
-	CAP_AKUTUTOR: (1 <<	 3),
-	CAP_COMMA_TRIAL:	(1 <<  4),
-	CAP_DANPROOF_TRIAL: (1 <<  5),
-	CAP_AKUTUTOR_TRIAL: (1 <<  6),
-	OPT_COMMA_LEVEL_1:	   (1 <<  0),
-	OPT_COMMA_LEVEL_2:	   (1 <<  1),
-	OPT_COMMA_LEVEL_3:	   (1 <<  2),
-	OPT_COMMA_GREEN:	   (1 <<  3),
-	OPT_COMMA_MAYBE:	   (1 <<  4),
-	OPT_COMMA_COLOR:	   (1 <<  5),
-	OPT_DP_ONLY_CONFIDENT: (1 <<  0),
-	OPT_DP_IGNORE_NAMES:   (1 <<  1),
-	OPT_DP_IGNORE_COMP:	   (1 <<  2),
-	OPT_DP_IGNORE_ABBR:	   (1 <<  3),
-	OPT_DP_IGNORE_OTHER:   (1 <<  4),
-	OPT_DP_IGNORE_MAJ:	   (1 <<  5),
-	OPT_DP_COLOR:		   (1 <<  6),
-	OPT_DP_USE_DICT:	   (1 <<  7),
+	CAP_ADMIN:    (1 <<  0),
+	CAP_COMMA:    (1 <<  1),
+	CAP_DANPROOF: (1 <<  2),
+	CAP_AKUTUTOR: (1 <<  3),
+	CAP_COMMA_TRIAL:     (1 <<  4),
+	CAP_DANPROOF_TRIAL:  (1 <<  5),
+	CAP_AKUTUTOR_TRIAL:  (1 <<  6),
+	CAP_COMMA_ENG:       (1 <<  7),
+	CAP_COMMA_ENG_TRIAL: (1 <<  8),
+	CAP_COMMA_DEU:       (1 <<  9),
+	CAP_COMMA_DEU_TRIAL: (1 << 10),
 	TYPE_COMP_RIGHT:  (1 <<  0),
 	TYPE_COMP_LEFT:   (1 <<  1),
 	TYPE_COMP_HYPHEN: (1 <<  2),
@@ -233,13 +223,18 @@ const Defs = {
 	'comma-commercial': 'Kommaforslag Erhverv',
 	'comma-private': 'Kommaforslag Privat',
 	'comma-student': 'Kommaforslag Studerende',
-	'danproof-commercial': 'Ret Mig Erhverv',
-	'danproof-private': 'Ret Mig Privat',
-	'danproof-student': 'Ret Mig Studerende',
+	'danproof-commercial': 'RetMig Erhverv',
+	'danproof-private': 'RetMig Privat',
+	'danproof-student': 'RetMig Studerende',
 	'akututor-clinic': 'Akututor Klinik',
 	'akututor-student': 'Akututor Studerende',
+	'engcom-commercial': 'Commatizer Commercial',
+	'engcom-private': 'Commatizer Private',
+	'engcom-student': 'Commatizer Student',
+	'deucom-commercial': 'Kommatroll Commercial',
+	'deucom-private': 'Kommatroll Private',
+	'deucom-student': 'Kommatroll Student',
 };
-Defs.OPT_DP_IGNORE_UNKNOWN = Defs.OPT_DP_IGNORE_NAMES|Defs.OPT_DP_IGNORE_COMP|Defs.OPT_DP_IGNORE_ABBR|Defs.OPT_DP_IGNORE_OTHER;
 Defs.TYPE_COMP = Defs.TYPE_COMP_LEFT|Defs.TYPE_COMP_RIGHT;
 
 // Upper-case because we compare them to DOM nodeName
@@ -270,7 +265,7 @@ let _live_options = {};
 
 // Letters we're likely to see in Danish, Norwegian, Swedish, Greenlandic
 // Can't rely on Unicode escapes or /u modifier because of IE11
-const Letters = '\\d\\wa-zA-ZÂâÊêÎîÔôÛûÃãĨĩÕõŨũÀàÈèÌìÒòÙùÁáÉéÍíÓóÚúÄäËëÏïÖöÜüÆæØøÅåĸ.,!;:';
+const Letters = '\\da-zA-ZÂâÊêÎîÔôÛûÃãĨĩÕõŨũÀàÈèÌìÒòÙùÁáÉéÍíÓóÚúÄäËëÏïÖöÜüÆæØøÅåĸ.,!;:';
 const Const = {
 	LetterT: new RegExp('['+Letters+']+', 'i'),
 	NonLetter: new RegExp('[^'+Letters+']+', 'ig'),
@@ -284,7 +279,25 @@ const Const = {
 Const.Split_Array = Const.Split_String.split('');
 Const.Split_Regex = new RegExp('(['+Const.Split_String+'])');
 
-let g_tool = null;
+let markings = [];
+let marking_ids = [];
+let to_send = null;
+let to_send_b = 0;
+let to_send_i = 0;
+let to_send_last = '';
+let ts_xhr = null;
+let ts_slow = null;
+let ts_fail = 0;
+let cache = {
+	Grammar: {},
+	Comma: {},
+};
+
+let g_tool = window.hasOwnProperty('g_tool') ? window.g_tool : null;
+let g_tools = {
+	grammar: false,
+	comma: false,
+};
 let session = {locale: 'da'};
 
 // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
@@ -486,6 +499,28 @@ function ls_del(key) {
 	window.localStorage.removeItem(key);
 }
 
+function markingColor(types) {
+	let col = 'green';
+	for (let i=0 ; i<types.length ; ++i) {
+		if (types_info.hasOwnProperty(types[i])) {
+			col = 'info';
+		}
+		if (types_yellow.hasOwnProperty(types[i])) {
+			col = 'yellow';
+		}
+		if (types_red.hasOwnProperty(types[i])) {
+			col = 'red';
+			break;
+		}
+	}
+	for (let i=0 ; i<types.length ; ++i) {
+		if (types[i] === '@green') {
+			col = 'green';
+		}
+	}
+	return col;
+}
+
 function findTextNodes(nodes, filter) {
 	let tns = [], wsx = /\S/;
 
@@ -547,7 +582,18 @@ function sanitize_result(txt) {
 		}
 	}
 
+	// Fix or remove split suffixes such as for must_ _n't or you_ _re
+	txt = txt.replace(/\n([Ww])ill_(\t\S+)?\n_(n'?t)\n/g, '\n$1o$3$2\n'); // will not
+	txt = txt.replace(/\n([Ss])hall_(\t\S+)?\n_(n'?t)\n/g, '\n$1ha$3$2\n'); // shall not
+	txt = txt.replace(/\n([Cc])an_(\t\S+)?\n_(n'?t)\n/g, '\n$1a$3$2\n'); // can not
+	txt = txt.replace(/\n(\S+)_(\t\S+)?\n_(n'?t)\n/g, '\n$1$3$2\n'); // are not, would not, etc
+	txt = txt.replace(/\n(\S+)_(\t\S+)?\n_(re|s|m|ll|d|ve)\n/g, '\n$1\'$3$2\n'); // you are, they will, etc
+	// Any remaining unhandled suffix goes into the void
 	txt = txt.replace(/\n_\S+\n/g, '\n');
+	txt = txt.replace(/\n(\S+?)_/g, '\n$1');
+
+	// %k-stop that changes a comma should be a replacement type, not a comma type
+	txt = txt.replace(/\n,\t%k-stop\n/g, '\n,\t%x-to-stop <R:.>\n');
 
 	// Remove empty sentences
 	txt = txt.replace(/<s\d+>[\s\n]*<\/s\d+>/g, '');
@@ -557,6 +603,10 @@ function sanitize_result(txt) {
 
 	// Remove noise between sentences
 	txt = txt.replace(/(\n<\/s\d+>)[^]*?(<s\d+>\n)/g, '$1\n\n$2');
+
+	// Remove noise after sentences
+	txt = txt.replace(/(<\/s\d+>)[^<]*?$/, '$1');
+
 	return txt;
 }
 
@@ -749,6 +799,395 @@ function findToSend(prefix, word, suffix, casing) {
 	return false;
 }
 
+function _parseResult(rv) {
+	g_impl.parseProgress();
+
+	if (rv.hasOwnProperty('hmac')) {
+		g_access_token.hmac = rv.hmac;
+	}
+
+	if (!rv.hasOwnProperty('c')) {
+		g_impl.parseNoResult();
+		return;
+	}
+
+	let txt = sanitize_result(rv.c);
+	let ps = [];
+	let nps = $.trim(txt.replace(/\n+<\/s>\n+/g, "\n\n")).split(/<\/s\d+>/);
+
+	// Where missing in result, copy from the cache
+	for (let k = to_send_b, p=0 ; k<to_send_i ; ++k) {
+		let found = false;
+		for (let i=p ; i<nps.length ; ++i) {
+			if (nps[i].indexOf('<s'+to_send[k].i+'>\n') !== -1) {
+				////console.log(`Par ${k} found in result`);
+				ps.push(nps[i]);
+				p = i;
+				found = true;
+				break;
+			}
+		}
+		if (!found && to_send[k].h in cache[g_tool]) {
+			////console.log(`Par ${k} found in cache`);
+			ps.push('<s'+to_send[k].i+'>\n'+cache[g_tool][to_send[k].h]);
+		}
+	}
+
+	for (let i=0 ; i<ps.length ; ++i) {
+		let cp = $.trim(ps[i]);
+		if (!cp) {
+			continue;
+		}
+
+		let lines = cp.split(/\n/);
+		let id = parseInt(lines[0].replace(/^<s(.+)>$/, '$1'));
+		for (let k = to_send_b ; k<to_send_i ; ++k) {
+			if (to_send[k].i === id) {
+				cache[g_tool][to_send[k].h] = $.trim(cp.replace(/^<s.+>/g, ''));
+				break;
+			}
+		}
+
+		let words = [];
+		let had_mark = false;
+		let prev_sentsplit = false;
+
+		for (let j=1 ; j<lines.length ; ++j) {
+			// Ignore duplicate opening tags
+			if (/^<s\d+>$/.test(lines[j])) {
+				continue;
+			}
+
+			let w = $.trim(lines[j]).split(/\t/);
+			w[0] = $.trim(w[0].replace(/(\S)=/g, '$1 '));
+
+			if (w[0] === '') {
+				words.push(w);
+				continue;
+			}
+
+			if (w.length > 1) {
+				let ws = w[1].split(/ /g);
+				let nws = [];
+				let rs = [];
+				let crs = [];
+				let had_r = false;
+				for (let k=0 ; k<ws.length ; ++k) {
+					if (ws[k].indexOf('<R:') === 0) {
+						let n = ws[k].substr(3);
+						n = n.substr(0, n.length-1).replace(/(\S)=/g, '$1 ');
+						if (n === w[0]) {
+							//console.log(n);
+							continue;
+						}
+						rs.push(n);
+						had_r = true;
+						continue;
+					}
+					if (ws[k].indexOf('<AFR:') === 0) {
+						let n = ws[k].substr(5);
+						n = n.substr(0, n.length-1).replace(/(\S)=/g, '$1 ');
+						if (n === w[0]) {
+							//console.log(n);
+							continue;
+						}
+						crs.push(n);
+						continue;
+					}
+					if (!marking_types.hasOwnProperty(ws[k])) {
+						//console.log('Unknown marking: '+ws[k]);
+					}
+					nws.push(ws[k]);
+				}
+				crs = rs.concat(crs);
+				// Remove @sentsplit from last token
+				if (j == lines.length-1 && nws.length == 1 && nws[0] === '@sentsplit') {
+					crs = [];
+					nws = [];
+				}
+				// Only show addfejl suggestions if there were real suggestions
+				if (!had_r) {
+					crs = [];
+				}
+
+				ws = [];
+				let had_sentsplit = false;
+				let none = true;
+
+				for (let k=0 ; k<nws.length ; ++k) {
+					if (nws[k] === '@sentsplit') {
+						had_sentsplit = true;
+					}
+					if (nws[k] === '@upper' && prev_sentsplit) {
+						////console.log(`Skipping @upper due to @sentsplit`);
+						continue;
+					}
+					if (_live_options.types.hasOwnProperty(nws[k]) && !_live_options.types[nws[k]]) {
+						continue;
+					}
+					none = false;
+					ws.push(nws[k]);
+				}
+
+				if (_live_options.config.opt_useDictionary && types_dictionary.test(ws[0]) && isInDictionary(w[0])) {
+					////console.log(`Found ${w[0]} in dictionary`);
+					ws = [];
+				}
+
+				prev_sentsplit = had_sentsplit;
+				if (ws.length && none) {
+					////console.log(`Vitec MV whitelist no-match: ${ws}`);
+					if (ws.indexOf('@insert') !== -1) {
+						w[0] = ' ';
+					}
+					ws = [];
+				}
+				nws = ws;
+				if (nws.length == 0) {
+					crs = [];
+				}
+
+				// For case-folding, create a correction if none exists and fold all corrections to the desired case
+				for (let k=0 ; k<nws.length ; ++k) {
+					if (types_to_upper.test(nws[k])) {
+						if (crs.length == 0) {
+							crs.push(w[0]);
+						}
+						for (let c=0 ; c<crs.length ; ++c) {
+							crs[c] = uc_first(crs[c]);
+						}
+					}
+					else if (types_to_lower.test(nws[k])) {
+						if (crs.length == 0) {
+							crs.push(w[0]);
+						}
+						for (let c=0 ; c<crs.length ; ++c) {
+							crs[c] = lc_first(crs[c]);
+						}
+					}
+				}
+
+				if (crs.length) {
+					// Only show additional suggestions if the real suggestion icase-matches one of them
+					let use_adf = false;
+					for (let c=1 ; c<crs.length ; ++c) {
+						if (crs[0].toUpperCase() == crs[c].toUpperCase()) {
+							use_adf = true;
+							break;
+						}
+					}
+					if (!use_adf) {
+						crs = [crs[0]];
+					}
+					crs = crs.unique();
+					w[2] = crs.join('\t');
+					////console.log(crs);
+				}
+				if (nws.length) {
+					nws = nws.unique();
+					w[1] = nws.join(' ');
+					if (!w[2] || w[2].length === 0) {
+						w[2] = '';
+					}
+					if (w[1].indexOf(' ') !== -1) {
+						w[1] = w[1].replace(/ @error /g, ' ').replace(/ @error$/g, '').replace(/^@error /g, '');
+					}
+
+					w[3] = 0;
+					if (w[1].indexOf('@-comp') !== -1) {
+						w[3] |= Defs.TYPE_COMP_LEFT;
+					}
+					if (types_comp_right.test(w[1])) {
+						w[3] |= Defs.TYPE_COMP_RIGHT;
+					}
+					if (w[1].indexOf('@comp-:-') !== -1) {
+						w[3] |= Defs.TYPE_COMP_HYPHEN;
+					}
+
+					had_mark = true;
+				}
+				else {
+					w.pop();
+				}
+			}
+			if (w.length > 1 && /(%ko|%k)( |-|$)/.test(w[1])) {
+				let wo = w[0];
+				w[0] = ',';
+				if (w[1].indexOf('%k-stop') !== -1) {
+					w[0] = '.';
+				}
+				words.push(w);
+				w = [wo];
+			}
+			words.push(w);
+		}
+		if (had_mark) {
+			// Pre-merge compound errors with the token they're supposed to be with, respecting other corrections to either side of the merge
+			for (let j=0 ; j<words.length ; ) {
+				if (words[j].length > 1 && words[j][3] & Defs.TYPE_COMP) {
+					let ts = words[j][1];
+					let wx = '';
+					let px = '';
+					let sx = '';
+					if (words[j][3] & Defs.TYPE_COMP_LEFT) {
+						if (words[j-1].length > 1 && words[j-1][1]) {
+							ts += ' '+words[j-1][1];
+						}
+						wx = words[j-1][0] + ' ' + words[j][0];
+						px = words[j-1][0];
+						if (words[j-1].length > 1 && words[j-1][2]) {
+							px = words[j-1][2];
+						}
+						sx = words[j][0];
+						if (words[j][2]) {
+							sx = words[j][2];
+						}
+					}
+					if (words[j][3] & Defs.TYPE_COMP_RIGHT) {
+						if (words[j+1].length > 1 && words[j+1][1]) {
+							ts += ' '+words[j+1][1];
+						}
+						wx = words[j][0] + ' ' + words[j+1][0];
+						px = words[j][0];
+						if (words[j][2]) {
+							px = words[j][2];
+						}
+						sx = words[j+1][0];
+						if (words[j+1].length > 1 && words[j+1][2]) {
+							sx = words[j+1][2];
+						}
+					}
+
+					let has_uc = (wx !== wx.toLowerCase());
+
+					px = px.split(/\t/);
+					sx = sx.split(/\t/);
+					let space = '';
+					if (words[j][3] & Defs.TYPE_COMP_HYPHEN) {
+						space = '‐';
+					}
+					let es = [];
+					for (let p=0 ; p<px.length ; ++p) {
+						for (let s=0 ; s<sx.length ; ++s) {
+							if (!has_uc && sx[s] !== sx[s].toLowerCase()) {
+								//console.log('Discarding case-different suffix: ' + sx[s]);
+								continue;
+							}
+							es.push(px[p] + space + sx[s]);
+						}
+					}
+					let flags = words[j][3];
+
+					let nw = [wx, ts.split(/ /).unique().join(' ').replace(/ +/g, ' '), es.join('\t')];
+					words[j] = nw;
+
+					if (flags & Defs.TYPE_COMP_LEFT) {
+						words.splice(j-1, 1);
+					}
+					else {
+						words.splice(j+1, 1);
+						++j;
+					}
+				}
+				else {
+					++j;
+				}
+			}
+			marking_ids[markings.length] = id;
+			markings.push(words);
+		}
+	}
+
+	g_impl.parseChunkDone();
+}
+
+function parseResult(rv) {
+	try {
+		_parseResult(rv);
+	}
+	catch (e) {
+		g_impl.parseError(e);
+	}
+}
+
+function sendTexts() {
+	g_impl.parseSendStart();
+	let text = '';
+
+	for (to_send_b = to_send_i ; to_send_i < to_send.length && text.length < Defs.MAX_RQ_SIZE ; ++to_send_i) {
+		let par = to_send[to_send_i];
+
+		let marks = /((?:\S+\s+){0,2})(\S+?)(\S[\u0300-\u036F]+)((?:\s+\S+){0,2})/.exec(par.t);
+		if (marks && par.t !== par.t.normalize()) {
+			g_impl.showWarning('WARN_COMBINING_CHARACTER', {
+				chr: marks[3],
+				cntx: marks[0],
+				});
+			continue;
+		}
+
+		if (!par.hasOwnProperty('h')) {
+			par.h = 'h-'+murmurHash3.x86.hash128(par.t) + '-' + par.t.length;
+		}
+
+		if (par.h in cache[g_tool]) {
+			////console.log(`Par ${par.i} found in cache`);
+			continue;
+		}
+
+		// MS Word Online sends a Narrow No-Break Space
+		let t = par.t.replace('\u202F', ' ');
+
+		t = t.replace(/\u00AD/g, ''); // Soft Hyphen
+		// Turn <> into ⟨⟩ so that plain-text markup isn't passed through
+		t = t.replace(/</g, '⟨');
+		t = t.replace(/>/g, '⟩');
+
+		text += '<s'+par.i+'>\n'+t+'\n</s'+par.i+'>\n\n';
+	}
+
+	if (text) {
+		to_send_last = text;
+		let url = ROOT_URL_GRAMMAR + '/callback.php?a=' + g_tools.grammar;
+		if (g_tool === 'Comma') {
+			url = ROOT_URL_GRAMMAR + '/callback.php?a=' + g_tools.comma;
+		}
+		let data = {
+			t: text,
+			r: ts_fail,
+			c: g_client,
+			SessionID: g_access_token.sessionid,
+		};
+		ts_xhr = $.ajax({
+			url: url,
+			type: 'POST',
+			dataType: 'json',
+			headers: {HMAC: g_access_token.hmac},
+			data: data,
+		}).done(parseResult).fail(function() {
+			//console.log(this);
+			g_impl.showError('ERR_POSTBACK');
+		});
+	}
+	else {
+		g_impl.parseSendEnd();
+	}
+}
+
+function checkParagraphs(doc) {
+	loadOptions((g_tool == 'Comma') ? SERVICES.Comma : SERVICES.Grammar);
+	loadDictionary();
+
+	//console.log(doc);
+	to_send = doc;
+	to_send_i = 0;
+	to_send_b = 0;
+	markings = [];
+	marking_ids = [];
+	g_impl.parseCheckStart();
+	sendTexts();
+}
+
 function object2tsv(obj) {
 	let rv = '';
 
@@ -829,6 +1268,9 @@ function object2po(obj, base) {
 
 function l10n_detectLanguage() {
 	l10n.lang = navigator.language;
+	if (window.hasOwnProperty('UILANG2') && window.UILANG2) {
+		l10n.lang = window.UILANG2;
+	}
 	if (!l10n.s.hasOwnProperty(l10n.lang)) {
 		l10n.lang = l10n.lang.replace(/^([^-_]+).*$/, '$1');
 	}
@@ -838,7 +1280,7 @@ function l10n_detectLanguage() {
 	return l10n.lang;
 }
 
-function l10n_translate(s) {
+function l10n_translate(s, g) {
 	s = '' + s; // Coerce to string
 
 	// Special case for the version triad
@@ -894,6 +1336,13 @@ function l10n_translate(s) {
 				did = true;
 			}
 		}
+
+		rx = /%([a-z0-9]+)%/;
+		m = null;
+		while ((m = rx.exec(t)) !== null) {
+			t = t.replace(m[0], g[m[1]]);
+			did = true;
+		}
 	} while (did);
 
 	return t;
@@ -913,14 +1362,34 @@ function _l10n_world_helper() {
 	}
 	e.html(v);
 	if (/^TXT_/.test(k)) {
-		e.find('[data-l10n]').each(_l10n_world_helper);
+		l10n_world(e);
 	}
 }
 
-function l10n_world() {
-	$('[data-l10n]').each(_l10n_world_helper);
-	if (typeof l10n_marking_types === 'function') {
+function l10n_world(node) {
+	if (!node) {
+		node = document;
+	}
+	$(node).find('[data-l10n]').each(_l10n_world_helper);
+	$(node).find('[data-l10n-alt]').each(function() {
+		let e = $(this);
+		let k = e.attr('data-l10n-alt');
+		let v = l10n_translate(k);
+		e.attr('alt', v);
+	});
+	$(node).find('[data-l10n-href]').each(function() {
+		let e = $(this);
+		let k = e.attr('data-l10n-href');
+		let v = l10n_translate(k);
+		e.attr('href', v);
+	});
+
+	if (node == document) {
 		l10n_marking_types(session.locale);
+		if (marking_types.hasOwnProperty('%k-stop') && !marking_types.hasOwnProperty('%x-to-stop')) {
+			marking_types['%x-to-stop'] = marking_types['%k-stop'];
+			marking_types_comma.push('%x-to-stop');
+		}
 	}
 }
 
@@ -939,20 +1408,26 @@ function addScriptDefer(url) {
 }
 
 $(window).on('load', function() {
-	if (location.search.indexOf('host=adobe') !== -1) {
+	const CLIENT = window.hasOwnProperty('CLIENT') ? window.CLIENT : '';
+
+	if (CLIENT === 'adobe' || location.search.indexOf('host=adobe') !== -1) {
 		g_client = 'adobe';
 		//console.log('Adobe');
 		addScript(ROOT_URL_SELF+'/vendor/CSInterface.js');
 		addScript(ROOT_URL_SELF+'/vendor/Vulcan.js');
 		addScript(ROOT_URL_SELF+'/js/impl-adobe.js');
 	}
-	else if (location.search.indexOf('host=msoffice') !== -1) {
+	else if (CLIENT === 'web' || location.search.indexOf('host=web') !== -1) {
+		g_client = 'web';
+		//console.log('Web');
+	}
+	else if (CLIENT === 'word' || location.search.indexOf('host=word') !== -1 || location.search.indexOf('host=msoffice') !== -1) {
 		g_client = 'word';
 		//console.log('MS Office');
 		addScript('https://appsforoffice.microsoft.com/lib/1/hosted/office.js');
 		addScript(ROOT_URL_SELF+'/js/impl-officejs.js');
 	}
-	else if (location.search.indexOf('host=outlook') !== -1) {
+	else if (CLIENT === 'outlook' || location.search.indexOf('host=outlook') !== -1) {
 		g_client = 'outlook';
 		//console.log('MS Office (Outlook)');
 		addScript('https://appsforoffice.microsoft.com/lib/1/hosted/office.js');
