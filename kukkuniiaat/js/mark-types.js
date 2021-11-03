@@ -19,9 +19,10 @@ let types_yellow = {
 let types_dictionary = new RegExp('.*');
 
 let types_comp_right = new RegExp('@comp-|@comp( |$)');
-
 let types_to_upper = new RegExp('@upper( |$)');
 let types_to_lower = new RegExp('~no-such-type');
+let rx_insertable = /(@insert|%ko|%k)( |-|$)/;
+let rx_removable = /(@nil|%nok|%ok|%nko)( |-|$)/;
 
 let marking_types = {
 	"@spell": [

@@ -251,11 +251,7 @@ function impl_showDictionary(text) {
 	Office.context.ui.displayDialogAsync(ROOT_URL_SELF + '/html/dictionary.html?host=msoffice&text='+text, { width: 800, height: 600, displayInIframe: true });
 }
 
-function impl_hasSelection() {
-	return true;
-}
-
-function impl_Init(func) {
+g_impl.init = function(func) {
 	Office.initialize = function(reason) {
 		$(document).ready(function() {
 			func();
@@ -267,4 +263,4 @@ function impl_Init(func) {
 			}
 		});
 	};
-}
+};

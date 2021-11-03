@@ -15,9 +15,10 @@ let types_yellow = {};
 let types_info = {};
 
 let types_comp_right = new RegExp('%comp-');
-
 let types_to_upper = new RegExp('%upper( |$)');
 let types_to_lower = new RegExp('%lower( |$)');
+let rx_insertable = /(@insert|%ko|%k)( |-|$)/;
+let rx_removable = /(@nil|%nok|%ok|%nko)( |-|$)/;
 
 let marking_types = {};
 let marking_types_comma = [];
@@ -2906,20 +2907,20 @@ function l10n_marking_types(lang) {
 		marking_types[k] = [v[1], v[2], v[3]];
 		marking_types_comma.push(k);
 
-		if (/^%ko-/.test(k)) {
+		if (/^%ko(-|$)/.test(k)) {
 			types_yellow[k] = k;
 		}
-		else if (/^%nko-/.test(k) || /^%ok-/.test(k)) {
+		else if (/^%nko(-|$)/.test(k) || /^%ok-/.test(k)) {
 			types_info[k] = k;
 		}
-		else if (/^%nok-/.test(k)) {
+		else if (/^%nok(-|$)/.test(k)) {
 			types_red[k] = k;
 		}
 	}
 
 	g_options_default.types = {};
 	for (let k in marking_types) {
-		if (/^%(ok|nko)-/.test(k)) {
+		if (/^%(ok|nko)(-|$)/.test(k)) {
 			g_options_default.types[k] = 0;
 		}
 		else {

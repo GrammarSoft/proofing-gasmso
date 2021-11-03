@@ -54,10 +54,11 @@ let types_yellow = {
 
 let types_dictionary = null;
 
-let types_comp_right = new RegExp('@comp-|@comp( |$)');
-
+let types_comp_right = new RegExp('@comp-( |$)');
 let types_to_upper = new RegExp('@upper( |$)');
 let types_to_lower = new RegExp('@lower( |$)');
+let rx_insertable = /(@insert|%ko|%k)( |-|$)/;
+let rx_removable = /(@nil|%nok|%ok|%nko)( |-|$)/;
 
 let marking_types = {
 	"@x-etype-list": [
@@ -315,10 +316,10 @@ for (let k in ctypes) {
 	let ms = rx.exec(ctypes[k][0]);
 	marking_types[k] = [ms[1], ms[2], ctypes[k][1]];
 
-	if (/^%ko-/.test(k)) {
+	if (/^%ko(-|$)/.test(k)) {
 		types_yellow[k] = k;
 	}
-	else if (/^%nok-/.test(k)) {
+	else if (/^%nok(-|$)/.test(k)) {
 		types_red[k] = k;
 	}
 }
