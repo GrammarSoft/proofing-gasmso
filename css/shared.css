@@ -352,16 +352,16 @@ thead, tfoot {
 	background-color: #eee;
 }
 
-.type-nok {
+.type-nok, .type-red {
 	color: #c12e2a;
 }
-.type-ko {
+.type-ko, .type-yellow {
 	color: #eb9316;
 }
-.type-ok, .type-nko {
+.type-ok, .type-nko, .type-info {
 	color: #1693eb;
 }
-.type-k {
+.type-k, .type-green {
 	color: #419641;
 }
 .type-other {

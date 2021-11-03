@@ -186,6 +186,15 @@ function getState() {
 	let can_comma = g_can_comma = impl_canComma();
 	let can_grammar = g_can_grammar = impl_canGrammar();
 
+	if (window.location.search.indexOf('singletool=1') !== -1) {
+		if (window.location.search.indexOf('tool=Comma') !== -1) {
+			can_grammar = g_can_grammar = false;
+		}
+		else {
+			can_comma = g_can_comma = false;
+		}
+	}
+
 	if (!can_comma) {
 		$('.comma').remove();
 	}
@@ -254,6 +263,18 @@ function getState() {
 				}
 				else if (t === '%nko' || t.indexOf('%nko-') === 0) {
 					tt += ' (<span class="type-nko">'+l10n_translate('LBL_CTYPE_INFORMATIVE')+'</span>)';
+				}
+				else if (types_red.hasOwnProperty(t)) {
+					tt += ' (<span class="type-red">'+l10n_translate('LBL_GTYPE_RED')+'</span>)';
+				}
+				else if (types_yellow.hasOwnProperty(t)) {
+					tt += ' (<span class="type-yellow">'+l10n_translate('LBL_GTYPE_YELLOW')+'</span>)';
+				}
+				else if (types_info.hasOwnProperty(t)) {
+					tt += ' (<span class="type-info">'+l10n_translate('LBL_GTYPE_INFO')+'</span>)';
+				}
+				else if (ts === marking_types_grammar) {
+					tt += ' (<span class="type-green">'+l10n_translate('LBL_GTYPE_GREEN')+'</span>)';
 				}
 				/*
 				else {

@@ -918,7 +918,7 @@ function _parseResult(rv) {
 					if (nws[k] === '@sentsplit') {
 						had_sentsplit = true;
 					}
-					if (nws[k] === '@upper' && prev_sentsplit) {
+					if (types_to_upper.test(nws[k]) && prev_sentsplit) {
 						////console.log(`Skipping @upper due to @sentsplit`);
 						continue;
 					}
@@ -1001,7 +1001,7 @@ function _parseResult(rv) {
 						w[3] |= Defs.TYPE_COMP_RIGHT;
 					}
 					if (w[1].indexOf('@comp-:-') !== -1) {
-						w[3] |= Defs.TYPE_COMP_HYPHEN;
+						w[3] |= Defs.TYPE_COMP_RIGHT | Defs.TYPE_COMP_HYPHEN;
 					}
 
 					had_mark = true;
