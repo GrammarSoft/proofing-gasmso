@@ -21,8 +21,8 @@
 const VERSION_MAJOR = 1;
 const VERSION_MINOR = 0;
 const VERSION_PATCH = 0;
-const PRODUCT_NAME = 'Commatizer';
-const PRODUCT_DOMAIN = 'commatizer.com';
+const PRODUCT_NAME = window.hasOwnProperty('PRODUCT_NAME') ? window.PRODUCT_NAME : 'Commatizer';
+const PRODUCT_DOMAIN = window.hasOwnProperty('PRODUCT_DOMAIN') ? window.PRODUCT_DOMAIN : 'commatizer.com';
 const ROOT_URL_SELF = 'https://'+PRODUCT_DOMAIN+'/gas/dev/gs-english/';
 const ROOT_URL_GRAMMAR = 'https://'+PRODUCT_DOMAIN+'/comma-eng/';
 const CADUCEUS_URL = 'wss://gramtrans.com/caduceus/';
@@ -114,5 +114,22 @@ function impl_addToDictionary(word) {
 function impl_removeFromDictionary(word) {
 }
 
-function impl_attachTTS() {
-}
+let g_impl = {
+	_callback: _impl_callback,
+	dataKeepalive: impl_dataKeepalive,
+	startLogin: impl_startLogin,
+	canGrammar: impl_canGrammar,
+	canComma: impl_canComma,
+	openDictionary: impl_openDictionary,
+	loadUserdata: impl_loadUserdata,
+	addToDictionary: impl_addToDictionary,
+	removeFromDictionary: impl_removeFromDictionary,
+	attachTTS: function() {},
+	hasSelection: function() {
+		return true;
+	},
+	init: function(func) {
+		func();
+		//l10n_world();
+	},
+	};

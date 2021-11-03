@@ -21,6 +21,8 @@
 const VERSION_MAJOR = 1;
 const VERSION_MINOR = 0;
 const VERSION_PATCH = 2;
+const PRODUCT_NAME = window.hasOwnProperty('PRODUCT_NAME') ? window.PRODUCT_NAME : 'Kukkuniiaat';
+const PRODUCT_DOMAIN = window.hasOwnProperty('PRODUCT_DOMAIN') ? window.PRODUCT_DOMAIN : 'tinodidriksen.com';
 const ROOT_URL_SELF = 'https://retmig.dk/gas/dev/kukkuniiaat/';
 const ROOT_URL_GRAMMAR = 'https://tinodidriksen.com/spell-dev/kal/';
 
@@ -89,3 +91,22 @@ function impl_removeFromDictionary(word) {
 
 function impl_attachTTS() {
 }
+
+let g_impl = {
+	dataKeepalive: impl_dataKeepalive,
+	startLogin: impl_startLogin,
+	canGrammar: impl_canGrammar,
+	canComma: impl_canComma,
+	openDictionary: impl_openDictionary,
+	loadUserdata: impl_loadUserdata,
+	addToDictionary: impl_addToDictionary,
+	removeFromDictionary: impl_removeFromDictionary,
+	attachTTS: impl_attachTTS,
+	hasSelection: function() {
+		return true;
+	},
+	init: function(func) {
+		func();
+		//l10n_world();
+	},
+	};

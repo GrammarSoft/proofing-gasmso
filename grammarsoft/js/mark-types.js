@@ -31,10 +31,11 @@ let types_yellow = {
 
 let types_info = {};
 
-let types_comp_right = new RegExp('@comp-|@comp( |$)');
-
+let types_comp_right = new RegExp('@comp-( |$)');
 let types_to_upper = new RegExp('@upper( |$)');
 let types_to_lower = new RegExp('@lower( |$)');
+let rx_insertable = /(@insert|%ko|%k)( |-|$)/;
+let rx_removable = /(@nil|%nok|%ok|%nko)( |-|$)/;
 
 let marking_types_comma = [];
 let marking_types_grammar = [];
@@ -881,7 +882,7 @@ let ctypes = {
 	],
 	"%nko-FSstart": [
 		"%nko-FSstart",
-		"Valgfrit startkomma ved ledsætninger<br>\n<br>\nOptional start comma before subclause, including clefted clauses. <i>To be placed left of subclause-initial adverbial, interrogative or preposition (but directly left of 'da', 'når', 'mens').</i>",
+		"Valgfrit startkomma ved ledsætninger",
 		"For at lette læsningen, kan man markere starten af en ledsætning med komma. Dette er i alle tilfælde obligatorisk ved brug af Grammatisk Komma og gør det nemmere at afkode sætningsstrukturen, især når der mangler et bindeord, eller når bindeordet ikke er det første ord i ledsætningen. Bruger man derimod Nyt Komma, anbefales det at udelade kommaet før ikke-selvstændige ledsætninger, dvs. før ledsætninger, der udgør en integreret del af den overordnede sætning.<br>\n<br>\n<i>Jeg tror(,) han lyver.</i><br>\n<br>\n<i>Det er vigtigt(,) at du kommer.</i><br>\n<br>\n<i>Computerne blev stjålet(,) uden at nogen opdagede det.</i><br>\n<br>\n<i>Ved du(,) hvem der har gjort det?</i><br>\n<br>\n<i>Godt(,) du kan lide jordbærtærte.</i><br>\n<br>\n<i>Hun fik mistanke om(,) at noget var galt.</i><br>\n<br>\nUanset om man bruger det valgfrie startkomma eller ej, har ledsætningen altid slutkomma:<br>\n<br>\n<i>Hans bemærkning om(,) at kvinder burde holde sig fra fodbold, faldt ikke i god jord.</i><br>\n<br>\nUanset om man bruger Grammatisk Komma eller Nyt Komma, er startkomma obligatorisk ved selvstændige (parentetiske) ledsætninger, herunder parentetiske relativsætninger. Selvstændige ledsætninger kan udelades uden at ødelægge sætningen og indeholder ofte ord, der markerer dette<i> (i øvrigt)</i> eller udtrykker et forbehold <i>(uanset, omend, hvorimod)</i><i>,</i> en usikkerhed <i>(formodentlig, sandsynligvis, måske)</i> eller en vurdering <i>(heldigvis).</i><br>\n<br>\n<i>Han er altædende, hvorimod hun dyrker sit vegetar-image.</i><br>\n<br>\n<i>Jeg har læst de to bøger, som jeg i øvrigt allerede havde set som film.</i><br>\n<br>\n<i>Når den overordnede sætning fortsætter med en ny ledsætning, er kommaet mellem ledsætningerne et (obligatorisk) slut-komma for den første ledsætning, ikke et (valgfrit) startkomma for den anden.</i><br>\n<br>\n<i>Vi havde allerede hørt(,) at bryllupet var aflyst, da Peter ringede.</i><br>\n<br>\nHvis ledsætningen indledes af en underordnende konjunktion <i>(</i>bindeord som <i>at, fordi, selvom etc.)</i> eller hv-ord <i>(hvem, hvad, hvilken, etc.)</i><i>,</i> placeres<i></i> komma som udgangspunkt umiddelbart før dette underordnende ord. Men hvis der er andre indledende ord eller ordforbindelser før det underordnende ord, rykkes komma tilsvarende længere til venstre. Sådanne ord kan være præpositioner, sammenligningskonjunktioner eller adverbialer:<br>\n<br>\n(a) præposition (forholdsord)<br>\n<br>\n<i>De fjernede cyklen(,) <b>uden</b> at han opdagede det.</i><br>\n<br>\n<i>Du kan få rabat(,) <b>mod</b>[,] at du selv afhenter varen.</i><br>\n<br>\n<i>Han inviterede hele landsbyen(,) <b>i anledning af</b>[,] at han blev 50.</i><br>\n<br>\n(b) sammenligningskonjunktion (<i>som, end</i>)<br>\n<br>\n<i>Det var nemmere</i><i>(</i><i>,</i><i>)</i><i></i> <b><i>end</i></b><i> hvis jeg havde været alene.</i><br>\n<br>\n(c) visse participier og andre udtryk brugt som konjunktion/præposition <i>(uanset, forudsat</i><i>, lige</i><i></i> <i>meget,</i> <i>ligegyldigt,</i> <i>alt efter</i><i>)</i><br>\n<br>\n<i>Du kan også få kage(,) <b>forudsat</b>[,] der er nok til alle.</i><br>\n<br>\n<i>Her får alle hjælp(,) <b>l</b><b>ige</b><b></b> <b>meget</b>[,] hvor de kommer fra.</i><br>\n<br>\n(d) adverbial (biled)<br>\n<br>\n<i>Du skal give besked(,) <b>en måned</b> før du skal rejse.</i><br>\n<br>\nKomma sættes dog efter adverbialet ved tidskonjunktionerne <i>da, når</i> eller <i>mens:</i><br>\n<br>\n<i>Du kan kigge forbi</i> <b><i>en aften</i></b><i>(</i><i>,</i><i>)</i><i> når du har tid.</i><br>\n<br>\nMen hvis tidskonkunktionen er udeladt, er der to muligheder - startkommaet kan så sættes enten før eller efter adverbialet:<br>\n<br>\n<i>Vi er altid på stranden de dage(,) solen skinner.</i><br>\n<br>\n<i>Vi er altid på stranden(,) de dage solen skinner.</i><br>\n<br>\nMan taler om sætningsknuder, når en del af ledsætningen flyttes op foran hovedsætningen, således at denne omsluttes af ledsætninger. Her kan man sætte et valgfrit startkomma til at markere brudet mellem hovedsætning og ledsætning.<br>\n<br>\n<i>Det tror jeg(,) at han vil støtte.</i><br>\n<br>\n<i>Hvem synes I(,) vi skal spørge?</i>",
 		"6.2",
 		"§49.1<br>\n<br>\n§49.5"
@@ -1075,6 +1076,13 @@ let ctypes = {
 		"",
 		""
 	],
+	"%nok": [
+		"%nok",
+		"Forkert komma",
+		"Dette komma adskiller ord, der syntaktisk hører sammen.<br>\n<br>\n<i>Dette er en[,] fejl. (Artiklen 'en' og substantivet 'fejl' hører sammen.)</i>",
+		"",
+		""
+	],
 	"%fullstop": [
 		"%fullstop",
 		"Sætningspunktum",
@@ -1092,7 +1100,7 @@ let ctypes = {
 	"%no-fullstop": [
 		"%no-fullstop",
 		"Forkert sætningspunktum",
-		"På dansk kan det afsluttende punktum efter anført direkte tale stå både før og efter det afsluttende anførselstegn, men førstnævnte er langt mere almindeligt.<br>\n<br>\n<i>Hun sagde: &quot;Jeg har hovedpine.&quot; (normalt)</i><br>\n<br>\n<i>Hun sagde: &quot;Jeg har hovedpine&quot;. (sjældent)</i><br>\n<br>\nKun hvis citatet er et almindeligt sætningsled, uden kolon/inquit, skal punktum stå efter det afsluttende anførselstegn, fordi det så tilhører hovedsætningen. Dette er fx tilfældet, når en sætning slutter med titlen på et værk i gåseøjne. Her står punktummet efter, ikke foran, det afsluttende anførselsestegn.<br>\n<br>\n<i>Bogens titel hedder</i><i> &quot;Komma</i> <i>eller kaos</i><i> - e</i><i>n</i> <i>brugsanvisning</i><i>&quot;.</i> (korrekt)<br>\n<br>\n<i>Bogens titel hedder</i><i> &quot;Komma</i> <i>eller kaos - en brugsanvisning</i><i>.&quot;</i> (forkert)<br>\n<br>\nDen anførende sætning mister sit punktum, hvis citatet selv allerede slutter med sætningsafsluttende tegnsætning.<br>\n<br>\n<i>Er råbte: &quot;Kom så, drenge!&quot;[.]</i><br>\n<br>\nOmvendt mister den anførte sætning sit punktum (men ikke spørgsmålstegn eller udråbstegn), hvis den står foran den anførende sætning (inquit):<br>\n<br>\n<i>&quot;</i><i>Jeg er ligeglad</i><i>[.]&quot;, sag</i><i>de han</i><i>.</i><br>\n<br>\nMan sætter ikke slutpunktum efter tekstbider, der står på en linje for sig, med mindre der er tale om hele sætninger i løbende tekst. Detter gælder bl.a. overskrifter og punktopstillinger sam adresseelementer og tidsangivelser, når de står på separate linjer.<br>\n<br>\n<i>Japan: Over 1000 døde efter skælv</i><br>\n<br>\n<i>Kommatrold ApS</i><br>\n<br>\n<i>Kommatorvet 17a</i><br>\n<br>\n<i>9999 Kommingen Ø</i><br>\n<br>\n<i>Kommingen, den 7. april 2021</i><br>\n<br>\nSelv hele sætninger får ikke punktum i en overskrift:<br>\n<br>\n<i>Perseverance lander på Mars</i><br>\n<br>\nPå dansk bruger man hverken komma eller punktum efter indlednings- og sluthilsner i breve og e-mails. Kun udråbstegn efter starthilsen er tilladt - i modsætning til engelsk, der bruger komma begge steder, og tysk, der bruger komma efter åbningshilsen, men ikke efter sluthilsen.<br>\n<br>\n<i></i><i>Hej Rasmus</i><i>(!)</i><br>\n<br>\n<i></i><i>Jeg skriver til dig, fordi jeg fylder rundt og gerne vil invitere dig til min fødselsdag.</i><br>\n<br>\n<i></i><br>\n<br>\n<i></i><i>M</i><i>ed venlig hilsen</i><br>\n<br>\n<i></i><i>Ronja</i>",
+		"På dansk kan det afsluttende punktum efter anført direkte tale stå både før og efter det afsluttende anførselstegn, men førstnævnte er langt mere almindeligt.<br>\n<br>\n<i>Hun sagde: &quot;Jeg har hovedpine.&quot; (normalt)</i><br>\n<br>\n<i>Hun sagde: &quot;Jeg har hovedpine&quot;. (sjældent)</i><br>\n<br>\nKun hvis citatet er et almindeligt sætningsled, uden kolon/inquit, skal punktum stå efter det afsluttende anførselstegn, fordi det så tilhører hovedsætningen. Dette er fx tilfældet, når en sætning slutter med titlen på et værk i gåseøjne. Her står punktummet efter, ikke foran, det afsluttende anførselsestegn.<br>\n<br>\n<i>Bogens titel hedder</i><i> &quot;Komma</i> <i>eller kaos</i><i> - e</i><i>n</i> <i>brugsanvisning</i><i>&quot;.</i> (korrekt)<br>\n<br>\n<i>Bogens titel hedder</i><i> &quot;Komma</i> <i>eller kaos - en brugsanvisning</i><i>.&quot;</i> (forkert)<br>\n<br>\nDen anførende sætning mister sit punktum, hvis citatet selv allerede slutter med sætningsafsluttende tegnsætning.<br>\n<br>\n<i>Er råbte: &quot;Kom så, drenge!&quot;[.]</i><br>\n<br>\nOmvendt mister den anførte sætning sit punktum (men ikke spørgsmålstegn eller udråbstegn), hvis den står foran den anførende sætning (inquit):<br>\n<br>\n<i>&quot;</i><i>Jeg er ligeglad</i><i>[.]&quot;, sag</i><i>de han</i><i>.</i><br>\n<br>\nMan sætter ikke slutpunktum efter tekstbider, der står på en linje for sig, med mindre der er tale om hele sætninger i løbende tekst. Detter gælder bl.a. overskrifter og punktopstillinger sam adresseelementer og tidsangivelser, når de står på separate linjer.<br>\n<br>\n<i>Japan: Over 1000 døde efter skælv</i><br>\n<br>\n<i>Kommatrold ApS</i><br>\n<br>\n<i>Kommatorvet 17a</i><br>\n<br>\n<i>9999 Kommingen Ø</i><br>\n<br>\n<i>Kommingen, den 7. april 2021</i><br>\n<br>\nSelv hele sætninger får ikke punktum i en overskrift:<br>\n<br>\n<i>Perseverance lander på Mars</i><br>\n<br>\nPå dansk bruger man hverken komma eller punktum efter indlednings- og sluthilsner i breve og e-mails. Kun udråbstegn efter starthilsen er tilladt - i modsætning til engelsk, der bruger komma begge steder, og tysk, der bruger komma efter åbningshilsen, men ikke efter sluthilsen.<br>\n<br>\n<i></i><i>Hej Rasmus</i><i>(!)</i><br>\n<br>\n<i></i><i>Jeg skriver til dig, fordi jeg fylder rundt og gerne vil invitere dig til min fødselsdag.</i><br>\n<br>\n<i></i><i>M</i><i>ed venlig hilsen</i><br>\n<br>\n<i></i><i>Ronja</i>",
 		"21.2",
 		"§41"
 	],
@@ -1193,7 +1201,7 @@ for (let k in ctypes) {
 
 ctypes = null;
 
-let types_dictionary = [];
+let types_dictionary = ['(@error)'];
 for (let k in types_yellow) {
 	types_dictionary.push('('+escapeRegExp(k)+')');
 }
@@ -1202,7 +1210,7 @@ types_dictionary = new RegExp('('+types_dictionary.join('|')+')( |$)');
 function l10n_marking_types(lang) {
 	g_options_default.types = {};
 	for (let k in marking_types) {
-		if (/^%(ok|nko)-/.test(k)) {
+		if (/^%(ok|nko)(-|$)/.test(k)) {
 			g_options_default.types[k] = 0;
 		}
 		else {
