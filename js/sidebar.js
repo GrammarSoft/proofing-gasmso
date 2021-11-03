@@ -17,31 +17,14 @@
  */
 'use strict';
 
-
 let g_mode = null;
-let g_tools = {
-	grammar: false,
-	comma: false,
-};
-let markings = [];
 let cmarking = {s: -1, w: -1};
-let cache = {
-	Grammar: {},
-	Comma: {},
-};
-let to_send = null;
-let to_send_b = 0;
-let to_send_i = 0;
-let ts_xhr = null;
-let ts_slow = null;
-let ts_fail = 0;
 let ignores = {};
 let act_queue = [];
 let select_fail = false;
 let grammar_retried = false;
 let comma_retried = false;
 let overlay_sidebars = [];
-let rx_insertable = /(@insert|%ko-|%k-|%k\b)/;
 
 function switchSidebar(which) {
 	$('#popupIgnore').hide();
@@ -115,28 +98,6 @@ function markingSetContext() {
 		}
 		cmarking.suffix += markings[cmarking.s][i][0] + ' ';
 	}
-}
-
-function markingColor(types) {
-	let col = 'green';
-	for (let i=0 ; i<types.length ; ++i) {
-		if (types_info.hasOwnProperty(types[i])) {
-			col = 'info';
-		}
-		if (types_yellow.hasOwnProperty(types[i])) {
-			col = 'yellow';
-		}
-		if (types_red.hasOwnProperty(types[i])) {
-			col = 'red';
-			break;
-		}
-	}
-	for (let i=0 ; i<types.length ; ++i) {
-		if (types[i] === '@green') {
-			col = 'green';
-		}
-	}
-	return col;
 }
 
 function markingRender(skipact) {
@@ -243,7 +204,7 @@ function markingRender(skipact) {
 		$('#chkDidYouMeanItems').find('.suggestion-lookup').off().click(function() {
 			impl_openDictionary($(this).closest('div').text());
 		});
-		impl_attachTTS($('#chkDidYouMeanItems').get(0));
+		g_impl.attachTTS($('#chkDidYouMeanItems').get(0));
 		$('.btnInput').show();
 		$('#chkDidYouMean').show();
 		$('.chkSentence').removeClass('divider');
@@ -266,7 +227,7 @@ function markingRender(skipact) {
 		}
 		$('.btnAccept').removeClass('disabled');
 	}
-	else if (/(@nil|%nok-|%ok-|%nko-)/.test(marking[1])) {
+	else if (rx_removable.test(marking[1])) {
 		$('.icon-accept,.icon-discard').addClass('icon-discard').removeClass('icon-accept');
 		$('.txtAccept').text(l10n_translate(btn_lbl + 'REMOVE'));
 		$('.btnAccept').removeClass('disabled');
@@ -325,7 +286,7 @@ function btnSeeList() {
 	}
 
 	$('#errorList').html(html);
-	impl_attachTTS($('#errorList').get(0));
+	g_impl.attachTTS($('#errorList').get(0));
 	overlay_push('#chkErrorList');
 }
 
@@ -554,7 +515,7 @@ function markingAccept() {
 		}
 		processQueue({f: impl_insertInDocument, s: cmarking.s, w: cmarking.w, prefix: px[1], middle: px[2] + px[3] + sx[1], rpl: px[2] + rpl + px[3] + sx[1], suffix: sx[2]});
 	}
-	else if (/(@nil|%nok-)/.test(markings[cmarking.s][cmarking.w][1])) {
+	else if (/(@nil|%nok)( |-|$)/.test(markings[cmarking.s][cmarking.w][1])) {
 		processQueue({f: impl_removeInDocument, s: cmarking.s, w: cmarking.w, rpl: ' '});
 	}
 	else {
@@ -593,417 +554,6 @@ function processQueue(action) {
 	let suffix = (act.suffix === null) ? cmarking.suffix : act.suffix;
 
 	return act.f(prefix, middle, act.rpl, suffix);
-}
-
-function _parseResult(rv) {
-	$('.chkProgressBar').css('width', (to_send_i/to_send.length*100.0) + '%');
-
-	if (!rv.hasOwnProperty('c')) {
-		$('.chkProgress').hide();
-		//console.log(rv);
-		return;
-	}
-
-	let txt = sanitize_result(rv.c);
-	let ps = [];
-	let nps = $.trim(txt.replace(/\n+<\/s>\n+/g, "\n\n")).split(/<\/s\d+>/);
-
-	// Where missing in result, copy from the cache
-	for (let k = to_send_b, p=0 ; k<to_send_i ; ++k) {
-		let found = false;
-		for (let i=p ; i<nps.length ; ++i) {
-			if (nps[i].indexOf('<s'+to_send[k].i+'>\n') !== -1) {
-				////console.log(`Par ${k} found in result`);
-				ps.push(nps[i]);
-				p = i;
-				found = true;
-				break;
-			}
-		}
-		if (!found && to_send[k].h in cache[g_tool]) {
-			////console.log(`Par ${k} found in cache`);
-			ps.push('<s'+to_send[k].i+'>\n'+cache[g_tool][to_send[k].h]);
-		}
-	}
-
-	for (let i=0 ; i<ps.length ; ++i) {
-		let cp = $.trim(ps[i]);
-		if (!cp) {
-			continue;
-		}
-
-		let lines = cp.split(/\n/);
-		let id = parseInt(lines[0].replace(/^<s(.+)>$/, '$1'));
-		for (let k = to_send_b ; k<to_send_i ; ++k) {
-			if (to_send[k].i === id) {
-				cache[g_tool][to_send[k].h] = $.trim(cp.replace(/^<s.+>/g, ''));
-				break;
-			}
-		}
-
-		let words = [];
-		let had_mark = false;
-		let prev_sentsplit = false;
-
-		for (let j=1 ; j<lines.length ; ++j) {
-			// Ignore duplicate opening tags
-			if (/^<s\d+>$/.test(lines[j])) {
-				continue;
-			}
-
-			let w = $.trim(lines[j]).split(/\t/);
-			w[0] = $.trim(w[0].replace(/(\S)=/g, '$1 '));
-
-			if (w[0] === '') {
-				words.push(w);
-				continue;
-			}
-
-			if (w.length > 1) {
-				// Strip marking types belonging to higher than current critique level
-				let ws = w[1].split(/ /g);
-				let nws = [];
-				let rs = [];
-				let crs = [];
-				let had_r = false;
-				for (let k=0 ; k<ws.length ; ++k) {
-					if (ws[k].indexOf('<R:') === 0) {
-						let n = ws[k].substr(3);
-						n = n.substr(0, n.length-1).replace(/(\S)=/g, '$1 ');
-						if (n === w[0]) {
-							//console.log(n);
-							continue;
-						}
-						rs.push(n);
-						had_r = true;
-						continue;
-					}
-					if (ws[k].indexOf('<AFR:') === 0) {
-						let n = ws[k].substr(5);
-						n = n.substr(0, n.length-1).replace(/(\S)=/g, '$1 ');
-						if (n === w[0]) {
-							//console.log(n);
-							continue;
-						}
-						crs.push(n);
-						continue;
-					}
-					if (marking_types.hasOwnProperty(ws[k])) {
-						nws.push(ws[k]);
-					}
-					else {
-						//console.log('Unknown marking: '+ws[k]);
-						if (g_tool === 'Grammar') {
-							nws.push(ws[k]);
-						}
-						else {
-							if (ws[k].indexOf('%nok-') === 0) {
-								nws.push('%nok-soft');
-							}
-							else {
-								nws.push('%k');
-							}
-						}
-					}
-				}
-				crs = rs.concat(crs);
-				// Remove @sentsplit from last token
-				if (j == lines.length-1 && nws.length == 1 && nws[0] === '@sentsplit') {
-					crs = [];
-					nws = [];
-				}
-				// Only show addfejl suggestions if there were real suggestions
-				if (!had_r) {
-					crs = [];
-				}
-
-				ws = [];
-				let had_sentsplit = false;
-				let none = true;
-
-				for (let k=0 ; k<nws.length ; ++k) {
-					if (nws[k] === '@sentsplit') {
-						had_sentsplit = true;
-					}
-					if (nws[k] === '@upper' && prev_sentsplit) {
-						////console.log(`Skipping @upper due to @sentsplit`);
-						continue;
-					}
-					if (_live_options.types.hasOwnProperty(nws[k]) && !_live_options.types[nws[k]]) {
-						continue;
-					}
-					none = false;
-					ws.push(nws[k]);
-				}
-
-				if (_live_options.config.opt_useDictionary && types_dictionary.test(ws[0]) && isInDictionary(w[0])) {
-					////console.log(`Found ${w[0]} in dictionary`);
-					ws = [];
-				}
-
-				prev_sentsplit = had_sentsplit;
-				if (ws.length && none) {
-					////console.log(`Vitec MV whitelist no-match: ${ws}`);
-					if (ws.indexOf('@insert') !== -1) {
-						w[0] = ' ';
-					}
-					ws = [];
-				}
-				nws = ws;
-				if (nws.length == 0) {
-					crs = [];
-				}
-
-				// For case-folding, create a correction if none exists and fold all corrections to the desired case
-				for (let k=0 ; k<nws.length ; ++k) {
-					if (types_to_upper.test(nws[k])) {
-						if (crs.length == 0) {
-							crs.push(w[0]);
-						}
-						for (let c=0 ; c<crs.length ; ++c) {
-							crs[c] = uc_first(crs[c]);
-						}
-					}
-					else if (types_to_lower.test(nws[k])) {
-						if (crs.length == 0) {
-							crs.push(w[0]);
-						}
-						for (let c=0 ; c<crs.length ; ++c) {
-							crs[c] = lc_first(crs[c]);
-						}
-					}
-				}
-
-				if (crs.length) {
-					// Only show additional suggestions if the real suggestion icase-matches one of them
-					let use_adf = false;
-					for (let c=1 ; c<crs.length ; ++c) {
-						if (crs[0].toUpperCase() == crs[c].toUpperCase()) {
-							use_adf = true;
-							break;
-						}
-					}
-					if (!use_adf) {
-						crs = [crs[0]];
-					}
-					crs = crs.unique();
-					w[2] = crs.join('\t');
-					////console.log(crs);
-				}
-				if (nws.length) {
-					nws = nws.unique();
-					w[1] = nws.join(' ');
-					if (!w[2] || w[2].length === 0) {
-						w[2] = '';
-					}
-					if (w[1].indexOf(' ') !== -1) {
-						w[1] = w[1].replace(/ @error /g, ' ').replace(/ @error$/g, '').replace(/^@error /g, '');
-					}
-
-					w[3] = 0;
-					if (w[1].indexOf('@-comp') !== -1) {
-						w[3] |= Defs.TYPE_COMP_LEFT;
-					}
-					if (types_comp_right.test(w[1])) {
-						w[3] |= Defs.TYPE_COMP_RIGHT;
-					}
-					if (w[1].indexOf('@comp-:-') !== -1) {
-						w[3] |= Defs.TYPE_COMP_HYPHEN;
-					}
-
-					had_mark = true;
-				}
-				else {
-					w.pop();
-				}
-			}
-			if (w.length > 1 && /(%ko-|%k-|%k\b)/.test(w[1])) {
-				let wo = w[0];
-				w[0] = ',';
-				if (w[1].indexOf('%k-stop') !== -1) {
-					w[0] = '.';
-				}
-				words.push(w);
-				w = [wo];
-			}
-			words.push(w);
-		}
-		if (had_mark) {
-			// Pre-merge compound errors with the token they're supposed to be with, respecting other corrections to either side of the merge
-			for (let j=0 ; j<words.length ; ) {
-				if (words[j].length > 1 && words[j][3] & Defs.TYPE_COMP) {
-					let ts = words[j][1];
-					let wx = '';
-					let px = '';
-					let sx = '';
-					if (words[j][3] & Defs.TYPE_COMP_LEFT) {
-						if (words[j-1].length > 1 && words[j-1][1]) {
-							ts += ' '+words[j-1][1];
-						}
-						wx = words[j-1][0] + ' ' + words[j][0];
-						px = words[j-1][0];
-						if (words[j-1].length > 1 && words[j-1][2]) {
-							px = words[j-1][2];
-						}
-						sx = words[j][0];
-						if (words[j][2]) {
-							sx = words[j][2];
-						}
-					}
-					if (words[j][3] & Defs.TYPE_COMP_RIGHT) {
-						if (words[j+1].length > 1 && words[j+1][1]) {
-							ts += ' '+words[j+1][1];
-						}
-						wx = words[j][0] + ' ' + words[j+1][0];
-						px = words[j][0];
-						if (words[j][2]) {
-							px = words[j][2];
-						}
-						sx = words[j+1][0];
-						if (words[j+1].length > 1 && words[j+1][2]) {
-							sx = words[j+1][2];
-						}
-					}
-
-					let has_uc = (wx !== wx.toLowerCase());
-
-					px = px.split(/\t/);
-					sx = sx.split(/\t/);
-					let space = '';
-					if (words[j][3] & Defs.TYPE_COMP_HYPHEN) {
-						space = '‐';
-					}
-					let es = [];
-					for (let p=0 ; p<px.length ; ++p) {
-						for (let s=0 ; s<sx.length ; ++s) {
-							if (!has_uc && sx[s] !== sx[s].toLowerCase()) {
-								//console.log('Discarding case-different suffix: ' + sx[s]);
-								continue;
-							}
-							es.push(px[p] + space + sx[s]);
-						}
-					}
-					let flags = words[j][3];
-
-					let nw = [wx, ts.split(/ /).unique().join(' ').replace(/ +/g, ' '), es.join('\t')];
-					words[j] = nw;
-
-					if (flags & Defs.TYPE_COMP_LEFT) {
-						words.splice(j-1, 1);
-					}
-					else {
-						words.splice(j+1, 1);
-						++j;
-					}
-				}
-				else {
-					++j;
-				}
-			}
-			markings.push(words);
-		}
-	}
-
-	if (cmarking.s === -1) {
-		btnNext();
-	}
-
-	if (to_send_i < to_send.length) {
-		sendTexts();
-	}
-	else {
-		$('.chkProgress').hide();
-	}
-}
-
-function parseResult(rv) {
-	try {
-		_parseResult(rv);
-	}
-	catch (e) {
-		//console.log(e);
-		$('.chkProgress').hide();
-	}
-}
-
-function sendTexts() {
-	$('.chkProgress').show();
-	let text = '';
-
-	for (to_send_b = to_send_i ; to_send_i < to_send.length && text.length < Defs.MAX_RQ_SIZE ; ++to_send_i) {
-		let par = to_send[to_send_i];
-
-		let marks = /((?:\S+\s+){0,2})(\S+?)(\S[\u0300-\u036F]+)((?:\s+\S+){0,2})/.exec(par.t);
-		if (marks && par.t !== par.t.normalize()) {
-			showWarning('WARN_COMBINING_CHARACTER', {
-				chr: marks[3],
-				cntx: marks[0],
-				});
-			continue;
-		}
-
-		if (!par.hasOwnProperty('h')) {
-			par.h = 'h-'+murmurHash3.x86.hash128(par.t) + '-' + par.t.length;
-		}
-
-		if (par.h in cache[g_tool]) {
-			////console.log(`Par ${par.i} found in cache`);
-			continue;
-		}
-
-		// MS Word Online sends a Narrow No-Break Space
-		let t = par.t.replace('\u202F', ' ');
-
-		t = t.replace(/\u00AD/g, ''); // Soft Hyphen
-		// Turn <> into ⟨⟩ so that plain-text markup isn't passed through
-		t = t.replace(/</g, '⟨');
-		t = t.replace(/>/g, '⟩');
-
-		text += '<s'+par.i+'>\n'+t+'\n</s'+par.i+'>\n\n';
-	}
-
-	if (text) {
-		let url = ROOT_URL_GRAMMAR + '/callback.php?a=' + g_tools.grammar;
-		if (g_tool === 'Comma') {
-			url = ROOT_URL_GRAMMAR + '/callback.php?a=' + g_tools.comma;
-		}
-		let data = {
-			t: text,
-			r: ts_fail,
-			c: g_client,
-			SessionID: g_access_token.sessionid,
-		};
-		ts_xhr = $.ajax({
-			url: url,
-			type: 'POST',
-			dataType: 'json',
-			headers: {HMAC: g_access_token.hmac},
-			data: data,
-		}).done(parseResult).fail(function() {
-			//console.log(this);
-			showError('ERR_POSTBACK');
-		});
-	}
-	else {
-		setTimeout(function() {
-			parseResult({c:''});
-		}, 500);
-		$('.chkProgress').hide();
-	}
-}
-
-function checkParagraphs(doc) {
-	loadOptions((g_tool == 'Comma') ? SERVICES.Comma : SERVICES.Grammar);
-	loadDictionary();
-
-	//console.log(doc);
-	to_send = doc;
-	to_send_i = 0;
-	to_send_b = 0;
-	markings = [];
-	cmarking = {s: -1, w: -1};
-	$('.chkProgressBar').css('width', '0%');
-	sendTexts();
 }
 
 function checkDone() {
@@ -1097,7 +647,7 @@ function getState() {
 		loadOptions(svc);
 	}
 	loadDictionary();
-	impl_attachTTS(document.body);
+	g_impl.attachTTS(document.body);
 }
 
 function loginKeepalive(init) {
@@ -1272,7 +822,7 @@ function initSidebar() {
 
 	window.addEventListener('message', loginMessage, false);
 
-	if (!impl_hasSelection()) {
+	if (!g_impl.hasSelection()) {
 		$('.btnCheckSelected').hide();
 		$('[data-l10n="TXT_GRAMMAR_HINT"]').attr('data-l10n', 'TXT_GRAMMAR_HINT_NS');
 		$('[data-l10n="TXT_COMMA_HINT"]').attr('data-l10n', 'TXT_COMMA_HINT_NS');
@@ -1455,10 +1005,50 @@ function initSidebar() {
 	}
 
 	impl_startLogin();
+
+	g_impl.showWarning = showWarning;
+	g_impl.showError = showError;
+
+	g_impl.parseCheckStart = function() {
+		cmarking = {s: -1, w: -1};
+		$('.chkProgressBar').css('width', '0%');
+	};
+	g_impl.parseProgress = function() {
+		$('.chkProgressBar').css('width', (to_send_i/to_send.length*100.0) + '%');
+	};
+	g_impl.parseNoResult = function() {
+		$('.chkProgress').hide();
+		//console.log(rv);
+	};
+	g_impl.parseChunkDone = function() {
+		if (cmarking.s === -1) {
+			btnNext();
+		}
+
+		if (to_send_i < to_send.length) {
+			sendTexts();
+		}
+		else {
+			$('.chkProgress').hide();
+		}
+	};
+	g_impl.parseError = function(e) {
+		//console.log(e);
+		$('.chkProgress').hide();
+	};
+	g_impl.parseSendStart = function() {
+		$('.chkProgress').show();
+	};
+	g_impl.parseSendEnd = function() {
+		setTimeout(function() {
+			parseResult({c:''});
+		}, 100);
+		$('.chkProgress').hide();
+	};
 }
 
 $(function() {
-	impl_Init(initSidebar);
+	g_impl.init(initSidebar);
 });
 
 function showError(msg, args) {
