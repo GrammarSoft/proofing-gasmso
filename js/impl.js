@@ -21,8 +21,8 @@
 const VERSION_MAJOR = 2;
 const VERSION_MINOR = 0;
 const VERSION_PATCH = 0;
-const PRODUCT_NAME = 'RetMig & Kommaforslag';
-const PRODUCT_DOMAIN = 'retmig.dk';
+const PRODUCT_NAME = window.hasOwnProperty('PRODUCT_NAME') ? window.PRODUCT_NAME : 'RetMig & Kommaforslag';
+const PRODUCT_DOMAIN = window.hasOwnProperty('PRODUCT_DOMAIN') ? window.PRODUCT_DOMAIN : 'retmig.dk';
 const ROOT_URL_SELF = 'https://'+PRODUCT_DOMAIN+'/gas/rmkf/2.0.0/';
 const ROOT_URL_GRAMMAR = 'https://'+PRODUCT_DOMAIN+'/';
 const CADUCEUS_URL = 'wss://gramtrans.com/caduceus/';
@@ -145,5 +145,22 @@ function impl_removeFromDictionary(word) {
 	_impl_callback({'a': 'dict-del', 'w': word});
 }
 
-function impl_attachTTS() {
-}
+let g_impl = {
+	_callback: _impl_callback,
+	dataKeepalive: impl_dataKeepalive,
+	startLogin: impl_startLogin,
+	canGrammar: impl_canGrammar,
+	canComma: impl_canComma,
+	openDictionary: impl_openDictionary,
+	loadUserdata: impl_loadUserdata,
+	addToDictionary: impl_addToDictionary,
+	removeFromDictionary: impl_removeFromDictionary,
+	attachTTS: function() {},
+	hasSelection: function() {
+		return true;
+	},
+	init: function(func) {
+		func();
+		//l10n_world();
+	},
+	};
