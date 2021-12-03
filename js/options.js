@@ -556,6 +556,12 @@ function initOptions() {
 		let v = null;
 		if ($(this).attr('type') === 'checkbox') {
 			v = $(this).prop('checked');
+			$('.'+k).each(function() {
+				if ($(this).prop('checked') !== v) {
+					$(this).prop('checked', v);
+					queueOption($(this), 'config', k, v);
+				}
+			});
 		}
 		else if ($(this).attr('type') === 'radio') {
 			v = $(this).val();
