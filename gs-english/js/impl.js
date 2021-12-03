@@ -38,6 +38,7 @@ const g_options_default = {
 	config: {
 		opt_useDictionary: true,
 		opt_color: false,
+		opt_confidential: false,
 		opt_maybe: true,
 		opt_longExplanations: true,
 		opt_speak: false,
