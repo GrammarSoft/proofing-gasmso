@@ -1156,6 +1156,7 @@ function sendTexts() {
 			t: text,
 			r: ts_fail,
 			c: g_client,
+			gdpr: _live_options.config.opt_confidential + 0,
 			SessionID: g_access_token.sessionid,
 		};
 		ts_xhr = $.ajax({
