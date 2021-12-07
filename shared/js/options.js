@@ -103,6 +103,7 @@ function dictionaryDelete() {
 	else {
 		alert(sprintf(l10n_translate('ERR_DICT_FAIL_DELETE'), w));
 	}
+	matomo_event('dictionaryDelete', w);
 }
 
 function dictionaryChanged() {
@@ -111,7 +112,7 @@ function dictionaryChanged() {
 	if (!b.hasClass('btnWordDelete')) {
 		return;
 	}
-	b.removeClass('btnWordDelete').addClass('btnWordEdit').text('Gem').off().click(function() {
+	b.removeClass('btnWordDelete').addClass('btnWordEdit').text(l10n_translate('BTN_WORD_SAVE')).off().click(function() {
 		b.removeClass('btnWordEdit').addClass('btnWordDelete').html('&times;').off().click(dictionaryDelete);
 		f.submit();
 	});
@@ -127,6 +128,7 @@ function attachDictionaryClicks() {
 		else {
 			alert(sprintf(l10n_translate('ERR_DICT_FAIL_EDIT'), ow, w));
 		}
+		matomo_event('dictionaryEdit', ow, w);
 
 		e.preventDefault();
 		return false;
@@ -155,6 +157,7 @@ function typeChanged() {
 	let k = $(this).attr('name');
 	let v = $(this).val();
 
+	matomo_event('typeChanged', k, v);
 	queueOption(this, 'types', k, v);
 
 	toggleAutoToggles();
@@ -165,6 +168,7 @@ function typesAllTo(e, v) {
 	let comma = e.hasClass('comma');
 	let svc = comma ? g_can_comma : g_can_grammar;
 
+	matomo_event('typesAllTo', v, svc);
 	e.find('input[type="radio"][value="'+v+'"]').each(function() {
 		let r = $(this);
 		r.prop('checked', true);
@@ -453,6 +457,7 @@ function showPane(e, w) {
 	else {
 		$('.pane-'+w).find('.column').first().show();
 	}
+	matomo_event('showPane', w);
 }
 
 function showColumn(e, w) {
@@ -460,6 +465,7 @@ function showColumn(e, w) {
 	$(e).addClass('selected');
 	$('.column').hide();
 	$('.'+w).show();
+	matomo_event('showColumn', w);
 }
 
 function initOptions() {
@@ -540,6 +546,7 @@ function initOptions() {
 		else {
 			alert(sprintf(l10n_translate('ERR_DICT_FAIL_ADD'), w));
 		}
+		matomo_event('dictionaryAdd', w);
 
 		e.preventDefault();
 		return false;
@@ -570,6 +577,7 @@ function initOptions() {
 			v = parseInt(v);
 		}
 
+		matomo_event('optionChange', k, v);
 		queueOption(this, 'config', k, v);
 	});
 
