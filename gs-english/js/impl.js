@@ -116,6 +116,7 @@ function impl_removeFromDictionary(word) {
 }
 
 let g_impl = {
+	matomo_sid: 4,
 	_callback: _impl_callback,
 	dataKeepalive: impl_dataKeepalive,
 	startLogin: impl_startLogin,
