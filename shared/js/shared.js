@@ -1408,6 +1408,30 @@ function addScriptDefer(url) {
 	document.body.appendChild(script);
 }
 
+function matomo_load() {
+	if (window.hasOwnProperty('_paq')) {
+		console.log('Matomo already loaded');
+		return;
+	}
+
+	console.log('Loading Matomo');
+	let _paq = window._paq = window._paq || [];
+	_paq.push(['trackPageView']);
+	_paq.push(['enableLinkTracking']);
+	(function() {
+		let u="//gramtrans.com/matomo/";
+		_paq.push(['setTrackerUrl', u+'matomo.php']);
+		_paq.push(['setSiteId', g_impl.matomo_sid]);
+		let d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+		g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+	})();
+}
+
+function matomo_event(cat, act, name, value) {
+	console.log([cat, act, name, value]);
+	_paq.push(['trackEvent', cat, act, name, value]);
+}
+
 $(window).on('load', function() {
 	const CLIENT = window.hasOwnProperty('CLIENT') ? window.CLIENT : '';
 
@@ -1445,6 +1469,6 @@ $(window).on('load', function() {
 	if (id === 'sidebar' || id === 'options' || id === 'dictionary') {
 		// Delay ever so slightly to force other scripts to load first
 		// No, defer doesn't work. No, async doesn't work either.
-		setTimeout(function() {addScript(ROOT_URL_SELF+'/js/'+id+'.js');}, 100);
+		setTimeout(function() {addScript(ROOT_URL_SELF+'/js/'+id+'.js'); matomo_load();}, 100);
 	}
 });
