@@ -288,6 +288,8 @@ function btnSeeList() {
 	$('#errorList').html(html);
 	g_impl.attachTTS($('#errorList').get(0));
 	overlay_push('#chkErrorList');
+
+	matomo_event('btnSeeList');
 }
 
 function btnAccept() {
@@ -339,6 +341,7 @@ function btnIgnorePopup() {
 function btnIgnore() {
 	$('#popupIgnore').hide();
 	markingIgnore();
+	matomo_event('btnIgnoreOne', markings[cmarking.s][cmarking.w][1], markings[cmarking.s][cmarking.w][0]);
 	btnNext();
 }
 
@@ -356,10 +359,13 @@ function btnIgnoreAll() {
 			}
 		}
 	}
+	matomo_event('btnIgnoreAll', ts, word);
 	btnNext();
 }
 
 function btnPrev() {
+	matomo_event('btnPrev');
+
 	$('#popupIgnore').hide();
 	let found = false;
 	for (;;) {
@@ -406,6 +412,8 @@ function btnPrev() {
 }
 
 function btnNext() {
+	matomo_event('btnNext');
+
 	$('#popupIgnore').hide();
 	let found = false;
 	for (;;) {
@@ -461,6 +469,7 @@ function btnInputOne() {
 	if (rpl.length === 0) {
 		rpl = ' ';
 	}
+	matomo_event('btnInputOne', markings[cmarking.s][cmarking.w][1], cmarking.w, rpl);
 	processQueue({f: impl_replaceInDocument, s: cmarking.s, w: cmarking.w, rpl: rpl});
 }
 
@@ -487,6 +496,7 @@ function btnInputAll() {
 		}
 	}
 
+	matomo_event('btnInputAll', ts, word, rpl);
 	processQueue({f: btnNext, s: os, w: ow});
 }
 
@@ -497,6 +507,7 @@ function markingAcceptSuggestion() {
 	}
 
 	let middle = markings[cmarking.s][cmarking.w][0];
+	matomo_event('suggestionAccept', cmarking.w, $(this).text());
 	processQueue({f: impl_replaceInDocument, s: cmarking.s, w: cmarking.w, middle: middle, rpl: $(this).text()});
 }
 
@@ -505,6 +516,8 @@ function markingAccept() {
 		//console.log('Prevented double action');
 		return;
 	}
+
+	matomo_event('btnAccept', markings[cmarking.s][cmarking.w][1], cmarking.w);
 
 	if (rx_insertable.test(markings[cmarking.s][cmarking.w][1])) {
 		let px = /^(.*?)(\S+)(\s?)$/.exec(cmarking.prefix);
@@ -811,6 +824,7 @@ function logout() {
 
 	loginListener();
 	switchSidebar('#chkWelcomeLogin');
+	matomo_event('ui', 'logout');
 }
 
 function initSidebar() {
@@ -846,10 +860,12 @@ function initSidebar() {
 	$('.chkExplainMore').click(function() {
 		$('.chkExplainShort').hide();
 		$('.chkExplainLong').show();
+		matomo_event('ui', 'explain-more');
 	});
 	$('.chkExplainLess').click(function() {
 		$('.chkExplainLong').hide();
 		$('.chkExplainShort').show();
+		matomo_event('ui', 'explain-less');
 	});
 
 	if (_live_options.config.opt_longExplanations) {
@@ -863,12 +879,14 @@ function initSidebar() {
 
 	$('.btnOptions').click(function() {
 		impl_showOptions(g_tool);
+		matomo_event('ui', 'open-options');
 	});
 	$('.btnRestart').click(function() {
 		$('#error').hide();
 		$('#working').hide();
 		ignores = {};
 		impl_startLogin();
+		matomo_event('ui', 'restart');
 	});
 	$('.btnSupport').click(function() {
 		if ($('#chkSupport:visible').length) {
@@ -876,6 +894,7 @@ function initSidebar() {
 		}
 		else {
 			overlay_push('#chkSupport');
+			matomo_event('ui', 'open-support');
 		}
 	});
 	$('.btnLanguages').click(function() {
@@ -884,6 +903,7 @@ function initSidebar() {
 		}
 		else {
 			overlay_push('#chkLanguages');
+			matomo_event('ui', 'open-languages');
 		}
 	});
 	$('.btnSeeList').click(btnSeeList);
@@ -895,6 +915,7 @@ function initSidebar() {
 		session.locale = l10n.lang = $(this).attr('data-which');
 		l10n_world();
 		overlay_pop();
+		matomo_event('ui', 'change-language', session.locale);
 	});
 
 	$('.optComma').click(function() {
@@ -910,6 +931,7 @@ function initSidebar() {
 			g_tool = 'Comma';
 		}
 		g_mode = 'auto';
+		matomo_event('ui', 'check-auto', g_tool);
 	});
 	$('.btnCheckSelected').click(function() {
 		if ($(this).hasClass('toolGrammar')) {
@@ -920,6 +942,7 @@ function initSidebar() {
 		}
 		g_mode = 'selected';
 		impl_getSelectedPars();
+		matomo_event('ui', 'check-selected', g_tool);
 	});
 	$('.btnCheckAll').click(function() {
 		if ($(this).hasClass('toolGrammar')) {
@@ -930,6 +953,7 @@ function initSidebar() {
 		}
 		g_mode = 'all';
 		impl_getAllPars();
+		matomo_event('ui', 'check-all', g_tool);
 	});
 
 	$('.btnAccept').click(btnAccept);
@@ -945,14 +969,17 @@ function initSidebar() {
 
 	$('.btnCheckAgain').click(function() {
 		switchSidebar('#chkWelcome' + g_tool);
+		matomo_event('ui', 'check-again', g_tool);
 	});
 	$('.btnCheckGrammar').click(function() {
 		g_tool = 'Grammar';
 		switchSidebar('#chkWelcome' + g_tool);
+		matomo_event('ui', 'check-grammar');
 	});
 	$('.btnCheckComma').click(function() {
 		g_tool = 'Comma';
 		switchSidebar('#chkWelcome' + g_tool);
+		matomo_event('ui', 'check-comma');
 	});
 
 	$('.btnAddWord').click(function() {
@@ -961,6 +988,7 @@ function initSidebar() {
 		}
 		addToDictionary(markings[cmarking.s][cmarking.w][0]);
 		$('.btnIgnoreAll').click();
+		matomo_event('ui', 'ignore-all');
 	});
 
 	$('.btnLoginGrammar').click(function() {
@@ -968,6 +996,7 @@ function initSidebar() {
 			return false;
 		}
 		window.open(ROOT_URL_GRAMMAR + '/login.php?popup=1&channel='+g_login_channel, 'Login');
+		matomo_event('ui', 'login');
 	});
 
 	$('.btnLogout').click(logout);
@@ -1001,6 +1030,7 @@ function initSidebar() {
 		doms = '<ul><li>'+Object.keys(doms).join('</li><li>')+'</li></ul>';
 		//console.log(doms);
 		showError('ERR_NO_STORAGE', {TRUSTED_DOMAINS: doms});
+		matomo_event('error', 'no-local-storage');
 		return;
 	}
 
