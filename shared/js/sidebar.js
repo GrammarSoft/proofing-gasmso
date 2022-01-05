@@ -884,7 +884,6 @@ function initSidebar() {
 	$('.btnRestart').click(function() {
 		$('#error').hide();
 		$('#working').hide();
-		ignores = {};
 		impl_startLogin();
 		matomo_event('ui', 'restart');
 	});
