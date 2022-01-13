@@ -19,6 +19,73 @@
 
 let _impl_options = null;
 
+function _impl_findElement_selectWord(state) {
+	let rngs = state.sel.search(state.word);
+
+	state.context.load(rngs, 'text');
+	return state.context.sync().then(function () {
+		//console.log(state);
+		let rng = rngs.items[rngs.items.length - 1];
+		rng.select();
+		if (state.func) {
+			return state.func(state.context, state.par, rng);
+		}
+		return state.context.sync();
+	});
+}
+
+function _impl_findElement_pars(state) {
+	let parss = [];
+	for (let i=0 ; i<state.rngs.length ; ++i) {
+		let pars = state.rngs[i].paragraphs;
+		state.context.load(pars, 'text');
+		parss.push(pars);
+	}
+
+	return state.context.sync().then(function () {
+		for (let p=0 ; p<parss.length ; ++p) {
+			let pars = parss[p].items;
+			for (let i=0 ; i<pars.length ; ++i) {
+				if (state.closer || pars[i].text === state.txt) {
+					return state.context.sync().then(function () {
+						let rngs = pars[i].getRange().split(Const.Split_Array);
+
+						state.context.load(rngs, 'text');
+						return state.context.sync().then(function () {
+							rngs = rngs.items;
+							state.prefix += state.word;
+							let rx_pfx = new RegExp(escapeRegExp(state.prefix) + '\\s*$');
+							state.par = pars[i];
+							state.sel = rngs[0].getRange();
+
+							let pfx = '';
+							let ri = 0;
+							for ( ; ri<rngs.length ; ++ri) {
+								pfx += rngs[ri].text;
+								state.sel = state.sel.expandTo(rngs[ri]);
+								if (state.closer) {
+									if (rx_pfx.test(pfx)) {
+										return _impl_findElement_selectWord(state);
+									}
+								}
+								else if (pfx.length >= state.prefix.length && pfx.substr(0, state.prefix.length) === state.prefix) {
+									return _impl_findElement_selectWord(state);
+								}
+							}
+
+							showError('ERR_SELECT_NOTFOUND');
+							return state.context.sync();
+						});
+					});
+				}
+			}
+		}
+
+		showError('ERR_SELECT_NOTFOUND');
+		return state.context.sync();
+	});
+}
+
 function _impl_findElement(prefix, word, suffix, func) {
 	let txt = findToSend(prefix, word, suffix);
 	if (!txt) {
@@ -26,77 +93,52 @@ function _impl_findElement(prefix, word, suffix, func) {
 		return false;
 	}
 
-	prefix = txt.prefix;
-	word = txt.word;
-	suffix = txt.suffix;
-	txt = txt.t;
+	let state = {
+		prefix: txt.prefix,
+		word: txt.word,
+		suffix: txt.suffix,
+		txt: txt.t,
+		func: func,
+		closer: false,
+		};
 
 	Word.run(function(context) {
-		let body = context.document.body;
-		let rngs = body.search($.trim(txt.substr(0, 255)));
+		state.context = context;
+		let body = state.context.document.body;
+		state.rngs = body.search($.trim(state.txt.substr(0, 255)));
 
-		context.load(rngs, 'text');
-		return context.sync().then(function () {
-			rngs = rngs.items;
-			if (rngs.length == 0) {
-				showError('ERR_SELECT_NOTFOUND');
-				return context.sync();
-			}
-
-			let parss = [];
-			for (let i=0 ; i<rngs.length ; ++i) {
-				let pars = rngs[i].paragraphs;
-				context.load(pars, 'text');
-				parss.push(pars);
-			}
-
-			return context.sync().then(function () {
-				for (let p=0 ; p<parss.length ; ++p) {
-					let pars = parss[p].items;
-					for (let i=0 ; i<pars.length ; ++i) {
-						if (pars[i].text === txt) {
-							return context.sync().then(function () {
-								let rngs = pars[i].getRange().split(Const.Split_Array);
-
-								context.load(rngs, 'text');
-								return context.sync().then(function () {
-									rngs = rngs.items;
-									prefix += word;
-									let sel = rngs[0].getRange();
-
-									let pfx = '';
-									let ri = 0;
-									for ( ; ri<rngs.length ; ++ri) {
-										pfx += rngs[ri].text;
-										sel = sel.expandTo(rngs[ri]);
-										if (pfx.length >= prefix.length && pfx.substr(0, prefix.length) === prefix) {
-											let rngs = sel.search(word);
-
-											context.load(rngs, 'text');
-											return context.sync().then(function () {
-												let rng = rngs.items[rngs.items.length - 1];
-												rng.select();
-												if (func) {
-													return func(context, pars[i], rng);
-												}
-												return context.sync();
-											});
-										}
-									}
-
-									showError('ERR_SELECT_NOTFOUND');
-									return context.sync();
-								});
-							});
-						}
-					}
+		state.context.load(state.rngs, 'text');
+		return state.context.sync().then(function () {
+			state.rngs = state.rngs.items;
+			if (state.rngs.length == 0) {
+				let px = /\s(\S+\s\S+\s\S+\s*)$/.exec(state.prefix);
+				if (px) {
+					state.prefix = px[1];
 				}
+				let sx = /^(\s*\S+\s\S+\s\S+)\s/.exec(state.suffix);
+				if (sx) {
+					state.suffix = sx[1];
+				}
+				let txt = state.prefix + state.word + state.suffix;
+				state.rngs = body.search(txt);
 
-				showError('ERR_SELECT_NOTFOUND');
-				return context.sync();
-			});
+				state.context.load(state.rngs, 'text');
+				return state.context.sync().then(function () {
+					state.rngs = state.rngs.items;
+					if (state.rngs.length == 0) {
+						showError('ERR_SELECT_NOTFOUND');
+						return context.sync();
+					}
+					//console.log('_impl_findElement close-context');
+					state.closer = true;
+					return _impl_findElement_pars(state);
+				});
+			}
+
+			return _impl_findElement_pars(state);
 		});
 	}).catch(function(error) {
+		//console.log(error);
 		showError(JSON.stringify(error));
 		if (error instanceof OfficeExtension.Error) {
 			//console.log('Debug info: ' + JSON.stringify(error.debugInfo));
