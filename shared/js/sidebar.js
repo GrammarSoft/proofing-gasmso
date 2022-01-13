@@ -100,6 +100,27 @@ function markingSetContext() {
 	}
 }
 
+function markingGetSnippet() {
+	let snippet = '';
+	for (let i=Math.max(0, cmarking.w-2) ; i<cmarking.w ; ++i) {
+		if (markings[cmarking.s][i].length > 1 && rx_insertable.test(markings[cmarking.s][i][1])) {
+			continue;
+		}
+		snippet += markings[cmarking.s][i][0] + ' ';
+	}
+
+	snippet += markings[cmarking.s][cmarking.w][0] + ' ';
+	for (let i=cmarking.w+1 ; i<Math.min(markings[cmarking.s].length, cmarking.w+3) ; ++i) {
+		if (markings[cmarking.s][i].length > 1 && rx_insertable.test(markings[cmarking.s][i][1])) {
+			continue;
+		}
+		snippet += markings[cmarking.s][i][0] + ' ';
+	}
+
+	snippet = $.trim(snippet);
+	return snippet;
+}
+
 function markingRender(skipact) {
 	let s = cmarking.s;
 	let marking = markings[s][cmarking.w];
@@ -1088,14 +1109,19 @@ function showError(msg, args) {
 		setTimeout(markingRender, 250);
 		return;
 	}
+
+	if (typeof args !== 'object') {
+		args = {};
+	}
 	console.log([msg, args]);
 	$('#error').show();
 	$('#working').hide();
 	let txt = l10n_translate(msg);
-	if (typeof args !== 'undefined') {
-		for (let k in args) {
-			txt = txt.replace('{'+k+'}', args[k]);
-		}
+	if (txt.indexOf('{SNIPPET}') !== -1) {
+		args['SNIPPET'] = markingGetSnippet();
+	}
+	for (let k in args) {
+		txt = txt.replace('{'+k+'}', args[k]);
 	}
 	$('#error-text').html(txt);
 }
