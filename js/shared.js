@@ -607,10 +607,14 @@ function sanitize_result(txt) {
 	// Remove noise after sentences
 	txt = txt.replace(/(<\/s\d+>)[^<]*?$/, '$1');
 
+	if (g_tool === 'Comma') {
+		txt = txt.replace(/(\n[^\t]+\t<R:[^>]+>)\n/, '$1 @error\n');
+	}
+
 	return txt;
 }
 
-function findToSend(prefix, word, suffix, casing) {
+function findToSend(prefix, word, suffix, casing, closer) {
 	////console.log([prefix, word, suffix, casing]);
 	let prefix_s = prefix.replace(Const.NonLetter, '');
 	let word_s = word.replace(Const.NonLetter, '');
@@ -645,7 +649,7 @@ function findToSend(prefix, word, suffix, casing) {
 				found = false;
 				break;
 			}
-			if (p_off === 0 && Const.LetterT.test(t.substring(0, nof))) {
+			if (!closer && p_off === 0 && Const.LetterT.test(t.substring(0, nof))) {
 				// There is something substantial before the prefix
 				//console.log('Prefix: '+t.substring(0, nof));
 				found = false;
@@ -708,7 +712,7 @@ function findToSend(prefix, word, suffix, casing) {
 			++s_off;
 		}
 
-		if (Const.LetterT.test(t.substring(s_off))) {
+		if (!closer && Const.LetterT.test(t.substring(s_off))) {
 			// There is something substantial after the suffix
 			//console.log('Suffix: '+t.substring(s_off));
 			continue;
@@ -753,7 +757,7 @@ function findToSend(prefix, word, suffix, casing) {
 			t: t_org,
 			};
 
-		if (casing) {
+		if (!closer && casing) {
 			if (rv.prefix.replace(Const.NonLetter, '').toLowerCase() !== prefix_s) {
 				//console.log('Non-prefix: '+rv.prefix+' != '+prefix_s);
 				continue;
@@ -767,7 +771,7 @@ function findToSend(prefix, word, suffix, casing) {
 				continue;
 			}
 		}
-		else {
+		else if (!closer) {
 			if (rv.prefix.replace(Const.NonLetter, '') !== prefix_s_org) {
 				//console.log('Non-prefix: '+rv.prefix+' != '+prefix_s_org);
 				continue;
@@ -785,18 +789,28 @@ function findToSend(prefix, word, suffix, casing) {
 		return rv;
 	}
 
+	let rv = false;
 	if (/\w+\. \./.test(prefix) || /\w+\. \./.test(word) || /\w+\. \./.test(suffix)) {
 		//console.log('findToSend snip extra abbreviation full stops');
-		let rv = findToSend(prefix.replace(/(\w+\.) \./g, '$1'), word.replace(/(\w+\.) \./g, '$1'), suffix.replace(/(\w+\.) \./g, '$1'));
-		if (rv !== false) {
-			return rv;
-		}
+		rv = findToSend(prefix.replace(/(\w+\.) \./g, '$1'), word.replace(/(\w+\.) \./g, '$1'), suffix.replace(/(\w+\.) \./g, '$1'));
 	}
-	if (!casing) {
+	if (rv === false && !casing) {
 		//console.log('findToSend case-insensitive');
-		return findToSend(prefix, word, suffix, true);
+		rv = findToSend(prefix, word, suffix, true, closer);
 	}
-	return false;
+	if (rv === false && !closer && !casing) {
+		let px = /\s(\S+\s\S+\s\S+\s*)$/.exec(prefix);
+		if (px) {
+			prefix = px[1];
+		}
+		let sx = /^(\s*\S+\s\S+\s\S+)\s/.exec(suffix);
+		if (sx) {
+			suffix = sx[1];
+		}
+		//console.log('findToSend(px:"'+prefix+'", sx:"'+suffix+'") close-context');
+		rv = findToSend(prefix, word, suffix, false, true);
+	}
+	return rv;
 }
 
 function _parseResult(rv) {
