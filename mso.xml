@@ -5,18 +5,18 @@
   <Id>3d7dab89-8dcd-4917-a89c-34785844caed</Id>
 
   <!--Version. Updates from the store only get triggered if there is a version change. -->
-  <Version>1.0.2</Version>
+  <Version>1.0.3</Version>
   <ProviderName>Tino Didriksen Consult</ProviderName>
   <DefaultLocale>da-DK</DefaultLocale>
   <DisplayName DefaultValue="Kukkuniiaat" />
   <Description DefaultValue="Kukkuniiaat" />
-  <IconUrl DefaultValue="https://tinodidriksen.com/spell/kal/gas/1.0.2/imgs/logo-32.png" />
+  <IconUrl DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/imgs/logo-32.png" />
 
-  <SupportUrl DefaultValue="https://tinodidriksen.com/spellers/" />
+  <SupportUrl DefaultValue="https://kukkuniiaat.gl/" />
   <AppDomains>
-    <AppDomain>retmig.dk</AppDomain>
+    <AppDomain>kukkuniiaat.gl</AppDomain>
     <AppDomain>oqaasileriffik.gl</AppDomain>
-    <AppDomain>tinodidriksen.com</AppDomain>
+    <AppDomain>retmig.dk</AppDomain>
   </AppDomains>
 
   <Hosts>
@@ -28,7 +28,7 @@
     </Sets>
   </Requirements>
   <DefaultSettings>
-    <SourceLocation DefaultValue="https://tinodidriksen.com/spell/kal/gas/1.0.2/html/sidebar.html" />
+    <SourceLocation DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/html/sidebar.html" />
   </DefaultSettings>
 
   <Permissions>ReadWriteDocument</Permissions>
@@ -39,38 +39,38 @@
       <Host xsi:type="Document">
         <DesktopFormFactor>
           <GetStarted>
-            <Title resid="TDC.KAL.GetStarted.Title"/>
-            <Description resid="TDC.KAL.GetStarted.Description"/>
-            <LearnMoreUrl resid="TDC.KAL.GetStarted.LearnMore"/>
+            <Title resid="OQAA.KAL.GetStarted.Title"/>
+            <Description resid="OQAA.KAL.GetStarted.Description"/>
+            <LearnMoreUrl resid="OQAA.KAL.GetStarted.LearnMore"/>
           </GetStarted>
 
           <ExtensionPoint xsi:type="PrimaryCommandSurface">
             <OfficeTab id="TabHome">
-              <Group id="TDC.KAL.Group1">
-                <Label resid="TDC.KAL.Group1Label" />
+              <Group id="OQAA.KAL.Group1">
+                <Label resid="OQAA.KAL.Group1Label" />
                 <!-- Icons. Required sizes 16,32,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX. -->
                 <!-- Use PNG icons. All URLs on the resources section must use HTTPS. -->
                 <Icon>
-                  <bt:Image size="16" resid="TDC.KAL.logo16" />
-                  <bt:Image size="32" resid="TDC.KAL.logo32" />
-                  <bt:Image size="80" resid="TDC.KAL.logo80" />
+                  <bt:Image size="16" resid="OQAA.KAL.logo16" />
+                  <bt:Image size="32" resid="OQAA.KAL.logo32" />
+                  <bt:Image size="80" resid="OQAA.KAL.logo80" />
                 </Icon>
 
-                <Control xsi:type="Button" id="TDC.KAL.TaskpaneButton">
-                  <Label resid="TDC.KAL.TaskpaneButton.Label" />
+                <Control xsi:type="Button" id="OQAA.KAL.TaskpaneButton">
+                  <Label resid="OQAA.KAL.TaskpaneButton.Label" />
                   <Supertip>
-                    <Title resid="TDC.KAL.TaskpaneButton.Label" />
-                    <Description resid="TDC.KAL.TaskpaneButton.Tooltip" />
+                    <Title resid="OQAA.KAL.TaskpaneButton.Label" />
+                    <Description resid="OQAA.KAL.TaskpaneButton.Tooltip" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="TDC.KAL.logo16" />
-                    <bt:Image size="32" resid="TDC.KAL.logo32" />
-                    <bt:Image size="80" resid="TDC.KAL.logo80" />
+                    <bt:Image size="16" resid="OQAA.KAL.logo16" />
+                    <bt:Image size="32" resid="OQAA.KAL.logo32" />
+                    <bt:Image size="80" resid="OQAA.KAL.logo80" />
                   </Icon>
 
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>ButtonId1</TaskpaneId>
-                    <SourceLocation resid="TDC.KAL.Taskpane" />
+                    <SourceLocation resid="OQAA.KAL.Taskpane" />
                   </Action>
                 </Control>
               </Group>
@@ -82,24 +82,24 @@
 
     <Resources>
       <bt:Images>
-        <bt:Image id="TDC.KAL.logo16" DefaultValue="https://tinodidriksen.com/spell/kal/gas/1.0.2/imgs/logo-16.png" />
-        <bt:Image id="TDC.KAL.logo32" DefaultValue="https://tinodidriksen.com/spell/kal/gas/1.0.2/imgs/logo-32.png" />
-        <bt:Image id="TDC.KAL.logo80" DefaultValue="https://tinodidriksen.com/spell/kal/gas/1.0.2/imgs/logo-80.png" />
+        <bt:Image id="OQAA.KAL.logo16" DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/imgs/logo-16.png" />
+        <bt:Image id="OQAA.KAL.logo32" DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/imgs/logo-32.png" />
+        <bt:Image id="OQAA.KAL.logo80" DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/imgs/logo-80.png" />
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="TDC.KAL.Taskpane" DefaultValue="https://tinodidriksen.com/spell/kal/gas/1.0.2/html/sidebar.html" />
-        <bt:Url id="TDC.KAL.GetStarted.LearnMore" DefaultValue="https://tinodidriksen.com/spellers/" />
+        <bt:Url id="OQAA.KAL.Taskpane" DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/html/sidebar.html" />
+        <bt:Url id="OQAA.KAL.GetStarted.LearnMore" DefaultValue="https://kukkuniiaat.gl/" />
       </bt:Urls>
       <!-- ShortStrings max characters==125. -->
       <bt:ShortStrings>
-        <bt:String id="TDC.KAL.TaskpaneButton.Label" DefaultValue="Kukkuniiaat" />
-        <bt:String id="TDC.KAL.Group1Label" DefaultValue="Kukkuniiaat" />
-        <bt:String id="TDC.KAL.GetStarted.Title" DefaultValue="Kom godt i gang med Kukkuniiaat!" />
+        <bt:String id="OQAA.KAL.TaskpaneButton.Label" DefaultValue="Kukkuniiaat" />
+        <bt:String id="OQAA.KAL.Group1Label" DefaultValue="Kukkuniiaat" />
+        <bt:String id="OQAA.KAL.GetStarted.Title" DefaultValue="Kom godt i gang med Kukkuniiaat!" />
       </bt:ShortStrings>
       <!-- LongStrings max characters==250. -->
       <bt:LongStrings>
-        <bt:String id="TDC.KAL.TaskpaneButton.Tooltip" DefaultValue="Klik for at åbne Kukkuniiaat" />
-        <bt:String id="TDC.KAL.GetStarted.Description" DefaultValue="Kukkuniiaat er nu installeret. Gå til fanen Hjem og klik på Kukkuniiaat for at komme i gang." />
+        <bt:String id="OQAA.KAL.TaskpaneButton.Tooltip" DefaultValue="Klik for at åbne Kukkuniiaat" />
+        <bt:String id="OQAA.KAL.GetStarted.Description" DefaultValue="Kukkuniiaat er nu installeret. Gå til fanen Hjem og klik på Kukkuniiaat for at komme i gang." />
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2022 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -36,6 +36,7 @@ html, body {
 	font-family: Verdana, sans-serif;
 	font-size: 14px;
 	width: 100%;
+	background-color: #fff;
 }
 
 body, iframe {
@@ -89,7 +90,7 @@ ul {
 	list-style-type: none;
 }
 
-#error {
+#error, #warning {
 	display: flex;
 	background-color: #fee;
 	margin: 0 0 10px;
@@ -98,14 +99,29 @@ ul {
 	align-items: center;
 }
 
-#error, .sidebar {
+#error, #warning, .sidebar {
 	padding: 0 18px;
 	/* border-bottom: 1px dotted #ccc; */
+}
+
+#error ul {
+	list-style-type: circle;
+	padding-left: 18px;
+	overflow-wrap: anywhere;
+}
+
+#warning {
+	background-color: #fef7ea;
 }
 
 #error-text {
 	padding: 18px 0;
 	color: #f00;
+}
+
+#warning-text {
+	padding: 18px 0;
+	color: #f90;
 }
 
 .closable {
@@ -160,6 +176,9 @@ ul {
 }
 .justify {
 	text-align: justify;
+}
+.smallcaps {
+	font-variant: small-caps;
 }
 
 button, .btn {
@@ -320,6 +339,35 @@ input[type="text"] {
 	margin: 0;
 }
 
+th, td {
+	padding: 5px;
+}
+tbody th {
+	text-align: left;
+}
+thead, tfoot {
+	background-color: #ddd;
+}
+.table-striped tbody tr:nth-child(even) {
+	background-color: #eee;
+}
+
+.type-nok, .type-red {
+	color: #c12e2a;
+}
+.type-ko, .type-yellow {
+	color: #eb9316;
+}
+.type-ok, .type-nko, .type-info {
+	color: #1693eb;
+}
+.type-k, .type-green {
+	color: #419641;
+}
+.type-other {
+	color: #666;
+}
+
 .crbox {
 	position: relative;
 	padding-left: 27px;
@@ -350,11 +398,19 @@ input[type="text"] {
 	background-image: url('../imgs/checkbox-checked.png');
 	top: 0;
 }
+.crbox input:indeterminate ~ .checkbox {
+	background-image: url('../imgs/checkbox-indeterminate.png');
+	top: 0;
+}
 .crbox input ~ .radio {
 	background-image: url('../imgs/radio-unchecked.png');
 }
 .crbox input:checked ~ .radio {
 	background-image: url('../imgs/radio-checked.png');
+}
+
+.default {
+	background-color: #5aa0f2;
 }
 
 .itw_tts {

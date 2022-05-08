@@ -67,3 +67,14 @@ function impl_getAllPars() {
 function impl_showDictionary(text) {
 	return google.script.run.withFailureHandler(showError).showDictionary(text);
 }
+
+g_impl.init = function(func) {
+	let csInterface = new CSInterface();
+	let extPath = csInterface.getSystemPath(SystemPath.EXTENSION);
+
+	csInterface.evalScript('try {$.evalFile("'+extPath+'/jsx/json2.jsx");} catch(e) {}');
+	csInterface.evalScript('try {$.evalFile("'+extPath+'/jsx/impl_csxs.jsx");} catch(e) {}');
+
+	func();
+	//l10n_world();
+};

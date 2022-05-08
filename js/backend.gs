@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2022 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -21,9 +21,9 @@
 'use strict';
 
 function onOpen(e) {
-	var ui = DocumentApp.getUi();
+	let ui = DocumentApp.getUi();
 	ui.createAddonMenu()
-		.addItem(l10n_translate('MENU_START'), 'showGrammar')
+		.addItem(l10n_translate('MENU_START'), 'showSidebar')
 		.addToUi();
 }
 
@@ -35,8 +35,9 @@ function include(filename) {
 	return HtmlService.createHtmlOutputFromFile(filename).getContent().replace(/<!--.*?-->/g, '');
 }
 
+/*
 function getState() {
-	var rv = {
+	let rv = {
 		active: Session.getActiveUser().getEmail(),
 		effective: Session.getEffectiveUser().getEmail(),
 		tz: Session.getScriptTimeZone(),
@@ -49,24 +50,21 @@ function getState() {
 		storage: PropertiesService.getUserProperties().getProperties(),
 	};
 }
+//*/
 
 function injectVariables(html, tool, mode) {
-	html = html.replace(/<!--.*?-->/g, '').replace(/>[\s\n]+</g, '><');
-	html = html.replace('</body>', '<script>g_tool = "'+tool+'"; g_mode = null;</script></body>');
+	html = html.replace(/<!--.*?-->/g, '');
+	html = html.replace('</body>', '<script>window.g_tool = "'+tool+'"; window.g_mode = null;</script></body>');
 	if (mode) {
-		html = html.replace('</body>', '<script>g_mode = "'+mode+'";</script></body>');
+		html = html.replace('</body>', '<script>window.g_mode = "'+mode+'";</script></body>');
 	}
-
-	// Transform MS Office backend to Google
-	html = html.replace('<script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>', '');
-	html = html.replace('/impl-officejs.js"', '/impl-gas.js"');
 
 	return html;
 }
 
-function showGrammar(mode) {
-	var ui = HtmlService.createTemplateFromFile('html/sidebar').evaluate();
-	var html = ui.getContent();
+function showSidebar(mode) {
+	let ui = HtmlService.createTemplateFromFile('html/load-sidebar').evaluate();
+	let html = ui.getContent();
 	html = injectVariables(html, 'Grammar', mode);
 	ui.setContent(html).setSandboxMode(HtmlService.SandboxMode.IFRAME).setTitle(l10n_translate('TITLE_SIDEBAR'));
 	DocumentApp.getUi().showSidebar(ui);
@@ -77,23 +75,23 @@ function showOptions(tool) {
 		tool = 'Grammar';
 	}
 
-	var ui = HtmlService.createTemplateFromFile('html/options').evaluate();
-	var html = ui.getContent();
+	let ui = HtmlService.createTemplateFromFile('html/load-options').evaluate();
+	let html = ui.getContent();
 	html = injectVariables(html, tool);
 	ui.setContent(html).setWidth(800).setHeight(800);
 	DocumentApp.getUi().showModalDialog(ui, l10n_translate('TITLE_OPTIONS'));
 }
 
 function showDictionary(text) {
-	var ui = HtmlService.createTemplateFromFile('html/dictionary').evaluate();
-	var html = ui.getContent().replace(/<!--.*?-->/g, '').replace(/>[\s\n]+</g, '><').replace('</body>', '<script>g_text = '+JSON.stringify(text)+';</script></body>');
+	let ui = HtmlService.createTemplateFromFile('html/load-dictionary').evaluate();
+	let html = ui.getContent().replace(/<!--.*?-->/g, '').replace(/>[\s\n]+</g, '><').replace('</body>', '<script>g_text = '+JSON.stringify(text)+';</script></body>');
 	ui.setContent(html).setWidth(800).setHeight(800);
 	DocumentApp.getUi().showModalDialog(ui, l10n_translate('TITLE_DICTIONARY'));
 }
 
 function getAllPars() {
-	var sects = [];
-	var doc = DocumentApp.getActiveDocument();
+	let sects = [];
+	let doc = DocumentApp.getActiveDocument();
 	if (doc.getHeader()) {
 		sects.push(doc.getHeader().getParagraphs());
 	}
@@ -104,17 +102,17 @@ function getAllPars() {
 		sects.push(doc.getFooter().getParagraphs());
 	}
 
-	var elms = [];
-	for (var i=0 ; i<sects.length ; ++i) {
-		var pars = sects[i];
-		for (var j=0 ; j<pars.length ; ++j) {
-			var p = pars[j];
+	let elms = [];
+	for (let i=0 ; i<sects.length ; ++i) {
+		let pars = sects[i];
+		for (let j=0 ; j<pars.length ; ++j) {
+			let p = pars[j];
 			if (!p.editAsText) {
 				Logger.log('Not text paragraph');
 				continue;
 			}
 
-			var t = p.asText().getText().replace(/\s*$/g, '');
+			let t = p.asText().getText().replace(/\s*$/g, '');
 			if (t.length === 0 || t === '') {
 				Logger.log('Empty paragraph');
 				continue;
@@ -128,13 +126,13 @@ function getAllPars() {
 }
 
 function getSelectedPars(elms) {
-	var es = [];
-	var sel = DocumentApp.getActiveDocument().getSelection();
+	let es = [];
+	let sel = DocumentApp.getActiveDocument().getSelection();
 	if (sel) {
-		var elements = sel.getRangeElements();
-		for (var i = 0; i < elements.length; ++i) {
-			var e = elements[i].getElement();
-			var t = e.asText().getText().replace(/\s*$/g, '');
+		let elements = sel.getRangeElements();
+		for (let i = 0; i < elements.length; ++i) {
+			let e = elements[i].getElement();
+			let t = e.asText().getText().replace(/\s*$/g, '');
 			if (t.length === 0 || t === '') {
 				Logger.log('Empty paragraph');
 				continue;
@@ -144,11 +142,11 @@ function getSelectedPars(elms) {
 	}
 	else {
 		Logger.log('No selection - using cursor position');
-		var c = DocumentApp.getActiveDocument().getCursor();
+		let c = DocumentApp.getActiveDocument().getCursor();
 		if (!c) {
 			throw 'ERR_NO_SELECTION';
 		}
-		var t = c.getElement().asText().getText().replace(/\s*$/g, '');
+		let t = c.getElement().asText().getText().replace(/\s*$/g, '');
 		if (t.length === 0 || t === '') {
 			throw 'ERR_NO_SELECTION';
 		}
@@ -159,8 +157,8 @@ function getSelectedPars(elms) {
 }
 
 function findElement(prefix, word, suffix) {
-	var sects = [];
-	var doc = DocumentApp.getActiveDocument();
+	let sects = [];
+	let doc = DocumentApp.getActiveDocument();
 	if (doc.getHeader()) {
 		sects.push(doc.getHeader());
 	}
@@ -171,10 +169,10 @@ function findElement(prefix, word, suffix) {
 		sects.push(doc.getFooter());
 	}
 
-	var rx = '^\\s*'+prefix.replace(Const.NonLetter, '.*?')+'\\s*'+escapeRegExpTokens(word)+'\\s*'+suffix.replace(Const.NonLetter, '.*?')+'\\s*$';
+	let rx = '^\\s*'+prefix.replace(Const.NonLetter, '.*?')+'\\s*'+escapeRegExpTokens(word)+'\\s*'+suffix.replace(Const.NonLetter, '.*?')+'\\s*$';
 	Logger.log('Searching regex %s', rx);
-	for (var i=0 ; i<sects.length ; ++i) {
-		var sel = sects[i].findText(rx);
+	for (let i=0 ; i<sects.length ; ++i) {
+		let sel = sects[i].findText(rx);
 		if (!sel) {
 			continue;
 		}
@@ -184,8 +182,8 @@ function findElement(prefix, word, suffix) {
 	// Retry without anchors, which is needed for cases where there are newlines inside a paragraph
 	rx = '\\s*'+prefix.replace(Const.NonLetter, '.*?')+'\\s*'+escapeRegExpTokens(word)+'\\s*'+suffix.replace(Const.NonLetter, '.*?')+'\\s*';
 	Logger.log('Searching regex %s', rx);
-	for (var i=0 ; i<sects.length ; ++i) {
-		var sel = sects[i].findText(rx);
+	for (let i=0 ; i<sects.length ; ++i) {
+		let sel = sects[i].findText(rx);
 		if (!sel) {
 			continue;
 		}
@@ -199,13 +197,13 @@ function replaceInDocument(prefix, word, rpl, suffix) {
 		throw 'ERR_REPLACE_NOSELECT';
 	}
 
-	var doc = DocumentApp.getActiveDocument();
-	var rem = doc.getSelection().getRangeElements()[0];
-	var b = rem.isPartial() ? rem.getStartOffset() : 0;
-	var txt = rem.getElement().editAsText();
-	var before = txt.getText();
+	let doc = DocumentApp.getActiveDocument();
+	let rem = doc.getSelection().getRangeElements()[0];
+	let b = rem.isPartial() ? rem.getStartOffset() : 0;
+	let txt = rem.getElement().editAsText();
+	let before = txt.getText();
 
-	var wi = 0, ri = 0;
+	let wi = 0, ri = 0;
 	if (hasSurrogatePair(word) || hasSurrogatePair(rpl)) {
 		Logger.log('Found surrogate in: %s %s', word, rpl);
 	}
@@ -222,7 +220,7 @@ function replaceInDocument(prefix, word, rpl, suffix) {
 		txt.insertText(b + ri, rpl.substr(ri));
 	}
 
-	var rng = doc.newRange();
+	let rng = doc.newRange();
 	rng.addElement(rem.getElement(), b, b + rpl.length - 1);
 	doc.setSelection(rng.build());
 
@@ -236,22 +234,22 @@ function replaceInDocument(prefix, word, rpl, suffix) {
 }
 
 function selectInDocument(prefix, word, suffix) {
-	var sel = findElement(prefix, word, suffix);
+	let sel = findElement(prefix, word, suffix);
 	if (!sel) {
 		Logger.log('Could not find %s %s %s', prefix, word, suffix);
 		throw 'ERR_SELECT_NOTFOUND';
 	}
 
-	var txt = sel.getElement().asText().getText();
-	var rx = new RegExp('^(\\s*'+prefix.replace(Const.NonLetter, '[^]*?')+'\\s*)'+escapeRegExpTokens(word));
-	var m = rx.exec(txt);
+	let txt = sel.getElement().asText().getText();
+	let rx = new RegExp('^(\\s*'+prefix.replace(Const.NonLetter, '[^]*?')+'\\s*)'+escapeRegExpTokens(word));
+	let m = rx.exec(txt);
 	if (!m) {
 		Logger.log('Did not match regex');
 		throw 'ERR_SELECT_NOMATCH';
 	}
 
-	var doc = DocumentApp.getActiveDocument();
-	var rng = doc.newRange();
+	let doc = DocumentApp.getActiveDocument();
+	let rng = doc.newRange();
 	rng.addElement(sel.getElement(), m[1].length, m[1].length + word.length - 1);
 	doc.setSelection(rng.build());
 

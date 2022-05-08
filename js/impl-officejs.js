@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2019 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2022 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -19,6 +19,73 @@
 
 let _impl_options = null;
 
+function _impl_findElement_selectWord(state) {
+	let rngs = state.sel.search(state.word);
+
+	state.context.load(rngs, 'text');
+	return state.context.sync().then(function () {
+		//console.log(state);
+		let rng = rngs.items[rngs.items.length - 1];
+		rng.select();
+		if (state.func) {
+			return state.func(state.context, state.par, rng);
+		}
+		return state.context.sync();
+	});
+}
+
+function _impl_findElement_pars(state) {
+	let parss = [];
+	for (let i=0 ; i<state.rngs.length ; ++i) {
+		let pars = state.rngs[i].paragraphs;
+		state.context.load(pars, 'text');
+		parss.push(pars);
+	}
+
+	return state.context.sync().then(function () {
+		for (let p=0 ; p<parss.length ; ++p) {
+			let pars = parss[p].items;
+			for (let i=0 ; i<pars.length ; ++i) {
+				if (state.closer || pars[i].text === state.txt) {
+					return state.context.sync().then(function () {
+						let rngs = pars[i].getRange().split(Const.Split_Array);
+
+						state.context.load(rngs, 'text');
+						return state.context.sync().then(function () {
+							rngs = rngs.items;
+							state.prefix += state.word;
+							let rx_pfx = new RegExp(escapeRegExp(state.prefix) + '\\s*$');
+							state.par = pars[i];
+							state.sel = rngs[0].getRange();
+
+							let pfx = '';
+							let ri = 0;
+							for ( ; ri<rngs.length ; ++ri) {
+								pfx += rngs[ri].text;
+								state.sel = state.sel.expandTo(rngs[ri]);
+								if (state.closer) {
+									if (rx_pfx.test(pfx)) {
+										return _impl_findElement_selectWord(state);
+									}
+								}
+								else if (pfx.length >= state.prefix.length && pfx.substr(0, state.prefix.length) === state.prefix) {
+									return _impl_findElement_selectWord(state);
+								}
+							}
+
+							showError('ERR_SELECT_NOTFOUND');
+							return state.context.sync();
+						});
+					});
+				}
+			}
+		}
+
+		showError('ERR_SELECT_NOTFOUND');
+		return state.context.sync();
+	});
+}
+
 function _impl_findElement(prefix, word, suffix, func) {
 	let txt = findToSend(prefix, word, suffix);
 	if (!txt) {
@@ -26,77 +93,52 @@ function _impl_findElement(prefix, word, suffix, func) {
 		return false;
 	}
 
-	prefix = txt.prefix;
-	word = txt.word;
-	suffix = txt.suffix;
-	txt = txt.t;
+	let state = {
+		prefix: txt.prefix,
+		word: txt.word,
+		suffix: txt.suffix,
+		txt: txt.t,
+		func: func,
+		closer: false,
+		};
 
 	Word.run(function(context) {
-		let body = context.document.body;
-		let rngs = body.search($.trim(txt.substr(0, 255)));
+		state.context = context;
+		let body = state.context.document.body;
+		state.rngs = body.search($.trim(state.txt.substr(0, 255)));
 
-		context.load(rngs, 'text');
-		return context.sync().then(function () {
-			rngs = rngs.items;
-			if (rngs.length == 0) {
-				showError('ERR_SELECT_NOTFOUND');
-				return context.sync();
-			}
-
-			let parss = [];
-			for (let i=0 ; i<rngs.length ; ++i) {
-				let pars = rngs[i].paragraphs;
-				context.load(pars, 'text');
-				parss.push(pars);
-			}
-
-			return context.sync().then(function () {
-				for (let p=0 ; p<parss.length ; ++p) {
-					let pars = parss[p].items;
-					for (let i=0 ; i<pars.length ; ++i) {
-						if (pars[i].text === txt) {
-							return context.sync().then(function () {
-								let rngs = pars[i].getRange().split(Const.Split_Array);
-
-								context.load(rngs, 'text');
-								return context.sync().then(function () {
-									rngs = rngs.items;
-									prefix += word;
-									let sel = rngs[0].getRange();
-
-									let pfx = '';
-									let ri = 0;
-									for ( ; ri<rngs.length ; ++ri) {
-										pfx += rngs[ri].text;
-										sel = sel.expandTo(rngs[ri]);
-										if (pfx.length >= prefix.length && pfx.substr(0, prefix.length) === prefix) {
-											let rngs = sel.search(word);
-
-											context.load(rngs, 'text');
-											return context.sync().then(function () {
-												let rng = rngs.items[rngs.items.length - 1];
-												rng.select();
-												if (func) {
-													return func(context, pars[i], rng);
-												}
-												return context.sync();
-											});
-										}
-									}
-
-									showError('ERR_SELECT_NOTFOUND');
-									return context.sync();
-								});
-							});
-						}
-					}
+		state.context.load(state.rngs, 'text');
+		return state.context.sync().then(function () {
+			state.rngs = state.rngs.items;
+			if (state.rngs.length == 0) {
+				let px = /\s(\S+\s\S+\s\S+\s*)$/.exec(state.prefix);
+				if (px) {
+					state.prefix = px[1];
 				}
+				let sx = /^(\s*\S+\s\S+\s\S+)\s/.exec(state.suffix);
+				if (sx) {
+					state.suffix = sx[1];
+				}
+				let txt = state.prefix + state.word + state.suffix;
+				state.rngs = body.search(txt);
 
-				showError('ERR_SELECT_NOTFOUND');
-				return context.sync();
-			});
+				state.context.load(state.rngs, 'text');
+				return state.context.sync().then(function () {
+					state.rngs = state.rngs.items;
+					if (state.rngs.length == 0) {
+						showError('ERR_SELECT_NOTFOUND');
+						return context.sync();
+					}
+					//console.log('_impl_findElement close-context');
+					state.closer = true;
+					return _impl_findElement_pars(state);
+				});
+			}
+
+			return _impl_findElement_pars(state);
 		});
 	}).catch(function(error) {
+		//console.log(error);
 		showError(JSON.stringify(error));
 		if (error instanceof OfficeExtension.Error) {
 			//console.log('Debug info: ' + JSON.stringify(error.debugInfo));
@@ -205,7 +247,7 @@ function _impl_showOptions_cb(asyncResult) {
 }
 
 function impl_showOptions(g_tool) {
-	Office.context.ui.displayDialogAsync(ROOT_URL_SELF + '/html/options.html?tool='+g_tool, { width: 800, height: 600, displayInIframe: true }, _impl_showOptions_cb);
+	Office.context.ui.displayDialogAsync(ROOT_URL_SELF + '/html/options.html?host=msoffice&tool='+g_tool, { width: 800, height: 600, displayInIframe: true }, _impl_showOptions_cb);
 }
 
 function _impl_getPars(context, pars) {
@@ -248,10 +290,10 @@ function impl_getAllPars() {
 }
 
 function impl_showDictionary(text) {
-	Office.context.ui.displayDialogAsync(ROOT_URL_SELF + '/html/dictionary.html?text='+text, { width: 800, height: 600, displayInIframe: true });
+	Office.context.ui.displayDialogAsync(ROOT_URL_SELF + '/html/dictionary.html?host=msoffice&text='+text, { width: 800, height: 600, displayInIframe: true });
 }
 
-function impl_Init(func) {
+g_impl.init = function(func) {
 	Office.initialize = function(reason) {
 		$(document).ready(function() {
 			func();
@@ -263,4 +305,4 @@ function impl_Init(func) {
 			}
 		});
 	};
-}
+};

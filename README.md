@@ -13,7 +13,7 @@ Released as GPLv3+ - except `imgs/logo*` and `js/mark-types.js`
 
 ## Deployment
 * Edit `js/impl.js` lines 21-25
-* Edit `mso.xml` and `html/*` to replace all instances of `https://tinodidriksen.com/spell/kal/gas/1.0.2/` with your chosen `ROOT_URL_SELF` value
+* Edit `mso.xml` and `html/*` to replace all instances of `https://kukkuniiaat.gl/gas/1.0.3/` with your chosen `ROOT_URL_SELF` value
 * Remove all lines matching `//console.log`
 
 # External Dependencies
