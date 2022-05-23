@@ -311,7 +311,7 @@ msgid "TXT_COMMA_ABOUT"
 msgstr "Når du har fået tjekket din tekst for stavning og grammatik, kan du efterfølgende få tjekket din tekst for kommatering. Kommaforslag foreslår kommaer i din tekst eller retter fejl i tekstens kommatering.\n\nDu får en forklaring af reglerne bag de kommaer, programmet foreslår eller markerer som fejl - og kan på den måde lære at sætte komma, samtidig med at du får hjælp. Programmet følger reglerne for kommatering med startkomma - også kendt som grammatisk komma eller 'kryds og bolle'-komma.\n\nKommaforslag er integreret i Grammateket."
 
 msgid "TXT_COMMA_COPYRIGHT"
-msgstr "Copyright 2016-2021 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af MV-Nordic, Part of Vitec Software Group."
+msgstr "Copyright 2016-2022 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af MV-Nordic, Part of Vitec Software Group."
 
 msgid "TXT_COMMA_HINT"
 msgstr "Vil du have tjekket din markering eller hele teksten?"
@@ -332,7 +332,7 @@ msgid "TXT_GRAMMAR_ABOUT"
 msgstr "Med Grammateket kan du tjekke din tekst for stavning, grammatik og efterfølgende for kommatering vha. Kommaforslag.\n\nDu får hjælp til:\n<ul>\n<li>Stavekontrol</li>\n<li>Sammensatte ord</li>\n<li>Nutids-r</li>\n<li>Kort og lang tillægsform</li>\n<li>Kommatering</li>\n</ul>\n\nGrammateket kan bruges når du arbejder med læse- og skriveværktøjerne IntoWords og CD-ORD. Grammateket giver også adgang til nemt opslag i IntoWords Ordbog (baseret på Den Danske Ordbog)."
 
 msgid "TXT_GRAMMAR_COPYRIGHT"
-msgstr "Copyright 2016-2021 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af MV-Nordic, Part of Vitec Software Group."
+msgstr "Copyright 2016-2022 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af MV-Nordic, Part of Vitec Software Group."
 
 msgid "TXT_GRAMMAR_HINT"
 msgstr "Vil du have tjekket din markering eller hele teksten?"

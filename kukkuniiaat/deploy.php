@@ -31,13 +31,13 @@ $mso = str_replace(' (dev)', '', $mso);
 file_put_contents('mso.xml', $mso);
 
 echo "Replacing URI path\n";
-echo shell_exec("replace 'https://retmig.dk/gas/dev/kukkuniiaat/' 'https://tinodidriksen.com/spell/kal/gas/$version/' -- $(grep -rl 'https://retmig.dk/gas/dev/kukkuniiaat/' *)");
+echo shell_exec("grep -rl 'https://retmig.dk/gas/dev/kukkuniiaat/' * | xargs -rn1 perl -pe 's@https://retmig.dk/gas/dev/kukkuniiaat/@https://kukkuniiaat.gl/gas/$version/@g' -i");
 
 echo "Replacing backend URI\n";
-echo shell_exec("replace 'https://tinodidriksen.com/spell-dev/kal/' 'https://tinodidriksen.com/spell/kal/' -- $(grep -rl 'https://tinodidriksen.com/spell-dev/kal/' *)");
+echo shell_exec("grep -rl 'https://kukkuniiaat.gl/dev/' * | xargs -rn1 perl -pe 's@https://kukkuniiaat.gl/dev/@https://kukkuniiaat.gl/@g' -i");
 
 echo "Commenting console.log\n";
-echo shell_exec("replace 'console.log' '//console.log' -- $(grep -rl 'console.log' *)");
+echo shell_exec("grep -rl 'console.log' * | xargs -rn1 perl -pe 's@console.log@//console.log@g;' -i");
 
 if ($where !== 'release') {
 	exit(0);

@@ -432,7 +432,7 @@ msgstr ""
 msgid "TXT_COMMA_ABOUT"
 msgstr ""
 
-# Copyright 2016-2021 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af Vitec MV, Part of Vitec Software Group.
+# Copyright 2016-2022 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af Vitec MV, Part of Vitec Software Group.
 msgid "TXT_COMMA_COPYRIGHT"
 msgstr ""
 
@@ -460,7 +460,7 @@ msgstr ""
 msgid "TXT_GRAMMAR_ABOUT"
 msgstr ""
 
-# Copyright 2016-2021 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af Vitec MV, Part of Vitec Software Group.
+# Copyright 2016-2022 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af Vitec MV, Part of Vitec Software Group.
 msgid "TXT_GRAMMAR_COPYRIGHT"
 msgstr ""
 

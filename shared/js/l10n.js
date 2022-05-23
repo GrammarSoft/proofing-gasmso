@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2021 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2022 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -74,8 +74,8 @@ l10n.s.dan = {
 	ERR_NO_SELECTION: "Der var ingen markering. Du skal markere noget tekst før den funktion virker.",
 	ERR_NO_STORAGE: "<p>Din browser understøtter ikke HTML5 Local Storage, som dette program behøver. Det kan være du har slået det fra, har blokeret for tredjepartscookies, eller benytter privat vindue. Slå Local Storage til og prøv igen.</p><p>Alternativt så kan du tilføje disse domæner til din browsers liste af sikre domæner:</p>{TRUSTED_DOMAINS}",
 	ERR_POSTBACK: "Der opstod en serverfejl under tjekning af teksten. Prøv evt. igen.",
-	ERR_REPLACE_NOSELECT: "Kunne ikke vælge stedet i konteksten. Det kan være du eller en anden har ændret i dokumentet siden tjekket blev kørt.",
-	ERR_SELECT_NOMATCH: "Konteksten matchede ikke. Det kan være du eller en anden har ændret i dokumentet siden tjekket blev kørt.",
+	ERR_REPLACE_NOSELECT: "Kunne ikke vælge stedet i konteksten for <q><i>{SNIPPET}</i></q>. Det kan være du eller en anden har ændret i dokumentet siden tjekket blev kørt.",
+	ERR_SELECT_NOMATCH: "Konteksten matchede ikke for <q><i>{SNIPPET}</i></q>. Det kan være du eller en anden har ændret i dokumentet siden tjekket blev kørt.",
 	ERR_SELECT_NOTFOUND: "Kunne ikke finde konteksten for <q><i>{SNIPPET}</i></q>. Det kan være du eller en anden har ændret i dokumentet siden tjekket blev kørt.",
 	HDR_COMMA: "{PRODUCT_NAME}",
 	HDR_COMMA_DISPLAY: "Kommavisning",
@@ -120,6 +120,8 @@ l10n.s.dan = {
 	LBL_OPT_LEVEL_2: "<b>Niveau 2</b>: 20 kommatyper, svarende til folkeskolens øverste klassetrin.",
 	LBL_OPT_LEVEL_3: "<b>Niveau 3</b>: Alle 34 kommatyper, svarende til gymnasiet og højere.",
 	LBL_OPT_LISTING: "Vis opremsningskommaer",
+	LBL_OPT_NO_HOMOPHONE: "Ret ikke eksisterende ord ud fra lydlige kriterier, hvis ordet er kort og hyppigt forekommende",
+	LBL_OPT_NO_SUBADJ: "Ret ikke bøjningsfejl i substantiver og adjektiver",
 	LBL_OPT_ONLYGREEN: "Vis kun manglende kommaer",
 	LBL_OPT_ONLY_CONFIDENT: "Vis kun sikre fejl",
 	LBL_OPT_ONLY_IMPORTANT: "Vis kun de mest graverende fejl",
@@ -212,8 +214,8 @@ l10n.s.eng = {
 	ERR_NO_SELECTION: "There was no selection. You need to select text before this functionality works.",
 	ERR_NO_STORAGE: "<p>Your browser does not support HTML5 Local Storage, which this program needs. You may have disabled this feature, blocked 3rd party cookies, or are using a private browsing window. Enable Local Storage and try again.</p><p>Alternatively, add these domains to your browser's list of trusted domains:</p>{TRUSTED_DOMAINS}",
 	ERR_POSTBACK: "A server-side error happened while checking the text. Please try again.",
-	ERR_REPLACE_NOSELECT: "Could not make the selection in the context. It may be that you or a collaborator changed the document since the check was run.",
-	ERR_SELECT_NOMATCH: "The context didn't match. It may be that you or a collaborator changed the document since the check was run.",
+	ERR_REPLACE_NOSELECT: "Could not make the selection in the context for <q><i>{SNIPPET}</i></q>. It may be that you or a collaborator changed the document since the check was run.",
+	ERR_SELECT_NOMATCH: "The context didn't match for <q><i>{SNIPPET}</i></q>. It may be that you or a collaborator changed the document since the check was run.",
 	ERR_SELECT_NOTFOUND: "Could not find the context for <q><i>{SNIPPET}</i></q>. It may be that you or a collaborator changed the document since the check was run.",
 	HDR_COMMA: "{PRODUCT_NAME}",
 	HDR_COMMA_DISPLAY: "Comma display options",
@@ -350,9 +352,9 @@ l10n.s.deu = {
 	ERR_NO_SELECTION: "Fehlende Markierung für diese Funktion, bitte Textausschnitt markieren!",
 	ERR_NO_STORAGE: "<p>{PRODUCT_NAME} kann nicht starten, wegen fehlender Browser-Unterstützung für HTML5 Local Storage. Mögliche Fehlerquellen: Local Storage-Einstellung  auf \"aus\" oder privates/anonymes Browser-Fenster benutzt.</p><p>Man kann das Problem auch lösen, indem man im Browser die Liste vertrauenswürdiger Domänen öffnet und folgende Domänen hinzufügt:</p>{TRUSTED_DOMAINS}",
 	ERR_POSTBACK: "Server-Fehler während der Textkontrolle. Bitte noch einmal versuchen.",
-	ERR_REPLACE_NOSELECT: "Fehler beim Text-Markieren. Mögliche Ursache: Der Text wurde nach der Kontrolle noch einmal durch den Benutzer - oder einen Mitverfasser - verändert.",
-	ERR_SELECT_NOMATCH: "Fehler beim Wiederauffinden der Textstelle, wegen fehlender Kontextübereinstimmung. Mögliche Ursache: Der Text wurde nach der Kontrolle noch einmal durch den Benutzer - oder einen Mitverfasser - verändert.",
-	ERR_SELECT_NOTFOUND: "Fehler beim Wiederauffinden der Textstelle, wegen fehlender Kontextübereinstimmung für <q><i>{SNIPPET}</i></q>. Mögliche Ursache: Der Text wurde nach der Kontrolle noch einmal durch den Benutzer - oder einen Mitverfasser - verändert.",
+	ERR_REPLACE_NOSELECT: "Fehler beim Text-Markieren für <q><i>{SNIPPET}</i></q>. Mögliche Ursache: Der Text wurde nach der Kontrolle noch einmal durch den Benutzer - oder einen Mitverfasser - verändert.",
+	ERR_SELECT_NOMATCH: "Fehler beim Wiederauffinden der Textstelle für <q><i>{SNIPPET}</i></q>, wegen fehlender Kontextübereinstimmung. Mögliche Ursache: Der Text wurde nach der Kontrolle noch einmal durch den Benutzer - oder einen Mitverfasser - verändert.",
+	ERR_SELECT_NOTFOUND: "Fehler beim Wiederauffinden der Textstelle für <q><i>{SNIPPET}</i></q>, wegen fehlender Kontextübereinstimmung. Mögliche Ursache: Der Text wurde nach der Kontrolle noch einmal durch den Benutzer - oder einen Mitverfasser - verändert.",
 	HDR_COMMA: "{PRODUCT_NAME}",
 	HDR_COMMA_DISPLAY: "Einstellungen für Kommaanzeige",
 	HDR_COMMA_DONE: "Textkontrolle beendet. Keine weiteren Änderungsvorschläge.",
