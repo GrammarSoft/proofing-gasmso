@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2021 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2022 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -1281,6 +1281,11 @@ function object2po(obj, base) {
 	return rv;
 }
 
+function nl2html(v) {
+	v = '<p>'+v.replace(/\n+<ul>/g, '</p><ul>').replace(/\n+<\/ul>/g, '</ul>').replace(/<\/ul>\n+/g, '</ul><p>').replace(/\n+<li>/g, '<li>').replace(/\n\n+/g, '</p><p>').replace(/\n/g, '<br>')+'</p>';
+	return v;
+}
+
 function l10n_detectLanguage() {
 	l10n.lang = navigator.language;
 	if (window.hasOwnProperty('UILANG2') && window.UILANG2) {
@@ -1352,7 +1357,7 @@ function l10n_translate(s, g) {
 			}
 		}
 
-		rx = /%([a-z0-9]+)%/;
+		rx = /%([A-Za-z0-9]+)%/;
 		m = null;
 		while ((m = rx.exec(t)) !== null) {
 			t = t.replace(m[0], g[m[1]]);
@@ -1361,7 +1366,11 @@ function l10n_translate(s, g) {
 	} while (did);
 
 	return t;
-};
+}
+
+function l10n_translate_html(s, g) {
+	return nl2html(l10n_translate(s, g));
+}
 
 function _l10n_world_helper() {
 	let e = $(this);
@@ -1373,7 +1382,7 @@ function _l10n_world_helper() {
 	}
 
 	if (/^TXT_/.test(k)) {
-		v = '<p>'+v.replace(/\n+<ul>/g, '</p><ul>').replace(/\n+<\/ul>/g, '</ul>').replace(/<\/ul>\n+/g, '</ul><p>').replace(/\n+<li>/g, '<li>').replace(/\n\n+/g, '</p><p>').replace(/\n/g, '<br>')+'</p>';
+		v = nl2html(v);
 	}
 	e.html(v);
 	if (/^TXT_/.test(k)) {
@@ -1399,7 +1408,7 @@ function l10n_world(node) {
 		e.attr('href', v);
 	});
 
-	if (node == document) {
+	if (node == document && typeof l10n_marking_types === 'function') {
 		l10n_marking_types(session.locale);
 		if (marking_types.hasOwnProperty('%k-stop') && !marking_types.hasOwnProperty('%x-to-stop')) {
 			marking_types['%x-to-stop'] = marking_types['%k-stop'];

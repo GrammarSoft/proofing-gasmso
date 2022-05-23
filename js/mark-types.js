@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2021 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2022 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
@@ -854,6 +854,13 @@ let ctypes = {
 	],
 	"%k-ellision": [
 		"%k-ellision",
+		"Ufuldstændig helsætning",
+		"Der sættes altid komma før en ny helsætning - også hvis denne mangler sit verbum (udsagnsord). Hvis den ufuldstændige sætning starter med et bindeord (<i>og, men, eller</i>), står kommaet foran dette.<br>\n<br>\n<i>Mænd er fra Mars, og kvinder fra Venus.</i><br>\n<br>\n<i>Jeg gik til venstre, han til højre</i><br>\n<br>\nModsat skal der ikke være komma før en sideordnet ufuldstændig (verbumsløs) <b>led</b>sætning. Dette gælder dog kun, hvis der er en konjunktion <i>(og/eller) -</i> ellers er der brug for et opremsningskomma.<br>\n<br>\n<i>De aftalte(,) at han skulle medbringe vin[,] og hun en kage.</i><br>\n<br>\n<i>De aftalte(,) at han skulle medbringe vin, hun en kage.</i>",
+		"7",
+		"§48.6"
+	],
+	"%ok-ellision": [
+		"%ok-ellision",
 		"Ufuldstændig helsætning",
 		"Der sættes altid komma før en ny helsætning - også hvis denne mangler sit verbum (udsagnsord). Hvis den ufuldstændige sætning starter med et bindeord (<i>og, men, eller</i>), står kommaet foran dette.<br>\n<br>\n<i>Mænd er fra Mars, og kvinder fra Venus.</i><br>\n<br>\n<i>Jeg gik til venstre, han til højre</i><br>\n<br>\nModsat skal der ikke være komma før en sideordnet ufuldstændig (verbumsløs) <b>led</b>sætning. Dette gælder dog kun, hvis der er en konjunktion <i>(og/eller) -</i> ellers er der brug for et opremsningskomma.<br>\n<br>\n<i>De aftalte(,) at han skulle medbringe vin[,] og hun en kage.</i><br>\n<br>\n<i>De aftalte(,) at han skulle medbringe vin, hun en kage.</i>",
 		"7",
