@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="TaskPaneApp">
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="MailApp">
 
   <!-- IMPORTANT! Id must be unique for your add-in, if you reuse this manifest ensure that you change this id to a new GUID. -->
-  <Id>3d7dab89-8dcd-4917-a89c-34785844caed</Id>
+  <Id>3d7dab89-8dcd-4917-a89c-34785844caee</Id>
 
   <!--Version. Updates from the store only get triggered if there is a version change. -->
   <Version>1.0.3</Version>
@@ -21,42 +21,41 @@
   </AppDomains>
 
   <Hosts>
-    <Host Name="Document" />
+    <Host Name="Mailbox" />
   </Hosts>
   <Requirements>
-    <Sets DefaultMinVersion="1.3">
-      <Set Name="WordApi" MinVersion="1.3"/>
+    <Sets>
+      <Set Name="Mailbox" MinVersion="1.3"/>
     </Sets>
   </Requirements>
-  <DefaultSettings>
-    <SourceLocation DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/html/sidebar.html?host=msoffice" />
-  </DefaultSettings>
 
-  <Permissions>ReadWriteDocument</Permissions>
+  <FormSettings>
+    <Form xsi:type="ItemRead">
+      <DesktopSettings>
+        <SourceLocation DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/html/sidebar.html?host=outlook" />
+        <RequestedHeight>450</RequestedHeight>
+      </DesktopSettings>
+    </Form>
+  </FormSettings>
 
-  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
+  <Permissions>ReadWriteItem</Permissions>
+  <Rule xsi:type="RuleCollection" Mode="Or">
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read"/>
+  </Rule>
 
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <Requirements>
+      <bt:Sets DefaultMinVersion="1.3">
+        <bt:Set Name="Mailbox"/>
+      </bt:Sets>
+    </Requirements>
     <Hosts>
-      <Host xsi:type="Document">
+      <Host xsi:type="MailHost">
         <DesktopFormFactor>
-          <GetStarted>
-            <Title resid="OQAA.KAL.GetStarted.Title"/>
-            <Description resid="OQAA.KAL.GetStarted.Description"/>
-            <LearnMoreUrl resid="OQAA.KAL.GetStarted.LearnMore"/>
-          </GetStarted>
-
-          <ExtensionPoint xsi:type="PrimaryCommandSurface">
+          <ExtensionPoint xsi:type="MessageComposeCommandSurface">
             <OfficeTab id="TabHome">
               <Group id="OQAA.KAL.Group1">
                 <Label resid="OQAA.KAL.Group1Label" />
-                <!-- Icons. Required sizes 16,32,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX. -->
-                <!-- Use PNG icons. All URLs on the resources section must use HTTPS. -->
-                <Icon>
-                  <bt:Image size="16" resid="OQAA.KAL.logo16" />
-                  <bt:Image size="32" resid="OQAA.KAL.logo32" />
-                  <bt:Image size="80" resid="OQAA.KAL.logo80" />
-                </Icon>
-
                 <Control xsi:type="Button" id="OQAA.KAL.TaskpaneButton">
                   <Label resid="OQAA.KAL.TaskpaneButton.Label" />
                   <Supertip>
@@ -66,11 +65,12 @@
                   <Icon>
                     <bt:Image size="16" resid="OQAA.KAL.logo16" />
                     <bt:Image size="32" resid="OQAA.KAL.logo32" />
+                    <bt:Image size="64" resid="OQAA.KAL.logo64" />
                     <bt:Image size="80" resid="OQAA.KAL.logo80" />
+                    <bt:Image size="128" resid="OQAA.KAL.logo128" />
                   </Icon>
 
                   <Action xsi:type="ShowTaskpane">
-                    <TaskpaneId>ButtonId1</TaskpaneId>
                     <SourceLocation resid="OQAA.KAL.Taskpane" />
                   </Action>
                 </Control>
@@ -85,22 +85,21 @@
       <bt:Images>
         <bt:Image id="OQAA.KAL.logo16" DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/imgs/logo-16.png" />
         <bt:Image id="OQAA.KAL.logo32" DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/imgs/logo-32.png" />
+        <bt:Image id="OQAA.KAL.logo64" DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/imgs/logo-64.png" />
         <bt:Image id="OQAA.KAL.logo80" DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/imgs/logo-80.png" />
+        <bt:Image id="OQAA.KAL.logo128" DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/imgs/logo-128.png" />
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="OQAA.KAL.Taskpane" DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/html/sidebar.html?host=msoffice" />
-        <bt:Url id="OQAA.KAL.GetStarted.LearnMore" DefaultValue="https://kukkuniiaat.gl/" />
+        <bt:Url id="OQAA.KAL.Taskpane" DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/html/sidebar.html?host=outlook" />
       </bt:Urls>
       <!-- ShortStrings max characters==125. -->
       <bt:ShortStrings>
         <bt:String id="OQAA.KAL.TaskpaneButton.Label" DefaultValue="Kukkuniiaat" />
         <bt:String id="OQAA.KAL.Group1Label" DefaultValue="Kukkuniiaat" />
-        <bt:String id="OQAA.KAL.GetStarted.Title" DefaultValue="Kom godt i gang med Kukkuniiaat!" />
       </bt:ShortStrings>
       <!-- LongStrings max characters==250. -->
       <bt:LongStrings>
         <bt:String id="OQAA.KAL.TaskpaneButton.Tooltip" DefaultValue="Klik for at åbne Kukkuniiaat" />
-        <bt:String id="OQAA.KAL.GetStarted.Description" DefaultValue="Kukkuniiaat er nu installeret. Gå til fanen Hjem og klik på Kukkuniiaat for at komme i gang." />
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>
