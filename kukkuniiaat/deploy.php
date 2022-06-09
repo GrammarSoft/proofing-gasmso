@@ -30,6 +30,12 @@ $mso = preg_replace('~<Version>[^<>]*</Version>~', "<Version>$version</Version>"
 $mso = str_replace(' (dev)', '', $mso);
 file_put_contents('mso.xml', $mso);
 
+echo "Setting MS Outlook version\n";
+$mso = file_get_contents('outlook.xml');
+$mso = preg_replace('~<Version>[^<>]*</Version>~', "<Version>$version</Version>", $mso);
+$mso = str_replace(' (dev)', '', $mso);
+file_put_contents('outlook.xml', $mso);
+
 echo "Replacing URI path\n";
 echo shell_exec("grep -rl 'https://retmig.dk/gas/dev/kukkuniiaat/' * | xargs -rn1 perl -pe 's@https://retmig.dk/gas/dev/kukkuniiaat/@https://kukkuniiaat.gl/gas/$version/@g' -i");
 
