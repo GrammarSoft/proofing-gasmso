@@ -615,7 +615,7 @@ function sanitize_result(txt) {
 }
 
 function findToSend(prefix, word, suffix, casing, closer) {
-	//console.log([prefix, word, suffix, casing]);
+	//console.log([prefix, word, suffix, casing, closer]);
 	let prefix_s = prefix.replace(Const.NonLetter, '');
 	let word_s = word.replace(Const.NonLetter, '');
 	let suffix_s = suffix.replace(Const.NonLetter, '');
@@ -639,23 +639,35 @@ function findToSend(prefix, word, suffix, casing, closer) {
 		}
 
 		let p_off = 0;
-		for (let j=0 ; j<prefix_s.length ; ++j) {
-			let f = prefix_s.charAt(j);
-			if (Const.SpaceOrEmpty.test(f)) {
-				continue;
+		if (closer) {
+			// Try to find verbatim prefix in the text
+			let pof = t.indexOf(prefix);
+			if (pof == -1) {
+				pof = t.indexOf(prefix.toLowerCase());
 			}
-			let nof = t.indexOf(f, p_off);
-			if (nof === -1) {
-				found = false;
-				break;
+			if (pof != -1) {
+				p_off = pof + prefix.length;
 			}
-			if (!closer && p_off === 0 && Const.LetterT.test(t.substring(0, nof))) {
-				// There is something substantial before the prefix
-				console.log('Prefix: '+t.substring(0, nof));
-				found = false;
-				break;
+		}
+		if (!p_off) {
+			for (let j=0 ; j<prefix_s.length ; ++j) {
+				let f = prefix_s.charAt(j);
+				if (Const.SpaceOrEmpty.test(f)) {
+					continue;
+				}
+				let nof = t.indexOf(f, p_off);
+				if (nof === -1) {
+					found = false;
+					break;
+				}
+				if (!closer && p_off === 0 && Const.LetterT.test(t.substring(0, nof))) {
+					// There is something substantial before the prefix
+					console.log('Prefix: '+t.substring(0, nof));
+					found = false;
+					break;
+				}
+				p_off = nof + f.length;
 			}
-			p_off = nof + f.length;
 		}
 		if (!found) {
 			console.log('Not-found: prefix');
