@@ -1481,7 +1481,7 @@ $(window).on('load', function() {
 		g_client = 'web';
 		console.log('Web');
 	}
-	else if (CLIENT === 'word' || location.search.indexOf('host=word') !== -1 || location.search.indexOf('host=msoffice') !== -1) {
+	else if (CLIENT === 'word' || location.search.indexOf('host=word') !== -1 || location.search.indexOf('host=msoffice') !== -1 || location.search.indexOf('_host_Info=Word') !== -1) {
 		g_client = 'word';
 		console.log('MS Office');
 		addScript('https://appsforoffice.microsoft.com/lib/1/hosted/office.js');
