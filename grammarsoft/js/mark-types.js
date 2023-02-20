@@ -460,6 +460,13 @@ let ctypes = {
 		"2",
 		"§46.2"
 	],
+	"%nko-list-ADJ": [
+		"%nko-list-ADJ",
+		"Sideordnede adjektiver",
+		"<i>Der sættes komma mellem sideordnede attributer (bestemmelser), hvis disse tillader et 'og' imellem sig og kan bytte plads uden større meningsforskel.</i><br>\n<br>\n<i>En varm, strålende sommerdag.</i><br>\n<br>\n<i>(en varm og strålende sommerdag - en strålende, varm sommerdag)</i><br>\n<br>\n<i>En lang, udmattende arbejdsdag</i><br>\n<br>\n<i>(en lang og udmattende arbejdsdag - en udmattende, lang arbejdsdag)</i>",
+		"2",
+		"§46.2"
+	],
 	"%nok-list-ADJ": [
 		"%nok-list-ADJ",
 		"Forkert adjektiv-komma",
