@@ -17,8 +17,8 @@ let types_info = {};
 let types_comp_right = new RegExp('~no-such-type');
 let types_to_upper = new RegExp('~no-such-type');
 let types_to_lower = new RegExp('~no-such-type');
-let rx_insertable = /(@insert|%ko|%k)( |-|$)/;
-let rx_removable = /(@nil|%nok|%ok|%nko)( |-|$)/;
+let rx_insertable = /(£insert|%ko|%k)( |-|$)/;
+let rx_removable = /(£nil|%nok|%ok|%nko)( |-|$)/;
 
 let marking_types = {};
 let marking_types_comma = [];
