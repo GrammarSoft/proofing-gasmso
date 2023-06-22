@@ -42,6 +42,7 @@ const g_options_default = {
 		opt_confidential: false,
 		opt_maybe: true,
 		opt_longExplanations: true,
+		opt_showAnalysis: false,
 		opt_speak: false,
 		opt_uiLang: 'da',
 	},
