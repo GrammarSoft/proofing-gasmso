@@ -23,6 +23,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title data-l10n="TITLE_SIDEBAR">…</title>
 	<base target="_top">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10/font/bootstrap-icons.css">
 	<script defer src="https://retmig.dk/gas/dev/grammarsoft/vendor/jquery.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://retmig.dk/gas/dev/grammarsoft/css/shared.css">
 	<link rel="stylesheet" type="text/css" href="https://retmig.dk/gas/dev/grammarsoft/css/sidebar.css">
@@ -175,8 +176,47 @@
 		<button class="btn-blue btnInputAll" data-l10n="BTN_EDIT_ALL">…</button>
 	</div>
 </div>
-<h1 class="chkType" data-l10n="HDR_YOUR_TEXT">…</h1>
+<div class="pos-rel">
+	<h1 class="chkType" data-l10n="HDR_YOUR_TEXT">…</h1>
+	<label class="label-abs-right labelShowAnalysis"><span data-l10n="LBL_SHOW_ANALYSIS">…</span> <input type="checkbox" class="chkShowAnalysis"></label>
+</div>
 <div class="text chkSentence">…</div>
+<div class="text backed chkAnalysisOpts">
+	<h3 data-l10n="HDR_ANALYSIS_OPTS">…</h3>
+	<div class="flex-cols">
+		<div>
+			<ul>
+				<li><label><input type="checkbox" class="chkPos" value="pos_V" checked> <i class="color_V bi bi-square-fill"></i> <span data-l10n="LBL_POS_V">…</span></label></li>
+				<li><label><input type="checkbox" class="chkPos" value="pos_N" checked> <i class="color_N bi bi-square-fill"></i> <span data-l10n="LBL_POS_N">…</span></label></li>
+				<li><label><input type="checkbox" class="chkPos" value="pos_PROP"> <i class="color_PROP bi bi-square-fill"></i> <span data-l10n="LBL_POS_PROP">…</span></label></li>
+				<li><label><input type="checkbox" class="chkPos" value="pos_ADJ"> <i class="color_ADJ bi bi-square-fill"></i> <span data-l10n="LBL_POS_ADJ">…</span></label></li>
+				<li><label><input type="checkbox" class="chkPos" value="pos_ADV"> <i class="color_ADV bi bi-square-fill"></i> <span data-l10n="LBL_POS_ADV">…</span></label></li>
+				<li><label><input type="checkbox" class="chkPos" value="pos_PRON"> <i class="color_PRON bi bi-square-fill"></i> <span data-l10n="LBL_POS_PRON">…</span></label></li>
+				<li><label><input type="checkbox" class="chkPos" value="pos_ART"> <i class="color_ART bi bi-square-fill"></i> <span data-l10n="LBL_POS_ART">…</span></label></li>
+				<li><label><input type="checkbox" class="chkPos" value="pos_DET"> <i class="color_DET bi bi-square-fill"></i> <span data-l10n="LBL_POS_DET">…</span></label></li>
+				<li><label><input type="checkbox" class="chkPos" value="pos_NUM"> <i class="color_NUM bi bi-square-fill"></i> <span data-l10n="LBL_POS_NUM">…</span></label></li>
+				<li><label><input type="checkbox" class="chkPos" value="pos_PRP"> <i class="color_PRP bi bi-square-fill"></i> <span data-l10n="LBL_POS_PRP">…</span></label></li>
+				<li><label><input type="checkbox" class="chkPos" value="pos_CONJ"> <i class="color_CONJ bi bi-square-fill"></i> <span data-l10n="LBL_POS_CONJ">…</span></label></li>
+				<li><label><input type="checkbox" class="chkPos" value="pos_INTJ"> <i class="color_INTJ bi bi-square-fill"></i> <span data-l10n="LBL_POS_INTJ">…</span></label></li>
+				<li><label><input type="checkbox" class="chkPos" value="pos_INFM"> <i class="color_INFM bi bi-square-fill"></i> <span data-l10n="LBL_POS_INFM">…</span></label></li>
+			</ul>
+		</div>
+		<div>
+			<ul>
+				<li><label><input type="checkbox" class="chkFunc" value="func_S" checked> <i class="black bi bi-x-lg"></i> <span data-l10n="LBL_FUNC_S">…</span></label></li>
+				<li><label><input type="checkbox" class="chkFunc" value="func_Sf"> <i class="black bi bi-x-lg"></i> <span data-l10n="LBL_FUNC_Sf">…</span></label></li>
+				<li><label><input type="checkbox" class="chkFunc" value="func_Vm"> <i class="black bi bi-circle-fill"></i> <span data-l10n="LBL_FUNC_Vm">…</span></label></li>
+				<li><label><input type="checkbox" class="chkFunc" value="func_Od" checked> <i class="black bi bi-triangle-fill"></i> <span data-l10n="LBL_FUNC_Od">…</span></label></li>
+				<li><label><input type="checkbox" class="chkFunc" value="func_Oi"> <i class="black bi bi-square-fill"></i> <span data-l10n="LBL_FUNC_Oi">…</span></label></li>
+				<li><label><input type="checkbox" class="chkFunc" value="func_Of"> <i class="black bi"><img class="rpl-vars" src="{ROOT_URL_SELF}/imgs/bi-chevron-down-half.svg"></i> <span data-l10n="LBL_FUNC_Of">…</span></label></li>
+				<li><label><input type="checkbox" class="chkFunc" value="func_A"> <i class="black bi"><img class="rpl-vars" src="{ROOT_URL_SELF}/imgs/bi-chevron-down-half.svg"></i> <span data-l10n="LBL_FUNC_A">…</span></label></li>
+				<li><label><input type="checkbox" class="chkFunc" value="func_Cs"> <i class="black bi bi-x-circle"></i> <span data-l10n="LBL_FUNC_Cs">…</span></label></li>
+				<li><label><input type="checkbox" class="chkFunc" value="func_Co"> <i class="black bi bi-plus-circle"></i> <span data-l10n="LBL_FUNC_Co">…</span></label></li>
+				<li><label><input type="checkbox" class="chkFunc" value="func_Op"> <i class="black bi bi-diamond-fill"></i> <span data-l10n="LBL_FUNC_Op">…</span></label></li>
+			</ul>
+		</div>
+	</div>
+</div>
 <div class="text backed" id="chkDidYouMean">
 	<h2 data-l10n="HDR_REPLACE_WITH">…</h2>
 	<div id="chkDidYouMeanItems">
