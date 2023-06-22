@@ -237,6 +237,15 @@ const Defs = {
 };
 Defs.TYPE_COMP = Defs.TYPE_COMP_LEFT|Defs.TYPE_COMP_RIGHT;
 
+const WF_WORD  = 0;
+const WF_MARK  = 1;
+const WF_SUGGS = 2;
+const WF_MERGE = 3;
+const WF_ANA   = 4;
+const NUM_WF   = 5;
+
+const VERSION_PROTOCOL = 1;
+
 // Upper-case because we compare them to DOM nodeName
 let text_nodes = {'ADDRESS': true, 'ARTICLE': true, 'ASIDE': true, 'AUDIO': true, 'BLOCKQUOTE': true, 'BODY': true, 'CANVAS': true, 'DD': true, 'DIV': true, 'DL': true, 'FIELDSET': true, 'FIGCAPTION': true, 'FIGURE': true, 'FOOTER': true, 'FORM': true, 'H1': true, 'H2': true, 'H3': true, 'H4': true, 'H5': true, 'H6': true, 'HEADER': true, 'HGROUP': true, 'HTML': true, 'HR': true, 'LI': true, 'MAIN': true, 'NAV': true, 'NOSCRIPT': true, 'OL': true, 'OUTPUT': true, 'P': true, 'PRE': true, 'SECTION': true, 'TABLE': true, 'TD': true, 'TH': true, 'UL': true, 'VIDEO': true};
 
@@ -278,6 +287,21 @@ const Const = {
 };
 Const.Split_Array = Const.Split_String.split('');
 Const.Split_Regex = new RegExp('(['+Const.Split_String+'])');
+
+const func2label = [
+	{rx:/^@<*SUBJ>*$/, f:'S', i:'x-lg', w:false}, // subject
+	{rx:/^@[FS]-<*SUBJ>*$/, f:'Sf', i:'x-lg', w:true}, // formal subject
+	{rx:/^@FMV$/, f:'Vm', i:'circle-fill', w:false}, // main verb
+	{rx:/^@<*(DAT|IOBJ)>*$/, f:'Oi', i:'square-fill', w:false}, // indirect object
+	{rx:/^@<*(ACC|OBJ)>*$/, f:'Od', i:'triangle-fill', w:false}, // direct object
+	{rx:/^@<*(PIV)>*$/, f:'Op', i:'diamond-fill', w:false}, // prepositional object
+	{rx:/^@<*(ADV[SOL])>*$/, f:'A', i:ROOT_URL_SELF+'/imgs/bi-chevron-down-half.svg', w:false}, // adverbial
+	{rx:/^@<*PASS>*$/, f:'A', i:ROOT_URL_SELF+'/imgs/bi-chevron-down-half.svg', w:false}, // passive adjunct
+	{rx:/^@<*(SC)>*$/, f:'Cs', i:'x-circle', w:false}, // subject predicative/complement
+	{rx:/^@<*(OC)>*$/, f:'Co', i:'plus-circle', w:false}, // object predicative/complement
+	{rx:/^@<*(SA|OA)>*$/, f:'A', i:ROOT_URL_SELF+'/imgs/bi-chevron-down-half.svg', w:false}, // focus
+	{rx:/^@(<*FOC>*|>P)$/, f:'A', i:ROOT_URL_SELF+'/imgs/bi-chevron-down-half.svg', w:false}, // focus, including pre-pp
+];
 
 let markings = [];
 let marking_ids = [];
@@ -440,7 +464,7 @@ function decHTML(t) {
 }
 
 function slugify(t) {
-	let nt = t.replace(/%+/g, 'p').replace(/@+/g, 'a').replace(/[^A-Za-z0-9]+/g, '-');
+	let nt = t.replace(/%+/g, 'p').replace(/£+/g, 'a').replace(/[^A-Za-z0-9]+/g, '-');
 	return nt;
 }
 
@@ -514,7 +538,7 @@ function markingColor(types) {
 		}
 	}
 	for (let i=0 ; i<types.length ; ++i) {
-		if (types[i] === '@green') {
+		if (types[i] === '£green') {
 			col = 'green';
 		}
 	}
@@ -552,11 +576,18 @@ function findTextNodes(nodes, filter) {
 }
 
 function sanitize_result(txt) {
+	if (txt.search(/\t[A-Z]+ @\S+/g) == -1) {
+		txt = txt.replace(/([ \t])@/g, '$1£');
+		//console.log(txt);
+	}
+
+	txt = txt.replace(/\n<\/?p>\n/g, '\n');
+
 	// Special case
-	txt = txt.replace(/@x-etype-case/g, '@upper');
+	txt = txt.replace(/£x-etype-case/g, '£upper');
 
 	// Workaround for bug https://trello.com/c/ixmc92EB
-	txt = txt.replace(/.'.\t@proper\n"/g, '.\n"');
+	txt = txt.replace(/.'.\t£proper\n"/g, '.\n"');
 
 	// Workaround for bug https://trello.com/c/JbXrn5ub
 	txt = txt.replace(/\n-[LR]\n/g, '\n-\n').replace(/ -[LR] /g, ' - ');
@@ -608,14 +639,14 @@ function sanitize_result(txt) {
 	txt = txt.replace(/(<\/s\d+>)[^<]*?$/, '$1');
 
 	if (g_tool === 'Comma') {
-		txt = txt.replace(/(\n[^\t]+\t<R:[^>]+>)\n/, '$1 @error\n');
+		txt = txt.replace(/(\n[^\t]+\t<R:[^>]+>)\n/, '$1 £error\n');
 	}
 
 	return txt;
 }
 
 function findToSend(prefix, word, suffix, casing, closer) {
-	////console.log([prefix, word, suffix, casing]);
+	////console.log([prefix, word, suffix, casing, closer]);
 	let prefix_s = prefix.replace(Const.NonLetter, '');
 	let word_s = word.replace(Const.NonLetter, '');
 	let suffix_s = suffix.replace(Const.NonLetter, '');
@@ -639,23 +670,35 @@ function findToSend(prefix, word, suffix, casing, closer) {
 		}
 
 		let p_off = 0;
-		for (let j=0 ; j<prefix_s.length ; ++j) {
-			let f = prefix_s.charAt(j);
-			if (Const.SpaceOrEmpty.test(f)) {
-				continue;
+		if (closer) {
+			// Try to find verbatim prefix in the text
+			let pof = t.indexOf(prefix);
+			if (pof == -1) {
+				pof = t.indexOf(prefix.toLowerCase());
 			}
-			let nof = t.indexOf(f, p_off);
-			if (nof === -1) {
-				found = false;
-				break;
+			if (pof != -1) {
+				p_off = pof + prefix.length;
 			}
-			if (!closer && p_off === 0 && Const.LetterT.test(t.substring(0, nof))) {
-				// There is something substantial before the prefix
-				//console.log('Prefix: '+t.substring(0, nof));
-				found = false;
-				break;
+		}
+		if (!p_off) {
+			for (let j=0 ; j<prefix_s.length ; ++j) {
+				let f = prefix_s.charAt(j);
+				if (Const.SpaceOrEmpty.test(f)) {
+					continue;
+				}
+				let nof = t.indexOf(f, p_off);
+				if (nof === -1) {
+					found = false;
+					break;
+				}
+				if (!closer && p_off === 0 && Const.LetterT.test(t.substring(0, nof))) {
+					// There is something substantial before the prefix
+					//console.log('Prefix: '+t.substring(0, nof));
+					found = false;
+					break;
+				}
+				p_off = nof + f.length;
 			}
-			p_off = nof + f.length;
 		}
 		if (!found) {
 			//console.log('Not-found: prefix');
@@ -825,6 +868,10 @@ function _parseResult(rv) {
 		return;
 	}
 
+	if (!rv.hasOwnProperty('v') || parseInt(rv.v) !== VERSION_PROTOCOL) {
+		g_impl.showWarning('WARN_VERSION_MISMATCH');
+	}
+
 	let txt = sanitize_result(rv.c);
 	let ps = [];
 	let nps = $.trim(txt.replace(/\n+<\/s>\n+/g, "\n\n")).split(/<\/s\d+>/);
@@ -873,15 +920,23 @@ function _parseResult(rv) {
 			}
 
 			let w = $.trim(lines[j]).split(/\t/);
-			w[0] = $.trim(w[0].replace(/(\S)=/g, '$1 '));
+			w[WF_WORD] = $.trim(w[WF_WORD].replace(/(\S)=/g, '$1 '));
 
-			if (w[0] === '') {
+			while (w.length < NUM_WF) {
+				w.push('');
+			}
+			w[WF_MERGE] = 0;
+			w[WF_ANA] = {pos:'', func:''};
+
+			if (w[WF_WORD] === '') {
 				words.push(w);
 				continue;
 			}
 
 			if (w.length > 1) {
-				let ws = w[1].split(/ /g);
+				let ws = w[WF_MARK].split(/ /g);
+				w = [w[WF_WORD], '', '', 0, {pos:'', func:''}];
+
 				let nws = [];
 				let rs = [];
 				let crs = [];
@@ -890,7 +945,7 @@ function _parseResult(rv) {
 					if (ws[k].indexOf('<R:') === 0) {
 						let n = ws[k].substr(3);
 						n = n.substr(0, n.length-1).replace(/(\S)=/g, '$1 ');
-						if (n === w[0]) {
+						if (n === w[WF_WORD]) {
 							//console.log(n);
 							continue;
 						}
@@ -901,7 +956,7 @@ function _parseResult(rv) {
 					if (ws[k].indexOf('<AFR:') === 0) {
 						let n = ws[k].substr(5);
 						n = n.substr(0, n.length-1).replace(/(\S)=/g, '$1 ');
-						if (n === w[0]) {
+						if (n === w[WF_WORD]) {
 							//console.log(n);
 							continue;
 						}
@@ -909,13 +964,23 @@ function _parseResult(rv) {
 						continue;
 					}
 					if (!marking_types.hasOwnProperty(ws[k])) {
-						//console.log('Unknown marking: '+ws[k]);
+						if (/^[A-Z]+$/.test(ws[k])) {
+							w[WF_ANA].pos = ws[k];
+						}
+						else if (/^@/.test(ws[k])) {
+							w[WF_ANA].func = ws[k];
+						}
+						else {
+							//console.log('Unknown marking/tag ' + ws[k]);
+						}
 					}
-					nws.push(ws[k]);
+					else {
+						nws.push(ws[k]);
+					}
 				}
 				crs = rs.concat(crs);
-				// Remove @sentsplit from last token
-				if (j == lines.length-1 && nws.length == 1 && nws[0] === '@sentsplit') {
+				// Remove £sentsplit from last token
+				if (j == lines.length-1 && nws.length == 1 && nws[0] === '£sentsplit') {
 					crs = [];
 					nws = [];
 				}
@@ -929,11 +994,11 @@ function _parseResult(rv) {
 				let none = true;
 
 				for (let k=0 ; k<nws.length ; ++k) {
-					if (nws[k] === '@sentsplit') {
+					if (nws[k] === '£sentsplit') {
 						had_sentsplit = true;
 					}
 					if (types_to_upper.test(nws[k]) && prev_sentsplit) {
-						////console.log(`Skipping @upper due to @sentsplit`);
+						////console.log(`Skipping £upper due to £sentsplit`);
 						continue;
 					}
 					if (_live_options.types.hasOwnProperty(nws[k]) && !_live_options.types[nws[k]]) {
@@ -951,8 +1016,8 @@ function _parseResult(rv) {
 				prev_sentsplit = had_sentsplit;
 				if (ws.length && none) {
 					////console.log(`Vitec MV whitelist no-match: ${ws}`);
-					if (ws.indexOf('@insert') !== -1) {
-						w[0] = ' ';
+					if (ws.indexOf('£insert') !== -1) {
+						w[WF_WORD] = ' ';
 					}
 					ws = [];
 				}
@@ -965,7 +1030,7 @@ function _parseResult(rv) {
 				for (let k=0 ; k<nws.length ; ++k) {
 					if (types_to_upper.test(nws[k])) {
 						if (crs.length == 0) {
-							crs.push(w[0]);
+							crs.push(w[WF_WORD]);
 						}
 						for (let c=0 ; c<crs.length ; ++c) {
 							crs[c] = uc_first(crs[c]);
@@ -973,7 +1038,7 @@ function _parseResult(rv) {
 					}
 					else if (types_to_lower.test(nws[k])) {
 						if (crs.length == 0) {
-							crs.push(w[0]);
+							crs.push(w[WF_WORD]);
 						}
 						for (let c=0 ; c<crs.length ; ++c) {
 							crs[c] = lc_first(crs[c]);
@@ -994,82 +1059,81 @@ function _parseResult(rv) {
 						crs = [crs[0]];
 					}
 					crs = crs.unique();
-					w[2] = crs.join('\t');
+					w[WF_SUGGS] = crs.join('\t');
 					////console.log(crs);
 				}
 				if (nws.length) {
 					nws = nws.unique();
-					w[1] = nws.join(' ');
-					if (!w[2] || w[2].length === 0) {
-						w[2] = '';
-					}
-					if (w[1].indexOf(' ') !== -1) {
-						w[1] = w[1].replace(/ @error /g, ' ').replace(/ @error$/g, '').replace(/^@error /g, '');
+					w[WF_MARK] = nws.join(' ');
+					if (w[WF_MARK].indexOf(' ') !== -1) {
+						w[WF_MARK] = w[WF_MARK].replace(/ £error /g, ' ').replace(/ £error$/g, '').replace(/^£error /g, '');
 					}
 
-					w[3] = 0;
-					if (w[1].indexOf('@-comp') !== -1) {
-						w[3] |= Defs.TYPE_COMP_LEFT;
+					if (w[WF_MARK].indexOf('£-comp') !== -1) {
+						w[WF_MERGE] |= Defs.TYPE_COMP_LEFT;
 					}
-					if (types_comp_right.test(w[1])) {
-						w[3] |= Defs.TYPE_COMP_RIGHT;
+					if (types_comp_right.test(w[WF_MARK])) {
+						w[WF_MERGE] |= Defs.TYPE_COMP_RIGHT;
 					}
-					if (w[1].indexOf('@comp-:-') !== -1) {
-						w[3] |= Defs.TYPE_COMP_RIGHT | Defs.TYPE_COMP_HYPHEN;
+					if (w[WF_MARK].indexOf('£comp-:-') !== -1) {
+						w[WF_MERGE] |= Defs.TYPE_COMP_RIGHT | Defs.TYPE_COMP_HYPHEN;
 					}
 
 					had_mark = true;
 				}
 				else {
-					w.pop();
+					w[WF_SUGGS] = '';
 				}
 			}
 			if (w.length > 1 && /(%ko|%k)( |-|$)/.test(w[1])) {
-				let wo = w[0];
-				w[0] = ',';
-				if (w[1].indexOf('%k-stop') !== -1) {
-					w[0] = '.';
+				let wo = [w[WF_WORD], '', '', 0, w[WF_ANA]];
+				w[WF_WORD] = ',';
+				if (w[WF_MARK].indexOf('%k-stop') !== -1) {
+					w[WF_WORD] = '.';
 				}
+				w[WF_ANA] = {pos: 'PU', func: ''};
 				words.push(w);
-				w = [wo];
+				w = wo;
 			}
 			words.push(w);
 		}
 		if (had_mark) {
 			// Pre-merge compound errors with the token they're supposed to be with, respecting other corrections to either side of the merge
 			for (let j=0 ; j<words.length ; ) {
-				if (words[j].length > 1 && words[j][3] & Defs.TYPE_COMP) {
-					let ts = words[j][1];
+				if (words[j].length > 1 && words[j][WF_MERGE] & Defs.TYPE_COMP) {
+					let ts = words[j][WF_MARK];
 					let wx = '';
 					let px = '';
 					let sx = '';
-					if (words[j][3] & Defs.TYPE_COMP_LEFT) {
-						if (words[j-1].length > 1 && words[j-1][1]) {
-							ts += ' '+words[j-1][1];
+					let ana = words[j][WF_ANA];
+					if (words[j][WF_MERGE] & Defs.TYPE_COMP_LEFT) {
+						if (words[j-1].length > 1 && words[j-1][WF_MARK]) {
+							ts += ' '+words[j-1][WF_MARK];
 						}
-						wx = words[j-1][0] + ' ' + words[j][0];
-						px = words[j-1][0];
-						if (words[j-1].length > 1 && words[j-1][2]) {
-							px = words[j-1][2];
+						wx = words[j-1][WF_WORD] + ' ' + words[j][WF_WORD];
+						px = words[j-1][WF_WORD];
+						if (words[j-1].length > 1 && words[j-1][WF_SUGGS]) {
+							px = words[j-1][WF_SUGGS];
 						}
-						sx = words[j][0];
-						if (words[j][2]) {
-							sx = words[j][2];
+						sx = words[j][WF_WORD];
+						if (words[j][WF_SUGGS]) {
+							sx = words[j][WF_SUGGS];
 						}
 					}
-					if (words[j][3] & Defs.TYPE_COMP_RIGHT) {
-						if (words[j+1].length > 1 && words[j+1][1]) {
-							ts += ' '+words[j+1][1];
+					if (words[j][WF_MERGE] & Defs.TYPE_COMP_RIGHT) {
+						if (words[j+1].length > 1 && words[j+1][WF_MARK]) {
+							ts += ' '+words[j+1][WF_MARK];
 						}
-						wx = words[j][0] + ' ' + words[j+1][0];
-						px = words[j][0];
-						if (words[j][2]) {
-							px = words[j][2];
+						wx = words[j][WF_WORD] + ' ' + words[j+1][WF_WORD];
+						px = words[j][WF_WORD];
+						if (words[j][WF_SUGGS]) {
+							px = words[j][WF_SUGGS];
 						}
-						sx = words[j+1][0];
-						if (words[j+1].length > 1 && words[j+1][2]) {
-							sx = words[j+1][2];
+						sx = words[j+1][WF_WORD];
+						if (words[j+1].length > 1 && words[j+1][WF_SUGGS]) {
+							sx = words[j+1][WF_SUGGS];
 						}
+						ana = words[j+1][WF_ANA];
 					}
 
 					let has_uc = (wx !== wx.toLowerCase());
@@ -1077,7 +1141,7 @@ function _parseResult(rv) {
 					px = px.split(/\t/);
 					sx = sx.split(/\t/);
 					let space = '';
-					if (words[j][3] & Defs.TYPE_COMP_HYPHEN) {
+					if (words[j][WF_MERGE] & Defs.TYPE_COMP_HYPHEN) {
 						space = '‐';
 					}
 					let es = [];
@@ -1090,9 +1154,9 @@ function _parseResult(rv) {
 							es.push(px[p] + space + sx[s]);
 						}
 					}
-					let flags = words[j][3];
+					let flags = words[j][WF_MERGE];
 
-					let nw = [wx, ts.split(/ /).unique().join(' ').replace(/ +/g, ' '), es.join('\t')];
+					let nw = [wx, ts.split(/ /).unique().join(' ').replace(/ +/g, ' '), es.join('\t'), ana];
 					words[j] = nw;
 
 					if (flags & Defs.TYPE_COMP_LEFT) {
@@ -1157,7 +1221,7 @@ function sendTexts() {
 		t = t.replace(/</g, '⟨');
 		t = t.replace(/>/g, '⟩');
 
-		text += '<s'+par.i+'>\n'+t+'\n</s'+par.i+'>\n\n';
+		text += '<s'+par.i+'>\n<p>\n'+t+'\n</p>\n</s'+par.i+'>\n\n';
 	}
 
 	if (text) {
@@ -1170,6 +1234,7 @@ function sendTexts() {
 			t: text,
 			r: ts_fail,
 			c: g_client,
+			v: VERSION_PROTOCOL,
 			gdpr: _live_options.config.opt_confidential + 0,
 			SessionID: g_access_token.sessionid,
 		};
@@ -1452,10 +1517,13 @@ function matomo_load() {
 
 function matomo_event(cat, act, name, value) {
 	//console.log([cat, act, name, value]);
+	if (typeof act === 'undefined' || !act) {
+		act = cat;
+	}
 	_paq.push(['trackEvent', cat, act, name, value]);
 }
 
-$(window).on('load', function() {
+function contentLoaded() {
 	const CLIENT = window.hasOwnProperty('CLIENT') ? window.CLIENT : '';
 
 	if (CLIENT === 'adobe' || location.search.indexOf('host=adobe') !== -1) {
@@ -1469,7 +1537,7 @@ $(window).on('load', function() {
 		g_client = 'web';
 		//console.log('Web');
 	}
-	else if (CLIENT === 'word' || location.search.indexOf('host=word') !== -1 || location.search.indexOf('host=msoffice') !== -1) {
+	else if (CLIENT === 'word' || location.search.indexOf('host=word') !== -1 || location.search.indexOf('host=msoffice') !== -1 || location.search.indexOf('_host_Info=Word') !== -1) {
 		g_client = 'word';
 		//console.log('MS Office');
 		addScript('https://appsforoffice.microsoft.com/lib/1/hosted/office.js');
@@ -1494,4 +1562,11 @@ $(window).on('load', function() {
 		// No, defer doesn't work. No, async doesn't work either.
 		setTimeout(function() {addScript(ROOT_URL_SELF+'/js/'+id+'.js'); matomo_load();}, 100);
 	}
-});
+}
+
+if (document.readyState === 'loading') {
+	$(window).on('load', contentLoaded);
+}
+else {
+	contentLoaded();
+}
