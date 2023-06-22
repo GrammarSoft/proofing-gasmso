@@ -185,7 +185,7 @@ l10n.s.dan = {
 	TXT_SUBSCRIBE: "Opret abonnement eller anmod om prøveadgang via <a href=\"https://{PRODUCT_DOMAIN}/\" target=\"_blank\">{PRODUCT_DOMAIN}</a>",
 	TXT_WHAT_IS: "{PRODUCT_NAME} hjælper dig med at sætte komma - dvs. tilføjer manglende kommaer og fjerner eller flytter forkerte kommaer.",
 	WARN_COMBINING_CHARACTER: "Der er et sammensat tegn \"{chr}\" i teksten \"{cntx}\". Programmet kan ikke rette paragraffen før sådanne tegn erstattes med deres <a href=\"https://unicode.org/reports/tr15/\" target=\"_blank\">førkombinerede former (NFC)</a>.",
-	WARN_VERSION_MISMATCH: "Der er en versionsforskel mellem serveren og klienten. Du bør derfor genstarte udvidelsen. Hvis denne advarsel ikke går væk, så skal du rydde browserens cache og derefter genstarte udvidelsen.",
+	WARN_VERSION_MISMATCH: "Der er en versionsforskel mellem serverens version af programmet og din egen. Du bør derfor genstarte udvidelsen. Hvis denne advarsel ikke går væk, så skal du rydde browserens cache og derefter genstarte udvidelsen.",
 };
 
 l10n.s.eng = {
@@ -513,6 +513,7 @@ l10n.s.deu = {
 	TXT_SUBSCRIBE: "Programm abonnieren oder gratis testen: <a href=\"https://{PRODUCT_DOMAIN}/\" target=\"_blank\">{PRODUCT_DOMAIN}</a>",
 	TXT_WHAT_IS: "{PRODUCT_NAME} zeigt an, wo Kommas fehlen, stören oder umgesetzt werden müssen.",
 	WARN_COMBINING_CHARACTER: "Det Text enhält ein zusammengesetztes Zeichen \"{chr}\". Bitte durch das entsprechende <a href=\"https://unicode.org/reports/tr15/\" target=\"_blank\">Einzelzeichen (NFC)</a> ersetzen, sonst kann dieser Paragraf nicht bearbeitet werden.",
+	WARN_VERSION_MISMATCH: "Es gibt einen Versionskonflikt zwischen einer neueren Version des Programms auf dem Server und einer älteren Version auf ihrem Computer. Bitte das Add-in (Zusatzmodul) neu starten. Reicht dies nicht aus, leeren sie bitte vorher den Browser-Cache.",
 };
 
 l10n.s.da = l10n.s.dan;
