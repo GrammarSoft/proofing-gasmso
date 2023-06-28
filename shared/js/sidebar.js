@@ -366,10 +366,10 @@ function markingIgnore() {
 	console.log('Ignoring %s in %s', ik, cmarking.sentence);
 
 	if (rx_insertable.test(marking[WF_MARK])) {
-		markings[cmarking.s][cmarking.w] = [' '];
+		markings[cmarking.s][cmarking.w] = [' ', '', '', 0, {pos:'', func:''}, marking[WF_TID]];
 	}
 	else {
-		markings[cmarking.s][cmarking.w] = [marking[WF_WORD], '', '', 0, marking[WF_ANA]];
+		markings[cmarking.s][cmarking.w] = [marking[WF_WORD], '', '', 0, marking[WF_ANA], marking[WF_TID]];
 	}
 }
 
@@ -390,15 +390,21 @@ function btnIgnorePopup() {
 
 function btnIgnore() {
 	$('#popupIgnore').hide();
+	let mark = markings[cmarking.s][cmarking.w];
+	log_marking_action({'a': 'ignore-one', 'm': mark[WF_MARK], 'w': mark[WF_WORD], 't': mark[WF_TID]});
+
 	markingIgnore();
-	matomo_event('btnIgnoreOne', markings[cmarking.s][cmarking.w][WF_MARK], markings[cmarking.s][cmarking.w][WF_WORD]);
+	matomo_event('btnIgnoreOne', mark[WF_MARK], mark[WF_WORD]);
 	btnNext();
 }
 
 function btnIgnoreAll() {
 	$('#popupIgnore').hide();
-	let word = markings[cmarking.s][cmarking.w][WF_WORD];
-	let ts = markings[cmarking.s][cmarking.w][WF_MARK];
+	let mark = markings[cmarking.s][cmarking.w];
+	log_marking_action({'a': 'ignore-all', 'm': mark[WF_MARK], 'w': mark[WF_WORD], 't': mark[WF_TID]});
+
+	let word = mark[WF_WORD];
+	let ts = mark[WF_MARK];
 	for (let s=0 ; s<markings.length ; ++s) {
 		for (let w=0 ; w<markings[s].length ; ++w) {
 			if (markings[s][w][WF_WORD] === word && markings[s][w][WF_MARK] && markings[s][w][WF_MARK] === ts) {
@@ -519,7 +525,9 @@ function btnInputOne() {
 	if (rpl.length === 0) {
 		rpl = ' ';
 	}
-	matomo_event('btnInputOne', markings[cmarking.s][cmarking.w][WF_MARK], cmarking.w, rpl);
+	let mark = markings[cmarking.s][cmarking.w];
+	matomo_event('btnInputOne', mark[WF_MARK], cmarking.w, rpl);
+	log_marking_action({'a': 'input-one', 'm': mark[WF_MARK], 'w': mark[WF_WORD], 'r': rpl, 't': mark[WF_TID]});
 	processQueue({f: impl_replaceInDocument, s: cmarking.s, w: cmarking.w, rpl: rpl});
 }
 
@@ -533,8 +541,9 @@ function btnInputAll() {
 	if (rpl.length === 0) {
 		rpl = ' ';
 	}
-	let word = markings[cmarking.s][cmarking.w][WF_WORD];
-	let ts = markings[cmarking.s][cmarking.w][WF_MARK];
+	let mark = markings[cmarking.s][cmarking.w];
+	let word = mark[WF_WORD];
+	let ts = mark[WF_MARK];
 	let os = cmarking.s;
 	let ow = cmarking.w;
 
@@ -547,6 +556,7 @@ function btnInputAll() {
 	}
 
 	matomo_event('btnInputAll', ts, word, rpl);
+	log_marking_action({'a': 'input-all', 'm': mark[WF_MARK], 'w': word, 'r': rpl, 't': mark[WF_TID]});
 	processQueue({f: btnNext, s: os, w: ow});
 }
 
@@ -595,8 +605,9 @@ function markingAcceptSuggestion() {
 		return;
 	}
 
-	let middle = markings[cmarking.s][cmarking.w][WF_WORD];
-	matomo_event('suggestionAccept', cmarking.w, $(this).text());
+	let mark = markings[cmarking.s][cmarking.w];
+	let middle = mark[WF_WORD];
+	log_marking_action({'a': 'accept', 'm': mark[WF_MARK], 'w': middle, 'r': $(this).text(), 't': mark[WF_TID]});
 	processQueue({f: impl_replaceInDocument, s: cmarking.s, w: cmarking.w, middle: middle, rpl: $(this).text()});
 }
 
@@ -606,18 +617,20 @@ function markingAccept() {
 		return;
 	}
 
-	matomo_event('btnAccept', markings[cmarking.s][cmarking.w][WF_MARK], cmarking.w);
+	let mark = markings[cmarking.s][cmarking.w];
 
-	if (rx_insertable.test(markings[cmarking.s][cmarking.w][WF_MARK])) {
+	if (rx_insertable.test(mark[WF_MARK])) {
 		let px = /^(.*?)(\S+)(\s?)$/.exec(cmarking.prefix);
 		let sx = /^(\s?\S+)(.*)$/.exec(cmarking.suffix);
-		let rpl = markings[cmarking.s][cmarking.w][WF_WORD];
-		if (/£insert/.test(markings[cmarking.s][cmarking.w][WF_MARK])) {
+		let rpl = mark[WF_WORD];
+		log_marking_action({'a': 'accept-insert', 'm': mark[WF_MARK], 'w': markings[cmarking.s][cmarking.w-1][WF_WORD], 'r': rpl, 't': mark[WF_TID]});
+		if (/£insert/.test(mark[WF_MARK])) {
 			rpl = ' ' + rpl;
 		}
 		processQueue({f: impl_insertInDocument, s: cmarking.s, w: cmarking.w, prefix: px[1], middle: px[2] + px[3] + sx[1], rpl: px[2] + rpl + px[3] + sx[1], suffix: sx[2]});
 	}
-	else if (/(£nil|%nok)( |-|$)/.test(markings[cmarking.s][cmarking.w][WF_MARK])) {
+	else if (/(£nil|%nok)( |-|$)/.test(mark[WF_MARK])) {
+		log_marking_action({'a': 'accept-remove', 'm': mark[WF_MARK], 'w': mark[WF_WORD], 't': mark[WF_TID]});
 		processQueue({f: impl_removeInDocument, s: cmarking.s, w: cmarking.w, rpl: ' '});
 	}
 	else {
@@ -709,7 +722,7 @@ function didSelect() {
 function didReplace(rv) {
 	console.log(rv);
 	_did_helper(rv.before, rv.after);
-	markings[cmarking.s][cmarking.w] = [rv.rpl];
+	markings[cmarking.s][cmarking.w] = [rv.rpl, '', '', 0, markings[cmarking.s][cmarking.w][WF_ANA], markings[cmarking.s][cmarking.w][WF_TID]];
 	processQueue();
 }
 
@@ -721,14 +734,14 @@ function didReplaceSilent(rv) {
 function didInsert(rv) {
 	console.log(rv);
 	_did_helper(rv.before, rv.after);
-	markings[cmarking.s][cmarking.w] = [markings[cmarking.s][cmarking.w][WF_WORD], '', '', 0, markings[cmarking.s][cmarking.w][WF_ANA]];
+	markings[cmarking.s][cmarking.w] = [markings[cmarking.s][cmarking.w][WF_WORD], '', '', 0, markings[cmarking.s][cmarking.w][WF_ANA], markings[cmarking.s][cmarking.w][WF_TID]];
 	processQueue();
 }
 
 function didRemove(rv) {
 	console.log(rv);
 	_did_helper(rv.before, rv.after);
-	markings[cmarking.s][cmarking.w] = ['', '', '', 0, {pos:'', func:''}];
+	markings[cmarking.s][cmarking.w] = ['', '', '', 0, {pos:'', func:''}, markings[cmarking.s][cmarking.w][WF_TID]];
 	processQueue();
 }
 
@@ -1109,7 +1122,9 @@ function initSidebar() {
 		if ($(this).hasClass('disabled')) {
 			return false;
 		}
-		addToDictionary(markings[cmarking.s][cmarking.w][WF_WORD]);
+		let mark = markings[cmarking.s][cmarking.w];
+		log_marking_action({'a': 'dict-add', 'm': mark[WF_MARK], 'w': mark[WF_WORD], 't': mark[WF_TID]});
+		addToDictionary(mark[WF_WORD]);
 		$('.btnIgnoreAll').click();
 		matomo_event('ui', 'ignore-all');
 	});
@@ -1194,7 +1209,7 @@ function initSidebar() {
 	};
 	g_impl.parseSendEnd = function() {
 		setTimeout(function() {
-			parseResult({c:''});
+			parseResult({c:'', v:VERSION_PROTOCOL, t:0});
 		}, 100);
 		$('.chkProgress').hide();
 	};

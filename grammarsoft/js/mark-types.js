@@ -618,8 +618,29 @@ let ctypes = {
 		"",
 		"§47.4"
 	],
+	"%ko-explain": [
+		"%ko-explain",
+		"Forklaringer og præciseringer",
+		"Der sættes komma omkring forklarende eller præciserende tilføjelser. Typisk er der et indledende ord eller udtryk som <i>fx, bl.a., herunder, inkl., uanset:</i><br>\n<br>\n<i>Sommetider får han en depression, f.eks. om vinteren.</i><br>\n<br>\n<i>En konstitueret leder, dvs. en midlertidig leder, har som opgave …</i><br>\n<br>\nHvis tilføjelsen indeholder en ledsætning, bortfalder reglen om optionelt startkomma, og kommaet placeres før det indledende forklaringsudtryk:<br>\n<br>\n<i>Jeg kan desværre ikke hjælpe dig med flytningen, bl.a. fordi jeg skal aflevere min opgave på mandag.</i><br>\n<br>\nNogle ord og udtryk <i>(nemlig, også, dels...dels, enten...eller)</i> bruges både inde i sætningen og foran forklarende tilføjelser. Her bruges der kun komma, hvis der er tale om tilføjelser, dvs. hvis resten af sætningen kan stå alene.<br>\n<br>\n<i>Turen må aflyses, dels på grund af vejret, dels på grund af mangel på tid. (Turen må aflyses.)</i><br>\n<br>\n<i>Det gælder dels udlandsrejser, dels rejser til Grønland. (*Det gælder.)</i>",
+		"",
+		"§47.4"
+	],
+	"%ko-explain-end": [
+		"%ko-explain-end",
+		"Forklaringer og præciseringer",
+		"Der sættes komma omkring forklarende eller præciserende tilføjelser. Typisk er der et indledende ord eller udtryk som <i>fx, bl.a., herunder, inkl., uanset:</i><br>\n<br>\n<i>Sommetider får han en depression, f.eks. om vinteren.</i><br>\n<br>\n<i>En konstitueret leder, dvs. en midlertidig leder, har som opgave …</i><br>\n<br>\nHvis tilføjelsen indeholder en ledsætning, bortfalder reglen om optionelt startkomma, og kommaet placeres før det indledende forklaringsudtryk:<br>\n<br>\n<i>Jeg kan desværre ikke hjælpe dig med flytningen, bl.a. fordi jeg skal aflevere min opgave på mandag.</i><br>\n<br>\nNogle ord og udtryk <i>(nemlig, også, dels...dels, enten...eller)</i> bruges både inde i sætningen og foran forklarende tilføjelser. Her bruges der kun komma, hvis der er tale om tilføjelser, dvs. hvis resten af sætningen kan stå alene.<br>\n<br>\n<i>Turen må aflyses, dels på grund af vejret, dels på grund af mangel på tid. (Turen må aflyses.)</i><br>\n<br>\n<i>Det gælder dels udlandsrejser, dels rejser til Grønland. (*Det gælder.)</i>",
+		"",
+		"§47.4"
+	],
 	"%ok-explain": [
 		"%ok-explain",
+		"Forklaringer og præciseringer",
+		"Der sættes komma omkring forklarende eller præciserende tilføjelser. Typisk er der et indledende ord eller udtryk som <i>fx, bl.a., herunder, inkl., uanset:</i><br>\n<br>\n<i>Sommetider får han en depression, f.eks. om vinteren.</i><br>\n<br>\n<i>En konstitueret leder, dvs. en midlertidig leder, har som opgave …</i><br>\n<br>\nHvis tilføjelsen indeholder en ledsætning, bortfalder reglen om optionelt startkomma, og kommaet placeres før det indledende forklaringsudtryk:<br>\n<br>\n<i>Jeg kan desværre ikke hjælpe dig med flytningen, bl.a. fordi jeg skal aflevere min opgave på mandag.</i><br>\n<br>\nNogle ord og udtryk <i>(nemlig, også, dels...dels, enten...eller)</i> bruges både inde i sætningen og foran forklarende tilføjelser. Her bruges der kun komma, hvis der er tale om tilføjelser, dvs. hvis resten af sætningen kan stå alene.<br>\n<br>\n<i>Turen må aflyses, dels på grund af vejret, dels på grund af mangel på tid. (Turen må aflyses.)</i><br>\n<br>\n<i>Det gælder dels udlandsrejser, dels rejser til Grønland. (*Det gælder.)</i>",
+		"",
+		"§47.4"
+	],
+	"%ok-explain-end": [
+		"%ok-explain-end",
 		"Forklaringer og præciseringer",
 		"Der sættes komma omkring forklarende eller præciserende tilføjelser. Typisk er der et indledende ord eller udtryk som <i>fx, bl.a., herunder, inkl., uanset:</i><br>\n<br>\n<i>Sommetider får han en depression, f.eks. om vinteren.</i><br>\n<br>\n<i>En konstitueret leder, dvs. en midlertidig leder, har som opgave …</i><br>\n<br>\nHvis tilføjelsen indeholder en ledsætning, bortfalder reglen om optionelt startkomma, og kommaet placeres før det indledende forklaringsudtryk:<br>\n<br>\n<i>Jeg kan desværre ikke hjælpe dig med flytningen, bl.a. fordi jeg skal aflevere min opgave på mandag.</i><br>\n<br>\nNogle ord og udtryk <i>(nemlig, også, dels...dels, enten...eller)</i> bruges både inde i sætningen og foran forklarende tilføjelser. Her bruges der kun komma, hvis der er tale om tilføjelser, dvs. hvis resten af sætningen kan stå alene.<br>\n<br>\n<i>Turen må aflyses, dels på grund af vejret, dels på grund af mangel på tid. (Turen må aflyses.)</i><br>\n<br>\n<i>Det gælder dels udlandsrejser, dels rejser til Grønland. (*Det gælder.)</i>",
 		"",
