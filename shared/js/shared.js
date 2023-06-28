@@ -1533,7 +1533,6 @@ function matomo_event(cat, act, name, value) {
 }
 
 function log_marking_action(data) {
-	data.s = SERVICES[g_tool];
 	let rq = {
 		a: 'marking-action',
 		data: data,
