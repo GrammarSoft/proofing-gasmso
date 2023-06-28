@@ -242,7 +242,8 @@ const WF_MARK  = 1;
 const WF_SUGGS = 2;
 const WF_MERGE = 3;
 const WF_ANA   = 4;
-const NUM_WF   = 5;
+const WF_TID   = 5;
+const NUM_WF   = 6;
 
 const VERSION_PROTOCOL = 1;
 
@@ -872,6 +873,8 @@ function _parseResult(rv) {
 		g_impl.showWarning('WARN_VERSION_MISMATCH');
 	}
 
+	let tid = parseInt(rv.t);
+
 	let txt = sanitize_result(rv.c);
 	let ps = [];
 	let nps = $.trim(txt.replace(/\n+<\/s>\n+/g, "\n\n")).split(/<\/s\d+>/);
@@ -882,7 +885,7 @@ function _parseResult(rv) {
 		for (let i=p ; i<nps.length ; ++i) {
 			if (nps[i].indexOf('<s'+to_send[k].i+'>\n') !== -1) {
 				////console.log(`Par ${k} found in result`);
-				ps.push(nps[i]);
+				ps.push([tid, nps[i]]);
 				p = i;
 				found = true;
 				break;
@@ -890,12 +893,13 @@ function _parseResult(rv) {
 		}
 		if (!found && to_send[k].h in cache[g_tool]) {
 			////console.log(`Par ${k} found in cache`);
-			ps.push('<s'+to_send[k].i+'>\n'+cache[g_tool][to_send[k].h]);
+			ps.push([cache[g_tool][to_send[k].h].tid, '<s'+to_send[k].i+'>\n'+cache[g_tool][to_send[k].h].txt]);
 		}
 	}
 
 	for (let i=0 ; i<ps.length ; ++i) {
-		let cp = $.trim(ps[i]);
+		let tid = ps[i][0];
+		let cp = $.trim(ps[i][1]);
 		if (!cp) {
 			continue;
 		}
@@ -904,7 +908,10 @@ function _parseResult(rv) {
 		let id = parseInt(lines[0].replace(/^<s(.+)>$/, '$1'));
 		for (let k = to_send_b ; k<to_send_i ; ++k) {
 			if (to_send[k].i === id) {
-				cache[g_tool][to_send[k].h] = $.trim(cp.replace(/^<s.+>/g, ''));
+				cache[g_tool][to_send[k].h] = {
+					tid: tid,
+					txt: $.trim(cp.replace(/^<s.+>/g, '')),
+					};
 				break;
 			}
 		}
@@ -927,6 +934,7 @@ function _parseResult(rv) {
 			}
 			w[WF_MERGE] = 0;
 			w[WF_ANA] = {pos:'', func:''};
+			w[WF_TID] = tid;
 
 			if (w[WF_WORD] === '') {
 				words.push(w);
@@ -935,7 +943,7 @@ function _parseResult(rv) {
 
 			if (w.length > 1) {
 				let ws = w[WF_MARK].split(/ /g);
-				w = [w[WF_WORD], '', '', 0, {pos:'', func:''}];
+				w = [w[WF_WORD], '', '', 0, {pos:'', func:''}, tid];
 
 				let nws = [];
 				let rs = [];
@@ -1086,7 +1094,7 @@ function _parseResult(rv) {
 				}
 			}
 			if (w.length > 1 && /(%ko|%k)( |-|$)/.test(w[1])) {
-				let wo = [w[WF_WORD], '', '', 0, w[WF_ANA]];
+				let wo = [w[WF_WORD], '', '', 0, w[WF_ANA], w[WF_TID]];
 				w[WF_WORD] = ',';
 				if (w[WF_MARK].indexOf('%k-stop') !== -1) {
 					w[WF_WORD] = '.';
@@ -1106,6 +1114,7 @@ function _parseResult(rv) {
 					let px = '';
 					let sx = '';
 					let ana = words[j][WF_ANA];
+					let tid = words[j][WF_TID];
 					if (words[j][WF_MERGE] & Defs.TYPE_COMP_LEFT) {
 						if (words[j-1].length > 1 && words[j-1][WF_MARK]) {
 							ts += ' '+words[j-1][WF_MARK];
@@ -1156,7 +1165,7 @@ function _parseResult(rv) {
 					}
 					let flags = words[j][WF_MERGE];
 
-					let nw = [wx, ts.split(/ /).unique().join(' ').replace(/ +/g, ' '), es.join('\t'), ana];
+					let nw = [wx, ts.split(/ /).unique().join(' ').replace(/ +/g, ' '), es.join('\t'), 0, ana, tid];
 					words[j] = nw;
 
 					if (flags & Defs.TYPE_COMP_LEFT) {
@@ -1521,6 +1530,15 @@ function matomo_event(cat, act, name, value) {
 		act = cat;
 	}
 	_paq.push(['trackEvent', cat, act, name, value]);
+}
+
+function log_marking_action(data) {
+	data.s = SERVICES[g_tool];
+	let rq = {
+		a: 'marking-action',
+		data: data,
+		};
+	g_impl.callback(rq);
 }
 
 function contentLoaded() {
