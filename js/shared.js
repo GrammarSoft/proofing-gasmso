@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this project.  If not, see <http://www.gnu.org/licenses/>.
  */
-'use strict';
+//'use strict';
 
 if (!Array.prototype.unique) {
 	Array.prototype.unique = function() {
@@ -201,6 +201,10 @@ if (!String.prototype.normalize) {
 
 		return rv;
 	}
+}
+
+if (typeof ROOT_URL_SELF === 'undefined') {
+	ROOT_URL_SELF = '';
 }
 
 const Defs = {
@@ -950,6 +954,11 @@ function _parseResult(rv) {
 				let crs = [];
 				let had_r = false;
 				for (let k=0 ; k<ws.length ; ++k) {
+					ws[k] = $.trim(ws[k]);
+					if (!ws[k]) {
+						continue;
+					}
+
 					if (ws[k].indexOf('<R:') === 0) {
 						let n = ws[k].substr(3);
 						n = n.substr(0, n.length-1).replace(/(\S)=/g, '$1 ');
@@ -1230,7 +1239,7 @@ function sendTexts() {
 		t = t.replace(/</g, '⟨');
 		t = t.replace(/>/g, '⟩');
 
-		text += '<s'+par.i+'>\n<p>\n'+t+'\n</p>\n</s'+par.i+'>\n\n';
+		text += '<s'+par.i+'>\n'+t+'\n</s'+par.i+'>\n\n';
 	}
 
 	if (text) {
