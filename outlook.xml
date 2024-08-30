@@ -5,19 +5,19 @@
   <Id>3d7dab89-8dcd-4917-a89c-34785844caee</Id>
 
   <!--Version. Updates from the store only get triggered if there is a version change. -->
-  <Version>1.0.3</Version>
+  <Version>1.0.4</Version>
   <ProviderName>Oqaasileriffik</ProviderName>
   <DefaultLocale>da-DK</DefaultLocale>
   <DisplayName DefaultValue="Kukkuniiaat" />
   <Description DefaultValue="Kukkuniiaat" />
-  <IconUrl DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/imgs/logo-32.png" />
-  <HighResolutionIconUrl DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/imgs/logo-64.png" />
+  <IconUrl DefaultValue="https://kukkuniiaat.gl/gas/1.0.4/imgs/logo-64.png" />
+  <HighResolutionIconUrl DefaultValue="https://kukkuniiaat.gl/gas/1.0.4/imgs/logo-128.png" />
 
   <SupportUrl DefaultValue="https://kukkuniiaat.gl/" />
   <AppDomains>
-    <AppDomain>kukkuniiaat.gl</AppDomain>
-    <AppDomain>oqaasileriffik.gl</AppDomain>
-    <AppDomain>retmig.dk</AppDomain>
+    <AppDomain>https://kukkuniiaat.gl</AppDomain>
+    <AppDomain>https://oqaasileriffik.gl</AppDomain>
+    <AppDomain>https://retmig.dk</AppDomain>
   </AppDomains>
 
   <Hosts>
@@ -32,7 +32,7 @@
   <FormSettings>
     <Form xsi:type="ItemRead">
       <DesktopSettings>
-        <SourceLocation DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/html/sidebar.html?host=outlook" />
+        <SourceLocation DefaultValue="https://kukkuniiaat.gl/gas/1.0.4/html/sidebar.html?host=outlook" />
         <RequestedHeight>450</RequestedHeight>
       </DesktopSettings>
     </Form>
@@ -83,14 +83,14 @@
 
     <Resources>
       <bt:Images>
-        <bt:Image id="OQAA.KAL.logo16" DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/imgs/logo-16.png" />
-        <bt:Image id="OQAA.KAL.logo32" DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/imgs/logo-32.png" />
-        <bt:Image id="OQAA.KAL.logo64" DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/imgs/logo-64.png" />
-        <bt:Image id="OQAA.KAL.logo80" DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/imgs/logo-80.png" />
-        <bt:Image id="OQAA.KAL.logo128" DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/imgs/logo-128.png" />
+        <bt:Image id="OQAA.KAL.logo16" DefaultValue="https://kukkuniiaat.gl/gas/1.0.4/imgs/logo-16.png" />
+        <bt:Image id="OQAA.KAL.logo32" DefaultValue="https://kukkuniiaat.gl/gas/1.0.4/imgs/logo-32.png" />
+        <bt:Image id="OQAA.KAL.logo64" DefaultValue="https://kukkuniiaat.gl/gas/1.0.4/imgs/logo-64.png" />
+        <bt:Image id="OQAA.KAL.logo80" DefaultValue="https://kukkuniiaat.gl/gas/1.0.4/imgs/logo-80.png" />
+        <bt:Image id="OQAA.KAL.logo128" DefaultValue="https://kukkuniiaat.gl/gas/1.0.4/imgs/logo-128.png" />
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="OQAA.KAL.Taskpane" DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/html/sidebar.html?host=outlook" />
+        <bt:Url id="OQAA.KAL.Taskpane" DefaultValue="https://kukkuniiaat.gl/gas/1.0.4/html/sidebar.html?host=outlook" />
       </bt:Urls>
       <!-- ShortStrings max characters==125. -->
       <bt:ShortStrings>

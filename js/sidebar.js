@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2022 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2024 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -49,72 +49,99 @@ function markingSetSentence() {
 	let s = cmarking.s;
 	let b = cmarking.w;
 	for (; b>0 ; --b) {
-		if (markings[s][b-1][0].length === 0) {
+		if (markings[s][b-1][WF_WORD].length === 0) {
 			--b;
 			break;
 		}
 	}
 	let e = cmarking.w;
 	for (; e<markings[s].length ; ++e) {
-		if (markings[s][e][0].length === 0) {
+		if (markings[s][e][WF_WORD].length === 0) {
 			break;
 		}
 	}
 
+	let sent_ana = [];
 	let sentence = '';
 	cmarking.sentence = '';
 	for (let i=b; i<e ; ++i) {
+		let m = markings[s][i];
+		if (!m[WF_WORD]) {
+			continue;
+		}
+
+		sent_ana.push(m);
+		let func = '';
+		let icon = '';
+		for (let f=0 ; f<func2label.length ; ++f) {
+			if (func2label[f].rx.test(m[WF_ANA].func)) {
+				func = ' func_off func_' + func2label[f].f;
+				if (func2label[f].i) {
+					if (func2label[f].i.indexOf('https://') !== -1) {
+						icon = '<i class="bi"><img src="'+func2label[f].i+'"></i>';
+					}
+					else {
+						icon = '<i class="bi bi-'+func2label[f].i+'"></i>';
+					}
+				}
+				if (func2label[f].w) {
+					icon = '(' + icon + ')';
+				}
+				break;
+			}
+		}
 		if (i === cmarking.w) {
-			let w = markings[s][i][0];
-			sentence += '<span class="marking">' + escHTML(w) + '</span> ';
+			let w = m[WF_WORD];
+			sentence += '<span class="marking pos pos_off pos_'+m[WF_ANA].pos+func+'"><span>' + escHTML(w) + '</span><br><span class="func">' + icon + '</span></span> ';
 		}
 		else {
-			if (markings[s][i].length > 1 && rx_insertable.test(markings[s][i][1])) {
-				////console.log(`Skipping ${s} ${i}: ${markings[s][i][1]}`);
+			if (m[WF_MARK].length > 1 && g_marks.rx_ins.test(m[WF_MARK])) {
+				////console.log(`Skipping ${s} ${i}: ${markings[s][i][WF_MARK]}`);
 				continue;
 			}
-			sentence += escHTML(markings[s][i][0]) + ' ';
+			sentence += '<span class="pos pos_off pos_'+m[WF_ANA].pos+func+'"><span>'+escHTML(m[WF_WORD]) + '</span><br><span class="func">' + icon + '</span></span> ';
 		}
-		cmarking.sentence += markings[s][i][0] + ' ';
+		cmarking.sentence += m[WF_WORD] + ' ';
 	}
+	ls_set('sentence_analysis', sent_ana);
 	return sentence;
 }
 
 function markingSetContext() {
 	cmarking.prefix = '';
 	for (let i=0 ; i<cmarking.w ; ++i) {
-		if (markings[cmarking.s][i].length > 1 && rx_insertable.test(markings[cmarking.s][i][1])) {
-			////console.log(`Skipping ${cmarking.s} ${i}: ${markings[cmarking.s][i][1]}`);
+		if (markings[cmarking.s][i][WF_MARK].length > 1 && g_marks.rx_ins.test(markings[cmarking.s][i][WF_MARK])) {
+			////console.log(`Skipping ${cmarking.s} ${i}: ${markings[cmarking.s][i][WF_MARK]}`);
 			continue;
 		}
-		cmarking.prefix += markings[cmarking.s][i][0] + ' ';
+		cmarking.prefix += markings[cmarking.s][i][WF_WORD] + ' ';
 	}
 
 	cmarking.suffix = '';
 	for (let i=cmarking.w+1 ; i<markings[cmarking.s].length ; ++i) {
-		if (markings[cmarking.s][i].length > 1 && rx_insertable.test(markings[cmarking.s][i][1])) {
-			////console.log(`Skipping ${cmarking.s} ${i}: ${markings[cmarking.s][i][1]}`);
+		if (markings[cmarking.s][i][WF_MARK].length > 1 && g_marks.rx_ins.test(markings[cmarking.s][i][WF_MARK])) {
+			////console.log(`Skipping ${cmarking.s} ${i}: ${markings[cmarking.s][i][WF_MARK]}`);
 			continue;
 		}
-		cmarking.suffix += markings[cmarking.s][i][0] + ' ';
+		cmarking.suffix += markings[cmarking.s][i][WF_WORD] + ' ';
 	}
 }
 
 function markingGetSnippet() {
 	let snippet = '';
 	for (let i=Math.max(0, cmarking.w-2) ; i<cmarking.w ; ++i) {
-		if (markings[cmarking.s][i].length > 1 && rx_insertable.test(markings[cmarking.s][i][1])) {
+		if (markings[cmarking.s][i][WF_MARK].length > 1 && g_marks.rx_ins.test(markings[cmarking.s][i][WF_MARK])) {
 			continue;
 		}
-		snippet += markings[cmarking.s][i][0] + ' ';
+		snippet += markings[cmarking.s][i][WF_WORD] + ' ';
 	}
 
-	snippet += markings[cmarking.s][cmarking.w][0] + ' ';
+	snippet += markings[cmarking.s][cmarking.w][WF_WORD] + ' ';
 	for (let i=cmarking.w+1 ; i<Math.min(markings[cmarking.s].length, cmarking.w+3) ; ++i) {
-		if (markings[cmarking.s][i].length > 1 && rx_insertable.test(markings[cmarking.s][i][1])) {
+		if (markings[cmarking.s][i][WF_MARK].length > 1 && g_marks.rx_ins.test(markings[cmarking.s][i][WF_MARK])) {
 			continue;
 		}
-		snippet += markings[cmarking.s][i][0] + ' ';
+		snippet += markings[cmarking.s][i][WF_WORD] + ' ';
 	}
 
 	snippet = $.trim(snippet);
@@ -126,10 +153,10 @@ function markingRender(skipact) {
 	let marking = markings[s][cmarking.w];
 	let sentence = markingSetSentence();
 
-	let ik = marking[0] + '\t' + marking[1];
+	let ik = marking[WF_WORD] + '\t' + marking[WF_MARK];
 	if (ignores.hasOwnProperty(ik) && ignores[ik].hasOwnProperty(cmarking.sentence) && ignores[ik][cmarking.sentence] === true) {
 		////console.log(`Skip ignored ${ik} : ${cmarking.sentence}`);
-		markings[s][cmarking.w] = [marking[0]];
+		markings[s][cmarking.w] = [marking[WF_WORD], '', '', 0, marking[WF_ANA]];
 		if (skipact === 'prev') {
 			btnPrev();
 		}
@@ -152,10 +179,10 @@ function markingRender(skipact) {
 		btn_lbl = 'BTN_COMMA_';
 	}
 
-	let types = marking[1].split(/ /g);
+	let types = marking[WF_MARK].split(/ /g);
 	let col = markingColor(types);
 
-	if (types_dictionary.test(marking[1])) {
+	if (g_marks.dict.test(marking[WF_MARK])) {
 		$('#chkAddWord').show();
 		$('.btnAddWord').removeClass('disabled');
 	}
@@ -171,10 +198,10 @@ function markingRender(skipact) {
 	let es = {};
 	let el = {};
 	for (let i=0 ; i<types.length ; ++i) {
-		let et = marking_types[types[i]] ? marking_types[types[i]][0] : (types[i] + ' ');
+		let et = g_marks.types[types[i]] ? g_marks.types[types[i]][0] : (types[i] + ' ');
 		es[i] = '<h2 title="'+escHTML(types[i])+'">'+et+'</h2>';
 
-		et = marking_types[types[i]] ? marking_types[types[i]][1] : (types[i] + ' ');
+		et = g_marks.types[types[i]] ? g_marks.types[types[i]][1] : (types[i] + ' ');
 		et = '<p>'+et.replace(/(<br>\s*)+<br>\s*/g, '</p><p>')+'</p>';
 		el[i] = es[i] + et.replace(/<p>\s*<\/p>/g, '');
 	}
@@ -189,27 +216,27 @@ function markingRender(skipact) {
 
 	let alt = (_live_options.config.opt_color ? ' alt' : '');
 
-	$('.chkType').attr('title', marking[1]);
+	$('.chkType').attr('title', marking[WF_MARK]);
 
-	sentence = sentence.replace(' class="marking"', ' class="marking marking-'+col+alt+' marking-'+g_tool.toLowerCase()+'"');
+	sentence = sentence.replace(' class="marking ', ' class="marking marking-'+col+alt+' marking-'+g_tool.toLowerCase()+' ');
 	$('.chkSentence').html(sentence);
 
-	if (marking[2].length === 0) {
+	if (marking[WF_SUGGS].length === 0) {
 		$('.btnInput').hide();
 		$('#chkDidYouMean').hide();
 		$('.chkSentence').addClass('divider');
 		$('.btnAccept').addClass('disabled');
 	}
 	else {
-		let all_upper = is_upper(marking[0]);
-		let first_upper = all_upper || is_upper(marking[0].charAt(0));
+		let all_upper = is_upper(marking[WF_WORD]);
+		let first_upper = all_upper || is_upper(marking[WF_WORD].charAt(0));
 
-		if (types_to_lower.test(marking[1])) {
+		if (g_marks.to_lower.test(marking[WF_MARK])) {
 			all_upper = first_upper = false;
 		}
 
 		let suggs = '';
-		let ss = marking[2].split(/\t/g);
+		let ss = marking[WF_SUGGS].split(/\t/g);
 		for (let i=0 ; i<ss.length ; ++i) {
 			let t = ss[i];
 			if (all_upper) {
@@ -238,27 +265,29 @@ function markingRender(skipact) {
 
 	$('.icon-accept,.icon-discard').addClass('icon-accept').removeClass('icon-discard');
 
-	if (rx_insertable.test(marking[1])) {
+	if (g_marks.rx_ins.test(marking[WF_MARK])) {
 		let px = /^(.*?)(\S+\s?)$/.exec(cmarking.prefix);
 		let sx = /^(\s?\S+)(.*)$/.exec(cmarking.suffix);
 		impl_selectInDocument(px[1], px[2] + sx[1], sx[2]);
 		$('.txtAccept').text(l10n_translate(btn_lbl + 'INSERT'));
-		if (marking[1].indexOf('%k-stop') !== -1) {
+		if (marking[WF_MARK].indexOf('%k-stop') !== -1) {
 			$('.txtAccept').text(l10n_translate(btn_lbl + 'INSERT_STOP'));
 		}
 		$('.btnAccept').removeClass('disabled');
 	}
-	else if (rx_removable.test(marking[1])) {
+	else if (g_marks.rx_del.test(marking[WF_MARK])) {
 		$('.icon-accept,.icon-discard').addClass('icon-discard').removeClass('icon-accept');
 		$('.txtAccept').text(l10n_translate(btn_lbl + 'REMOVE'));
 		$('.btnAccept').removeClass('disabled');
-		impl_selectInDocument(cmarking.prefix, marking[0], cmarking.suffix);
+		impl_selectInDocument(cmarking.prefix, marking[WF_WORD], cmarking.suffix);
 	}
 	else {
 		$('.txtAccept').text(l10n_translate(btn_lbl + 'REPLACE'));
-		let middle = marking[0];
+		let middle = marking[WF_WORD];
 		impl_selectInDocument(cmarking.prefix, middle, cmarking.suffix);
 	}
+
+	showHideAnalysis();
 }
 
 function markingSelect(s, w) {
@@ -275,20 +304,20 @@ function btnSeeList() {
 
 	for (let s = 0 ; s<markings.length ; ++s) {
 		for (let w = 0 ; w<markings[s].length ; ++w) {
-			if (markings[s][w].length > 1) {
-				html += '<div class="errorListEntry" onclick="markingSelect('+s+','+w+');" title="'+escHTML(markings[s][w][1])+'"><span class="link">';
+			if (markings[s][w][WF_MARK].length > 1) {
+				html += '<div class="errorListEntry" onclick="markingSelect('+s+','+w+');" title="'+escHTML(markings[s][w][WF_MARK])+'"><span class="link">';
 				let c = Math.max(w-3, 0);
 				if (c > 0) {
 					html += '…';
 				}
 				for ( ; c<w ; ++c) {
-					html += escHTML(markings[s][c][0]) + ' ';
+					html += escHTML(markings[s][c][WF_WORD]) + ' ';
 				}
-				let col = markingColor(markings[s][w][1].split(/ /g));
-				html += '<span class="marking marking-'+col+alt+' marking-'+g_tool.toLowerCase()+'">'+escHTML(markings[s][w][0])+'</span>';
+				let col = markingColor(markings[s][w][WF_MARK].split(/ /g));
+				html += '<span class="marking marking-'+col+alt+' marking-'+g_tool.toLowerCase()+'">'+escHTML(markings[s][w][WF_WORD])+'</span>';
 				c = w+1;
 				for ( ; c<markings[s].length && c<w+3 ; ++c) {
-					html += ' '+escHTML(markings[s][c][0]);
+					html += ' '+escHTML(markings[s][c][WF_WORD]);
 				}
 				if (c < markings[s].length) {
 					html += '…';
@@ -322,25 +351,25 @@ function btnAccept() {
 }
 
 function btnInput() {
-	$('#chkInputText').val(markings[cmarking.s][cmarking.w][0]);
+	$('#chkInputText').val(markings[cmarking.s][cmarking.w][WF_WORD]);
 	$('#chkInput').show();
 	$('#chkInputText').focus();
 }
 
 function markingIgnore() {
 	let marking = markings[cmarking.s][cmarking.w];
-	let ik = marking[0] + '\t' + marking[1];
+	let ik = marking[WF_WORD] + '\t' + marking[WF_MARK];
 	if (!ignores[ik]) {
 		ignores[ik] = {};
 	}
 	ignores[ik][cmarking.sentence] = true;
 	//console.log('Ignoring %s in %s', ik, cmarking.sentence);
 
-	if (rx_insertable.test(marking[1])) {
-		markings[cmarking.s][cmarking.w] = [' '];
+	if (g_marks.rx_ins.test(marking[WF_MARK])) {
+		markings[cmarking.s][cmarking.w] = [' ', '', '', 0, {pos:'', func:''}, marking[WF_TID]];
 	}
 	else {
-		markings[cmarking.s][cmarking.w] = [marking[0]];
+		markings[cmarking.s][cmarking.w] = [marking[WF_WORD], '', '', 0, marking[WF_ANA], marking[WF_TID]];
 	}
 }
 
@@ -361,18 +390,24 @@ function btnIgnorePopup() {
 
 function btnIgnore() {
 	$('#popupIgnore').hide();
+	let mark = markings[cmarking.s][cmarking.w];
+	log_marking_action({'a': 'ignore-one', 'm': mark[WF_MARK], 'w': mark[WF_WORD], 't': mark[WF_TID]});
+
 	markingIgnore();
-	matomo_event('btnIgnoreOne', markings[cmarking.s][cmarking.w][1], markings[cmarking.s][cmarking.w][0]);
+	matomo_event('btnIgnoreOne', mark[WF_MARK], mark[WF_WORD]);
 	btnNext();
 }
 
 function btnIgnoreAll() {
 	$('#popupIgnore').hide();
-	let word = markings[cmarking.s][cmarking.w][0];
-	let ts = markings[cmarking.s][cmarking.w][1];
+	let mark = markings[cmarking.s][cmarking.w];
+	log_marking_action({'a': 'ignore-all', 'm': mark[WF_MARK], 'w': mark[WF_WORD], 't': mark[WF_TID]});
+
+	let word = mark[WF_WORD];
+	let ts = mark[WF_MARK];
 	for (let s=0 ; s<markings.length ; ++s) {
 		for (let w=0 ; w<markings[s].length ; ++w) {
-			if (markings[s][w][0] === word && markings[s][w][1] && markings[s][w][1] === ts) {
+			if (markings[s][w][WF_WORD] === word && markings[s][w][WF_MARK] && markings[s][w][WF_MARK] === ts) {
 				cmarking.s = s;
 				cmarking.w = w;
 				markingSetSentence();
@@ -401,7 +436,7 @@ function btnPrev() {
 					continue;
 				}
 
-				if (markings[s][w].length > 1) {
+				if (markings[s][w][WF_MARK].length > 1) {
 					cmarking.s = s;
 					cmarking.w = w;
 					found = true;
@@ -449,7 +484,7 @@ function btnNext() {
 					continue;
 				}
 
-				if (markings[s][w].length > 1) {
+				if (markings[s][w][WF_MARK].length > 1) {
 					cmarking.s = s;
 					cmarking.w = w;
 					found = true;
@@ -490,7 +525,9 @@ function btnInputOne() {
 	if (rpl.length === 0) {
 		rpl = ' ';
 	}
-	matomo_event('btnInputOne', markings[cmarking.s][cmarking.w][1], cmarking.w, rpl);
+	let mark = markings[cmarking.s][cmarking.w];
+	matomo_event('btnInputOne', mark[WF_MARK], cmarking.w, rpl);
+	log_marking_action({'a': 'input-one', 'm': mark[WF_MARK], 'w': mark[WF_WORD], 'r': rpl, 't': mark[WF_TID]});
 	processQueue({f: impl_replaceInDocument, s: cmarking.s, w: cmarking.w, rpl: rpl});
 }
 
@@ -504,21 +541,62 @@ function btnInputAll() {
 	if (rpl.length === 0) {
 		rpl = ' ';
 	}
-	let word = markings[cmarking.s][cmarking.w][0];
-	let ts = markings[cmarking.s][cmarking.w][1];
+	let mark = markings[cmarking.s][cmarking.w];
+	let word = mark[WF_WORD];
+	let ts = mark[WF_MARK];
 	let os = cmarking.s;
 	let ow = cmarking.w;
 
 	for (let s=0 ; s<markings.length ; ++s) {
 		for (let w=0 ; w<markings[s].length ; ++w) {
-			if (markings[s][w][0] === word && markings[s][w][1] && markings[s][w][1] === ts) {
+			if (markings[s][w][WF_WORD] === word && markings[s][w][WF_MARK] && markings[s][w][WF_MARK] === ts) {
 				appendQueue({f: impl_replaceInDocument, s: s, w: w, rpl: rpl});
 			}
 		}
 	}
 
 	matomo_event('btnInputAll', ts, word, rpl);
+	log_marking_action({'a': 'input-all', 'm': mark[WF_MARK], 'w': word, 'r': rpl, 't': mark[WF_TID]});
 	processQueue({f: btnNext, s: os, w: ow});
+}
+
+function showHideAnalysis() {
+	let chk = $('.chkShowAnalysis').prop('checked');
+	if (chk) {
+		$('.pos').removeClass('pos_off');
+		$('.chkAnalysisOpts').show();
+		$('.chkPos,.chkFunc').each(function() {
+			let e = $(this);
+			let pfs = $('.'+e.val());
+			let which = 'func_';
+			if (e.hasClass('chkPos')) {
+				which = 'pos_';
+			}
+			if (e.prop('checked')) {
+				e.removeClass('strike');
+				pfs.removeClass(which+'off');
+			}
+			else {
+				e.addClass('strike');
+				pfs.addClass(which+'off');
+			}
+		});
+	}
+	else {
+		$('.pos').addClass('pos_off').addClass('func_off');
+		$('.chkAnalysisOpts').hide();
+	}
+	return chk;
+}
+
+function btnToggleAnalysis() {
+	let chk = showHideAnalysis();
+	if (chk) {
+		matomo_event('ui', 'show-analysis');
+	}
+	else {
+		matomo_event('ui', 'hide-analysis');
+	}
 }
 
 function markingAcceptSuggestion() {
@@ -527,8 +605,9 @@ function markingAcceptSuggestion() {
 		return;
 	}
 
-	let middle = markings[cmarking.s][cmarking.w][0];
-	matomo_event('suggestionAccept', cmarking.w, $(this).text());
+	let mark = markings[cmarking.s][cmarking.w];
+	let middle = mark[WF_WORD];
+	log_marking_action({'a': 'accept', 'm': mark[WF_MARK], 'w': middle, 'r': $(this).text(), 't': mark[WF_TID]});
 	processQueue({f: impl_replaceInDocument, s: cmarking.s, w: cmarking.w, middle: middle, rpl: $(this).text()});
 }
 
@@ -538,18 +617,20 @@ function markingAccept() {
 		return;
 	}
 
-	matomo_event('btnAccept', markings[cmarking.s][cmarking.w][1], cmarking.w);
+	let mark = markings[cmarking.s][cmarking.w];
 
-	if (rx_insertable.test(markings[cmarking.s][cmarking.w][1])) {
+	if (g_marks.rx_ins.test(mark[WF_MARK])) {
 		let px = /^(.*?)(\S+)(\s?)$/.exec(cmarking.prefix);
 		let sx = /^(\s?\S+)(.*)$/.exec(cmarking.suffix);
-		let rpl = markings[cmarking.s][cmarking.w][0];
-		if (/@insert/.test(markings[cmarking.s][cmarking.w][1])) {
+		let rpl = mark[WF_WORD];
+		log_marking_action({'a': 'accept-insert', 'm': mark[WF_MARK], 'w': markings[cmarking.s][cmarking.w-1][WF_WORD], 'r': rpl, 't': mark[WF_TID]});
+		if (/£insert/.test(mark[WF_MARK])) {
 			rpl = ' ' + rpl;
 		}
 		processQueue({f: impl_insertInDocument, s: cmarking.s, w: cmarking.w, prefix: px[1], middle: px[2] + px[3] + sx[1], rpl: px[2] + rpl + px[3] + sx[1], suffix: sx[2]});
 	}
-	else if (/(@nil|%nok)( |-|$)/.test(markings[cmarking.s][cmarking.w][1])) {
+	else if (g_marks.rx_del.test(mark[WF_MARK])) {
+		log_marking_action({'a': 'accept-remove', 'm': mark[WF_MARK], 'w': mark[WF_WORD], 't': mark[WF_TID]});
 		processQueue({f: impl_removeInDocument, s: cmarking.s, w: cmarking.w, rpl: ' '});
 	}
 	else {
@@ -584,7 +665,7 @@ function processQueue(action) {
 	markingSetContext();
 
 	let prefix = (act.prefix === null) ? cmarking.prefix : act.prefix;
-	let middle = (act.middle === null) ? markings[cmarking.s][cmarking.w][0] : act.middle;
+	let middle = (act.middle === null) ? markings[cmarking.s][cmarking.w][WF_WORD] : act.middle;
 	let suffix = (act.suffix === null) ? cmarking.suffix : act.suffix;
 
 	return act.f(prefix, middle, act.rpl, suffix);
@@ -641,7 +722,7 @@ function didSelect() {
 function didReplace(rv) {
 	//console.log(rv);
 	_did_helper(rv.before, rv.after);
-	markings[cmarking.s][cmarking.w] = [rv.rpl];
+	markings[cmarking.s][cmarking.w] = [rv.rpl, '', '', 0, markings[cmarking.s][cmarking.w][WF_ANA], markings[cmarking.s][cmarking.w][WF_TID]];
 	processQueue();
 }
 
@@ -653,14 +734,14 @@ function didReplaceSilent(rv) {
 function didInsert(rv) {
 	//console.log(rv);
 	_did_helper(rv.before, rv.after);
-	markings[cmarking.s][cmarking.w] = [markings[cmarking.s][cmarking.w][0]];
+	markings[cmarking.s][cmarking.w] = [markings[cmarking.s][cmarking.w][WF_WORD], '', '', 0, markings[cmarking.s][cmarking.w][WF_ANA], markings[cmarking.s][cmarking.w][WF_TID]];
 	processQueue();
 }
 
 function didRemove(rv) {
 	//console.log(rv);
 	_did_helper(rv.before, rv.after);
-	markings[cmarking.s][cmarking.w] = [''];
+	markings[cmarking.s][cmarking.w] = ['', '', '', 0, {pos:'', func:''}, markings[cmarking.s][cmarking.w][WF_TID]];
 	processQueue();
 }
 
@@ -711,6 +792,10 @@ function loginKeepalive(init) {
 		g_keepalive = setInterval(loginKeepalive, 5*60*1000); // 5 minute keepalive
 
 		//console.log('Login success');
+		if (rv.hasOwnProperty('anonymous')) {
+			g_anonymous = rv.anonymous;
+			delete rv.anonymous;
+		}
 		delete rv.a;
 		g_access_token = rv;
 		ls_set('access-token', g_access_token);
@@ -821,7 +906,7 @@ function loginListener() {
 }
 
 function logout() {
-	window.open(SIGNOUT_URL+g_access_token.sessionid, 'Logout');
+	g_impl.openExternal(SIGNOUT_URL+g_access_token.sessionid, 'Logout');
 
 	$.ajax({
 		url: ROOT_URL_GRAMMAR+'/callback.php',
@@ -863,6 +948,20 @@ function initSidebar() {
 		$('[data-l10n="TXT_COMMA_HINT"]').attr('data-l10n', 'TXT_COMMA_HINT_NS');
 		$('[data-l10n="BTN_EXEC_ALL"]').attr('data-l10n', 'BTN_EXEC_ALL_NS');
 	}
+	if (!g_impl.hasOwnProperty('callback')) {
+		g_impl.callback = function () {};
+	}
+	if (!g_impl.hasOwnProperty('openExternal')) {
+		g_impl.openExternal = function (url, title) {
+			window.open(url, title);
+		};
+	}
+	if (!g_impl.hasOwnProperty('beforeSendTexts')) {
+		g_impl.beforeSendTexts = function(t) { return t; };
+	}
+	if (!g_impl.hasOwnProperty('beforeParseResult')) {
+		g_impl.beforeParseResult = function(t) { return t; };
+	}
 
 	if (typeof window.g_tool === 'string') {
 		g_tool = window.g_tool;
@@ -897,6 +996,41 @@ function initSidebar() {
 		$('.chkExplainLong').hide();
 		$('.chkExplainShort').show();
 	}
+
+	$('.chkAnalysisOpts').hide();
+	if (_live_options.config.opt_showAnalysis) {
+		$('.chkShowAnalysis').prop('checked', true);
+	}
+	else {
+		$('.chkShowAnalysis').prop('checked', false);
+	}
+	$('.chkShowAnalysis').click(btnToggleAnalysis);
+	$('.chkPos,.chkFunc').each(function() {
+		let e = $(this);
+		if (e.prop('checked')) {
+			e.closest('label').removeClass('strike');
+		}
+		else {
+			e.closest('label').addClass('strike');
+		}
+	}).click(function() {
+		let e = $(this);
+		let pfs = $('.'+e.val());
+		let which = 'func_';
+		if (e.hasClass('chkPos')) {
+			which = 'pos_';
+		}
+		if (e.prop('checked')) {
+			e.closest('label').removeClass('strike');
+			pfs.removeClass(which+'off');
+			matomo_event('ui', 'enable_'+e.val());
+		}
+		else {
+			e.closest('label').addClass('strike');
+			pfs.addClass(which+'off');
+			matomo_event('ui', 'disable_'+e.val());
+		}
+	});
 
 	$('.btnOptions').click(function() {
 		impl_showOptions(g_tool);
@@ -1006,7 +1140,9 @@ function initSidebar() {
 		if ($(this).hasClass('disabled')) {
 			return false;
 		}
-		addToDictionary(markings[cmarking.s][cmarking.w][0]);
+		let mark = markings[cmarking.s][cmarking.w];
+		log_marking_action({'a': 'dict-add', 'm': mark[WF_MARK], 'w': mark[WF_WORD], 't': mark[WF_TID]});
+		addToDictionary(mark[WF_WORD]);
 		$('.btnIgnoreAll').click();
 		matomo_event('ui', 'ignore-all');
 	});
@@ -1015,9 +1151,26 @@ function initSidebar() {
 		if ($(this).hasClass('disabled')) {
 			return false;
 		}
-		window.open(ROOT_URL_GRAMMAR + '/login.php?popup=1&channel='+g_login_channel, 'Login');
+		g_impl.openExternal(ROOT_URL_GRAMMAR + '/login.php?popup=1&channel='+g_login_channel, 'Login');
 		matomo_event('ui', 'login');
 	});
+
+	$('.btnLoginSkip').click(function() {
+		if ($(this).hasClass('disabled')) {
+			return false;
+		}
+		g_anonymous = true;
+		g_impl.openExternal(ROOT_URL_GRAMMAR + '/login.php?popup=1&anonymous=1&channel='+g_login_channel, 'Login');
+		matomo_event('ui', 'login');
+	});
+
+	if (typeof impl_getSelectedText !== 'function') {
+		$('.hyphen-specific').hide();
+	}
+	else {
+		$('.btnHyphenate').click(function() { impl_getSelectedText(g_impl.hyphenate); });
+		$('.btnHyphenateUndo').click(function() { impl_getSelectedText(g_impl.hyphenateUndo); });
+	}
 
 	$('.btnLogout').click(logout);
 	$('.btnOptions').hide();
@@ -1066,7 +1219,7 @@ function initSidebar() {
 	g_impl.parseProgress = function() {
 		$('.chkProgressBar').css('width', (to_send_i/to_send.length*100.0) + '%');
 	};
-	g_impl.parseNoResult = function() {
+	g_impl.parseNoResult = function(rv) {
 		$('.chkProgress').hide();
 		//console.log(rv);
 	};
@@ -1091,10 +1244,23 @@ function initSidebar() {
 	};
 	g_impl.parseSendEnd = function() {
 		setTimeout(function() {
-			parseResult({c:''});
+			parseResult({c:'', v:VERSION_PROTOCOL, t:0});
 		}, 100);
 		$('.chkProgress').hide();
 	};
+
+	if (g_client == 'adobe') {
+		$('a[href^="https://"]').click(function () {
+			let url = $(this).attr('href');
+			g_impl.openExternal(url);
+		});
+		$('form[action^="https://"]').submit(function () {
+			let url = $(this).attr('action');
+			g_impl.openExternal(url);
+		});
+	}
+
+	matomo_load();
 }
 
 $(function() {

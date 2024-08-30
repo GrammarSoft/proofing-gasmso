@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2022 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2024 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -247,7 +247,7 @@ function _impl_showOptions_cb(asyncResult) {
 }
 
 function impl_showOptions(g_tool) {
-	Office.context.ui.displayDialogAsync(ROOT_URL_SELF + '/html/options.html?host=msoffice&tool='+g_tool, { width: 800, height: 600, displayInIframe: true }, _impl_showOptions_cb);
+	Office.context.ui.displayDialogAsync(ROOT_URL_SELF + '/html/options.html?host=msoffice&tool='+g_tool, { width: 80, height: 80, displayInIframe: true }, _impl_showOptions_cb);
 }
 
 function _impl_getPars(context, pars) {
@@ -290,8 +290,28 @@ function impl_getAllPars() {
 }
 
 function impl_showDictionary(text) {
-	Office.context.ui.displayDialogAsync(ROOT_URL_SELF + '/html/dictionary.html?host=msoffice&text='+text, { width: 800, height: 600, displayInIframe: true });
+	Office.context.ui.displayDialogAsync(ROOT_URL_SELF + '/html/dictionary.html?host=msoffice&text='+text, { width: 80, height: 80, displayInIframe: true });
 }
+
+/*
+function impl_getSelectedText(func) {
+	Word.run(function(context) {
+		let rv = [];
+		let s = context.document.getSelection();
+		let pars = s.paragraphs;
+		for (let i=0 ; i<pars.length ; ++i) {
+			let r = pars[i].getRange().split([' ']);
+			let sel = r.intersectWith(s);
+		}
+		return func(rv);
+	}).catch(function(error) {
+		showError(JSON.stringify(error));
+		if (error instanceof OfficeExtension.Error) {
+			//console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+		}
+	});
+}
+//*/
 
 g_impl.init = function(func) {
 	Office.initialize = function(reason) {

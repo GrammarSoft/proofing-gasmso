@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2022 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2024 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -31,6 +31,7 @@ html {
 }
 
 html, body {
+	--font-size: 14px;
 	margin: 0;
 	padding: 0;
 	font-family: Verdana, sans-serif;
@@ -84,6 +85,14 @@ iframe {
 }
 .darkorange {
 	color: #e6930a;
+}
+.black {
+	color: #000;
+}
+
+.strike {
+	text-decoration: line-through;
+	font-style: italic;
 }
 
 ul {
@@ -260,6 +269,20 @@ button {
 	background-color: #097ab3;
 }
 
+.btn-green {
+	background-color: #18aa18;
+}
+.btn-green:hover, .btn-green:focus {
+	background-color: #128012;
+}
+
+.btn-red {
+	background-color: #aa1818;
+}
+.btn-red:hover, .btn-red:focus {
+	background-color: #801212;
+}
+
 a, .link {
 	text-decoration: none;
 	cursor: pointer;
@@ -296,6 +319,11 @@ h2 {
 	font-weight: bold;
 	color: #000;
 }
+h3 {
+	font-size: 12px;
+	font-weight: bold;
+	color: #000;
+}
 
 h1, .text {
 	margin: 18px 0;
@@ -323,11 +351,11 @@ label {
 	color: #0da9f6;
 }
 
-label * {
+label.crbox * {
 	display: inline-block;
 }
 
-label input[type="checkbox"] {
+label.crbox input[type="checkbox"] {
 	margin: 2px 9px 0 0;
 }
 
@@ -363,6 +391,12 @@ thead, tfoot {
 }
 .type-k, .type-green {
 	color: #419641;
+}
+.type-purple {
+	color: #c22bc2;
+}
+.type-blue {
+	color: #2b2bc2;
 }
 .type-other {
 	color: #666;
@@ -419,6 +453,129 @@ thead, tfoot {
 .itw_tts:hover {
 	background-color: yellow;
 	color: #000;
+}
+
+.pos-rel {
+	position: relative;
+}
+.label-abs-right {
+	position: absolute;
+	right: 0;
+	top: 0;
+	margin: 0;
+	white-space: nowrap;
+	font-size: 12px;
+}
+
+.bi img {
+	width: var(--font-size);
+}
+.pos {
+	display: inline-block;
+	text-align: center;
+}
+.pos span {
+	display: inline-block;
+	border-bottom: 3px solid transparent;
+	margin-bottom: 3px;
+}
+.pos .func {
+	user-select: none;
+	border-bottom: 0px;
+}
+.pos_V span {
+	border-color: #f00;
+}
+.color_V {
+	color: #f00;
+}
+.pos_N span {
+	border-color: #00f;
+}
+.color_N {
+	color: #00f;
+}
+.pos_PROP span {
+	border-color: #008;
+}
+.color_PROP {
+	color: #008;
+}
+.pos_ADJ span {
+	border-color: #060;
+}
+.color_ADJ {
+	color: #060;
+}
+.pos_ADV span {
+	border-color: #fc0;
+}
+.color_ADV {
+	color: #fc0;
+}
+.pos_PRON span {
+	border-color: #39f;
+}
+.color_PRON {
+	color: #39f;
+}
+.pos_ART span, .pos_DET span {
+	border-color: #990;
+}
+.color_ART, .color_DET {
+	color: #990;
+}
+.pos_NUM span {
+	border-color: #0c0;
+}
+.color_NUM {
+	color: #0c0;
+}
+.pos_PRP span {
+	border-color: #900;
+}
+.color_PRP {
+	color: #900;
+}
+.pos_CONJ span {
+	border-color: #999;
+}
+.color_CONJ {
+	color: #999;
+}
+.pos_INTJ span {
+	border-color: #f0f;
+}
+.color_INTJ {
+	color: #f0f;
+}
+.pos_INFM span {
+	border-color: #f60;
+}
+.color_INFM {
+	color: #f60;
+}
+.pos_off span {
+	border-color: transparent;
+}
+.func_off .func {
+	display: none;
+}
+
+.flex-cols {
+	display: flex;
+	justify-content: space-between;
+}
+.flex-cols ul {
+	padding: 0;
+}
+.flex-cols li {
+	--font-size: 12px;
+	font-size: 12px;
+	white-space: nowrap;
+}
+.flex-cols input {
+	display: none;
 }
 
 footer {

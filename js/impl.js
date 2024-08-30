@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2022 Tino Didriksen Consult <consult@tinodidriksen.com> at https://tinodidriksen.com/
+ * Copyright 2016-2024 Tino Didriksen Consult <consult@tinodidriksen.com> at https://tinodidriksen.com/
  * Linguistic backend by Oqaasileriffik (https://oqaasileriffik.gl/)
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
@@ -20,10 +20,10 @@
 
 const VERSION_MAJOR = 1;
 const VERSION_MINOR = 0;
-const VERSION_PATCH = 3;
+const VERSION_PATCH = 4;
 const PRODUCT_NAME = window.hasOwnProperty('PRODUCT_NAME') ? window.PRODUCT_NAME : 'Kukkuniiaat';
 const PRODUCT_DOMAIN = window.hasOwnProperty('PRODUCT_DOMAIN') ? window.PRODUCT_DOMAIN : 'kukkuniiaat.gl';
-const ROOT_URL_SELF = 'https://kukkuniiaat.gl/gas/1.0.3/';
+const ROOT_URL_SELF = 'https://kukkuniiaat.gl/gas/1.0.4/';
 const ROOT_URL_GRAMMAR = 'https://kukkuniiaat.gl/';
 
 const VERSION = ''+VERSION_MAJOR+'.'+VERSION_MINOR+'.'+VERSION_PATCH;
@@ -79,7 +79,7 @@ function impl_canComma() {
 }
 
 function impl_openDictionary(word) {
-	window.open('https://ordbog.gl/?st='+encodeURIComponent(word), 'Kalaallisut ordbogit');
+	g_impl.openExternal('https://ordbog.gl/?st='+encodeURIComponent(word), 'Kalaallisut ordbogit');
 }
 
 function impl_loadUserdata() {
@@ -94,7 +94,51 @@ function impl_removeFromDictionary(word) {
 function impl_attachTTS() {
 }
 
+function _impl_expandSelToWord(sel) {
+	sel.prefix = sel.p.substr(0, sel.i);
+	sel.suffix = sel.p.substr(sel.i + sel.t.length);
+
+	while (!/^[\s\n]/.test(sel.t) && /[a-zA-Z0-9æøåÆØÅ\u00AD\u2010]$/i.test(sel.prefix)) {
+		sel.t = sel.prefix.slice(-1) + sel.t;
+		sel.prefix = sel.prefix.slice(0, -1);
+	}
+
+	while (!/[\s\n]$/.test(sel.t) && /^[a-zA-Z0-9æøåÆØÅ\u00AD\u2010]/i.test(sel.suffix)) {
+		sel.t += sel.suffix.slice(0, 1);
+		sel.suffix = sel.suffix.slice(1);
+	}
+
+	return sel;
+}
+
+function impl_hyphenate(sels) {
+	for (let i=0 ; i<sels.length ; ++i) {
+		let sel = _impl_expandSelToWord(sels[i]);
+
+		// Note this also removes existing U+002D Hyphen Minus
+		let h = sel.t.replace(/[-\u00ad\u2010]+/g, '');
+		h = kal_hyphenate(h);
+		if ($('.chkHyphenateHard').prop('checked')) {
+			h = h.replace(/\u00ad/g, '\u2010'); // Replace all U+00AD Soft Hyphen with U+2010 Hyphen
+		}
+		to_send = [{t: sel.p}];
+		impl_replaceInDocumentSilent(sel.prefix, sel.t, h, sel.suffix);
+	}
+}
+
+function impl_hyphenateUndo(sels) {
+	for (let i=0 ; i<sels.length ; ++i) {
+		let sel = _impl_expandSelToWord(sels[i]);
+
+		// Only wipe Soft Hyphen and Hyphen, because we didn't add U+002D Hyphen Minus
+		let h = sel.t.replace(/[\u00AD\u2010]+/g, '');
+		to_send = [{t: sel.p}];
+		impl_replaceInDocumentSilent(sel.prefix, sel.t, h, sel.suffix);
+	}
+}
+
 let g_impl = {
+	matomo_sid: 5,
 	dataKeepalive: impl_dataKeepalive,
 	startLogin: impl_startLogin,
 	canGrammar: impl_canGrammar,
@@ -104,11 +148,14 @@ let g_impl = {
 	addToDictionary: impl_addToDictionary,
 	removeFromDictionary: impl_removeFromDictionary,
 	attachTTS: impl_attachTTS,
+	hyphenate: impl_hyphenate,
+	hyphenateUndo: impl_hyphenateUndo,
 	hasSelection: function() {
 		return true;
 	},
 	init: function(func) {
+		MATOMO_ROOT = '//oqaasileriffik.gl/matomo/';
 		func();
 		//l10n_world();
 	},
-	};
+};

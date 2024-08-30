@@ -5,19 +5,19 @@
   <Id>3d7dab89-8dcd-4917-a89c-34785844caed</Id>
 
   <!--Version. Updates from the store only get triggered if there is a version change. -->
-  <Version>1.0.3</Version>
+  <Version>1.0.4</Version>
   <ProviderName>Oqaasileriffik</ProviderName>
   <DefaultLocale>da-DK</DefaultLocale>
   <DisplayName DefaultValue="Kukkuniiaat" />
   <Description DefaultValue="Kukkuniiaat" />
-  <IconUrl DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/imgs/logo-32.png" />
-  <HighResolutionIconUrl DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/imgs/logo-64.png" />
+  <IconUrl DefaultValue="https://kukkuniiaat.gl/gas/1.0.4/imgs/logo-32.png" />
+  <HighResolutionIconUrl DefaultValue="https://kukkuniiaat.gl/gas/1.0.4/imgs/logo-64.png" />
 
   <SupportUrl DefaultValue="https://kukkuniiaat.gl/" />
   <AppDomains>
-    <AppDomain>kukkuniiaat.gl</AppDomain>
-    <AppDomain>oqaasileriffik.gl</AppDomain>
-    <AppDomain>retmig.dk</AppDomain>
+    <AppDomain>https://kukkuniiaat.gl</AppDomain>
+    <AppDomain>https://oqaasileriffik.gl</AppDomain>
+    <AppDomain>https://retmig.dk</AppDomain>
   </AppDomains>
 
   <Hosts>
@@ -29,7 +29,7 @@
     </Sets>
   </Requirements>
   <DefaultSettings>
-    <SourceLocation DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/html/sidebar.html?host=msoffice" />
+    <SourceLocation DefaultValue="https://kukkuniiaat.gl/gas/1.0.4/html/sidebar.html?host=msoffice" />
   </DefaultSettings>
 
   <Permissions>ReadWriteDocument</Permissions>
@@ -83,12 +83,12 @@
 
     <Resources>
       <bt:Images>
-        <bt:Image id="OQAA.KAL.logo16" DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/imgs/logo-16.png" />
-        <bt:Image id="OQAA.KAL.logo32" DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/imgs/logo-32.png" />
-        <bt:Image id="OQAA.KAL.logo80" DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/imgs/logo-80.png" />
+        <bt:Image id="OQAA.KAL.logo16" DefaultValue="https://kukkuniiaat.gl/gas/1.0.4/imgs/logo-16.png" />
+        <bt:Image id="OQAA.KAL.logo32" DefaultValue="https://kukkuniiaat.gl/gas/1.0.4/imgs/logo-32.png" />
+        <bt:Image id="OQAA.KAL.logo80" DefaultValue="https://kukkuniiaat.gl/gas/1.0.4/imgs/logo-80.png" />
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="OQAA.KAL.Taskpane" DefaultValue="https://kukkuniiaat.gl/gas/1.0.3/html/sidebar.html?host=msoffice" />
+        <bt:Url id="OQAA.KAL.Taskpane" DefaultValue="https://kukkuniiaat.gl/gas/1.0.4/html/sidebar.html?host=msoffice" />
         <bt:Url id="OQAA.KAL.GetStarted.LearnMore" DefaultValue="https://kukkuniiaat.gl/" />
       </bt:Urls>
       <!-- ShortStrings max characters==125. -->

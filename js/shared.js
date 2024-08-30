@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2022 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2024 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this project.  If not, see <http://www.gnu.org/licenses/>.
  */
-'use strict';
+//'use strict';
 
 if (!Array.prototype.unique) {
 	Array.prototype.unique = function() {
@@ -203,6 +203,10 @@ if (!String.prototype.normalize) {
 	}
 }
 
+if (typeof ROOT_URL_SELF === 'undefined') {
+	ROOT_URL_SELF = '';
+}
+
 const Defs = {
 	CAP_ADMIN:    (1 <<  0),
 	CAP_COMMA:    (1 <<  1),
@@ -237,6 +241,17 @@ const Defs = {
 };
 Defs.TYPE_COMP = Defs.TYPE_COMP_LEFT|Defs.TYPE_COMP_RIGHT;
 
+const WF_WORD  = 0;
+const WF_MARK  = 1;
+const WF_SUGGS = 2;
+const WF_MERGE = 3;
+const WF_ANA   = 4;
+const WF_TID   = 5;
+const NUM_WF   = 6;
+
+const VERSION_PROTOCOL = 1;
+let MATOMO_ROOT = '//gramtrans.com/matomo/';
+
 // Upper-case because we compare them to DOM nodeName
 let text_nodes = {'ADDRESS': true, 'ARTICLE': true, 'ASIDE': true, 'AUDIO': true, 'BLOCKQUOTE': true, 'BODY': true, 'CANVAS': true, 'DD': true, 'DIV': true, 'DL': true, 'FIELDSET': true, 'FIGCAPTION': true, 'FIGURE': true, 'FOOTER': true, 'FORM': true, 'H1': true, 'H2': true, 'H3': true, 'H4': true, 'H5': true, 'H6': true, 'HEADER': true, 'HGROUP': true, 'HTML': true, 'HR': true, 'LI': true, 'MAIN': true, 'NAV': true, 'NOSCRIPT': true, 'OL': true, 'OUTPUT': true, 'P': true, 'PRE': true, 'SECTION': true, 'TABLE': true, 'TD': true, 'TH': true, 'UL': true, 'VIDEO': true};
 
@@ -255,6 +270,7 @@ let g_keepalive = null;
 let g_login_channel = '';
 let g_login_ws = null;
 let g_client = 'unknown';
+let g_anonymous = false;
 
 let g_tts_speaker = null;
 let g_tts_tap = 0;
@@ -279,6 +295,40 @@ const Const = {
 Const.Split_Array = Const.Split_String.split('');
 Const.Split_Regex = new RegExp('(['+Const.Split_String+'])');
 
+const func2label = [
+	{rx:/^@<*SUBJ>*$/, f:'S', i:'x-lg', w:false}, // subject
+	{rx:/^@[FS]-<*SUBJ>*$/, f:'Sf', i:'x-lg', w:true}, // formal subject
+	{rx:/^@FMV$/, f:'Vm', i:'circle-fill', w:false}, // main verb
+	{rx:/^@<*(DAT|IOBJ)>*$/, f:'Oi', i:'square-fill', w:false}, // indirect object
+	{rx:/^@<*(ACC|OBJ)>*$/, f:'Od', i:'triangle-fill', w:false}, // direct object
+	{rx:/^@<*(PIV)>*$/, f:'Op', i:'diamond-fill', w:false}, // prepositional object
+	{rx:/^@<*(ADV[SOL])>*$/, f:'A', i:ROOT_URL_SELF+'/imgs/bi-chevron-down-half.svg', w:false}, // adverbial
+	{rx:/^@<*PASS>*$/, f:'A', i:ROOT_URL_SELF+'/imgs/bi-chevron-down-half.svg', w:false}, // passive adjunct
+	{rx:/^@<*(SC)>*$/, f:'Cs', i:'x-circle', w:false}, // subject predicative/complement
+	{rx:/^@<*(OC)>*$/, f:'Co', i:'plus-circle', w:false}, // object predicative/complement
+	{rx:/^@<*(SA|OA)>*$/, f:'A', i:ROOT_URL_SELF+'/imgs/bi-chevron-down-half.svg', w:false}, // focus
+	{rx:/^@(<*FOC>*|>P)$/, f:'A', i:ROOT_URL_SELF+'/imgs/bi-chevron-down-half.svg', w:false}, // focus, including pre-pp
+];
+
+let g_marks = {
+	types: {},
+	types_comma: [],
+	types_grammar: [],
+
+	comp_right: null,
+	to_upper: null,
+	to_lower: null,
+	rx_ins: null,
+	rx_del: null,
+
+	red: {},
+	yellow: {},
+	purple: {},
+	blue: {},
+	info: {},
+
+	dict: {},
+};
 let markings = [];
 let marking_ids = [];
 let to_send = null;
@@ -440,7 +490,7 @@ function decHTML(t) {
 }
 
 function slugify(t) {
-	let nt = t.replace(/%+/g, 'p').replace(/@+/g, 'a').replace(/[^A-Za-z0-9]+/g, '-');
+	let nt = t.replace(/%+/g, 'p').replace(/£+/g, 'a').replace(/[^A-Za-z0-9]+/g, '-');
 	return nt;
 }
 
@@ -502,19 +552,25 @@ function ls_del(key) {
 function markingColor(types) {
 	let col = 'green';
 	for (let i=0 ; i<types.length ; ++i) {
-		if (types_info.hasOwnProperty(types[i])) {
+		if (g_marks.info.hasOwnProperty(types[i])) {
 			col = 'info';
 		}
-		if (types_yellow.hasOwnProperty(types[i])) {
+		if (g_marks.yellow.hasOwnProperty(types[i])) {
 			col = 'yellow';
 		}
-		if (types_red.hasOwnProperty(types[i])) {
+		if (g_marks.blue.hasOwnProperty(types[i])) {
+			col = 'blue';
+		}
+		if (g_marks.purple.hasOwnProperty(types[i])) {
+			col = 'purple';
+		}
+		if (g_marks.red.hasOwnProperty(types[i])) {
 			col = 'red';
 			break;
 		}
 	}
 	for (let i=0 ; i<types.length ; ++i) {
-		if (types[i] === '@green') {
+		if (types[i] === '£green') {
 			col = 'green';
 		}
 	}
@@ -552,11 +608,21 @@ function findTextNodes(nodes, filter) {
 }
 
 function sanitize_result(txt) {
+	if (txt.search(/\t[A-Z]+ @\S+/g) == -1) {
+		txt = txt.replace(/([ \t])@/g, '$1£');
+		//console.log(txt);
+	}
+
+	txt = txt.replace(/\n<\/?p>\n/g, '\n');
+
 	// Special case
-	txt = txt.replace(/@x-etype-case/g, '@upper');
+	txt = txt.replace(/£x-etype-case/g, '£upper');
+
+	// Puntuation on a line of its own should be a sentence break
+	txt = txt.replace(/\n([.?!:])\n/g, '\n$1\n\n');
 
 	// Workaround for bug https://trello.com/c/ixmc92EB
-	txt = txt.replace(/.'.\t@proper\n"/g, '.\n"');
+	txt = txt.replace(/.'.\t£proper\n"/g, '.\n"');
 
 	// Workaround for bug https://trello.com/c/JbXrn5ub
 	txt = txt.replace(/\n-[LR]\n/g, '\n-\n').replace(/ -[LR] /g, ' - ');
@@ -608,14 +674,14 @@ function sanitize_result(txt) {
 	txt = txt.replace(/(<\/s\d+>)[^<]*?$/, '$1');
 
 	if (g_tool === 'Comma') {
-		txt = txt.replace(/(\n[^\t]+\t<R:[^>]+>)\n/, '$1 @error\n');
+		txt = txt.replace(/(\n[^\t]+\t<R:[^>]+>)\n/, '$1 £error\n');
 	}
 
 	return txt;
 }
 
 function findToSend(prefix, word, suffix, casing, closer) {
-	////console.log([prefix, word, suffix, casing]);
+	////console.log([prefix, word, suffix, casing, closer]);
 	let prefix_s = prefix.replace(Const.NonLetter, '');
 	let word_s = word.replace(Const.NonLetter, '');
 	let suffix_s = suffix.replace(Const.NonLetter, '');
@@ -639,23 +705,35 @@ function findToSend(prefix, word, suffix, casing, closer) {
 		}
 
 		let p_off = 0;
-		for (let j=0 ; j<prefix_s.length ; ++j) {
-			let f = prefix_s.charAt(j);
-			if (Const.SpaceOrEmpty.test(f)) {
-				continue;
+		if (closer) {
+			// Try to find verbatim prefix in the text
+			let pof = t.indexOf(prefix);
+			if (pof == -1) {
+				pof = t.indexOf(prefix.toLowerCase());
 			}
-			let nof = t.indexOf(f, p_off);
-			if (nof === -1) {
-				found = false;
-				break;
+			if (pof != -1) {
+				p_off = pof + prefix.length;
 			}
-			if (!closer && p_off === 0 && Const.LetterT.test(t.substring(0, nof))) {
-				// There is something substantial before the prefix
-				//console.log('Prefix: '+t.substring(0, nof));
-				found = false;
-				break;
+		}
+		if (!p_off) {
+			for (let j=0 ; j<prefix_s.length ; ++j) {
+				let f = prefix_s.charAt(j);
+				if (Const.SpaceOrEmpty.test(f)) {
+					continue;
+				}
+				let nof = t.indexOf(f, p_off);
+				if (nof === -1) {
+					found = false;
+					break;
+				}
+				if (!closer && p_off === 0 && Const.LetterT.test(t.substring(0, nof))) {
+					// There is something substantial before the prefix
+					//console.log('Prefix: '+t.substring(0, nof));
+					found = false;
+					break;
+				}
+				p_off = nof + f.length;
 			}
-			p_off = nof + f.length;
 		}
 		if (!found) {
 			//console.log('Not-found: prefix');
@@ -825,7 +903,15 @@ function _parseResult(rv) {
 		return;
 	}
 
+	if (!rv.hasOwnProperty('v') || parseInt(rv.v) !== VERSION_PROTOCOL) {
+		g_impl.showWarning('WARN_VERSION_MISMATCH');
+	}
+
+	let tid = parseInt(rv.t);
+
 	let txt = sanitize_result(rv.c);
+	txt = g_impl.beforeParseResult(txt);
+
 	let ps = [];
 	let nps = $.trim(txt.replace(/\n+<\/s>\n+/g, "\n\n")).split(/<\/s\d+>/);
 
@@ -835,7 +921,7 @@ function _parseResult(rv) {
 		for (let i=p ; i<nps.length ; ++i) {
 			if (nps[i].indexOf('<s'+to_send[k].i+'>\n') !== -1) {
 				////console.log(`Par ${k} found in result`);
-				ps.push(nps[i]);
+				ps.push([tid, nps[i]]);
 				p = i;
 				found = true;
 				break;
@@ -843,12 +929,13 @@ function _parseResult(rv) {
 		}
 		if (!found && to_send[k].h in cache[g_tool]) {
 			////console.log(`Par ${k} found in cache`);
-			ps.push('<s'+to_send[k].i+'>\n'+cache[g_tool][to_send[k].h]);
+			ps.push([cache[g_tool][to_send[k].h].tid, '<s'+to_send[k].i+'>\n'+cache[g_tool][to_send[k].h].txt]);
 		}
 	}
 
 	for (let i=0 ; i<ps.length ; ++i) {
-		let cp = $.trim(ps[i]);
+		let tid = ps[i][0];
+		let cp = $.trim(ps[i][1]);
 		if (!cp) {
 			continue;
 		}
@@ -857,7 +944,10 @@ function _parseResult(rv) {
 		let id = parseInt(lines[0].replace(/^<s(.+)>$/, '$1'));
 		for (let k = to_send_b ; k<to_send_i ; ++k) {
 			if (to_send[k].i === id) {
-				cache[g_tool][to_send[k].h] = $.trim(cp.replace(/^<s.+>/g, ''));
+				cache[g_tool][to_send[k].h] = {
+					tid: tid,
+					txt: $.trim(cp.replace(/^<s.+>/g, '')),
+					};
 				break;
 			}
 		}
@@ -873,24 +963,38 @@ function _parseResult(rv) {
 			}
 
 			let w = $.trim(lines[j]).split(/\t/);
-			w[0] = $.trim(w[0].replace(/(\S)=/g, '$1 '));
+			w[WF_WORD] = $.trim(w[WF_WORD].replace(/(\S)=/g, '$1 '));
 
-			if (w[0] === '') {
+			while (w.length < NUM_WF) {
+				w.push('');
+			}
+			w[WF_MERGE] = 0;
+			w[WF_ANA] = {pos:'', func:''};
+			w[WF_TID] = tid;
+
+			if (w[WF_WORD] === '') {
 				words.push(w);
 				continue;
 			}
 
 			if (w.length > 1) {
-				let ws = w[1].split(/ /g);
+				let ws = w[WF_MARK].split(/ /g);
+				w = [w[WF_WORD], '', '', 0, {pos:'', func:''}, tid];
+
 				let nws = [];
 				let rs = [];
 				let crs = [];
 				let had_r = false;
 				for (let k=0 ; k<ws.length ; ++k) {
+					ws[k] = $.trim(ws[k]);
+					if (!ws[k]) {
+						continue;
+					}
+
 					if (ws[k].indexOf('<R:') === 0) {
 						let n = ws[k].substr(3);
 						n = n.substr(0, n.length-1).replace(/(\S)=/g, '$1 ');
-						if (n === w[0]) {
+						if (n === w[WF_WORD]) {
 							//console.log(n);
 							continue;
 						}
@@ -901,21 +1005,31 @@ function _parseResult(rv) {
 					if (ws[k].indexOf('<AFR:') === 0) {
 						let n = ws[k].substr(5);
 						n = n.substr(0, n.length-1).replace(/(\S)=/g, '$1 ');
-						if (n === w[0]) {
+						if (n === w[WF_WORD]) {
 							//console.log(n);
 							continue;
 						}
 						crs.push(n);
 						continue;
 					}
-					if (!marking_types.hasOwnProperty(ws[k])) {
-						//console.log('Unknown marking: '+ws[k]);
+					if (!g_marks.types.hasOwnProperty(ws[k])) {
+						if (/^[A-Z]+$/.test(ws[k])) {
+							w[WF_ANA].pos = ws[k];
+						}
+						else if (/^@/.test(ws[k])) {
+							w[WF_ANA].func = ws[k];
+						}
+						else {
+							//console.log('Unknown marking/tag ' + ws[k]);
+						}
 					}
-					nws.push(ws[k]);
+					else {
+						nws.push(ws[k]);
+					}
 				}
 				crs = rs.concat(crs);
-				// Remove @sentsplit from last token
-				if (j == lines.length-1 && nws.length == 1 && nws[0] === '@sentsplit') {
+				// Remove £sentsplit from last token
+				if (j == lines.length-1 && nws.length == 1 && nws[0] === '£sentsplit') {
 					crs = [];
 					nws = [];
 				}
@@ -929,11 +1043,11 @@ function _parseResult(rv) {
 				let none = true;
 
 				for (let k=0 ; k<nws.length ; ++k) {
-					if (nws[k] === '@sentsplit') {
+					if (nws[k] === '£sentsplit') {
 						had_sentsplit = true;
 					}
-					if (types_to_upper.test(nws[k]) && prev_sentsplit) {
-						////console.log(`Skipping @upper due to @sentsplit`);
+					if (g_marks.to_upper.test(nws[k]) && prev_sentsplit) {
+						////console.log(`Skipping £upper due to £sentsplit`);
 						continue;
 					}
 					if (_live_options.types.hasOwnProperty(nws[k]) && !_live_options.types[nws[k]]) {
@@ -943,7 +1057,7 @@ function _parseResult(rv) {
 					ws.push(nws[k]);
 				}
 
-				if (_live_options.config.opt_useDictionary && types_dictionary.test(ws[0]) && isInDictionary(w[0])) {
+				if (_live_options.config.opt_useDictionary && g_marks.dict.test(ws[0]) && isInDictionary(w[0])) {
 					////console.log(`Found ${w[0]} in dictionary`);
 					ws = [];
 				}
@@ -951,8 +1065,8 @@ function _parseResult(rv) {
 				prev_sentsplit = had_sentsplit;
 				if (ws.length && none) {
 					////console.log(`Vitec MV whitelist no-match: ${ws}`);
-					if (ws.indexOf('@insert') !== -1) {
-						w[0] = ' ';
+					if (ws.indexOf('£insert') !== -1) {
+						w[WF_WORD] = ' ';
 					}
 					ws = [];
 				}
@@ -963,17 +1077,17 @@ function _parseResult(rv) {
 
 				// For case-folding, create a correction if none exists and fold all corrections to the desired case
 				for (let k=0 ; k<nws.length ; ++k) {
-					if (types_to_upper.test(nws[k])) {
+					if (g_marks.to_upper.test(nws[k])) {
 						if (crs.length == 0) {
-							crs.push(w[0]);
+							crs.push(w[WF_WORD]);
 						}
 						for (let c=0 ; c<crs.length ; ++c) {
 							crs[c] = uc_first(crs[c]);
 						}
 					}
-					else if (types_to_lower.test(nws[k])) {
+					else if (g_marks.to_lower.test(nws[k])) {
 						if (crs.length == 0) {
-							crs.push(w[0]);
+							crs.push(w[WF_WORD]);
 						}
 						for (let c=0 ; c<crs.length ; ++c) {
 							crs[c] = lc_first(crs[c]);
@@ -994,82 +1108,82 @@ function _parseResult(rv) {
 						crs = [crs[0]];
 					}
 					crs = crs.unique();
-					w[2] = crs.join('\t');
+					w[WF_SUGGS] = crs.join('\t');
 					////console.log(crs);
 				}
 				if (nws.length) {
 					nws = nws.unique();
-					w[1] = nws.join(' ');
-					if (!w[2] || w[2].length === 0) {
-						w[2] = '';
-					}
-					if (w[1].indexOf(' ') !== -1) {
-						w[1] = w[1].replace(/ @error /g, ' ').replace(/ @error$/g, '').replace(/^@error /g, '');
+					w[WF_MARK] = nws.join(' ');
+					if (w[WF_MARK].indexOf(' ') !== -1) {
+						w[WF_MARK] = w[WF_MARK].replace(/ £error /g, ' ').replace(/ £error$/g, '').replace(/^£error /g, '');
 					}
 
-					w[3] = 0;
-					if (w[1].indexOf('@-comp') !== -1) {
-						w[3] |= Defs.TYPE_COMP_LEFT;
+					if (w[WF_MARK].indexOf('£-comp') !== -1) {
+						w[WF_MERGE] |= Defs.TYPE_COMP_LEFT;
 					}
-					if (types_comp_right.test(w[1])) {
-						w[3] |= Defs.TYPE_COMP_RIGHT;
+					if (g_marks.comp_right.test(w[WF_MARK])) {
+						w[WF_MERGE] |= Defs.TYPE_COMP_RIGHT;
 					}
-					if (w[1].indexOf('@comp-:-') !== -1) {
-						w[3] |= Defs.TYPE_COMP_RIGHT | Defs.TYPE_COMP_HYPHEN;
+					if (w[WF_MARK].indexOf('£comp-:-') !== -1) {
+						w[WF_MERGE] |= Defs.TYPE_COMP_RIGHT | Defs.TYPE_COMP_HYPHEN;
 					}
 
 					had_mark = true;
 				}
 				else {
-					w.pop();
+					w[WF_SUGGS] = '';
 				}
 			}
 			if (w.length > 1 && /(%ko|%k)( |-|$)/.test(w[1])) {
-				let wo = w[0];
-				w[0] = ',';
-				if (w[1].indexOf('%k-stop') !== -1) {
-					w[0] = '.';
+				let wo = [w[WF_WORD], '', '', 0, w[WF_ANA], w[WF_TID]];
+				w[WF_WORD] = ',';
+				if (w[WF_MARK].indexOf('%k-stop') !== -1) {
+					w[WF_WORD] = '.';
 				}
+				w[WF_ANA] = {pos: 'PU', func: ''};
 				words.push(w);
-				w = [wo];
+				w = wo;
 			}
 			words.push(w);
 		}
 		if (had_mark) {
 			// Pre-merge compound errors with the token they're supposed to be with, respecting other corrections to either side of the merge
 			for (let j=0 ; j<words.length ; ) {
-				if (words[j].length > 1 && words[j][3] & Defs.TYPE_COMP) {
-					let ts = words[j][1];
+				if (words[j].length > 1 && words[j][WF_MERGE] & Defs.TYPE_COMP) {
+					let ts = words[j][WF_MARK];
 					let wx = '';
 					let px = '';
 					let sx = '';
-					if (words[j][3] & Defs.TYPE_COMP_LEFT) {
-						if (words[j-1].length > 1 && words[j-1][1]) {
-							ts += ' '+words[j-1][1];
+					let ana = words[j][WF_ANA];
+					let tid = words[j][WF_TID];
+					if (words[j][WF_MERGE] & Defs.TYPE_COMP_LEFT) {
+						if (words[j-1].length > 1 && words[j-1][WF_MARK]) {
+							ts += ' '+words[j-1][WF_MARK];
 						}
-						wx = words[j-1][0] + ' ' + words[j][0];
-						px = words[j-1][0];
-						if (words[j-1].length > 1 && words[j-1][2]) {
-							px = words[j-1][2];
+						wx = words[j-1][WF_WORD] + ' ' + words[j][WF_WORD];
+						px = words[j-1][WF_WORD];
+						if (words[j-1].length > 1 && words[j-1][WF_SUGGS]) {
+							px = words[j-1][WF_SUGGS];
 						}
-						sx = words[j][0];
-						if (words[j][2]) {
-							sx = words[j][2];
+						sx = words[j][WF_WORD];
+						if (words[j][WF_SUGGS]) {
+							sx = words[j][WF_SUGGS];
 						}
 					}
-					if (words[j][3] & Defs.TYPE_COMP_RIGHT) {
-						if (words[j+1].length > 1 && words[j+1][1]) {
-							ts += ' '+words[j+1][1];
+					if (words[j][WF_MERGE] & Defs.TYPE_COMP_RIGHT) {
+						if (words[j+1].length > 1 && words[j+1][WF_MARK]) {
+							ts += ' '+words[j+1][WF_MARK];
 						}
-						wx = words[j][0] + ' ' + words[j+1][0];
-						px = words[j][0];
-						if (words[j][2]) {
-							px = words[j][2];
+						wx = words[j][WF_WORD] + ' ' + words[j+1][WF_WORD];
+						px = words[j][WF_WORD];
+						if (words[j][WF_SUGGS]) {
+							px = words[j][WF_SUGGS];
 						}
-						sx = words[j+1][0];
-						if (words[j+1].length > 1 && words[j+1][2]) {
-							sx = words[j+1][2];
+						sx = words[j+1][WF_WORD];
+						if (words[j+1].length > 1 && words[j+1][WF_SUGGS]) {
+							sx = words[j+1][WF_SUGGS];
 						}
+						ana = words[j+1][WF_ANA];
 					}
 
 					let has_uc = (wx !== wx.toLowerCase());
@@ -1077,7 +1191,7 @@ function _parseResult(rv) {
 					px = px.split(/\t/);
 					sx = sx.split(/\t/);
 					let space = '';
-					if (words[j][3] & Defs.TYPE_COMP_HYPHEN) {
+					if (words[j][WF_MERGE] & Defs.TYPE_COMP_HYPHEN) {
 						space = '‐';
 					}
 					let es = [];
@@ -1090,9 +1204,9 @@ function _parseResult(rv) {
 							es.push(px[p] + space + sx[s]);
 						}
 					}
-					let flags = words[j][3];
+					let flags = words[j][WF_MERGE];
 
-					let nw = [wx, ts.split(/ /).unique().join(' ').replace(/ +/g, ' '), es.join('\t')];
+					let nw = [wx, ts.split(/ /).unique().join(' ').replace(/ +/g, ' '), es.join('\t'), 0, ana, tid];
 					words[j] = nw;
 
 					if (flags & Defs.TYPE_COMP_LEFT) {
@@ -1161,6 +1275,8 @@ function sendTexts() {
 	}
 
 	if (text) {
+		text = g_impl.beforeSendTexts(text);
+
 		to_send_last = text;
 		let url = ROOT_URL_GRAMMAR + '/callback.php?a=' + g_tools.grammar;
 		if (g_tool === 'Comma') {
@@ -1170,6 +1286,7 @@ function sendTexts() {
 			t: text,
 			r: ts_fail,
 			c: g_client,
+			v: VERSION_PROTOCOL,
 			gdpr: _live_options.config.opt_confidential + 0,
 			SessionID: g_access_token.sessionid,
 		};
@@ -1288,6 +1405,13 @@ function nl2html(v) {
 
 function l10n_detectLanguage() {
 	l10n.lang = navigator.language;
+	try {
+		if (window.hasOwnProperty('parent') && window.parent && window.parent.hasOwnProperty('UILANG2') && window.parent.UILANG2) {
+			l10n.lang = window.parent.UILANG2;
+		}
+	}
+	catch (DOMException) {
+	}
 	if (window.hasOwnProperty('UILANG2') && window.UILANG2) {
 		l10n.lang = window.UILANG2;
 	}
@@ -1410,9 +1534,9 @@ function l10n_world(node) {
 
 	if (node == document && typeof l10n_marking_types === 'function') {
 		l10n_marking_types(session.locale);
-		if (marking_types.hasOwnProperty('%k-stop') && !marking_types.hasOwnProperty('%x-to-stop')) {
-			marking_types['%x-to-stop'] = marking_types['%k-stop'];
-			marking_types_comma.push('%x-to-stop');
+		if (g_marks.types.hasOwnProperty('%k-stop') && !g_marks.types.hasOwnProperty('%x-to-stop')) {
+			g_marks.types['%x-to-stop'] = g_marks.types['%k-stop'];
+			g_marks.types_comma.push('%x-to-stop');
 		}
 	}
 }
@@ -1442,7 +1566,7 @@ function matomo_load() {
 	_paq.push(['trackPageView']);
 	_paq.push(['enableLinkTracking']);
 	(function() {
-		let u="//gramtrans.com/matomo/";
+		let u= MATOMO_ROOT;
 		_paq.push(['setTrackerUrl', u+'matomo.php']);
 		_paq.push(['setSiteId', g_impl.matomo_sid]);
 		let d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
@@ -1452,24 +1576,33 @@ function matomo_load() {
 
 function matomo_event(cat, act, name, value) {
 	//console.log([cat, act, name, value]);
+	if (typeof act === 'undefined' || !act) {
+		act = cat;
+	}
 	_paq.push(['trackEvent', cat, act, name, value]);
 }
 
-$(window).on('load', function() {
+function log_marking_action(data) {
+	let rq = {
+		a: 'marking-action',
+		data: data,
+		};
+	g_impl.callback(rq);
+}
+
+function contentLoaded() {
 	const CLIENT = window.hasOwnProperty('CLIENT') ? window.CLIENT : '';
 
 	if (CLIENT === 'adobe' || location.search.indexOf('host=adobe') !== -1) {
 		g_client = 'adobe';
 		//console.log('Adobe');
-		addScript(ROOT_URL_SELF+'/vendor/CSInterface.js');
-		addScript(ROOT_URL_SELF+'/vendor/Vulcan.js');
 		addScript(ROOT_URL_SELF+'/js/impl-adobe.js');
 	}
 	else if (CLIENT === 'web' || location.search.indexOf('host=web') !== -1) {
 		g_client = 'web';
 		//console.log('Web');
 	}
-	else if (CLIENT === 'word' || location.search.indexOf('host=word') !== -1 || location.search.indexOf('host=msoffice') !== -1) {
+	else if (CLIENT === 'word' || location.search.indexOf('host=word') !== -1 || location.search.indexOf('host=msoffice') !== -1 || location.search.indexOf('_host_Info=Word') !== -1) {
 		g_client = 'word';
 		//console.log('MS Office');
 		addScript('https://appsforoffice.microsoft.com/lib/1/hosted/office.js');
@@ -1492,6 +1625,13 @@ $(window).on('load', function() {
 	if (id === 'sidebar' || id === 'options' || id === 'dictionary') {
 		// Delay ever so slightly to force other scripts to load first
 		// No, defer doesn't work. No, async doesn't work either.
-		setTimeout(function() {addScript(ROOT_URL_SELF+'/js/'+id+'.js'); matomo_load();}, 100);
+		setTimeout(function() {addScript(ROOT_URL_SELF+'/js/'+id+'.js'); }, 100);
 	}
-});
+}
+
+if (document.readyState === 'loading') {
+	$(window).on('load', contentLoaded);
+}
+else {
+	contentLoaded();
+}
