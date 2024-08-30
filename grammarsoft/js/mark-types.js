@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2022 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2024 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
@@ -8,7 +8,7 @@
  */
 'use strict';
 
-let types_red = {
+g_marks.red = {
 	"£error": "£error",
 	"£comp-": "£comp-",
 	"£-comp": "£-comp",
@@ -22,25 +22,25 @@ let types_red = {
 	"£hyphen-suffix": "£hyphen-suffix",
 };
 
-let types_yellow = {
+g_marks.yellow = {
 	"£proper": "£proper",
 	"£new": "£new",
 	"£abbreviation": "£abbreviation",
 	"£check!": "£check!",
 };
 
-let types_info = {};
+g_marks.info = {};
 
-let types_comp_right = new RegExp('£comp-( |$)');
-let types_to_upper = new RegExp('£upper( |$)');
-let types_to_lower = new RegExp('£lower( |$)');
-let rx_insertable = /(£insert|%ko|%k)( |-|$)/;
-let rx_removable = /(£nil|%nok|%ok|%nko)( |-|$)/;
+g_marks.comp_right = new RegExp('£comp-( |$)');
+g_marks.to_upper = new RegExp('£upper( |$)');
+g_marks.to_lower = new RegExp('£lower( |$)');
+g_marks.rx_ins = /(£insert|%ko|%k)( |-|$)/;
+g_marks.rx_del = /(£nil|%nok|%ok|%nko)( |-|$)/;
 
-let marking_types_comma = [];
-let marking_types_grammar = [];
+g_marks.types_comma = [];
+g_marks.types_grammar = [];
 
-let marking_types = {
+g_marks.types = {
 	"£x-etype-list": [
 		"£x-etype-list",
 		"Stavefejl fundet ved listeopslag",
@@ -385,19 +385,16 @@ let marking_types = {
 	]
 };
 
-let types_mv = {};
-
-for (let k in marking_types) {
+for (let k in g_marks.types) {
 	let v = [
-		marking_types[k][1],
-		marking_types[k][2] + "<br>\n<br>\n<i>" + marking_types[k][3] + '</i>'
+		g_marks.types[k][1],
+		g_marks.types[k][2] + "<br>\n<br>\n<i>" + g_marks.types[k][3] + '</i>'
 		];
-	if (marking_types[k][1] === marking_types[k][2]) {
-		v[1] = '<i>' + marking_types[k][3] + '</i>';
+	if (g_marks.types[k][1] === g_marks.types[k][2]) {
+		v[1] = '<i>' + g_marks.types[k][3] + '</i>';
 	}
-	marking_types[k] = v;
-	marking_types_grammar.push(k);
-	types_mv[k] = true;
+	g_marks.types[k] = v;
+	g_marks.types_grammar.push(k);
 }
 
 let ctypes = {
@@ -1241,28 +1238,28 @@ for (let k in ctypes) {
 		continue;
 	}
 	let c = ctypes[k];
-	marking_types[k] = [c[1], c[2], [3]];
-	marking_types_comma.push(k);
+	g_marks.types[k] = [c[1], c[2], [3]];
+	g_marks.types_comma.push(k);
 
 	if (/^%ko-/.test(k)) {
-		types_yellow[k] = k;
+		g_marks.yellow[k] = k;
 	}
 	else if (/^%nok-/.test(k)) {
-		types_red[k] = k;
+		g_marks.red[k] = k;
 	}
 }
 
 ctypes = null;
 
-let types_dictionary = ['(£error)'];
-for (let k in types_yellow) {
-	types_dictionary.push('('+escapeRegExp(k)+')');
+g_marks.dict = ['(£error)'];
+for (let k in g_marks.yellow) {
+	g_marks.dict.push('('+escapeRegExp(k)+')');
 }
-types_dictionary = new RegExp('('+types_dictionary.join('|')+')( |$)');
+g_marks.dict = new RegExp('('+g_marks.dict.join('|')+')( |$)');
 
 function l10n_marking_types(lang) {
 	g_options_default.types = {};
-	for (let k in marking_types) {
+	for (let k in g_marks.types) {
 		if (/^%(ok|nko)(-|$)/.test(k)) {
 			g_options_default.types[k] = 0;
 		}

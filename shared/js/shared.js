@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2022 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2024 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -250,6 +250,7 @@ const WF_TID   = 5;
 const NUM_WF   = 6;
 
 const VERSION_PROTOCOL = 1;
+let MATOMO_ROOT = '//gramtrans.com/matomo/';
 
 // Upper-case because we compare them to DOM nodeName
 let text_nodes = {'ADDRESS': true, 'ARTICLE': true, 'ASIDE': true, 'AUDIO': true, 'BLOCKQUOTE': true, 'BODY': true, 'CANVAS': true, 'DD': true, 'DIV': true, 'DL': true, 'FIELDSET': true, 'FIGCAPTION': true, 'FIGURE': true, 'FOOTER': true, 'FORM': true, 'H1': true, 'H2': true, 'H3': true, 'H4': true, 'H5': true, 'H6': true, 'HEADER': true, 'HGROUP': true, 'HTML': true, 'HR': true, 'LI': true, 'MAIN': true, 'NAV': true, 'NOSCRIPT': true, 'OL': true, 'OUTPUT': true, 'P': true, 'PRE': true, 'SECTION': true, 'TABLE': true, 'TD': true, 'TH': true, 'UL': true, 'VIDEO': true};
@@ -269,6 +270,7 @@ let g_keepalive = null;
 let g_login_channel = '';
 let g_login_ws = null;
 let g_client = 'unknown';
+let g_anonymous = false;
 
 let g_tts_speaker = null;
 let g_tts_tap = 0;
@@ -308,6 +310,25 @@ const func2label = [
 	{rx:/^@(<*FOC>*|>P)$/, f:'A', i:ROOT_URL_SELF+'/imgs/bi-chevron-down-half.svg', w:false}, // focus, including pre-pp
 ];
 
+let g_marks = {
+	types: {},
+	types_comma: [],
+	types_grammar: [],
+
+	comp_right: null,
+	to_upper: null,
+	to_lower: null,
+	rx_ins: null,
+	rx_del: null,
+
+	red: {},
+	yellow: {},
+	purple: {},
+	blue: {},
+	info: {},
+
+	dict: {},
+};
 let markings = [];
 let marking_ids = [];
 let to_send = null;
@@ -531,13 +552,19 @@ function ls_del(key) {
 function markingColor(types) {
 	let col = 'green';
 	for (let i=0 ; i<types.length ; ++i) {
-		if (types_info.hasOwnProperty(types[i])) {
+		if (g_marks.info.hasOwnProperty(types[i])) {
 			col = 'info';
 		}
-		if (types_yellow.hasOwnProperty(types[i])) {
+		if (g_marks.yellow.hasOwnProperty(types[i])) {
 			col = 'yellow';
 		}
-		if (types_red.hasOwnProperty(types[i])) {
+		if (g_marks.blue.hasOwnProperty(types[i])) {
+			col = 'blue';
+		}
+		if (g_marks.purple.hasOwnProperty(types[i])) {
+			col = 'purple';
+		}
+		if (g_marks.red.hasOwnProperty(types[i])) {
 			col = 'red';
 			break;
 		}
@@ -590,6 +617,9 @@ function sanitize_result(txt) {
 
 	// Special case
 	txt = txt.replace(/£x-etype-case/g, '£upper');
+
+	// Puntuation on a line of its own should be a sentence break
+	txt = txt.replace(/\n([.?!:])\n/g, '\n$1\n\n');
 
 	// Workaround for bug https://trello.com/c/ixmc92EB
 	txt = txt.replace(/.'.\t£proper\n"/g, '.\n"');
@@ -880,6 +910,8 @@ function _parseResult(rv) {
 	let tid = parseInt(rv.t);
 
 	let txt = sanitize_result(rv.c);
+	txt = g_impl.beforeParseResult(txt);
+
 	let ps = [];
 	let nps = $.trim(txt.replace(/\n+<\/s>\n+/g, "\n\n")).split(/<\/s\d+>/);
 
@@ -980,7 +1012,7 @@ function _parseResult(rv) {
 						crs.push(n);
 						continue;
 					}
-					if (!marking_types.hasOwnProperty(ws[k])) {
+					if (!g_marks.types.hasOwnProperty(ws[k])) {
 						if (/^[A-Z]+$/.test(ws[k])) {
 							w[WF_ANA].pos = ws[k];
 						}
@@ -1014,7 +1046,7 @@ function _parseResult(rv) {
 					if (nws[k] === '£sentsplit') {
 						had_sentsplit = true;
 					}
-					if (types_to_upper.test(nws[k]) && prev_sentsplit) {
+					if (g_marks.to_upper.test(nws[k]) && prev_sentsplit) {
 						//console.log(`Skipping £upper due to £sentsplit`);
 						continue;
 					}
@@ -1025,7 +1057,7 @@ function _parseResult(rv) {
 					ws.push(nws[k]);
 				}
 
-				if (_live_options.config.opt_useDictionary && types_dictionary.test(ws[0]) && isInDictionary(w[0])) {
+				if (_live_options.config.opt_useDictionary && g_marks.dict.test(ws[0]) && isInDictionary(w[0])) {
 					//console.log(`Found ${w[0]} in dictionary`);
 					ws = [];
 				}
@@ -1045,7 +1077,7 @@ function _parseResult(rv) {
 
 				// For case-folding, create a correction if none exists and fold all corrections to the desired case
 				for (let k=0 ; k<nws.length ; ++k) {
-					if (types_to_upper.test(nws[k])) {
+					if (g_marks.to_upper.test(nws[k])) {
 						if (crs.length == 0) {
 							crs.push(w[WF_WORD]);
 						}
@@ -1053,7 +1085,7 @@ function _parseResult(rv) {
 							crs[c] = uc_first(crs[c]);
 						}
 					}
-					else if (types_to_lower.test(nws[k])) {
+					else if (g_marks.to_lower.test(nws[k])) {
 						if (crs.length == 0) {
 							crs.push(w[WF_WORD]);
 						}
@@ -1089,7 +1121,7 @@ function _parseResult(rv) {
 					if (w[WF_MARK].indexOf('£-comp') !== -1) {
 						w[WF_MERGE] |= Defs.TYPE_COMP_LEFT;
 					}
-					if (types_comp_right.test(w[WF_MARK])) {
+					if (g_marks.comp_right.test(w[WF_MARK])) {
 						w[WF_MERGE] |= Defs.TYPE_COMP_RIGHT;
 					}
 					if (w[WF_MARK].indexOf('£comp-:-') !== -1) {
@@ -1243,6 +1275,8 @@ function sendTexts() {
 	}
 
 	if (text) {
+		text = g_impl.beforeSendTexts(text);
+
 		to_send_last = text;
 		let url = ROOT_URL_GRAMMAR + '/callback.php?a=' + g_tools.grammar;
 		if (g_tool === 'Comma') {
@@ -1371,6 +1405,13 @@ function nl2html(v) {
 
 function l10n_detectLanguage() {
 	l10n.lang = navigator.language;
+	try {
+		if (window.hasOwnProperty('parent') && window.parent && window.parent.hasOwnProperty('UILANG2') && window.parent.UILANG2) {
+			l10n.lang = window.parent.UILANG2;
+		}
+	}
+	catch (DOMException) {
+	}
 	if (window.hasOwnProperty('UILANG2') && window.UILANG2) {
 		l10n.lang = window.UILANG2;
 	}
@@ -1493,9 +1534,9 @@ function l10n_world(node) {
 
 	if (node == document && typeof l10n_marking_types === 'function') {
 		l10n_marking_types(session.locale);
-		if (marking_types.hasOwnProperty('%k-stop') && !marking_types.hasOwnProperty('%x-to-stop')) {
-			marking_types['%x-to-stop'] = marking_types['%k-stop'];
-			marking_types_comma.push('%x-to-stop');
+		if (g_marks.types.hasOwnProperty('%k-stop') && !g_marks.types.hasOwnProperty('%x-to-stop')) {
+			g_marks.types['%x-to-stop'] = g_marks.types['%k-stop'];
+			g_marks.types_comma.push('%x-to-stop');
 		}
 	}
 }
@@ -1525,7 +1566,7 @@ function matomo_load() {
 	_paq.push(['trackPageView']);
 	_paq.push(['enableLinkTracking']);
 	(function() {
-		let u="//gramtrans.com/matomo/";
+		let u= MATOMO_ROOT;
 		_paq.push(['setTrackerUrl', u+'matomo.php']);
 		_paq.push(['setSiteId', g_impl.matomo_sid]);
 		let d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
@@ -1555,8 +1596,6 @@ function contentLoaded() {
 	if (CLIENT === 'adobe' || location.search.indexOf('host=adobe') !== -1) {
 		g_client = 'adobe';
 		console.log('Adobe');
-		addScript(ROOT_URL_SELF+'/vendor/CSInterface.js');
-		addScript(ROOT_URL_SELF+'/vendor/Vulcan.js');
 		addScript(ROOT_URL_SELF+'/js/impl-adobe.js');
 	}
 	else if (CLIENT === 'web' || location.search.indexOf('host=web') !== -1) {
@@ -1586,7 +1625,7 @@ function contentLoaded() {
 	if (id === 'sidebar' || id === 'options' || id === 'dictionary') {
 		// Delay ever so slightly to force other scripts to load first
 		// No, defer doesn't work. No, async doesn't work either.
-		setTimeout(function() {addScript(ROOT_URL_SELF+'/js/'+id+'.js'); matomo_load();}, 100);
+		setTimeout(function() {addScript(ROOT_URL_SELF+'/js/'+id+'.js'); }, 100);
 	}
 }
 

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2022 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2024 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -223,8 +223,8 @@ function getState() {
 	attachDictionaryClicks();
 
 	let iters = [
-		['#comma-types', marking_types_comma, can_comma, g_can_comma],
-		['#grammar-types', marking_types_grammar, can_grammar, g_can_grammar],
+		['#comma-types', g_marks.types_comma, can_comma, g_can_comma],
+		['#grammar-types', g_marks.types_grammar, can_grammar, g_can_grammar],
 		];
 
 	for (let it=0 ; it<iters.length ; ++it) {
@@ -252,7 +252,7 @@ function getState() {
 			html += '<tbody>';
 			for (let i=0 ; i<ts.length ; ++i) {
 				let t = ts[i];
-				let tt = marking_types[t][0];
+				let tt = g_marks.types[t][0];
 				if (t === '%nok' || t.indexOf('%nok-') === 0) {
 					tt += ' (<span class="type-nok">'+l10n_translate('LBL_CTYPE_PROHIBITED')+'</span>)';
 				}
@@ -268,16 +268,22 @@ function getState() {
 				else if (t === '%nko' || t.indexOf('%nko-') === 0) {
 					tt += ' (<span class="type-nko">'+l10n_translate('LBL_CTYPE_INFORMATIVE')+'</span>)';
 				}
-				else if (types_red.hasOwnProperty(t)) {
+				else if (g_marks.red.hasOwnProperty(t)) {
 					tt += ' (<span class="type-red">'+l10n_translate('LBL_GTYPE_RED')+'</span>)';
 				}
-				else if (types_yellow.hasOwnProperty(t)) {
+				else if (g_marks.yellow.hasOwnProperty(t)) {
 					tt += ' (<span class="type-yellow">'+l10n_translate('LBL_GTYPE_YELLOW')+'</span>)';
 				}
-				else if (types_info.hasOwnProperty(t)) {
+				else if (g_marks.purple.hasOwnProperty(t)) {
+					tt += ' (<span class="type-purple">'+l10n_translate('LBL_GTYPE_PURPLE')+'</span>)';
+				}
+				else if (g_marks.blue.hasOwnProperty(t)) {
+					tt += ' (<span class="type-blue">'+l10n_translate('LBL_GTYPE_BLUE')+'</span>)';
+				}
+				else if (g_marks.info.hasOwnProperty(t)) {
 					tt += ' (<span class="type-info">'+l10n_translate('LBL_GTYPE_INFO')+'</span>)';
 				}
-				else if (ts === marking_types_grammar) {
+				else if (ts === g_marks.types_grammar) {
 					tt += ' (<span class="type-green">'+l10n_translate('LBL_GTYPE_GREEN')+'</span>)';
 				}
 				/*
@@ -342,7 +348,7 @@ function autoToggleTypes() {
 	if (on) {
 		on = cache_regexp($(this), 'types-on-regex', on);
 
-		let ts = Object.keys(marking_types);
+		let ts = Object.keys(g_marks.types);
 		for (let i=0 ; i<ts.length ; ++i) {
 			let t = ts[i];
 			let ts_id = slugify(t);
@@ -358,7 +364,7 @@ function autoToggleTypes() {
 	if (off) {
 		off = cache_regexp($(this), 'types-off-regex', off);
 
-		let ts = Object.keys(marking_types);
+		let ts = Object.keys(g_marks.types);
 		for (let i=0 ; i<ts.length ; ++i) {
 			let t = ts[i];
 			let ts_id = slugify(t);
@@ -385,7 +391,7 @@ function toggleAutoToggles() {
 
 			let all_on = true;
 			let all_off = true;
-			let ts = Object.keys(marking_types);
+			let ts = Object.keys(g_marks.types);
 			for (let i=0 ; i<ts.length ; ++i) {
 				let t = ts[i];
 				let ts_id = slugify(t);
@@ -417,7 +423,7 @@ function toggleAutoToggles() {
 
 			let all_on = true;
 			let all_off = true;
-			let ts = Object.keys(marking_types);
+			let ts = Object.keys(g_marks.types);
 			for (let i=0 ; i<ts.length ; ++i) {
 				let t = ts[i];
 				let ts_id = slugify(t);
@@ -597,6 +603,8 @@ function initOptions() {
 			commitOptions();
 		}
 	});
+
+	matomo_load();
 }
 
 $(function() {
