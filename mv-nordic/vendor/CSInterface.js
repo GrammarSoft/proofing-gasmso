@@ -1,1 +1,0 @@
-../../shared/vendor/CSInterface.js

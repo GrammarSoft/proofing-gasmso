@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2022 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2024 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -27,54 +27,118 @@ function _impl_findElement(prefix, word, suffix) {
 	return {prefix: txt.prefix, middle: txt.word, suffix: txt.suffix};
 }
 
+function _impl_uxpMessage(a, rv, rpl) {
+	window.uxpHost.postMessage({a: a, r: {
+		px: rv.prefix,
+		md: rv.middle,
+		sx: rv.suffix,
+		rpl: rpl,
+	}});
+}
+
 function impl_selectInDocument(prefix, middle, suffix) {
 	let rv = _impl_findElement(prefix, middle, suffix);
-	return google.script.run.withSuccessHandler(didSelect).withFailureHandler(showError).selectInDocument(rv.prefix, rv.middle, rv.suffix);
+	_impl_uxpMessage('selectInDocument', rv, '');
 }
 
 function impl_replaceInDocument(prefix, find, rpl, suffix) {
 	let rv = _impl_findElement(prefix, find, suffix);
-	return google.script.run.withSuccessHandler(didReplace).withFailureHandler(showError).replaceInDocument(rv.prefix, rv.middle, rpl, rv.suffix);
+	_impl_uxpMessage('replaceInDocument', rv, rpl);
 }
 
 function impl_replaceInDocumentSilent(prefix, find, rpl, suffix) {
 	let rv = _impl_findElement(prefix, find, suffix);
-	return google.script.run.withSuccessHandler(didReplaceSilent).withFailureHandler(showError).replaceInDocument(rv.prefix, rv.middle, rpl, rv.suffix);
+	_impl_uxpMessage('replaceInDocumentSilent', rv, rpl);
 }
 
 function impl_insertInDocument(prefix, find, rpl, suffix) {
 	let rv = _impl_findElement(prefix, find, suffix);
-	return google.script.run.withSuccessHandler(didInsert).withFailureHandler(showError).replaceInDocument(rv.prefix, rv.middle, rpl, rv.suffix);
+	_impl_uxpMessage('insertInDocument', rv, rpl);
 }
 
 function impl_removeInDocument(prefix, find, rpl, suffix) {
 	let rv = _impl_findElement(prefix, find, suffix);
-	return google.script.run.withSuccessHandler(didRemove).withFailureHandler(showError).replaceInDocument(rv.prefix, rv.middle, rpl, rv.suffix);
+	if (rv.prefix.slice(-1) == ' ') {
+		rv.prefix = rv.prefix.slice(0, -1);
+		rv.middle = ' ' + rv.middle;
+	}
+	else if (rv.suffix.slice(0, 1) == ' ') {
+		rv.suffix = rv.suffix.slice(1);
+		rv.middle = rv.middle + ' ';
+	}
+	rpl = '';
+	_impl_uxpMessage('removeInDocument', rv, rpl);
 }
 
 function impl_showOptions(g_tool) {
-	return google.script.run.withFailureHandler(showError).showOptions(g_tool);
+	window.uxpHost.postMessage({a: 'showOptions', w: g_tool});
 }
 
 function impl_getSelectedPars() {
-	return google.script.run.withSuccessHandler(checkParagraphs).withFailureHandler(showError).getSelectedPars();
+	window.uxpHost.postMessage({a: 'getSelectedPars'});
 }
 
 function impl_getAllPars() {
-	return google.script.run.withSuccessHandler(checkParagraphs).withFailureHandler(showError).getAllPars();
+	window.uxpHost.postMessage({a: 'getAllPars'});
 }
 
 function impl_showDictionary(text) {
-	return google.script.run.withFailureHandler(showError).showDictionary(text);
+	window.uxpHost.postMessage({a: 'showDictionary', t: text});
 }
 
+let _g_impl_gst_func = null;
+function impl_getSelectedText(func) {
+	_g_impl_gst_func = func;
+	window.uxpHost.postMessage({a: 'getSelectedText'});
+}
+
+function _impl_eventListener(e) {
+	e = e.data;
+	console.log(e);
+
+	if (e.a === 'init') {
+		// Of the non-English InDesign UI languages, we only support Danish and German
+		if (e.locale == 'DANISH_LOCALE') {
+			session.locale = 'da';
+		}
+		else if (e.locale == 'GERMAN_LOCALE') {
+			session.locale = 'de';
+		}
+	}
+	else if (e.a === 'getAllPars' || e.a === 'getSelectedPars') {
+		checkParagraphs(e.ps);
+	}
+	else if (e.a === 'selectInDocument') {
+		didSelect();
+	}
+	else if (e.a === 'replaceInDocument') {
+		didReplace(e.d);
+	}
+	else if (e.a === 'replaceInDocumentSilent') {
+		didReplaceSilent(e.d);
+	}
+	else if (e.a === 'insertInDocument') {
+		didInsert(e.d);
+	}
+	else if (e.a === 'removeInDocument') {
+		didRemove(e.d);
+	}
+	else if (e.a === 'getSelectedText') {
+		_g_impl_gst_func(e.d);
+	}
+	else if (e.a === 'showError') {
+		showError(e.e);
+	}
+}
+
+window.addEventListener('message', _impl_eventListener);
+
+let _g_adobe_init = g_impl.init;
 g_impl.init = function(func) {
-	let csInterface = new CSInterface();
-	let extPath = csInterface.getSystemPath(SystemPath.EXTENSION);
+	_g_adobe_init(func);
+	window.uxpHost.postMessage({a: 'init'});
+};
 
-	csInterface.evalScript('try {$.evalFile("'+extPath+'/jsx/json2.jsx");} catch(e) {}');
-	csInterface.evalScript('try {$.evalFile("'+extPath+'/jsx/impl_csxs.jsx");} catch(e) {}');
-
-	func();
-	//l10n_world();
+g_impl.openExternal = function(url) {
+	window.uxpHost.postMessage({a: 'openExternal', url: url});
 };

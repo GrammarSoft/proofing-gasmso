@@ -1,1 +1,0 @@
-../../shared/vendor/Vulcan.js

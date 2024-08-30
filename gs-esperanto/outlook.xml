@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="MailApp">
+
+  <!-- IMPORTANT! Id must be unique for your add-in, if you reuse this manifest ensure that you change this id to a new GUID. -->
+  <Id>e7fa4ce0-d447-416a-8587-1069e4203e4b</Id>
+
+  <!--Version. Updates from the store only get triggered if there is a version change. -->
+  <Version>1.0.0</Version>
+  <ProviderName>GrammarSoft ApS</ProviderName>
+  <DefaultLocale>da-DK</DefaultLocale>
+  <DisplayName DefaultValue="RetMig og Kommaforslag (dev)" />
+  <Description DefaultValue="RetMig og Kommaforslag (dev)" />
+  <IconUrl DefaultValue="https://retmig.dk/gas/dev/grammarsoft/imgs/logo-64.png" />
+  <HighResolutionIconUrl DefaultValue="https://retmig.dk/gas/dev/grammarsoft/imgs/logo-128.png" />
+
+  <SupportUrl DefaultValue="https://grammarsoft.com/" />
+  <AppDomains>
+    <AppDomain>retmig.dk</AppDomain>
+    <AppDomain>kommaer.dk</AppDomain>
+    <AppDomain>gramtrans.com</AppDomain>
+    <AppDomain>grammarsoft.com</AppDomain>
+  </AppDomains>
+
+  <Hosts>
+    <Host Name="Mailbox" />
+  </Hosts>
+  <Requirements>
+    <Sets>
+      <Set Name="Mailbox" MinVersion="1.3"/>
+    </Sets>
+  </Requirements>
+
+  <FormSettings>
+    <Form xsi:type="ItemRead">
+      <DesktopSettings>
+        <SourceLocation DefaultValue="https://retmig.dk/gas/dev/grammarsoft/html/sidebar.html?host=outlook" />
+        <RequestedHeight>450</RequestedHeight>
+      </DesktopSettings>
+    </Form>
+  </FormSettings>
+
+  <Permissions>ReadWriteItem</Permissions>
+  <Rule xsi:type="RuleCollection" Mode="Or">
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read"/>
+  </Rule>
+
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <Requirements>
+      <bt:Sets DefaultMinVersion="1.3">
+        <bt:Set Name="Mailbox"/>
+      </bt:Sets>
+    </Requirements>
+    <Hosts>
+      <Host xsi:type="MailHost">
+        <DesktopFormFactor>
+          <ExtensionPoint xsi:type="MessageComposeCommandSurface">
+            <OfficeTab id="TabHome">
+              <Group id="GS.RMKF.Group1">
+                <Label resid="GS.RMKF.Group1Label" />
+                <Control xsi:type="Button" id="GS.RMKF.TaskpaneButton">
+                  <Label resid="GS.RMKF.TaskpaneButton.Label" />
+                  <Supertip>
+                    <Title resid="GS.RMKF.TaskpaneButton.Label" />
+                    <Description resid="GS.RMKF.TaskpaneButton.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="GS.RMKF.logo16" />
+                    <bt:Image size="32" resid="GS.RMKF.logo32" />
+                    <bt:Image size="64" resid="GS.RMKF.logo64" />
+                    <bt:Image size="80" resid="GS.RMKF.logo80" />
+                    <bt:Image size="128" resid="GS.RMKF.logo128" />
+                  </Icon>
+
+                  <Action xsi:type="ShowTaskpane">
+                    <SourceLocation resid="GS.RMKF.Taskpane" />
+                  </Action>
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+
+    <Resources>
+      <bt:Images>
+        <bt:Image id="GS.RMKF.logo16" DefaultValue="https://retmig.dk/gas/dev/grammarsoft/imgs/logo-16.png" />
+        <bt:Image id="GS.RMKF.logo32" DefaultValue="https://retmig.dk/gas/dev/grammarsoft/imgs/logo-32.png" />
+        <bt:Image id="GS.RMKF.logo64" DefaultValue="https://retmig.dk/gas/dev/grammarsoft/imgs/logo-64.png" />
+        <bt:Image id="GS.RMKF.logo80" DefaultValue="https://retmig.dk/gas/dev/grammarsoft/imgs/logo-80.png" />
+        <bt:Image id="GS.RMKF.logo128" DefaultValue="https://retmig.dk/gas/dev/grammarsoft/imgs/logo-128.png" />
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="GS.RMKF.Taskpane" DefaultValue="https://retmig.dk/gas/dev/grammarsoft/html/sidebar.html?host=outlook" />
+      </bt:Urls>
+      <!-- ShortStrings max characters==125. -->
+      <bt:ShortStrings>
+        <bt:String id="GS.RMKF.TaskpaneButton.Label" DefaultValue="RetMig og Kommaforslag (dev)" />
+        <bt:String id="GS.RMKF.Group1Label" DefaultValue="RetMig og Kommaforslag (dev)" />
+      </bt:ShortStrings>
+      <!-- LongStrings max characters==250. -->
+      <bt:LongStrings>
+        <bt:String id="GS.RMKF.TaskpaneButton.Tooltip" DefaultValue="Klik for at åbne RetMig og Kommaforslag" />
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
+</OfficeApp>

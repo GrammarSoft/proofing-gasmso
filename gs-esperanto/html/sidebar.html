@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<!--
+ Copyright 2016-2024 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
+ Frontend by Tino Didriksen <mail@tinodidriksen.com>
+
+ This project is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This project is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this project.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title data-l10n="TITLE_SIDEBAR">…</title>
+	<base target="_top">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10/font/bootstrap-icons.css">
+	<script defer src="https://epo.visl.dk/gas/dev/gs-esperanto/vendor/jquery.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://epo.visl.dk/gas/dev/gs-esperanto/css/shared.css">
+	<link rel="stylesheet" type="text/css" href="https://epo.visl.dk/gas/dev/gs-esperanto/css/sidebar.css">
+	<script defer src="https://epo.visl.dk/gas/dev/gs-esperanto/vendor/murmurhash3js.min.js"></script>
+	<script defer src="https://epo.visl.dk/gas/dev/gs-esperanto/js/impl.js"></script>
+	<script defer src="https://epo.visl.dk/gas/dev/gs-esperanto/js/l10n.js"></script>
+	<script defer src="https://epo.visl.dk/gas/dev/gs-esperanto/js/l10n-local.js"></script>
+	<script defer src="https://epo.visl.dk/gas/dev/gs-esperanto/js/shared.js"></script>
+	<script defer src="https://epo.visl.dk/gas/dev/gs-esperanto/js/mark-types.js"></script>
+</head>
+<body id="sidebar">
+
+<div id="placeholder" style="height: 3000px; width: 100%;" data-l10n="POP_LOADING">…</div>
+<div id="working" data-l10n="POP_WORKING">…</div>
+
+<div class="closable" id="error">
+<div class="closer">&times;</div>
+<div id="error-text">…</div>
+</div>
+
+<div class="sidebar" id="chkSupport">
+<h1 data-l10n="HDR_SUPPORT_COPYRIGHT">…</h1>
+<div class="center backed">
+	<span data-l10n="TXT_GRAMMAR_SUPPORT">…</span>
+	<span data-l10n="BTN_VERSION">…</span>
+	<span data-l10n="TXT_GRAMMAR_COPYRIGHT">…</span>
+</div>
+
+<div class="text center">
+	<button class="btn-lightblue btnCloseSupport" data-l10n="BTN_CLOSE">…</button>
+</div>
+
+<span data-l10n="TXT_GRAMMAR_ABOUT">…</span>
+
+<div class="text center">
+	<button class="btn-lightblue btnCloseSupport" data-l10n="BTN_CLOSE">…</button>
+</div>
+</div>
+
+<div class="sidebar" id="chkLanguages">
+<h1 data-l10n="HDR_LANGUAGES">…</h1>
+<div class="center backed">
+	<button class="btn-lightblue btnLanguage" data-which="eo"><span class="smallcaps">epo</span><br>Esperanto</button>
+	<br>
+	<button class="btn-lightblue btnLanguage" data-which="en"><span class="smallcaps">eng</span><br>English</button>
+	<br>
+	<button class="btn-lightblue btnLanguage" data-which="de"><span class="smallcaps">deu</span><br>Deutsch</button>
+	<br>
+	<button class="btn-lightblue btnLanguage" data-which="da"><span class="smallcaps">dan</span><br>Dansk</button>
+</div>
+
+<div class="text center">
+	<button class="btn-lightblue btnCloseLanguages" data-l10n="BTN_CLOSE">…</button>
+</div>
+</div>
+
+<!-- Login -->
+
+<div class="sidebar" id="chkWelcomeLogin">
+<h1 class="backed" data-l10n="HDR_LOGIN">…</h1>
+<div class="text">
+	<span data-l10n="TXT_LOGIN_OPTIONAL">…</span>
+</div>
+<div class="text center">
+	<button class="btn-lightblue btn-big btnLoginSkip" data-l10n="BTN_LOGIN_SKIP">…</button>
+</div>
+<div class="text center">
+	<button class="btn-lightblue btn-big btnLoginGrammar" data-l10n="BTN_LOGIN">…</button>
+</div>
+<div class="text backed">
+	<h2 data-l10n="HDR_WHAT_IS">…</h2>
+	<span data-l10n="TXT_WHAT_IS">…</span>
+</div>
+<div class="text">
+	<span data-l10n="TXT_SUBSCRIBE_FREE">…</span>
+</div>
+</div>
+
+<!-- Shared -->
+
+<div class="sidebar" id="chkWelcomeShared">
+<h1 data-l10n="HDR_GRAMMAR">…</h1>
+<div class="text">
+	<span data-l10n="TXT_GRAMMAR_INTRO">…</span>
+	<span data-l10n="TXT_GRAMMAR_HINT">…</span>
+</div>
+<div class="buttonbar backed">
+	<button class="btn-blue btnCheckAuto toolGrammar" data-l10n="BTN_EXEC_CONTINUOUS">…</button>
+	<button class="btn-orange btnCheckSelected toolGrammar" data-l10n="BTN_EXEC_SELECTED">…</button>
+	<button class="btn-lightblue btnCheckAll toolGrammar" data-l10n="BTN_EXEC_ALL">…</button>
+</div>
+<div class="text chkGrammarToComma">
+<label class="crbox"><input type="checkbox" class="optComma" checked><span class="checkbox"></span><span data-l10n="LBL_COMMA_AFTER">…</span></label>
+</div>
+
+<hr class="tall">
+
+<h1 data-l10n="HDR_COMMA">…</h1>
+<div class="text">
+	<span data-l10n="TXT_COMMA_INTRO">…</span>
+	<span data-l10n="TXT_COMMA_HINT">…</span>
+</div>
+<div class="buttonbar backed">
+	<button class="btn-blue btnCheckAuto toolComma" data-l10n="BTN_EXEC_CONTINUOUS">…</button>
+	<button class="btn-orange btnCheckSelected toolComma" data-l10n="BTN_EXEC_SELECTED">…</button>
+	<button class="btn-lightblue btnCheckAll toolComma" data-l10n="BTN_EXEC_ALL">…</button>
+</div>
+<div class="text chkProgress">
+	<div class="chkProgressContainer"><div class="chkProgressBar"></div></div>
+</div>
+</div>
+
+<div class="sidebar" id="chkErrorList">
+<h1 data-l10n="HDR_ERRORLIST">…</h1>
+<div class="text center errorListTopBtn">
+	<button class="btn-lightblue btnCloseList" data-l10n="BTN_CLOSE">…</button>
+</div>
+
+<div class="text" id="errorList"></div>
+
+<div class="text center">
+	<button class="btn-lightblue btnCloseList" data-l10n="BTN_CLOSE">…</button>
+</div>
+</div>
+
+<div class="sidebar" id="chkChecking">
+<div class="backed">
+<div class="buttonbar buttonbar-edges buttonbar-wide">
+	<button class="btn-link left btnPrev"><span class="icon icon-previous"></span><span data-l10n="BTN_PREVIOUS">…</span></button>
+	<button class="btn-link btnSeeList"><span data-l10n="BTN_SEEALL">…</span></button>
+	<button class="btn-link right btnNext"><span data-l10n="BTN_NEXT">…</span><span class="icon icon-next"></span></button>
+</div>
+<div class="buttonbar buttonbar-wide">
+	<button class="btn-lightblue btnAccept"><span class="icon icon-accept"></span><span class="txtAccept">…</span></button>
+	<button class="btn-orange btnIgnore"><span class="icon icon-ignore"></span><span data-l10n="BTN_IGNORE">…</span></button>
+	<button class="btn-blue btnInput"><span class="icon icon-input"></span><span data-l10n="BTN_EDIT">…</span></button>
+</div>
+</div>
+<div class="text closable backed" id="chkInput">
+	<div class="closer">&times;</div>
+	<h2 data-l10n="HDR_EDIT">…</h2>
+	<div class="row"><input type="text" id="chkInputText"></div>
+	<div class="row">
+		<button class="btn-blue btnInputOne" data-l10n="BTN_EDIT_ONE">…</button>
+		&nbsp;
+		<button class="btn-blue btnInputAll" data-l10n="BTN_EDIT_ALL">…</button>
+	</div>
+</div>
+<div class="pos-rel">
+	<h1 class="chkType" data-l10n="HDR_YOUR_TEXT">…</h1>
+	<label class="label-abs-right labelShowAnalysis"><span data-l10n="LBL_SHOW_ANALYSIS">…</span> <input type="checkbox" class="chkShowAnalysis"></label>
+</div>
+<div class="text chkSentence">…</div>
+<div class="text backed chkAnalysisOpts">
+	<h3 data-l10n="HDR_ANALYSIS_OPTS">…</h3>
+	<div class="flex-cols">
+		<div>
+			<ul>
+				<li><label><input type="checkbox" class="chkPos" value="pos_V" checked> <i class="color_V bi bi-square-fill"></i> <span data-l10n="LBL_POS_V">…</span></label></li>
+				<li><label><input type="checkbox" class="chkPos" value="pos_N" checked> <i class="color_N bi bi-square-fill"></i> <span data-l10n="LBL_POS_N">…</span></label></li>
+				<li><label><input type="checkbox" class="chkPos" value="pos_PROP"> <i class="color_PROP bi bi-square-fill"></i> <span data-l10n="LBL_POS_PROP">…</span></label></li>
+				<li><label><input type="checkbox" class="chkPos" value="pos_ADJ"> <i class="color_ADJ bi bi-square-fill"></i> <span data-l10n="LBL_POS_ADJ">…</span></label></li>
+				<li><label><input type="checkbox" class="chkPos" value="pos_ADV"> <i class="color_ADV bi bi-square-fill"></i> <span data-l10n="LBL_POS_ADV">…</span></label></li>
+				<li><label><input type="checkbox" class="chkPos" value="pos_PRON"> <i class="color_PRON bi bi-square-fill"></i> <span data-l10n="LBL_POS_PRON">…</span></label></li>
+				<li><label><input type="checkbox" class="chkPos" value="pos_ART"> <i class="color_ART bi bi-square-fill"></i> <span data-l10n="LBL_POS_ART">…</span></label></li>
+				<li><label><input type="checkbox" class="chkPos" value="pos_DET"> <i class="color_DET bi bi-square-fill"></i> <span data-l10n="LBL_POS_DET">…</span></label></li>
+				<li><label><input type="checkbox" class="chkPos" value="pos_NUM"> <i class="color_NUM bi bi-square-fill"></i> <span data-l10n="LBL_POS_NUM">…</span></label></li>
+				<li><label><input type="checkbox" class="chkPos" value="pos_PRP"> <i class="color_PRP bi bi-square-fill"></i> <span data-l10n="LBL_POS_PRP">…</span></label></li>
+				<li><label><input type="checkbox" class="chkPos" value="pos_CONJ"> <i class="color_CONJ bi bi-square-fill"></i> <span data-l10n="LBL_POS_CONJ">…</span></label></li>
+				<li><label><input type="checkbox" class="chkPos" value="pos_INTJ"> <i class="color_INTJ bi bi-square-fill"></i> <span data-l10n="LBL_POS_INTJ">…</span></label></li>
+				<li><label><input type="checkbox" class="chkPos" value="pos_INFM"> <i class="color_INFM bi bi-square-fill"></i> <span data-l10n="LBL_POS_INFM">…</span></label></li>
+			</ul>
+		</div>
+		<div>
+			<ul>
+				<li><label><input type="checkbox" class="chkFunc" value="func_S" checked> <i class="black bi bi-x-lg"></i> <span data-l10n="LBL_FUNC_S">…</span></label></li>
+				<li><label><input type="checkbox" class="chkFunc" value="func_Sf"> <i class="black bi bi-x-lg"></i> <span data-l10n="LBL_FUNC_Sf">…</span></label></li>
+				<li><label><input type="checkbox" class="chkFunc" value="func_Vm"> <i class="black bi bi-circle-fill"></i> <span data-l10n="LBL_FUNC_Vm">…</span></label></li>
+				<li><label><input type="checkbox" class="chkFunc" value="func_Od" checked> <i class="black bi bi-triangle-fill"></i> <span data-l10n="LBL_FUNC_Od">…</span></label></li>
+				<li><label><input type="checkbox" class="chkFunc" value="func_Oi"> <i class="black bi bi-square-fill"></i> <span data-l10n="LBL_FUNC_Oi">…</span></label></li>
+				<li><label><input type="checkbox" class="chkFunc" value="func_Of"> <i class="black bi"><img class="rpl-vars" src="{ROOT_URL_SELF}/imgs/bi-chevron-down-half.svg"></i> <span data-l10n="LBL_FUNC_Of">…</span></label></li>
+				<li><label><input type="checkbox" class="chkFunc" value="func_A"> <i class="black bi"><img class="rpl-vars" src="{ROOT_URL_SELF}/imgs/bi-chevron-down-half.svg"></i> <span data-l10n="LBL_FUNC_A">…</span></label></li>
+				<li><label><input type="checkbox" class="chkFunc" value="func_Cs"> <i class="black bi bi-x-circle"></i> <span data-l10n="LBL_FUNC_Cs">…</span></label></li>
+				<li><label><input type="checkbox" class="chkFunc" value="func_Co"> <i class="black bi bi-plus-circle"></i> <span data-l10n="LBL_FUNC_Co">…</span></label></li>
+				<li><label><input type="checkbox" class="chkFunc" value="func_Op"> <i class="black bi bi-diamond-fill"></i> <span data-l10n="LBL_FUNC_Op">…</span></label></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="text backed" id="chkDidYouMean">
+	<h2 data-l10n="HDR_REPLACE_WITH">…</h2>
+	<div id="chkDidYouMeanItems">
+	</div>
+</div>
+<div class="text chkExplain">
+	<div class="chkExplainShort"><div class="chkExplainShortText">…</div><a class="link chkExplainMore"><span data-l10n="BTN_EXPL_MORE">…</span> <img class="rpl-vars" src="{ROOT_URL_SELF}/imgs/arrow-blue-down.png"></a></div>
+	<div class="chkExplainLong"><div class="chkExplainLongText">…</div><a class="link chkExplainLess"><span data-l10n="BTN_EXPL_LESS">…</span> <img class="rpl-vars" src="{ROOT_URL_SELF}/imgs/arrow-blue-up.png"></a></div>
+</div>
+<div class="text center" id="chkAddWord">
+	<button class="btn-lightblue btn-big btnAddWord"><span class="icon icon-add"></span><span data-l10n="BTN_DICT_ADD">…</span></button>
+</div>
+<div class="text chkProgress">
+	<div class="chkProgressContainer"><div class="chkProgressBar"></div></div>
+</div>
+</div>
+
+<!-- Grammar -->
+
+<div class="sidebar" id="chkWelcomeGrammar">
+<h1 data-l10n="HDR_GRAMMAR">…</h1>
+<div class="text">
+	<span data-l10n="TXT_GRAMMAR_HINT">…</span>
+</div>
+<div class="buttonbar backed">
+	<button class="btn-blue btnCheckAuto" data-l10n="BTN_EXEC_CONTINUOUS">…</button>
+	<button class="btn-orange btnCheckSelected" data-l10n="BTN_EXEC_SELECTED">…</button>
+	<button class="btn-lightblue btnCheckAll" data-l10n="BTN_EXEC_ALL">…</button>
+</div>
+<div class="text chkGrammarToComma">
+<label class="crbox"><input type="checkbox" class="optComma" checked><span class="checkbox"></span><span data-l10n="LBL_COMMA_AFTER">…</span></label>
+</div>
+<div class="text chkProgress">
+	<div class="chkProgressContainer"><div class="chkProgressBar"></div></div>
+</div>
+</div>
+
+<div class="sidebar" id="chkDoneGrammar">
+<h1 data-l10n="HDR_GRAMMAR_DONE">…</h1>
+<div class="buttonbar backed">
+	<button class="btn-blue btnCheckAgain" data-l10n="BTN_GRAMMAR_AGAIN">…</button>
+	<button class="btn-orange btnCheckComma" data-l10n="BTN_COMMA_GOTO">…</button>
+</div>
+</div>
+
+<!-- Comma -->
+
+<div class="sidebar" id="chkWelcomeComma">
+<h1 data-l10n="HDR_COMMA">…</h1>
+<div class="text">
+	<span data-l10n="TXT_COMMA_HINT">…</span>
+</div>
+<div class="buttonbar backed">
+	<button class="btn-blue btnCheckAuto" data-l10n="BTN_EXEC_CONTINUOUS">…</button>
+	<button class="btn-orange btnCheckSelected" data-l10n="BTN_EXEC_SELECTED">…</button>
+	<button class="btn-lightblue btnCheckAll" data-l10n="BTN_EXEC_ALL">…</button>
+</div>
+<div class="text chkProgress">
+	<div class="chkProgressContainer"><div class="chkProgressBar"></div></div>
+</div>
+</div>
+
+<div class="sidebar" id="chkDoneComma">
+<h1 data-l10n="HDR_COMMA_DONE">…</h1>
+<div class="buttonbar backed">
+	<button class="btn-blue btnCheckAgain" data-l10n="BTN_COMMA_AGAIN">…</button>
+	<button class="btn-orange btnCheckGrammar" data-l10n="BTN_GRAMMAR_GOTO">…</button>
+</div>
+</div>
+
+<div id="popupIgnore">
+	<div class="arrow-up arrow-orange"></div>
+	<div class="btn btn-top btn-orange btnIgnore" data-l10n="BTN_POP_IGNORE">…</div>
+	<div class="btn btn-bottom btn-darkorange btnIgnoreAll" data-l10n="BTN_POP_IGNOREALL">…</div>
+</div>
+
+<footer class="center">
+	<a class="btn-panel btnRestart"><span class="icon icon-restart-blue"></span><span data-l10n="BTN_RESTART">…</span></a>
+	<a class="btn-panel btnSupport"><span class="icon icon-support-blue"></span><span data-l10n="BTN_SUPPORT">…</span></a>
+	<a class="btn-panel btnLanguages"><span class="icon icon-language-blue"></span><span data-l10n="BTN_LANGUAGES">…</span></a>
+	<a class="btn-panel btnOptions"><span class="icon icon-options-blue"></span><span data-l10n="BTN_OPTIONS">…</span></a>
+	<a class="btn-panel btnLogout"><span class="icon icon-logout-blue"></span><span data-l10n="BTN_LOGOUT">…</span></a>
+</footer>
+
+</body>
+</html>

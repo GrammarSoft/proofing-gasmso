@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2022 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2024 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -269,6 +269,20 @@ button {
 	background-color: #097ab3;
 }
 
+.btn-green {
+	background-color: #18aa18;
+}
+.btn-green:hover, .btn-green:focus {
+	background-color: #128012;
+}
+
+.btn-red {
+	background-color: #aa1818;
+}
+.btn-red:hover, .btn-red:focus {
+	background-color: #801212;
+}
+
 a, .link {
 	text-decoration: none;
 	cursor: pointer;
@@ -377,6 +391,12 @@ thead, tfoot {
 }
 .type-k, .type-green {
 	color: #419641;
+}
+.type-purple {
+	color: #c22bc2;
+}
+.type-blue {
+	color: #2b2bc2;
 }
 .type-other {
 	color: #666;

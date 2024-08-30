@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2022 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2024 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -32,6 +32,8 @@ l10n.s.dan = {
 	BTN_EXEC_ALL: "Alt",
 	BTN_EXEC_ALL_NS: "Tjek alt",
 	BTN_EXEC_CONTINUOUS: "Løbende",
+	BTN_EXEC_HYPHEN: "Del i stavelser",
+	BTN_EXEC_HYPHEN_UNDO: "Fjern bindestreger",
 	BTN_EXEC_SELECTED: "Markering",
 	BTN_EXPL_LESS: "Skjul",
 	BTN_EXPL_MORE: "Vis mere",
@@ -74,6 +76,7 @@ l10n.s.dan = {
 	HDR_GRAMMAR: "{PRODUCT_NAME}",
 	HDR_GRAMMAR_DONE: "Din tekst er blevet tjekket, og der er ikke flere stave- eller grammatikforslag.",
 	HDR_GRAMMAR_ETYPES: "Fejltyper",
+	HDR_HYPHENATE: "Stavelsesdeling",
 	HDR_LANGUAGES: "Vælg brugerfladesprog",
 	HDR_LOGIN: "Login",
 	HDR_REPLACE_WITH: "Erstat med …",
@@ -81,6 +84,7 @@ l10n.s.dan = {
 	HDR_TTS: "Oplæsning",
 	HDR_WHAT_IS: "Hvad er {PRODUCT_NAME}?",
 	HDR_YOUR_TEXT: "Din tekst",
+	LBL_HYPHENATE_HARD: "Brug hård bindestreg",
 	LBL_OPT_COLOR: "Fremhæv rettelser",
 	LBL_OPT_IGNORE_MAJ: "Ret ikke fejl ved store/små bogstaver",
 	LBL_OPT_IGNORE_UABBR: "Ret ikke fejl med ukendte forkortelser",
@@ -101,11 +105,12 @@ l10n.s.dan = {
 	TITLE_SIDEBAR: "{PRODUCT_NAME}",
 	TXT_DICTIONARY_HINT: "Her kan du tilføje, rette eller fjerne ord fra din ordbog.",
 	TXT_GRAMMAR_ABOUT: "{PRODUCT_NAME} hjælper dig med at fange og fjerne stave- og slåfejl i dine tekster.",
-	TXT_GRAMMAR_COPYRIGHT: "Copyright 2019-2022 Oqaasileriffik.",
+	TXT_GRAMMAR_COPYRIGHT: "Copyright 2019-2024 Oqaasileriffik.",
 	TXT_GRAMMAR_HINT: "Vil du have tjekket din markering eller hele teksten?",
 	TXT_GRAMMAR_HINT_NS: "I Outlook kan man kun tjekke hele teksten.",
 	TXT_GRAMMAR_INTRO: "Først skal du tjekke din tekst for stavning.",
 	TXT_GRAMMAR_SUPPORT: "Du kan få hjælp via <a href=\"https://kukkuniiaat.gl\" target=\"_blank\">Oqaasileriffik</a>.",
+	TXT_HYPHENATE_HINT: "De markerede tekster eller elementer kan automatisk deles i stavelser.",
 	TXT_WHAT_IS: "{PRODUCT_NAME} er en stavekontrol for grønlandsk (kalaallisut), der hjælper dig med at fange og fjerne stave- og slåfejl i dine tekster.<br><br>{PRODUCT_NAME} er udviklet af <a href=\"https://oqaasileriffik.gl/\" target=\"_blank\">Grønlands Sprogsekretariat (Oqaasileriffik)</a>.",
 };
 
@@ -119,6 +124,8 @@ l10n.s.eng = {
 	BTN_EXEC_ALL: "Everything",
 	BTN_EXEC_ALL_NS: "Check everything",
 	BTN_EXEC_CONTINUOUS: "Continuous",
+	BTN_EXEC_HYPHEN: "Hyphenate",
+	BTN_EXEC_HYPHEN_UNDO: "Remove hyphens",
 	BTN_EXEC_SELECTED: "Selection",
 	BTN_EXPL_LESS: "Hide",
 	BTN_EXPL_MORE: "Show more",
@@ -159,7 +166,9 @@ l10n.s.eng = {
 	HDR_EDIT: "Make your own",
 	HDR_ERRORLIST: "All errors / markings",
 	HDR_GRAMMAR: "{PRODUCT_NAME}",
+	HDR_GRAMMAR_DONE: "Your text has been checked and no spelling or grammar suggestions were found.",
 	HDR_GRAMMAR_ETYPES: "Error types",
+	HDR_HYPHENATE: "Hyphenation",
 	HDR_LANGUAGES: "Select interface language",
 	HDR_LOGIN: "Log in",
 	HDR_REPLACE_WITH: "Replace with …",
@@ -167,6 +176,7 @@ l10n.s.eng = {
 	HDR_TTS: "Text to speech",
 	HDR_WHAT_IS: "What is {PRODUCT_NAME}?",
 	HDR_YOUR_TEXT: "Your text",
+	LBL_HYPHENATE_HARD: "Use hard hyphen",
 	LBL_OPT_USE_DICT: "Use the user dictionary",
 	MENU_START: "Start {PRODUCT_NAME}",
 	POP_LOADING: "Click to open {PRODUCT_NAME}",
@@ -177,10 +187,14 @@ l10n.s.eng = {
 	TITLE_OPTIONS: "Options",
 	TITLE_SIDEBAR: "{PRODUCT_NAME}",
 	TXT_DICTIONARY_HINT: "From here you can add, edit, or remove words from your dictionary.",
-	TXT_GRAMMAR_COPYRIGHT: "Copyright 2019-2022 Oqaasileriffik.",
+	TXT_GRAMMAR_ABOUT: "{PRODUCT_NAME} will help you catch spelling and typing errors in your texts.",
+	TXT_GRAMMAR_COPYRIGHT: "Copyright 2019-2024 Oqaasileriffik.",
 	TXT_GRAMMAR_HINT: "Do you want the selection or the whole document checked?",
 	TXT_GRAMMAR_HINT_NS: "In Outlook you can only check the whole text.",
 	TXT_GRAMMAR_INTRO: "First you should check the document's spelling.",
+	TXT_GRAMMAR_SUPPORT: "Help is available via <a href=\"https://kukkuniiaat.gl\" target=\"_blank\">Oqaasileriffik</a>.",
+	TXT_HYPHENATE_HINT: "The selected texts or elements can be automatically hyphenated.",
+	TXT_WHAT_IS: "{PRODUCT_NAME} is a spell checker for Greenlandic (Kalaallisut) that will help you catch spelling and typing errors in your texts.<br><br>{PRODUCT_NAME} is developed by <a href=\"https://oqaasileriffik.gl/\" target=\"_blank\">The Language Secretariat of Greenland (Oqaasileriffik)</a>.",
 };
 
 l10n.s.kal = {
@@ -192,6 +206,8 @@ l10n.s.kal = {
 	BTN_EDIT_ONE: "Aaqqissuuguk",
 	BTN_EXEC_ALL: "Tamakkiisumik kukkunersiuineq",
 	BTN_EXEC_CONTINUOUS: "Ingerlaavartumik kukkunersiuineq",
+	BTN_EXEC_HYPHEN: "Taanernut avitsigit",
+	BTN_EXEC_HYPHEN_UNDO: "Kittoraateeqqat piikkit",
 	BTN_EXEC_SELECTED: "Nalunaakkanik kukkunersiuineq",
 	BTN_EXPL_LESS: "Tarrisiguk",
 	BTN_EXPL_MORE: "Annertusiguk",
@@ -234,6 +250,7 @@ l10n.s.kal = {
 	HDR_GRAMMAR: "{PRODUCT_NAME}",
 	HDR_GRAMMAR_DONE: "Allatat misissorneqareerpoq, allanik naqqiissutissaqartoqanngilaq.",
 	HDR_GRAMMAR_ETYPES: "Kukkunerit suussusaat",
+	HDR_HYPHENATE: "Oqaatsinik avitsineq",
 	HDR_LANGUAGES: "Oqaatsit atorneqartussat toqqakkit",
 	HDR_LOGIN: "Isertaat",
 	HDR_REPLACE_WITH: "Uuminnga taarseruk",
@@ -241,6 +258,7 @@ l10n.s.kal = {
 	HDR_TTS: "Atuffatsinneq",
 	HDR_WHAT_IS: "{PRODUCT_NAME} suua?",
 	HDR_YOUR_TEXT: "Allaffissaq",
+	LBL_HYPHENATE_HARD: "Kittoraateeraq ataannartitsisoq atoruk (akunneqanngitsoq)",
 	LBL_OPT_COLOR: "Naqqissukkat ersarissisikkit",
 	LBL_OPT_IGNORE_MAJ: "Naqinnerit mikisut/angisuut naqqissornagit",
 	LBL_OPT_IGNORE_UABBR: "Naalisaanerit naqqissornagit",
@@ -261,9 +279,10 @@ l10n.s.kal = {
 	TITLE_SIDEBAR: "{PRODUCT_NAME}",
 	TXT_DICTIONARY_HINT: "Uani oqaatsimik ilanngussisinnaavutit, naqqiillutit peersillutilluunniit.",
 	TXT_GRAMMAR_ABOUT: "{PRODUCT_NAME}ip naqinnerliukkat nassaaralugillu peertassavai.",
-	TXT_GRAMMAR_COPYRIGHT: "Copyright 2019-2022 Oqaasileriffik.",
+	TXT_GRAMMAR_COPYRIGHT: "Copyright 2019-2024 Oqaasileriffik.",
 	TXT_GRAMMAR_HINT: "Toqqakkat taamaallaat misissortikkusuppiuk imalt. allataq tamaat?",
 	TXT_GRAMMAR_SUPPORT: "Una aqqutigalugu ikiorneqarsinnaavutit <a href=\"https://kukkuniiaat.gl/\" target=\"_blank\">Oqaasileriffik</a>.",
+	TXT_HYPHENATE_HINT: "Nalunaakkat imminik ingerlasumik kittoraateeralersorneqarsinnaapput.",
 	TXT_WHAT_IS: "{PRODUCT_NAME} kalaallisut allagaasut naqinnerliukkat kukkusumilluunniit allanneqarsimasut nassaarisarpai peertarlugillu. {PRODUCT_NAME} Oqaasileriffimmit ineriartortinneqarpoq.",
 };
 
