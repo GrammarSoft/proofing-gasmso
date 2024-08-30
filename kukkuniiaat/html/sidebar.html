@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
- Copyright 2016-2022 Tino Didriksen Consult <consult@tinodidriksen.com> at https://tinodidriksen.com/
+ Copyright 2016-2024 Tino Didriksen Consult <consult@tinodidriksen.com> at https://tinodidriksen.com/
  Linguistic backend by Oqaasileriffik (https://oqaasileriffik.gl/)
  Frontend by Tino Didriksen <mail@tinodidriksen.com>
 
@@ -31,6 +31,7 @@
 	<script defer src="https://retmig.dk/gas/dev/kukkuniiaat/js/l10n.js"></script>
 	<script defer src="https://retmig.dk/gas/dev/kukkuniiaat/js/shared.js"></script>
 	<script defer src="https://retmig.dk/gas/dev/kukkuniiaat/js/mark-types.js"></script>
+	<script defer src="https://oqaasileriffik.gl/wp-content/plugins/oqaa/pub/hyphenation.js"></script>
 </head>
 <body id="sidebar">
 
@@ -67,7 +68,7 @@
 <span data-l10n="TXT_COMMA_LINKS">…</span>
 </span>
 
-<div class="center backed"><a href="https://tinodidriksen.com/" target="_blank"><img class="logo rpl-vars" src="{ROOT_URL_SELF}/imgs/logo-tdc.png"></a></div>
+<div class="center backed"><a href="https://oqaasileriffik.gl" target="_blank"><img class="logo rpl-vars" src="{ROOT_URL_SELF}/imgs/logo-oqaasileriffik.png" width="150"></a></div>
 
 <div class="text center">
 	<button class="btn-lightblue btnCloseSupport" data-l10n="BTN_CLOSE">…</button>
@@ -78,10 +79,8 @@
 <h1 data-l10n="HDR_LANGUAGES">…</h1>
 <div class="center backed">
 	<button class="btn-lightblue btnLanguage" data-which="da"><span class="smallcaps">dan</span><br>Dansk</button>
-	<!--
 	<br>
 	<button class="btn-lightblue btnLanguage" data-which="kl"><span class="smallcaps">kal</span><br>Kalaallisut</button>
-	-->
 	<br>
 	<button class="btn-lightblue btnLanguage" data-which="en"><span class="smallcaps">eng</span><br>English</button>
 </div>
@@ -185,6 +184,22 @@
 <div class="text chkGrammarToComma">
 <label class="crbox"><input type="checkbox" class="optComma" checked><span class="checkbox"></span><span data-l10n="LBL_COMMA_AFTER">…</span></label>
 </div>
+
+<span class="hyphen-specific">
+<hr class="tall">
+<h1 data-l10n="HDR_HYPHENATE">…</h1>
+<div class="text">
+	<span data-l10n="TXT_HYPHENATE_HINT">…</span>
+</div>
+<div class="buttonbar backed">
+	<button class="btn-green btnHyphenate" data-l10n="BTN_EXEC_HYPHEN">…</button>
+	<button class="btn-red btnHyphenateUndo" data-l10n="BTN_EXEC_HYPHEN_UNDO">…</button>
+</div>
+<div class="text">
+<label class="crbox"><input type="checkbox" class="chkHyphenateHard"><span class="checkbox"></span><span data-l10n="LBL_HYPHENATE_HARD">…</span></label>
+</div>
+</span>
+
 <div class="text chkProgress">
 	<div class="chkProgressContainer"><div class="chkProgressBar"></div></div>
 </div>

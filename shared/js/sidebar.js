@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2022 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2024 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -95,7 +95,7 @@ function markingSetSentence() {
 			sentence += '<span class="marking pos pos_off pos_'+m[WF_ANA].pos+func+'"><span>' + escHTML(w) + '</span><br><span class="func">' + icon + '</span></span> ';
 		}
 		else {
-			if (m[WF_MARK].length > 1 && rx_insertable.test(m[WF_MARK])) {
+			if (m[WF_MARK].length > 1 && g_marks.rx_ins.test(m[WF_MARK])) {
 				//console.log(`Skipping ${s} ${i}: ${markings[s][i][WF_MARK]}`);
 				continue;
 			}
@@ -110,7 +110,7 @@ function markingSetSentence() {
 function markingSetContext() {
 	cmarking.prefix = '';
 	for (let i=0 ; i<cmarking.w ; ++i) {
-		if (markings[cmarking.s][i][WF_MARK].length > 1 && rx_insertable.test(markings[cmarking.s][i][WF_MARK])) {
+		if (markings[cmarking.s][i][WF_MARK].length > 1 && g_marks.rx_ins.test(markings[cmarking.s][i][WF_MARK])) {
 			//console.log(`Skipping ${cmarking.s} ${i}: ${markings[cmarking.s][i][WF_MARK]}`);
 			continue;
 		}
@@ -119,7 +119,7 @@ function markingSetContext() {
 
 	cmarking.suffix = '';
 	for (let i=cmarking.w+1 ; i<markings[cmarking.s].length ; ++i) {
-		if (markings[cmarking.s][i][WF_MARK].length > 1 && rx_insertable.test(markings[cmarking.s][i][WF_MARK])) {
+		if (markings[cmarking.s][i][WF_MARK].length > 1 && g_marks.rx_ins.test(markings[cmarking.s][i][WF_MARK])) {
 			//console.log(`Skipping ${cmarking.s} ${i}: ${markings[cmarking.s][i][WF_MARK]}`);
 			continue;
 		}
@@ -130,7 +130,7 @@ function markingSetContext() {
 function markingGetSnippet() {
 	let snippet = '';
 	for (let i=Math.max(0, cmarking.w-2) ; i<cmarking.w ; ++i) {
-		if (markings[cmarking.s][i][WF_MARK].length > 1 && rx_insertable.test(markings[cmarking.s][i][WF_MARK])) {
+		if (markings[cmarking.s][i][WF_MARK].length > 1 && g_marks.rx_ins.test(markings[cmarking.s][i][WF_MARK])) {
 			continue;
 		}
 		snippet += markings[cmarking.s][i][WF_WORD] + ' ';
@@ -138,7 +138,7 @@ function markingGetSnippet() {
 
 	snippet += markings[cmarking.s][cmarking.w][WF_WORD] + ' ';
 	for (let i=cmarking.w+1 ; i<Math.min(markings[cmarking.s].length, cmarking.w+3) ; ++i) {
-		if (markings[cmarking.s][i][WF_MARK].length > 1 && rx_insertable.test(markings[cmarking.s][i][WF_MARK])) {
+		if (markings[cmarking.s][i][WF_MARK].length > 1 && g_marks.rx_ins.test(markings[cmarking.s][i][WF_MARK])) {
 			continue;
 		}
 		snippet += markings[cmarking.s][i][WF_WORD] + ' ';
@@ -182,7 +182,7 @@ function markingRender(skipact) {
 	let types = marking[WF_MARK].split(/ /g);
 	let col = markingColor(types);
 
-	if (types_dictionary.test(marking[WF_MARK])) {
+	if (g_marks.dict.test(marking[WF_MARK])) {
 		$('#chkAddWord').show();
 		$('.btnAddWord').removeClass('disabled');
 	}
@@ -198,10 +198,10 @@ function markingRender(skipact) {
 	let es = {};
 	let el = {};
 	for (let i=0 ; i<types.length ; ++i) {
-		let et = marking_types[types[i]] ? marking_types[types[i]][0] : (types[i] + ' ');
+		let et = g_marks.types[types[i]] ? g_marks.types[types[i]][0] : (types[i] + ' ');
 		es[i] = '<h2 title="'+escHTML(types[i])+'">'+et+'</h2>';
 
-		et = marking_types[types[i]] ? marking_types[types[i]][1] : (types[i] + ' ');
+		et = g_marks.types[types[i]] ? g_marks.types[types[i]][1] : (types[i] + ' ');
 		et = '<p>'+et.replace(/(<br>\s*)+<br>\s*/g, '</p><p>')+'</p>';
 		el[i] = es[i] + et.replace(/<p>\s*<\/p>/g, '');
 	}
@@ -231,7 +231,7 @@ function markingRender(skipact) {
 		let all_upper = is_upper(marking[WF_WORD]);
 		let first_upper = all_upper || is_upper(marking[WF_WORD].charAt(0));
 
-		if (types_to_lower.test(marking[WF_MARK])) {
+		if (g_marks.to_lower.test(marking[WF_MARK])) {
 			all_upper = first_upper = false;
 		}
 
@@ -265,7 +265,7 @@ function markingRender(skipact) {
 
 	$('.icon-accept,.icon-discard').addClass('icon-accept').removeClass('icon-discard');
 
-	if (rx_insertable.test(marking[WF_MARK])) {
+	if (g_marks.rx_ins.test(marking[WF_MARK])) {
 		let px = /^(.*?)(\S+\s?)$/.exec(cmarking.prefix);
 		let sx = /^(\s?\S+)(.*)$/.exec(cmarking.suffix);
 		impl_selectInDocument(px[1], px[2] + sx[1], sx[2]);
@@ -275,7 +275,7 @@ function markingRender(skipact) {
 		}
 		$('.btnAccept').removeClass('disabled');
 	}
-	else if (rx_removable.test(marking[WF_MARK])) {
+	else if (g_marks.rx_del.test(marking[WF_MARK])) {
 		$('.icon-accept,.icon-discard').addClass('icon-discard').removeClass('icon-accept');
 		$('.txtAccept').text(l10n_translate(btn_lbl + 'REMOVE'));
 		$('.btnAccept').removeClass('disabled');
@@ -365,7 +365,7 @@ function markingIgnore() {
 	ignores[ik][cmarking.sentence] = true;
 	console.log('Ignoring %s in %s', ik, cmarking.sentence);
 
-	if (rx_insertable.test(marking[WF_MARK])) {
+	if (g_marks.rx_ins.test(marking[WF_MARK])) {
 		markings[cmarking.s][cmarking.w] = [' ', '', '', 0, {pos:'', func:''}, marking[WF_TID]];
 	}
 	else {
@@ -619,7 +619,7 @@ function markingAccept() {
 
 	let mark = markings[cmarking.s][cmarking.w];
 
-	if (rx_insertable.test(mark[WF_MARK])) {
+	if (g_marks.rx_ins.test(mark[WF_MARK])) {
 		let px = /^(.*?)(\S+)(\s?)$/.exec(cmarking.prefix);
 		let sx = /^(\s?\S+)(.*)$/.exec(cmarking.suffix);
 		let rpl = mark[WF_WORD];
@@ -629,7 +629,7 @@ function markingAccept() {
 		}
 		processQueue({f: impl_insertInDocument, s: cmarking.s, w: cmarking.w, prefix: px[1], middle: px[2] + px[3] + sx[1], rpl: px[2] + rpl + px[3] + sx[1], suffix: sx[2]});
 	}
-	else if (/(£nil|%nok)( |-|$)/.test(mark[WF_MARK])) {
+	else if (g_marks.rx_del.test(mark[WF_MARK])) {
 		log_marking_action({'a': 'accept-remove', 'm': mark[WF_MARK], 'w': mark[WF_WORD], 't': mark[WF_TID]});
 		processQueue({f: impl_removeInDocument, s: cmarking.s, w: cmarking.w, rpl: ' '});
 	}
@@ -792,6 +792,10 @@ function loginKeepalive(init) {
 		g_keepalive = setInterval(loginKeepalive, 5*60*1000); // 5 minute keepalive
 
 		console.log('Login success');
+		if (rv.hasOwnProperty('anonymous')) {
+			g_anonymous = rv.anonymous;
+			delete rv.anonymous;
+		}
 		delete rv.a;
 		g_access_token = rv;
 		ls_set('access-token', g_access_token);
@@ -902,7 +906,7 @@ function loginListener() {
 }
 
 function logout() {
-	window.open(SIGNOUT_URL+g_access_token.sessionid, 'Logout');
+	g_impl.openExternal(SIGNOUT_URL+g_access_token.sessionid, 'Logout');
 
 	$.ajax({
 		url: ROOT_URL_GRAMMAR+'/callback.php',
@@ -943,6 +947,20 @@ function initSidebar() {
 		$('[data-l10n="TXT_GRAMMAR_HINT"]').attr('data-l10n', 'TXT_GRAMMAR_HINT_NS');
 		$('[data-l10n="TXT_COMMA_HINT"]').attr('data-l10n', 'TXT_COMMA_HINT_NS');
 		$('[data-l10n="BTN_EXEC_ALL"]').attr('data-l10n', 'BTN_EXEC_ALL_NS');
+	}
+	if (!g_impl.hasOwnProperty('callback')) {
+		g_impl.callback = function () {};
+	}
+	if (!g_impl.hasOwnProperty('openExternal')) {
+		g_impl.openExternal = function (url, title) {
+			window.open(url, title);
+		};
+	}
+	if (!g_impl.hasOwnProperty('beforeSendTexts')) {
+		g_impl.beforeSendTexts = function(t) { return t; };
+	}
+	if (!g_impl.hasOwnProperty('beforeParseResult')) {
+		g_impl.beforeParseResult = function(t) { return t; };
 	}
 
 	if (typeof window.g_tool === 'string') {
@@ -1133,9 +1151,26 @@ function initSidebar() {
 		if ($(this).hasClass('disabled')) {
 			return false;
 		}
-		window.open(ROOT_URL_GRAMMAR + '/login.php?popup=1&channel='+g_login_channel, 'Login');
+		g_impl.openExternal(ROOT_URL_GRAMMAR + '/login.php?popup=1&channel='+g_login_channel, 'Login');
 		matomo_event('ui', 'login');
 	});
+
+	$('.btnLoginSkip').click(function() {
+		if ($(this).hasClass('disabled')) {
+			return false;
+		}
+		g_anonymous = true;
+		g_impl.openExternal(ROOT_URL_GRAMMAR + '/login.php?popup=1&anonymous=1&channel='+g_login_channel, 'Login');
+		matomo_event('ui', 'login');
+	});
+
+	if (typeof impl_getSelectedText !== 'function') {
+		$('.hyphen-specific').hide();
+	}
+	else {
+		$('.btnHyphenate').click(function() { impl_getSelectedText(g_impl.hyphenate); });
+		$('.btnHyphenateUndo').click(function() { impl_getSelectedText(g_impl.hyphenateUndo); });
+	}
 
 	$('.btnLogout').click(logout);
 	$('.btnOptions').hide();
@@ -1184,7 +1219,7 @@ function initSidebar() {
 	g_impl.parseProgress = function() {
 		$('.chkProgressBar').css('width', (to_send_i/to_send.length*100.0) + '%');
 	};
-	g_impl.parseNoResult = function() {
+	g_impl.parseNoResult = function(rv) {
 		$('.chkProgress').hide();
 		console.log(rv);
 	};
@@ -1213,6 +1248,19 @@ function initSidebar() {
 		}, 100);
 		$('.chkProgress').hide();
 	};
+
+	if (g_client == 'adobe') {
+		$('a[href^="https://"]').click(function () {
+			let url = $(this).attr('href');
+			g_impl.openExternal(url);
+		});
+		$('form[action^="https://"]').submit(function () {
+			let url = $(this).attr('action');
+			g_impl.openExternal(url);
+		});
+	}
+
+	matomo_load();
 }
 
 $(function() {

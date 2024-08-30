@@ -1,0 +1,1 @@
+../../shared/js/l10n.js

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2022 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2024 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
@@ -8,23 +8,21 @@
  */
 'use strict';
 
-let types_red = {};
+g_marks.red = {};
 
-let types_yellow = {};
+g_marks.yellow = {};
 
-let types_info = {};
+g_marks.info = {};
 
-let types_comp_right = new RegExp('~no-such-type');
-let types_to_upper = new RegExp('~no-such-type');
-let types_to_lower = new RegExp('~no-such-type');
-let rx_insertable = /(£insert|%ko|%k)( |-|$)/;
-let rx_removable = /(£nil|%nok|%ok|%nko)( |-|$)/;
+g_marks.comp_right = new RegExp('~no-such-type');
+g_marks.to_upper = new RegExp('~no-such-type');
+g_marks.to_lower = new RegExp('~no-such-type');
+g_marks.rx_ins = /(£insert|%ko|%k)( |-|$)/;
+g_marks.rx_del = /(£nil|%nok|%ok|%nko)( |-|$)/;
 
-let marking_types = {};
-let marking_types_comma = [];
-let marking_types_grammar = [];
-
-let types_mv = {};
+g_marks.types = {};
+g_marks.types_comma = [];
+g_marks.types_grammar = [];
 
 let ctypes = {
 	dan: {
@@ -1707,43 +1705,43 @@ ctypes.da = ctypes.dan;
 ctypes.de = ctypes.deu;
 ctypes.en = ctypes.eng;
 
-let types_dictionary = [];
-for (let k in types_yellow) {
-	types_dictionary.push('('+escapeRegExp(k)+')');
+g_marks.dict = [];
+for (let k in g_marks.yellow) {
+	g_marks.dict.push('('+escapeRegExp(k)+')');
 }
-if (types_dictionary.length) {
-	types_dictionary = new RegExp('('+types_dictionary.join('|')+')( |$)');
+if (g_marks.dict.length) {
+	g_marks.dict = new RegExp('('+g_marks.dict.join('|')+')( |$)');
 }
 else {
-	types_dictionary = new RegExp('^!NO-SUCH-TYPE');
+	g_marks.dict = new RegExp('^!NO-SUCH-TYPE');
 }
 
 function l10n_marking_types(lang) {
-	marking_types = {};
-	marking_types_comma = [];
-	marking_types_grammar = [];
+	g_marks.types = {};
+	g_marks.types_comma = [];
+	g_marks.types_grammar = [];
 
 	for (let k in ctypes[lang]) {
 		if (!ctypes[lang].hasOwnProperty(k)) {
 			continue;
 		}
 		let v = ctypes[lang][k];
-		marking_types[k] = [v[1], v[2], v[3]];
-		marking_types_comma.push(k);
+		g_marks.types[k] = [v[1], v[2], v[3]];
+		g_marks.types_comma.push(k);
 
 		if (/^%ko(-|$)/.test(k)) {
-			types_yellow[k] = k;
+			g_marks.yellow[k] = k;
 		}
 		else if (/^%nko(-|$)/.test(k) || /^%ok-/.test(k)) {
-			types_info[k] = k;
+			g_marks.info[k] = k;
 		}
 		else if (/^%nok(-|$)/.test(k)) {
-			types_red[k] = k;
+			g_marks.red[k] = k;
 		}
 	}
 
 	g_options_default.types = {};
-	for (let k in marking_types) {
+	for (let k in g_marks.types) {
 		if (/^%(ok|nko)(-|$)/.test(k)) {
 			g_options_default.types[k] = 0;
 		}
