@@ -617,6 +617,7 @@ function sanitize_result(txt) {
 
 	// Special case
 	txt = txt.replace(/£x-etype-case/g, '£upper');
+	txt = txt.replace(/£:\S+/g, '£:...');
 
 	// Puntuation on a line of its own should be a sentence break
 	txt = txt.replace(/\n([.?!:])\n/g, '\n$1\n\n');
