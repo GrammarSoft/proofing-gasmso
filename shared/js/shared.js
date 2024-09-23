@@ -617,6 +617,7 @@ function sanitize_result(txt) {
 
 	// Special case
 	txt = txt.replace(/£x-etype-case/g, '£upper');
+	txt = txt.replace(/£:\S+/g, '£:...');
 
 	// Puntuation on a line of its own should be a sentence break
 	txt = txt.replace(/\n([.?!:])\n/g, '\n$1\n\n');
@@ -1575,6 +1576,10 @@ function matomo_load() {
 }
 
 function matomo_event(cat, act, name, value) {
+	if (typeof _paq === 'undefined') {
+		console.log('Matomo not loaded yet');
+		return false;
+	}
 	console.log([cat, act, name, value]);
 	if (typeof act === 'undefined' || !act) {
 		act = cat;
@@ -1626,6 +1631,11 @@ function contentLoaded() {
 		// Delay ever so slightly to force other scripts to load first
 		// No, defer doesn't work. No, async doesn't work either.
 		setTimeout(function() {addScript(ROOT_URL_SELF+'/js/'+id+'.js'); }, 100);
+	}
+
+	if (/^(word|outlook)$/.test(g_client) && /Trident|MSIE|Edge/.test(window.navigator.userAgent)) {
+		$('#working').hide();
+		$('#placeholder').html(l10n_translate_html('ERR_OFFICE_TOO_OLD'));
 	}
 }
 

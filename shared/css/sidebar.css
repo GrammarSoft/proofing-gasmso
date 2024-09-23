@@ -30,17 +30,20 @@ label span {
 	margin-top: 10px;
 }
 
-#working {
+#placeholder, #working {
 	position: absolute;
 	left: 0;
 	right: 0;
 	top: 0;
 	bottom: 0;
 	background-color: #fff;
-	opacity: 0.75;
 	z-index: 9999999;
 	text-align: center;
+	padding-top: 50px;
+}
+#working {
 	padding-top: 200px;
+	opacity: 0.75;
 	font-size: 24px;
 }
 
