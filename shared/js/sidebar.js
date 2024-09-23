@@ -1181,7 +1181,13 @@ function initSidebar() {
 	$('#working').hide();
 	$('.chkProgress').hide();
 	$('.sidebar').hide();
-	$('#placeholder').remove();
+
+	if (/^(word|outlook)$/.test(g_client) && /Trident|MSIE|Edge/.test(window.navigator.userAgent)) {
+		$('#placeholder').html(l10n_translate_html('ERR_OFFICE_TOO_OLD'));
+	}
+	else {
+		$('#placeholder').remove();
+	}
 
 	$('.rpl-vars').each(function() {
 		let e = $(this);

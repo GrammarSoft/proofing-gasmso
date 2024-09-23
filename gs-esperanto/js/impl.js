@@ -22,7 +22,7 @@ const VERSION_MAJOR = 1;
 const VERSION_MINOR = 0;
 const VERSION_PATCH = 0;
 const PRODUCT_NAME = window.hasOwnProperty('PRODUCT_NAME') ? window.PRODUCT_NAME : 'Lingvohelpilo';
-const PRODUCT_DOMAIN = window.hasOwnProperty('PRODUCT_DOMAIN') ? window.PRODUCT_DOMAIN : 'epo.visl.dk';
+const PRODUCT_DOMAIN = window.hasOwnProperty('PRODUCT_DOMAIN') ? window.PRODUCT_DOMAIN : 'lingvohelpilo.visl.dk';
 const ROOT_URL_SELF = 'https://'+PRODUCT_DOMAIN+'/gas/dev/gs-esperanto/';
 const ROOT_URL_GRAMMAR = 'https://'+PRODUCT_DOMAIN+'/dev/';
 const CADUCEUS_URL = 'wss://gramtrans.com/caduceus/';
@@ -84,7 +84,7 @@ function impl_canComma() {
 }
 
 function impl_openDictionary(word) {
-	g_impl.openExternal('https://ordnet.dk/ddo/ordbog?query='+encodeURIComponent(word), 'Den Danske Ordbog');
+	g_impl.openExternal('https://vortaro.net/#'+encodeURIComponent(word)+'_kd', 'Plena Ilustrita Vortaro de Esperanto 2020');
 }
 
 function impl_loadUserdata() {
@@ -168,9 +168,13 @@ function impl_beforeParseResult(txt) {
 
 	if (g_impl.has_diacritics) {
 		let rx = / <R:\S+>/g;
-		let ms = [...txt.matchAll(rx)];
-		for (let m of ms) {
-			m = m[0];
+		let ms = [];
+		let m = null;
+		while ((m = rx.exec(txt)) !== null) {
+			ms.push(m);
+		}
+		for (let i=0 ; i<ms.length ; ++i) {
+			m = m[i][0];
 			let org = m;
 			m = m.replace(/ux/g, 'ŭ');
 			m = m.replace(/UX/ig, 'Ŭ');
