@@ -168,9 +168,13 @@ function impl_beforeParseResult(txt) {
 
 	if (g_impl.has_diacritics) {
 		let rx = / <R:\S+>/g;
-		let ms = [...txt.matchAll(rx)];
-		for (let m of ms) {
-			m = m[0];
+		let ms = [];
+		let m = null;
+		while ((m = rx.exec(txt)) !== null) {
+			ms.push(m);
+		}
+		for (let i=0 ; i<ms.length ; ++i) {
+			m = m[i][0];
 			let org = m;
 			m = m.replace(/ux/g, 'ŭ');
 			m = m.replace(/UX/ig, 'Ŭ');
