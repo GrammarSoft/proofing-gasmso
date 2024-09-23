@@ -15,11 +15,11 @@
 
   <SupportUrl DefaultValue="https://grammarsoft.com/" />
   <AppDomains>
-    <AppDomain>lingvohelpilo.visl.dk</AppDomain>
-    <AppDomain>retmig.dk</AppDomain>
-    <AppDomain>kommaer.dk</AppDomain>
-    <AppDomain>gramtrans.com</AppDomain>
-    <AppDomain>grammarsoft.com</AppDomain>
+    <AppDomain>https://lingvohelpilo.visl.dk</AppDomain>
+    <AppDomain>https://retmig.dk</AppDomain>
+    <AppDomain>https://kommaer.dk</AppDomain>
+    <AppDomain>https://gramtrans.com</AppDomain>
+    <AppDomain>https://grammarsoft.com</AppDomain>
   </AppDomains>
 
   <Hosts>
