@@ -10,8 +10,8 @@
   <DefaultLocale>eo-EO</DefaultLocale>
   <DisplayName DefaultValue="Lingvohelpilo (dev)" />
   <Description DefaultValue="Lingvohelpilo (dev)" />
-  <IconUrl DefaultValue="https://lingvohelpilo.visl.dk/gas/dev/grammarsoft/imgs/logo-64.png" />
-  <HighResolutionIconUrl DefaultValue="https://lingvohelpilo.visl.dk/gas/dev/grammarsoft/imgs/logo-128.png" />
+  <IconUrl DefaultValue="https://lingvohelpilo.visl.dk/gas/dev/gs-esperanto/imgs/logo-64.png" />
+  <HighResolutionIconUrl DefaultValue="https://lingvohelpilo.visl.dk/gas/dev/gs-esperanto/imgs/logo-128.png" />
 
   <SupportUrl DefaultValue="https://grammarsoft.com/" />
   <AppDomains>
@@ -34,7 +34,7 @@
   <FormSettings>
     <Form xsi:type="ItemRead">
       <DesktopSettings>
-        <SourceLocation DefaultValue="https://lingvohelpilo.visl.dk/gas/dev/grammarsoft/html/sidebar.html?host=outlook" />
+        <SourceLocation DefaultValue="https://lingvohelpilo.visl.dk/gas/dev/gs-esperanto/html/sidebar.html?host=outlook" />
         <RequestedHeight>450</RequestedHeight>
       </DesktopSettings>
     </Form>
@@ -85,14 +85,14 @@
 
     <Resources>
       <bt:Images>
-        <bt:Image id="GS.EPOG.logo16" DefaultValue="https://lingvohelpilo.visl.dk/gas/dev/grammarsoft/imgs/logo-16.png" />
-        <bt:Image id="GS.EPOG.logo32" DefaultValue="https://lingvohelpilo.visl.dk/gas/dev/grammarsoft/imgs/logo-32.png" />
-        <bt:Image id="GS.EPOG.logo64" DefaultValue="https://lingvohelpilo.visl.dk/gas/dev/grammarsoft/imgs/logo-64.png" />
-        <bt:Image id="GS.EPOG.logo80" DefaultValue="https://lingvohelpilo.visl.dk/gas/dev/grammarsoft/imgs/logo-80.png" />
-        <bt:Image id="GS.EPOG.logo128" DefaultValue="https://lingvohelpilo.visl.dk/gas/dev/grammarsoft/imgs/logo-128.png" />
+        <bt:Image id="GS.EPOG.logo16" DefaultValue="https://lingvohelpilo.visl.dk/gas/dev/gs-esperanto/imgs/logo-16.png" />
+        <bt:Image id="GS.EPOG.logo32" DefaultValue="https://lingvohelpilo.visl.dk/gas/dev/gs-esperanto/imgs/logo-32.png" />
+        <bt:Image id="GS.EPOG.logo64" DefaultValue="https://lingvohelpilo.visl.dk/gas/dev/gs-esperanto/imgs/logo-64.png" />
+        <bt:Image id="GS.EPOG.logo80" DefaultValue="https://lingvohelpilo.visl.dk/gas/dev/gs-esperanto/imgs/logo-80.png" />
+        <bt:Image id="GS.EPOG.logo128" DefaultValue="https://lingvohelpilo.visl.dk/gas/dev/gs-esperanto/imgs/logo-128.png" />
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="GS.EPOG.Taskpane" DefaultValue="https://lingvohelpilo.visl.dk/gas/dev/grammarsoft/html/sidebar.html?host=outlook" />
+        <bt:Url id="GS.EPOG.Taskpane" DefaultValue="https://lingvohelpilo.visl.dk/gas/dev/gs-esperanto/html/sidebar.html?host=outlook" />
       </bt:Urls>
       <!-- ShortStrings max characters==125. -->
       <bt:ShortStrings>
