@@ -35,34 +35,44 @@ g_marks.purple = {
 };
 
 g_marks.blue = {
-	'£pl': '£pl',
-	'£sg': '£sg',
-	'£akt': '£akt',
-	'£pas': '£pas',
-	'£vfin': '£vfin',
-	'£as': '£as',
-	'£is': '£is',
-	'£os': '£os',
-	'£us': '£us',
-	'£u': '£u',
-	'£inf': '£inf',
-	'£adj': '£adj',
-	'£adv': '£adv',
-	'£noun': '£noun',
-	'£ordinal': '£ordinal',
-	'£poss': '£poss',
-	'£refl': '£refl',
-	'£no-refl': '£no-refl',
-	'£ki-': '£ki-',
-	'£ig': '£ig',
-	'£igx': '£igx',
-	'£ul': '£ul',
-	'£ado': '£ado',
+	'£-io': '£-io',
+	'£-iu': '£-iu',
 	'£PREADD:subject': '£PREADD:subject',
 	'£PRESWAP': '£PRESWAP',
-	'£nil': '£nil',
+	'£adj': '£adj',
+	'£ado': '£ado',
+	'£adv': '£adv',
+	'£akt': '£akt',
+	'£ante': '£ante',
+	'£as': '£as',
+	'£ata': '£ata',
+	'£clefting': '£clefting',
+	'£cond': '£cond',
+	'£ig': '£ig',
+	'£igx': '£igx',
+	'£inf': '£inf',
 	'£insert': '£insert',
+	'£inte': '£inte',
+	'£is': '£is',
+	'£ita': '£ita',
+	'£ki-': '£ki-',
+	'£nil': '£nil',
+	'£no-refl': '£no-refl',
+	'£noun': '£noun',
+	'£ordinal': '£ordinal',
+	'£os': '£os',
+	'£pas': '£pas',
+	'£pcp': '£pcp',
+	'£pl': '£pl',
+	'£poss': '£poss',
 	'£question': '£question',
+	'£refl': '£refl',
+	'£sg': '£sg',
+	'£u': '£u',
+	'£ul': '£ul',
+	'£us': '£us',
+	'£vfin': '£vfin',
+	'£warning': '£warning',
 };
 
 g_marks.comp_right = new RegExp('£comp-( |$)');
@@ -120,7 +130,7 @@ g_marks.types = {
 	"£x-etype-h-style": [
 		"£x-etype-h-style",
 		"H anstataŭ supersigno",
-		"Tiu vorto estis rekonebla nur se oni supozas uzon de ‘h’ anstataŭ supersigno, ekz. pro problemoj kun klavaro. Ĉar tio estas permesita en la Fundamento, ne temas pri vera eraro. Se vi intence uzas tiun konvencion, aŭ kopiis malnovan tekston uzante ĝin, vi povas malŝalti la markadon de tiu “eraro” en viaj <i>personaj agordoj.</i>",
+		"Tiu vorto estis rekonebla nur se oni supozas uzon de ‘h’ anstataŭ supersigno, ekz. pro problemoj kun klavaro. Ĉar tio estas permesita en la Fundamento, ne temas pri vera eraro. Se vi intence uzas tiun konvencion, aŭ kopiis malnovan tekston uzante ĝin, vi povas malŝalti la markadon de tiu \"eraro\" en viaj <i>personaj agordoj.</i>",
 		"<span style=\"color: #ff0000\">shanghi</span> [ŝanĝi]"
 	],
 	"£x-etype-au": [
@@ -132,7 +142,7 @@ g_marks.types = {
 	"£x-etype-joined": [
 		"£x-etype-joined",
 		"Kunfando-eraro (mankanta spaco)",
-		"Du individuaj vortoj estis erare kunskribitaj. Plej ofte tio estas tajperaro aŭ OCR-eraro. Adverbo antaŭ alia adverbo aŭ adjektivo estas normale individua vorto, sed la lingvouzo estas malklara in kelkaj kazoj, precipe kun <i>‘plej’</i>. Tiel eblas skribi kaj “plej ofte” kaj “plejofte”. La vorteto <i>‘ĉi’</i> ne estu kunskribita kun montraj tabelvortoj. Ankaŭ mallongigoj de mezurunuoj estu apartigitaj post ciferoj.",
+		"Du individuaj vortoj estis erare kunskribitaj. Plej ofte tio estas tajperaro aŭ OCR-eraro. Adverbo antaŭ alia adverbo aŭ adjektivo estas normale individua vorto, sed la lingvouzo estas malklara in kelkaj kazoj, precipe kun <i>‘plej’</i>. Tiel eblas skribi kaj \"plej ofte\" kaj \"plejofte\". La vorteto <i>‘ĉi’</i> ne estu kunskribita kun montraj tabelvortoj. Ankaŭ mallongigoj de mezurunuoj estu apartigitaj post ciferoj.",
 		"<span style=\"color: #ff0000\">septembrokaj</span> [septempro kaj] oktobro, <span style=\"color: #ff0000\">ĉitiu</span> [ĉi tiu], <span style=\"color: #ff0000\">24°C</span> [24 °C["
 	],
 	"£x-etype-dis": [
@@ -144,7 +154,7 @@ g_marks.types = {
 	"£x-etype-apostrophe": [
 		"£x-etype-apostrophe",
 		"Mankanta apostrofo",
-		"En Esperanto, oni uzas apostrofon por marki la forlason de la fina vokalo en la artikolo <i>(l’ akvo)</i> aŭ la substantiva ‘-o’ <i>(dum temp’ eterna)</i>. Uzi “nudan” radikon sen tiu apostrofo estas eraro.<br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/apostrofo\">apostrofo</a>.",
+		"En Esperanto, oni uzas apostrofon por marki la forlason de la fina vokalo en la artikolo <i>(l’ akvo)</i> aŭ la substantiva ‘-o’ <i>(dum temp’ eterna)</i>. Uzi \"nudan\" radikon sen tiu apostrofo estas eraro.<br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/apostrofo\">apostrofo</a>.",
 		"Flavgajas <span style=\"color: #ff0000\">foliar</span> [foliar’] de helianto<br>\n<br>\nHo mia <span style=\"color: #ff0000\">kor</span> [kor’], kiam venos <span style=\"color: #ff0000\">liber</span> [liber’]"
 	],
 	"£x-etype-Hyphen": [
@@ -276,25 +286,25 @@ g_marks.types = {
 	"£hyphen-prefix": [
 		"£hyphen-prefix",
 		"Mankanta streketo post memstara prefikso, en kunordigo",
-		"La markita vorto devas havi streketon dekstre. Temas pri kunordigo de kunmetaĵoj aŭ derivaĵoj, kie la unua vorto “partumas” sian duan parton kun la dua vorto.",
+		"La markita vorto devas havi streketon dekstre. Temas pri kunordigo de kunmetaĵoj aŭ derivaĵoj, kie la unua vorto \"partumas\" sian duan parton kun la dua vorto.",
 		"<span style=\"color: #ff0000\">somer</span> kaj vintro-ferioj [somer- kaj vintroferioj]"
 	],
 	"£hyphen-suffix": [
 		"£hyphen-suffix",
 		"Mankanta streketo antaŭ memstara sufikso, en kunordigo",
-		"La markita vorto devas havi streketon maldekstre. Temas pri kunordigo de kunmetaĵoj aŭ derivaĵoj, kie la dua vorto “partumas” sian unuan parton kun la unua vorto.",
+		"La markita vorto devas havi streketon maldekstre. Temas pri kunordigo de kunmetaĵoj aŭ derivaĵoj, kie la dua vorto \"partumas\" sian unuan parton kun la unua vorto.",
 		"Esperanto-poemoj kaj <span style=\"color: #ff0000\">romanoj</span> [Esperanto-poemoj kaj -romanoj]"
 	],
 	"£apostrophe": [
 		"£apostrophe",
 		"Mankanta apostrofo",
-		"En Esperanto, oni uzas apostrofon por marki la forlason de la fina vokalo en la artikolo <i>(l’ akvo)</i> aŭ la substantiva ‘-o’ <i>(dum temp’ eterna)</i>. Uzi “nudan” radikon sen tiu apostrofo estas eraro.<br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/apostrofo\">apostrofo</a>.",
+		"En Esperanto, oni uzas apostrofon por marki la forlason de la fina vokalo en la artikolo <i>(l’ akvo)</i> aŭ la substantiva ‘-o’ <i>(dum temp’ eterna)</i>. Uzi \"nudan\" radikon sen tiu apostrofo estas eraro.<br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/apostrofo\">apostrofo</a>.",
 		""
 	],
 	"£no-apostrophe": [
 		"£no-apostrophe",
 		"Troa apostrofo",
-		"En Esperanto, oni uzas apostrofon por marki la forlason de la fina vokalo en la artikolo <i>(l’ akvo)</i> aŭ la substantiva ‘-o’ <i>(dum temp’ eterna)</i>. Uzi “nudan” radikon sen tiu apostrofo estas eraro.<br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/apostrofo\">apostrofo</a>.",
+		"En Esperanto, oni uzas apostrofon por marki la forlason de la fina vokalo en la artikolo <i>(l’ akvo)</i> aŭ la substantiva ‘-o’ <i>(dum temp’ eterna)</i>. Uzi \"nudan\" radikon sen tiu apostrofo estas eraro.<br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/apostrofo\">apostrofo</a>.",
 		""
 	],
 	"£upper": [
@@ -360,7 +370,7 @@ g_marks.types = {
 	"£acc": [
 		"£acc",
 		"Akuzativo en rekta objekto",
-		"Mankas akuzativa -n en rekta objekto. En Esperanto, sendepende de vortordo, oni distingas objekton de subjekto per la finaĵo -n. Kutime subjekto indikas aganton aŭ kaŭzantan eventon, dum objekto indikas dependan rolon, ekz. viktimon, celon, rezulton aŭ vehiklon de ago aŭ okazaĵo. En frazo ‘A<i>-o xxxas B-on’,</i> vi povas fari teston demandante: <i>Ĉu estas A-o aŭ B-o, kiu xxxas?</i> La respondo estas la subjekto (A-o). La objekto (B-o) ne xxxas, sed estas xxxata.<br>\n<br>\nLegu pli en la Lernu!-paĝo pri akuzativo (Objekto).",
+		"Mankas akuzativa -n en rekta objekto. En Esperanto, sendepende de vortordo, oni distingas objekton de subjekto per la finaĵo -n. Kutime subjekto indikas aganton aŭ kaŭzantan eventon, dum objekto indikas dependan rolon, ekz. viktimon, celon, rezulton aŭ vehiklon de ago aŭ okazaĵo. En frazo ‘A<i>-o xxxas B-on’,</i> vi povas fari teston demandante: <i>Ĉu estas A-o aŭ B-o, kiu xxxas?</i> La respondo estas la subjekto (A-o). La objekto (B-o) ne xxxas, sed estas xxxata.<br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/akuzativo\">akuzativo</a> (Objekto).",
 		"Li manĝis <span style=\"color: #ff0000\">pomo</span> [pomon]<br>\n<br>\nDu <span style=\"color: #ff0000\">jaroj</span> [jarojn] antaŭ la milito<br>\n<br>\nŜi preferas la francan kiel <span style=\"color: #ff0000\">dua lingvo</span> [kiel duan lingvon]"
 	],
 	"£acc-oc": [
@@ -444,7 +454,7 @@ g_marks.types = {
 	"£pas": [
 		"£pas",
 		"Pasivo",
-		"Uzu aktivan participon anstataŭ pasiva.<br>\n<br>\nEsperantaj participoj estas aktivaj, se ili havas -n- inter la tempo-vokalo kaj la participa -t- <i>(ekz. -a</i><b><i>n</i></b><i>to, -i</i><b><i>n</i></b><i>taj, -o</i><b><i>n</i></b><i>te)</i>, pasivaj se ne <i>(ekz. -ato, -itaj, -ote).</i><br>\n<br>\nEn pasiva frazo la objekto de transitiva verbo fariĝas subjekto, dum la origina subjekto forfalas aŭ sekvas kun la prepozicio <i>‘de’</i> tuj post la participo<i></i> <i>(Petro trovis la ŝlosilon → La ŝlosilo estis trovita [de Petro]).</i> Do aktiva participo de transitiva verbo sen rekta objekto, kaj kun ne-aganta, “objekteca” subjekto, aŭ sekvata de <i>‘de’</i> plus aganto, tre verŝajne devus esti pasiva anstataŭ aktiva.<br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/participoj\">participoj</a>.",
+		"Uzu aktivan participon anstataŭ pasiva.<br>\n<br>\nEsperantaj participoj estas aktivaj, se ili havas -n- inter la tempo-vokalo kaj la participa -t- <i>(ekz. -a</i><b><i>n</i></b><i>to, -i</i><b><i>n</i></b><i>taj, -o</i><b><i>n</i></b><i>te)</i>, pasivaj se ne <i>(ekz. -ato, -itaj, -ote).</i><br>\n<br>\nEn pasiva frazo la objekto de transitiva verbo fariĝas subjekto, dum la origina subjekto forfalas aŭ sekvas kun la prepozicio <i>‘de’</i> tuj post la participo<i> (Petro trovis la ŝlosilon → La ŝlosilo estis trovita [de Petro]).</i> Do aktiva participo de transitiva verbo sen rekta objekto, kaj kun ne-aganta, \"objekteca\" subjekto, aŭ sekvata de <i>‘de’</i> plus aganto, tre verŝajne devus esti pasiva anstataŭ aktiva.<br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/participoj\">participoj</a>.",
 		"<span style=\"color: #ff0000\">Trafinte</span> [Trafite] de la pafo, li falis teren<br>\n<br>\nTiuj reguloj povas esti <span style=\"color: #ff0000\">rigardantaj</span> [rigardataj] kiel universalaj"
 	],
 	"£ata": [
@@ -459,6 +469,18 @@ g_marks.types = {
 		"Konsideru uzi -ita anstataŭ -ata. Temas pri aspekto-diferenco. Pasivaj participo kun -ata esprimas procezan (malperfektivan) aspekton, dum pasiva participo kun -ita esprimas rezultan/perfektigan aspekton. Oni povas testi la diferencon per aldono de tempoadverbialo. Proceza aspekto permesas <i>‘dum tri horoj/tagoj/jaroj ktp’.</i> sed ne <i>‘en dato/horo/jaro ktp.’,</i> kaj rezulta aspekto male. Ekz. eblas diri <i>‘la ponto estis detruita en 1944’,</i> sed ne <i>‘la ponto estis detruita dum dum 3 jaroj’,</i> ĉar oni perceptas detruadon kiel punktan eventon kun rezulto, ne kiel procezon kun daŭro.<br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/participoj\">participoj</a> (Pasivo - participelekto).",
 		"La bebo estis <span style=\"color: #ff0000\">naskata</span> [naskita] en januaro"
 	],
+	"£ante": [
+		"£ante",
+		"Adverba participo (prezenco)",
+		"Ne eblas uzi ‘post’ kun infinitivo (ekz. <i>post manĝi</i>). Necesas uzi -ado <i>(post manĝado)</i> aŭ participon <i>(manĝinte).</i> Kun participo eblas rekte transpreni objekton aŭ alian dependan frazeron de la (malĝusta) infinitivo: <i>Manĝinte multe/glaciaĵon.</i>",
+		"<span style=\"color: #ff0000\">Post diri</span> tiujn vortojn [Dirinte tiujn vortojn]"
+	],
+	"£inte": [
+		"£inte",
+		"Adverba participo (preterito)",
+		"Ne eblas uzi ‘per’ kun infinitivo (ekz. <i>per naĝi</i>). Necesas uzi -ado <i>(per naĝado)</i> aŭ participon <i>(naĝante).</i> Kun participo eblas rekte transpreni objekton aŭ alian dependan frazeron de la (malĝusta) infinitivo: <i>Naĝante longajn distancojn.</i>",
+		"Tion mi provos atingi <span style=\"color: #ff0000\">per ekzameni</span> kelkajn slangajn esprimojn [… ekzamenante kelkajn slangajn esprimojn]"
+	],
 	"£pcp": [
 		"£pcp",
 		"Participo",
@@ -468,7 +490,7 @@ g_marks.types = {
 	"£adv": [
 		"£adv",
 		"Adverbo",
-		"Ĉi tie devas esti adverbo (e-vorto), kaj ne adjektivo (a-vorto). La diferenco estas, ke adjektivoj rilatas la substantivoj (o-vortoj), dum adverboj rilatas al verboj (i/as-vortoj) aŭ al la tuta frazo. Adverboj informas pri <i>kiel, kie, kiam</i> kaj <i>kiom (kiagrade).</i> Kun ĉi-lasta funkcio adverboj ankaŭ povas rilati al adjektivoj <i>(tre ĉarma, vaste konata)</i><br>\n<br>\nEkzistas en Esperanto kelkaj ne-derivitaj, “radikaj” adverboj <i>(tre, tro, ankaŭ, almenaŭ),</i> sed la plej multaj adverboj estas derivitaj de aliaj vortklasoj uzante e-finaĵon. Lokajn adverbojn eblas ŝangi al direktaj adverboj aldonante n-finaĵon (ekz. <i>tie – tien, hejme – hejmen</i>).<br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/adverboj\">adverboj</a>.",
+		"Ĉi tie devas esti adverbo (e-vorto), kaj ne adjektivo (a-vorto). La diferenco estas, ke adjektivoj rilatas la substantivoj (o-vortoj), dum adverboj rilatas al verboj (i/as-vortoj) aŭ al la tuta frazo. Adverboj informas pri <i>kiel, kie, kiam</i> kaj <i>kiom (kiagrade).</i> Kun ĉi-lasta funkcio adverboj ankaŭ povas rilati al adjektivoj <i>(tre ĉarma, vaste konata)</i><br>\n<br>\nEkzistas en Esperanto kelkaj ne-derivitaj, \"radikaj\" adverboj <i>(tre, tro, ankaŭ, almenaŭ),</i> sed la plej multaj adverboj estas derivitaj de aliaj vortklasoj uzante e-finaĵon. Lokajn adverbojn eblas ŝangi al direktaj adverboj aldonante n-finaĵon (ekz. <i>tie – tien, hejme – hejmen</i>).<br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/adverboj\">adverboj</a>.",
 		"Estas <span style=\"color: #ff0000\">normala</span> ke … [Estas normale ke …]<br>\n<br>\nDu jaroj <span style=\"color: #ff0000\">antaŭ</span> [antaŭe] me estis en Islando"
 	],
 	"£adj": [
@@ -480,43 +502,55 @@ g_marks.types = {
 	"£noun": [
 		"£noun",
 		"Substantivo",
-		"Ĉi tie devas esti substantivo, uzu o-finaĵon, eventuale post substantiviga sufikso <i>(-ado, -eco, -ulo)</i><br>\n<br>\nSubstantivo (o-vorto) priskribas aĵon, aferon, vivantajn estaĵojn, ecojn, konceptojn ktp. Substantivo tipe rolas kiel kerno de la subjekto aŭ objekto, aŭ kiel komplemento de prepozicio.<br>\n<br>\nEĉ adjektiva aŭ adverba radikoj normale ricevas o-finaĵon, eventuale kune kun substantiviga sufikso, kiam ili aperas en “substantiva” loko, nome komplementas prepozicion <i>(post *malsana [malsano])</i>, sekvas artikolon aŭ estas uzataj kiel kerno en subjekto aŭ objekto. Tamen ne substantivigu adjektivon post kvantoadverbo <i>(la plej *saĝulo [saĝa]).</i><br>\n<br>\nVerboj jes povas roli kiel subjekto aŭ objekto, en infinitiva formo, sed eĉ verban radikon necesas substantivigi post artikolo kaj post multaj prepozicioj (nur <i>por, sen, anstataŭ</i> kaj <i>antaŭ ol</i> permesas infinitivon).<br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/substantivoj\">substantivoj</a>.",
+		"Ĉi tie devas esti substantivo, uzu o-finaĵon, eventuale post substantiviga sufikso <i>(-ado, -eco, -ulo)</i><br>\n<br>\nSubstantivo (o-vorto) priskribas aĵon, aferon, vivantajn estaĵojn, ecojn, konceptojn ktp. Substantivo tipe rolas kiel kerno de la subjekto aŭ objekto, aŭ kiel komplemento de prepozicio.<br>\n<br>\nEĉ adjektiva aŭ adverba radikoj normale ricevas o-finaĵon, eventuale kune kun substantiviga sufikso, kiam ili aperas en \"substantiva\" loko, nome komplementas prepozicion <i>(post *malsana [malsano])</i>, sekvas artikolon aŭ estas uzataj kiel kerno en subjekto aŭ objekto. Tamen ne substantivigu adjektivon post kvantoadverbo <i>(la plej *saĝulo [saĝa]).</i><br>\n<br>\nVerboj jes povas roli kiel subjekto aŭ objekto, en infinitiva formo, sed eĉ verban radikon necesas substantivigi post artikolo kaj post multaj prepozicioj (nur <i>por, sen, anstataŭ</i> kaj <i>antaŭ ol</i> permesas infinitivon).<br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/substantivoj\">substantivoj</a>.",
 		"5 metrojn de <span style=\"color: #ff0000\">longa</span> kaj 3 metrojn de <span style=\"color: #ff0000\">larĝa</span> [5 metrojn laŭ longo kaj 3 metrojn laŭ larĝo]<br>\n<br>\nBonaj <span style=\"color: #ff0000\">naĝantaj</span> [naĝantoj] povas atingi la insuleton vidalvide de la plaĝo<br>\n<br>\nLa <span style=\"color: #ff0000\">ofte</span> [ofto/ofteco] de varmondoj kreskis<br>\n<br>\nNe ludu dum <span style=\"color: #ff0000\">manĝi</span> [manĝo/manĝado]"
 	],
 	"£ordinal": [
 		"£ordinal",
 		"Ordonombro (orda numeralo)",
-		"Ĉi tie devas esti ordonombro, uzu a-finaĵon. Post cifero ankaŭ eblas uzi punkton.<br>\n<br>\nOrdonombro informas pri loko en vico kaj respondas la demandon “<i>la kioma …?”</i> Oni formas ordonombrojn el simplaj numeralo per aldono de adjektiva finaĵo: <i>unua, dua, tria.</i> Aldonante a-finaĵon al ciferoj oni ofte uzas streketon por apartigi ĝin (do <i>21a</i> aŭ<i> 21-a</i>).<br>\n<br>\nPor la tagoj de monato oni uzas ordonombrojn: <i>la 4-an de januaro, 12.-15. aprilo</i><br>\n<br>\nLegu pli en la Lernu!-paĝo pri nombroj (adjektivaj nombrovortoj).",
+		"Ĉi tie devas esti ordonombro, uzu a-finaĵon. Post cifero ankaŭ eblas uzi punkton.<br>\n<br>\nOrdonombro informas pri loko en vico kaj respondas la demandon \"<i>la kioma …?\"</i> Oni formas ordonombrojn el simplaj numeralo per aldono de adjektiva finaĵo: <i>unua, dua, tria.</i> Aldonante a-finaĵon al ciferoj oni ofte uzas streketon por apartigi ĝin (do <i>21a</i> aŭ<i> 21-a</i>).<br>\n<br>\nPor la tagoj de monato oni uzas ordonombrojn: <i>la 4-an de januaro, 12.-15. aprilo</i><br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/nombraj_vortoj\">nombroj</a> (adjektivaj nombrovortoj).",
 		"La <span style=\"color: #ff0000\">20</span> jarcento [La 20-a jarcento]"
 	],
 	"£poss": [
 		"£poss",
 		"Posesivo",
-		"Ĉi tie devas esti posesiva pronomo anstataŭ simpla persona numero. Aldonu a-finaĵon!<br>\n<br>\nOni kreas posesivajn (posedajn) pronomojn per adjektivigo de personaj pronomoj. Sen tio, personaj pronomoj rolas kiel substantivoj kaj ne povas esti epitetoj.<br>\n<br>\nLegu pri en la Lernu!-paĝo pri pronomoj (posedaj pronomoj).",
+		"Ĉi tie devas esti posesiva pronomo anstataŭ simpla persona numero. Aldonu a-finaĵon!<br>\n<br>\nOni kreas posesivajn (posedajn) pronomojn per adjektivigo de personaj pronomoj. Sen tio, personaj pronomoj rolas kiel substantivoj kaj ne povas esti epitetoj.<br>\n<br>\nLegu pri en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/pronomoj\">pronomoj</a> (posedaj pronomoj).",
 		"Mi amiko [mia amiko]"
 	],
 	"£refl": [
 		"£refl",
 		"Mankanta refleksivo",
-		"Ĉi tie necesas refleksiva pronomo. Uzu <i>‘si(n)’</i> aŭ <i>‘sia(j/n)’</i>!<br>\n<br>\nOni uzas <i>‘si’</i> aŭ <i>‘sia’</i> anstataŭ triapersona pronomo <i>(li, ŝi, ĝi, ili, lia, ŝia, ĝia, ilia)</i>, se tiu referencas al la subjekto de la sama (sub)frazo. Uzu refleksivon, se eblas aldoni <i>‘mem’</i> aŭ <i>‘propra’:</i><br>\n<br>\n<i>– “Li kulpigis sin (mem).”</i><br>\n<br>\n<i>– “Li venis en sia (propra) aŭto.”</i><br>\n<br>\nRefleksivo ne povas esti subjekto aŭ parto de ĝi. Do ne eblas diri:<br>\n<br>\n– “?<span style=\"color: #ff0000\">Li kaj sia frato</span> forlasis la feston frue.” [Li kaj lia frato …]<br>\n<br>\nTio ankaŭ validas por pasiva frazo:<br>\n<br>\n– “?<span style=\"color: #ff0000\">Sia edzino</span> estis kisata de li.” [Lia edzino ...]<br>\n<br>\nLegu pri en la Legu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/pronomoj\">pronomoj</a> (si).",
+		"Ĉi tie necesas refleksiva pronomo. Uzu <i>‘si(n)’</i> aŭ <i>‘sia(j/n)’</i>!<br>\n<br>\nOni uzas <i>‘si’</i> aŭ <i>‘sia’</i> anstataŭ triapersona pronomo <i>(li, ŝi, ĝi, ili, lia, ŝia, ĝia, ilia)</i>, se tiu referencas al la subjekto de la sama (sub)frazo. Uzu refleksivon, se eblas aldoni <i>‘mem’</i> aŭ <i>‘propra’:</i><br>\n<br>\n<i>– \"Li kulpigis sin (mem).\"</i><br>\n<br>\n<i>– \"Li venis en sia (propra) aŭto.\"</i><br>\n<br>\nRefleksivo ne povas esti subjekto aŭ parto de ĝi. Do ne eblas diri:<br>\n<br>\n– \"?<span style=\"color: #ff0000\">Li kaj sia frato</span> forlasis la feston frue.\" [Li kaj lia frato …]<br>\n<br>\nTio ankaŭ validas por pasiva frazo:<br>\n<br>\n– \"?<span style=\"color: #ff0000\">Sia edzino</span> estis kisata de li.\" [Lia edzino ...]<br>\n<br>\nLegu pri en la Legu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/pronomoj\">pronomoj</a> (si).",
 		"Li preferas <span style=\"color: #ff0000\">lian</span> [sian] propran biciklon"
 	],
 	"£no-refl": [
 		"£no-refl",
 		"Malĝusta refleksivo",
-		"Ĉi tie ne eblas uzi refleksivan pronomon. Anstataŭu <i>‘si(n)’</i> aŭ <i>‘sia(j/n)’</i> per triapersona pronomo <i>(li, ŝi, ĝi, ili, lia, ŝia, ĝia, ilia).</i><br>\n<br>\nOni uzas <i>‘si’</i> aŭ <i>‘sia’</i> anstataŭ persona pronomo nur, se tiu referencas al la subjekto de la sama frazo aŭ subfrazo. Refleksivo en subfrazo ne povas referenci al la subjekto de ĉeffrazo.<br>\n<br>\n– Ŝi sentis, ke pluvas sur <span style=\"color: #ff0000\">sin</span> [ŝin]<br>\n<br>\nNe uzu refleksivon, se ne eblas aldoni <i>‘mem’</i> aŭ <i>‘propra’:</i><br>\n<br>\n<i>– “Petro vidis Markon kun la ŝtelita biciklo. Li kulpigis lin (?mem).”</i><br>\n<br>\n<i>– “Petro estas senlabora, sed havas riĉan patron. Li venis en lia (?propra) aŭto.”</i><br>\n<br>\nRefleksivo ne povas esti subjekto aŭ parto de ĝi. Do ne eblas diri:<br>\n<br>\n– “?<span style=\"color: #ff0000\">Li kaj sia frato</span> forlasis la feston frue.” [Li kaj lia frato …]<br>\n<br>\nTio ankaŭ validas por pasiva frazo:<br>\n<br>\n– “?<span style=\"color: #ff0000\">Sia edzino</span> estis kisata de li.” [Lia edzino ...]<br>\n<br>\nLegu pri en la Legu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/pronomoj\">pronomoj</a> (si).",
+		"Ĉi tie ne eblas uzi refleksivan pronomon. Anstataŭu <i>‘si(n)’</i> aŭ <i>‘sia(j/n)’</i> per triapersona pronomo <i>(li, ŝi, ĝi, ili, lia, ŝia, ĝia, ilia).</i><br>\n<br>\nOni uzas <i>‘si’</i> aŭ <i>‘sia’</i> anstataŭ persona pronomo nur, se tiu referencas al la subjekto de la sama frazo aŭ subfrazo. Refleksivo en subfrazo ne povas referenci al la subjekto de ĉeffrazo.<br>\n<br>\n– Ŝi sentis, ke pluvas sur <span style=\"color: #ff0000\">sin</span> [ŝin]<br>\n<br>\nNe uzu refleksivon, se ne eblas aldoni <i>‘mem’</i> aŭ <i>‘propra’:</i><br>\n<br>\n<i>– \"Petro vidis Markon kun la ŝtelita biciklo. Li kulpigis lin (?mem).\"</i><br>\n<br>\n<i>– \"Petro estas senlabora, sed havas riĉan patron. Li venis en lia (?propra) aŭto.\"</i><br>\n<br>\nRefleksivo ne povas esti subjekto aŭ parto de ĝi. Do ne eblas diri:<br>\n<br>\n– \"?<span style=\"color: #ff0000\">Li kaj sia frato</span> forlasis la feston frue.\" [Li kaj lia frato …]<br>\n<br>\nTio ankaŭ validas por pasiva frazo:<br>\n<br>\n– \"?<span style=\"color: #ff0000\">Sia edzino</span> estis kisata de li.\" [Lia edzino ...]<br>\n<br>\nLegu pri en la Legu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/pronomoj\">pronomoj</a> (si).",
 		"Ŝi ne sciis, ke li amas <span style=\"color: #ff0000\">sin</span> [ŝin]"
 	],
 	"£ki-": [
 		"£ki-",
-		"Demandvorto",
+		"Demandovorto",
 		"En tiu loko necesas demanda tabelvorto, ne montra.",
 		"Mi demandis <span style=\"color: #ff0000\">tial</span> [kial] li venis."
+	],
+	"£-iu": [
+		"£-iu",
+		"Malĝusta tabelvorto",
+		"Tabelvorto kun -o <i>(kio, tio, io, ĉio, nenio)</i> estas memstara, substantiveca. Ne eblas uzi ĝin adjektivece antaŭ substantivo. Uzu tabelvorton kun -u anstataŭ.",
+		"<span style=\"color: #ff0000\">ĉio</span> [ĉiu] granda religio<br>\n<br>\n<span style=\"color: #ff0000\">Kio</span> [Kiu] filmo plej plaĉis al vi?"
+	],
+	"£-io": [
+		"£-io",
+		"Malĝusta tabelvorto",
+		"Oni uzas tabelvorton kun -u <i>(kiu, tiu, iu, ĉiu, neniu)</i> aŭ precizige antaŭ substantivo, aŭ memstare celante personon. Ne eblas uzi ĝin memstare celante aĵon aŭ aferon. En tiu kazo, uzu tabelvorton kun -o anstataŭ.",
+		"<span style=\"color: #ff0000\">Kiun</span> [Kion] vi volas diri?<br>\n<br>\nEsprimi<span style=\"color: #ff0000\"> tiun, kiun</span> [tion, kion] oni sentas"
 	],
 	"£ig": [
 		"£ig",
 		"Mankanta afikso: -ig",
-		"Aldonu la sufikson -ig!<br>\n<br>\nOni uzas -ig por esprimi kaŭzadon aŭ ŝanĝadon, kun la proksimuma signifo de <i>‘fari’.</i> Do, <i>‘gajigi lin’ = ‘fari lin gaja’, ‘pecigi ĝin’ = fari ĝin pecoj’, ‘kantigi ŝin’ = ‘fari ŝin kanti’</i>. Verboj kun -ig estas transitivaj, kun objekto indikanta la subjekton de la kaŭzata ago aŭ evento, aŭ al kiu/kio efikas la ŝanĝo. Se la radiko jam estas transitiva verbo, la objekto de ig-verbo ankaŭ povas indiki la objekton de la radiko:<br>\n<br>\n– <i>“Li legigis sian filon.”</i><br>\n<br>\n– <i>“Li legigis la libron al sia filo.”</i><br>\n<br>\nLegu pli en la Lernu!-paĝo pri sufiksoj (-ig)",
+		"Aldonu la sufikson -ig!<br>\n<br>\nOni uzas -ig por esprimi kaŭzadon aŭ ŝanĝadon, kun la proksimuma signifo de <i>‘fari’.</i> Do, <i>‘gajigi lin’ = ‘fari lin gaja’, ‘pecigi ĝin’ = fari ĝin pecoj’, ‘kantigi ŝin’ = ‘fari ŝin kanti’</i>. Verboj kun -ig estas transitivaj, kun objekto indikanta la subjekton de la kaŭzata ago aŭ evento, aŭ al kiu/kio efikas la ŝanĝo. Se la radiko jam estas transitiva verbo, la objekto de ig-verbo ankaŭ povas indiki la objekton de la radiko:<br>\n<br>\n– <i>\"Li legigis sian filon.\"</i><br>\n<br>\n– <i>\"Li legigis la libron al sia filo.\"</i><br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/sufiksoj\">sufiksoj</a> (-ig)",
 		"<span style=\"color: #ff0000\">mallaŭleĝante</span> [mallaŭleĝigante] alkoholon<br>\n<br>\n<span style=\"color: #ff0000\">lumita</span> [lumigita] strato"
 	],
 	"£igx": [
@@ -588,11 +622,11 @@ g_marks.types = {
 	"£PRESWAP": [
 		"£PRESWAP",
 		"Inversa vortordo",
-		"Ĉi tie du vortoj aperas en malĝusta sinsekvo. La markita vorto interŝangu lokon kun la vorto tuj maldekstre.<br>\n<br>\nEn Esperanto, la ordo de frazpartoj estas teorie libera. Tamen la sinsekvo subjekto-verbo-objekto estas plej normala, kaj ŝanĝi ĝin kreas efikon de emfazo aŭ poezieco.<br>\n<br>\nEne de frazparto, do en substantiva, adjektiva aŭ verba vortgrupo, la vortordo estas malpli libera. Adjektivaj epitetoj povas stari aŭ antaŭ aŭ post substantivo, sed artikoloj kaj difiniloj devas stari en la komenco de substantiva vortgrupo. Prepozicioj staras tuj antaŭ la vortgrupo, kiun ili regas, kaj konjunkcioj staras antaŭ tio, kion ili ligas. Relativaj kaj interrogativaj pronomoj staras en la komenco de frazo aŭ subfrazo, sed post eventuala prepozicio.<br>\n<br>\nAdverboj, kiuj priskribas manieron, tempon, lokon aŭ direkton, kaj la plej multaj derivitaj adverbo rolas kiel liberaj frazpartoj, dum emfazaj, fokusaj, intensigaj, kvantaj kaj neaj adverboj <i>(ne, eĉ, tre, tro, pli, plej, nur, ankaŭ, nek, ekzemple)</i> staras tuj antaŭ la vorto aŭ vortgrupo, al kiu ili rilatas.<br>\n<br>\nLegu pli en la Lernu!-paĝo pri vortordo.",
+		"Ĉi tie du vortoj aperas en malĝusta sinsekvo. La markita vorto interŝangu lokon kun la vorto tuj maldekstre.<br>\n<br>\nEn Esperanto, la ordo de frazpartoj estas teorie libera. Tamen la sinsekvo subjekto-verbo-objekto estas plej normala, kaj ŝanĝi ĝin kreas efikon de emfazo aŭ poezieco.<br>\n<br>\nEne de frazparto, do en substantiva, adjektiva aŭ verba vortgrupo, la vortordo estas malpli libera. Adjektivaj epitetoj povas stari aŭ antaŭ aŭ post substantivo, sed artikoloj kaj difiniloj devas stari en la komenco de substantiva vortgrupo. Prepozicioj staras tuj antaŭ la vortgrupo, kiun ili regas, kaj konjunkcioj staras antaŭ tio, kion ili ligas. Relativaj kaj interrogativaj pronomoj staras en la komenco de frazo aŭ subfrazo, sed post eventuala prepozicio.<br>\n<br>\nAdverboj, kiuj priskribas manieron, tempon, lokon aŭ direkton, kaj la plej multaj derivitaj adverbo rolas kiel liberaj frazpartoj, dum emfazaj, fokusaj, intensigaj, kvantaj kaj neaj adverboj <i>(ne, eĉ, tre, tro, pli, plej, nur, ankaŭ, nek, ekzemple)</i> staras tuj antaŭ la vorto aŭ vortgrupo, al kiu ili rilatas.<br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/vortordo\">vortordo</a>.",
 		"En <span style=\"color: #ff0000\">la</span> <span style=\"color: #ff0000\"><b>preskaŭ</b></span> tuta mondo [en <b>preskaŭ la</b> tuta mondo]<br>\n<br>\n<span style=\"color: #ff0000\">nek</span> <span style=\"color: #ff0000\"><b>estas</b></span> ĝenerala nek tutkovra [<b>estas nek</b> ĝenerala nek tutkovra]"
 	],
-	"£sentstop": [
-		"£sentstop",
+	"£sentsplit": [
+		"£sentsplit",
 		"Kunfando de frazoj, manko de frazpunkto",
 		"Lingvohelpilo pensas, ke komenciĝas nova frazo post tiu vorto. Eble mankas frazpunkto aŭ alia apartigilo (dupunkto, liniorompo aŭ similie). Se vere komenciĝas nova frazo ĉi tie, kontrolu ĉu la venonta vorto estas majuskla.",
 		"Li bedaŭrinde ne povas <span style=\"color: #ff0000\">veni</span> [veni.] Li estas malsana."
@@ -600,7 +634,7 @@ g_marks.types = {
 	"£comma": [
 		"£comma",
 		"Mankanta komo",
-		"Komoj helpas strukturigi la frazojn kaj faciligas legadon, markante subfrazojn, kunordigojn kaj listojn. Komoj ankaŭ povas esti uzataj por apartigi krominformojn aŭ materialon, kiu ne estas sintaksa parto de la frazo. Kaj foje komo estas la sola indiko, kiu distingas unu signifon de alia.<br>\n<br>\nEsperanto ne havas eksplicitajn komo-regulojn. Nek Zamenhof nek la Akademio de Esperanto provis normigi la uzon de komoj, kaj ankaŭ PMEG nur donas minimumajn konsilojn. La uzado en klasika literaturo tamen estas relative kohera kaj sekvas la tradician mezeŭropan tradicion kun t.n. gramatika komo. Tian sistemon sufiĉe detale priskribas Monato en siaj redaktoraj konvencioj .",
+		"Komoj helpas strukturigi la frazojn kaj faciligas legadon, markante subfrazojn, kunordigojn kaj listojn. Komoj ankaŭ povas esti uzataj por apartigi krominformojn aŭ materialon, kiu ne estas sintaksa parto de la frazo. Kaj foje komo estas la sola indiko, kiu distingas unu signifon de alia.<br>\n<br>\nEsperanto ne havas eksplicitajn komo-regulojn. Nek Zamenhof nek la Akademio de Esperanto provis normigi la uzon de komoj, kaj ankaŭ PMEG nur donas minimumajn konsilojn. La uzado en klasika literaturo tamen estas relative kohera kaj sekvas la tradician mezeŭropan tradicion kun t.n. gramatika komo. Tian sistemon sufiĉe detale priskribas Monato en siaj <a target=\"_blank\" href=\"https://www.monato.be/konvencioj.php#inter\">redaktoraj konvencioj</a> .",
 		""
 	],
 	"£no-comma": [
@@ -618,7 +652,7 @@ g_marks.types = {
 	"£clefting": [
 		"£clefting",
 		"Fraznodo (interplekto de frazoj)",
-		"Lingvohelpilo kredas ke la markita(j) vortoj estas parto de fraznodo. Fraznodo “levas” parton de ke-frazo al la antaŭo de la ĉeffrazo, pro emfazo. Fraznodoj estas relative oftaj en kelkaj lingvoj (ekz. skandinavaj), sed ne en Esperanto. Eventuale pripensu alternativon.",
+		"Lingvohelpilo kredas ke la markita(j) vortoj estas parto de fraznodo. Fraznodo \"levas\" parton de ke-frazo al la antaŭo de la ĉeffrazo, pro emfazo. Fraznodoj estas relative oftaj en kelkaj lingvoj (ekz. skandinavaj), sed ne en Esperanto. Eventuale pripensu alternativon.",
 		"Tiu laboro <span style=\"color: #ff0000\">mi pensas, ke</span> estas malfacila.<br>\n<br>\nTiun laboron <span style=\"color: #ff0000\">mi pensas, ke</span> vi devas fari"
 	],
 	"£warning": [
@@ -627,20 +661,20 @@ g_marks.types = {
 		"Okazis konflikto inter sintaksaj etikedoj dum la analizo de la frazo, kio povas indiki eraron – aŭ de la sistemo (plej verŝajne) aŭ de vi (kontrolu!).<br>\n<br>\nEkz. ne eblas havi, sen kunordigo, du subjektojn aŭ du objekton de la sama tipo en la sama (sub)propozicio. En tiu kazo povas esti, ke mankas aŭ troas akuzativo en la markita vorto, aŭ ke ĝi bezonas prepozicion.",
 		"En 1949 la registaro SUBJ&gt; prenis la sunan kalendaron ŝtata <span style=\"color: #ff0000\">kalendaro</span> &lt;SUBJ [… prenis la sunan kalendaron <b>kiel</b> ŝtata<b>n</b> kalendaro<b>n</b>]"
 	],
-	"£:de&”&lt;da&gt;”": [
-		"£:de&”&lt;da&gt;”",
+	"£:de&\"<da>\"": [
+		"£:de&\"<da>\"",
 		"Malĝusta prepozicio",
-		"La prepozicio <i>‘da’</i> havas kvantan signifon. Oni uzas ĝin post kvantaj vortoj <i>(amaso, multe, malmulte, iom, pli, malpli, milo, miliono, litro, kilogramo)</i> aŭ post ujoj aŭ aliaj vortoj, kiuj implicas kvanton <i>(glaso da teo, fasko da herboj).</i><br>\n<br>\nUzu la prepozicion <i>‘de’</i> post ne-kvantaj vortoj <i>(multaj specoj de, manko/perdo/gajno de)</i> kaj post <i>-ono (duono de kuko, 12-ono de jaro).</i> Grupvortojn eblas uzi kaj kun <i>‘de’</i> (el kio la grupo konsistas?) kaj kun <i>‘da’</i> (kiom da?): <i>grupo de/da soldatoj, reto de/da komputioj.</i><br>\n<br>\n<i>Ne eblas uzi</i> <i>'da’</i> antaŭ vorto, kiu estas pronomo aŭ alimaniere jam kvante difinita, per numeralo aŭ alia kvanta epiteto: <i>glaso/multe de unu vino, glaso de ĝi, iom de kelkaj bieroj, iom de ili.</i><br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/da\">da</a>.",
+		"La prepozicio <i>‘da’</i> havas kvantan signifon. Oni uzas ĝin post kvantaj vortoj <i>(amaso, multe, malmulte, iom, pli, malpli, milo, miliono, litro, kilogramo)</i> aŭ post ujoj aŭ aliaj vortoj, kiuj implicas kvanton <i>(glaso da teo, fasko da herboj).</i><br>\n<br>\nUzu la prepozicion <i>‘de’</i> post ne-kvantaj vortoj <i>(multaj specoj de, manko/perdo/gajno de)</i> kaj post <i>-ono (duono de kuko, 12-ono de jaro).</i> Grupvortojn eblas uzi kaj kun <i>‘de’</i> (el kio la grupo konsistas?) kaj kun <i>‘da’</i> (kiom da?): <i>grupo de/da soldatoj, reto de/da komputioj.</i><br>\n<br>\n<i>Ne eblas uzi 'da’</i> antaŭ vorto, kiu estas pronomo aŭ alimaniere jam kvante difinita, per numeralo aŭ alia kvanta epiteto: <i>glaso/multe de unu vino, glaso de ĝi, iom de kelkaj bieroj, iom de ili.</i><br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/da\">da</a>.",
 		"Manko <span style=\"color: #ff0000\">da</span> [de] tempo<br>\n<br>\nMultaj specoj <span style=\"color: #ff0000\">da</span> [de] floroj"
 	],
-	"£:da&”&lt;de&gt;”": [
-		"£:da&”&lt;de&gt;”",
+	"£:da&\"<de>\"": [
+		"£:da&\"<de>\"",
 		"Malĝusta prepozicio",
-		"--&gt; £:de&amp;&quot;&lt;da&gt;&quot;",
+		"La prepozicio <i>‘da’</i> havas kvantan signifon. Oni uzas ĝin post kvantaj vortoj <i>(amaso, multe, malmulte, iom, pli, malpli, milo, miliono, litro, kilogramo)</i> aŭ post ujoj aŭ aliaj vortoj, kiuj implicas kvanton <i>(glaso da teo, fasko da herboj).</i><br>\n<br>\nUzu la prepozicion <i>‘de’</i> post ne-kvantaj vortoj <i>(multaj specoj de, manko/perdo/gajno de)</i> kaj post <i>-ono (duono de kuko, 12-ono de jaro).</i> Grupvortojn eblas uzi kaj kun <i>‘de’</i> (el kio la grupo konsistas?) kaj kun <i>‘da’</i> (kiom da?): <i>grupo de/da soldatoj, reto de/da komputioj.</i><br>\n<br>\n<i>Ne eblas uzi 'da’</i> antaŭ vorto, kiu estas pronomo aŭ alimaniere jam kvante difinita, per numeralo aŭ alia kvanta epiteto: <i>glaso/multe de unu vino, glaso de ĝi, iom de kelkaj bieroj, iom de ili.</i><br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/da\">da</a>.",
 		"Multe <span style=\"color: #ff0000\">de</span> [da] vino<br>\n<br>\nManpleno <span style=\"color: #ff0000\">de</span> [da] beroj"
 	],
-	"£:dum&”&lt;por&gt;”": [
-		"£:dum&”&lt;por&gt;”",
+	"£:dum&\"<por>\"": [
+		"£:dum&\"<por>\"",
 		"Malĝusta prepozicio",
 		"Kiel tempa prepozicio, <i>‘por’</i> signifas estontan, celitan tempodaŭron (rezulta/perfektiva aspekto):<br>\n<br>\n– <i>Li sidiĝis por momento</i><br>\n<br>\n<i>– Li forvojaĝis por 2 semajnoj</i><br>\n<br>\n<i>– provizoj por 3 tagoj</i><br>\n<br>\nUzu <i>‘dum’</i> por tempodaŭro ĝenerale (ne-perfektiva aspekto).<br>\n<br>\n– <i>Li ne manĝis dum 3 tagoj</i><br>\n<br>\n<i>– Li dormis dum 8 horoj</i><br>\n<br>\nAtentu pri la angla <i>‘for’</i> kiu kovras ambaŭ signifojn. La germana uzas <i>‘für’</i> por la unua signifo, kaj <i>‘… lang’</i> por la dua. La dana uzas <i>‘for’</i> por la unua signifo, kaj <i>‘i’</i> por la dua.",
 		"Li estis hejme <span style=\"color: #ff0000\">por</span> [dum] kelkaj horoj<br>\n<br>\nLi jam konas ŝin <span style=\"color: #ff0000\">por</span> [dum] multaj jaroj"
@@ -652,8 +686,6 @@ g_marks.types = {
 		"Li <span style=\"color: #ff0000\">ordinare</span> [kutime] ne manĝas fiŝon."
 	]
 };
-
-g_marks.types['£sentsplit'] = g_marks.types['£sentstop'];
 
 let g_green = {
 	'£green': '£green',
@@ -675,7 +707,7 @@ for (let k in g_marks.types) {
 	if (g_marks.yellow.hasOwnProperty(k) || g_marks.blue.hasOwnProperty(k) || g_marks.purple.hasOwnProperty(k) || g_green.hasOwnProperty(k)) {
 		// Nothing
 	}
-	else if (/^£(nom.*|acc.*|DEL.*)$/.test(k)) {
+	else if (/^£(nom.*|acc.*|DEL.*|PREADD.*)$/.test(k)) {
 		g_marks.blue[k] = k;
 	}
 	else {
@@ -697,6 +729,17 @@ function l10n_marking_types(lang) {
 		}
 		else {
 			g_options_default.types[k] = 1;
+		}
+		if (k.indexOf('&') !== -1) {
+			let fk = k.substring(0, k.indexOf('&'));
+			let v = k.substring(k.indexOf('&')+1);
+			if (!g_marks.types_complex.hasOwnProperty(fk)) {
+				g_marks.types_complex[fk] = [];
+			}
+			g_marks.types_complex[fk].push({
+				ana: v.split(/\s+/),
+				exp: k,
+			});
 		}
 	}
 	g_options_default.types["£new"] = 0;
