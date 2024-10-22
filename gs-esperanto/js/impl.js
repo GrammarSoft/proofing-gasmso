@@ -171,10 +171,10 @@ function impl_beforeParseResult(txt) {
 		let ms = [];
 		let m = null;
 		while ((m = rx.exec(txt)) !== null) {
-			ms.push(m);
+			ms.push(m[0]);
 		}
 		for (let i=0 ; i<ms.length ; ++i) {
-			m = m[i][0];
+			let m = ms[i];
 			let org = m;
 			m = m.replace(/ux/g, 'ŭ');
 			m = m.replace(/UX/ig, 'Ŭ');
