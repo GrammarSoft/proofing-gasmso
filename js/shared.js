@@ -314,6 +314,7 @@ let g_marks = {
 	types: {},
 	types_comma: [],
 	types_grammar: [],
+	types_complex: {},
 
 	comp_right: null,
 	to_upper: null,
@@ -617,7 +618,6 @@ function sanitize_result(txt) {
 
 	// Special case
 	txt = txt.replace(/£x-etype-case/g, '£upper');
-	txt = txt.replace(/£:\S+/g, '£:...');
 
 	// Puntuation on a line of its own should be a sentence break
 	txt = txt.replace(/\n([.?!:])\n/g, '\n$1\n\n');
@@ -964,13 +964,14 @@ function _parseResult(rv) {
 			}
 
 			let w = $.trim(lines[j]).split(/\t/);
+			let wf = '"<'+w[WF_WORD]+'>"';
 			w[WF_WORD] = $.trim(w[WF_WORD].replace(/(\S)=/g, '$1 '));
 
 			while (w.length < NUM_WF) {
 				w.push('');
 			}
 			w[WF_MERGE] = 0;
-			w[WF_ANA] = {pos:'', func:''};
+			w[WF_ANA] = {pos:'', func:'', raw: ' ' + wf + ' '};
 			w[WF_TID] = tid;
 
 			if (w[WF_WORD] === '') {
@@ -980,7 +981,7 @@ function _parseResult(rv) {
 
 			if (w.length > 1) {
 				let ws = w[WF_MARK].split(/ /g);
-				w = [w[WF_WORD], '', '', 0, {pos:'', func:''}, tid];
+				w = [w[WF_WORD], '', '', 0, {pos:'', func:'', raw: ' ' + wf + ' '}, tid];
 
 				let nws = [];
 				let rs = [];
@@ -1013,7 +1014,8 @@ function _parseResult(rv) {
 						crs.push(n);
 						continue;
 					}
-					if (!g_marks.types.hasOwnProperty(ws[k])) {
+					if (!/^[%£]/.test(ws[k])) {
+						w[WF_ANA].raw += ws[k] + ' ';
 						if (/^[A-Z]+$/.test(ws[k])) {
 							w[WF_ANA].pos = ws[k];
 						}
@@ -1028,6 +1030,48 @@ function _parseResult(rv) {
 						nws.push(ws[k]);
 					}
 				}
+
+				let dnws = [];
+				for (let k=0 ; k<nws.length ; ++k) {
+					if (g_marks.types_complex.hasOwnProperty(nws[k])) {
+						//console.log(`Complex marking ${nws[k]}`);
+						let cs = g_marks.types_complex[nws[k]];
+						let good = false;
+						for (let ci = 0 ; ci<cs.length ; ++ci) {
+							let c = cs[ci];
+							good = true;
+							for (let a=0 ; a<c.ana.length ; ++a) {
+								//console.log(`Complex testing ${c.ana[a]} in ${w[WF_ANA].raw}`);
+								if (w[WF_ANA].raw.indexOf(' ' + c.ana[a] + ' ') === -1) {
+									//console.log(`Complex not-found ${nws[k]}`);
+									good = false;
+									break;
+								}
+							}
+							if (good) {
+								//console.log(`Complex found ${nws[k]} => ${c.exp}`);
+								dnws.push(c.exp);
+								break;
+							}
+						}
+						if (good) {
+							continue;
+						}
+					}
+
+					if (!g_marks.types.hasOwnProperty(nws[k])) {
+						nws[k] = nws[k].replace(/^£:\S+/, '£:...');
+					}
+
+					if (g_marks.types.hasOwnProperty(nws[k])) {
+						dnws.push(nws[k]);
+					}
+					else {
+						//console.log('Unknown marking/tag ' + nws[k]);
+					}
+				}
+				nws = dnws;
+
 				crs = rs.concat(crs);
 				// Remove £sentsplit from last token
 				if (j == lines.length-1 && nws.length == 1 && nws[0] === '£sentsplit') {
