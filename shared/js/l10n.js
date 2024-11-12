@@ -23,6 +23,7 @@ let l10n = {
 	};
 
 l10n.s.dan = {
+	BTN_ABOUT: "Om",
 	BTN_CLOSE: "Luk",
 	BTN_COMMA_AGAIN: "Tjek kommatering igen",
 	BTN_COMMA_GOTO: "Tjek kommatering",
@@ -201,6 +202,7 @@ l10n.s.dan = {
 };
 
 l10n.s.eng = {
+	BTN_ABOUT: "About",
 	BTN_CLOSE: "Close",
 	BTN_COMMA_AGAIN: "Check commas again",
 	BTN_COMMA_GOTO: "Check commas",
@@ -377,6 +379,7 @@ l10n.s.eng = {
 };
 
 l10n.s.deu = {
+	BTN_ABOUT: "Info",
 	BTN_CLOSE: "Schließen",
 	BTN_COMMA_AGAIN: "Erneute Kommakontrolle",
 	BTN_COMMA_GOTO: "Kommakontrolle",
@@ -551,6 +554,7 @@ l10n.s.deu = {
 };
 
 l10n.s.epo = {
+	BTN_ABOUT: "Pri",
 	BTN_CLOSE: "Fermi",
 	BTN_COMMA_AGAIN: "Nova komo-kontrolo",
 	BTN_COMMA_GOTO: "Komo-kontrolo",
