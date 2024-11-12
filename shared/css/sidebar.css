@@ -186,6 +186,7 @@ label span {
 	height: 19px;
 	margin-right: 3px;
 	margin-left: -3px;
+	font-size: 18px;
 }
 .icon-input {
 	background-image: url('../imgs/icon-input.png');
