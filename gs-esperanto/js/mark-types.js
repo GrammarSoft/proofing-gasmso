@@ -605,13 +605,13 @@ g_marks.types = {
 		"£nil",
 		"Forigenda (troa) vorto",
 		"Ne eblas havi tiun vorton en tiu loko/kunteksto. La programo proponas forigi ĝin. Povas temi ekzemple pri troa artikolo aŭ prepozicio, aŭ pri kopiado-eraro kun duobligo de vorto.<br>\n<br>\nFoje forigo de unu vorto ligiĝas al ŝanĝado de alia, ekz. antataŭante ‘al + nominativo’ per akuzativo sen ‘al’ <i>(mi amas</i> <span style=\"color: #ff0000\"><b><i>al vi</i></b></span><i> → mi amas</i> <b><i>vin</i></b><i>)</i>",
-		"En <span style=\"color: #ff0000\">la</span> mia domo [en mia domo]<br>\n<br>\nLa urbo <span style=\"color: #ff0000\">de</span> Novjorko [la urbo Novjorko]"
+		"En <span style=\"color: #ff0000\">*la</span> mia domo [en mia domo]<br>\n<br>\nLa urbo <span style=\"color: #ff0000\">*de</span> Novjorko [la urbo Novjorko]"
 	],
 	"£insert": [
 		"£insert",
 		"Mankanta vorto",
-		"Det markerede ord skal tilføjes<br>\n<br>\nEt eksempel for et manglende ord er en glemt infinitiv-markør <i>'at'</i>, fx <i>Det fik trænerduoen til [</i><b><i>at</i></b><i>] kalde til timeout</i>",
-		"Det fik trænerduoen til <span style=\"color: #ff0000\">[at]</span> kalde til time-out"
+		"Necesas aldoni la markitan vorton.<br>\n<br>\nEkzemplo povas esti mankanta artikolo aŭ mankanta konjunkcio.",
+		"Mi ŝatus vojaĝi kaj ekkoni [<b>la</b>] mondon.<br>\n<br>\nMi pensas [<b>ke</b>] vi pravas."
 	],
 	"£PREADD:subject": [
 		"£PREADD:subject",
@@ -625,8 +625,8 @@ g_marks.types = {
 		"Ĉi tie du vortoj aperas en malĝusta sinsekvo. La markita vorto interŝangu lokon kun la vorto tuj maldekstre.<br>\n<br>\nEn Esperanto, la ordo de frazpartoj estas teorie libera. Tamen la sinsekvo subjekto-verbo-objekto estas plej normala, kaj ŝanĝi ĝin kreas efikon de emfazo aŭ poezieco.<br>\n<br>\nEne de frazparto, do en substantiva, adjektiva aŭ verba vortgrupo, la vortordo estas malpli libera. Adjektivaj epitetoj povas stari aŭ antaŭ aŭ post substantivo, sed artikoloj kaj difiniloj devas stari en la komenco de substantiva vortgrupo. Prepozicioj staras tuj antaŭ la vortgrupo, kiun ili regas, kaj konjunkcioj staras antaŭ tio, kion ili ligas. Relativaj kaj interrogativaj pronomoj staras en la komenco de frazo aŭ subfrazo, sed post eventuala prepozicio.<br>\n<br>\nAdverboj, kiuj priskribas manieron, tempon, lokon aŭ direkton, kaj la plej multaj derivitaj adverbo rolas kiel liberaj frazpartoj, dum emfazaj, fokusaj, intensigaj, kvantaj kaj neaj adverboj <i>(ne, eĉ, tre, tro, pli, plej, nur, ankaŭ, nek, ekzemple)</i> staras tuj antaŭ la vorto aŭ vortgrupo, al kiu ili rilatas.<br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/vortordo\">vortordo</a>.",
 		"En <span style=\"color: #ff0000\">la</span> <span style=\"color: #ff0000\"><b>preskaŭ</b></span> tuta mondo [en <b>preskaŭ la</b> tuta mondo]<br>\n<br>\n<span style=\"color: #ff0000\">nek</span> <span style=\"color: #ff0000\"><b>estas</b></span> ĝenerala nek tutkovra [<b>estas nek</b> ĝenerala nek tutkovra]"
 	],
-	"£sentsplit": [
-		"£sentsplit",
+	"£sentstop": [
+		"£sentstop",
 		"Kunfando de frazoj, manko de frazpunkto",
 		"Lingvohelpilo pensas, ke komenciĝas nova frazo post tiu vorto. Eble mankas frazpunkto aŭ alia apartigilo (dupunkto, liniorompo aŭ similie). Se vere komenciĝas nova frazo ĉi tie, kontrolu ĉu la venonta vorto estas majuskla.",
 		"Li bedaŭrinde ne povas <span style=\"color: #ff0000\">veni</span> [veni.] Li estas malsana."
@@ -684,6 +684,18 @@ g_marks.types = {
 		"Malĝusta Vortelekto",
 		"La radiko ‘<i>ordinare</i>’ plej ofte havas la signifon <i>‘ne aparte’, ‘malstrange’,</i> dum ‘<i>kutime</i>’ signifas<i> ‘plej ofte’</i>. Temas pri nuanca diferenco, kaj vi povas elekti la ĝustan por via celo.",
 		"Li <span style=\"color: #ff0000\">ordinare</span> [kutime] ne manĝas fiŝon."
+	],
+	"£nil&ART": [
+		"£nil&ART",
+		"Malĝusta/troa artikolo",
+		"En ĉi tiu kunteksto estas malkutime uzi difinan artikolon.<br>\n<br>\nOni uzas artikolon por ĝenerale konata, videbla, divenebla, unika aŭ antaŭe menciita afero, aŭ generale kiam oni supozas, ke la aŭskultanto scias pri kio aŭ pri kiu(j) temas. Ne uzu difinan artikolon antaŭ nomo aŭ antaŭ alia difinilo <i>(tiu, ĉiu, kies, ambaŭ, unu, mia, via</i> ktp.). Eblas uzi <i>‘la’</i> anstataŭ posesiva pronomo <i>(li levis la manon)</i> aŭ ĝeneralig anstataŭ <i>‘ĉiuj’ (la spektantoj aplaŭdis).</i> Oni krome uzas <i>‘la’</i> por krei lingvonomon el nacia aŭ etna adjektivo <i>(la angla, la japana).</i>",
+		"Helpis <span style=\"color: #ff0000\">*la</span> mia patrino.<br>\n<br>\n<span style=\"color: #ff0000\">*La</span> Petro naskiĝis en<span style=\"color: #c9211e\"> *</span><span style=\"color: #ff0000\">la</span> Turkio.<br>\n<br>\nAlica estas *la instruisto."
+	],
+	"£insert&ART": [
+		"£insert&ART",
+		"Mankanta artikolo",
+		"Ĉi tie devus esti difina artikolo.<br>\n<br>\nOni uzas artikolon por ĝenerale konata, videbla, divenebla, unika aŭ antaŭe menciita afero, aŭ generale kiam oni supozas, ke la aŭskultanto scias pri kio aŭ pri kiu(j) temas. Ne uzu difinan artikolon antaŭ nomo aŭ antaŭ alia difinilo <i>(tiu, ĉiu, kies, ambaŭ, unu, mia, via ktp.).</i> Eblas uzi <i>‘la’</i> anstataŭ posesiva pronomo <i>(li levis la manon)</i> aŭ ĝeneralig anstataŭ <i>‘ĉiuj’</i> <i>(la spektantoj aplaŭdis)</i>. Oni krome uzas <i>‘la’</i> por krei lingvonomon el nacia aŭ etna adjektivo <i>(la angla, la japana)</i>.",
+		"La ŝtrumpoj estas en <span style=\"color: #ff0000\">la</span> plej suba tirkesto.<br>\n<br>\nEn <span style=\"color: #ff0000\">la</span> nuna periodo …<br>\n<br>\nParolis <span style=\"color: #ff0000\">la</span> reĝo de Bestolando"
 	]
 };
 
