@@ -252,6 +252,8 @@ const NUM_WF   = 6;
 const VERSION_PROTOCOL = 1;
 let MATOMO_ROOT = '//gramtrans.com/matomo/';
 
+const STR_NULLISH = '\ue00b';
+
 // Upper-case because we compare them to DOM nodeName
 let text_nodes = {'ADDRESS': true, 'ARTICLE': true, 'ASIDE': true, 'AUDIO': true, 'BLOCKQUOTE': true, 'BODY': true, 'CANVAS': true, 'DD': true, 'DIV': true, 'DL': true, 'FIELDSET': true, 'FIGCAPTION': true, 'FIGURE': true, 'FOOTER': true, 'FORM': true, 'H1': true, 'H2': true, 'H3': true, 'H4': true, 'H5': true, 'H6': true, 'HEADER': true, 'HGROUP': true, 'HTML': true, 'HR': true, 'LI': true, 'MAIN': true, 'NAV': true, 'NOSCRIPT': true, 'OL': true, 'OUTPUT': true, 'P': true, 'PRE': true, 'SECTION': true, 'TABLE': true, 'TD': true, 'TH': true, 'UL': true, 'VIDEO': true};
 
@@ -320,6 +322,7 @@ let g_marks = {
 	to_upper: null,
 	to_lower: null,
 	rx_ins: null,
+	rx_ins_before: /((?:%ko|%k|£comma)(?:-\S+)?)(?: |$)/,
 	rx_del: null,
 
 	red: {},
@@ -362,6 +365,10 @@ function escapeRegExpTokens(txt) {
 		ts[i] = escapeRegExp(ts[i]);
 	}
 	return ts.join('\\s+');
+}
+
+function is_nullish(s) {
+	return (!s) || (s.length == 0) || (s === STR_NULLISH);
 }
 
 function loadOptions(s) {
@@ -1179,9 +1186,21 @@ function _parseResult(rv) {
 					w[WF_SUGGS] = '';
 				}
 			}
-			if (w.length > 1 && /(%ko|%k)( |-|$)/.test(w[1])) {
-				let wo = [w[WF_WORD], '', '', 0, w[WF_ANA], w[WF_TID]];
+			if (w.length > 1 && g_marks.rx_ins_before.test(w[1])) {
+				let mos = w[WF_MARK].split(' ');
+				let mo = [];
+				let mw = [];
+				for (let k=0 ; k<mos.length ; ++k) {
+					if (g_marks.rx_ins_before.test(mos[k])) {
+						mw.push(mos[k]);
+					}
+					else {
+						mo.push(mos[k]);
+					}
+				}
+				let wo = [w[WF_WORD], mo.join(' '), '', 0, w[WF_ANA], w[WF_TID]];
 				w[WF_WORD] = ',';
+				w[WF_MARK] = mw.join(' ');
 				if (w[WF_MARK].indexOf('%k-stop') !== -1) {
 					w[WF_WORD] = '.';
 				}

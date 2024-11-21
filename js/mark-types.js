@@ -78,8 +78,8 @@ g_marks.blue = {
 g_marks.comp_right = new RegExp('£comp-( |$)');
 g_marks.to_upper = new RegExp('£upper( |$)');
 g_marks.to_lower = new RegExp('£lower( |$)');
-g_marks.rx_ins = /(£insert)( |-|$)/;
-g_marks.rx_del = /(£nil|£no-comma)( |-|$)/;
+g_marks.rx_ins = /(£comma\S*|£insert\S*)( |-|$)/;
+g_marks.rx_del = /(£nil\S*|£no-comma\S*)( |-|$)/;
 
 g_marks.types_comma = [];
 g_marks.types_grammar = [];

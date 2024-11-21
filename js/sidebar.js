@@ -66,7 +66,7 @@ function markingSetSentence() {
 	cmarking.sentence = '';
 	for (let i=b; i<e ; ++i) {
 		let m = markings[s][i];
-		if (!m[WF_WORD]) {
+		if (is_nullish(m[WF_WORD])) {
 			continue;
 		}
 
@@ -114,6 +114,9 @@ function markingSetContext() {
 			////console.log(`Skipping ${cmarking.s} ${i}: ${markings[cmarking.s][i][WF_MARK]}`);
 			continue;
 		}
+		if (is_nullish(markings[cmarking.s][i][WF_WORD])) {
+			continue;
+		}
 		cmarking.prefix += markings[cmarking.s][i][WF_WORD] + ' ';
 	}
 
@@ -121,6 +124,9 @@ function markingSetContext() {
 	for (let i=cmarking.w+1 ; i<markings[cmarking.s].length ; ++i) {
 		if (markings[cmarking.s][i][WF_MARK].length > 1 && g_marks.rx_ins.test(markings[cmarking.s][i][WF_MARK])) {
 			////console.log(`Skipping ${cmarking.s} ${i}: ${markings[cmarking.s][i][WF_MARK]}`);
+			continue;
+		}
+		if (is_nullish(markings[cmarking.s][i][WF_WORD])) {
 			continue;
 		}
 		cmarking.suffix += markings[cmarking.s][i][WF_WORD] + ' ';
@@ -133,12 +139,18 @@ function markingGetSnippet() {
 		if (markings[cmarking.s][i][WF_MARK].length > 1 && g_marks.rx_ins.test(markings[cmarking.s][i][WF_MARK])) {
 			continue;
 		}
+		if (is_nullish(markings[cmarking.s][i][WF_WORD])) {
+			continue;
+		}
 		snippet += markings[cmarking.s][i][WF_WORD] + ' ';
 	}
 
 	snippet += markings[cmarking.s][cmarking.w][WF_WORD] + ' ';
 	for (let i=cmarking.w+1 ; i<Math.min(markings[cmarking.s].length, cmarking.w+3) ; ++i) {
 		if (markings[cmarking.s][i][WF_MARK].length > 1 && g_marks.rx_ins.test(markings[cmarking.s][i][WF_MARK])) {
+			continue;
+		}
+		if (is_nullish(markings[cmarking.s][i][WF_WORD])) {
 			continue;
 		}
 		snippet += markings[cmarking.s][i][WF_WORD] + ' ';
@@ -268,6 +280,7 @@ function markingRender(skipact) {
 	if (g_marks.rx_ins.test(marking[WF_MARK])) {
 		let px = /^(.*?)(\S+\s?)$/.exec(cmarking.prefix);
 		let sx = /^(\s?\S+)(.*)$/.exec(cmarking.suffix);
+		//console.log([cmarking.prefix, cmarking.suffix, px, sx]);
 		impl_selectInDocument(px[1], px[2] + sx[1], sx[2]);
 		$('.txtAccept').text(l10n_translate(btn_lbl + 'INSERT'));
 		if (marking[WF_MARK].indexOf('%k-stop') !== -1) {
@@ -741,7 +754,7 @@ function didInsert(rv) {
 function didRemove(rv) {
 	//console.log(rv);
 	_did_helper(rv.before, rv.after);
-	markings[cmarking.s][cmarking.w] = ['', '', '', 0, {pos:'', func:''}, markings[cmarking.s][cmarking.w][WF_TID]];
+	markings[cmarking.s][cmarking.w] = [STR_NULLISH, '', '', 0, {pos:'', func:''}, markings[cmarking.s][cmarking.w][WF_TID]];
 	processQueue();
 }
 
