@@ -28,6 +28,11 @@ g_marks.yellow = {
 
 g_marks.purple = {
 	'£comma': '£comma',
+	'£comma-FSstart': '£comma-FSstart',
+	'£comma-FSend': '£comma-FSend',
+	'£comma-FMco': '£comma-FMco',
+	'£comma-FSco': '£comma-FSco',
+	'£comma-contrast': '£comma-contrast',
 	'£no-comma': '£no-comma',
 	'£colon': '£colon',
 	//'£sentstop': '£sentstop', // Converted to £sentsplit
@@ -95,7 +100,7 @@ g_marks.types = {
 		"£x-etype-lemma",
 		"Malĝusta vortelekto aŭ falsa amiko",
 		"La vorto estas leksike malĝusta: Ne temas pri simpla literumeraro aŭ pri gramatika eraro, sed pri laŭsignife malĝusta vortelekto, evitinda neologismo aŭ falsa amiko el alia lingvo.",
-		"Proceso – procezo<br>\n<br>\nOferi – oferti<br>\n<br>\nAŭdi – aŭskulti<br>\n<br>\n<span style=\"color: #ff0000\">aŭtomatika</span> [aŭtomata]<br>\n<br>\n<span style=\"color: #ff0000\">demobilizi</span> [malmobilizi]<br>\n<br>\n<span style=\"color: #ff0000\">relacio</span> [rilato]"
+		"<span style=\"color: #ff0000\">proceso</span> – procezo<br>\n<br>\n<span style=\"color: #ff0000\">oferi</span> – oferti<br>\n<br>\n<span style=\"color: #ff0000\">aŭdi</span> – aŭskulti<br>\n<br>\n<span style=\"color: #ff0000\">aŭtomatika</span> [aŭtomata]<br>\n<br>\n<span style=\"color: #ff0000\">demobilizi</span> [malmobilizi]<br>\n<br>\n<span style=\"color: #ff0000\">relacio</span> [rilato]"
 	],
 	"£x-etype-neo": [
 		"£x-etype-neo",
@@ -634,13 +639,43 @@ g_marks.types = {
 	"£comma": [
 		"£comma",
 		"Mankanta komo",
-		"Komoj helpas strukturigi la frazojn kaj faciligas legadon, markante subfrazojn, kunordigojn kaj listojn. Komoj ankaŭ povas esti uzataj por apartigi krominformojn aŭ materialon, kiu ne estas sintaksa parto de la frazo. Kaj foje komo estas la sola indiko, kiu distingas unu signifon de alia.<br>\n<br>\nEsperanto ne havas eksplicitajn komo-regulojn. Nek Zamenhof nek la Akademio de Esperanto provis normigi la uzon de komoj, kaj ankaŭ PMEG nur donas minimumajn konsilojn. La uzado en klasika literaturo tamen estas relative kohera kaj sekvas la tradician mezeŭropan tradicion kun t.n. gramatika komo. Tian sistemon sufiĉe detale priskribas Monato en siaj <a target=\"_blank\" href=\"https://www.monato.be/konvencioj.php#inter\">redaktoraj konvencioj</a> .",
-		""
+		"Komoj helpas strukturigi la frazojn kaj faciligas legadon, markante subfrazojn, kunordigojn kaj listojn, aŭ por kontrastigi or reliefigi frazopartojn. Komoj ankaŭ povas esti uzataj por apartigi krominformojn aŭ materialon, kiu ne estas sintaksa parto de la frazo. Kaj foje komo estas la sola indiko, kiu distingas unu signifon de alia.<br>\n<br>\nEsperanto ne havas eksplicitajn komo-regulojn. Nek Zamenhof nek la Akademio de Esperanto provis normigi la uzon de komoj, kaj ankaŭ PMEG nur donas minimumajn konsilojn. La uzado en klasika literaturo tamen estas relative kohera kaj sekvas la tradician mezeŭropan tradicion kun t.n. gramatika komo. Tian sistemon sufiĉe detale priskribas Monato en siaj <a target=\"_blank\" href=\"https://www.monato.be/konvencioj.php#inter\">redaktoraj konvencioj</a> .",
+		"Mi ne mendis kafon<span style=\"color: #ff0000\"><b>,</b></span> <span style=\"color: #ff0000\">sed</span> teon."
+	],
+	"£comma-FSstart": [
+		"£comma-FSstart",
+		"Mankanta komo: komenco de subpropozicio",
+		"Ĉi tie komenciĝas subpropozicio. Metu komon por faciligi legadon. En Esperanto, subpropozicio normale komenciĝas per subjunkcio (subordiga konjunkcio, ekz. <i>ke, kvankam, se, kiam, ĉu</i>), relativa pronomo <i>(kiu, kie, kies)</i> aŭ demandovorto (ajna <i>ki-</i>vorto, <i>cxu</i>).<br>\n<br>\nEsperanto ne havas eksplicitajn komo-regulojn, sed la uzado en klasika literaturo tamen estas relative kohera kaj sekvas la tradician mezeŭropan tradicion kun t.n. gramatika komo, kiu celas faciligi legadon markante la limojn inter propozicioj kaj subpropozicioj. Tian sistemon sufiĉe detale priskribas Monato en siaj <a target=\"_blank\" href=\"https://www.monato.be/konvencioj.php#inter\">redaktoraj konvencioj</a> .",
+		"Mi kredas<span style=\"color: #ff0000\"><b>,</b></span> <span style=\"color: #ff0000\">ke</span> necesas ripari la tegmenton."
+	],
+	"£comma-FSend": [
+		"£comma-FSend",
+		"Mankanta komo: fino de subpropozicio",
+		"Ĉi tie finiĝas subpropozicio, kaj daŭriĝas aŭ komenciĝas sintakse pli \"alta\" subpropozicio aŭ ĉefpropozicio. Tiu komo estas unu el la plej malfacilaj, sed kompense multe faciligas legadon.<br>\n<br>\nEsperanto ne havas eksplicitajn komo-regulojn, sed la uzado en klasika literaturo tamen estas relative kohera kaj sekvas la tradician mezeŭropan tradicion kun t.n. gramatika komo, kiu celas faciligi legadon markante la limojn inter propozicioj kaj subpropozicioj. Tian sistemon sufiĉe detale priskribas Monato en siaj <a target=\"_blank\" href=\"https://www.monato.be/konvencioj.php#inter\">redaktoraj konvencioj</a> .",
+		"Se vi havas komentojn<span style=\"color: #ff0000\"><b>,</b></span> sendu retmesaĝon al ni!"
+	],
+	"£comma-FMco": [
+		"£comma-FMco",
+		"Komo inter cxefpropozicioj",
+		"Tiu komo markas la limon inter du cxefpropozicioj, aŭ la komencon de nova cxefpropozicio pos subpropozicio apartenanta al alia, antaŭa cxefpropozicio. Uzu komon antaŭ la konjunkcioj ‘<i>kaj’, ‘aŭ’</i> aŭ<i> ‘nek’,</i> kiam ili kunordigas tutajn propoziciojn, sed ne, kiam ili kunordigas aliajn, pli etajn frazpartojn (substantivajn, adjektivajn, adverbajn aŭ prepoziciajn). Kompare, la kontrastiga konjunkcio ‘<i>sed’</i> ĉiam markas fortan rompon en la frazofluon kaj meritas komon en ajna kazo.<br>\n<br>\nEsperanto ne havas eksplicitajn komo-regulojn, sed la uzado en klasika literaturo tamen estas relative kohera kaj sekvas la tradician mezeŭropan tradicion kun t.n. gramatika komo, kiu celas faciligi legadon markante la limojn inter propozicioj kaj subpropozicioj. Tian sistemon sufiĉe detale priskribas Monato en siaj <a target=\"_blank\" href=\"https://www.monato.be/konvencioj.php#inter\">redaktoraj konvencioj</a> .",
+		"Finfine la pluvo ĉesis<span style=\"color: #ff0000\"><b>,</b></span> <span style=\"color: #ff0000\">kaj</span> la suno reaperis."
+	],
+	"£comma-FSco": [
+		"£comma-FSco",
+		"Komo inter subpropozicioj",
+		"Tiu komo markas la limon inter du kunordigitaj subpropozicioj. Uzu komon antaŭ la konjunkcioj ‘<i>kaj’, ‘aŭ’</i> aŭ<i> ‘nek’,</i> kiam ili kunordigas tutajn propoziciojn, sed ne, kiam ili kunordigas aliajn, pli etajn frazpartojn (substantivajn, adjektivajn, adverbajn aŭ prepoziciajn).<br>\n<br>\nEsperanto ne havas eksplicitajn komo-regulojn, sed la uzado en klasika literaturo tamen estas relative kohera kaj sekvas la tradician mezeŭropan tradicion kun t.n. gramatika komo, kiu celas faciligi legadon markante la limojn inter propozicioj kaj subpropozicioj. Tian sistemon sufiĉe detale priskribas Monato en siaj <a target=\"_blank\" href=\"https://www.monato.be/konvencioj.php#inter\">redaktoraj konvencioj</a> .",
+		"Kiam neĝas<span style=\"color: #ff0000\"><b>,</b> </span><span style=\"color: #ff0000\">aŭ</span> kiam forta pluvo kreskigas la riveron, oni fermas la vojon al la montovalo."
+	],
+	"£comma-contrast": [
+		"£comma-contrast",
+		"Kontrasta komo",
+		"Tiu komo helpas kontrastigi du frazpartojn aŭ du propoziciojn. La plej ofta kontrastiga vorto estas <i>‘sed’</i>.",
+		"<i>Ŝi celas afekti klerecon</i><span style=\"color: #ff0000\"><i>, sed</i></span><i> ne parolas Esperanton.</i>"
 	],
 	"£no-comma": [
 		"£no-comma",
 		"Troa komo",
-		"Komo en tiu loko ne estas kutima kaj povas ĝeni la legadon.",
+		"Komo en tiu loko ne estas kutima kaj povas ĝeni la legadon.<br>\n<br>\nOni uzas komon por apartigi ripetitajn (samtipajn) aŭ klarigajn frazpartojn (do ekz. en listoj kaj ĉirkaŭ apozicioj), kaj por apartigi propoziciojn, sed ne inter malsamaj frazpartoj malpli grandaj ol propozicioj, krom por marki kontraston aŭ paŭzon.<br>\n<br>\nNe uzu komon antaŭ konjunkcio, kiu kunordigas ne propoziciojn, sed nur verbojn aŭ predikatiojn kun la sama subjekto: <i>Ili aĉetis vinon</i> <span style=\"color: #ff0000\"><i>[,]</i></span><i> kaj diboĉis la tutan nokton.</i><br>\n<br>\nNe uzu komon inter subjekto kaj verbo: <i>Cezaro</i><span style=\"color: #ff0000\"><i> [,]</i></span><i> deziras lin vidi.</i><br>\n<br>\nNe uzu komon inter adjektivo kaj substantivo: <i>En tiaj kazoj rapida</i> <span style=\"color: #ff0000\"><i>[,]</i> </span><i>helpo estas necesega.</i><br>\n<br>\nNe uzu komon inter konjunkcio kaj la propozicio, kiun ĝi enkondukas – la komo devas esti <i>antaŭ</i> la konjunkcio: <i>Li diris</i><span style=\"color: #ff0000\"><i> ke</i></span><i></i> <span style=\"color: #ff0000\"><i>[,]</i></span><i> la aziaj kaj euxropaj landoj devas plifortigi cxiuflankan kunlaboron. → Li diris</i><span style=\"color: #ff0000\"><i>,</i></span><i> ke la aziaj …</i>",
 		""
 	],
 	"£colon": [
