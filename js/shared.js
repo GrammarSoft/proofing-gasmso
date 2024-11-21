@@ -283,7 +283,7 @@ let _live_options = {};
 
 // Letters we're likely to see in Danish, Norwegian, Swedish, Greenlandic
 // Can't rely on Unicode escapes or /u modifier because of IE11
-const Letters = '\\da-zA-ZÂâÊêÎîÔôÛûÃãĨĩÕõŨũÀàÈèÌìÒòÙùÁáÉéÍíÓóÚúÄäËëÏïÖöÜüÆæØøÅåĸ.,!;:';
+const Letters = '\\da-zA-ZŭŬĉĈĝĜĥĤĵĴŝŜÂâÊêÎîÔôÛûÃãĨĩÕõŨũÀàÈèÌìÒòÙùÁáÉéÍíÓóÚúÄäËëÏïÖöÜüÆæØøÅåĸ.,!;:';
 const Const = {
 	LetterT: new RegExp('['+Letters+']+', 'i'),
 	NonLetter: new RegExp('[^'+Letters+']+', 'ig'),
@@ -1168,6 +1168,9 @@ function _parseResult(rv) {
 					w[WF_MARK] = nws.join(' ');
 					if (w[WF_MARK].indexOf(' ') !== -1) {
 						w[WF_MARK] = w[WF_MARK].replace(/ £error /g, ' ').replace(/ £error$/g, '').replace(/^£error /g, '');
+						if (w[WF_MARK].indexOf('£green') !== -1) {
+							w[WF_MARK] = w[WF_MARK].replace(/ £green /g, ' ').replace(/ £green$/g, '').replace(/^£green /g, '') + ' £green';
+						}
 					}
 
 					if (w[WF_MARK].indexOf('£-comp') !== -1) {
