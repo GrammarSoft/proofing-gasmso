@@ -124,6 +124,10 @@ label span {
 	font-style: italic;
 	font-weight: bold;
 }
+.marking-enhance {
+	border: 1px solid;
+	border-radius: 3px;
+}
 .marking-grammar {
 }
 .marking-comma {

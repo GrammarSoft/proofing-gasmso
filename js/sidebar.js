@@ -227,6 +227,12 @@ function markingRender(skipact) {
 	$('.chkExplainLongText').html(el);
 
 	let alt = (_live_options.config.opt_color ? ' alt' : '');
+	if (/^[,.:!?;]$/.test(marking[WF_WORD])) {
+		alt += ' marking-comma';
+	}
+	else if (marking[WF_WORD].length <= 2) {
+		alt += ' marking-enhance';
+	}
 
 	$('.chkType').attr('title', marking[WF_MARK]);
 
