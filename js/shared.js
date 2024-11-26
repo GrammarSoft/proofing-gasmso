@@ -300,7 +300,7 @@ Const.Split_Regex = new RegExp('(['+Const.Split_String+'])');
 const func2label = [
 	{rx:/^@<*SUBJ>*$/, f:'S', i:'x-lg', w:false}, // subject
 	{rx:/^@[FS]-<*SUBJ>*$/, f:'Sf', i:'x-lg', w:true}, // formal subject
-	{rx:/^@FMV$/, f:'Vm', i:'circle-fill', w:false}, // main verb
+	{rx:/^@(FMV|FAUX|FS-.*|ICL-(?!AUX<).*)$/, f:'Vm', i:'circle-fill', w:false}, // main verb
 	{rx:/^@<*(DAT|IOBJ)>*$/, f:'Oi', i:'square-fill', w:false}, // indirect object
 	{rx:/^@<*(ACC|OBJ)>*$/, f:'Od', i:'triangle-fill', w:false}, // direct object
 	{rx:/^@<*(PIV)>*$/, f:'Op', i:'diamond-fill', w:false}, // prepositional object
@@ -1049,7 +1049,7 @@ function _parseResult(rv) {
 							good = true;
 							for (let a=0 ; a<c.ana.length ; ++a) {
 								//console.log(`Complex testing ${c.ana[a]} in ${w[WF_ANA].raw}`);
-								if (w[WF_ANA].raw.indexOf(' ' + c.ana[a] + ' ') === -1) {
+								if (!c.ana[a].test(w[WF_ANA].raw)) {
 									//console.log(`Complex not-found ${nws[k]}`);
 									good = false;
 									break;

@@ -731,6 +731,114 @@ g_marks.types = {
 		"Mankanta artikolo",
 		"Ĉi tie devus esti difina artikolo.<br>\n<br>\nOni uzas artikolon por ĝenerale konata, videbla, divenebla, unika aŭ antaŭe menciita afero, aŭ generale kiam oni supozas, ke la aŭskultanto scias pri kio aŭ pri kiu(j) temas. Ne uzu difinan artikolon antaŭ nomo aŭ antaŭ alia difinilo <i>(tiu, ĉiu, kies, ambaŭ, unu, mia, via ktp.).</i> Eblas uzi <i>‘la’</i> anstataŭ posesiva pronomo <i>(li levis la manon)</i> aŭ ĝeneralig anstataŭ <i>‘ĉiuj’</i> <i>(la spektantoj aplaŭdis)</i>. Oni krome uzas <i>‘la’</i> por krei lingvonomon el nacia aŭ etna adjektivo <i>(la angla, la japana)</i>.",
 		"La ŝtrumpoj estas en <span style=\"color: #ff0000\">la</span> plej suba tirkesto.<br>\n<br>\nEn <span style=\"color: #ff0000\">la</span> nuna periodo …<br>\n<br>\nParolis <span style=\"color: #ff0000\">la</span> reĝo de Bestolando"
+	],
+	"£:BASE-plenkreskulo&\"<adultoj?n?>\"": [
+		"£:BASE-plenkreskulo&\"<adultoj?n?>\"",
+		"Falsa amiko",
+		"Tio povas esti falsa amiko: <i>‘adulto’</i> signifas <i>‘ekstergeedza kromseksumado’,</i> dum plenkreskulo simple estas homo pli aĝa ol 18.",
+		""
+	],
+	"£:BASE-afekcii": [
+		"£:BASE-afekcii",
+		"Falsa amiko / konfuzebla vortoparo",
+		"En Esperanto, <i>‘afekti’</i> signifas troige ŝajnigi propran econ aŭ staton (angle: <i>pretend)</i>, dum <i>‘afekcii’</i> (angle: <i>affect</i>) signifas kaŭzi ŝanĝon en animstato aŭ korpofunkcio. Trovu difinojn kaj ekzemplojn en <a target=\"_blank\" href=\"https://reta-vortaro.de/\">ReVo</a>!",
+		""
+	],
+	"£:BASE-akra": [
+		"£:BASE-akra",
+		"Falsa amiko",
+		"En Esperanto, <i>‘akuta’</i> celas aktualan intensecon (ekz. de malsano), dum <i>‘akra’</i> signifas <i>‘tranĉa’, ‘penetra’,</i> inkl. de diversaj metaforaj uzoj (angle: <i>sharp</i>). La falsa amiko estas angla <i>‘acute’</i> en kunteksto de sensorganoj aŭ sonoj. Trovu difinojn kaj ekzemplojn en <a target=\"_blank\" href=\"https://reta-vortaro.de/\">ReVo</a>!",
+		""
+	],
+	"£:BASE-preciza": [
+		"£:BASE-preciza",
+		"Falsa amiko / konfuzebla vortoparo",
+		"En Esperanto, akurateco temas pri tempo (angle: <i>on time</i>), dum angla <i>‘accurate’</i> en Esperanto esprimiĝas kiel precizeco. Trovu difinojn kaj ekzemplojn en <a target=\"_blank\" href=\"https://reta-vortaro.de/\">ReVo</a>!",
+		""
+	],
+	"£:BASE-surveturi": [
+		"£:BASE-surveturi",
+		"Malĝusta vortelekto",
+		"Oni <i>alveturas</i> lokon (vojaĝo), sed <i>surveturas</i> homon aŭ beston en aŭtoakcidento.",
+		""
+	],
+	"£:BASE-akcxento": [
+		"£:BASE-akcxento",
+		"Falsa amiko / konfuzebla vortoparo",
+		"Esterlandano havas <i>akĉenton,</i> vortprononco aŭ rimo havas <i>akcenton,</i> kaj esperantaj literoj havas <i>supersignojn.</i>",
+		""
+	],
+	"£:BASE-sxati": [
+		"£:BASE-sxati",
+		"Konfuzebla vortoparo",
+		"Eblas uzi kaj <i>‘ami’</i> kaj <i>‘ŝati’</i> kun preskaŭ ĉiu speco de objekto, sed <i>‘ami’</i> (angle: <i>love</i>) estas pli emocia, \"kora\" ol <i>‘ŝati’</i> (angle: <i>like</i>)<i>.</i> Do tipe oni ŝatas manĝaĵon aŭ libron, sed amas koramik(in)on. Atentu pri propoziciaj objektoj (<i>ke-</i>frazoj kaj infinitivoj) – kun ili nur eblas <i>‘ŝati’:</i><br>\n<br>\n<i>Mi</i> <span style=\"color: #ff0000\"><i>amas</i></span><i> (ŝatas) vojaĝi. Mi</i> <span style=\"color: #ff0000\"><i>amis</i></span><i> (ŝatis), ke vi finverkis nian artikolon.</i>",
+		""
+	],
+	"£:BASE-arko": [
+		"£:BASE-arko",
+		"Falsa amiko / konfuzebla vortoparo",
+		"Oni uzas <i>arĉon</i> por ludi violonon. La ĝenerala vorto estas <i>arko</i> (angle: <span style=\"color: #0000ff\"><i>arch</i></span>).",
+		""
+	],
+	"£:BASE-argumento": [
+		"£:BASE-argumento",
+		"Falsa amiko",
+		"En Esperanto, <i>‘argumento’</i> ĉiam celas kialon or fakton favora al unu opinio aŭ alia. Parola kverelo kun kontraŭulo (angle: <i>argument</i>) estas <i>‘disputo’.</i>",
+		""
+	],
+	"£:BASE-partopreni": [
+		"£:BASE-partopreni",
+		"Falsa amiko",
+		"En Esperanto, oni <i>atendas</i> ekz. alvenon de buso aŭ amiko (angle: <i>wait [for])</i>, dum oni <i>partoprenas</i> en inaŭguro aŭ<i> ĉeestas</i> feston (angle: <span style=\"color: #0000ff\"><i>attend</i></span><i>).</i>Trovu difinojn kaj ekzemplojn en <a target=\"_blank\" href=\"https://reta-vortaro.de/\">ReVo</a>!",
+		""
+	],
+	"£:BASE-atenti": [
+		"£:BASE-atenti",
+		"Konfuzebla vortoparo",
+		"En Esperanto, oni <i>atentas pri</i> io (oni \"malignoras\" ĝin), sed <i>atendas</i> alvenon de buso aŭ amiko. Angla <i>‘attend to’</i> estas falsa amiko en tiu kunteksto; en Esperanto, ‘<i>atendi’</i> (angle: <i>wait [for]</i>) ne uzeblas kun tiu signifo. Trovu difinojn kaj ekzemplojn en <a target=\"_blank\" href=\"https://reta-vortaro.de/\">ReVo</a>!",
+		""
+	],
+	"£:BASE-sukcesi": [
+		"£:BASE-sukcesi",
+		"Malĝusta vortelekto",
+		"La vorto <i>‘atingi’</i> (angle: <i>reach</i>) taŭgas kaj en konkreta (loka) kaj en abstrakta kunteksto: <i>atingi urbon, atingi rezultaton.</i> Sed male al kelkaj naciaj lingvoj (germane: <i>erreichen,</i> dane: <i>nå</i>), Esperanto uzas alian vorton, <i>‘sukcesi’,</i> se la atingita afero estas infinitivo:<br>\n<br>\nMalfeliĉo kredeble <span style=\"color: #ff0000\">atingis</span> mian <span style=\"color: #0000ff\">fraton</span> sed eble mi <span style=\"color: #ff0000\">sukcesos</span> ankoraŭ lin <span style=\"color: #0000ff\">savi</span> .<br>\n<br>\nTrovu difinojn kaj ekzemplojn en <a target=\"_blank\" href=\"https://reta-vortaro.de/\">ReVo</a>!",
+		""
+	],
+	"£:BASE-alveni": [
+		"£:BASE-alveni",
+		"Malĝusta sintakso",
+		"'Atingi’ prenas rektan, akuzativan objekton. Kun lokaj prepozicioj, uzu <i>‘alveni’:</i><br>\n<br>\n<span style=\"color: #ff0000\"><i>atingi</i></span><i> (alveni) en Parizo</i><br>\n<br>\n<span style=\"color: #ff0000\"><i>atingi</i></span><i> (alveni) sur la montopinto</i>",
+		""
+	],
+	"£:BASE-pli": [
+		"£:BASE-pli",
+		"Malĝusta vortelekto",
+		"Eblas facile konfuzi <i>‘pli’</i> kaj <i>‘plu’.</i> La unua havas kvantan signifon, la dua tempan. Kun la kvanta prepozicio <i>‘da’,</i> ĉiam uzu <i>‘pli’.</i> Antaŭ verbo, post <i>‘ne’,</i> uzu <i>‘plu’.</i><br>\n<br>\n<i>Mi ne plu havas pli da tempo.</i><br>\n<br>\nTrovu difinojn kaj ekzemplojn en <a target=\"_blank\" href=\"https://reta-vortaro.de/\">ReVo</a>!",
+		""
+	],
+	"£:BASE-auxskulti": [
+		"£:BASE-auxskulti",
+		"Konfuzebla vortoparo: precizigo",
+		"En Esperanto, oni distingas inter aktiva kaj pasiva sensado. Do anstataŭ la vortoj <i>vidi</i> kaj<i> aŭdi</i> oni uzas <i>rigardi/spekti</i> kaj <i>aŭskulti,</i> se oni atente sekvas ion:<br>\n<br>\n<i>Li aŭdis tondron – Li aŭskultis radion.</i><br>\n<br>\n<i>Ŝi vidis aglon – Ŝi rigardis bildon. Ŝi spektis filmon</i><br>\n<br>\nNotu, ke oni <i>rigardas</i> ion pli-malpli konstantan/senmovan, dum oni <i>spektas</i> prezentaĵon (kun moviĝo).<br>\n<br>\nTrovu difinojn kaj ekzemplojn en <a target=\"_blank\" href=\"https://reta-vortaro.de/\">ReVo</a>!",
+		""
+	],
+	"£:BASE-preventi": [
+		"£:BASE-preventi",
+		"Falsa amiko",
+		"En Esperanto, oni <i>avertas</i> (angle: warn) personon pri danĝero, sen por malhelpi la danĝeron oni uzas <i>‘preventi’</i> (angle: <i>avert</i>)<i>.</i>",
+		""
+	],
+	"£:BASE-malhelpi": [
+		"£:BASE-malhelpi",
+		"Malĝusta vortelekto / sintakso",
+		"Oni preventas agon aŭ okazaĵon, sed male al la angla (<i>prevent</i> <i>sb. from -ing</i>) ne eblas uzi tiun verbon kun akuzativo+nefinita verbo (latine: ACI-sintakso), kie persono en akuzativo estas la logika subjekto de la nefinita verbo.<br>\n<br>\n<i>Nur gardu la hejmon de la mastro kaj</i> <span style=\"color: #ff0000\"><i>preventu</i></span><i> (malhelpu)</i> <span style=\"color: #0000ff\"><i>sxtelistojn eniri</i></span><i> nokte</i><br>\n<br>\nUzi <i>malhelpi</i> ebligas reteni la akuzativon kaj infinitivon, sed oni perdas la aspekton de preventa antaŭago (<i>malhelpi</i> povus esti samtempe). Do pli eleganta solvo – sed tro komplika por aŭtomata Lingvohelpilo-propono – estus ke-objekto:<br>\n<br>\n<i>… preventu,</i> <b><i>ke</i></b><i> ŝtelistoj enir</i><b><i>u</i></b><i> nokte</i>",
+		""
+	],
+	"£:ekvilibrigi": [
+		"£:ekvilibrigi",
+		"Falsa amiko",
+		"En Esperanto, <i>‘balanci’</i> signifas tien-reen movon de korpoparto aŭ objekto (simile al <i>‘svingi’)</i>, sen ekvilibriga aspekto. Kun tia, uzu <i>‘ekvilibrigi’ (buĝeton, premon, pilkon sur fingro).</i> Notu ankaŭ, ke ‘<i>balanci’</i> estas transitiva! Do:<br>\n<br>\nFinfine, ni <span style=\"color: #ff0000\">balancis</span> (ekvilibrigis) la buĝeton.<br>\n<br>\nFinfine, la buĝeto <span style=\"color: #ff0000\">balancas</span> (ekvilibras).",
+		""
 	]
 };
 
@@ -783,8 +891,13 @@ function l10n_marking_types(lang) {
 			if (!g_marks.types_complex.hasOwnProperty(fk)) {
 				g_marks.types_complex[fk] = [];
 			}
+			let vs = v.split(/\s+/);
+			let ana = [];
+			for (let i=0 ; i<vs.length ; ++i) {
+				ana.push(new RegExp(vs[i]));
+			}
 			g_marks.types_complex[fk].push({
-				ana: v.split(/\s+/),
+				ana: ana,
 				exp: k,
 			});
 		}

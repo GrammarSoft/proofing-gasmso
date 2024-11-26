@@ -263,12 +263,37 @@ function markingRender(skipact) {
 			else if (first_upper) {
 				t = uc_first(t);
 			}
-			suggs += '<div class="suggestion"><span class="link" tabindex="'+(50+i*2)+'">' + escHTML(t) + '</span><a class="suggestion-lookup link" tabindex="'+(50+i*2+1)+'"><span class="icon icon-lookup"></span></a></div>';
+			suggs += '<div class="suggestion"><span class="link link-suggestion" tabindex="'+(50+i*3)+'">' + escHTML(t) + '</span><span class="suggestion-lookup"><a class="link link-corpus" tabindex="'+(50+i*3+1)+'"><span class="icon">𓂀</span></a><a class="link link-dict" tabindex="'+(50+i*3+2)+'"><span class="icon"><i class="bi bi-book"></i></span></a></span></div>';
 		}
 		$('#chkDidYouMeanItems').html(suggs);
-		$('#chkDidYouMeanItems').find('span.link').off().click(markingAcceptSuggestion);
-		$('#chkDidYouMeanItems').find('.suggestion-lookup').off().click(function() {
-			impl_openDictionary($(this).closest('div').text());
+		$('#chkDidYouMeanItems').find('span.link-suggestion').off().click(markingAcceptSuggestion);
+		$('#chkDidYouMeanItems').find('.link-corpus').off().click(function() {
+			let query = '';
+			for (let i=Math.max(0, cmarking.w-2) ; i<cmarking.w ; ++i) {
+				if (markings[cmarking.s][i][WF_MARK].length > 1 && g_marks.rx_ins.test(markings[cmarking.s][i][WF_MARK])) {
+					continue;
+				}
+				if (is_nullish(markings[cmarking.s][i][WF_WORD])) {
+					continue;
+				}
+				query += '[word=="' + markings[cmarking.s][i][WF_WORD] + '"]? ';
+			}
+
+			query += '[word=="' + $(this).closest('div').find('.link-suggestion').text() + '"] ';
+
+			for (let i=cmarking.w+1 ; i<Math.min(markings[cmarking.s].length, cmarking.w+3) ; ++i) {
+				if (markings[cmarking.s][i][WF_MARK].length > 1 && g_marks.rx_ins.test(markings[cmarking.s][i][WF_MARK])) {
+					continue;
+				}
+				if (is_nullish(markings[cmarking.s][i][WF_WORD])) {
+					continue;
+				}
+				query += '[word=="' + markings[cmarking.s][i][WF_WORD] + '"]? ';
+			}
+			impl_openCorpus($.trim(query));
+		});
+		$('#chkDidYouMeanItems').find('.link-dict').off().click(function() {
+			impl_openDictionary($(this).closest('div').find('.link-suggestion').text());
 		});
 		g_impl.attachTTS($('#chkDidYouMeanItems').get(0));
 		$('.btnInput').show();

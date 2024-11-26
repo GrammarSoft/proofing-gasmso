@@ -83,6 +83,22 @@ function impl_canComma() {
 	return false;
 }
 
+function impl_openCorpus(query) {
+	query = query.replace(/ŭ/g, 'ux');
+	query = query.replace(/Ŭ/ig, 'Ux');
+	query = query.replace(/ĉ/g, 'cx');
+	query = query.replace(/Ĉ/ig, 'Cx');
+	query = query.replace(/ĝ/g, 'gx');
+	query = query.replace(/Ĝ/ig, 'Gx');
+	query = query.replace(/ĥ/g, 'hx');
+	query = query.replace(/Ĥ/ig, 'Hx');
+	query = query.replace(/ĵ/g, 'jx');
+	query = query.replace(/Ĵ/ig, 'Jx');
+	query = query.replace(/ŝ/g, 'sx');
+	query = query.replace(/Ŝ/ig, 'Sx');
+	g_impl.openExternal('https://corp.visl.dk/m/?l=epo&s=s&c[epo_uniq_ttt]=1&c[epo_wikipedia]=1&c[epo_literature]=1&c[epo_periodicals]=1&c[epo_crawl]=1&q='+encodeURIComponent(query), 'Corpus Query');
+}
+
 function impl_openDictionary(word) {
 	g_impl.openExternal('https://vortaro.net/#'+encodeURIComponent(word)+'_kd', 'Plena Ilustrita Vortaro de Esperanto 2020');
 }

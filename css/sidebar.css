@@ -91,6 +91,10 @@ label span {
 	position: absolute;
 	right: 0;
 	top: 0;
+	white-space: nowrap;
+}
+.suggestion-lookup span {
+	display: inline-block;
 }
 
 .chkExplainLess img, .chkExplainMore img {
@@ -190,7 +194,8 @@ label span {
 	height: 19px;
 	margin-right: 3px;
 	margin-left: -3px;
-	font-size: 18px;
+	font-size: 19px;
+	line-height: 13px;
 }
 .icon-input {
 	background-image: url('../imgs/icon-input.png');
