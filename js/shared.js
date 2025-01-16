@@ -222,6 +222,7 @@ const Defs = {
 	TYPE_COMP_RIGHT:  (1 <<  0),
 	TYPE_COMP_LEFT:   (1 <<  1),
 	TYPE_COMP_HYPHEN: (1 <<  2),
+	TYPE_COMP_PRESWAP: (1 <<  3),
 	MAX_SESSIONS: 5,
 	MAX_RQ_SIZE: 4096,
 	'comma-commercial': 'Kommaforslag Erhverv',
@@ -239,7 +240,7 @@ const Defs = {
 	'deucom-private': 'Kommatroll Private',
 	'deucom-student': 'Kommatroll Student',
 };
-Defs.TYPE_COMP = Defs.TYPE_COMP_LEFT|Defs.TYPE_COMP_RIGHT;
+Defs.TYPE_COMP = Defs.TYPE_COMP_LEFT|Defs.TYPE_COMP_RIGHT|Defs.TYPE_COMP_PRESWAP;
 
 const WF_WORD  = 0;
 const WF_MARK  = 1;
@@ -318,21 +319,31 @@ let g_marks = {
 	types_grammar: [],
 	types_complex: {},
 
-	comp_right: null,
-	to_upper: null,
-	to_lower: null,
-	rx_ins: null,
+	comp_left: /[£%]-comp( |$)/,
+	comp_right: /[£%]comp-?( |$)/,
+	comp_hyphen: /[£%]comp-:-( |$)/,
+	comp_preswap: /[£%]PRESWAP( |$)/,
+	to_upper: /£upper( |$)/,
+	to_lower: /£lower( |$)/,
+	rx_ins: /(£comma|£insert\S*|%ko|%k)( |-|$)/,
 	rx_ins_before: /((?:%ko|%k|£comma)(?:-\S+)?)(?: |$)/,
-	rx_del: null,
+	rx_del: /(£nil|£no-comma|%nok|%ok|%nko)( |-|$)/,
+	rx_editable: /£(vfin|no-refl)/,
 
 	red: {},
 	yellow: {},
 	purple: {},
 	blue: {},
 	info: {},
+	order: [
+		[/^£:.*/, 10],
+		[/^£(upper|lower|comma)/, -10],
+		[/^£green/, -20],
+	],
 
 	dict: {},
 };
+
 let markings = [];
 let marking_ids = [];
 let to_send = null;
@@ -583,6 +594,33 @@ function markingColor(types) {
 		}
 	}
 	return col;
+}
+
+function orderMarkings() {
+	order = {};
+	for (let m in g_marks.types) {
+		order[m] = 0;
+		for (let rx of g_marks.order) {
+			if (rx[0].test(m)) {
+				order[m] = rx[1];
+			}
+		}
+	}
+	g_marks.order = order;
+	//console.log(g_marks.order);
+}
+
+function sortMarkings(a, b) {
+	if (a === b) {
+		return 0;
+	}
+	if (!g_marks.order.hasOwnProperty(a)) {
+		return 1;
+	}
+	if (!g_marks.order.hasOwnProperty(b)) {
+		return -1;
+	}
+	return g_marks.order[b] - g_marks.order[a];
 }
 
 function findTextNodes(nodes, filter) {
@@ -1122,7 +1160,7 @@ function _parseResult(rv) {
 					}
 					ws = [];
 				}
-				nws = ws;
+				nws = ws.unique().sort(sortMarkings);
 				if (nws.length == 0) {
 					crs = [];
 				}
@@ -1164,23 +1202,22 @@ function _parseResult(rv) {
 					////console.log(crs);
 				}
 				if (nws.length) {
-					nws = nws.unique();
 					w[WF_MARK] = nws.join(' ');
 					if (w[WF_MARK].indexOf(' ') !== -1) {
 						w[WF_MARK] = w[WF_MARK].replace(/ £error /g, ' ').replace(/ £error$/g, '').replace(/^£error /g, '');
-						if (w[WF_MARK].indexOf('£green') !== -1) {
-							w[WF_MARK] = w[WF_MARK].replace(/ £green /g, ' ').replace(/ £green$/g, '').replace(/^£green /g, '') + ' £green';
-						}
 					}
 
-					if (w[WF_MARK].indexOf('£-comp') !== -1) {
+					if (g_marks.comp_left.test(w[WF_MARK])) {
 						w[WF_MERGE] |= Defs.TYPE_COMP_LEFT;
 					}
 					if (g_marks.comp_right.test(w[WF_MARK])) {
 						w[WF_MERGE] |= Defs.TYPE_COMP_RIGHT;
 					}
-					if (w[WF_MARK].indexOf('£comp-:-') !== -1) {
+					if (g_marks.comp_hyphen.test(w[WF_MARK])) {
 						w[WF_MERGE] |= Defs.TYPE_COMP_RIGHT | Defs.TYPE_COMP_HYPHEN;
+					}
+					if (g_marks.comp_preswap.test(w[WF_MARK])) {
+						w[WF_MERGE] |= Defs.TYPE_COMP_PRESWAP;
 					}
 
 					had_mark = true;
@@ -1216,7 +1253,7 @@ function _parseResult(rv) {
 		if (had_mark) {
 			// Pre-merge compound errors with the token they're supposed to be with, respecting other corrections to either side of the merge
 			for (let j=0 ; j<words.length ; ) {
-				if (words[j].length > 1 && words[j][WF_MERGE] & Defs.TYPE_COMP) {
+				if (words[j].length > 1 && (words[j][WF_MERGE] & Defs.TYPE_COMP)) {
 					let ts = words[j][WF_MARK];
 					let wx = '';
 					let px = '';
@@ -1252,6 +1289,20 @@ function _parseResult(rv) {
 						}
 						ana = words[j+1][WF_ANA];
 					}
+					if (words[j][WF_MERGE] & Defs.TYPE_COMP_PRESWAP) {
+						if (words[j-1].length > 1 && words[j-1][WF_MARK]) {
+							ts += ' '+words[j-1][WF_MARK];
+						}
+						wx = words[j-1][WF_WORD] + ' ' + words[j][WF_WORD];
+						px = words[j][WF_WORD];
+						if (words[j][WF_SUGGS]) {
+							px = words[j][WF_SUGGS];
+						}
+						sx = words[j-1][WF_WORD];
+						if (words[j-1].length > 1 && words[j-1][WF_SUGGS]) {
+							sx = words[j-1][WF_SUGGS];
+						}
+					}
 
 					let has_uc = (wx !== wx.toLowerCase());
 
@@ -1260,6 +1311,9 @@ function _parseResult(rv) {
 					let space = '';
 					if (words[j][WF_MERGE] & Defs.TYPE_COMP_HYPHEN) {
 						space = '‐';
+					}
+					if (words[j][WF_MERGE] & Defs.TYPE_COMP_PRESWAP) {
+						space = ' ';
 					}
 					let es = [];
 					for (let p=0 ; p<px.length ; ++p) {
@@ -1276,7 +1330,7 @@ function _parseResult(rv) {
 					let nw = [wx, ts.split(/ /).unique().join(' ').replace(/ +/g, ' '), es.join('\t'), 0, ana, tid];
 					words[j] = nw;
 
-					if (flags & Defs.TYPE_COMP_LEFT) {
+					if (flags & (Defs.TYPE_COMP_LEFT | Defs.TYPE_COMP_PRESWAP)) {
 						words.splice(j-1, 1);
 					}
 					else {
@@ -1387,6 +1441,34 @@ function checkParagraphs(doc) {
 	sendTexts();
 }
 
+function recheckParagraphs(doc) {
+	if (ts_xhr) {
+		ts_xhr.abort();
+	}
+	ts_xhr = null;
+
+	for (let k = 0 ; k<to_send.length ; ++k) {
+		if (to_send[k].i === marking_ids[cmarking.s]) {
+			to_send.splice(k, 1, ...doc);
+			break;
+		}
+	}
+	for (let k = 0 ; k<to_send.length ; ++k) {
+		to_send[k].i = k+1;
+	}
+
+	loadOptions((g_tool == 'Comma') ? SERVICES.Comma : SERVICES.Grammar);
+	loadDictionary();
+
+	//console.log(doc, to_send);
+	to_send_i = 0;
+	to_send_b = 0;
+	markings = [];
+	marking_ids = [];
+	g_impl.parseCheckStart();
+	sendTexts();
+}
+
 function object2tsv(obj) {
 	let rv = '';
 
@@ -1466,7 +1548,7 @@ function object2po(obj, base) {
 }
 
 function nl2html(v) {
-	v = '<p>'+v.replace(/\n+<ul>/g, '</p><ul>').replace(/\n+<\/ul>/g, '</ul>').replace(/<\/ul>\n+/g, '</ul><p>').replace(/\n+<li>/g, '<li>').replace(/\n\n+/g, '</p><p>').replace(/\n/g, '<br>')+'</p>';
+	v = '<p>'+v.replace(/\n+<ul>/g, '</p><ul>').replace(/\n+<\/ul>/g, '</ul>').replace(/<\/ul>\n+/g, '</ul><p>').replace(/\n+<ol>/g, '</p><ol>').replace(/\n+<\/ol>/g, '</ol>').replace(/<\/ol>\n+/g, '</ol><p>').replace(/\n+<li>/g, '<li>').replace(/\n\n+/g, '</p><p>').replace(/\n/g, '<br>')+'</p>';
 	return v;
 }
 
@@ -1597,6 +1679,12 @@ function l10n_world(node) {
 		let k = e.attr('data-l10n-href');
 		let v = l10n_translate(k);
 		e.attr('href', v);
+	});
+	$(node).find('[data-l10n-placeholder]').each(function() {
+		let e = $(this);
+		let k = e.attr('data-l10n-placeholder');
+		let v = l10n_translate(k);
+		e.attr('placeholder', v);
 	});
 
 	if (node == document && typeof l10n_marking_types === 'function') {

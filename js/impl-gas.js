@@ -56,6 +56,10 @@ function impl_showOptions(g_tool) {
 	return google.script.run.withFailureHandler(showError).showOptions(g_tool);
 }
 
+function impl_recheckSelectedPars() {
+	return google.script.run.withSuccessHandler(recheckParagraphs).withFailureHandler(showError).getSelectedPars();
+}
+
 function impl_getSelectedPars() {
 	return google.script.run.withSuccessHandler(checkParagraphs).withFailureHandler(showError).getSelectedPars();
 }

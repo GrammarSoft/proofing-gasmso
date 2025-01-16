@@ -197,6 +197,10 @@ label span {
 	font-size: 19px;
 	line-height: 13px;
 }
+.bi.icon {
+	margin-right: 0;
+	margin-left: 0;
+}
 .icon-input {
 	background-image: url('../imgs/icon-input.png');
 	width: 16px;

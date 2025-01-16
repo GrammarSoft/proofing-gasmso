@@ -141,6 +141,10 @@ function impl_showOptions(g_tool) {
 	Office.context.ui.displayDialogAsync(ROOT_URL_SELF + '/html/options.html?host=outlook&tool='+g_tool, { width: 80, height: 80, displayInIframe: true }, _impl_showOptions_cb);
 }
 
+function impl_recheckSelectedPars() {
+	showError('ERR_CANNOT_SELECT');
+}
+
 function impl_getSelectedPars() {
 	showError('ERR_CANNOT_SELECT');
 }
