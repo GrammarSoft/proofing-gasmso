@@ -18,13 +18,39 @@
 'use strict';
 
 let g_mode = null;
-let cmarking = {s: -1, w: -1};
+let cmarking = {
+	s: -1,
+	b: -1,
+	e: -1,
+	m: -1,
+	mark: null,
+	suggs: [],
+	sel_sug: -1,
+	words: '',
+	prefix: '',
+	suffix: '',
+	sentence: '',
+	};
+let prev_marking = {};
 let ignores = {};
 let act_queue = [];
 let select_fail = false;
 let grammar_retried = false;
 let comma_retried = false;
 let overlay_sidebars = [];
+
+function cmark() {
+	cmarking.mark = marking_ranges[cmarking.m];
+	cmarking.s = cmarking.mark.seg;
+	cmarking.b = cmarking.mark.begin;
+	cmarking.e = cmarking.mark.end;
+
+	cmarking.words = '';
+	for (let i=cmarking.b ; i<cmarking.e ; ++i) {
+		cmarking.words += segments[cmarking.s][i].word + segments[cmarking.s][i].space;
+	}
+	cmarking.words = $.trim(cmarking.words.replace(/  +/g, ' '));
+}
 
 function switchSidebar(which) {
 	$('#popupIgnore').hide();
@@ -47,16 +73,16 @@ function overlay_pop() {
 
 function markingSetSentence() {
 	let s = cmarking.s;
-	let b = cmarking.w;
+	let b = cmarking.b;
 	for (; b>0 ; --b) {
-		if (markings[s][b-1][WF_WORD].length === 0) {
+		if (segments[s][b-1].word === STR_SENT_BREAK) {
 			--b;
 			break;
 		}
 	}
-	let e = cmarking.w;
-	for (; e<markings[s].length ; ++e) {
-		if (markings[s][e][WF_WORD].length === 0) {
+	let e = cmarking.e;
+	for (; e<segments[s].length ; ++e) {
+		if (segments[s][e].word === STR_SENT_BREAK) {
 			break;
 		}
 	}
@@ -65,8 +91,19 @@ function markingSetSentence() {
 	let sentence = '';
 	cmarking.sentence = '';
 	for (let i=b; i<e ; ++i) {
-		let m = markings[s][i];
-		if (is_nullish(m[WF_WORD])) {
+		if (i == cmarking.b) {
+			sentence += '<span class="marking">';
+		}
+		if (i == cmarking.e) {
+			sentence += '</span>';
+		}
+
+		let m = segments[s][i];
+		let w = m.word;
+		if (i == cmarking.b && cmarking.mark.ins) {
+			w = cmarking.mark.ins.word;
+		}
+		if (is_nullish(w)) {
 			continue;
 		}
 
@@ -74,7 +111,7 @@ function markingSetSentence() {
 		let func = '';
 		let icon = '';
 		for (let f=0 ; f<func2label.length ; ++f) {
-			if (func2label[f].rx.test(m[WF_ANA].func)) {
+			if (func2label[f].rx.test(m.ana.func)) {
 				func = ' func_off func_' + func2label[f].f;
 				if (func2label[f].i) {
 					if (func2label[f].i.indexOf('https://') !== -1) {
@@ -90,89 +127,76 @@ function markingSetSentence() {
 				break;
 			}
 		}
-		if (i === cmarking.w) {
-			let w = m[WF_WORD];
-			sentence += '<span class="marking pos pos_off pos_'+m[WF_ANA].pos+func+'"><span>' + escHTML(w) + '</span><br><span class="func">' + icon + '</span></span> ';
+		if (i >= cmarking.b && i < cmarking.e) {
+			sentence += '<span class="pos pos_off pos_'+m.ana.pos+func+'"><span>' + escHTML(w) + '</span><br><span class="func">' + icon + '</span></span>' + m.space;
 		}
 		else {
-			if (m[WF_MARK].length > 1 && g_marks.rx_ins.test(m[WF_MARK])) {
-				////console.log(`Skipping ${s} ${i}: ${markings[s][i][WF_MARK]}`);
-				continue;
-			}
-			sentence += '<span class="pos pos_off pos_'+m[WF_ANA].pos+func+'"><span>'+escHTML(m[WF_WORD]) + '</span><br><span class="func">' + icon + '</span></span> ';
+			sentence += '<span class="pos pos_off pos_'+m.ana.pos+func+'"><span>'+escHTML(w) + '</span><br><span class="func">' + icon + '</span></span>' + m.space;
 		}
-		cmarking.sentence += m[WF_WORD] + ' ';
+		cmarking.sentence += w + m.space;
 	}
 	ls_set('sentence_analysis', sent_ana);
-	return sentence;
+	return sentence.replace(/ (<\/\w+>)/g, '$1 ');
 }
 
 function markingSetContext() {
+	let s = cmarking.s;
+	let b = cmarking.b;
+	let e = cmarking.e;
+
 	cmarking.prefix = '';
-	for (let i=0 ; i<cmarking.w ; ++i) {
-		if (markings[cmarking.s][i][WF_MARK].length > 1 && g_marks.rx_ins.test(markings[cmarking.s][i][WF_MARK])) {
-			////console.log(`Skipping ${cmarking.s} ${i}: ${markings[cmarking.s][i][WF_MARK]}`);
+	for (let i=0 ; i<b ; ++i) {
+		if (is_nullish(segments[s][i].word)) {
 			continue;
 		}
-		if (is_nullish(markings[cmarking.s][i][WF_WORD])) {
-			continue;
-		}
-		cmarking.prefix += markings[cmarking.s][i][WF_WORD] + ' ';
+		cmarking.prefix += segments[s][i].word + segments[s][i].space;
 	}
 
 	cmarking.suffix = '';
-	for (let i=cmarking.w+1 ; i<markings[cmarking.s].length ; ++i) {
-		if (markings[cmarking.s][i][WF_MARK].length > 1 && g_marks.rx_ins.test(markings[cmarking.s][i][WF_MARK])) {
-			////console.log(`Skipping ${cmarking.s} ${i}: ${markings[cmarking.s][i][WF_MARK]}`);
+	for (let i=e ; i<segments[s].length ; ++i) {
+		if (is_nullish(segments[s][i].word)) {
 			continue;
 		}
-		if (is_nullish(markings[cmarking.s][i][WF_WORD])) {
-			continue;
-		}
-		cmarking.suffix += markings[cmarking.s][i][WF_WORD] + ' ';
+		cmarking.suffix += segments[s][i].word + segments[s][i].space;
 	}
 }
 
 function markingGetSnippet() {
+	let s = cmarking.s;
+	let b = cmarking.b;
+	let e = cmarking.e;
+
 	let snippet = '';
-	for (let i=Math.max(0, cmarking.w-2) ; i<cmarking.w ; ++i) {
-		if (markings[cmarking.s][i][WF_MARK].length > 1 && g_marks.rx_ins.test(markings[cmarking.s][i][WF_MARK])) {
+	for (let i=Math.max(0, b-2) ; i<Math.min(segments[s].length, e+2) ; ++i) {
+		if (is_nullish(segments[s][i].word)) {
 			continue;
 		}
-		if (is_nullish(markings[cmarking.s][i][WF_WORD])) {
-			continue;
-		}
-		snippet += markings[cmarking.s][i][WF_WORD] + ' ';
+		snippet += segments[s][i].word + segments[s][i].space;
 	}
 
-	snippet += markings[cmarking.s][cmarking.w][WF_WORD] + ' ';
-	for (let i=cmarking.w+1 ; i<Math.min(markings[cmarking.s].length, cmarking.w+3) ; ++i) {
-		if (markings[cmarking.s][i][WF_MARK].length > 1 && g_marks.rx_ins.test(markings[cmarking.s][i][WF_MARK])) {
-			continue;
-		}
-		if (is_nullish(markings[cmarking.s][i][WF_WORD])) {
-			continue;
-		}
-		snippet += markings[cmarking.s][i][WF_WORD] + ' ';
-	}
-
-	snippet = $.trim(snippet);
+	snippet = $.trim(snippet.replace(/  +/g, ' '));
 	return snippet;
 }
 
 function markingRender(skipact) {
+	cmark();
 	let s = cmarking.s;
-	let marking = markings[s][cmarking.w];
+	let b = cmarking.b;
+	let e = cmarking.e;
+	let words = cmarking.words;
+
+	let marking = cmarking.mark;
 	let sentence = markingSetSentence();
 
-	let ik = marking[WF_WORD] + '\t' + marking[WF_MARK];
+	let ik = words + '\t' + marking.mark;
 	if (ignores.hasOwnProperty(ik) && ignores[ik].hasOwnProperty(cmarking.sentence) && ignores[ik][cmarking.sentence] === true) {
 		////console.log(`Skip ignored ${ik} : ${cmarking.sentence}`);
-		markings[s][cmarking.w] = [marking[WF_WORD], '', '', 0, marking[WF_ANA]];
+		marking_ranges.splice(cmarking.m, 1);
 		if (skipact === 'prev') {
 			btnPrev();
 		}
 		else {
+			cmarking.m -= 1;
 			btnNext();
 		}
 		return;
@@ -191,10 +215,10 @@ function markingRender(skipact) {
 		btn_lbl = 'BTN_COMMA_';
 	}
 
-	let types = marking[WF_MARK].split(/ /g);
+	let types = marking.mark.split(/ /g);
 	let col = markingColor(types);
 
-	if (g_marks.dict.test(marking[WF_MARK])) {
+	if (g_marks.dict.test(marking.mark)) {
 		$('#chkAddWord').show();
 		$('.btnAddWord').removeClass('disabled');
 	}
@@ -210,7 +234,7 @@ function markingRender(skipact) {
 	let es = {};
 	let el = {};
 	for (let i=0 ; i<types.length ; ++i) {
-		let et = g_marks.types[types[i]] ? g_marks.types[types[i]][0] : (types[i] + ' ');
+		let et = (g_marks.types[types[i]] ? g_marks.types[types[i]][0] : (types[i] + ' ')).replace(/:.*$/, '');
 		es[i] = '<h2 title="'+escHTML(types[i])+'">'+et+'</h2>';
 
 		et = g_marks.types[types[i]] ? g_marks.types[types[i]][1] : (types[i] + ' ');
@@ -227,71 +251,93 @@ function markingRender(skipact) {
 	$('.chkExplainLongText').html(el);
 
 	let alt = (_live_options.config.opt_color ? ' alt' : '');
-	if (/^[,.:!?;]$/.test(marking[WF_WORD])) {
+	if (/^[,.:!?;]$/.test(words) || (marking.ins && /^[,.:!?;]$/.test(marking.ins.word))) {
 		alt += ' marking-comma';
 	}
-	else if (marking[WF_WORD].length <= 2) {
+	else if (words.length <= 2 || (marking.ins && marking.ins.word.length <= 2)) {
 		alt += ' marking-enhance';
 	}
 
-	$('.chkType').attr('title', marking[WF_MARK]);
+	$('.chkType').attr('title', marking.mark);
 
-	sentence = sentence.replace(' class="marking ', ' class="marking marking-'+col+alt+' marking-'+g_tool.toLowerCase()+' ');
+	sentence = sentence.replace(' class="marking">', ' class="marking marking-'+col+alt+' marking-'+g_tool.toLowerCase()+'">');
 	$('.chkSentence').html(sentence);
 
 	let input_vis = false;
 	$('.btnManualInput').hide();
 
-	if (marking[WF_SUGGS].length === 0) {
+	let suggs = Array.from(marking.suggs);
+
+	if (suggs.length === 0) {
+		if (g_marks.comp_left.test(marking.mark)) {
+			suggs = [[new GS_Suggestion(segments[s][b].word, ''), new GS_Suggestion(segments[s][b+1].word)]];
+		}
+		else if (g_marks.comp_right.test(marking.mark)) {
+			suggs = [[new GS_Suggestion(segments[s][b].word, ''), new GS_Suggestion(segments[s][b+1].word)]];
+		}
+		else if (g_marks.comp_hyphen.test(marking.mark)) {
+			suggs = [[new GS_Suggestion(segments[s][b].word + '‐', ''), new GS_Suggestion(segments[s][b+1].word)]]; // U+2010 Hyphen
+		}
+		else if (g_marks.comp_preswap.test(marking.mark)) {
+			suggs = [[new GS_Suggestion(segments[s][b+1].word), new GS_Suggestion(segments[s][b].word)]];
+		}
+	}
+
+	cmarking.suggs = suggs;
+
+	if (suggs.length === 0) {
 		$('.btnInput').hide();
 		$('#chkDidYouMean').hide();
 		$('.chkSentence').addClass('divider');
 		$('.btnAccept').addClass('disabled');
+		$('#chkDidYouMeanItems').html('');
 	}
 	else {
-		let all_upper = is_upper(marking[WF_WORD]);
-		let first_upper = all_upper || is_upper(marking[WF_WORD].charAt(0));
+		let all_upper = is_upper(words);
+		let first_upper = all_upper || is_upper(words.charAt(0));
 
-		if (g_marks.to_lower.test(marking[WF_MARK])) {
+		if (g_marks.to_lower.test(marking.mark)) {
 			all_upper = first_upper = false;
 		}
 
-		let suggs = '';
-		let ss = marking[WF_SUGGS].split(/\t/g);
-		for (let i=0 ; i<ss.length ; ++i) {
-			let t = ss[i];
+		let html = '';
+		for (let i=0 ; i<suggs.length ; ++i) {
+			let t = '';
+			for (let j=0 ; j<suggs[i].length ; ++j) {
+				let sg = suggs[i][j];
+				if (sg.word === STR_PLACEHOLDER) {
+					t += escHTML(segments[s][b+j].word) + segments[s][b+j].space;
+				}
+				else {
+					t += escHTML(sg.word) + sg.space;
+				}
+			}
 			if (all_upper) {
 				t = t.toUpperCase();
 			}
 			else if (first_upper) {
 				t = uc_first(t);
 			}
-			suggs += '<div class="suggestion"><span class="link link-suggestion" tabindex="'+(50+i*3)+'">' + escHTML(t) + '</span><span class="suggestion-lookup"><a class="link link-corpus" tabindex="'+(50+i*3+1)+'"><span class="icon">𓂀</span></a><a class="link link-dict" tabindex="'+(50+i*3+2)+'"><span class="icon"><i class="bi bi-book"></i></span></a></span></div>';
+			html += '<div class="suggestion"><span class="link link-suggestion" data-which="'+i+'" tabindex="'+(50+i*3)+'">' + t + '</span><span class="suggestion-lookup"><a class="link link-corpus" tabindex="'+(50+i*3+1)+'"><span class="icon">𓂀</span></a><a class="link link-dict" tabindex="'+(50+i*3+2)+'"><span class="icon"><i class="bi bi-book"></i></span></a></span></div>';
 		}
-		$('#chkDidYouMeanItems').html(suggs);
+		$('#chkDidYouMeanItems').html(html);
 		$('#chkDidYouMeanItems').find('span.link-suggestion').off().click(markingAcceptSuggestion);
 		$('#chkDidYouMeanItems').find('.link-corpus').off().click(function() {
 			let query = '';
-			for (let i=Math.max(0, cmarking.w-2) ; i<cmarking.w ; ++i) {
-				if (markings[cmarking.s][i][WF_MARK].length > 1 && g_marks.rx_ins.test(markings[cmarking.s][i][WF_MARK])) {
+			for (let i=Math.max(0, b-2) ; i<b ; ++i) {
+				if (is_nullish(segments[s][i].word)) {
 					continue;
 				}
-				if (is_nullish(markings[cmarking.s][i][WF_WORD])) {
-					continue;
-				}
-				query += '[word=="' + markings[cmarking.s][i][WF_WORD] + '"]? ';
+				query += '[word=="' + segments[s][i].word + '"]? ';
 			}
 
 			query += '[word=="' + $(this).closest('div').find('.link-suggestion').text() + '"] ';
 
-			for (let i=cmarking.w+1 ; i<Math.min(markings[cmarking.s].length, cmarking.w+3) ; ++i) {
-				if (markings[cmarking.s][i][WF_MARK].length > 1 && g_marks.rx_ins.test(markings[cmarking.s][i][WF_MARK])) {
+			for (let i=e ; i<Math.min(segments[s].length, e+2) ; ++i) {
+				if (is_nullish(segments[s][i].word)) {
 					continue;
 				}
-				if (is_nullish(markings[cmarking.s][i][WF_WORD])) {
-					continue;
-				}
-				query += '[word=="' + markings[cmarking.s][i][WF_WORD] + '"]? ';
+				query += '[word=="' + segments[s][i].word + '"]? ';
 			}
 			impl_openCorpus($.trim(query));
 		});
@@ -306,7 +352,7 @@ function markingRender(skipact) {
 		$('.btnAccept').removeClass('disabled');
 	}
 
-	if (g_marks.rx_editable.test(marking[WF_MARK])) {
+	if (g_marks.rx_editable.test(marking.mark)) {
 		$('.btnInput').show();
 		input_vis = true;
 	}
@@ -320,35 +366,34 @@ function markingRender(skipact) {
 
 	$('.icon-accept,.icon-discard').addClass('icon-accept').removeClass('icon-discard');
 
-	if (g_marks.rx_ins.test(marking[WF_MARK])) {
+	if (g_marks.rx_ins.test(marking.ef_mark)) {
 		let px = /^(.*?)(\S+\s?)$/.exec(cmarking.prefix);
 		let sx = /^(\s?\S+)(.*)$/.exec(cmarking.suffix);
 		//console.log([cmarking.prefix, cmarking.suffix, px, sx]);
 		impl_selectInDocument(px[1], px[2] + sx[1], sx[2]);
 		$('.txtAccept').text(l10n_translate(btn_lbl + 'INSERT'));
-		if (marking[WF_MARK].indexOf('%k-stop') !== -1) {
+		if (marking.mark.indexOf('%k-stop') !== -1) {
 			$('.txtAccept').text(l10n_translate(btn_lbl + 'INSERT_STOP'));
 		}
 		$('.btnAccept').removeClass('disabled');
 	}
-	else if (g_marks.rx_del.test(marking[WF_MARK])) {
+	else if (g_marks.rx_del.test(marking.ef_mark)) {
 		$('.icon-accept,.icon-discard').addClass('icon-discard').removeClass('icon-accept');
 		$('.txtAccept').text(l10n_translate(btn_lbl + 'REMOVE'));
 		$('.btnAccept').removeClass('disabled');
-		impl_selectInDocument(cmarking.prefix, marking[WF_WORD], cmarking.suffix);
+		impl_selectInDocument(cmarking.prefix, words, cmarking.suffix);
 	}
 	else {
 		$('.txtAccept').text(l10n_translate(btn_lbl + 'REPLACE'));
-		let middle = marking[WF_WORD];
+		let middle = words;
 		impl_selectInDocument(cmarking.prefix, middle, cmarking.suffix);
 	}
 
 	showHideAnalysis();
 }
 
-function markingSelect(s, w) {
-	cmarking.s = s;
-	cmarking.w = w;
+function markingSelect(m) {
+	cmarking.m = m;
 	markingRender();
 	window.scrollTo(0, 0);
 }
@@ -358,30 +403,32 @@ function btnSeeList() {
 	let alt = (_live_options.config.opt_color ? ' alt' : '');
 	let en = 0;
 
-	for (let s = 0 ; s<markings.length ; ++s) {
-		for (let w = 0 ; w<markings[s].length ; ++w) {
-			if (markings[s][w][WF_MARK].length > 1) {
-				html += '<div class="errorListEntry" onclick="markingSelect('+s+','+w+');" title="'+escHTML(markings[s][w][WF_MARK])+'"><span class="link">';
-				let c = Math.max(w-3, 0);
-				if (c > 0) {
-					html += '…';
-				}
-				for ( ; c<w ; ++c) {
-					html += escHTML(markings[s][c][WF_WORD]) + ' ';
-				}
-				let col = markingColor(markings[s][w][WF_MARK].split(/ /g));
-				html += '<span class="marking marking-'+col+alt+' marking-'+g_tool.toLowerCase()+'">'+escHTML(markings[s][w][WF_WORD])+'</span>';
-				c = w+1;
-				for ( ; c<markings[s].length && c<w+3 ; ++c) {
-					html += ' '+escHTML(markings[s][c][WF_WORD]);
-				}
-				if (c < markings[s].length) {
-					html += '…';
-				}
-				html += '</span><span class="link suggestion-lookup"><span class="icon icon-lookup"></span></span></div>';
-				++en;
-			}
+	for (let i=0 ; i<marking_ranges.length ; ++i) {
+		let m = marking_ranges[i];
+		let s = m.seg;
+		let b = m.begin;
+		let e = m.end;
+
+		html += '<div class="errorListEntry" onclick="markingSelect('+i+');" title="'+escHTML(m.mark)+'"><span class="link">';
+		let c = Math.max(b-3, 0);
+		if (c > 0) {
+			html += '…';
 		}
+		for ( ; c<b ; ++c) {
+			html += escHTML(segments[s][c].oword ?? segments[s][c].word) + segments[s][c].space;
+		}
+		let col = markingColor(m.mark.split(/ /g));
+		for ( ; c<e ; ++c) {
+			html += '<span class="marking marking-'+col+alt+' marking-'+g_tool.toLowerCase()+'">'+escHTML(segments[s][c].oword ?? segments[s][c].word)+'</span>' + segments[s][c].space;
+		}
+		for ( ; c<segments[s].length && c<e+2 ; ++c) {
+			html += escHTML(segments[s][c].oword ?? segments[s][c].word) + segments[s][c].space;
+		}
+		if (c < segments[s].length) {
+			html += '…';
+		}
+		html += '</span><span class="link suggestion-lookup"><span class="icon icon-lookup"></span></span></div>';
+		++en;
 	}
 
 	if (en >= 10) {
@@ -407,26 +454,25 @@ function btnAccept() {
 }
 
 function btnInput() {
-	$('#chkInputText').val(markings[cmarking.s][cmarking.w][WF_WORD]);
+	let words = cmarking.words;
+
+	$('#chkInputText').val(words);
 	$('#chkInput').show();
 	$('#chkInputText').focus();
 }
 
 function markingIgnore() {
-	let marking = markings[cmarking.s][cmarking.w];
-	let ik = marking[WF_WORD] + '\t' + marking[WF_MARK];
+	let words = cmarking.words;
+	let marking = cmarking.mark;
+
+	let ik = words + '\t' + marking.mark;
 	if (!ignores[ik]) {
 		ignores[ik] = {};
 	}
 	ignores[ik][cmarking.sentence] = true;
 	//console.log('Ignoring %s in %s', ik, cmarking.sentence);
 
-	if (g_marks.rx_ins.test(marking[WF_MARK])) {
-		markings[cmarking.s][cmarking.w] = [' ', '', '', 0, {pos:'', func:''}, marking[WF_TID]];
-	}
-	else {
-		markings[cmarking.s][cmarking.w] = [marking[WF_WORD], '', '', 0, marking[WF_ANA], marking[WF_TID]];
-	}
+	marking_ranges.splice(cmarking.m, 1);
 }
 
 function btnIgnorePopup() {
@@ -445,33 +491,42 @@ function btnIgnorePopup() {
 }
 
 function btnIgnore() {
+	let words = cmarking.words;
+
 	$('#popupIgnore').hide();
-	let mark = markings[cmarking.s][cmarking.w];
-	log_marking_action({'a': 'ignore-one', 'm': mark[WF_MARK], 'w': mark[WF_WORD], 't': mark[WF_TID]});
+	let mark = cmarking.mark;
+	log_marking_action({'a': 'ignore-one', 'm': mark.mark, 'w': words, 't': mark.tid});
 
 	markingIgnore();
-	matomo_event('btnIgnoreOne', mark[WF_MARK], mark[WF_WORD]);
+	matomo_event('btnIgnoreOne', mark.mark, words);
+	cmarking.m -= 1;
 	btnNext();
 }
 
 function btnIgnoreAll() {
-	$('#popupIgnore').hide();
-	let mark = markings[cmarking.s][cmarking.w];
-	log_marking_action({'a': 'ignore-all', 'm': mark[WF_MARK], 'w': mark[WF_WORD], 't': mark[WF_TID]});
+	let words = cmarking.words;
 
-	let word = mark[WF_WORD];
-	let ts = mark[WF_MARK];
-	for (let s=0 ; s<markings.length ; ++s) {
-		for (let w=0 ; w<markings[s].length ; ++w) {
-			if (markings[s][w][WF_WORD] === word && markings[s][w][WF_MARK] && markings[s][w][WF_MARK] === ts) {
-				cmarking.s = s;
-				cmarking.w = w;
+	$('#popupIgnore').hide();
+	let mark = cmarking.mark;
+	log_marking_action({'a': 'ignore-all', 'm': mark.mark, 'w': words, 't': mark.tid});
+
+	let ts = mark.mark;
+	for (let i=0 ; i<marking_ranges.length ; ) {
+		let m = marking_ranges[i];
+		if (m.mark === ts) {
+			cmarking.m = i;
+			cmark();
+			if (words === cmarking.words) {
 				markingSetSentence();
 				markingIgnore();
+				continue;
 			}
 		}
+		++i;
 	}
+
 	matomo_event('btnIgnoreAll', ts, word);
+	cmarking.m -= 1;
 	btnNext();
 }
 
@@ -479,43 +534,13 @@ function btnPrev() {
 	matomo_event('btnPrev');
 
 	$('#popupIgnore').hide();
-	let found = false;
-	for (;;) {
-		for (let s=cmarking.s ; s>=0 ; --s) {
-			if (!markings[s]) {
-				continue;
-			}
 
-			for (let w=Math.min(cmarking.w, markings[s].length)-1 ; w>=0 ; --w) {
-				////console.log(`${s} ${w}`);
-				if (!markings[s][w]) {
-					continue;
-				}
+	if (marking_ranges.length) {
+		cmarking.m -= 1;
+		if (cmarking.m < 0) {
+			cmarking.m = marking_ranges.length - 1;
+		}
 
-				if (markings[s][w][WF_MARK].length > 1) {
-					cmarking.s = s;
-					cmarking.w = w;
-					found = true;
-					break;
-				}
-			}
-			if (found) {
-				break;
-			}
-			cmarking.w = 9999999;
-		}
-		if (found) {
-			break;
-		}
-		// If no marking was found and we are searching from the end, give up
-		if (!found && cmarking.s === markings.length) {
-			break;
-		}
-		// If no marking was found going backward, loop around and try from the end
-		cmarking.s = markings.length;
-	}
-
-	if (cmarking.s !== markings.length) {
 		markingRender('prev');
 	}
 	else if (to_send_i >= to_send.length) {
@@ -527,43 +552,12 @@ function btnNext() {
 	matomo_event('btnNext');
 
 	$('#popupIgnore').hide();
-	let found = false;
-	for (;;) {
-		for (let s=cmarking.s ; s<markings.length ; ++s) {
-			if (!markings[s]) {
-				continue;
-			}
-
-			for (let w=cmarking.w+1 ; w<markings[s].length ; ++w) {
-				////console.log(`${s} ${w}`);
-				if (!markings[s][w]) {
-					continue;
-				}
-
-				if (markings[s][w][WF_MARK].length > 1) {
-					cmarking.s = s;
-					cmarking.w = w;
-					found = true;
-					break;
-				}
-			}
-			if (found) {
-				break;
-			}
-			cmarking.w = -1;
+	if (marking_ranges.length) {
+		cmarking.m += 1;
+		if (cmarking.m >= marking_ranges.length) {
+			cmarking.m = 0;
 		}
-		if (found) {
-			break;
-		}
-		// If no marking was found and we are searching from the start, give up
-		if (!found && cmarking.s === -1) {
-			break;
-		}
-		// If no marking was found going forward, loop around and try from the start
-		cmarking.s = -1;
-	}
 
-	if (cmarking.s !== -1) {
 		markingRender('next');
 	}
 	else if (to_send_i >= to_send.length) {
@@ -577,14 +571,19 @@ function btnInputOne() {
 		return;
 	}
 
-	let rpl = $('#chkInputText').val();
+	let rpl = $.trim($('#chkInputText').val().replace(/  +/g, ' '));
 	if (rpl.length === 0) {
 		rpl = ' ';
 	}
-	let mark = markings[cmarking.s][cmarking.w];
-	matomo_event('btnInputOne', mark[WF_MARK], cmarking.w, rpl);
-	log_marking_action({'a': 'input-one', 'm': mark[WF_MARK], 'w': mark[WF_WORD], 'r': rpl, 't': mark[WF_TID]});
-	processQueue({f: impl_replaceInDocument, s: cmarking.s, w: cmarking.w, rpl: rpl});
+	let mark = cmarking.mark;
+	let words = cmarking.words;
+	cmarking.suggs = Array(cmarking.e - cmarking.b);
+	cmarking.suggs.fill(new GS_Suggestion(''));
+	cmarking.suggs[0] = new GS_Suggestion(rpl);
+	cmarking.sel_sug = 0;
+	matomo_event('btnInputOne', mark.mark, cmarking.b, rpl);
+	log_marking_action({'a': 'input-one', 'm': mark.mark, 'w': words, 'r': rpl, 't': mark.tid});
+	processQueue({f: impl_replaceInDocument, m: cmarking.m, rpl: rpl});
 }
 
 function btnInputAll() {
@@ -593,27 +592,34 @@ function btnInputAll() {
 		return;
 	}
 
-	let rpl = $('#chkInputText').val();
+	let rpl = $.trim($('#chkInputText').val().replace(/  +/g, ' '));
 	if (rpl.length === 0) {
 		rpl = ' ';
 	}
-	let mark = markings[cmarking.s][cmarking.w];
-	let word = mark[WF_WORD];
-	let ts = mark[WF_MARK];
-	let os = cmarking.s;
-	let ow = cmarking.w;
+	let mark = cmarking.mark;
+	let words = cmarking.words;
+	let ts = mark.mark;
+	let om = cmarking.m;
 
-	for (let s=0 ; s<markings.length ; ++s) {
-		for (let w=0 ; w<markings[s].length ; ++w) {
-			if (markings[s][w][WF_WORD] === word && markings[s][w][WF_MARK] && markings[s][w][WF_MARK] === ts) {
-				appendQueue({f: impl_replaceInDocument, s: s, w: w, rpl: rpl});
+	cmarking.suggs = Array(cmarking.e - cmarking.b);
+	cmarking.suggs.fill(new GS_Suggestion(''));
+	cmarking.suggs[0] = new GS_Suggestion(rpl);
+	cmarking.sel_sug = 0;
+
+	for (let i=0 ; i<marking_ranges.length ; ++i) {
+		let m = marking_ranges[i];
+		if (m.mark.mark === ts) {
+			cmarking.m = i;
+			cmark();
+			if (words === cmarking.words) {
+				appendQueue({f: impl_replaceInDocument, m: i, rpl: rpl});
 			}
 		}
 	}
 
-	matomo_event('btnInputAll', ts, word, rpl);
-	log_marking_action({'a': 'input-all', 'm': mark[WF_MARK], 'w': word, 'r': rpl, 't': mark[WF_TID]});
-	processQueue({f: btnNext, s: os, w: ow});
+	matomo_event('btnInputAll', ts, words, rpl);
+	log_marking_action({'a': 'input-all', 'm': ts, 'w': words, 'r': rpl, 't': mark.tid});
+	processQueue({f: btnNext, m: om});
 }
 
 function showHideAnalysis() {
@@ -661,10 +667,11 @@ function markingAcceptSuggestion() {
 		return;
 	}
 
-	let mark = markings[cmarking.s][cmarking.w];
-	let middle = mark[WF_WORD];
-	log_marking_action({'a': 'accept', 'm': mark[WF_MARK], 'w': middle, 'r': $(this).text(), 't': mark[WF_TID]});
-	processQueue({f: impl_replaceInDocument, s: cmarking.s, w: cmarking.w, middle: middle, rpl: $(this).text()});
+	let mark = cmarking.mark;
+	let middle = cmarking.words;
+	cmarking.sel_sug = parseInt($(this).attr('data-which'));
+	log_marking_action({'a': 'accept', 'm': mark.mark, 'w': middle, 'r': $(this).text(), 't': mark.tid});
+	processQueue({f: impl_replaceInDocument, m: cmarking.m, middle: middle, rpl: $(this).text()});
 }
 
 function markingAccept() {
@@ -673,21 +680,21 @@ function markingAccept() {
 		return;
 	}
 
-	let mark = markings[cmarking.s][cmarking.w];
+	let mark = cmarking.mark;
 
-	if (g_marks.rx_ins.test(mark[WF_MARK])) {
+	if (g_marks.rx_ins.test(mark.ef_mark)) {
 		let px = /^(.*?)(\S+)(\s?)$/.exec(cmarking.prefix);
 		let sx = /^(\s?\S+)(.*)$/.exec(cmarking.suffix);
-		let rpl = mark[WF_WORD];
-		log_marking_action({'a': 'accept-insert', 'm': mark[WF_MARK], 'w': markings[cmarking.s][cmarking.w-1][WF_WORD], 'r': rpl, 't': mark[WF_TID]});
-		if (/£insert/.test(mark[WF_MARK])) {
+		let rpl = mark.ins.word;
+		log_marking_action({'a': 'accept-insert', 'm': mark.mark, 'w': segments[cmarking.s][cmarking.b-1].word, 'r': rpl, 't': mark.tid});
+		if (/£insert/.test(mark.mark)) {
 			rpl = ' ' + rpl;
 		}
-		processQueue({f: impl_insertInDocument, s: cmarking.s, w: cmarking.w, prefix: px[1], middle: px[2] + px[3] + sx[1], rpl: px[2] + rpl + px[3] + sx[1], suffix: sx[2]});
+		processQueue({f: impl_insertInDocument, m: cmarking.m, prefix: px[1], middle: px[2] + px[3] + sx[1], rpl: px[2] + rpl + px[3] + sx[1], suffix: sx[2]});
 	}
-	else if (g_marks.rx_del.test(mark[WF_MARK])) {
-		log_marking_action({'a': 'accept-remove', 'm': mark[WF_MARK], 'w': mark[WF_WORD], 't': mark[WF_TID]});
-		processQueue({f: impl_removeInDocument, s: cmarking.s, w: cmarking.w, rpl: ' '});
+	else if (g_marks.rx_del.test(mark.ef_mark)) {
+		log_marking_action({'a': 'accept-remove', 'm': mark.mark, 'w': cmarking.words, 't': mark.tid});
+		processQueue({f: impl_removeInDocument, m: cmarking.m, rpl: ' '});
 	}
 	else {
 		$('#chkDidYouMeanItems').find('.link').first().click();
@@ -696,7 +703,7 @@ function markingAccept() {
 
 function appendQueue(action) {
 	if (action) {
-		act_queue.push(Object.assign({s:0,w:0,prefix:null,middle:null,rpl:null,suffix:null}, action));
+		act_queue.push(Object.assign({m:0, prefix:null, middle:null, rpl:null, suffix:null}, action));
 	}
 }
 
@@ -710,18 +717,19 @@ function processQueue(action) {
 
 	$('#working').show();
 	let act = act_queue.shift();
-	cmarking.s = act.s;
-	cmarking.w = act.w;
+	cmarking.m = act.m;
 
 	if (act.f === btnNext) {
 		$('#working').hide();
 		return act.f();
 	}
 
+	cmark();
 	markingSetContext();
+	prev_marking = Object.assign({}, cmarking);
 
 	let prefix = (act.prefix === null) ? cmarking.prefix : act.prefix;
-	let middle = (act.middle === null) ? markings[cmarking.s][cmarking.w][WF_WORD] : act.middle;
+	let middle = (act.middle === null) ? cmarking.words : act.middle;
 	let suffix = (act.suffix === null) ? cmarking.suffix : act.suffix;
 
 	return act.f(prefix, middle, act.rpl, suffix);
@@ -778,10 +786,44 @@ function didSelect() {
 function didReplace(rv) {
 	//console.log(rv);
 	_did_helper(rv.before, rv.after);
-	markings[cmarking.s][cmarking.w] = [rv.rpl, '', '', 0, markings[cmarking.s][cmarking.w][WF_ANA], markings[cmarking.s][cmarking.w][WF_TID]];
+
+	for (let i=0 ; i<prev_marking.suggs[prev_marking.sel_sug].length ; ++i) {
+		let s = prev_marking.suggs[prev_marking.sel_sug][i];
+		if (s.word === STR_PLACEHOLDER) {
+			continue;
+		}
+		segments[prev_marking.s][prev_marking.b+i].word = s.word;
+		segments[prev_marking.s][prev_marking.b+i].space = s.space;
+	}
+
+	/*
+	if (g_marks.comp_left.test(prev_marking.mark.mark)) {
+		segments[prev_marking.s][prev_marking.b].space = '';
+	}
+	else if (g_marks.comp_right.test(prev_marking.mark.mark)) {
+		segments[prev_marking.s][prev_marking.b].space = '';
+	}
+	else if (g_marks.comp_hyphen.test(prev_marking.mark.mark)) {
+		segments[prev_marking.s][prev_marking.b].word += '‐';
+		segments[prev_marking.s][prev_marking.b].space = '';
+	}
+	else if (g_marks.comp_preswap.test(prev_marking.mark.mark)) {
+		let w = segments[prev_marking.s][prev_marking.b];
+		segments[prev_marking.s][prev_marking.b] = segments[prev_marking.s][prev_marking.b+1];
+		segments[prev_marking.s][prev_marking.b+1] = w;
+	}
+	else {
+		segments[prev_marking.s][prev_marking.b].word = rv.rpl;
+	}
+	//*/
+
+	marking_ranges.splice(prev_marking.m, 1);
+	cmarking.m -= 1;
+
 	processQueue();
 }
 
+// Used by Kukkuniiaat hyphenation, so not by any marking replacements
 function didReplaceSilent(rv) {
 	//console.log(rv);
 	_did_helper(rv.before, rv.after);
@@ -790,14 +832,22 @@ function didReplaceSilent(rv) {
 function didInsert(rv) {
 	//console.log(rv);
 	_did_helper(rv.before, rv.after);
-	markings[cmarking.s][cmarking.w] = [markings[cmarking.s][cmarking.w][WF_WORD], '', '', 0, markings[cmarking.s][cmarking.w][WF_ANA], markings[cmarking.s][cmarking.w][WF_TID]];
+	segments[prev_marking.s][prev_marking.b] = prev_marking.mark.ins;
+
+	marking_ranges.splice(prev_marking.m, 1);
+	cmarking.m -= 1;
+
 	processQueue();
 }
 
 function didRemove(rv) {
 	//console.log(rv);
 	_did_helper(rv.before, rv.after);
-	markings[cmarking.s][cmarking.w] = [STR_NULLISH, '', '', 0, {pos:'', func:''}, markings[cmarking.s][cmarking.w][WF_TID]];
+	segments[prev_marking.s][prev_marking.b] = new GS_Word(STR_NULLISH);
+
+	marking_ranges.splice(prev_marking.m, 1);
+	cmarking.m -= 1;
+
 	processQueue();
 }
 
@@ -829,10 +879,10 @@ function feedbackSend() {
 	if (overlay_sidebars[overlay_sidebars.length-1].is('#chkChecking')) {
 		json = {
 			s: '',
-			w: cmarking.w,
+			m: cmarking.mark,
 			};
-		for (let i=0 ; i<markings[cmarking.s].length ; ++i) {
-			json.s += markings[cmarking.s][i][WF_WORD] + '\t' + markings[cmarking.s][i][WF_SUGGS] + '\t' + markings[cmarking.s][i][WF_MARK] + '\n';
+		for (let i=0 ; i<segments[cmarking.s].length ; ++i) {
+			json.s += segments[cmarking.s][i].word + '\n';
 		}
 		//console.log(json);
 		json = JSON.stringify(json);
@@ -1272,9 +1322,9 @@ function initSidebar() {
 		if ($(this).hasClass('disabled')) {
 			return false;
 		}
-		let mark = markings[cmarking.s][cmarking.w];
-		log_marking_action({'a': 'dict-add', 'm': mark[WF_MARK], 'w': mark[WF_WORD], 't': mark[WF_TID]});
-		addToDictionary(mark[WF_WORD]);
+		let mark = cmarking.mark;
+		log_marking_action({'a': 'dict-add', 'm': mark.mark, 'w': cmarking.words, 't': mark.tid});
+		addToDictionary(cmarking.words);
 		$('.btnIgnoreAll').click();
 		matomo_event('ui', 'ignore-all');
 	});
@@ -1352,7 +1402,7 @@ function initSidebar() {
 	g_impl.showError = showError;
 
 	g_impl.parseCheckStart = function() {
-		cmarking = {s: -1, w: -1};
+		cmarking.m = -1;
 		$('.chkProgressBar').css('width', '0%');
 	};
 	g_impl.parseProgress = function() {
@@ -1363,7 +1413,7 @@ function initSidebar() {
 		//console.log(rv);
 	};
 	g_impl.parseChunkDone = function() {
-		if (cmarking.s === -1) {
+		if (cmarking.m === -1) {
 			btnNext();
 		}
 
@@ -1402,8 +1452,17 @@ function initSidebar() {
 	matomo_load();
 }
 
-$(function() {
+function sidebarLoaded() {
+	if (!g_impl.loaded) {
+		//console.log('Waiting for implementation to load');
+		setTimeout(sidebarLoaded, 200);
+		return;
+	}
 	g_impl.init(initSidebar);
+}
+
+$(function() {
+	sidebarLoaded();
 });
 
 function showError(msg, args) {

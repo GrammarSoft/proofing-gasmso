@@ -9,9 +9,9 @@ Released as GPLv3+ - except `imgs/logo*` and `js/mark-types.js`
 * [Google Apps Script Github Assistant](https://chrome.google.com/webstore/detail/google-apps-script-github/lfjcgcmkmjjlieihflfhjopckgpelofo) can be used to deploy to a Google Apps Script project
 
 ### Microsoft Office
-* Office Online: https://docs.microsoft.com/en-us/office/dev/add-ins/testing/sideload-office-add-ins-for-testing
-* Windows: https://docs.microsoft.com/en-us/office/dev/add-ins/testing/create-a-network-shared-folder-catalog-for-task-pane-and-content-add-ins
-* macOS and iPad: https://docs.microsoft.com/en-us/office/dev/add-ins/testing/sideload-an-office-add-in-on-ipad-and-mac
+* Office Online: https://docs.microsoft.com/en-us/office/add-ins/testing/sideload-office-add-ins-for-testing
+* Windows: https://docs.microsoft.com/en-us/office/add-ins/testing/create-a-network-shared-folder-catalog-for-task-pane-and-content-add-ins
+* macOS and iPad: https://docs.microsoft.com/en-us/office/add-ins/testing/sideload-an-office-add-in-on-ipad-and-mac
 
 ## Deployment
 * Edit `js/impl.js` lines 21-27

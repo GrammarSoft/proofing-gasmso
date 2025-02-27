@@ -71,3 +71,5 @@ function impl_getAllPars() {
 function impl_showDictionary(text) {
 	return google.script.run.withFailureHandler(showError).showDictionary(text);
 }
+
+g_impl.loaded = true;

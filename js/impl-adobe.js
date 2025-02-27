@@ -149,3 +149,5 @@ g_impl.init = function(func) {
 g_impl.openExternal = function(url) {
 	window.uxpHost.postMessage({a: 'openExternal', url: url});
 };
+
+g_impl.loaded = true;

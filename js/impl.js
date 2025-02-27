@@ -24,7 +24,7 @@ const VERSION_PATCH = 0;
 const PRODUCT_NAME = window.hasOwnProperty('PRODUCT_NAME') ? window.PRODUCT_NAME : 'Lingvohelpilo';
 const PRODUCT_DOMAIN = window.hasOwnProperty('PRODUCT_DOMAIN') ? window.PRODUCT_DOMAIN : 'lingvohelpilo.visl.dk';
 const ROOT_URL_SELF = 'https://'+PRODUCT_DOMAIN+'/gas/grammar-epo/1.0.0/';
-const ROOT_URL_GRAMMAR = 'https://'+PRODUCT_DOMAIN+'/dev/';
+const ROOT_URL_GRAMMAR = 'https://'+PRODUCT_DOMAIN+'/';
 const CADUCEUS_URL = 'wss://gramtrans.com/caduceus/';
 const SIGNOUT_URL = ROOT_URL_GRAMMAR+'/logout?';
 
@@ -211,6 +211,7 @@ function impl_beforeParseResult(txt) {
 }
 
 let g_impl = {
+	loaded: false,
 	matomo_sid: 16,
 	callback: _impl_callback,
 	dataKeepalive: impl_dataKeepalive,

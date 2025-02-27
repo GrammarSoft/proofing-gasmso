@@ -282,6 +282,11 @@ g_impl.hasSelection = function() {
 };
 
 g_impl.init = function(func) {
+	if (typeof Office === 'undefined') {
+		//console.log('Waiting for Office to load');
+		setTimeout(function() { g_impl.init(func); }, 200);
+		return;
+	}
 	Office.initialize = function(reason) {
 		$(document).ready(function() {
 			func();
@@ -296,3 +301,5 @@ g_impl.init = function(func) {
 		});
 	};
 };
+
+g_impl.loaded = true;
