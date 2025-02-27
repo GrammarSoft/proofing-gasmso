@@ -250,6 +250,29 @@ function impl_showOptions(g_tool) {
 	Office.context.ui.displayDialogAsync(ROOT_URL_SELF + '/html/options.html?host=msoffice&tool='+g_tool, { width: 80, height: 80, displayInIframe: true }, _impl_showOptions_cb);
 }
 
+function impl_recheckSelectedPars() {
+	Word.run(function(context) {
+		let pars = context.document.getSelection().paragraphs;
+		context.load(pars, 'text');
+		return context.sync().then(function () {
+			let elms = [];
+			pars = pars.items;
+			for (let p = 0; p < pars.length; ++p) {
+				let txt = $.trim(pars[p].text);
+				if (txt.length) {
+					elms.push({i: elms.length+1, t: pars[p].text});
+				}
+			}
+			recheckParagraphs(elms);
+		});
+	}).catch(function(error) {
+		showError(JSON.stringify(error));
+		if (error instanceof OfficeExtension.Error) {
+			console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+		}
+	});
+}
+
 function _impl_getPars(context, pars) {
 	context.load(pars, 'text');
 	return context.sync().then(function () {
@@ -314,6 +337,11 @@ function impl_getSelectedText(func) {
 //*/
 
 g_impl.init = function(func) {
+	if (typeof Office === 'undefined') {
+		console.log('Waiting for Office to load');
+		setTimeout(function() { g_impl.init(func); }, 200);
+		return;
+	}
 	Office.initialize = function(reason) {
 		$(document).ready(function() {
 			func();
@@ -326,3 +354,5 @@ g_impl.init = function(func) {
 		});
 	};
 };
+
+g_impl.loaded = true;

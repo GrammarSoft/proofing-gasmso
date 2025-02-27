@@ -77,6 +77,9 @@ function impl_canComma() {
 	return SERVICES.Comma;
 }
 
+function impl_openCorpus(query) {
+}
+
 function impl_openDictionary(word) {
 }
 
@@ -116,6 +119,7 @@ function impl_removeFromDictionary(word) {
 }
 
 let g_impl = {
+	loaded: false,
 	matomo_sid: 4,
 	callback: _impl_callback,
 	dataKeepalive: impl_dataKeepalive,

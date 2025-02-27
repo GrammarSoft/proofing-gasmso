@@ -60,6 +60,11 @@ iframe {
 	height: 100%;
 }
 
+textarea {
+	min-height: 15ex;
+	min-width: 90%;
+}
+
 .supportBtn {
 	background-color: #4a90e2;
 	color: #fff;
@@ -364,7 +369,13 @@ input[type="text"] {
 	border: 2px solid #4a90e2;
 	width: 100%;
 	padding: 3px;
-	margin: 0;
+	margin: 5px 0;
+	line-height: 18px;
+	min-height: 30px;
+}
+
+.w20 {
+	width: 20ex !important;
 }
 
 th, td {
@@ -576,6 +587,10 @@ thead, tfoot {
 }
 .flex-cols input {
 	display: none;
+}
+
+.is-invalid {
+	border: 2px solid #aa1818;
 }
 
 footer {

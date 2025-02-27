@@ -77,7 +77,12 @@ function impl_canComma() {
 	return SERVICES.Comma;
 }
 
+function impl_openCorpus(query) {
+	g_impl.openExternal('https://corp.visl.dk/m/?l=deu&s=s&c[deu_leipzig]=1&c[deu_wiki_2019a]=1&q='+encodeURIComponent(query), 'Corpus Query');
+}
+
 function impl_openDictionary(word) {
+	g_impl.openExternal('https://www.duden.de/suchen/dudenonline/'+encodeURIComponent(word), 'Duden Online');
 }
 
 function impl_loadUserdata() {

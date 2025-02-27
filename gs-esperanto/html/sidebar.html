@@ -23,7 +23,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title data-l10n="TITLE_SIDEBAR">…</title>
 	<base target="_top">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10/font/bootstrap-icons.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11/font/bootstrap-icons.css">
 	<script defer src="https://lingvohelpilo.visl.dk/gas/dev/gs-esperanto/vendor/jquery.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://lingvohelpilo.visl.dk/gas/dev/gs-esperanto/css/shared.css">
 	<link rel="stylesheet" type="text/css" href="https://lingvohelpilo.visl.dk/gas/dev/gs-esperanto/css/sidebar.css">
@@ -44,6 +44,8 @@
 <div id="error-text">…</div>
 </div>
 
+<!-- Support -->
+
 <div class="sidebar" id="chkSupport">
 <h1 data-l10n="HDR_SUPPORT_COPYRIGHT">…</h1>
 <div class="center backed">
@@ -53,15 +55,21 @@
 </div>
 
 <div class="text center">
-	<button class="btn-lightblue btnCloseSupport" data-l10n="BTN_CLOSE">…</button>
+	<button class="btn-blue btnFeedback"><i class="bi bi-envelope-exclamation icon"></i> <span data-l10n="BTN_FEEDBACK">…</span></button>
+</div>
+
+<div class="text center">
+	<button class="btn-lightblue btnOverlayPop" data-l10n="BTN_CLOSE">…</button>
 </div>
 
 <span data-l10n="TXT_GRAMMAR_ABOUT">…</span>
 
 <div class="text center">
-	<button class="btn-lightblue btnCloseSupport" data-l10n="BTN_CLOSE">…</button>
+	<button class="btn-lightblue btnOverlayPop" data-l10n="BTN_CLOSE">…</button>
 </div>
 </div>
+
+<!-- Languages -->
 
 <div class="sidebar" id="chkLanguages">
 <h1 data-l10n="HDR_LANGUAGES">…</h1>
@@ -76,7 +84,31 @@
 </div>
 
 <div class="text center">
-	<button class="btn-lightblue btnCloseLanguages" data-l10n="BTN_CLOSE">…</button>
+	<button class="btn-lightblue btnOverlayPop" data-l10n="BTN_CLOSE">…</button>
+</div>
+</div>
+
+<!-- Feedback -->
+
+<div class="sidebar" id="chkFeedback">
+<h1 data-l10n="HDR_FEEDBACK">…</h1>
+<div class="text">
+	<span data-l10n="TXT_FEEDBACK">…</span>
+	<span id="txtFeedbackError" data-l10n="TXT_FEEDBACK_ERROR">…</span>
+</div>
+
+<div class="center backed">
+	<textarea id="txtFeedback" placeholder="…" data-l10n-placeholder="LBL_PLACEHOLDER"></textarea>
+	<br>
+	<button class="btn-green btnFeedbackSend" data-l10n="BTN_FEEDBACK_SEND">…</button>
+</div>
+
+<div class="text">
+	<span data-l10n="TXT_FEEDBACK_ALT">…</span>
+</div>
+
+<div class="text center">
+	<button class="btn-lightblue btnOverlayPop" data-l10n="BTN_CLOSE">…</button>
 </div>
 </div>
 
@@ -94,14 +126,14 @@
 	<button class="btn-lightblue btn-big btnLoginGrammar" data-l10n="BTN_LOGIN">…</button>
 </div>
 <div class="text backed">
-	<h2 data-l10n="HDR_WHAT_IS">…</h2>
-	<span data-l10n="TXT_WHAT_IS">…</span>
-</div>
-<div class="text">
 	<span data-l10n="TXT_SUBSCRIBE_FREE">…</span>
 </div>
-<div class="text backed">
+<div class="text">
 	<span data-l10n="TXT_DISABLE_BUILTIN_LINK">…</span>
+</div>
+<div class="text backed">
+	<h2 data-l10n="HDR_WHAT_IS">…</h2>
+	<span data-l10n="TXT_GRAMMAR_ABOUT">…</span>
 </div>
 </div>
 
@@ -142,28 +174,38 @@
 <div class="sidebar" id="chkErrorList">
 <h1 data-l10n="HDR_ERRORLIST">…</h1>
 <div class="text center errorListTopBtn">
-	<button class="btn-lightblue btnCloseList" data-l10n="BTN_CLOSE">…</button>
+	<button class="btn-lightblue btnOverlayPop" data-l10n="BTN_CLOSE">…</button>
 </div>
 
 <div class="text" id="errorList"></div>
 
 <div class="text center">
-	<button class="btn-lightblue btnCloseList" data-l10n="BTN_CLOSE">…</button>
+	<button class="btn-lightblue btnOverlayPop" data-l10n="BTN_CLOSE">…</button>
 </div>
 </div>
 
 <div class="sidebar" id="chkChecking">
 <div class="backed">
-<div class="buttonbar buttonbar-edges buttonbar-wide">
-	<button class="btn-link left btnPrev"><span class="icon icon-previous"></span><span data-l10n="BTN_PREVIOUS">…</span></button>
-	<button class="btn-link btnSeeList"><span data-l10n="BTN_SEEALL">…</span></button>
-	<button class="btn-link right btnNext"><span data-l10n="BTN_NEXT">…</span><span class="icon icon-next"></span></button>
-</div>
-<div class="buttonbar buttonbar-wide">
-	<button class="btn-lightblue btnAccept"><span class="icon icon-accept"></span><span class="txtAccept">…</span></button>
-	<button class="btn-orange btnIgnore"><span class="icon icon-ignore"></span><span data-l10n="BTN_IGNORE">…</span></button>
-	<button class="btn-blue btnInput"><span class="icon icon-input"></span><span data-l10n="BTN_EDIT">…</span></button>
-</div>
+<span id="controlsAuto">
+	<div class="buttonbar buttonbar-edges buttonbar-wide">
+		<button class="btn-link left btnPrev"><span class="icon icon-previous"></span><span data-l10n="BTN_PREVIOUS">…</span></button>
+		<button class="btn-link btnSeeList"><span data-l10n="BTN_SEEALL">…</span></button>
+		<button class="btn-link right btnNext"><span data-l10n="BTN_NEXT">…</span><span class="icon icon-next"></span></button>
+	</div>
+	<div class="buttonbar buttonbar-wide">
+		<button class="btn-lightblue btnAccept"><span class="icon icon-accept"></span><span class="txtAccept">…</span></button>
+		<button class="btn-orange btnIgnore"><span class="icon icon-ignore"></span><span data-l10n="BTN_IGNORE">…</span></button>
+		<button class="btn-blue btnInput"><span class="icon icon-input"></span><span data-l10n="BTN_EDIT">…</span></button>
+		<button class="btn-blue btnManualInput"><span class="icon icon-input"></span><span data-l10n="BTN_MANUAL_EDIT">…</span></button>
+	</div>
+</span>
+<span id="controlsManual">
+	<div data-l10n="TXT_MANUAL_EDIT">…</div>
+	<div class="buttonbar buttonbar-wide">
+		<button class="btn-orange btnManualCancel"><i class="bi bi-x icon"></i> <span data-l10n="BTN_MANUAL_CANCEL">…</span></button>
+		<button class="btn-lightblue btnManualDone"><i class="bi bi-check-lg icon"></i> <span data-l10n="BTN_MANUAL_DONE">…</span></button>
+	</div>
+</span>
 </div>
 <div class="text closable backed" id="chkInput">
 	<div class="closer">&times;</div>
@@ -203,11 +245,11 @@
 		<div>
 			<ul>
 				<li><label><input type="checkbox" class="chkFunc" value="func_S" checked> <i class="black bi bi-x-lg"></i> <span data-l10n="LBL_FUNC_S">…</span></label></li>
-				<li><label><input type="checkbox" class="chkFunc" value="func_Sf"> <i class="black bi bi-x-lg"></i> <span data-l10n="LBL_FUNC_Sf">…</span></label></li>
+				<!-- <li><label><input type="checkbox" class="chkFunc" value="func_Sf"> <i class="black bi bi-x-lg"></i> <span data-l10n="LBL_FUNC_Sf">…</span></label></li> -->
 				<li><label><input type="checkbox" class="chkFunc" value="func_Vm"> <i class="black bi bi-circle-fill"></i> <span data-l10n="LBL_FUNC_Vm">…</span></label></li>
 				<li><label><input type="checkbox" class="chkFunc" value="func_Od" checked> <i class="black bi bi-triangle-fill"></i> <span data-l10n="LBL_FUNC_Od">…</span></label></li>
 				<li><label><input type="checkbox" class="chkFunc" value="func_Oi"> <i class="black bi bi-square-fill"></i> <span data-l10n="LBL_FUNC_Oi">…</span></label></li>
-				<li><label><input type="checkbox" class="chkFunc" value="func_Of"> <i class="black bi"><img class="rpl-vars" src="{ROOT_URL_SELF}/imgs/bi-chevron-down-half.svg"></i> <span data-l10n="LBL_FUNC_Of">…</span></label></li>
+				<!-- <li><label><input type="checkbox" class="chkFunc" value="func_Of"> <i class="black bi"><img class="rpl-vars" src="{ROOT_URL_SELF}/imgs/bi-chevron-down-half.svg"></i> <span data-l10n="LBL_FUNC_Of">…</span></label></li> -->
 				<li><label><input type="checkbox" class="chkFunc" value="func_A"> <i class="black bi"><img class="rpl-vars" src="{ROOT_URL_SELF}/imgs/bi-chevron-down-half.svg"></i> <span data-l10n="LBL_FUNC_A">…</span></label></li>
 				<li><label><input type="checkbox" class="chkFunc" value="func_Cs"> <i class="black bi bi-x-circle"></i> <span data-l10n="LBL_FUNC_Cs">…</span></label></li>
 				<li><label><input type="checkbox" class="chkFunc" value="func_Co"> <i class="black bi bi-plus-circle"></i> <span data-l10n="LBL_FUNC_Co">…</span></label></li>
@@ -227,6 +269,9 @@
 </div>
 <div class="text center" id="chkAddWord">
 	<button class="btn-lightblue btn-big btnAddWord"><span class="icon icon-add"></span><span data-l10n="BTN_DICT_ADD">…</span></button>
+</div>
+<div class="text center">
+	<button class="btn-orange btnFeedback"><i class="bi bi-envelope-exclamation icon"></i> <span data-l10n="BTN_FEEDBACK_ERROR">…</span></button>
 </div>
 <div class="text chkProgress">
 	<div class="chkProgressContainer"><div class="chkProgressBar"></div></div>

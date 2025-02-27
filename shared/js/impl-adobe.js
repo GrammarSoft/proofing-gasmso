@@ -74,6 +74,10 @@ function impl_showOptions(g_tool) {
 	window.uxpHost.postMessage({a: 'showOptions', w: g_tool});
 }
 
+function impl_recheckSelectedPars() {
+	window.uxpHost.postMessage({a: 'recheckSelectedPars'});
+}
+
 function impl_getSelectedPars() {
 	window.uxpHost.postMessage({a: 'getSelectedPars'});
 }
@@ -107,6 +111,9 @@ function _impl_eventListener(e) {
 	}
 	else if (e.a === 'getAllPars' || e.a === 'getSelectedPars') {
 		checkParagraphs(e.ps);
+	}
+	else if (e.a === 'recheckSelectedPars') {
+		recheckParagraphs(e.ps);
 	}
 	else if (e.a === 'selectInDocument') {
 		didSelect();
@@ -142,3 +149,5 @@ g_impl.init = function(func) {
 g_impl.openExternal = function(url) {
 	window.uxpHost.postMessage({a: 'openExternal', url: url});
 };
+
+g_impl.loaded = true;
