@@ -474,6 +474,25 @@ function showColumn(e, w) {
 	matomo_event('showColumn', w);
 }
 
+function filterTypes(which) {
+	let v = $.trim($('.filter-'+which).val().toLowerCase());
+	$('#'+which+'-types').find('td[title]').each(function() {
+		let t = ($(this).attr('title') + $(this).text()).toLowerCase();
+		$(this).closest('tr').show();
+		if (t.indexOf(v) === -1) {
+			$(this).closest('tr').hide();
+		}
+	});
+}
+
+function filterGrammar() {
+	filterTypes('grammar');
+}
+
+function filterComma() {
+	filterTypes('comma');
+}
+
 function initOptions() {
 	$.ajaxSetup({
 		xhrFields: {
@@ -541,6 +560,11 @@ function initOptions() {
 	$('.btnTypesAllOff').click(function() {
 		typesAllTo(this, '0');
 	});
+
+	$('.filter-grammar').change(filterGrammar).keyup(filterGrammar);
+	$('.btnFilterGrammar').click(filterGrammar);
+	$('.filter-comma').change(filterComma).keyup(filterComma);
+	$('.btnFilterComma').click(filterComma);
 
 	$('.formWordAdd').submit(function(e) {
 		let w = $.trim($('.inputAddWord').val());

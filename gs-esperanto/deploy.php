@@ -41,6 +41,7 @@ echo shell_exec("grep -rl '/dev/gs-esperanto/' * | xargs -rn1 perl -pe 's@/dev/g
 
 echo "Replacing Grammar URI\n";
 echo shell_exec("grep -rl '/grammar/' * | xargs -rn1 perl -pe 's@/grammar/@/@g;' -i");
+echo shell_exec("grep -rl '/dev/' * | xargs -rn1 perl -pe 's@/dev/@/@g;' -i");
 
 echo "Commenting console.log\n";
 echo shell_exec("grep -rl 'console.log' * | xargs -rn1 perl -pe 's@console.log@//console.log@g;' -i");

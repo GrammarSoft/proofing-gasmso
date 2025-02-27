@@ -91,6 +91,10 @@ label span {
 	position: absolute;
 	right: 0;
 	top: 0;
+	white-space: nowrap;
+}
+.suggestion-lookup span {
+	display: inline-block;
 }
 
 .chkExplainLess img, .chkExplainMore img {
@@ -123,6 +127,10 @@ label span {
 	margin-right: 1px;
 	font-style: italic;
 	font-weight: bold;
+}
+.marking-enhance {
+	border: 1px solid;
+	border-radius: 3px;
 }
 .marking-grammar {
 }
@@ -186,7 +194,12 @@ label span {
 	height: 19px;
 	margin-right: 3px;
 	margin-left: -3px;
-	font-size: 18px;
+	font-size: 19px;
+	line-height: 13px;
+}
+.bi.icon {
+	margin-right: 0;
+	margin-left: 0;
 }
 .icon-input {
 	background-image: url('../imgs/icon-input.png');

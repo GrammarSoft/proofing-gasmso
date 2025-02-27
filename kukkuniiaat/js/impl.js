@@ -138,6 +138,7 @@ function impl_hyphenateUndo(sels) {
 }
 
 let g_impl = {
+	loaded: false,
 	matomo_sid: 5,
 	dataKeepalive: impl_dataKeepalive,
 	startLogin: impl_startLogin,

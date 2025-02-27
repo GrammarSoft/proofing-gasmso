@@ -14,12 +14,6 @@ g_marks.yellow = {};
 
 g_marks.info = {};
 
-g_marks.comp_right = new RegExp('~no-such-type');
-g_marks.to_upper = new RegExp('~no-such-type');
-g_marks.to_lower = new RegExp('~no-such-type');
-g_marks.rx_ins = /(£insert|%ko|%k)( |-|$)/;
-g_marks.rx_del = /(£nil|%nok|%ok|%nko)( |-|$)/;
-
 g_marks.types = {};
 g_marks.types_comma = [];
 g_marks.types_grammar = [];
