@@ -141,6 +141,10 @@ function impl_showOptions(g_tool) {
 	Office.context.ui.displayDialogAsync(ROOT_URL_SELF + '/html/options.html?host=outlook&tool='+g_tool, { width: 80, height: 80, displayInIframe: true }, _impl_showOptions_cb);
 }
 
+function impl_recheckSelectedPars() {
+	showError('ERR_CANNOT_SELECT');
+}
+
 function impl_getSelectedPars() {
 	showError('ERR_CANNOT_SELECT');
 }
@@ -278,6 +282,11 @@ g_impl.hasSelection = function() {
 };
 
 g_impl.init = function(func) {
+	if (typeof Office === 'undefined') {
+		console.log('Waiting for Office to load');
+		setTimeout(function() { g_impl.init(func); }, 200);
+		return;
+	}
 	Office.initialize = function(reason) {
 		$(document).ready(function() {
 			func();
@@ -292,3 +301,5 @@ g_impl.init = function(func) {
 		});
 	};
 };
+
+g_impl.loaded = true;

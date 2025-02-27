@@ -31,12 +31,6 @@ g_marks.yellow = {
 
 g_marks.info = {};
 
-g_marks.comp_right = new RegExp('£comp-( |$)');
-g_marks.to_upper = new RegExp('£upper( |$)');
-g_marks.to_lower = new RegExp('£lower( |$)');
-g_marks.rx_ins = /(£insert|%ko|%k)( |-|$)/;
-g_marks.rx_del = /(£nil|%nok|%ok|%nko)( |-|$)/;
-
 g_marks.types_comma = [];
 g_marks.types_grammar = [];
 

@@ -85,6 +85,10 @@ function impl_canComma() {
 	return false;
 }
 
+function impl_openCorpus(query) {
+	g_impl.openExternal('https://corp.visl.dk/m/?l=dan&s=s&c[dan_c90]=1&c[dan_c2000]=1&c[dan_kdk2010_dep]=1&c[dan_wiki_2018]=1&q='+encodeURIComponent(query), 'Corpus Query');
+}
+
 function impl_openDictionary(word) {
 	g_impl.openExternal('https://ordnet.dk/ddo/ordbog?query='+encodeURIComponent(word), 'Den Danske Ordbog');
 }
@@ -148,6 +152,7 @@ function impl_removeFromDictionary(word) {
 }
 
 let g_impl = {
+	loaded: false,
 	matomo_sid: 2,
 	callback: _impl_callback,
 	dataKeepalive: impl_dataKeepalive,
