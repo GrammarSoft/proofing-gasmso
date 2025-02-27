@@ -331,7 +331,7 @@ function markingRender(skipact) {
 				query += '[word=="' + segments[s][i].word + '"]? ';
 			}
 
-			query += '[word=="' + $(this).closest('div').find('.link-suggestion').text() + '"] ';
+			query += '[word=="' + $(this).closest('div').find('.link-suggestion').text().trim() + '"] ';
 
 			for (let i=e ; i<Math.min(segments[s].length, e+2) ; ++i) {
 				if (is_nullish(segments[s][i].word)) {
@@ -342,7 +342,7 @@ function markingRender(skipact) {
 			impl_openCorpus($.trim(query));
 		});
 		$('#chkDidYouMeanItems').find('.link-dict').off().click(function() {
-			impl_openDictionary($(this).closest('div').find('.link-suggestion').text());
+			impl_openDictionary($(this).closest('div').find('.link-suggestion').text().trim());
 		});
 		g_impl.attachTTS($('#chkDidYouMeanItems').get(0));
 		$('.btnInput').show();
