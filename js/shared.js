@@ -1456,6 +1456,8 @@ function _parseResult(rv) {
 						range.suggs = [];
 						words[j] = new GS_Word(STR_NULLISH);
 						words[j].oword = range.ins.word;
+						words[j].omark = range.ins.omark;
+						words[j].osuggs = range.ins.osuggs;
 					}
 
 					marking_ranges.push(range);
