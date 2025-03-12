@@ -1,15 +1,17 @@
+require('util').inspect.defaultOptions.depth = Infinity;
 const fs = require('fs');
 
 const g_conf_defaults = {};
-let to_send = [];
 let $ = function(){};
 let window = {};
 
 let js = fs.readFileSync(__dirname + '/../js/shared.js', 'utf-8') + '';
 js = js.replace("$(window).on('load', function() {", 'let __ignore = (function() {');
 js = js.replace(/['"]use strict['"](;?)/g, '');
-js = js.replace(/let to_send = null;/g, '');
+js = js.replace(/\nlet\b/g, '\nvar');
 eval(js);
+
+to_send = [];
 
 let tests = [
 	{t: 'abc def ghi', a: ['abc ', 'def', ' ghi'], e: {word: 'def'}},

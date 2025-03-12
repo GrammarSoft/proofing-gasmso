@@ -438,6 +438,12 @@ g_marks.types = {
 		"Mankas akuzativa -n en rekta objekto. En Esperanto, sendepende de vortordo, oni distingas objekton de subjekto per la finaĵo -n. Kutime subjekto indikas aganton aŭ kaŭzantan eventon, dum objekto indikas dependan rolon, ekz. viktimon, celon, rezulton aŭ vehiklon de ago aŭ okazaĵo. En frazo ‘A<i>-o xxxas B-on’,</i> vi povas fari teston demandante: <i>Ĉu estas A-o aŭ B-o, kiu xxxas?</i> La respondo estas la subjekto (A-o). La objekto (B-o) ne xxxas, sed estas xxxata.<br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/akuzativo\">akuzativo</a> (Objekto).",
 		"Li manĝis <span style=\"color: #ff0000\">pomo</span> [pomon]<br>\n<br>\nDu <span style=\"color: #ff0000\">jaroj</span> [jarojn] antaŭ la milito<br>\n<br>\nŜi preferas la francan kiel <span style=\"color: #ff0000\">dua lingvo</span> [kiel duan lingvon]"
 	],
+	"£acc&&N<PRED": [
+		"£acc&&N<PRED",
+		"Akuzativo en atributa predikativo",
+		"Predikativaj post-atributoj, izolitaj per komo aŭ parentezo, agordas same kiel normalaj antaŭ- aŭ post-atributoj.<br>\n<br>\n<i>Li ŝatas frukt</i><span style=\"color: #008000\"><b><i>ajn</i></b></span><i> kuk</i><b><i>ojn</i></b><i>.</i> (antaŭ-atributo)<br>\n<br>\n<i>Li ŝatas kuk</i><b><i>ojn</i></b><i> frukt</i><span style=\"color: #008000\"><b><i>ajn</i></b></span><i>.</i> (post-atributo)<br>\n<br>\n<i>Li ŝatas kuk</i><b><i>ojn</i></b><i>, aparte frukt</i><b><i>ajn</i></b><i>.</i> (predikativa atributo post komo)<br>\n<br>\n<i>Li ŝatas kuk</i><b><i>ojn</i></b><i> (frukt</i><span style=\"color: #008000\"><b><i>ajn</i></b></span><i>, krem</i><span style=\"color: #008000\"><b><i>ajn</i></b></span><i> kaj ali</i><span style=\"color: #008000\"><b><i>ajn</i></b></span><i>).</i> (predikativaj atributoj inter krampoj)<br>\n<br>\nPrincipe, tio validas ne nur por adjektivaj, sed ankaŭ por substantivaj predikativoj:<br>\n<br>\n<i>Li havas du hund</i><b><i>ojn</i></b><i>, grand</i><span style=\"color: #008000\"><b><i>ajn</i></b></span><i> best</i><span style=\"color: #0000ff\"><b><i>ojn</i></b></span><i> kun timigaj dentoj.</i><br>\n<br>\nPrecipe kun parentezo, homoj tamen ne ĉiam sekvas tiun regulon:<br>\n<br>\n<i>En 1910, ĝi havis 1657 enloĝant</i><b><i>ojn</i></b><i> (ruman</i><span style=\"color: #ff0000\"><b><i>oj</i></b></span><i>, hungar</i><span style=\"color: #ff0000\"><b><i>oj</i></b></span><i>, german</i><span style=\"color: #ff0000\"><b><i>oj</i></b></span><i>).</i><br>\n<br>\nNotu, ke agordo nur okazas, se la predikativa substantivo estas sinonimo, ekzemplo aŭ atributo, do referencas la saman objekton. Por alitipaj parentezaj informoj, simple uzu nominativon:<br>\n<br>\n<i>Ŝi gajnis kaj oran medal</i><b><i>on</i></b><i> (dorsnaĝad</i><b><i>o</i></b><i>) kaj arĝentan medal</i><b><i>on</i></b><i> (turplonĝad</i><b><i>o</i></b><i>).</i>",
+		""
+	],
 	"£acc-oc": [
 		"£acc-oc",
 		"Akuzativo en objekta predikativo",
@@ -467,6 +473,12 @@ g_marks.types = {
 		"Akuzativo post transitiva adverbo",
 		"Mankas akuzativo post transitiva adverbo, aldonu -n! Kelkaj adverboj <i>(inkluzive, ekskluzive, koncerne, rilate)</i>, kun verbeca signifo, estas transitivaj kaj postulas akuzativon en rekta komplemento. Se la komplemento ne estas rekta, sed prepozicia , ne sekvas akuzativo, sed nominativo <i>(inkluzive de, rilate al).</i>",
 		"Mi telefonas koncerne<span style=\"color: #ff0000\"> via kunlaboropropono</span> [vian kunlaboroproponon]<br>\n<br>\nInkluzive la <span style=\"color: #ff0000\">gastoj</span> [gastojn], ni estas 11 personoj en la domo"
+	],
+	"£acc-komp": [
+		"£acc-komp",
+		"Akuzativo en komparo",
+		"La komparaĵo post <i>‘ol’</i> agordas kun la kazo de la vorto kun kiu oni komparas ĝin. Do kiam oni komparas kun la objekto, devas esti akuzativo:<br>\n<br>\n<i>Mi ŝatas</i> <span style=\"color: #0000ff\"><i>fiŝ</i></span><span style=\"color: #0000ff\"><b><i>on</i></b></span><i> pli ol</i> <span style=\"color: #0000ff\"><i>viand</i></span><span style=\"color: #0000ff\"><b><i>on</i></b></span><i>.</i><br>\n<br>\nSed se oni komparas kun la subjekto, devas esti nominativo:<br>\n<br>\n<span style=\"color: #0000ff\"><i>Esperant</i></span><span style=\"color: #0000ff\"><b><i>o</i></b></span><i> taŭgas pli bone por verki poemojn ol eĉ la gepatra</i> <span style=\"color: #0000ff\"><i>lingv</i></span><span style=\"color: #0000ff\"><b><i>o</i></b></span><i>.</i><br>\n<br>\nLa vorto <i>‘ol’</i> en tiuj frazoj funkcias pli kiel konjunkcio ol kiel prepozicio, kvazaŭ enkonduko de frazeto kun forlasita verbo: <i>‘ol (mi ŝatas) viandon’, ‘ol (taŭgas) la gepatra lingvo’.</i><br>\n<br>\n<i>Notu, ke post ‘anstataŭ’ tiu \"konjunkcia\" uzo estas libervola – oni povas aŭ uzi normalan post-prepozician nominativon aŭ sekvi la kazon de la anstataŭaĵo:</i><br>\n<br>\n<i>Hodiaŭ, mi volas trinki teon anstataŭ kafo(n).</i><br>\n<br>\nTria kandidato por ĉi tiu regulo estas <i>‘krom’</i>, sed la konjunkcia uzo estas malpli ofta, menciita en PMEG kaj ReVo, sed ne en PIV, kiu traktas la vorton kiel simplan prepozicion. Zamenhof ne uzis akuzativon post <i>‘krom’</i>, sed jes ekz. <i>‘al-’</i> komplementojn.",
+		"Li spektas serialojn pli ol <span style=\"color: #ff0000\">filmoj</span> (filmojn).<br>\n<br>\nMi volas manĝi ion alian ol <span style=\"color: #ff0000\">salato</span> (salaton)."
 	],
 	"£vfin": [
 		"£vfin",
@@ -537,8 +549,14 @@ g_marks.types = {
 	"£ata": [
 		"£ata",
 		"Malperfektiva/proceza aspekto (ata-aspekto)",
-		"Konsideru uzi -ata anstataŭ -ita. Temas pri aspekto-diferenco. Pasivaj participo kun -ata esprimas procezan (malperfektivan) aspekton, dum pasiva participo kun -ita esprimas rezultan/perfektigan aspekton. Oni povas testi la diferencon per aldono de tempoadverbialo. Proceza aspekto permesas <i>‘dum tri horoj/tagoj/jaroj ktp’.</i> sed ne <i>‘en dato/horo/jaro ktp.’,</i> kaj rezulta aspekto male. Ekz. eblas diri <i>‘la ponto estis detruita en 1944’,</i> sed ne <i>‘la ponto estis detruita dum dum 3 jaroj’,</i> ĉar oni perceptas detruadon kiel punktan eventon kun rezulto, ne kiel procezon kun daŭro.<br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/participoj\">participoj</a> (Pasivo - participelekto).",
+		"Konsideru uzi <i>-ata</i> anstataŭ <i>-ita</i>. Temas pri aspekto-diferenco. Pasivaj participo kun -ata esprimas procezan (malperfektivan) aspekton, dum pasiva participo kun -ita esprimas rezultan/perfektivan aspekton. Oni povas testi la diferencon per aldono de tempoadverbialo. Proceza aspekto permesas <i>‘dum tri horoj/tagoj/jaroj ktp’.</i> sed ne <i>‘en dato/horo/jaro ktp.’,</i> kaj rezulta aspekto male. Ekz. eblas diri <i>‘la ponto estis detruita en 1944’,</i> sed ne <i>‘la ponto estis detruita dum dum 3 jaroj’,</i> ĉar oni perceptas detruadon kiel punktan eventon kun rezulto, ne kiel procezon kun daŭro.<br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/participoj\">participoj</a> (Pasivo - participelekto).",
 		"Ŝi estis plu kaj plu <span style=\"color: #ff0000\">amita</span> [amata]"
+	],
+	"£anta": [
+		"£anta",
+		"Malperfektiva/proceza aspekto en aktiva participo",
+		"Konsideru uzi <i>‘-anta’</i> anstataŭ <i>‘-inta’.</i> Povas temi pri aspekto-diferenco. Participo kun -a- esprimas procezan (malperfektivan) aspekton, dum participo kun -i- esprimas rezultan/perfektivan aspekton. Oni povas testi la diferencon per aldono de tempoadverbialo. Proceza aspekto permesas <i>‘dum tri horoj/tagoj/jaroj’</i> ktp., sed ne <i>‘en dato/horo/jaro’</i> ktp. Estas male ĉe rezulta (-i-) aspekto.<br>\n<br>\n<i>Ili estis jam</i> <b><i>finmanĝintaj</i></b><i> la tutan kukon.</i><br>\n<br>\n<i>Ili estis ĉiam/daŭre</i> <span style=\"color: #ff0000\"><i>kverelintaj</i></span><i> (kverelantaj).</i><br>\n<br>\nNotu, ke foje ekzistas <i>tempa</i> klarigo por la uzo de -i-participo en normale \"malperfektivema\" verbo, precipe en kombino kun nea vorto aŭ la adverbo <i>‘jam’:</i><br>\n<br>\n<i>Ili jam estis</i> <b><i>kverelintaj</i></b><i> plurajn horojn.</i>",
+		""
 	],
 	"£ita": [
 		"£ita",
@@ -546,46 +564,52 @@ g_marks.types = {
 		"Konsideru uzi -ita anstataŭ -ata. Temas pri aspekto-diferenco. Pasivaj participo kun -ata esprimas procezan (malperfektivan) aspekton, dum pasiva participo kun -ita esprimas rezultan/perfektigan aspekton. Oni povas testi la diferencon per aldono de tempoadverbialo. Proceza aspekto permesas <i>‘dum tri horoj/tagoj/jaroj ktp’.</i> sed ne <i>‘en dato/horo/jaro ktp.’,</i> kaj rezulta aspekto male. Ekz. eblas diri <i>‘la ponto estis detruita en 1944’,</i> sed ne <i>‘la ponto estis detruita dum dum 3 jaroj’,</i> ĉar oni perceptas detruadon kiel punktan eventon kun rezulto, ne kiel procezon kun daŭro.<br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/participoj\">participoj</a> (Pasivo - participelekto).",
 		"La bebo estis <span style=\"color: #ff0000\">naskata</span> [naskita] en januaro"
 	],
+	"£inta": [
+		"£inta",
+		"Perfektiva/rezulta aspekto en aktiva participo",
+		"Konsideru uzi <i>‘-inta’</i> anstataŭ <i>‘-anta’.</i> Povas temi pri aspekto-diferenco. Participo kun -a- esprimas procezan (malperfektivan) aspekton, dum participo kun -i- esprimas rezultan/perfektivan aspekton. Oni povas testi la diferencon per aldono de tempoadverbialo. Proceza aspekto permesas <i>‘dum tri horoj/tagoj/jaroj’</i> ktp., sed ne <i>‘en dato/horo/jaro’</i> ktp. Estas male ĉe rezulta (-i-) aspekto.<br>\n<br>\n<i>Ili estis ĉiam/daŭre</i> <b><i>kverelantaj</i></b><i>.</i><br>\n<br>\n<i>Ili estis</i> <span style=\"color: #ff0000\"><i>finmanĝantaj</i></span><i> (finmanĝintaj) la tutan kukon.</i><br>\n<br>\n<i>Ili jam estis</i> <span style=\"color: #ff0000\"><i>manĝantaj</i></span><i> (manĝintaj) la tutan kukon.</i><br>\n<br>\nNotu, ke foje ekzistas <i>tempa</i> klarigo por la uzo de -i-participo eĉ en normale \"perfektivema\" verbo, precipe en kombino kun la adverboj <i>‘daŭre’</i> aŭ <i>‘ofte’:</i><br>\n<br>\n<i>Drinkinta tro, li daŭre estis stumbl</i><b><i>anta</i></b><b><i>.</i></b><i></i><br>\n<br>\n<i>Li estis ofte rekomenc</i><b><i>anta</i></b><i> sian frazon.</i>",
+		""
+	],
 	"£ante": [
 		"£ante",
 		"Adverba participo (prezenco)",
-		"Ne eblas uzi ‘post’ kun infinitivo (ekz. <i>post manĝi</i>). Necesas uzi -ado <i>(post manĝado)</i> aŭ participon <i>(manĝinte).</i> Kun participo eblas rekte transpreni objekton aŭ alian dependan frazeron de la (malĝusta) infinitivo: <i>Manĝinte multe/glaciaĵon.</i>",
+		"Adverba participo (prezenco)",
 		"<span style=\"color: #ff0000\">Post diri</span> tiujn vortojn [Dirinte tiujn vortojn]"
 	],
 	"£inte": [
 		"£inte",
 		"Adverba participo (preterito)",
-		"Ne eblas uzi ‘per’ kun infinitivo (ekz. <i>per naĝi</i>). Necesas uzi -ado <i>(per naĝado)</i> aŭ participon <i>(naĝante).</i> Kun participo eblas rekte transpreni objekton aŭ alian dependan frazeron de la (malĝusta) infinitivo: <i>Naĝante longajn distancojn.</i>",
+		"<i>Ili estis jam</i> <b><i>finmanĝintaj</i></b><i> la tutan kukon.</i>",
 		"Tion mi provos atingi <span style=\"color: #ff0000\">per ekzameni</span> kelkajn slangajn esprimojn [… ekzamenante kelkajn slangajn esprimojn]"
 	],
 	"£pcp": [
 		"£pcp",
 		"Participo",
-		"Necesas uzi participon ĉi tie, ne infinitivon aŭ finitivon.",
+		"<i>Ili estis ĉiam/daŭre</i> <span style=\"color: #ff0000\"><i>kverelintaj</i></span><i> (kverelantaj).</i>",
 		"Mi estis <span style=\"color: #ff0000\">studi</span> ekonomion [Mi estis studanta ekonomion]"
 	],
 	"£adv": [
 		"£adv",
 		"Adverbo",
-		"Ĉi tie devas esti adverbo (e-vorto), kaj ne adjektivo (a-vorto). La diferenco estas, ke adjektivoj rilatas la substantivoj (o-vortoj), dum adverboj rilatas al verboj (i/as-vortoj) aŭ al la tuta frazo. Adverboj informas pri <i>kiel, kie, kiam</i> kaj <i>kiom (kiagrade).</i> Kun ĉi-lasta funkcio adverboj ankaŭ povas rilati al adjektivoj <i>(tre ĉarma, vaste konata)</i><br>\n<br>\nEkzistas en Esperanto kelkaj ne-derivitaj, \"radikaj\" adverboj <i>(tre, tro, ankaŭ, almenaŭ),</i> sed la plej multaj adverboj estas derivitaj de aliaj vortklasoj uzante e-finaĵon. Lokajn adverbojn eblas ŝangi al direktaj adverboj aldonante n-finaĵon (ekz. <i>tie – tien, hejme – hejmen</i>).<br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/adverboj\">adverboj</a>.",
+		"Adverbo",
 		"Estas <span style=\"color: #ff0000\">normala</span> ke … [Estas normale ke …]<br>\n<br>\nDu jaroj <span style=\"color: #ff0000\">antaŭ</span> [antaŭe] me estis en Islando"
 	],
 	"£adv&<num-fract>": [
 		"£adv&<num-fract>",
 		"Sintaksa problemo",
-		"Normale, la kompara <i>‘ol</i>’ bezonas \"alkroĉo\"-vorton – <i>pli ol, malpli ol, alia ol, preferi … ol.</i> Estas nekutime uzi ĝin lige al kvanto-vortoj sen aldona <i>pli/malpli</i>, ekz. <i>trioble … ol, duono … ol</i>:<br>\n<br>\n<i>La virinaj kandidatoj ricevis nur</i> <span style=\"color: #ff0000\"><i>duonon/duone</i> </span><i>da</i><i> ofertoj</i> <span style=\"color: #ff0000\"><i>ol</i></span><i> la viraj</i><br>\n<br>\n<i>La viraj kandidatoj ricevis</i> <span style=\"color: #ff0000\"><i>la duoblon/duoble</i></span><i></i> <i>da</i><i> ofertoj</i> <span style=\"color: #ff0000\"><i>ol</i></span><i> la virinaj</i><br>\n<br>\nLa plej simpla korekto estas aldoni <i>pli/malpli.</i> Samtempe necesas adverbigi la kvantovorton, se ĝi ne jam estas adverbo:<br>\n<br>\n<i>La virinaj kandidatoj ricevis (nur)</i> <span style=\"color: #008000\"><i>duone malpli</i></span><i> da ofertoj</i> <span style=\"color: #008000\"><i>ol</i></span><i> la viraj.</i><br>\n<br>\n<i>La viraj kandidatoj ricevis</i> <span style=\"color: #008000\"><i>duoble pli</i></span><i> da ofertoj</i> <span style=\"color: #008000\"><i>ol</i></span><i> la virinaj.</i><br>\n<br>\nNotu, ke devas esti <i>‘da’,</i> ne <i>‘de’</i> post la kvanto-vorto. Kaj ne forgesu forigi eventualan artikolon antaŭ adverbigita substantivo.",
+		"Notu, ke foje ekzistas tempa, ne aspekta, klarigo por la uzo de -i-participo, precipe en kombino kun nea vorto aŭ la adverbo <i>‘jam’</i> aŭ <i>‘ofte’:</i>",
 		""
 	],
 	"£adj": [
 		"£adj",
 		"Adjektivo",
-		"Ĉi tie devas esti adjektivo, uzu a-finaĵon!<br>\n<br>\nAdjektivo (a-vorto) havas du ĉefajn rolojn en la frazo: Unue, ĝi povas esti epiteto de substantivo, esprimante econ de la substantivo. Due, ĝi povas roli kiel predikativo de la subjekto aŭ de (rekta) objekto.<br>\n<br>\nEn esperanto, substantivo ne povas esti (antaŭ)epiteto de alia substantivo (kiel en la angla, ekzemple). Oni devas en tiu kazo ŝanĝi la o-finaĵon al a-finaĵo, do krei adjektivon el la substantivo. Ne eblas diri <i>‘gepatroj domo’,</i> devas esti <i>‘gepatra domo’.</i><br>\n<br>\nEn subjektpredikativo kun adjektiva signifo, ne uzu adverbon (e-vorton) anstataŭ adjektivo, krom se en la frazo mankas subjekto,. Do, diru <i>‘Li/tio/Petro estas granda’,</i> ne <i>‘Li/tio/Petro estas grande’.</i><br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/adjektivoj\">adjektivoj</a>.",
+		"Adjektivo",
 		"Tio estas <span style=\"color: #ff0000\">bone</span> [bona]<br>\n<br>\n<span style=\"color: #ff0000\">Berlino</span> Esperanto-klubo [berlina Esperanto-klubo<br>\n<br>\nLi havis du fratojn <span style=\"color: #ff0000\">muzikistojn</span> [du fratojn muzikistajn]"
 	],
 	"£noun": [
 		"£noun",
 		"Substantivo",
-		"Ĉi tie devas esti substantivo, uzu o-finaĵon, eventuale post substantiviga sufikso <i>(-ado, -eco, -ulo)</i><br>\n<br>\nSubstantivo (o-vorto) priskribas aĵon, aferon, vivantajn estaĵojn, ecojn, konceptojn ktp. Substantivo tipe rolas kiel kerno de la subjekto aŭ objekto, aŭ kiel komplemento de prepozicio.<br>\n<br>\nEĉ adjektiva aŭ adverba radikoj normale ricevas o-finaĵon, eventuale kune kun substantiviga sufikso, kiam ili aperas en \"substantiva\" loko, nome komplementas prepozicion <i>(post *malsana [malsano])</i>, sekvas artikolon aŭ estas uzataj kiel kerno en subjekto aŭ objekto. Tamen ne substantivigu adjektivon post kvantoadverbo <i>(la plej *saĝulo [saĝa]).</i><br>\n<br>\nVerboj jes povas roli kiel subjekto aŭ objekto, en infinitiva formo, sed eĉ verban radikon necesas substantivigi post artikolo kaj post multaj prepozicioj (nur <i>por, sen, anstataŭ</i> kaj <i>antaŭ ol</i> permesas infinitivon).<br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/substantivoj\">substantivoj</a>.",
+		"<i>Ili jam estis</i> <b><i>kverelintaj</i></b><i> plurajn horojn.</i>",
 		"5 metrojn de <span style=\"color: #ff0000\">longa</span> kaj 3 metrojn de <span style=\"color: #ff0000\">larĝa</span> [5 metrojn laŭ longo kaj 3 metrojn laŭ larĝo]<br>\n<br>\nBonaj <span style=\"color: #ff0000\">naĝantaj</span> [naĝantoj] povas atingi la insuleton vidalvide de la plaĝo<br>\n<br>\nLa <span style=\"color: #ff0000\">ofte</span> [ofto/ofteco] de varmondoj kreskis<br>\n<br>\nNe ludu dum <span style=\"color: #ff0000\">manĝi</span> [manĝo/manĝado]"
 	],
 	"£ordinal": [
@@ -750,6 +774,18 @@ g_marks.types = {
 		"Komoj helpas strukturigi la frazojn kaj faciligas legadon, markante subfrazojn, kunordigojn kaj listojn, aŭ por kontrastigi or reliefigi frazopartojn. Komoj ankaŭ povas esti uzataj por apartigi krominformojn aŭ materialon, kiu ne estas sintaksa parto de la frazo. Kaj foje komo estas la sola indiko, kiu distingas unu signifon de alia.<br>\n<br>\nEsperanto ne havas eksplicitajn komo-regulojn. Nek Zamenhof nek la Akademio de Esperanto provis normigi la uzon de komoj, kaj ankaŭ PMEG nur donas minimumajn konsilojn. La uzado en klasika literaturo tamen estas relative kohera kaj sekvas la tradician mezeŭropan tradicion kun t.n. gramatika komo. Tian sistemon sufiĉe detale priskribas Monato en siaj <a target=\"_blank\" href=\"https://www.monato.be/konvencioj.php#inter\">redaktoraj konvencioj</a> .",
 		"Mi ne mendis kafon<span style=\"color: #ff0000\"><b>,</b></span> <span style=\"color: #ff0000\">sed</span> teon."
 	],
+	"£insert&\"<$,>\"": [
+		"£insert&\"<$,>\"",
+		"Mankanta komo",
+		"Komoj helpas strukturigi la frazojn kaj faciligas legadon, markante subfrazojn, kunordigojn kaj listojn, aŭ por kontrastigi or reliefigi frazopartojn. Komoj ankaŭ povas esti uzataj por apartigi krominformojn aŭ materialon, kiu ne estas sintaksa parto de la frazo. Kaj foje komo estas la sola indiko, kiu distingas unu signifon de alia.<br>\n<br>\nEsperanto ne havas eksplicitajn komo-regulojn. Nek Zamenhof nek la Akademio de Esperanto provis normigi la uzon de komoj, kaj ankaŭ PMEG nur donas minimumajn konsilojn. La uzado en klasika literaturo tamen estas relative kohera kaj sekvas la tradician mezeŭropan tradicion kun t.n. gramatika komo. Tian sistemon sufiĉe detale priskribas Monato en siaj <a target=\"_blank\" href=\"https://www.monato.be/konvencioj.php#inter\">redaktoraj konvencioj</a> .",
+		"Mi ne mendis kafon<span style=\"color: #ff0000\"><b>,</b></span> <span style=\"color: #ff0000\">sed</span> teon."
+	],
+	"£insert&\",\"": [
+		"£insert&\",\"",
+		"Mankanta komo",
+		"Komoj helpas strukturigi la frazojn kaj faciligas legadon, markante subfrazojn, kunordigojn kaj listojn, aŭ por kontrastigi or reliefigi frazopartojn. Komoj ankaŭ povas esti uzataj por apartigi krominformojn aŭ materialon, kiu ne estas sintaksa parto de la frazo. Kaj foje komo estas la sola indiko, kiu distingas unu signifon de alia.<br>\n<br>\nEsperanto ne havas eksplicitajn komo-regulojn. Nek Zamenhof nek la Akademio de Esperanto provis normigi la uzon de komoj, kaj ankaŭ PMEG nur donas minimumajn konsilojn. La uzado en klasika literaturo tamen estas relative kohera kaj sekvas la tradician mezeŭropan tradicion kun t.n. gramatika komo. Tian sistemon sufiĉe detale priskribas Monato en siaj <a target=\"_blank\" href=\"https://www.monato.be/konvencioj.php#inter\">redaktoraj konvencioj</a> .",
+		"Mi ne mendis kafon<span style=\"color: #ff0000\"><b>,</b></span> <span style=\"color: #ff0000\">sed</span> teon."
+	],
 	"£comma-FSstart": [
 		"£comma-FSstart",
 		"Mankanta komo: komenco de subpropozicio",
@@ -795,7 +831,7 @@ g_marks.types = {
 	"£no-comma": [
 		"£no-comma",
 		"Troa komo",
-		"Komo en tiu loko ne estas kutima kaj povas ĝeni la legadon.<br>\n<br>\nOni uzas komon por apartigi ripetitajn (samtipajn) aŭ klarigajn frazpartojn (do ekz. en listoj kaj ĉirkaŭ apozicioj), kaj por apartigi propoziciojn, sed ne inter malsamaj frazpartoj malpli grandaj ol propozicioj, krom por marki kontraston aŭ paŭzon.<br>\n<br>\nNe uzu komon antaŭ konjunkcio, kiu kunordigas ne propoziciojn, sed nur verbojn aŭ predikatiojn kun la sama subjekto: <i>Ili aĉetis vinon</i> <span style=\"color: #ff0000\"><i>[,]</i></span><i> kaj diboĉis la tutan nokton.</i><br>\n<br>\nNe uzu komon inter subjekto kaj verbo: <i>Cezaro</i><span style=\"color: #ff0000\"><i> [,]</i></span><i> deziras lin vidi.</i><br>\n<br>\nNe uzu komon inter adjektivo kaj substantivo: <i>En tiaj kazoj rapida</i> <span style=\"color: #ff0000\"><i>[,]</i> </span><i>helpo estas necesega.</i><br>\n<br>\nNe uzu komon inter konjunkcio kaj la propozicio, kiun ĝi enkondukas – la komo devas esti <i>antaŭ</i> la konjunkcio: <i>Li diris</i><span style=\"color: #ff0000\"><i> ke</i></span><i></i> <span style=\"color: #ff0000\"><i>[,]</i></span><i> la aziaj kaj euxropaj landoj devas plifortigi cxiuflankan kunlaboron. → Li diris</i><span style=\"color: #ff0000\"><i>,</i></span><i> ke la aziaj …</i>",
+		"Komo en tiu loko ne estas kutima kaj povas ĝeni la legadon.<br>\n<br>\nOni uzas komon por apartigi ripetitajn (samtipajn) aŭ klarigajn frazpartojn (do ekz. en listoj kaj ĉirkaŭ apozicioj), kaj por apartigi propoziciojn, sed ne inter malsamaj frazpartoj malpli grandaj ol propozicioj, krom por marki kontraston aŭ paŭzon.<br>\n<br>\nNe uzu komon antaŭ konjunkcio, kiu kunordigas ne propoziciojn, sed nur verbojn aŭ predikatiojn kun la sama subjekto: <i>Ili aĉetis vinon</i> <span style=\"color: #ff0000\"><i>[,]</i></span><i> kaj diboĉis la tutan nokton.</i><br>\n<br>\nNe uzu komon inter subjekto kaj verbo: <i>Cezaro</i><span style=\"color: #ff0000\"><i> [,]</i></span><i> deziras lin vidi.</i><br>\n<br>\nNe uzu komon inter adjektivo kaj substantivo: <i>En tiaj kazoj rapida</i> <span style=\"color: #ff0000\"><i>[,]</i> </span><i>helpo estas necesega.</i><br>\n<br>\nNe uzu komon inter konjunkcio kaj la propozicio, kiun ĝi enkondukas – la komo devas esti <i>antaŭ</i> la konjunkcio: <i>Li diris</i><span style=\"color: #ff0000\"><i> ke</i></span><i></i> <span style=\"color: #ff0000\"><i>[,]</i></span><i> la aziaj kaj euxropaj landoj devas plifortigi cxiuflankan kunlaboron. → Li diris</i><span style=\"color: #ff0000\"><i>,</i></span><i> ke la aziaj …</i><br>\n<br>\nKonsideru ankaŭ ne uzi komon antaŭ listo-fina <i>‘kaj’, ‘aŭ’</i> aŭ <i>‘ktp.’</i>. Tiu komo nomiĝas ‘oksforda komo’ kaj ne estas natura en klasika Esperanto, ĉar ĝi markas (eblan) spirpaŭzeton, ne sintaksan rompon. Monato rekomendas eviti ĝin, sed ne temas pri vera eraro. Multaj homoj, precipe denaskaj parolantoj de la angla, uzas ĝin. Decidu mem – kaj poste uzu tiun komon (au ne) samdecide en la tuta teksto: <i>Li parolas la anglan, la francan</i> <span style=\"color: #ff0000\"><i>(,)</i></span><i> kaj la germanan. Vi ricevos rabaton por diversaj gazetoj, magazinoj, ĵurnaloj</i> <span style=\"color: #ff0000\"><i>(,)</i></span><i> ktp.</i>",
 		""
 	],
 	"£colon": [
@@ -935,6 +971,36 @@ g_marks.types = {
 		"Fakvorto: enŝuti/deŝuti → alŝuti/elŝuti",
 		"En komputila kunteksto, uzu <i>‘alŝuti’</i> kaj <i>‘elŝuti’</i> por metado aŭ prenado dosieroj, dokumentoj, bildoj ktp. al aŭ de servilo aŭ retejo. Ne uzu <i>‘enŝuti/deŝuti’</i> for tiu celo.<br>\n<br>\nNotu, ke <i>‘ŝuti’</i> havas pli larĝan signifon, do kompreneble vi povas ŝuti karbon, sablon aŭ rizon en ujon, aŭ de",
 		"Mi tuj <span style=\"color: #c9211e\">deŝutos</span> (elŝutos) novan version de la programo."
+	],
+	"£:BASE-artikolo": [
+		"£:BASE-artikolo",
+		"Falsa amiko – konfuzebla vortoparo: artikolo ↔ artiklo",
+		"Ne konfuzu <i>‘artikolo’</i> kaj <i>‘artiklo’.</i> La unua kutime celas skriban verkaĵon en ekz. libro aŭ gazeto, la dua signifas <i>‘varo’.</i> Oni skribas aŭ aperigas artikolojn, sed vendas aŭ aĉetas (komercajn) artiklojn.<br>\n<br>\nNotu, ke <i>‘artikolo’</i> ankaŭ povas esti gramatika esprimo (vortklaso) aŭ numerita paragrafo/sekcio en leĝo aŭ statuto.",
+		"Li verkis longan <span style=\"color: #ff0000\">artiklon</span> (artikolo) por nia revuo.<br>\n<br>\nLa firmao vendas luksajn, manfaritajn <span style=\"color: #ff0000\">artikolojn</span> (artiklojn) el diversaj metaloj."
+	],
+	"£:BASE-artiklo": [
+		"£:BASE-artiklo",
+		"Falsa amiko – konfuzebla vortoparo: artikolo ↔ artiklo",
+		"Ne konfuzu <i>‘artikolo’</i> kaj <i>‘artiklo’.</i> La unua kutime celas skriban verkaĵon en ekz. libro aŭ gazeto, la dua signifas <i>‘varo’.</i> Oni skribas aŭ aperigas artikolojn, sed vendas aŭ aĉetas (komercajn) artiklojn.<br>\n<br>\nNotu, ke <i>‘artikolo’</i> ankaŭ povas esti gramatika esprimo (vortklaso) aŭ numerita paragrafo/sekcio en leĝo aŭ statuto.",
+		"Li verkis longan <span style=\"color: #ff0000\">artiklon</span> (artikolo) por nia revuo.<br>\n<br>\nLa firmao vendas luksajn, manfaritajn <span style=\"color: #ff0000\">artikolojn</span> (artiklojn) el diversaj metaloj."
+	],
+	"£:BASE-lineara": [
+		"£:BASE-lineara",
+		"Falsa amiko – konfuzebla vortoparo: linea → lineara",
+		"La adjektivo <i>‘linea’</i> celas konduktilon, ekz. Elektran aŭ telefonan lineon. <i>‘Lineara’</i> estas matematika termino kaj rilatas al ekz. vektoraj spacoj.<br>\n<br>\nNotu, ke <i>‘linea’</i> ankaŭ povas rilati al la biologo Lineo (Linné), ekz. <i>‘linea taksonomio’, ‘linea nomo’.</i>",
+		"<span style=\"color: #ff0000\">lineaj</span> (linearaj) kombinoj de statoj"
+	],
+	"£:BASE-enlogxantaro&\"<populacioj?n?>\"": [
+		"£:BASE-enlogxantaro&\"<populacioj?n?>\"",
+		"Falsa amiko – konfuzebla vortoparo: populacio → enloĝantaro",
+		"La normala esperanta vorto por homgrupo loĝanta en lando, regiono aŭ urbo estas <i>‘enloĝantaro’.</i> La alternativa <i>‘populacio’</i> (angle: <i>population</i>) estas statistika faktermino, uzata ĉefe en sciencaj tekstoj, kaj rilate al bestoj, plantoj aŭ malsanuloj. Ne temas pri certa eraro, sed konsideru fari ŝanĝon ĉi tie.",
+		"La <span style=\"color: #ff0000\">populacio</span> (enloĝantaro) de la urbo ribelis kontraŭ la invadintoj."
+	],
+	"£:BASE-.*provajxo": [
+		"£:BASE-.*provajxo",
+		"Falsa amiko – konfuzebla vortoparo: provo → provaĵo",
+		"<i>'Provo’</i> estas ago, <i>‘provaĵo’</i> estas aĵo. Do oni legas, korektas aŭ sendas <i>‘presprovaĵon’</i> aŭ <i>‘lingvoprovaĵon’,</i> ne <i>‘presprovon’</i> aŭ <i>‘lingvoprovon’.</i>",
+		"La libro enhavis 900-radikan vortaron kaj <span style=\"color: #ff0000\">lingvoprovojn</span> (lingvoprovaĵojn)."
 	],
 	"£:BASE-rombo&\"<lozangxoj?n?>\"": [
 		"£:BASE-rombo&\"<lozangxoj?n?>\"",
@@ -1500,6 +1566,12 @@ g_marks.types = {
 		"'Animalo’ estas grupvorto por <i>‘homo’</i> plus <i>‘bestoj’.</i> Prefere uzu ĝin nur en biologia aŭ religia kunteksto por inkluzivi la homon kune kun la bestoj. En aliaj kuntekstoj, simple uzu <i>‘besto’.</i>",
 		"Ŝi amas la animalojn (bestojn) kaj fariĝis vegetarano."
 	],
+	"£x-etype-lemma&\"<antauxleg.*>\"": [
+		"£x-etype-lemma&\"<antauxleg.*>\"",
+		"Falsa amiko: antaŭlegi → laŭtlegi",
+		"Tio povas esti falsa amiko (germane: <i>vorlesen</i>). En Esperanto, <i>‘antaŭlegi’</i> logike signifus ‘legi pli frue’, ne ‘legi la alia persono’. Prefere uzu <i>‘laŭtlegi’</i> aŭ <i>‘voĉlegi’.</i>",
+		"Mi <span style=\"color: #ff0000\">antaŭlegis</span> (laŭtlegis) libron pri rangiferoj al mia filo."
+	],
 	"£:BASE-antikvo": [
 		"£:BASE-antikvo",
 		"Falsa amiko: antikveco → antikvo",
@@ -1559,6 +1631,12 @@ g_marks.types = {
 		"Falsa amiko: balanci → ekvilibrigi",
 		"En Esperanto, <i>‘balanci’</i> signifas tien-reen movon de korpoparto aŭ objekto (simile al <i>‘svingi’)</i>, sen ekvilibriga aspekto. Kun tia, uzu <i>‘ekvilibrigi’ (buĝeton, premon, pilkon sur fingro).</i> Notu ankaŭ, ke ‘<i>balanci’</i> estas transitiva! Do:<br>\n<br>\nFinfine, ni <span style=\"color: #ff0000\">balancis</span> (ekvilibrigis) la buĝeton.<br>\n<br>\nFinfine, la buĝeto <span style=\"color: #ff0000\">balancas</span> (ekvilibras).",
 		""
+	],
+	"£:BASE-inkludi&\"<cxirkauxpren.*>\"": [
+		"£:BASE-inkludi&\"<cxirkauxpren.*>\"",
+		"Falsa amiko: ĉirkaŭpreni → inkludi",
+		"En Esperanto, <i>‘ĉirkaŭpreni’</i> estas fizika ago, normale farita brake aŭ mane de homo al objekto aŭ alia homo. Prefere ne uzu la vorton kun la abstrakta signifo de <i>‘inkludi/inkluzivi’</i>",
+		"La nova ekonomia partnereco <span style=\"color: #ff0000\">ĉirkaŭprenas</span> (inkludas) 2 miliardojn da homoj."
 	],
 	"£:BASE-peti&\"<demand.*>\"": [
 		"£:BASE-peti&\"<demand.*>\"",
@@ -1722,6 +1800,12 @@ g_marks.types = {
 		"Tio estas latinida falsa amiko. En Esperanto, oni <i>esperas</i>, ke io bona okazu (angle: <i>hope</i>), dum oni <i>atendas</i> ekz. buson aŭ iun probablan okazaĵon (angle: <i>expect</i>). Ankaŭ kun tempomezuro oni uzas <i>atendi</i> (angle: <i>wait</i>)<i>:</i><br>\n<br>\n<i>Li</i> <span style=\"color: #ff0000\"><i>esperis</i></span><i> (atendis) dum 2 horoj / ĝis la kvara posttagmeze</i>",
 		""
 	],
+	"£:BASE-aserto&\"<esprimoj?n?>\"": [
+		"£:BASE-aserto&\"<esprimoj?n?>\"",
+		"Falsa amiko: esprimo → aserto",
+		"En Esperanto, <i>‘esprimo’</i> estas speciala vorto, fiksita vortumo aŭ formulo, aŭ eble vizaĝesprimo. Sed ĝi ne estas sinonimo de (ne formuleca/termina) <i>‘eldiro’</i> aŭ <i>‘aserto’.</i> Precipe kun ke-frazo ne uzu <i>‘esprimo’,</i> sed <i>‘aserto/eldiro’.</i>",
+		"Mi plurfoje aŭdis tiun <span style=\"color: #ff0000\">esprimon</span> (aserton), ke li traktas homojn kiel sklavojn."
+	],
 	"£:BASE-trompigxi&\"<fal.*>\"": [
 		"£:BASE-trompigxi&\"<fal.*>\"",
 		"Falsa amiko: fali al/por → trompiĝi de",
@@ -1769,6 +1853,12 @@ g_marks.types = {
 		"Falsa amiko: futo → piedo",
 		"En Esperanto, la vorto <i>‘futo’</i> nur funkcias kiel mezurunuo (ĉ. 33 cm). Por la korpoparto, uzu <i>‘piedo’.</i><br>\n<br>\nLa neologismo <i>futbalo</i> (piedpilkado) estas kurioza kombino el du falsaj amikoj (<i>futo</i> kaj <i>balo</i>), kiuj kune – kaj nur kune! - rehavas siajn malfalsajn signifojn de ‘piedo’ kaj ‘pilko’. Sola, ‘balo’ signifas dancfeston.",
 		"Provu stari sur unu <span style=\"color: #ff0000\">futo</span> (piedo) kaj fermu vian okulojn!"
+	],
+	"£:BASE-gasto&\"<gestoj?n?>\"": [
+		"£:BASE-gasto&\"<gestoj?n?>\"",
+		"Falsa amiko: gesto → gasto",
+		"En Esperanto, <i>‘gesto’</i> estas man- aŭ kapsigno. Ne konfuzu ĝin kun <i>‘gasto’</i> (vizitanta homo, angle: <i>guest).</i>",
+		"La gesto (gasto) estis tre malsata."
 	],
 	"£:BASE-turni&\"<gxir.*>\"": [
 		"£:BASE-turni&\"<gxir.*>\"",
@@ -1875,7 +1965,7 @@ g_marks.types = {
 	"£:BASE-landinterno": [
 		"£:BASE-landinterno",
 		"Falsa amiko: interi[eo]ro → landinterno",
-		"En Esperanto, <i>‘interioro’</i> estas endoma eco de mebloaranĝo ktp. Ne eblas uzi la vorton en la senco de <i>‘landinterno’</i> aŭ <i>‘landprofundo’</i> (angle: <i>interior,</i> germane: Hinterland). <i>‘Interiero’</i> estas misliterumo de <i>‘interioro’.</i>",
+		"En Esperanto, <i>‘interioro’</i> estas endoma eco de mebloaranĝo ktp. Ne eblas uzi la vorton en la senco de <i>‘landinterno’</i> aŭ <i>‘landprofundo’</i> (angle: <i>interior,</i> germane: Hinterland). <i>‘Interiero’</i> estas misliterumo de <i>‘interioro’.</i><br>\n<br>\nNotu ankaŭ, ke la foje uzata, germaneca <i>‘hinterlando’</i> en Esperanto estas evitinda neologismo.",
 		"Bona Espero situas en la brazila <span style=\"color: #ff0000\">interiero</span> (landinterno)"
 	],
 	"£:BASE-ekspoziciejo&\"<interpretejoj?n?>\"": [
@@ -1925,6 +2015,12 @@ g_marks.types = {
 		"Falsa amiko: ke → kiu",
 		"Ne konfuzu la konjunkcion <i>‘ke’</i> kun la relativa pronomo <i>‘kiu’.</i> Povas temi pri falsamika konfuzo, ĉar la du vortoj tradukiĝas (parte) same en kaj la franca <i>(que)</i> kaj la angla <i>(that</i>). Kaj la franca <i>‘que’</i> eĉ sonas kiel la esperanta <i>‘ke’.</i>",
 		"Tio estis la plej bela filmo <span style=\"color: #ff0000\">ke</span> (kiun) mi iam vidis."
+	],
+	"£:BASE-komiksa": [
+		"£:BASE-komiksa",
+		"Falsa amiko: komika → komiksa",
+		"En Esperanto oni distingas inter la ĝenerala vorto <i>‘komika’</i> (ridiga, amuza) kaj la literatura vorto <i>‘komiksa’,</i> kiun oni uzas pri bildstrioj, sendepende de ilia eventuala komikeco.",
+		"Mi ŝatas <span style=\"color: #ff0000\">komikajn striojn</span> (komiksajn bildstriojn)."
 	],
 	"£:BASE-konsistigi&\"<kompon.*>\"": [
 		"£:BASE-konsistigi&\"<kompon.*>\"",
@@ -2172,6 +2268,12 @@ g_marks.types = {
 		"En Esperanto, <i>‘lektor-’</i> estas substantiva radiko, kaj <i>‘lektori’</i> pli-malpli estas sinonimo de <i>‘prelegi’.</i> Prefere ne uzu la vorton kun la senco de <i>‘provlegi’</i> aŭ <i>‘revizii’,</i>",
 		"Ĉu vi povus <span style=\"color: #ff0000\">lektori</span> (provlegi) la tekston?"
 	],
+	"£:BASE-lenso&\"<lentoj?n?>\"": [
+		"£:BASE-lenso&\"<lentoj?n?>\"",
+		"Falsa amiko: lento → lenso",
+		"Ne konfuzu <i>‘lento’</i> kun <i>‘lenso’</i>. La unua estas manĝebla semo, la alia optika instrumento.",
+		"Necesas purigi la <span style=\"color: #ff0000\">lenton</span> (lenson) de via telefono."
+	],
 	"£:BASE-ligilo&\"<linkoj?n?>\"": [
 		"£:BASE-ligilo&\"<linkoj?n?>\"",
 		"Falsa amiko: linko → ligilo",
@@ -2219,6 +2321,12 @@ g_marks.types = {
 		"Falsa amiko: metodologio → metodaro",
 		"La vortoj 'metodologio’ kaj <i>‘metodiko’</i> celas la sciencon, la studadon kaj esploron de (sciencaj) metodoj. Ne konfuzu tion kun <i>‘metodoj’</i> kaj <i>‘metodaro’,</i> kie temas pri konkretaj metodoj uzataj aŭ konceptitaj por iu celo.",
 		"En la kurso oni uzos tute novan <span style=\"color: #ff0000\">metodologion</span> (metodaron)."
+	],
+	"£:BASE-gvidi&\"<moderig.*>\"": [
+		"£:BASE-gvidi&\"<moderig.*>\"",
+		"Falsa amiko: moderigi → gvidi",
+		"En Esperanto, <i>‘moderigi’</i> signifas simple ‘igi pli modera’. Oni do moderigas agojn, sintenojn aŭ la intensecon de io. Okazaĵon, spektaklon aŭ diskuton oni ne moderigas (angle: <i>moderate</i>), sed <i>‘gvidas’, ‘estras’</i> aŭ <i>‘administras’.</i>",
+		"Inter 2015 kaj 2017 ŝi <span style=\"color: #ff0000\">moderigis</span> (gvidis) la elsendon \"Voĉoj de Varsovio\"."
 	],
 	"£:BASE-sxtato&\"<nacioj?n?>\"": [
 		"£:BASE-sxtato&\"<nacioj?n?>\"",
@@ -2279,6 +2387,18 @@ g_marks.types = {
 		"Falsa amiko: oportunaĵo → ŝanco",
 		"Ĉi tie eble enŝteliĝis falsa angla amiko (<i>opportunity</i>). Konsideru uzi <i>‘sxanco’.</i> En Esperanto, <i>‘oportunaĵo’</i> estas io oportuna, faciligaĵo. Ne temas pri ebleco aŭ sxanco fari ion. Se temas pri fajna signifonuanco, kaj Lingvohelpilo ne certas, kion rekomendi. Decidu vi mem!",
 		"Tio kreas <span style=\"color: #ff0000\">oportunaĵon</span> (ŝancon) por la disvastigo de Esperanto."
+	],
+	"£:BASE-konfirmi&\"<pas.*>\"": [
+		"£:BASE-konfirmi&\"<pas.*>\"",
+		"Falsa amiko: pas(ig)i → konfirm(iĝ)i",
+		"En Esperanto, <i>‘pasi’</i> kaj <i>‘pasigi’</i> ne ekstas aplikebla al parlamentaj voĉdonoj pri leĝoj, amendoj ktp. Temas pri falsa amiko (angle: <i>pass</i>) Uzu <i>‘konfirmi’</i> kaj <i>‘konfirmiĝi’.</i>",
+		"<i>La parlamento</i> <span style=\"color: #ff0000\"><i>pasigis</i></span><i> (konfirmis) la novan leĝon kun granda plimulto.</i><br>\n<br>\n<i>Nur triaprove la amendo</i> <span style=\"color: #ff0000\"><i>pasis</i></span><i> (konfirmiĝis).</i>"
+	],
+	"£:BASE-konfirmigxi&\"<pas.*>\"": [
+		"£:BASE-konfirmigxi&\"<pas.*>\"",
+		"Falsa amiko: pas(ig)i → konfirm(iĝ)i",
+		"En Esperanto, <i>‘pasi’</i> kaj <i>‘pasigi’</i> ne ekstas aplikebla al parlamentaj voĉdonoj pri leĝoj, amendoj ktp. Temas pri falsa amiko (angle: <i>pass</i>) Uzu <i>‘konfirmi’</i> kaj <i>‘konfirmiĝi’.</i>",
+		"<i>La parlamento</i> <span style=\"color: #ff0000\"><i>pasigis</i></span><i> (konfirmis) la novan leĝon kun granda plimulto.</i><br>\n<br>\n<i>Nur triaprove la amendo</i> <span style=\"color: #ff0000\"><i>pasis</i></span><i> (konfirmiĝis).</i>"
 	],
 	"£:BASE-rajtigilo&\"<patentoj?n?>\"": [
 		"£:BASE-rajtigilo&\"<patentoj?n?>\"",
@@ -2454,6 +2574,12 @@ g_marks.types = {
 		"En Esperanto, ‘<i>referi</i>’ signifas ‘prezenti sciencan aŭ/kaj detalan raporton. La verbo estas netransitiva, do kun akuzativo aŭ ‘<i>ke</i>’ uzu ‘<i>raporti</i>’:<br>\n<br>\n<i>Li</i> <span style=\"color: #ff0000\"><i>referis</i></span><i> (raportis) la retiriĝon de la atakantoj. Li</i> <span style=\"color: #ff0000\"><i>referis</i></span><i> (raportis), ke ili retiriĝis.</i><br>\n<br>\nNe konfuzu ‘referi’ kaj ‘referenci’. Oni referencas akademian fonton, aŭtoron, verkon ktp., kaj nomo aŭ difino povas referenci al objekto, loko aŭ okazaĵo (angle: <i>refer to</i>).<br>\n<br>\n<i>La eseo multe</i> <span style=\"color: #ff0000\"><i>referis</i></span><i> (referencis) klasikajn aŭtorojn.</i><br>\n<br>\n<i>La nomo de la observatorio</i> <span style=\"color: #ff0000\"><i>referas</i></span><i> (referencas) al la varianta stelo Mira</i><br>\n<br>\n<i>La raporto</i> <span style=\"color: #ff0000\"><i>referas</i></span><i> (referencas) la aktualajn prezojn al la jaro 1990.</i><br>\n<br>\nLa franca versio de tiu falsa amiko estas <i>‘se référer à’:</i><br>\n<br>\n<i>S-ro Ceric</i><span style=\"color: #ff0000\"><i> referas sin</i> </span><i>(referencas, aludas) al glora pasinteco.</i><br>\n<br>\nAlia angla falsa amiko estas <i>‘refer sb./s.th. to’:</i><br>\n<br>\n<i>OGPU</i> <span style=\"color: #ff0000\"><i>referis</i></span><i> (plusendis) la aferon/petanton/mesaĝon al la Politburoo.</i>",
 		""
 	],
+	"£:BASE-regula&\"<regularaj?n?>\"": [
+		"£:BASE-regula&\"<regularaj?n?>\"",
+		"Falsa amiko: regulara → regula",
+		"En Esperanto, <i>‘regulara’</i> estas malofta vorto kun rilato al <i>‘regularo’</i> (aro de reguloj). Ne konfuzu tion kun <i>‘regula’</i> (okazanta kun fiksaj tempaj interspacoj). Temas pri angla falsa amiko <i>(regular</i>).",
+		"Dum la lasta jaro li faris regularajn (regulaj) vizitojn al la loka naĝejo."
+	],
 	"£x-etype-lemma&\"<rekogn.*>\"": [
 		"£x-etype-lemma&\"<rekogn.*>\"",
 		"Falsa amiko: rekogni → rekoni",
@@ -2601,7 +2727,7 @@ g_marks.types = {
 	"£:BASE-eltrovi&\"<trov.*>\"": [
 		"£:BASE-eltrovi&\"<trov.*>\"",
 		"Falsa amiko: trovi → eltrovi",
-		"En Esperanto, oni kutimo uzas <i>‘eltrovi’</i> (germane: <i>herausfinden,</i> angle: <i>find out</i>), ne <i>‘trovi’</i> kun objekta subpropozicio pri fakto aŭ solvo.",
+		"En Esperanto, oni kutime uzas <i>‘eltrovi’</i> (germane: <i>herausfinden,</i> angle: <i>find out</i>), ne <i>‘trovi’</i> kun objekta subpropozicio pri fakto aŭ solvo.",
 		"Ni devas <span style=\"color: #ff0000\">trovi</span> (eltrovi) kiel helpi."
 	],
 	"£:BASE-farigxi&\"<turnigx.*>\"": [
@@ -2646,6 +2772,12 @@ g_marks.types = {
 		"En pluraj lingvoj ekzistas adiaŭ-vortumoj kun la radiko ‘vidi’ (angle: <i>see you</i>)<i>,</i> ofte uzante refleksivon<i></i> (germane: <i>Wir sehen uns</i>, dane: <i>vi ses</i>). Sed en Esperanto, la gramatike ekvivalenta <i>‘(re)vidiĝi’</i> nur signifas ‘(re)aperi’, do fariĝi videbla, kaj <i>‘vidi sin’</i> estas ambigua kun ‘vidi sin mem’ (en ekz. spegulo).<br>\n<br>\nEn adiaŭa/renkontiĝa kunteksto tial estas preferinde diri <i>‘</i><b><i>intervidiĝi</i></b><i>’</i> anstataŭ <i>‘</i><span style=\"color: #ff0000\"><i>vidiĝi</i></span><i>’,</i> kiel proponas kaj PIV kaj ReVo), kaj eble <i>‘renkontiĝi’</i> aŭ <i>‘vidi unu la alian’</i> anstataŭ <i>‘vidi sin’.</i> La unua tamen fariĝas tre peza kun la prefikso <i>‘re-’: reintervidiĝi/o</i> (germane: Wiedersehen, dane: <i>gensyn</i>). Konsideru uzi <i>‘(re)renkontiĝi/o’.</i><br>\n<br>\nNotu la senrefleksivan escepton en la adiaŭa saluto <i>‘ĝis la revido’,</i> kaj evitu verban uzon: <i>‘… ĝis ni</i> <span style=\"color: #ff0000\"><i>revidos</i></span><i>.</i> Necesas diri <i>‘ĝis ni revidos unu la alian’, ‘ĝis ni denove/ree intervidiĝos/renkontiĝos’.</i>",
 		"Kiam ni <span style=\"color: #ff0000\">vidiĝos</span> (intervidiĝos)?<br>\n<br>\nKiam ni <span style=\"color: #ff0000\">vidos nin</span> (vidos unu la alian / renkontiĝos)?<br>\n<br>\nKiam ni <span style=\"color: #ff0000\">revidiĝos</span> (rerenkontiĝos)?<br>\n<br>\nKiam ni <span style=\"color: #ff0000\">revidos</span> (rerenkontiĝos)?"
 	],
+	"£:BASE-furora&\"<virus.*>\"": [
+		"£:BASE-furora&\"<virus.*>\"",
+		"Falsa amiko: virusa → furora",
+		"En Esperanto ne estas kutime uzi virusan metaforon por esprimi, kie io aŭ iu estas tre laŭmoda kaj pasie disvastigata. Por tio oni uzas la radikon <i>‘furor-’:</i><br>\n<br>\n<i>La kanto furoris. Ĝi estis vera furorkanto.</i><br>\n<br>\nSe entute, uzu <i>‘virusuma’</i> estas pli bona por tiu signifo ol <i>‘viruseca’,</i> dum <i>‘virusa’</i> estas medicina vorto kaj evitinda ĉi tie.<br>\n<br>\n<i>Lia jutubaĵo fariĝis ege</i> <span style=\"color: #c9211e\"><i>virusa</i></span><i> (furora).</i>",
+		""
+	],
 	"£:BASE-realtempa&\"<vivaj?n?>": [
 		"£:BASE-realtempa&\"<vivaj?n?>",
 		"Falsa amiko: viva → realtempa",
@@ -2669,6 +2801,12 @@ g_marks.types = {
 		"Formala subjekto: ĝi",
 		"Esperanto, male al la ĝermanaj lingvoj, ne uzas formalan subjekton. Ĉi tie la plej simpla korekto estas forstreki la pronomon <i>‘ĝi’.</i>",
 		"La idealo de EU estas samrajtaj lingvoj, sed en la realo <span style=\"color: #ff0000\">[ĝi]</span> ne estas tiel."
+	],
+	"£nil&\"<a>\".*&<ACC": [
+		"£nil&\"<a>\".*&<ACC",
+		"Hispanismo: a + acc",
+		"La litero <i>‘a’</i> estas erara ĉi tie, Lingvohelpilo proponas forigi ĉin. Eble vi celis la artikolon <i>‘la’</i> aŭ la prepozicion <i>‘al’,</i> sed la konteksto ne klare subtenas tion. Povas esti, ke temas pri hispanismo – markado de akuzativo uzante la (hispanan) prepozicio <i>‘a’.</i>",
+		"Mia filino banis <span style=\"color: #ff0000\">[a]</span> sian hundinon kun la hoso ."
 	],
 	"£:BASE-finia&\"<finitaj?n?>\"": [
 		"£:BASE-finia&\"<finitaj?n?>\"",
@@ -2958,6 +3096,42 @@ g_marks.types = {
 		"'<i>Provi</i>’ havas la ĉefan sencon de ‘<i>elprovi</i>’ (angle: <i>try</i>), do fari kaj vidi, ĉu funkcias. ‘<i>Pruvi</i>’ signifas ‘montri la verecon/faktecon de io (angle: <i>prove)</i>. Do, oni <i>pruvas, ke …,</i> kaj <i>provas, ĉu</i> … Kun infinitivo, nur eblas ‘<i>provi</i>’ (ekz. <i>Provu kapti min!</i>)<br>\n<br>\n<i>Li</i> <span style=\"color: #ff0000\"><i>pruvis</i></span><i> (provis), cxu la glacio estis sufiĉe dika por sketi.</i><br>\n<br>\n<i>Li</i> <span style=\"color: #ff0000\"><i>provis</i></span><i> (pruvis), ke la glacio estis sufiĉe dika por sketi.</i><br>\n<br>\nNotu, ke por manĝaĵoj kaj trinkaĵoj oni prefere uzu ‘gustumi’, ne ‘provi’:<br>\n<br>\nProvu (gustumu) mian aprikotan marmeladon!",
 		""
 	],
+	"£:BASE-anstatauxigebla": [
+		"£:BASE-anstatauxigebla",
+		"Konfuzebla vortogrupo: substitui ↔ anstataŭi ↔ anstataŭigi",
+		"En Esperanto ekzistas tri malsamaj verboj por esprimi agon aŭ eventon kun la rezulto ‘A anstataŭ B’. Plej simple, <i>‘A anstataŭas B’</i> signifas, ke A transprenas la rolon/lokon de B. Persono C, kiu kaŭzas tion, povas celi aŭ A aŭ B kiel objekton. Tiel, oni <i>‘substituas A</i> <b><i>al</i></b><i> B’,</i> sed <i>‘anstataŭigas B</i> <b><i>per</i></b><i> A’.</i><br>\n<br>\nTute logike, B ne estas <span style=\"color: #ff0000\"><i>substituebla</i></span>, sed <b><i>anstataŭigebla</i></b><b></b> (= ŝangebla), kaj A ne estas <span style=\"color: #ff0000\"><i>anstataŭigebla</i></span>, sed <b><i>substituebla</i></b> (= alternative taŭga). Analoge, ‘<i>substituito’</i> kaj <i>‘anstataŭanto’</i> celas A, ne B, kaj <i>anstataŭito</i> aŭ <i>anstataŭigito</i> celas B, ne A. Krome, nur A povas <i>substituiĝi,</i> kaj nur B povas <i>anstataŭiĝi.</i><br>\n<br>\nNotu, ke <i>‘anstataŭebla’</i> kaj <i>‘anstataŭigebla’</i> ambaŭ funkcias en preskaŭ ĉiuj kuntekstoj, kie oni celas B, ne A. La diferenco estas, ke la dua implicas la ekziston de iu ekstera, anstataŭiga aganto C, la unua ne.",
+		"Pro lia granda sperto, li estas malfacile <span style=\"color: #ff0000\">substituebla</span> (anstataŭigebla).<br>\n<br>\nOni ne ĝustatempe sukcesis <span style=\"color: #ff0000\">substitui</span> (anstataŭigi) la instruiston.<br>\n<br>\nMetila jodido similas al metano, kie unu hidrogenatomo <span style=\"color: #ff0000\">substituiĝas</span> (anstataŭiĝas) per unu jodatomo."
+	],
+	"£:BASE-anstatauxigi": [
+		"£:BASE-anstatauxigi",
+		"Konfuzebla vortogrupo: substitui ↔ anstataŭi ↔ anstataŭigi",
+		"En Esperanto ekzistas tri malsamaj verboj por esprimi agon aŭ eventon kun la rezulto ‘A anstataŭ B’. Plej simple, <i>‘A anstataŭas B’</i> signifas, ke A transprenas la rolon/lokon de B. Persono C, kiu kaŭzas tion, povas celi aŭ A aŭ B kiel objekton. Tiel, oni <i>‘substituas A</i> <b><i>al</i></b><i> B’,</i> sed <i>‘anstataŭigas B</i> <b><i>per</i></b><i> A’.</i><br>\n<br>\nTute logike, B ne estas <span style=\"color: #ff0000\"><i>substituebla</i></span>, sed <b><i>anstataŭigebla</i></b><b></b> (= ŝangebla), kaj A ne estas <span style=\"color: #ff0000\"><i>anstataŭigebla</i></span>, sed <b><i>substituebla</i></b> (= alternative taŭga). Analoge, ‘<i>substituito’</i> kaj <i>‘anstataŭanto’</i> celas A, ne B, kaj <i>anstataŭito</i> aŭ <i>anstataŭigito</i> celas B, ne A. Krome, nur A povas <i>substituiĝi,</i> kaj nur B povas <i>anstataŭiĝi.</i><br>\n<br>\nNotu, ke <i>‘anstataŭebla’</i> kaj <i>‘anstataŭigebla’</i> ambaŭ funkcias en preskaŭ ĉiuj kuntekstoj, kie oni celas B, ne A. La diferenco estas, ke la dua implicas la ekziston de iu ekstera, anstataŭiga aganto C, la unua ne.",
+		"Pro lia granda sperto, li estas malfacile <span style=\"color: #ff0000\">substituebla</span> (anstataŭigebla).<br>\n<br>\nOni ne ĝustatempe sukcesis <span style=\"color: #ff0000\">substitui</span> (anstataŭigi) la instruiston.<br>\n<br>\nMetila jodido similas al metano, kie unu hidrogenatomo <span style=\"color: #ff0000\">substituiĝas</span> (anstataŭiĝas) per unu jodatomo."
+	],
+	"£:BASE-anstatauxigxi": [
+		"£:BASE-anstatauxigxi",
+		"Konfuzebla vortogrupo: substitui ↔ anstataŭi ↔ anstataŭigi",
+		"En Esperanto ekzistas tri malsamaj verboj por esprimi agon aŭ eventon kun la rezulto ‘A anstataŭ B’. Plej simple, <i>‘A anstataŭas B’</i> signifas, ke A transprenas la rolon/lokon de B. Persono C, kiu kaŭzas tion, povas celi aŭ A aŭ B kiel objekton. Tiel, oni <i>‘substituas A</i> <b><i>al</i></b><i> B’,</i> sed <i>‘anstataŭigas B</i> <b><i>per</i></b><i> A’.</i><br>\n<br>\nTute logike, B ne estas <span style=\"color: #ff0000\"><i>substituebla</i></span>, sed <b><i>anstataŭigebla</i></b><b></b> (= ŝangebla), kaj A ne estas <span style=\"color: #ff0000\"><i>anstataŭigebla</i></span>, sed <b><i>substituebla</i></b> (= alternative taŭga). Analoge, ‘<i>substituito’</i> kaj <i>‘anstataŭanto’</i> celas A, ne B, kaj <i>anstataŭito</i> aŭ <i>anstataŭigito</i> celas B, ne A. Krome, nur A povas <i>substituiĝi,</i> kaj nur B povas <i>anstataŭiĝi.</i><br>\n<br>\nNotu, ke <i>‘anstataŭebla’</i> kaj <i>‘anstataŭigebla’</i> ambaŭ funkcias en preskaŭ ĉiuj kuntekstoj, kie oni celas B, ne A. La diferenco estas, ke la dua implicas la ekziston de iu ekstera, anstataŭiga aganto C, la unua ne.",
+		"Pro lia granda sperto, li estas malfacile <span style=\"color: #ff0000\">substituebla</span> (anstataŭigebla).<br>\n<br>\nOni ne ĝustatempe sukcesis <span style=\"color: #ff0000\">substitui</span> (anstataŭigi) la instruiston.<br>\n<br>\nMetila jodido similas al metano, kie unu hidrogenatomo <span style=\"color: #ff0000\">substituiĝas</span> (anstataŭiĝas) per unu jodatomo."
+	],
+	"£:BASE-substituebla": [
+		"£:BASE-substituebla",
+		"Konfuzebla vortogrupo: substitui ↔ anstataŭi ↔ anstataŭigi",
+		"En Esperanto ekzistas tri malsamaj verboj por esprimi agon aŭ eventon kun la rezulto ‘A anstataŭ B’. Plej simple, <i>‘A anstataŭas B’</i> signifas, ke A transprenas la rolon/lokon de B. Persono C, kiu kaŭzas tion, povas celi aŭ A aŭ B kiel objekton. Tiel, oni <i>‘substituas A</i> <b><i>al</i></b><i> B’,</i> sed <i>‘anstataŭigas B</i> <b><i>per</i></b><i> A’.</i><br>\n<br>\nTute logike, B ne estas <span style=\"color: #ff0000\"><i>substituebla</i></span>, sed <b><i>anstataŭigebla</i></b><b></b> (= ŝangebla), kaj A ne estas <span style=\"color: #ff0000\"><i>anstataŭigebla</i></span>, sed <b><i>substituebla</i></b> (= alternative taŭga). Analoge, ‘<i>substituito’</i> kaj <i>‘anstataŭanto’</i> celas A, ne B, kaj <i>anstataŭito</i> aŭ <i>anstataŭigito</i> celas B, ne A. Krome, nur A povas <i>substituiĝi,</i> kaj nur B povas <i>anstataŭiĝi.</i><br>\n<br>\nNotu, ke <i>‘anstataŭebla’</i> kaj <i>‘anstataŭigebla’</i> ambaŭ funkcias en preskaŭ ĉiuj kuntekstoj, kie oni celas B, ne A. La diferenco estas, ke la dua implicas la ekziston de iu ekstera, anstataŭiga aganto C, la unua ne.",
+		"Pro lia granda sperto, li estas malfacile <span style=\"color: #ff0000\">substituebla</span> (anstataŭigebla).<br>\n<br>\nOni ne ĝustatempe sukcesis <span style=\"color: #ff0000\">substitui</span> (anstataŭigi) la instruiston.<br>\n<br>\nMetila jodido similas al metano, kie unu hidrogenatomo <span style=\"color: #ff0000\">substituiĝas</span> (anstataŭiĝas) per unu jodatomo."
+	],
+	"£:BASE-substitui": [
+		"£:BASE-substitui",
+		"Konfuzebla vortogrupo: substitui ↔ anstataŭi ↔ anstataŭigi",
+		"En Esperanto ekzistas tri malsamaj verboj por esprimi agon aŭ eventon kun la rezulto ‘A anstataŭ B’. Plej simple, <i>‘A anstataŭas B’</i> signifas, ke A transprenas la rolon/lokon de B. Persono C, kiu kaŭzas tion, povas celi aŭ A aŭ B kiel objekton. Tiel, oni <i>‘substituas A</i> <b><i>al</i></b><i> B’,</i> sed <i>‘anstataŭigas B</i> <b><i>per</i></b><i> A’.</i><br>\n<br>\nTute logike, B ne estas <span style=\"color: #ff0000\"><i>substituebla</i></span>, sed <b><i>anstataŭigebla</i></b><b></b> (= ŝangebla), kaj A ne estas <span style=\"color: #ff0000\"><i>anstataŭigebla</i></span>, sed <b><i>substituebla</i></b> (= alternative taŭga). Analoge, ‘<i>substituito’</i> kaj <i>‘anstataŭanto’</i> celas A, ne B, kaj <i>anstataŭito</i> aŭ <i>anstataŭigito</i> celas B, ne A. Krome, nur A povas <i>substituiĝi,</i> kaj nur B povas <i>anstataŭiĝi.</i><br>\n<br>\nNotu, ke <i>‘anstataŭebla’</i> kaj <i>‘anstataŭigebla’</i> ambaŭ funkcias en preskaŭ ĉiuj kuntekstoj, kie oni celas B, ne A. La diferenco estas, ke la dua implicas la ekziston de iu ekstera, anstataŭiga aganto C, la unua ne.",
+		"Pro lia granda sperto, li estas malfacile <span style=\"color: #ff0000\">substituebla</span> (anstataŭigebla).<br>\n<br>\nOni ne ĝustatempe sukcesis <span style=\"color: #ff0000\">substitui</span> (anstataŭigi) la instruiston.<br>\n<br>\nMetila jodido similas al metano, kie unu hidrogenatomo <span style=\"color: #ff0000\">substituiĝas</span> (anstataŭiĝas) per unu jodatomo."
+	],
+	"£:BASE-substituigxi": [
+		"£:BASE-substituigxi",
+		"Konfuzebla vortogrupo: substitui ↔ anstataŭi ↔ anstataŭigi",
+		"En Esperanto ekzistas tri malsamaj verboj por esprimi agon aŭ eventon kun la rezulto ‘A anstataŭ B’. Plej simple, <i>‘A anstataŭas B’</i> signifas, ke A transprenas la rolon/lokon de B. Persono C, kiu kaŭzas tion, povas celi aŭ A aŭ B kiel objekton. Tiel, oni <i>‘substituas A</i> <b><i>al</i></b><i> B’,</i> sed <i>‘anstataŭigas B</i> <b><i>per</i></b><i> A’.</i><br>\n<br>\nTute logike, B ne estas <span style=\"color: #ff0000\"><i>substituebla</i></span>, sed <b><i>anstataŭigebla</i></b><b></b> (= ŝangebla), kaj A ne estas <span style=\"color: #ff0000\"><i>anstataŭigebla</i></span>, sed <b><i>substituebla</i></b> (= alternative taŭga). Analoge, ‘<i>substituito’</i> kaj <i>‘anstataŭanto’</i> celas A, ne B, kaj <i>anstataŭito</i> aŭ <i>anstataŭigito</i> celas B, ne A. Krome, nur A povas <i>substituiĝi,</i> kaj nur B povas <i>anstataŭiĝi.</i><br>\n<br>\nNotu, ke <i>‘anstataŭebla’</i> kaj <i>‘anstataŭigebla’</i> ambaŭ funkcias en preskaŭ ĉiuj kuntekstoj, kie oni celas B, ne A. La diferenco estas, ke la dua implicas la ekziston de iu ekstera, anstataŭiga aganto C, la unua ne.",
+		"Pro lia granda sperto, li estas malfacile <span style=\"color: #ff0000\">substituebla</span> (anstataŭigebla).<br>\n<br>\nOni ne ĝustatempe sukcesis <span style=\"color: #ff0000\">substitui</span> (anstataŭigi) la instruiston.<br>\n<br>\nMetila jodido similas al metano, kie unu hidrogenatomo <span style=\"color: #ff0000\">substituiĝas</span> (anstataŭiĝas) per unu jodatomo."
+	],
 	"£:BASE-transvivi": [
 		"£:BASE-transvivi",
 		"Konfuzebla vortogrupo: travivi – transvivi – postvivi",
@@ -3180,6 +3354,18 @@ g_marks.types = {
 		"La vorto <i>esti</i> havas multajn uzojn en Esperanto. Sed ĝi ĉiam bezonas komplementon alian ol subjekto. Povas temi pri predikativo, adverbialo aŭ helpverba komplemento:<br>\n<br>\nPredikativo: <i>li estas malsana / franco</i><br>\n<br>\nAdverbialo: <i>ŝi estas heime, estas domaĝe, ke …</i><br>\n<br>\n<i> Mi estas sen aŭto / el Turkio / por rekta demokratio</i><br>\n<br>\n<i> la libro estas de William Auld</i><br>\n<br>\nPasivo: <i>li ne estis invitita</i><br>\n<br>\nNe eblas uzi <i>‘esti’ –</i> sen predikativa komplemento – kun la signifo de <i>‘ekzisti’.</i>",
 		"Depende de via tempo-disponeblo, <span style=\"color: #ff0000\">estas</span> (ekzistas) multaj ebloj:"
 	],
+	"£:BASE-etiketo&\"<etikedon?>\"": [
+		"£:BASE-etiketo&\"<etikedon?>\"",
+		"Konfuzebla vortoparo: etikedo ↔ etiketo",
+		"'Etikedo’ estas nomŝildeto aŭ kategorinomo, dum <i>‘etiketo’</i> estas socia regularo. <i>‘Etiketo’</i> estas pli malnova vorto, kaj origine havis ambaŭ signifojn. Do oni foje vidas ĝin uzata anstataŭ <i>‘etikedo’,</i> sed Lingvohelpilo rekomendas klare distingi. Uzi <i>‘etikedo’</i> en la senco de socia regularo ĉiam estas erara.",
+		"Okazos prelego pri retpoŝta etikedo (etiketo)."
+	],
+	"£:BASE-etikedo&\"<etiketoj?n?>\"": [
+		"£:BASE-etikedo&\"<etiketoj?n?>\"",
+		"Konfuzebla vortoparo: etikedo ↔ etiketo",
+		"'Etikedo’ estas nomŝildeto aŭ kategorinomo, dum <i>‘etiketo’</i> estas socia regularo. <i>‘Etiketo’</i> estas pli malnova vorto, kaj origine havis ambaŭ signifojn. Do oni foje vidas ĝin uzata anstataŭ <i>‘etikedo’,</i> sed Lingvohelpilo rekomendas klare distingi. Uzi <i>‘etikedo’</i> en la senco de socia regularo ĉiam estas erara.",
+		"Okazos prelego pri retpoŝta etikedo (etiketo)."
+	],
 	"£:BASE-falti": [
 		"£:BASE-falti",
 		"Konfuzebla vortoparo: falti ↔ faldi",
@@ -3380,6 +3566,18 @@ g_marks.types = {
 	],
 	"£:BASE-koni&\"<sci.*>\"": [
 		"£:BASE-koni&\"<sci.*>\"",
+		"Konfuzebla vortoparo: koni ↔ scii",
+		"Oni <i>konas</i> ion aŭ iun, ĉar oni jam antaŭe renkontis, vidis aŭ spertis la koncernan aferon (germane: <i>kennen</i>). ‘<i>Scii’</i> signifas havi precisan mensan informaron pri io (germane: <i>wissen</i>). Ambaŭ verboj estas transitivaj, sed <i>‘koni’</i> havas substantivan komplementon, dum <i>scii</i> permesas infinitivon aŭ propozician <i>ke-</i>komplementon. Oni <i>konas</i> urbon aŭ personon, sed <i>scias</i> naĝi aŭ<i> scias</i> lingvon. Notu, ke oni ofte uzas <i>‘scipovi’</i> kun infinitiva aŭ substantiva komplemento, sed ne kun <i>ke-</i>propozicio.",
+		"Ĉu vi <span style=\"color: #ff0000\">konas</span> (scias/scipovas) la francan?<br>\n<br>\n<i>Mi</i> <span style=\"color: #ff0000\"><i>scias</i></span><i> (konas) bonan lignaĵiston, kiu povas helpi vin.</i>"
+	],
+	"£:BASE-ekscii&\"<ekkon.*>\"": [
+		"£:BASE-ekscii&\"<ekkon.*>\"",
+		"Konfuzebla vortoparo: koni ↔ scii",
+		"Oni <i>konas</i> ion aŭ iun, ĉar oni jam antaŭe renkontis, vidis aŭ spertis la koncernan aferon (germane: <i>kennen</i>). ‘<i>Scii’</i> signifas havi precisan mensan informaron pri io (germane: <i>wissen</i>). Ambaŭ verboj estas transitivaj, sed <i>‘koni’</i> havas substantivan komplementon, dum <i>scii</i> permesas infinitivon aŭ propozician <i>ke-</i>komplementon. Oni <i>konas</i> urbon aŭ personon, sed <i>scias</i> naĝi aŭ<i> scias</i> lingvon. Notu, ke oni ofte uzas <i>‘scipovi’</i> kun infinitiva aŭ substantiva komplemento, sed ne kun <i>ke-</i>propozicio.",
+		"Ĉu vi <span style=\"color: #ff0000\">konas</span> (scias/scipovas) la francan?<br>\n<br>\n<i>Mi</i> <span style=\"color: #ff0000\"><i>scias</i></span><i> (konas) bonan lignaĵiston, kiu povas helpi vin.</i>"
+	],
+	"£:BASE-ekscio&\"<ekkonoj?n?>\"": [
+		"£:BASE-ekscio&\"<ekkonoj?n?>\"",
 		"Konfuzebla vortoparo: koni ↔ scii",
 		"Oni <i>konas</i> ion aŭ iun, ĉar oni jam antaŭe renkontis, vidis aŭ spertis la koncernan aferon (germane: <i>kennen</i>). ‘<i>Scii’</i> signifas havi precisan mensan informaron pri io (germane: <i>wissen</i>). Ambaŭ verboj estas transitivaj, sed <i>‘koni’</i> havas substantivan komplementon, dum <i>scii</i> permesas infinitivon aŭ propozician <i>ke-</i>komplementon. Oni <i>konas</i> urbon aŭ personon, sed <i>scias</i> naĝi aŭ<i> scias</i> lingvon. Notu, ke oni ofte uzas <i>‘scipovi’</i> kun infinitiva aŭ substantiva komplemento, sed ne kun <i>ke-</i>propozicio.",
 		"Ĉu vi <span style=\"color: #ff0000\">konas</span> (scias/scipovas) la francan?<br>\n<br>\n<i>Mi</i> <span style=\"color: #ff0000\"><i>scias</i></span><i> (konas) bonan lignaĵiston, kiu povas helpi vin.</i>"
@@ -3635,6 +3833,12 @@ g_marks.types = {
 		"Konfuzebla vortoparo: poŝto → mesaĝo",
 		"'Poŝto’ estas sendosistemo aŭ sendofirmao. La vorto ankaŭ uzeblas por ĉiu el la tagaj distribuoj de poŝto, sed ne por la individua sendaĵo aŭ mesaĝo.",
 		"Mi ricevis <span style=\"color: #ff0000\">poŝton</span> (mesaĝon) de la banko."
+	],
+	"£:BASE-provizanto": [
+		"£:BASE-provizanto",
+		"Konfuzebla vortoparo: provizoro → provizanto",
+		"En Esperanto, <i>‘provizoro’</i> signifas improvizitan kaj provizoran situation. Ne uzu la vorton neologisme anstataŭ <i>‘provizanto’.</i> Ebla escepto estas uzado kiel faktermino por historia profesio.",
+		"Parolu kun la <span style=\"color: #ff0000\">provizoro</span> (provizanto) de via retpoŝtadreso."
 	],
 	"£:BASE-rakedo": [
 		"£:BASE-rakedo",
@@ -3921,13 +4125,13 @@ g_marks.types = {
 	"£:de&\"<da>\"": [
 		"£:de&\"<da>\"",
 		"Malĝusta prepozicio: da → de",
-		"La prepozicio <i>‘da’</i> havas kvantan signifon. Oni uzas ĝin post kvantaj vortoj <i>(amaso, multe, malmulte, iom, pli, malpli, milo, miliono, litro, kilogramo)</i> aŭ post ujoj aŭ aliaj vortoj, kiuj implicas kvanton <i>(glaso da teo, fasko da herboj).</i><br>\n<br>\nUzu la prepozicion <i>‘de’</i> post ne-kvantaj vortoj <i>(multaj specoj de, manko/perdo/gajno de)</i> kaj post <i>-ono (duono de kuko, 12-ono de jaro).</i> Grupvortojn eblas uzi kaj kun <i>‘de’</i> (el kio la grupo konsistas?) kaj kun <i>‘da’</i> (kiom da?): <i>grupo de/da soldatoj, reto de/da komputioj.</i><br>\n<br>\n<i>Ne eblas uzi 'da’</i> antaŭ vorto, kiu estas pronomo aŭ alimaniere jam kvante difinita, per numeralo aŭ alia kvanta epiteto: <i>glaso/multe de unu vino, glaso de ĝi, iom de kelkaj bieroj, iom de ili.</i><br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/da\">da</a>.",
+		"La prepozicio <i>‘da’</i> havas kvantan signifon. Oni uzas ĝin post kvantaj vortoj <i>(amaso, multe, malmulte, iom, pli, malpli, milo, miliono, litro, kilogramo)</i> aŭ post ujoj aŭ aliaj vortoj, kiuj implicas kvanton <i>(glaso da teo, fasko da herboj).</i><br>\n<br>\nUzu la prepozicion <i>‘de’</i> post ne-kvantaj vortoj <i>(multaj specoj de, manko/perdo/gajno de)</i> kaj post <i>-ono (duono de kuko, 12-ono de jaro).</i> Grupvortojn eblas uzi kaj kun <i>‘de’</i> (el kio la grupo konsistas?) kaj kun <i>‘da’</i> (kiom da?): <i>grupo de/da soldatoj, reto de/da komputioj.</i> La vorton <i>‘kvanto’</i> eblas uzi ne nur kiel ĝuste kvantan vorton (kun <i>da</i>), sed ankaŭ por (kvanta) eco de io (kun <i>de</i>)<i>,</i> ekz. <i>‘la kvanto de la oro en la trezorejo estas giganta.</i><br>\n<br>\n<i>Ne eblas uzi 'da’</i> antaŭ vorto, kiu estas pronomo aŭ alimaniere jam kvante difinita, per numeralo aŭ alia kvanta epiteto: <i>glaso/multe de unu vino, glaso de ĝi, iom de kelkaj bieroj, iom de ili.</i><br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/da\">da</a>.",
 		"Manko <span style=\"color: #ff0000\">da</span> [de] tempo<br>\n<br>\nMultaj specoj <span style=\"color: #ff0000\">da</span> [de] floroj"
 	],
 	"£:da&\"<de>\"": [
 		"£:da&\"<de>\"",
 		"Malĝusta prepozicio: de → da",
-		"La prepozicio <i>‘da’</i> havas kvantan signifon. Oni uzas ĝin post kvantaj vortoj <i>(amaso, multe, malmulte, iom, pli, malpli, milo, miliono, litro, kilogramo)</i> aŭ post ujoj aŭ aliaj vortoj, kiuj implicas kvanton <i>(glaso da teo, fasko da herboj).</i><br>\n<br>\nUzu la prepozicion <i>‘de’</i> post ne-kvantaj vortoj <i>(multaj specoj de, manko/perdo/gajno de)</i> kaj post <i>-ono (duono de kuko, 12-ono de jaro).</i> Grupvortojn eblas uzi kaj kun <i>‘de’</i> (el kio la grupo konsistas?) kaj kun <i>‘da’</i> (kiom da?): <i>grupo de/da soldatoj, reto de/da komputioj.</i><br>\n<br>\n<i>Ne eblas uzi 'da’</i> antaŭ vorto, kiu estas pronomo aŭ alimaniere jam kvante difinita, per numeralo aŭ alia kvanta epiteto: <i>glaso/multe de unu vino, glaso de ĝi, iom de kelkaj bieroj, iom de ili.</i><br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/da\">da</a>.",
+		"La prepozicio <i>‘da’</i> havas kvantan signifon. Oni uzas ĝin post kvantaj vortoj <i>(amaso, multe, malmulte, iom, pli, malpli, milo, miliono, litro, kilogramo)</i> aŭ post ujoj aŭ aliaj vortoj, kiuj implicas kvanton <i>(glaso da teo, fasko da herboj).</i><br>\n<br>\nUzu la prepozicion <i>‘de’</i> post ne-kvantaj vortoj <i>(multaj specoj de, manko/perdo/gajno de)</i> kaj post <i>-ono (duono de kuko, 12-ono de jaro).</i> Grupvortojn eblas uzi kaj kun <i>‘de’</i> (el kio la grupo konsistas?) kaj kun <i>‘da’</i> (kiom da?): <i>grupo de/da soldatoj, reto de/da komputioj.</i> La vorton <i>‘kvanto’</i> eblas uzi ne nur kiel ĝuste kvantan vorton (kun <i>da</i>), sed ankaŭ por (kvanta) eco de io (kun <i>de</i>)<i>,</i> ekz. <i>‘la kvanto de la oro en la trezorejo estas giganta.</i><br>\n<br>\n<i>Ne eblas uzi 'da’</i> antaŭ vorto, kiu estas pronomo aŭ alimaniere jam kvante difinita, per numeralo aŭ alia kvanta epiteto: <i>glaso/multe de unu vino, glaso de ĝi, iom de kelkaj bieroj, iom de ili.</i><br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/da\">da</a>.",
 		"Multe <span style=\"color: #ff0000\">de</span> [da] vino<br>\n<br>\nManpleno <span style=\"color: #ff0000\">de</span> [da] beroj"
 	],
 	"£:el&\"<de>\"": [
@@ -4356,6 +4560,12 @@ g_marks.types = {
 		"<i>'Respondulo’</i> estas homo, kiu dondas respondojn en enketo aŭ demandaro, dum <i>‘respondeculo’</i> estas la persono, kiu havas la respondecon (angle: <i>responsibility</i>) pri iu projekto, plano, ago, loko, infano aŭ simile.",
 		"Mi tuj volas paroli kun la <span style=\"color: #ff0000\">respondulo</span> (respondeculo)."
 	],
+	"£:la&\"<lingvoj?>\"": [
+		"£:la&\"<lingvoj?>\"",
+		"Nekutima vortumo",
+		"En Esperanto, oni kutime referencas lingvon per adjektivo kun artikolo, forlasante la vorton ‘lingvo’. Notu, ke eĉ, kiam vi jes uzas la vorton ‘lingvo’ antaŭ la lingvo-adjektivo, tamen necesas artikolo, ĉar lingvo estas unikaĵo.",
+		"Interlingvo povas esti komuna dialektlingvo kiel ezemple <span style=\"color: #ff0000\">(la) lingvo araba</span> (la araba)."
+	],
 	"£:kiel&\"kia\"": [
 		"£:kiel&\"kia\"",
 		"Nenormala uzo de korelativo: kia → kiel",
@@ -4395,7 +4605,19 @@ g_marks.types = {
 	"£:BASE-estonteco": [
 		"£:BASE-estonteco",
 		"Neologismo: futuro → estonteco",
-		"Uzi la vorton <i>‘futuro’</i> ekster la kampo de gramatiko, kun la ĝenerallingva senco de <i>‘estonteco’,</i> estas neologismo. Ne estas vera eraro, sed konsideru uzi <i>‘estonteco’</i> ĉi tie.",
+		"Uzi la vorton <i>‘futuro’</i> ekster la kampo de gramatiko, kun la ĝenerallingva senco de <i>‘estonteco’,</i> estas neologismo. Ne estas vera eraro, sed konsideru uzi <i>‘estonteco’</i> ĉi tie, aŭ <i>‘estonta/estonte’.</i>",
+		"Ni devas pensi pri la <span style=\"color: #ff0000\">futuro</span> (estonteco) de la tero kaj de niaj infanoj."
+	],
+	"£:BASE-estonta": [
+		"£:BASE-estonta",
+		"Neologismo: futuro → estonteco",
+		"Uzi la vorton <i>‘futuro’</i> ekster la kampo de gramatiko, kun la ĝenerallingva senco de <i>‘estonteco’,</i> estas neologismo. Ne estas vera eraro, sed konsideru uzi <i>‘estonteco’</i> ĉi tie, aŭ <i>‘estonta/estonte’.</i>",
+		"Ni devas pensi pri la <span style=\"color: #ff0000\">futuro</span> (estonteco) de la tero kaj de niaj infanoj."
+	],
+	"£:BASE-estonte": [
+		"£:BASE-estonte",
+		"Neologismo: futuro → estonteco",
+		"Uzi la vorton <i>‘futuro’</i> ekster la kampo de gramatiko, kun la ĝenerallingva senco de <i>‘estonteco’,</i> estas neologismo. Ne estas vera eraro, sed konsideru uzi <i>‘estonteco’</i> ĉi tie, aŭ <i>‘estonta/estonte’.</i>",
 		"Ni devas pensi pri la <span style=\"color: #ff0000\">futuro</span> (estonteco) de la tero kaj de niaj infanoj."
 	],
 	"£nil&\"<na>\"": [
@@ -4403,6 +4625,12 @@ g_marks.types = {
 		"Neologismo: na",
 		"Ŝajnas, ke vi uzis la neologisman prepozicion <i>‘na’</i> ĉi tie, ĉar sekvas vorto, kiu ne permesas la finaĵon ‘-n’. Konsideru sekvi la vastan plimulton de esperantistoj, kiuj ne markas tiun kazon per speciala prepozicio. Se vi intence uzis <i>‘na’,</i> uzu ĝin same en la tuta teksto, kaj malŝaltu la koncernan erar-markon en la agordoj de Lingvohelpilo.",
 		"Li manĝis 4 pecojn da kuko, la fratino nur [<span style=\"color: #ff0000\">na</span>] 2."
+	],
+	"£x-etype-lemma&\"<random.*>\"": [
+		"£x-etype-lemma&\"<random.*>\"",
+		"Neologismo: ramdom- → hazard-",
+		"La radiko <i>‘random-’</i> (laŭ angla <i>random</i>) ne ekzistas en Esperanto. Uzu <i>‘hazard-’</i> anstataŭe!",
+		""
 	],
 	"£:BASE-aparataro": [
 		"£:BASE-aparataro",

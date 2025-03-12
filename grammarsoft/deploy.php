@@ -55,4 +55,4 @@ echo shell_exec("rsync -avcL --delete '$cwd/' ./ '--exclude=*.php' '--exclude=*.
 echo shell_exec('git add -A .');
 echo shell_exec("git commit --all -m 'Release $version'");
 echo shell_exec('git push --all -f');
-echo shell_exec('git checkout master');
+echo shell_exec('git checkout main');

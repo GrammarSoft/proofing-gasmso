@@ -525,7 +525,7 @@ function btnIgnoreAll() {
 		++i;
 	}
 
-	matomo_event('btnIgnoreAll', ts, word);
+	matomo_event('btnIgnoreAll', ts, words);
 	cmarking.m -= 1;
 	btnNext();
 }
