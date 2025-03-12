@@ -920,7 +920,7 @@ function findToSend(prefix, word, suffix, casing, closer) {
 			}
 		}
 		else if (Const.PrefixNonLetterT.test(word)) {
-			while (p_off > 1 && Const.NonLetterT.test(t.charAt(p_off-1))) {
+			while (p_off > 1 && Const.NonLetterT.test(t.charAt(p_off-1)) && !/\s/.test(t.charAt(p_off-1))) {
 				--p_off;
 			}
 		}
@@ -936,7 +936,7 @@ function findToSend(prefix, word, suffix, casing, closer) {
 			}
 		}
 		else if (Const.SuffixNonLetterT.test(word)) {
-			while (w_off < t.length && Const.NonLetterT.test(t.charAt(w_off))) {
+			while (w_off < t.length && Const.NonLetterT.test(t.charAt(w_off)) && !/\s/.test(t.charAt(w_off))) {
 				++w_off;
 			}
 		}
