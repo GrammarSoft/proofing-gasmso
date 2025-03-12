@@ -1305,6 +1305,7 @@ function _parseResult(rv) {
 				wo.ana.pos = w.ana.pos;
 				wo.ana.func = w.ana.func;
 				wo.ana.raw = w.ana.raw;
+				wo.suggs = w.suggs;
 				wo.tid = w.tid;
 
 				w = new GS_Word(',', mw.join(' '));
