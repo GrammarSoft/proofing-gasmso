@@ -86,6 +86,10 @@ function object_join(obj, s) {
 	return object_values(obj).join(s);
 }
 
+// From https://stackoverflow.com/a/43053803/145919
+let _f = (a, b) => [].concat(...a.map(a => b.map(b => [].concat(a, b))));
+let cartesian = (a, b, ...c) => b ? cartesian(_f(a, b), ...c) : a;
+
 // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/repeat#Polyfill
 if (!String.prototype.repeat) {
 	String.prototype.repeat = function(count) {
