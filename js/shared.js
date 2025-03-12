@@ -668,7 +668,7 @@ function orderMarkings() {
 		}
 	}
 	g_marks.order = order;
-	//console.log(g_marks.order);
+	////console.log(g_marks.order);
 }
 
 function sortMarkings(a, b) {
@@ -1054,10 +1054,13 @@ function _parseResult(rv) {
 			continue;
 		}
 
+		let otxt = '';
+
 		let lines = cp.split(/\n/);
 		let id = parseInt(lines[0].replace(/^<s(.+)>$/, '$1'));
 		for (let k = to_send_b ; k<to_send_i ; ++k) {
 			if (to_send[k].i === id) {
+				otxt = to_send[k].t;
 				cache[g_tool][to_send[k].h] = {
 					tid: tid,
 					txt: $.trim(cp.replace(/^<s.+>/g, '')),
@@ -1310,6 +1313,59 @@ function _parseResult(rv) {
 			}
 			words.push(w);
 		}
+
+		// Try to fix backend's mangling of symbols, by detecting non-letters and adopting them from the input text
+		if (otxt) {
+			let rx = /^([^a-zA-Z0-9])/;
+			let good = true;
+			for (let j=0 ; j<words.length ; ++j) {
+				let w = words[j];
+				if (is_nullish(w.word) || g_marks.rx_ins.test(w.mark)) {
+					continue;
+				}
+				if (otxt.indexOf(w.word) == 0) {
+					otxt = otxt.substr(w.word.length).trim();
+				}
+				else {
+					let ws = w.word.split(/([^a-zA-Z0-9])/);
+					for (let k=0 ; k<ws.length ; ++k) {
+						if (otxt.indexOf(ws[k]) == 0) {
+							otxt = otxt.substr(ws[k].length).trim();
+						}
+						else {
+							let m = rx.exec(otxt);
+							if (m) {
+								ws[k] = m[1];
+								otxt = otxt.substr(ws[k].length).trim();
+							}
+							else {
+								good = false;
+								//console.log([w, ws, j]);
+								break;
+							}
+						}
+					}
+					if (good) {
+						let sgs = words[j].suggs.split('\t');
+						for (let k=0 ; k<sgs.length ; ++k) {
+							let sg = sgs[k].split(/([^a-zA-Z0-9])/);
+							if (sg.length === ws.length) {
+								for (let m=0 ; m<ws.length ; ++m) {
+									if (/^[^a-zA-Z0-9]$/.test(sg[m])) {
+										sg[m] = ws[m];
+									}
+								}
+								sgs[k] = sg.join('');
+							}
+						}
+						words[j].suggs = sgs.join('\t');
+						let nw = ws.join('');
+						words[j].word = nw;
+					}
+				}
+			}
+		}
+
 		if (had_mark) {
 			// First loop only handles spanning marks so they can eat types behind them
 			for (let j=0 ; j<words.length ; ++j) {
@@ -1474,7 +1530,7 @@ function _parseResult(rv) {
 					marking_ranges[j].ef_mark = marking_ranges[j].mark;
 				}
 			}
-			//console.log(marking_ranges);
+			////console.log(marking_ranges);
 
 			segment_ids[segments.length] = id;
 			segments.push(words);
@@ -1929,9 +1985,11 @@ function contentLoaded() {
 	}
 }
 
-if (document.readyState === 'loading') {
-	$(window).on('load', contentLoaded);
-}
-else {
-	contentLoaded();
+if (typeof document !== 'undefined') {
+	if (document.readyState === 'loading') {
+		$(window).on('load', contentLoaded);
+	}
+	else {
+		contentLoaded();
+	}
 }
