@@ -1223,8 +1223,8 @@ function _parseResult(rv) {
 					ws.push(nws[k]);
 				}
 
-				if (_live_options.config.opt_useDictionary && g_marks.dict.test(ws[0]) && isInDictionary(w[0])) {
-					//console.log(`Found ${w[0]} in dictionary`);
+				if (_live_options.config.opt_useDictionary && g_marks.dict.test(ws[0]) && isInDictionary(w.word)) {
+					//console.log(`Found ${w.word} in dictionary`);
 					ws = [];
 				}
 
@@ -1765,6 +1765,12 @@ function l10n_detectLanguage() {
 		l10n.lang = l10n.lang.replace(/^([^-_]+).*$/, '$1');
 	}
 	if (!l10n.s.hasOwnProperty(l10n.lang)) {
+		l10n.lang = g_options_default?.config?.opt_uiLang ?? 'en';
+	}
+	if (!l10n.s.hasOwnProperty(l10n.lang)) {
+		l10n.lang = 'en';
+	}
+	if (!l10n.s.hasOwnProperty(l10n.lang)) {
 		l10n.lang = 'da';
 	}
 	return l10n.lang;
@@ -1787,6 +1793,9 @@ function l10n_translate(s, g) {
 	let l = session.locale;
 	let t = '';
 
+	if (!l10n.s.hasOwnProperty(l)) {
+		l = 'en';
+	}
 	if (!l10n.s.hasOwnProperty(l)) {
 		l = 'da';
 	}
