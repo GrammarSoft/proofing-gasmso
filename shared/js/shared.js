@@ -408,6 +408,7 @@ let g_marks = {
 	dict: {},
 };
 
+let segments_i = 0;
 let segments = [];
 let segment_ids = [];
 let marking_ranges = [];
@@ -1630,6 +1631,7 @@ function checkParagraphs(doc) {
 	to_send = doc;
 	to_send_i = 0;
 	to_send_b = 0;
+	segments_i = 0;
 	segments = [];
 	segment_ids = [];
 	marking_ranges = [];

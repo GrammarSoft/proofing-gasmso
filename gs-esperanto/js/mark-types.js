@@ -48,6 +48,7 @@ g_marks.blue = {
 	'£ado': '£ado',
 	'£adv': '£adv',
 	'£akt': '£akt',
+	'£an': '£an',
 	'£ante': '£ante',
 	'£as': '£as',
 	'£ata': '£ata',
@@ -69,15 +70,18 @@ g_marks.blue = {
 	'£pas': '£pas',
 	'£pcp': '£pcp',
 	'£pl': '£pl',
+	'£pl-sem': '£pl-sem',
 	'£poss': '£poss',
 	'£question': '£question',
 	'£refl': '£refl',
 	'£sg': '£sg',
+	'£sg-sem': '£sg-sem',
 	'£u': '£u',
 	'£ul': '£ul',
 	'£us': '£us',
 	'£vfin': '£vfin',
 	'£warning': '£warning',
+	'£x-etype-inner-pl': '£x-etype-inner-pl',
 };
 
 g_marks.types_comma = [];
@@ -140,7 +144,7 @@ g_marks.types = {
 	],
 	"£x-etype-auxe": [
 		"£x-etype-auxe",
-		"E-finaĵo post AU",
+		"E-finaĵo post AŬ",
 		"La tempaj adverboj <i>‘baldaŭ’, ‘hodiaŭ’, ‘morgaŭ’</i> ne bezonas la adverban e-finaĵon, ĉar ili jam estas adverboj.",
 		"<span style=\"color: #ff0000\">baldaŭe</span> [baldaŭ]"
 	],
@@ -168,6 +172,12 @@ g_marks.types = {
 		"En Esperanto, oni uzas apostrofon por marki la forlason de la fina vokalo en la artikolo <i>(l’ akvo)</i> aŭ la substantiva ‘-o’ <i>(dum temp’ eterna)</i>. Uzi \"nudan\" radikon sen tiu apostrofo estas eraro.<br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/apostrofo\">apostrofo</a>.",
 		"Flavgajas <span style=\"color: #ff0000\">foliar</span> [foliar’] de helianto<br>\n<br>\nHo mia <span style=\"color: #ff0000\">kor</span> [kor’], kiam venos <span style=\"color: #ff0000\">liber</span> [liber’]"
 	],
+	"£x-etype-number": [
+		"£x-etype-number",
+		"Nombro-formato",
+		"La fundamento ne enhavas regulojn pri nombro-formato, do ĉi tie ne temas pri vera eraro, sed pri rekomendo de Lingvohelpilo, kiun vi cetere laŭplaĉe povas malŝalti en la agordoj:<br>\n<br>\n* En ne-entjeraj nombroj, uzu komon (ne punkton) por apartgi la entjeran parton de la decimala. Tio estas la tradicia uzo kaj rekomendata de <i>Monato:</i> 0,25 = 1/4<br>\n<br>\n* Uzu punkton (ne komon) por marki cifero-triopojn en grandaj nombroj: <i>5.352.714.</i> Monato rekomendas nerompeblan spacon, sed ĝi ne videblas kiel tia. Lingvohelpilo rekomendas punkton.<br>\n<br>\n<i>*</i> Uzu spacon antaŭ ‘%: <i>70,5 % de la loĝantaro</i><br>\n<br>\n* Libervole uzu streketon inter nombro kaj la adjektiva gramatika finaĵo: <i>Frederiko la 3a / 3-a, La 5an / 5-an de septembro</i>",
+		""
+	],
 	"£x-etype-hyphen": [
 		"£x-etype-hyphen",
 		"Streketo-eraro",
@@ -183,8 +193,20 @@ g_marks.types = {
 	"£x-etype-case": [
 		"£x-etype-case",
 		"Uskleco-eraro",
-		"La eraro temas pri uskleco, do ĉu la vorto literumiĝas majuskle aŭ minuskle.<br>\n<br>\nOni uzas majusklon komence de teksto aŭ frazo, kaj eblas uzi majusklon por ĉiu nova punkto en vertikala listo.<br>\n<br>\n<b>Nomoj</b> skribiĝas kun majusklo, sendepende de ĉu temas pri nomoj de personoj, bestoj, landoj, organizaĵoj, ŝipoj ktp. En nomoj konsistantaj el pluraj partoj oni uzas majusklon por la unua vorto kaj por ĉiuj semantike pezaj vortoj, normale substantivoj kaj adjektivoj. En titoloj de libroj, filmoj ktp. oni foje nur majuskligas la unuan vorton, precipe se temas pri pli longaj titoloj kun verboj kaj adverboj.<br>\n<br>\nOni normale ne uzas majusklon por la esperantaj nomoj de etnioj, besto- aŭ plantospecoj, manĝaĵoj, trinkaĵoj ktp. <i>(zebro, kverko, cidro).</i><br>\n<br>\nKelkaj homoj, laŭ angla tradicio, uzas majusklon por <b>geografiaj, naciaj kaj etniaj adjektivoj</b>, sed tio ne reflektas la originan esperantan uzon. Kiam nomoj uziĝas kiel partoj en drivaĵoj aŭ kunmetaĵoj, ili ne havas majusklon <i>(marksismo, usondevena),</i> krom se la nome videblas kiel tuto kaj estas markita per streketo.<br>\n<br>\nEblas – nedevige – uzi majusklon por <b>honoraj titoloj</b> kaj religiaj konceptoj <i>(Reĝino Elizabeta, Dio, la Virgulino, la Profeto),</i> sen normalaj titoloj kaj alparoloj estas minusklaj <i>(direktoro Jensen, onklino Maja, mia kara, vi).</i><br>\n<br>\nLiter-mallongigoj de plurpartaj nomoj kutime estas tute majusklaj <i>(UEA, UN).</i> Esceptoj estas kelkaj mallongigoj transprenitaj el aliaj lingvoj kun literuma fonetiko <i>(Usono, Komsomolo).</i><br>\n<br>\nLegu pli en la konvencioj de MONATO pri <a target=\"_blank\" href=\"https://www.monato.be/konvencioj.php#pers\">propraj nomoj</a> kaj <a target=\"_blank\" href=\"https://www.monato.be/konvencioj.php#maju\">uskleco</a>.",
+		"La eraro temas pri uskleco, do ĉu la vorto literumiĝas majuskle aŭ minuskle.<br>\n<br>\nOni uzas majusklon komence de teksto aŭ frazo, kaj eblas uzi majusklon por ĉiu nova punkto en vertikala listo.<br>\n<br>\n<b>Nomoj</b> skribiĝas kun majusklo, sendepende de ĉu temas pri nomoj de personoj, bestoj, landoj, organizaĵoj, ŝipoj ktp. En nomoj konsistantaj el pluraj partoj oni uzas majusklon por la unua vorto kaj por ĉiuj semantike pezaj vortoj, normale substantivoj kaj adjektivoj. En titoloj de libroj, filmoj ktp. oni foje nur majuskligas la unuan vorton, precipe se temas pri pli longaj titoloj kun verboj kaj adverboj.<br>\n<br>\nOni normale ne uzas majusklon por la esperantaj nomoj de etnioj, besto- aŭ plantospecoj, manĝaĵoj, trinkaĵoj ktp. <i>(zebro, kverko, cidro).</i><br>\n<br>\nKelkaj homoj, laŭ angla tradicio, uzas majusklon por <b>geografiaj, naciaj kaj etniaj adjektivoj</b>, sed tio ne reflektas la originan esperantlingvan uzon. Kiam nomoj uziĝas kiel partoj en derivaĵoj aŭ kunmetaĵoj, ili ne havas majusklon <i>(marksismo, usondevena),</i> krom se la nomo videblas kiel tuto kaj estas markita per streketo.<br>\n<br>\nEblas – nedevige – uzi majusklon por <b>honoraj titoloj</b> kaj religiaj konceptoj <i>(Reĝino Elizabeta, Dio, la Virgulino, la Profeto),</i> sen normalaj titoloj kaj alparoloj estas minusklaj <i>(direktoro Jensen, onklino Maja, mia kara, vi).</i><br>\n<br>\nLiter-mallongigoj de plurpartaj nomoj kutime estas tute majusklaj <i>(UEA, UN).</i> Esceptoj estas kelkaj mallongigoj transprenitaj el aliaj lingvoj kun literuma fonetiko <i>(Usono, Komsomolo).</i><br>\n<br>\nLegu pli en la konvencioj de MONATO pri <a target=\"_blank\" href=\"https://www.monato.be/konvencioj.php#pers\">propraj nomoj</a> kaj <a target=\"_blank\" href=\"https://www.monato.be/konvencioj.php#maju\">uskleco</a>.",
 		"La <span style=\"color: #ff0000\">Franca</span> [franca] popolo"
+	],
+	"£x-etype-adv-pl": [
+		"£x-etype-adv-pl",
+		"Pluralo en adverbo",
+		"Ne eblas uzi pluralan -j en adverboj.",
+		""
+	],
+	"£x-etype-inner-pl": [
+		"£x-etype-inner-pl",
+		"Pluralo meze de vorto",
+		"Ne eblas uzi pluralan -oj en kunmetaĵoj. Simple uzu radikon sen -oj, aŭ – antaŭ alia radiko – radikon kun liga -o.",
+		"<span style=\"color: #ff0000\"><i>libr</i></span><span style=\"color: #ff0000\"><b><i>oj</i></b></span><span style=\"color: #ff0000\"><i>vendejoj</i></span><i> [libr|oj+vendejoj] →</i> <b><i>libro</i></b><i>vendejo</i><br>\n<br>\n<span style=\"color: #ff0000\"><i>Sen</i></span><span style=\"color: #ff0000\"><i>har</i></span><span style=\"color: #ff0000\"><b><i>oj</i></b></span><span style=\"color: #ff0000\"><i>igi</i></span><i> [sen+har|oj+igi]→ sen</i><b><i>har</i></b><i>igi</i>"
 	],
 	"£x-etype-lc": [
 		"£x-etype-lc",
@@ -290,7 +312,7 @@ g_marks.types = {
 	],
 	"£green": [
 		"£green",
-		"Malgrava aŭ necerta eraro en vorto kiu ezistas kiel tia",
+		"Malgrava aŭ necerta eraro en vorto kiu ekzistas kiel tia",
 		"Povas temi pri (a) malcerta gramatika eraro, (b) tre malofta vorto kun pli normala alternativo aŭ (c) arĥaismo, neologismo, idismo aŭ simile. Malŝaltu tiun kategorion en viaj <i>personaj agordoj,</i> se vi opinias, kie tiaj markoj pli ĝenas ol helpas.",
 		"<span style=\"color: #ff0000\">ties</span> [aliula]<br>\n<br>\n<span style=\"color: #ff0000\">alpinismo</span> [alpismo]<br>\n<br>\n<span style=\"color: #ff0000\">atraktiva</span> [alloga]"
 	],
@@ -303,13 +325,13 @@ g_marks.types = {
 	"£foreign": [
 		"£foreign",
 		"Fremdvorto",
-		"Lingvohelpilo ne rekonis tiun vorton kiel esperantan, sed kredas, ke ĝi estas (akceptebla) fremdvorto. Eble temas pri pruntesprimo el alia lingvo aŭ pri citaĵo. Se temas pri unuopa vorto, eble pripensu ĉu ekzistas esperanta esprimo, kiun vi povus uzi anstataŭe.",
+		"Lingvohelpilo ne rekonis tiun vorton kiel Esperanto-vorton, sed kredas, ke ĝi estas (akceptebla) fremdvorto. Eble temas pri pruntesprimo el alia lingvo aŭ pri citaĵo. Se temas pri unuopa vorto, eble pripensu, ĉu ekzistas esperantlingva esprimo, kiun vi povus uzi anstataŭe.",
 		"Fracking"
 	],
 	"£abbreviation": [
 		"£abbreviation",
-		"Abbreviation",
-		"Lingvohelpilo pensas, ke tio estas mallongigo, kaj ne trovis certan eraron.",
+		"Mallongigo",
+		"Lingvohelpilo pensas, ke tio estas mallongigo, kaj ne trovis konfirmeblan eraron.",
 		"Ekz., inkl., k.a."
 	],
 	"£abbr-error": [
@@ -363,13 +385,13 @@ g_marks.types = {
 	"£upper": [
 		"£upper",
 		"Mankanta majuskligo",
-		"La eraro temas pri uskleco, do ĉu la vorto literumiĝas majuskle aŭ minuskle.<br>\n<br>\nOni uzas majusklon komence de teksto aŭ frazo, kaj eblas uzi majusklon por ĉiu nova punkto en vertikala listo.<br>\n<br>\n<b>Nomoj</b> skribiĝas kun majusklo, sendepende de ĉu temas pri nomoj de personoj, bestoj, landoj, organizaĵoj, ŝipoj ktp. En nomoj konsistantaj el pluraj partoj oni uzas majusklon por la unua vorto kaj por ĉiuj semantike pezaj vortoj, normale substantivoj kaj adjektivoj. En titoloj de libroj, filmoj ktp. oni foje nur majuskligas la unuan vorton, precipe se temas pri pli longaj titoloj kun verboj kaj adverboj.<br>\n<br>\nOni normale ne uzas majusklon por la esperantaj nomoj de etnioj, besto- aŭ plantospecoj, manĝaĵoj, trinkaĵoj ktp. <i>(zebro, kverko, cidro).</i><br>\n<br>\nKelkaj homoj, laŭ angla tradicio, uzas majusklon por <b>geografiaj, naciaj kaj etniaj adjektivoj</b>, sed tio ne reflektas la originan esperantan uzon. Kiam nomoj uziĝas kiel partoj en drivaĵoj aŭ kunmetaĵoj, ili ne havas majusklon <i>(marksismo, usondevena),</i> krom se la nome videblas kiel tuto kaj estas markita per streketo.<br>\n<br>\nEblas – nedevige – uzi majusklon por <b>honoraj titoloj</b> kaj religiaj konceptoj <i>(Reĝino Elizabeta, Dio, la Virgulino, la Profeto),</i> sen normalaj titoloj kaj alparoloj estas minusklaj <i>(direktoro Jensen, onklino Maja, mia kara, vi).</i><br>\n<br>\nLiter-mallongigoj de plurpartaj nomoj kutime estas tute majusklaj <i>(UEA, UN).</i> Esceptoj estas kelkaj mallongigoj transprenitaj el aliaj lingvoj kun literuma fonetiko <i>(Usono, Komsomolo).</i><br>\n<br>\nLegu pli en la konvencioj de MONATO pri <a target=\"_blank\" href=\"https://www.monato.be/konvencioj.php#pers\">propraj nomoj</a> kaj <a target=\"_blank\" href=\"https://www.monato.be/konvencioj.php#maju\">uskleco</a>.",
+		"La eraro temas pri uskleco, do ĉu la vorto literumiĝas majuskle aŭ minuskle.<br>\n<br>\nOni uzas majusklon komence de teksto aŭ frazo, kaj eblas uzi majusklon por ĉiu nova punkto en vertikala listo.<br>\n<br>\n<b>Nomoj</b> skribiĝas kun majusklo, sendepende de ĉu temas pri nomoj de personoj, bestoj, landoj, organizaĵoj, ŝipoj ktp. En nomoj konsistantaj el pluraj partoj oni uzas majusklon por la unua vorto kaj por ĉiuj semantike pezaj vortoj, normale substantivoj kaj adjektivoj. En titoloj de libroj, filmoj ktp. oni foje nur majuskligas la unuan vorton, precipe se temas pri pli longaj titoloj kun verboj kaj adverboj.<br>\n<br>\nOni normale ne uzas majusklon por la esperantaj nomoj de etnioj, besto- aŭ plantospecoj, manĝaĵoj, trinkaĵoj ktp. <i>(zebro, kverko, cidro).</i><br>\n<br>\nKelkaj homoj, laŭ angla tradicio, uzas majusklon por <b>geografiaj, naciaj kaj etniaj adjektivoj</b>, sed tio ne reflektas la originan esperantlingvan uzon. Kiam nomoj uziĝas kiel partoj en derivaĵoj aŭ kunmetaĵoj, ili ne havas majusklon <i>(marksismo, usondevena),</i> krom se la nomo videblas kiel tuto kaj estas markita per streketo.<br>\n<br>\nEblas – nedevige – uzi majusklon por <b>honoraj titoloj</b> kaj religiaj konceptoj <i>(Reĝino Elizabeta, Dio, la Virgulino, la Profeto),</i> sen normalaj titoloj kaj alparoloj estas minusklaj <i>(direktoro Jensen, onklino Maja, mia kara, vi).</i><br>\n<br>\nLiter-mallongigoj de plurpartaj nomoj kutime estas tute majusklaj <i>(UEA, UN).</i> Esceptoj estas kelkaj mallongigoj transprenitaj el aliaj lingvoj kun literuma fonetiko <i>(Usono, Komsomolo).</i><br>\n<br>\nLegu pli en la konvencioj de MONATO pri <a target=\"_blank\" href=\"https://www.monato.be/konvencioj.php#pers\">propraj nomoj</a> kaj <a target=\"_blank\" href=\"https://www.monato.be/konvencioj.php#maju\">uskleco</a>.",
 		"<span style=\"color: #ff0000\">li</span> estas en <span style=\"color: #ff0000\">alasko</span> [Li estas en Alasko]"
 	],
 	"£lower": [
 		"£lower",
 		"Nenecesa majuskligo",
-		"La eraro temas pri uskleco, do ĉu la vorto literumiĝas majuskle aŭ minuskle.<br>\n<br>\nOni uzas majusklon komence de teksto aŭ frazo, kaj eblas uzi majusklon por ĉiu nova punkto en vertikala listo.<br>\n<br>\n<b>Nomoj</b> skribiĝas kun majusklo, sendepende de ĉu temas pri nomoj de personoj, bestoj, landoj, organizaĵoj, ŝipoj ktp. En nomoj konsistantaj el pluraj partoj oni uzas majusklon por la unua vorto kaj por ĉiuj semantike pezaj vortoj, normale substantivoj kaj adjektivoj. En titoloj de libroj, filmoj ktp. oni foje nur majuskligas la unuan vorton, precipe se temas pri pli longaj titoloj kun verboj kaj adverboj.<br>\n<br>\nOni normale ne uzas majusklon por la esperantaj nomoj de etnioj, besto- aŭ plantospecoj, manĝaĵoj, trinkaĵoj ktp. <i>(zebro, kverko, cidro).</i><br>\n<br>\nKelkaj homoj, laŭ angla tradicio, uzas majusklon por <b>geografiaj, naciaj kaj etniaj adjektivoj</b>, sed tio ne reflektas la originan esperantan uzon. Kiam nomoj uziĝas kiel partoj en drivaĵoj aŭ kunmetaĵoj, ili ne havas majusklon <i>(marksismo, usondevena),</i> krom se la nome videblas kiel tuto kaj estas markita per streketo.<br>\n<br>\nEblas – nedevige – uzi majusklon por <b>honoraj titoloj</b> kaj religiaj konceptoj <i>(Reĝino Elizabeta, Dio, la Virgulino, la Profeto),</i> sen normalaj titoloj kaj alparoloj estas minusklaj <i>(direktoro Jensen, onklino Maja, mia kara, vi).</i><br>\n<br>\nLiter-mallongigoj de plurpartaj nomoj kutime estas tute majusklaj <i>(UEA, UN).</i> Esceptoj estas kelkaj mallongigoj transprenitaj el aliaj lingvoj kun literuma fonetiko <i>(Usono, Komsomolo).</i><br>\n<br>\nLegu pli en la konvencioj de MONATO pri <a target=\"_blank\" href=\"https://www.monato.be/konvencioj.php#pers\">propraj nomoj</a> kaj <a target=\"_blank\" href=\"https://www.monato.be/konvencioj.php#maju\">uskleco</a>.",
+		"La eraro temas pri uskleco, do ĉu la vorto literumiĝas majuskle aŭ minuskle.<br>\n<br>\nOni uzas majusklon komence de teksto aŭ frazo, kaj eblas uzi majusklon por ĉiu nova punkto en vertikala listo.<br>\n<br>\n<b>Nomoj</b> skribiĝas kun majusklo, sendepende de ĉu temas pri nomoj de personoj, bestoj, landoj, organizaĵoj, ŝipoj ktp. En nomoj konsistantaj el pluraj partoj oni uzas majusklon por la unua vorto kaj por ĉiuj semantike pezaj vortoj, normale substantivoj kaj adjektivoj. En titoloj de libroj, filmoj ktp. oni foje nur majuskligas la unuan vorton, precipe se temas pri pli longaj titoloj kun verboj kaj adverboj.<br>\n<br>\nOni normale ne uzas majusklon por la esperantaj nomoj de etnioj, besto- aŭ plantospecoj, manĝaĵoj, trinkaĵoj ktp. <i>(zebro, kverko, cidro).</i><br>\n<br>\nKelkaj homoj, laŭ angla tradicio, uzas majusklon por <b>geografiaj, naciaj kaj etniaj adjektivoj</b>, sed tio ne reflektas la originan esperantlingvan uzon. Kiam nomoj uziĝas kiel partoj en derivaĵoj aŭ kunmetaĵoj, ili ne havas majusklon <i>(marksismo, usondevena),</i> krom se la nomo videblas kiel tuto kaj estas markita per streketo.<br>\n<br>\nEblas – nedevige – uzi majusklon por <b>honoraj titoloj</b> kaj religiaj konceptoj <i>(Reĝino Elizabeta, Dio, la Virgulino, la Profeto),</i> sen normalaj titoloj kaj alparoloj estas minusklaj <i>(direktoro Jensen, onklino Maja, mia kara, vi).</i><br>\n<br>\nLiter-mallongigoj de plurpartaj nomoj kutime estas tute majusklaj <i>(UEA, UN).</i> Esceptoj estas kelkaj mallongigoj transprenitaj el aliaj lingvoj kun literuma fonetiko <i>(Usono, Komsomolo).</i><br>\n<br>\nLegu pli en la konvencioj de MONATO pri <a target=\"_blank\" href=\"https://www.monato.be/konvencioj.php#pers\">propraj nomoj</a> kaj <a target=\"_blank\" href=\"https://www.monato.be/konvencioj.php#maju\">uskleco</a>.",
 		"Oni diras, ke <span style=\"color: #ff0000\">Francoj</span> ne ŝatas <span style=\"color: #ff0000\">Anglan</span> manĝaĵon. [Oni diras, ke francoj ne ŝatas anglan manĝaĵon]"
 	],
 	"£question": [
@@ -384,6 +406,12 @@ g_marks.types = {
 		"Vi uzis singularon anstataŭ pluralo, mankas la finaĵo <i>‘-j’</i>.<br>\n<br>\nLingvohelpilo trovis konflikton kun alia, interdependa vorto, kiu indikas pluralon. Notu ke interdependaj substantivecaj kaj adjektivecaj vortoj (a-vortoj, numeraloj, determinaj pronomoj) devas agordi en nombro, do ne eblas diri ‘<i>granda domoj’,</i> devas esti aŭ <i>‘granda domo’</i> au <i>‘grandaj domoj’. S</i>e vi ne volas ŝanĝi la markitan singularan vorton, konsideru evantuale fari la inversan ŝanĝon (al singularo) en interdependa vorto.<br>\n<br>\nEn Esperanto, la plurala finaĵo estas ‘-j’. Legu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/singularo_pluralo\">singularo kaj pluralo</a>.",
 		"Ambaŭ <span style=\"color: #ff0000\">virino</span> [ambaŭ virinoj]<br>\n<br>\nDiferenco inter la antaŭa kaj nuna <span style=\"color: #c9211e\">versio</span> [versioj]<br>\n<br>\nManjo kaj ŝia patro estis <span style=\"color: #c9211e\">laca</span> [lacaj]"
 	],
+	"£pl-sem": [
+		"£pl-sem",
+		"Plurala signifo",
+		"Ĉi tie la semantiko de la kunteksto postulas pluralon. En kvanta kunteksto (ekz. Post <i>‘da</i>’), se ne temas pri mas-vorto, sed pri nombreblaĵo, uzu pluralon. Kelkaj aĵoj preskaŭ ĉiam aperas en multaj ekzempleroj kune (ekz. pizoj aŭ faboj) aŭ en paroj (ekz. okulvitroj). Pripensu, ĉu vi vere celis nur 1 ekzempleron.",
+		"<i>Sur la tegmento sidis multe da</i> <span style=\"color: #ff0000\"><i>kato</i></span><i> (katoj).</i><br>\n<br>\n<i>Tofuo estas manĝaĵo farita el</i> <span style=\"color: #ff0000\"><i>sojfabo</i></span><i> (sojfaboj).</i>"
+	],
 	"£xor>pl": [
 		"£xor>pl",
 		"Interdependa singularo/pluralo",
@@ -395,6 +423,12 @@ g_marks.types = {
 		"Singularo",
 		"Vi uzis pluralon anstataŭ singularo, forigu la finaĵon <i>‘-j’</i>.<br>\n<br>\nLingvohelpilo trovis konflikton kun alia, interdependa vorto, kiu indikas singularon. Notu ke interdependaj substantivecaj kaj adjektivecaj vortoj (a-vortoj, numeraloj, determinaj pronomoj) devas agordi en nombro, do ne eblas diri ‘<i>granda domoj’,</i> devas esti aŭ <i>‘granda domo’</i> au <i>‘grandaj domoj’. S</i>e vi ne volas ŝanĝi la markitan singularan vorton, konsideru evantuale fari la inversan ŝanĝon (al singularo) en interdependa vorto.<br>\n<br>\nEn Esperanto, la plurala finaĵo estas ‘-j’. Legu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/singularo_pluralo\">singularo kaj pluralo</a>.",
 		"Li estas <span style=\"color: #ff0000\">junaj</span> [li estas juna]<br>\n<br>\nĈiu el ili estis <span style=\"color: #ff0000\">kontentaj</span> [kontenta]<br>\n<br>\nLa polico estis <span style=\"color: #ff0000\">armitaj</span> [armita]"
+	],
+	"£sg-sem": [
+		"£sg-sem",
+		"Singulara signifo",
+		"Ne uzu pluralon kun singulara signifo. Pro historiaj kialoj, en multaj lingvoj, certaj \"par-simetriaj\" aŭ \"mult-eraj\" vortoj kiel <i>‘kalsono’, ‘pantalono’, ‘mono’</i> kaj <i>‘statuto’</i> estas uzataj plurale kun singulara signifo (1 vestaĵo, 1 regularo), sed estas falsamika uzo fari tion en Esperanto.<br>\n<br>\nEscepto, kie ankaŭ Esperanto uzas pluralon, estas <i>‘okulvitroj’.</i>",
+		"<i>Li vestis sin per</i> <span style=\"color: #ff0000\"><i>blankaj kalsonoj</i></span><i> (blanka kalsono) kaj</i> <span style=\"color: #ff0000\"><i>nigraj pantalonoj</i></span><i> (nigra pantalono).</i><br>\n<br>\n<i>La asocio ricevis</i> <span style=\"color: #ff0000\"><i>novajn statutojn</i></span><i> (novan statuton.</i><br>\n<br>\n<i>Mi elspezis</i> <span style=\"color: #ff0000\"><i>miajn tutajn monojn</i></span><i> (mian tutan monon).</i>"
 	],
 	"£xor>sg": [
 		"£xor>sg",
@@ -437,6 +471,12 @@ g_marks.types = {
 		"Akuzativo en rekta objekto",
 		"Mankas akuzativa -n en rekta objekto. En Esperanto, sendepende de vortordo, oni distingas objekton de subjekto per la finaĵo -n. Kutime subjekto indikas aganton aŭ kaŭzantan eventon, dum objekto indikas dependan rolon, ekz. viktimon, celon, rezulton aŭ vehiklon de ago aŭ okazaĵo. En frazo ‘A<i>-o xxxas B-on’,</i> vi povas fari teston demandante: <i>Ĉu estas A-o aŭ B-o, kiu xxxas?</i> La respondo estas la subjekto (A-o). La objekto (B-o) ne xxxas, sed estas xxxata.<br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/akuzativo\">akuzativo</a> (Objekto).",
 		"Li manĝis <span style=\"color: #ff0000\">pomo</span> [pomon]<br>\n<br>\nDu <span style=\"color: #ff0000\">jaroj</span> [jarojn] antaŭ la milito<br>\n<br>\nŜi preferas la francan kiel <span style=\"color: #ff0000\">dua lingvo</span> [kiel duan lingvon]"
+	],
+	"£acc&\"<[A-Za-z][a-z-]+’>\"": [
+		"£acc&\"<[A-Za-z][a-z-]+’>\"",
+		"Akuzativo ĉe apostrofo",
+		"Ne eblas aldoni gramatikajn finaĵojn al substantivo, kiu finiĝas per apostrofo. Uzu la ‘-o’-formon de la vorto.",
+		"Koro batas, flor’ mi ŝatas."
 	],
 	"£acc&&N<PRED": [
 		"£acc&&N<PRED",
@@ -678,6 +718,12 @@ g_marks.types = {
 		"Legu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/sufiksoj\">sufiksoj</a> (-iĝ)",
 		"Kiam <span style=\"color: #ff0000\">komencas</span> [komenciĝas] la koncerto?"
 	],
+	"£igx&\"<sent.*>\"": [
+		"£igx&\"<sent.*>\"",
+		"Transitiveco",
+		"La verbo <i>‘senti’</i> estas devige transitiva. Ne eblas uzi ĝin en la senco de ‘senti sin’ (angle: <i>I feel lucky</i>) aŭ ‘doni senton de’ (angle: <i>the water feels warm</i>). En ambaŭ kazoj eblas uzi la netransitivigan sufikson -igx.",
+		"Vi <span style=\"color: #c9211e\">sentas</span> (sentiĝas) pli bone ol hieraux, cxu?<br>\n<br>\nLa aero <span style=\"color: #c9211e\">sentas</span> (sentiĝas) pli freŝa hodiaŭ, ĉu ne?"
+	],
 	"£DEL:ig": [
 		"£DEL:ig",
 		"Forigenda afikso: -ig",
@@ -695,6 +741,12 @@ g_marks.types = {
 		"Mankanta afikso: -ul",
 		"La sufikso ‘-ul’ kreas person-vorton, kies difina eco estas la radiko de la derivaĵo, ofte – sed ne nepre – adjektivo, ekz. <i>saĝa → saĝulo, ŝako → ŝakulo.</i> Ankaŭ eblas uzi ‘-ul’ por ŝipoj <i>(tri|mast|ulo).</i> Notu, ke simpla substantivigo de adjektivo (do sen ‘-ul’) plej ofte kreas eco-vorton, ne person-vorton <i>(longa → longo ~ longeco, alta → alto → alteco).</i><br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/sufiksoj\">sufiksoj</a> (-ul)",
 		"Li estas <span style=\"color: #ff0000\">genio</span> [geniulo]"
+	],
+	"£an": [
+		"£an",
+		"Mankanta afikso: -an",
+		"La sufikso ‘-an’ kreas, post nomo-radiko, person-vorton, kies difina eco estas aparteneco al la radikaj loko, komunumo, ismo aŭ famulo. Do:<br>\n<br>\n<i>Usonano =</i> enloĝanto de Usono<br>\n<br>\n<i>hamburgano =</i> enloĝanto de Hamburgo<br>\n<br>\n<i>kristano</i> = sekvanto de Kristo<br>\n<br>\n<i>islamano</i> = sekvanto de islamo",
+		""
 	],
 	"£ulino": [
 		"£ulino",
@@ -768,6 +820,12 @@ g_marks.types = {
 		"Lingvohelpilo pensas, ke komenciĝas nova frazo post tiu vorto. Eble mankas frazpunkto aŭ alia apartigilo (dupunkto, liniorompo aŭ similie). Se vere komenciĝas nova frazo ĉi tie, kontrolu ĉu la venonta vorto estas majuskla.",
 		"Li bedaŭrinde ne povas <span style=\"color: #ff0000\">veni</span> [veni.] Li estas malsana."
 	],
+	"£headstop": [
+		"£headstop",
+		"Mankanta frazapartigilo post titolo a.s.",
+		"Lingvohelpilo pensas, ke komenciĝas nova frazo post tiu vorto. Eble mankas apartigilo (dupunkto, liniorompo aŭ similie) post titolo aŭ simile.",
+		"<span style=\"color: #c9211e\">Sociogeografio</span> En la jaro 2000 en la komunumo vivis 12356 personoj"
+	],
 	"£comma": [
 		"£comma",
 		"Mankanta komo",
@@ -789,7 +847,7 @@ g_marks.types = {
 	"£comma-FSstart": [
 		"£comma-FSstart",
 		"Mankanta komo: komenco de subpropozicio",
-		"Ĉi tie komenciĝas subpropozicio. Metu komon por faciligi legadon. En Esperanto, subpropozicio normale komenciĝas per subjunkcio (subordiga konjunkcio, ekz. <i>ke, kvankam, se, kiam, ĉu</i>), relativa pronomo <i>(kiu, kie, kies)</i> aŭ demandovorto (ajna <i>ki-</i>vorto, <i>cxu</i>).<br>\n<br>\nEsperanto ne havas eksplicitajn komo-regulojn, sed la uzado en klasika literaturo tamen estas relative kohera kaj sekvas la tradician mezeŭropan tradicion kun t.n. gramatika komo, kiu celas faciligi legadon markante la limojn inter propozicioj kaj subpropozicioj. Tian sistemon sufiĉe detale priskribas Monato en siaj <a target=\"_blank\" href=\"https://www.monato.be/konvencioj.php#inter\">redaktoraj konvencioj</a> .",
+		"Ĉi tie komenciĝas subpropozicio. Metu komon por faciligi legadon. En Esperanto, subpropozicio normale komenciĝas per subjunkcio (subordiga konjunkcio, ekz. <i>ke, kvankam, se, kiam, ĉu</i>), relativa pronomo <i>(kiu, kie, kies)</i> aŭ demandovorto (ajna <i>ki-</i>vorto, <i>ĉu</i>).<br>\n<br>\nEsperanto ne havas eksplicitajn komo-regulojn, sed la uzado en klasika literaturo tamen estas relative kohera kaj sekvas la tradician mezeŭropan tradicion kun t.n. gramatika komo, kiu celas faciligi legadon markante la limojn inter propozicioj kaj subpropozicioj. Tian sistemon sufiĉe detale priskribas Monato en siaj <a target=\"_blank\" href=\"https://www.monato.be/konvencioj.php#inter\">redaktoraj konvencioj</a> .",
 		"Mi kredas<span style=\"color: #ff0000\"><b>,</b></span> <span style=\"color: #ff0000\">ke</span> necesas ripari la tegmenton."
 	],
 	"£comma-FSend": [
@@ -806,8 +864,8 @@ g_marks.types = {
 	],
 	"£comma-FMco": [
 		"£comma-FMco",
-		"Komo inter cxefpropozicioj",
-		"Tiu komo markas la limon inter du cxefpropozicioj, aŭ la komencon de nova cxefpropozicio pos subpropozicio apartenanta al alia, antaŭa cxefpropozicio. Uzu komon antaŭ la konjunkcioj ‘<i>kaj’, ‘aŭ’</i> aŭ<i> ‘nek’,</i> kiam ili kunordigas tutajn propoziciojn, sed ne, kiam ili kunordigas aliajn, pli etajn frazpartojn (substantivajn, adjektivajn, adverbajn aŭ prepoziciajn). Kompare, la kontrastiga konjunkcio ‘<i>sed’</i> ĉiam markas fortan rompon en la frazofluon kaj meritas komon en ajna kazo.<br>\n<br>\nEsperanto ne havas eksplicitajn komo-regulojn, sed la uzado en klasika literaturo tamen estas relative kohera kaj sekvas la tradician mezeŭropan tradicion kun t.n. gramatika komo, kiu celas faciligi legadon markante la limojn inter propozicioj kaj subpropozicioj. Tian sistemon sufiĉe detale priskribas Monato en siaj <a target=\"_blank\" href=\"https://www.monato.be/konvencioj.php#inter\">redaktoraj konvencioj</a> .",
+		"Komo inter ĉefpropozicioj",
+		"Tiu komo markas la limon inter du ĉefpropozicioj, aŭ la komencon de nova ĉefpropozicio post subpropozicio apartenanta al alia, antaŭa ĉefpropozicio. Uzu komon antaŭ la konjunkcioj ‘<i>kaj’, ‘aŭ’</i> aŭ<i> ‘nek’,</i> kiam ili kunordigas tutajn propoziciojn, sed ne, kiam ili kunordigas aliajn, pli etajn frazpartojn (substantivajn, adjektivajn, adverbajn aŭ prepoziciajn). Kompare, la kontrastiga konjunkcio ‘<i>sed’</i> ĉiam markas fortan rompon en la frazofluon kaj meritas komon en ajna kazo.<br>\n<br>\nEsperanto ne havas eksplicitajn komo-regulojn, sed la uzado en klasika literaturo tamen estas relative kohera kaj sekvas la tradician mezeŭropan tradicion kun t.n. gramatika komo, kiu celas faciligi legadon markante la limojn inter propozicioj kaj subpropozicioj. Tian sistemon sufiĉe detale priskribas Monato en siaj <a target=\"_blank\" href=\"https://www.monato.be/konvencioj.php#inter\">redaktoraj konvencioj</a> .",
 		"Finfine la pluvo ĉesis<span style=\"color: #ff0000\"><b>,</b></span> <span style=\"color: #ff0000\">kaj</span> la suno reaperis."
 	],
 	"£comma-FSco": [
@@ -827,6 +885,12 @@ g_marks.types = {
 		"Apozicia komo",
 		"Oni kutime metas komon ĉirkaŭ apozicio por indiki, ke temas pri krominformo, do ekzemple post substantiva vortgrupo kiu jam referencas unikan individuon:<br>\n<br>\n<i>Lia patrino</i><span style=\"color: #ff0000\"><i>, Emilia</i></span><i> Maribo</i><span style=\"color: #ff0000\"><i>, ofertis</i></span><i> …</i> (nur povas temi pri unu patrino)<br>\n<br>\nAŭ ĉe precizigoj:<br>\n<br>\n<i>Alia esploristo</i><span style=\"color: #ff0000\"><i>, Zongyu</i></span><i> Yue</i><span style=\"color: #ff0000\"><i>, opinias</i> </span><i>…</i> (la nomo estas precizigo, ne nepre necesa)<br>\n<br>\nNe uzu apozician komon, kiam la ĉemetita vorto estas necesa struktura parto de substantiva vortgrupo, tipe post artikolo kaj kategoria vorto:<br>\n<br>\n<i>La usona nacia parko</i> <span style=\"color: #ff0000\"><i>[,]</i></span><i> Yellowstone</i> <span style=\"color: #ff0000\"><i>[,]</i></span><i> estas ...</i> (La artikolo implicas, ke temas pri difinita parko, sed tio nur havas sencon kune kun la nomo).<br>\n<br>\nVi povas testi la neceson de apoziciaj komoj forigante la ĉemetaĵon – se la frazo funkcias bone ankaŭ sen ĝi, necesas meti komojn.",
 		""
+	],
+	"£comma-tagquest": [
+		"£comma-tagquest",
+		"Refrendemanda komo",
+		"Refrendemandoj estas aldoneblaj fine de konstataj aŭ demandaj frazoj kaj konsistas el la konjunkcio <i>‘ĉu’</i> plus eventuale 1-2 aliaj vortoj, kutime adverboj aŭ pronomoj. Oni uzas refrendemandojn por peti konfirmon aŭ malkonfirmon de la alparolato, aŭ simple por antaŭenigi komunikadon. Refrendemandoj estas senverbaj kaj ne estas plenaj subpropozicioj. Sed ili ankaŭ ne estas integra parto de la ĉeffrazo, do necesas apartigi ilin per komo:",
+		"Vi jam ricevis tiun dokumenton<span style=\"color: #c9211e\">, ĉu ne</span>?<br>\n<br>\nMi venos morgaŭ je la dua<span style=\"color: #c9211e\">, ĉu</span> <span style=\"color: #c9211e\">bone</span>?"
 	],
 	"£no-comma": [
 		"£no-comma",
@@ -990,11 +1054,11 @@ g_marks.types = {
 		"La adjektivo <i>‘linea’</i> celas konduktilon, ekz. Elektran aŭ telefonan lineon. <i>‘Lineara’</i> estas matematika termino kaj rilatas al ekz. vektoraj spacoj.<br>\n<br>\nNotu, ke <i>‘linea’</i> ankaŭ povas rilati al la biologo Lineo (Linné), ekz. <i>‘linea taksonomio’, ‘linea nomo’.</i>",
 		"<span style=\"color: #ff0000\">lineaj</span> (linearaj) kombinoj de statoj"
 	],
-	"£:BASE-enlogxantaro&\"<populacioj?n?>\"": [
-		"£:BASE-enlogxantaro&\"<populacioj?n?>\"",
+	"£:BASE-logxantaro&\"<populacioj?n?>\"": [
+		"£:BASE-logxantaro&\"<populacioj?n?>\"",
 		"Falsa amiko – konfuzebla vortoparo: populacio → enloĝantaro",
-		"La normala esperanta vorto por homgrupo loĝanta en lando, regiono aŭ urbo estas <i>‘enloĝantaro’.</i> La alternativa <i>‘populacio’</i> (angle: <i>population</i>) estas statistika faktermino, uzata ĉefe en sciencaj tekstoj, kaj rilate al bestoj, plantoj aŭ malsanuloj. Ne temas pri certa eraro, sed konsideru fari ŝanĝon ĉi tie.",
-		"La <span style=\"color: #ff0000\">populacio</span> (enloĝantaro) de la urbo ribelis kontraŭ la invadintoj."
+		"La normala esperanta vorto por homgrupo loĝanta en lando, regiono aŭ urbo estas <i>‘loĝantaro’.</i> La alternativa <i>‘populacio’</i> (angle: <i>population</i>) estas statistika faktermino, uzata ĉefe en sciencaj tekstoj, kaj rilate al bestoj, plantoj aŭ malsanuloj. Ne temas pri certa eraro, sed konsideru fari ŝanĝon ĉi tie.",
+		"La <span style=\"color: #ff0000\">populacio</span> (loĝantaro) de la urbo ribelis kontraŭ la invadintoj."
 	],
 	"£:BASE-.*provajxo": [
 		"£:BASE-.*provajxo",
@@ -1268,6 +1332,12 @@ g_marks.types = {
 	],
 	"£:BASE-regi&\"<kontrol.*>\"r": [
 		"£:BASE-regi&\"<kontrol.*>\"r",
+		"Falsa amiko / konfuzebla vortoparo: kontroli → regi",
+		"Oni <i>kontrolas,</i> ĉu io estas en ordo kaj laŭ supozo (angle: <i>check</i>), kaj en tiu senco eblas kontroli fakton, personon, spezkalkulon ktp. Sed en Esperanto ne eblas uzi la vorto kun la senco ‘regi/direkti’ (angle: <i>control</i>):",
+		"La rebeloj <span style=\"color: #ff0000\">kontrolis</span> (regis) la orientan parton de la lando."
+	],
+	"£:BASE-regilo&\"<kontroliloj?n?>\"": [
+		"£:BASE-regilo&\"<kontroliloj?n?>\"",
 		"Falsa amiko / konfuzebla vortoparo: kontroli → regi",
 		"Oni <i>kontrolas,</i> ĉu io estas en ordo kaj laŭ supozo (angle: <i>check</i>), kaj en tiu senco eblas kontroli fakton, personon, spezkalkulon ktp. Sed en Esperanto ne eblas uzi la vorto kun la senco ‘regi/direkti’ (angle: <i>control</i>):",
 		"La rebeloj <span style=\"color: #ff0000\">kontrolis</span> (regis) la orientan parton de la lando."
@@ -1604,14 +1674,20 @@ g_marks.types = {
 	],
 	"£:BASE-partopreni": [
 		"£:BASE-partopreni",
-		"Falsa amiko: atendi → partopreni/ĉeesti",
-		"En Esperanto, oni <i>atendas</i> ekz. alvenon de buso aŭ amiko (angle: <i>wait [for])</i>, dum oni <i>partoprenas</i> en inaŭguro aŭ<i> ĉeestas</i> feston (angle: <span style=\"color: #0000ff\"><i>attend</i></span><i>).</i>Trovu difinojn kaj ekzemplojn en <a target=\"_blank\" href=\"https://reta-vortaro.de/\">ReVo</a>!",
+		"Falsa amiko: atendi → partopreni/ĉeesti/frekventi",
+		"En Esperanto, oni <i>atendas</i> ekz. alvenon de buso aŭ amiko (angle: <i>wait [for])</i>, dum oni <i>partoprenas</i> en inaŭguro, <i>ĉeestas</i> feston aŭ <i>frekventas</i> lernejon (angle: <span style=\"color: #0000ff\"><i>attend</i></span><i>).</i>Trovu difinojn kaj ekzemplojn en <a target=\"_blank\" href=\"https://reta-vortaro.de/\">ReVo</a>!",
 		""
 	],
 	"£:BASE-ĉeesti": [
 		"£:BASE-ĉeesti",
-		"Falsa amiko: atendi → partopreni/ĉeesti",
-		"En Esperanto, oni <i>atendas</i> ekz. alvenon de buso aŭ amiko (angle: <i>wait [for])</i>, dum oni <i>partoprenas</i> en inaŭguro aŭ<i> ĉeestas</i> feston (angle: <span style=\"color: #0000ff\"><i>attend</i></span><i>).</i>Trovu difinojn kaj ekzemplojn en <a target=\"_blank\" href=\"https://reta-vortaro.de/\">ReVo</a>!",
+		"Falsa amiko: atendi → partopreni/ĉeesti/frekventi",
+		"En Esperanto, oni <i>atendas</i> ekz. alvenon de buso aŭ amiko (angle: <i>wait [for])</i>, dum oni <i>partoprenas</i> en inaŭguro, <i>ĉeestas</i> feston aŭ <i>frekventas</i> lernejon (angle: <span style=\"color: #0000ff\"><i>attend</i></span><i>).</i>Trovu difinojn kaj ekzemplojn en <a target=\"_blank\" href=\"https://reta-vortaro.de/\">ReVo</a>!",
+		""
+	],
+	"£:BASE-frekventi": [
+		"£:BASE-frekventi",
+		"Falsa amiko: atendi → partopreni/ĉeesti/frekventi",
+		"En Esperanto, oni <i>atendas</i> ekz. alvenon de buso aŭ amiko (angle: <i>wait [for])</i>, dum oni <i>partoprenas</i> en inaŭguro, <i>ĉeestas</i> feston aŭ <i>frekventas</i> lernejon (angle: <span style=\"color: #0000ff\"><i>attend</i></span><i>).</i>Trovu difinojn kaj ekzemplojn en <a target=\"_blank\" href=\"https://reta-vortaro.de/\">ReVo</a>!",
 		""
 	],
 	"£:BASE-travivi&\"<atest.*>\"": [
@@ -1715,6 +1791,12 @@ g_marks.types = {
 		"Falsa amiko: digna → meritanta",
 		"La vorto <i>‘digna’</i> signifas ‘meritanta respekton’ (angle: <i>dignified,</i> germane: <i>würdig</i>). Prefere ne uzu ĝin transitive, kun infinitivo indikanta, kion oni meritas. Por tiu senco, rekte uzu <i>‘meritanta’</i> aŭ ‘<i>kapabla/inda’.</i> Povas temi pri germana falsa amiko. PIV nomas tiun uzon ‘evitinda’.",
 		"Tiam oni vivis por esti <span style=\"color: #ff0000\">digna</span> (meritanta) eniri paradizon"
+	],
+	"£:BASE-rekte&\"<direkte>\"": [
+		"£:BASE-rekte&\"<direkte>\"",
+		"Falsa amiko: direkte → rekte",
+		"'Direkte (al)’ signifas ‘en la direkto de’ (angle: <i>in the direction of</i>), dum <i>‘rekte’</i> signifas ‘senpere’ (angle: <i>directly</i>).",
+		"Ŝi hontis , ne volante rigardi Natalion <span style=\"color: #c9211e\">direkte</span> (rekte) en la okulojn"
 	],
 	"£:BASE-fako&\"<disciplin.*>\"": [
 		"£:BASE-fako&\"<disciplin.*>\"",
@@ -1905,7 +1987,7 @@ g_marks.types = {
 	"£:BASE-jxus&\"<gxuste>\"": [
 		"£:BASE-jxus&\"<gxuste>\"",
 		"Falsa amiko: ĝuste → ĵus",
-		"'Ĝuste’ signifas ‘senerare’. La similsona angla <i>‘just’</i> tradukiĝas aŭ kiel <i>‘juste’</i> (= laŭregule) aŭ kiel <i>‘jus’</i> (= antaŭ tre mallonga tempo).",
+		"'Ĝuste’ signifas ‘senerare’. La similsona angla <i>‘just’</i> tradukiĝas aŭ kiel <i>‘juste’</i> (= laŭregule) aŭ kiel <i>‘jus’</i> (= antaŭ tre mallonga tempo).<br>\n<br>\nNotu, ke <i>‘ĝuste’</i> povas tamen havi ankaŭ tempan signifon:<br>\n<br>\nKiam la amiko alvenis, ŝi ĝuste estis trinkanta teon / havis alian gaston<br>\n<br>\nSed temas pri samtempeco, male al <i>‘jus’,</i> kiu ĉiam implicas antaŭtempecon.",
 		"Mi <span style=\"color: #ff0000\">ĝuste</span> (ĵus) alvenis de la flughaveno."
 	],
 	"£:BASE-ŝtatestro&\"<guvernisto>\"": [
@@ -1986,6 +2068,12 @@ g_marks.types = {
 		"Parlamento havas <i>‘ĉambrojn’,</i> ne <i>‘kamerojn’.</i>",
 		""
 	],
+	"£:BASE-cxefurbo": [
+		"£:BASE-cxefurbo",
+		"Falsa amiko: kapitalo → ĉefurbo",
+		"En Esperanto, <i>‘kapitalo’</i> estas monsumo. Ne konfuzu ĝin kun la vorto <i>‘ĉefurbo’</i> (angle: <i>capital</i>).",
+		"Li loĝas en la <span style=\"color: #c9211e\">kapitalo</span> (ĉefurbo)."
+	],
 	"£:BASE-mapo&\"<kartoj?n?>\"": [
 		"£:BASE-mapo&\"<kartoj?n?>\"",
 		"Falsa amiko: karto → mapo",
@@ -2015,6 +2103,12 @@ g_marks.types = {
 		"Falsa amiko: ke → kiu",
 		"Ne konfuzu la konjunkcion <i>‘ke’</i> kun la relativa pronomo <i>‘kiu’.</i> Povas temi pri falsamika konfuzo, ĉar la du vortoj tradukiĝas (parte) same en kaj la franca <i>(que)</i> kaj la angla <i>(that</i>). Kaj la franca <i>‘que’</i> eĉ sonas kiel la esperanta <i>‘ke’.</i>",
 		"Tio estis la plej bela filmo <span style=\"color: #ff0000\">ke</span> (kiun) mi iam vidis."
+	],
+	"£:BASE-aplauxdi&\"<klacx.*>\"": [
+		"£:BASE-aplauxdi&\"<klacx.*>\"",
+		"Falsa amiko: klaĉi → aplaŭdi",
+		"<i>'Klaĉi’</i> signifas interŝanĝi onidirojn pri aliaj personoj. Ne konfuzu la vorton kun <i>‘aplaŭdi’</i> (aprobe kunbati la manojn, germane: <i>klatschen</i>). Temas pri falsa amiko.",
+		"Post la spektaklo la spektantoj longe <span style=\"color: #c9211e\">klaĉis</span> (aplaŭdis)."
 	],
 	"£:BASE-komiksa": [
 		"£:BASE-komiksa",
@@ -2121,43 +2215,43 @@ g_marks.types = {
 	"£:BASE-gxusta": [
 		"£:BASE-gxusta",
 		"Falsa amiko: korekta → ĝusta",
-		"En Esperanto, <i>‘korekti’</i> estas transitiva verbo, do se oni uzas ĝin kiel adjektivo, tiu ankaŭ fariĝas transitiva (angle: <i>correcting</i>): <i>korekta laboro</i> (la laboro korekti ion)<i>, korektaj ŝanĝetoj</i> (ŝanĝoj faritaj por korekti ion). Ne eblas uzi <i>‘korekta’</i> kun la senco de <i>‘ĝusta’</i> (= ‘senerara’, angle: <i>correct</i>). Simile <i>‘korekteco’</i> devas esti <i>‘ĝusteco’</i> (de fakto/aserto) aŭ (politika) <i>‘laŭreguleco/bonkonduteco’,</i> kaj anstataŭ <i>‘malkorektaĵo’</i> prefere simple uzu <i>‘eraro’.</i>",
+		"En Esperanto, <i>‘korekti’</i> estas transitiva verbo, do se oni uzas ĝin kiel adjektivo, tiu ankaŭ fariĝas transitiva (angle: <i>correcting</i>): <i>korekta laboro</i> (la laboro korekti ion)<i>, korektaj ŝanĝetoj</i> (ŝanĝoj faritaj por korekti ion). Ne eblas uzi <i>‘korekta’</i> kun la senco de <i>‘ĝusta’</i> (= ‘senerara’, angle: <i>correct</i>). Simile <i>‘korekteco’</i> devas esti <i>‘ĝusteco’</i> (de fakto/aserto) aŭ (politika) <i>‘laŭreguleco/bonkonduteco’,</i> kaj anstataŭ <i>‘malkorektaĵo’</i> prefere simple uzu <i>‘eraro’.</i><br>\n<br>\nVidu ankaŭ la deklaron de la Akademio de Esperanto pri <a target=\"_blank\" href=\"https://www.akademio-de-esperanto.org/decidoj/rezultstataj_adjektivoj/index.htmlr\">rezultstataj adjektivoj</a>.",
 		"Tiu frazo ne estas <span style=\"color: #ff0000\">korekta</span> (ĝusta)."
 	],
 	"£:BASE-gxuste": [
 		"£:BASE-gxuste",
 		"Falsa amiko: korekta → ĝusta",
-		"En Esperanto, <i>‘korekti’</i> estas transitiva verbo, do se oni uzas ĝin kiel adjektivo, tiu ankaŭ fariĝas transitiva (angle: <i>correcting</i>): <i>korekta laboro</i> (la laboro korekti ion)<i>, korektaj ŝanĝetoj</i> (ŝanĝoj faritaj por korekti ion). Ne eblas uzi <i>‘korekta’</i> kun la senco de <i>‘ĝusta’</i> (= ‘senerara’, angle: <i>correct</i>). Simile <i>‘korekteco’</i> devas esti <i>‘ĝusteco’</i> (de fakto/aserto) aŭ (politika) <i>‘laŭreguleco/bonkonduteco’,</i> kaj anstataŭ <i>‘malkorektaĵo’</i> prefere simple uzu <i>‘eraro’.</i>",
+		"En Esperanto, <i>‘korekti’</i> estas transitiva verbo, do se oni uzas ĝin kiel adjektivo, tiu ankaŭ fariĝas transitiva (angle: <i>correcting</i>): <i>korekta laboro</i> (la laboro korekti ion)<i>, korektaj ŝanĝetoj</i> (ŝanĝoj faritaj por korekti ion). Ne eblas uzi <i>‘korekta’</i> kun la senco de <i>‘ĝusta’</i> (= ‘senerara’, angle: <i>correct</i>). Simile <i>‘korekteco’</i> devas esti <i>‘ĝusteco’</i> (de fakto/aserto) aŭ (politika) <i>‘laŭreguleco/bonkonduteco’,</i> kaj anstataŭ <i>‘malkorektaĵo’</i> prefere simple uzu <i>‘eraro’.</i><br>\n<br>\nVidu ankaŭ la deklaron de la Akademio de Esperanto pri <a target=\"_blank\" href=\"https://www.akademio-de-esperanto.org/decidoj/rezultstataj_adjektivoj/index.htmlr\">rezultstataj adjektivoj</a>.",
 		"Tiu frazo ne estas <span style=\"color: #ff0000\">korekta</span> (ĝusta)."
 	],
 	"£:BASE-malgxusta": [
 		"£:BASE-malgxusta",
 		"Falsa amiko: korekta → ĝusta",
-		"En Esperanto, <i>‘korekti’</i> estas transitiva verbo, do se oni uzas ĝin kiel adjektivo, tiu ankaŭ fariĝas transitiva (angle: <i>correcting</i>): <i>korekta laboro</i> (la laboro korekti ion)<i>, korektaj ŝanĝetoj</i> (ŝanĝoj faritaj por korekti ion). Ne eblas uzi <i>‘korekta’</i> kun la senco de <i>‘ĝusta’</i> (= ‘senerara’, angle: <i>correct</i>). Simile <i>‘korekteco’</i> devas esti <i>‘ĝusteco’</i> (de fakto/aserto) aŭ (politika) <i>‘laŭreguleco/bonkonduteco’,</i> kaj anstataŭ <i>‘malkorektaĵo’</i> prefere simple uzu <i>‘eraro’.</i>",
+		"En Esperanto, <i>‘korekti’</i> estas transitiva verbo, do se oni uzas ĝin kiel adjektivo, tiu ankaŭ fariĝas transitiva (angle: <i>correcting</i>): <i>korekta laboro</i> (la laboro korekti ion)<i>, korektaj ŝanĝetoj</i> (ŝanĝoj faritaj por korekti ion). Ne eblas uzi <i>‘korekta’</i> kun la senco de <i>‘ĝusta’</i> (= ‘senerara’, angle: <i>correct</i>). Simile <i>‘korekteco’</i> devas esti <i>‘ĝusteco’</i> (de fakto/aserto) aŭ (politika) <i>‘laŭreguleco/bonkonduteco’,</i> kaj anstataŭ <i>‘malkorektaĵo’</i> prefere simple uzu <i>‘eraro’.</i><br>\n<br>\nVidu ankaŭ la deklaron de la Akademio de Esperanto pri <a target=\"_blank\" href=\"https://www.akademio-de-esperanto.org/decidoj/rezultstataj_adjektivoj/index.htmlr\">rezultstataj adjektivoj</a>.",
 		"Tiu frazo ne estas <span style=\"color: #ff0000\">korekta</span> (ĝusta)."
 	],
 	"£:BASE-malgxuste": [
 		"£:BASE-malgxuste",
 		"Falsa amiko: korekta → ĝusta",
-		"En Esperanto, <i>‘korekti’</i> estas transitiva verbo, do se oni uzas ĝin kiel adjektivo, tiu ankaŭ fariĝas transitiva (angle: <i>correcting</i>): <i>korekta laboro</i> (la laboro korekti ion)<i>, korektaj ŝanĝetoj</i> (ŝanĝoj faritaj por korekti ion). Ne eblas uzi <i>‘korekta’</i> kun la senco de <i>‘ĝusta’</i> (= ‘senerara’, angle: <i>correct</i>). Simile <i>‘korekteco’</i> devas esti <i>‘ĝusteco’</i> (de fakto/aserto) aŭ (politika) <i>‘laŭreguleco/bonkonduteco’,</i> kaj anstataŭ <i>‘malkorektaĵo’</i> prefere simple uzu <i>‘eraro’.</i>",
+		"En Esperanto, <i>‘korekti’</i> estas transitiva verbo, do se oni uzas ĝin kiel adjektivo, tiu ankaŭ fariĝas transitiva (angle: <i>correcting</i>): <i>korekta laboro</i> (la laboro korekti ion)<i>, korektaj ŝanĝetoj</i> (ŝanĝoj faritaj por korekti ion). Ne eblas uzi <i>‘korekta’</i> kun la senco de <i>‘ĝusta’</i> (= ‘senerara’, angle: <i>correct</i>). Simile <i>‘korekteco’</i> devas esti <i>‘ĝusteco’</i> (de fakto/aserto) aŭ (politika) <i>‘laŭreguleco/bonkonduteco’,</i> kaj anstataŭ <i>‘malkorektaĵo’</i> prefere simple uzu <i>‘eraro’.</i><br>\n<br>\nVidu ankaŭ la deklaron de la Akademio de Esperanto pri <a target=\"_blank\" href=\"https://www.akademio-de-esperanto.org/decidoj/rezultstataj_adjektivoj/index.htmlr\">rezultstataj adjektivoj</a>.",
 		"Tiu frazo ne estas <span style=\"color: #ff0000\">korekta</span> (ĝusta)."
 	],
 	"£:BASE-gxusteco": [
 		"£:BASE-gxusteco",
 		"Falsa amiko: korekta → ĝusta",
-		"En Esperanto, <i>‘korekti’</i> estas transitiva verbo, do se oni uzas ĝin kiel adjektivo, tiu ankaŭ fariĝas transitiva (angle: <i>correcting</i>): <i>korekta laboro</i> (la laboro korekti ion)<i>, korektaj ŝanĝetoj</i> (ŝanĝoj faritaj por korekti ion). Ne eblas uzi <i>‘korekta’</i> kun la senco de <i>‘ĝusta’</i> (= ‘senerara’, angle: <i>correct</i>). Simile <i>‘korekteco’</i> devas esti <i>‘ĝusteco’</i> (de fakto/aserto) aŭ (politika) <i>‘laŭreguleco/bonkonduteco’,</i> kaj anstataŭ <i>‘malkorektaĵo’</i> prefere simple uzu <i>‘eraro’.</i>",
+		"En Esperanto, <i>‘korekti’</i> estas transitiva verbo, do se oni uzas ĝin kiel adjektivo, tiu ankaŭ fariĝas transitiva (angle: <i>correcting</i>): <i>korekta laboro</i> (la laboro korekti ion)<i>, korektaj ŝanĝetoj</i> (ŝanĝoj faritaj por korekti ion). Ne eblas uzi <i>‘korekta’</i> kun la senco de <i>‘ĝusta’</i> (= ‘senerara’, angle: <i>correct</i>). Simile <i>‘korekteco’</i> devas esti <i>‘ĝusteco’</i> (de fakto/aserto) aŭ (politika) <i>‘laŭreguleco/bonkonduteco’,</i> kaj anstataŭ <i>‘malkorektaĵo’</i> prefere simple uzu <i>‘eraro’.</i><br>\n<br>\nVidu ankaŭ la deklaron de la Akademio de Esperanto pri <a target=\"_blank\" href=\"https://www.akademio-de-esperanto.org/decidoj/rezultstataj_adjektivoj/index.htmlr\">rezultstataj adjektivoj</a>.",
 		"Tiu frazo ne estas <span style=\"color: #ff0000\">korekta</span> (ĝusta)."
 	],
 	"£:BASE-eraro&\"<malkorektajxoj?n?>\"": [
 		"£:BASE-eraro&\"<malkorektajxoj?n?>\"",
 		"Falsa amiko: korekta → ĝusta",
-		"En Esperanto, <i>‘korekti’</i> estas transitiva verbo, do se oni uzas ĝin kiel adjektivo, tiu ankaŭ fariĝas transitiva (angle: <i>correcting</i>): <i>korekta laboro</i> (la laboro korekti ion)<i>, korektaj ŝanĝetoj</i> (ŝanĝoj faritaj por korekti ion). Ne eblas uzi <i>‘korekta’</i> kun la senco de <i>‘ĝusta’</i> (= ‘senerara’, angle: <i>correct</i>). Simile <i>‘korekteco’</i> devas esti <i>‘ĝusteco’</i> (de fakto/aserto) aŭ (politika) <i>‘laŭreguleco/bonkonduteco’,</i> kaj anstataŭ <i>‘malkorektaĵo’</i> prefere simple uzu <i>‘eraro’.</i>",
+		"En Esperanto, <i>‘korekti’</i> estas transitiva verbo, do se oni uzas ĝin kiel adjektivo, tiu ankaŭ fariĝas transitiva (angle: <i>correcting</i>): <i>korekta laboro</i> (la laboro korekti ion)<i>, korektaj ŝanĝetoj</i> (ŝanĝoj faritaj por korekti ion). Ne eblas uzi <i>‘korekta’</i> kun la senco de <i>‘ĝusta’</i> (= ‘senerara’, angle: <i>correct</i>). Simile <i>‘korekteco’</i> devas esti <i>‘ĝusteco’</i> (de fakto/aserto) aŭ (politika) <i>‘laŭreguleco/bonkonduteco’,</i> kaj anstataŭ <i>‘malkorektaĵo’</i> prefere simple uzu <i>‘eraro’.</i><br>\n<br>\nVidu ankaŭ la deklaron de la Akademio de Esperanto pri <a target=\"_blank\" href=\"https://www.akademio-de-esperanto.org/decidoj/rezultstataj_adjektivoj/index.htmlr\">rezultstataj adjektivoj</a>.",
 		"Tiu frazo ne estas <span style=\"color: #ff0000\">korekta</span> (ĝusta)."
 	],
 	"£:BASE-laŭreguleco&\"<korektecoj?n?>\"": [
 		"£:BASE-laŭreguleco&\"<korektecoj?n?>\"",
 		"Falsa amiko: korekta → ĝusta",
-		"En Esperanto, <i>‘korekti’</i> estas transitiva verbo, do se oni uzas ĝin kiel adjektivo, tiu ankaŭ fariĝas transitiva (angle: <i>correcting</i>): <i>korekta laboro</i> (la laboro korekti ion)<i>, korektaj ŝanĝetoj</i> (ŝanĝoj faritaj por korekti ion). Ne eblas uzi <i>‘korekta’</i> kun la senco de <i>‘ĝusta’</i> (= ‘senerara’, angle: <i>correct</i>). Simile <i>‘korekteco’</i> devas esti <i>‘ĝusteco’</i> (de fakto/aserto) aŭ (politika) <i>‘laŭreguleco/bonkonduteco’,</i> kaj anstataŭ <i>‘malkorektaĵo’</i> prefere simple uzu <i>‘eraro’.</i>",
+		"En Esperanto, <i>‘korekti’</i> estas transitiva verbo, do se oni uzas ĝin kiel adjektivo, tiu ankaŭ fariĝas transitiva (angle: <i>correcting</i>): <i>korekta laboro</i> (la laboro korekti ion)<i>, korektaj ŝanĝetoj</i> (ŝanĝoj faritaj por korekti ion). Ne eblas uzi <i>‘korekta’</i> kun la senco de <i>‘ĝusta’</i> (= ‘senerara’, angle: <i>correct</i>). Simile <i>‘korekteco’</i> devas esti <i>‘ĝusteco’</i> (de fakto/aserto) aŭ (politika) <i>‘laŭreguleco/bonkonduteco’,</i> kaj anstataŭ <i>‘malkorektaĵo’</i> prefere simple uzu <i>‘eraro’.</i><br>\n<br>\nVidu ankaŭ la deklaron de la Akademio de Esperanto pri <a target=\"_blank\" href=\"https://www.akademio-de-esperanto.org/decidoj/rezultstataj_adjektivoj/index.htmlr\">rezultstataj adjektivoj</a>.",
 		"Tiu frazo ne estas <span style=\"color: #ff0000\">korekta</span> (ĝusta)."
 	],
 	"£:BASE-koruptigxema&\"<koruptaj?n?>\"": [
@@ -2424,6 +2518,12 @@ g_marks.types = {
 		"Povas temi pri (angla) falsa amiko <i>(plaster).</i> En Esperanto 'Plastro’ estas glupansaĵo por kovri vundeton, la moldebla blanka materialo nomiĝas <i>‘gipso’.</i>",
 		""
 	],
+	"£:BASE-surhavi": [
+		"£:BASE-surhavi",
+		"Falsa amiko: porti → surhavi",
+		"En Esperanto, ne necesas uzi <i>‘porti’</i> por vestaĵoj, kiujn oni havas sur la korpo (ne en la mano!), ĉar ekzistas la pli specifa <i>surhavi.</i> Sed ne temas pri vera eraro, nu propono.",
+		"Ŝi <span style=\"color: #c9211e\">portis</span> (surhavis) longan kamelharan jakon."
+	],
 	"£:BASE-ebla&\"<poten.*>\"": [
 		"£:BASE-ebla&\"<poten.*>\"",
 		"Falsa amiko: potenciala → ebla/latenta",
@@ -2604,6 +2704,12 @@ g_marks.types = {
 		"'Ribo’ estas bero (angle: <i>currant</i>), <i>‘ripo’</i> estas osto (angle: <i>rib</i>)",
 		""
 	],
+	"£:BASE-senstrecxigxi&\"<rilaks.*>\"": [
+		"£:BASE-senstrecxigxi&\"<rilaks.*>\"",
+		"Falsa amiko: rilaksi → senstreĉiĝi",
+		"En Esperanto, <i>‘rilaksi’</i> estas transitiva verbo, normale celante kondiĉojn, parametrojn aŭ muskolojn kiel objektojn. Homoj ne rilaksas, sed senstreĉiĝas.",
+		"Cxiu <span style=\"color: #c9211e\">rilaksis</span> (senstreĉiĝis) kaj auxskultis la muzikon ."
+	],
 	"£:BASE-kuracilo&\"<rimedoj?n?>": [
 		"£:BASE-kuracilo&\"<rimedoj?n?>",
 		"Falsa amiko: rimedo → kuracilo",
@@ -2676,11 +2782,23 @@ g_marks.types = {
 		"En Esperanto, <i>‘skolo’</i> estas la adeptaro de iu majstro, filozofio aŭ doktrino (angle: <i>school of thought</i>). Ne konfuzu tion kun la <i>‘lernejo’ –</i> la ĝenerala vorto por loko, kie oni lernas.",
 		"En tiu <span style=\"color: #ff0000\">skolo</span> (lernejo) la infanoj ne rajtas kunporti poŝtelefonojn."
 	],
+	"£:BASE-verki&\"<skrib.*>\"": [
+		"£:BASE-verki&\"<skrib.*>\"",
+		"Falsa amiko: skribi → verki",
+		"En Esperanto, libron aŭ poemon oni <i>‘verkas’,</i> dum oni <i>‘skribas’</i> leteron, mesaĝon aŭ frazon. La ĝenerala vorto estas <i>‘skribi’,</i> sed aŭtoroj verkas siajn verkojn.",
+		"Dum sia junaĝo, li ankaŭ <span style=\"color: #c9211e\">skribis</span> (verkis) poemojn."
+	],
 	"£:BASE-grundo&\"<sojloj?n?>\"": [
 		"£:BASE-grundo&\"<sojloj?n?>\"",
 		"Falsa amiko: sojlo → grundo",
 		"En Esperanto, <i>‘sojlo’</i> estas portoŝtono aŭ metafore transiro-linio inter du statoj, epokoj aŭ agoj. Estas (angla) falsa amiko uzi la vorton kun la signivo de <i>‘grundo’.</i>",
 		"La <span style=\"color: #ff0000\">sojlo</span> (grundo) en malnovaj inundo-ebenaĵoj estas aparte fekunda."
+	],
+	"£:BASE-divenumi&\"<spekul.*>\"": [
+		"£:BASE-divenumi&\"<spekul.*>\"",
+		"Falsa amiko: spekuli → divenumi",
+		"La vortoj <i>‘spekuli’</i> kaj <i>‘spekulacio’</i> estas borsaj/financaj fakvortoj. La signifo de ‘divenumi’/’divene prognozi’ (germane: <i>spekulieren,</i> angle: <i>speculate</i>), pri faktoj aŭ okazaĵoj, estas falsa amiko.",
+		"Mi ne volas <span style=\"color: #c9211e\">spekuli</span> (divenumi) pri la rezultoj de la venonta baloto."
 	],
 	"£:BASE-temo&\"<subjektoj?n?>\"": [
 		"£:BASE-temo&\"<subjektoj?n?>\"",
@@ -2994,6 +3112,24 @@ g_marks.types = {
 		"Ne konfuzu <i>‘nombri’</i> kaj <i>‘numeri’. ‘Nombri’</i> signifas (a) diri 1, 2 , 3 …, (b) determini kiom da individuoj estas en iu aro, aŭ, pri aro, (c) enhavi certan nombron da individuoj. <i>‘Numeri’</i> signifas ‘doni sinsekvajn nombrojn al la ordigitaj aŭ vicigitaj elementoj en listo aŭ aro’. Oni do nombras partoprenantojn, pomojn aŭ botelojn, sed numeras alineojn, etaĝojn, domojn aŭ versiojn.<br>\n<br>\nNecesas analoge distingi inter <i>‘nombro’</i> kaj <i>‘numero’.</i> La unua, <i>‘nombro’</i> estas la ĝenerala matematika vorto, kaj ankaŭ esprimas kvanton. Dume, <i>‘numero’</i> la lokon er ordigita vico. Krom oni uzas ĝin por indiki ekzempleron de gazeto aŭ lotilon. Tria rilatita vorto estas <i>‘cifero’,</i> kiu celas nombrosimbolon, ne la nombron mem: <i>romanaj/arabaj ciferoj, duuma cifero.</i><br>\n<br>\nNotu, ke nek <i>‘nombri’</i> nek <i>‘numeri’</i> uzeblas kun la senco de ‘listigi’.",
 		"La ĉambroj estas <span style=\"color: #ff0000\">nombritaj</span> (numeritaj). Trovu vian en la listo ĉe la enirejo!<br>\n<br>\nLa dokumento <span style=\"color: #ff0000\">numeris</span> (listigis) liajn meritojn.<br>\n<br>\nOni limigis la <span style=\"color: #ff0000\">numeron</span> (nombron) de partoprenantoj.<br>\n<br>\nHieraŭ mi legis tri <span style=\"color: #ff0000\">nombrojn</span> (numerojn) de ‘Kontakto’."
 	],
+	"£:BASE-farbi": [
+		"£:BASE-farbi",
+		"Konfuzebla vortogrupo: pentri ↔ farbi ↔ kolorigi",
+		"Ne konfuzu <i>‘pentri’</i> kun <i>‘farbi’</i> aŭ <i>‘kolorigi’.</i> Oni ‘<i>pentras’</i> objekton kreante bildon de ĝi. <i>‘Farbado’</i> kaj <i>‘kolorigo’</i> ne estas kreaj agoj. Oni <i>‘farbas’</i> surfacon (ekz. muron) ruĝe, blanke aŭ blue. Oni <i>‘kolorigas’</i> desegnaĵon aŭ objekton <i>per</i> kolorigiloj, ekz. krajonoj)",
+		"<i>Ŝi</i> <span style=\"color: #c9211e\"><i>pentris</i></span><i> (farbis) sian hararon ruĝa.</i><br>\n<br>\n<i>La infano</i> <span style=\"color: #c9211e\"><i>pentris</i></span><i> (kolorigis) la literojn en la teksto per buntaj krajonoj.</i>"
+	],
+	"£:BASE-kolorigi": [
+		"£:BASE-kolorigi",
+		"Konfuzebla vortogrupo: pentri ↔ farbi ↔ kolorigi",
+		"Ne konfuzu <i>‘pentri’</i> kun <i>‘farbi’</i> aŭ <i>‘kolorigi’.</i> Oni ‘<i>pentras’</i> objekton kreante bildon de ĝi. <i>‘Farbado’</i> kaj <i>‘kolorigo’</i> ne estas kreaj agoj. Oni <i>‘farbas’</i> surfacon (ekz. muron) ruĝe, blanke aŭ blue. Oni <i>‘kolorigas’</i> desegnaĵon aŭ objekton <i>per</i> kolorigiloj, ekz. krajonoj)",
+		"<i>Ŝi</i> <span style=\"color: #c9211e\"><i>pentris</i></span><i> (farbis) sian hararon ruĝa.</i><br>\n<br>\n<i>La infano</i> <span style=\"color: #c9211e\"><i>pentris</i></span><i> (kolorigis) la literojn en la teksto per buntaj krajonoj.</i>"
+	],
+	"£:BASE-pentri": [
+		"£:BASE-pentri",
+		"Konfuzebla vortogrupo: pentri ↔ farbi ↔ kolorigi",
+		"Ne konfuzu <i>‘pentri’</i> kun <i>‘farbi’</i> aŭ <i>‘kolorigi’.</i> Oni ‘<i>pentras’</i> objekton kreante bildon de ĝi. <i>‘Farbado’</i> kaj <i>‘kolorigo’</i> ne estas kreaj agoj. Oni <i>‘farbas’</i> surfacon (ekz. muron) ruĝe, blanke aŭ blue. Oni <i>‘kolorigas’</i> desegnaĵon aŭ objekton <i>per</i> kolorigiloj, ekz. krajonoj)",
+		"<i>Ŝi</i> <span style=\"color: #c9211e\"><i>pentris</i></span><i> (farbis) sian hararon ruĝa.</i><br>\n<br>\n<i>La infano</i> <span style=\"color: #c9211e\"><i>pentris</i></span><i> (kolorigis) la literojn en la teksto per buntaj krajonoj.</i>"
+	],
 	"£:BASE-plasto": [
 		"£:BASE-plasto",
 		"Konfuzebla vortogrupo: plasto – plastiko – plastio",
@@ -3210,6 +3346,12 @@ g_marks.types = {
 		"La adjektivo <i>‘(mal)ferma’</i> havas verban radikon kaj celas agon, ekz. <i>‘malferma parolado’, ‘ferma kunsido’.</i> Por la stato de io, kion oni (mal)fermis, uzu la participon <i>‘(mal)fermita.</i> Post <i>‘esti’</i> preskaŭ ĉiam devas esti la participa formo.",
 		"La libroservo estos <span style=\"color: #ff0000\">malferma</span> (malfermita) ĉiumatene."
 	],
+	"£:BASE-aktivajxo&\"<aktivecoj?n?>\"": [
+		"£:BASE-aktivajxo&\"<aktivecoj?n?>\"",
+		"Konfuzebla vortoparo: aktiveco → aktivaĵo",
+		"La vorto <i>‘aktiveco’</i> mezuras la gradon de esti aktiva, dum <i>‘aktivaĵo’</i> celas la konkretajn agadojn. Oni <i>‘faras, disvolvas, ofertas, proponas’</i> aktivaĵojn, ne aktivecojn. Pluralo estas bona indiko, ke devas esti <i>‘aktivaĵo(j)’,</i> ne <i>‘aktiveco(j)’.</i>",
+		"La lernejo ofertas multajn sportajn <span style=\"color: #c9211e\">aktivecojn</span> (aktivaĵojn)."
+	],
 	"£:BASE-sxati&\"<am.*>\"": [
 		"£:BASE-sxati&\"<am.*>\"",
 		"Konfuzebla vortoparo: ami ↔ ŝati",
@@ -3258,6 +3400,18 @@ g_marks.types = {
 		"La vorto <i>‘deci’</i> aludas al normoj aŭ reguloj, al moroj, tradicio, bonedukiteco aŭ moralo. En pli neŭtrala kunteksto, uzu simple <i>‘konveni al’</i> aŭ <i>‘taŭgi por’.</i>",
 		"Tiu koloro ne <span style=\"color: #ff0000\">decas</span> (konvenas) al brunulinoj."
 	],
+	"£:BASE-degeli": [
+		"£:BASE-degeli",
+		"Konfuzebla vortoparo: degeli ↔ fandiĝi",
+		"Nu substancoj, kiuj normale estas likvaj ĉe endoma temperaturo, povas <i>degeli –</i> ekz. glacio, neĝo aŭ frostita lakto. Solidaĵoj, ekz. fero, fromaĝo aŭ butero, <i>fandiĝas,</i> kiam oni varmigas ilin.",
+		"Multaj glaĉeroj rapide <span style=\"color: #c9211e\">fandiĝas</span> (degelas) dum la ĉiam pli varmaj someroj.<br>\n<br>\nLa fromaĝo <span style=\"color: #c9211e\">degelis</span> (fandiĝis) sur la varma metalo."
+	],
+	"£:BASE-fandigxi": [
+		"£:BASE-fandigxi",
+		"Konfuzebla vortoparo: degeli ↔ fandiĝi",
+		"Nu substancoj, kiuj normale estas likvaj ĉe endoma temperaturo, povas <i>degeli –</i> ekz. glacio, neĝo aŭ frostita lakto. Solidaĵoj, ekz. fero, fromaĝo aŭ butero, <i>fandiĝas,</i> kiam oni varmigas ilin.",
+		"Multaj glaĉeroj rapide <span style=\"color: #c9211e\">fandiĝas</span> (degelas) dum la ĉiam pli varmaj someroj.<br>\n<br>\nLa fromaĝo <span style=\"color: #c9211e\">degelis</span> (fandiĝis) sur la varma metalo."
+	],
 	"£:BASE-postuli&\"<devig.*>\"": [
 		"£:BASE-postuli&\"<devig.*>\"",
 		"Konfuzebla vortoparo: devigi ke →postuli ke",
@@ -3288,22 +3442,52 @@ g_marks.types = {
 		"La diferenco inter ‘<i>povi’</i> kaj ‘<i>ebli’</i> estas la rolo de la akompananta infinitivo. <i>‘Povi’</i> estas helpverbo kun infinitiva komplemento, dum eventuala infinitivo ĉe <i>‘ebli’</i> estas subjekto. Ne uzu <i>‘ebli’</i> kiel helpverbon. Do ne diru: <span style=\"color: #0000ff\"><i>Oni</i></span><i> ne</i><i></i> <span style=\"color: #ff0000\"><i>eblas</i></span><i></i> <span style=\"color: #ff0000\"><i>fari</i></span><i> tion.</i> Sed <i>‘fari tion’</i> povas esti subjekto de <i>‘ebli’,</i> anstataŭ alia subjekto: <span style=\"color: #0000ff\"><i>Fari tion</i></span><i> ne eblas.</i> <i>Ne eblas</i> <span style=\"color: #0000ff\"><i>fari tion</i></span><i>.</i><br>\n<br>\n<i>Mi ne povas helpi vin.</i><br>\n<br>\n<i>Ne eblas trovi tiun varon pli malmultekoste.</i><br>\n<br>\n<i>Sukceso ne eblos sen bona preparo.</i>",
 		"Dum la UK oni ne <span style=\"color: #ff0000\">eblos</span> (povos) loĝi en la kongresejo"
 	],
+	"£:BASE-ebleco&\"<ebloj?n?>\"": [
+		"£:BASE-ebleco&\"<ebloj?n?>\"",
+		"Konfuzebla vortoparo: eblo → ebleco",
+		"La vorto <i>‘eblo’</i> temas pri la povo fari ion aŭ pri io, kio povas okazi. <i>‘Ebleco’</i> estas eco de tia eblo, oni uzas ĝin en kunteksto de mezuro <i>(granda ebleco, multaj eblecoj</i>), komparo aŭ elekto <i>(de alia ebleco).</i> La nuntempa lingvouzo ne klare distingas la du vortojn, do ne eblas diri, ke temas pri eraro ĉi tie, kaj Lingvohelpilo tial nur celas atentigi kaj rekomendi eblan – en si mem koheran – distingon.",
+		""
+	],
 	"£:BASE-efika&\"<efektivaj?n?>\"": [
 		"£:BASE-efika&\"<efektivaj?n?>\"",
-		"Konfuzebla vortoparo: efektiva ↔ efika",
-		"<i>'Efektiva/-e’</i> signifas <i>‘fakta/-e’</i> (angle: <i>actual, in fact</i>), dum ‘<i>efika/-e’</i> signifas <i>‘kun bona rezulto’</i> (angle: <i>effective</i>).<br>\n<br>\n<i>La nuda vetkuro tre efike famigis la eventon.</i><br>\n<br>\n<i>Oni efektive ne uzas Esperanton en usonaj lernejoj.</i>",
+		"Konfuzebla vortoparo: efektiva ↔ efika ↔ efekta",
+		"<i>'Efektiva/-e’</i> signifas <i>‘fakta/-e’</i> (angle: <i>actual, in fact</i>), dum ‘<i>efika/-e’</i> signifas <i>‘kun bona rezulto’</i> (angle: <i>effective</i>). <i>‘Efekta/-e’</i> koncernas la vekadon de atento kaj emocioj (angle: <i>effectual, spectacular</i>)<br>\n<br>\n<i>La nuda vetkuro tre efike famigis la eventon.</i><br>\n<br>\n<i>Oni efektive ne uzas Esperanton en usonaj lernejoj.</i><br>\n<br>\n<i>Modernaj infanfilmoj estas pli efektaj ol bildrakontoj.</i>",
 		"La plej <span style=\"color: #ff0000\">efektiva</span> (efika) maniero"
 	],
 	"£:BASE-efike&\"<efektive>\"": [
 		"£:BASE-efike&\"<efektive>\"",
-		"Konfuzebla vortoparo: efektiva ↔ efika",
-		"<i>'Efektiva/-e’</i> signifas <i>‘fakta/-e’</i> (angle: <i>actual, in fact</i>), dum ‘<i>efika/-e’</i> signifas <i>‘kun bona rezulto’</i> (angle: <i>effective</i>).<br>\n<br>\n<i>La nuda vetkuro tre efike famigis la eventon.</i><br>\n<br>\n<i>Oni efektive ne uzas Esperanton en usonaj lernejoj.</i>",
+		"Konfuzebla vortoparo: efektiva ↔ efika ↔ efekta",
+		"<i>'Efektiva/-e’</i> signifas <i>‘fakta/-e’</i> (angle: <i>actual, in fact</i>), dum ‘<i>efika/-e’</i> signifas <i>‘kun bona rezulto’</i> (angle: <i>effective</i>). <i>‘Efekta/-e’</i> koncernas la vekadon de atento kaj emocioj (angle: <i>effectual, spectacular</i>)<br>\n<br>\n<i>La nuda vetkuro tre efike famigis la eventon.</i><br>\n<br>\n<i>Oni efektive ne uzas Esperanton en usonaj lernejoj.</i><br>\n<br>\n<i>Modernaj infanfilmoj estas pli efektaj ol bildrakontoj.</i>",
 		"La plej <span style=\"color: #ff0000\">efektiva</span> (efika) maniero"
 	],
 	"£:BASE-efektive": [
 		"£:BASE-efektive",
-		"Konfuzebla vortoparo: efektiva ↔ efika",
-		"<i>'Efektiva/-e’</i> signifas <i>‘fakta/-e’</i> (angle: <i>actual, in fact</i>), dum ‘<i>efika/-e’</i> signifas <i>‘kun bona rezulto’</i> (angle: <i>effective</i>).<br>\n<br>\n<i>La nuda vetkuro tre efike famigis la eventon.</i><br>\n<br>\n<i>Oni efektive ne uzas Esperanton en usonaj lernejoj.</i>",
+		"Konfuzebla vortoparo: efektiva ↔ efika ↔ efekta",
+		"<i>'Efektiva/-e’</i> signifas <i>‘fakta/-e’</i> (angle: <i>actual, in fact</i>), dum ‘<i>efika/-e’</i> signifas <i>‘kun bona rezulto’</i> (angle: <i>effective</i>). <i>‘Efekta/-e’</i> koncernas la vekadon de atento kaj emocioj (angle: <i>effectual, spectacular</i>)<br>\n<br>\n<i>La nuda vetkuro tre efike famigis la eventon.</i><br>\n<br>\n<i>Oni efektive ne uzas Esperanton en usonaj lernejoj.</i><br>\n<br>\n<i>Modernaj infanfilmoj estas pli efektaj ol bildrakontoj.</i>",
+		"La plej <span style=\"color: #ff0000\">efektiva</span> (efika) maniero"
+	],
+	"£:BASE-efekta": [
+		"£:BASE-efekta",
+		"Konfuzebla vortoparo: efektiva ↔ efika ↔ efekta",
+		"<i>'Efektiva/-e’</i> signifas <i>‘fakta/-e’</i> (angle: <i>actual, in fact</i>), dum ‘<i>efika/-e’</i> signifas <i>‘kun bona rezulto’</i> (angle: <i>effective</i>). <i>‘Efekta/-e’</i> koncernas la vekadon de atento kaj emocioj (angle: <i>effectual, spectacular</i>)<br>\n<br>\n<i>La nuda vetkuro tre efike famigis la eventon.</i><br>\n<br>\n<i>Oni efektive ne uzas Esperanton en usonaj lernejoj.</i><br>\n<br>\n<i>Modernaj infanfilmoj estas pli efektaj ol bildrakontoj.</i>",
+		"La plej <span style=\"color: #ff0000\">efektiva</span> (efika) maniero"
+	],
+	"£:BASE-efekte": [
+		"£:BASE-efekte",
+		"Konfuzebla vortoparo: efektiva ↔ efika ↔ efekta",
+		"<i>'Efektiva/-e’</i> signifas <i>‘fakta/-e’</i> (angle: <i>actual, in fact</i>), dum ‘<i>efika/-e’</i> signifas <i>‘kun bona rezulto’</i> (angle: <i>effective</i>). <i>‘Efekta/-e’</i> koncernas la vekadon de atento kaj emocioj (angle: <i>effectual, spectacular</i>)<br>\n<br>\n<i>La nuda vetkuro tre efike famigis la eventon.</i><br>\n<br>\n<i>Oni efektive ne uzas Esperanton en usonaj lernejoj.</i><br>\n<br>\n<i>Modernaj infanfilmoj estas pli efektaj ol bildrakontoj.</i>",
+		"La plej <span style=\"color: #ff0000\">efektiva</span> (efika) maniero"
+	],
+	"£:BASE-efiko": [
+		"£:BASE-efiko",
+		"Konfuzebla vortoparo: efektiva ↔ efika ↔ efekta",
+		"<i>'Efektiva/-e’</i> signifas <i>‘fakta/-e’</i> (angle: <i>actual, in fact</i>), dum ‘<i>efika/-e’</i> signifas <i>‘kun bona rezulto’</i> (angle: <i>effective</i>). <i>‘Efekta/-e’</i> koncernas la vekadon de atento kaj emocioj (angle: <i>effectual, spectacular</i>)<br>\n<br>\n<i>La nuda vetkuro tre efike famigis la eventon.</i><br>\n<br>\n<i>Oni efektive ne uzas Esperanton en usonaj lernejoj.</i><br>\n<br>\n<i>Modernaj infanfilmoj estas pli efektaj ol bildrakontoj.</i>",
+		"La plej <span style=\"color: #ff0000\">efektiva</span> (efika) maniero"
+	],
+	"£:BASE-efekto": [
+		"£:BASE-efekto",
+		"Konfuzebla vortoparo: efektiva ↔ efika ↔ efekta",
+		"<i>'Efektiva/-e’</i> signifas <i>‘fakta/-e’</i> (angle: <i>actual, in fact</i>), dum ‘<i>efika/-e’</i> signifas <i>‘kun bona rezulto’</i> (angle: <i>effective</i>). <i>‘Efekta/-e’</i> koncernas la vekadon de atento kaj emocioj (angle: <i>effectual, spectacular</i>)<br>\n<br>\n<i>La nuda vetkuro tre efike famigis la eventon.</i><br>\n<br>\n<i>Oni efektive ne uzas Esperanton en usonaj lernejoj.</i><br>\n<br>\n<i>Modernaj infanfilmoj estas pli efektaj ol bildrakontoj.</i>",
 		"La plej <span style=\"color: #ff0000\">efektiva</span> (efika) maniero"
 	],
 	"£:BASE-sama&\"<egalaj?n?>\"": [
@@ -3534,6 +3718,12 @@ g_marks.types = {
 		"'Karaktero’ celas la psikan, individuan ecaron de persono, dum <i>‘karaktro’</i> estas neologisma faktermino por litero aŭ alia tajpsigno.",
 		"Komence mi havis malfacilaĵojn kun esperantaj <span style=\"color: #ff0000\">karakteroj</span> (karaktroj) en mia telefono."
 	],
+	"£:BASE-karbo&\"<karbonoj?n?>\"": [
+		"£:BASE-karbo&\"<karbonoj?n?>\"",
+		"Konfuzebla vortoparo: karbono → karbo",
+		"'Karbono’ estas ĥemia elemento, <i>‘karbo’</i> estas materialo.",
+		"La germana industrio bruligis multe da <span style=\"color: #c9211e\">karbono</span> (karbo)."
+	],
 	"£:BASE-kaverno": [
 		"£:BASE-kaverno",
 		"Konfuzebla vortoparo: kavo → kaverno",
@@ -3548,6 +3738,12 @@ g_marks.types = {
 	],
 	"£:BASE-konekso": [
 		"£:BASE-konekso",
+		"Konfuzebla vortoparo: konekto → konekso",
+		"En Esperanto, laŭ ReVo, eblas distingi inter <i>‘konekto’</i> kaj <i>‘konekso’.</i> La unua estas fizika ligo, la dua abstrakta, koncepta, logika. Oni parolas pri (mal)bonaj retaj, trajnaj aŭ elektraj <i>konektoj</i>, sed pri <i>konekso</i> inter ideoj, vortoj aŭ okazaĵoj. PIV simile distingas inter <i>‘konektita’</i> kaj <i>‘koneksa’.</i> En la angla, ambaŭ substantivoj tradukiĝas per <i>‘connection’</i> or <i>‘link’,</i> sed en la germana <i>‘konekto’</i> estas <i>‘Verbindung’,</i> dum <i>‘konekso’</i> estas <i>‘Zusammenhang’.</i> Depende de la gepatra lingvo, ne ĉiuj esperantistoj konscias pri tiu distingo. Do ne temas pri vera eraro, sed pri niveloj de precizeco.",
+		"Ŝi sukcesis brile trovi neatenditajn <span style=\"color: #ff0000\">konektojn</span> (koneksojn) inter diversaj ideoj"
+	],
+	"£:BASE-koneksa": [
+		"£:BASE-koneksa",
 		"Konfuzebla vortoparo: konekto → konekso",
 		"En Esperanto, laŭ ReVo, eblas distingi inter <i>‘konekto’</i> kaj <i>‘konekso’.</i> La unua estas fizika ligo, la dua abstrakta, koncepta, logika. Oni parolas pri (mal)bonaj retaj, trajnaj aŭ elektraj <i>konektoj</i>, sed pri <i>konekso</i> inter ideoj, vortoj aŭ okazaĵoj. PIV simile distingas inter <i>‘konektita’</i> kaj <i>‘koneksa’.</i> En la angla, ambaŭ substantivoj tradukiĝas per <i>‘connection’</i> or <i>‘link’,</i> sed en la germana <i>‘konekto’</i> estas <i>‘Verbindung’,</i> dum <i>‘konekso’</i> estas <i>‘Zusammenhang’.</i> Depende de la gepatra lingvo, ne ĉiuj esperantistoj konscias pri tiu distingo. Do ne temas pri vera eraro, sed pri niveloj de precizeco.",
 		"Ŝi sukcesis brile trovi neatenditajn <span style=\"color: #ff0000\">konektojn</span> (koneksojn) inter diversaj ideoj"
@@ -3833,6 +4029,18 @@ g_marks.types = {
 		"Konfuzebla vortoparo: poŝto → mesaĝo",
 		"'Poŝto’ estas sendosistemo aŭ sendofirmao. La vorto ankaŭ uzeblas por ĉiu el la tagaj distribuoj de poŝto, sed ne por la individua sendaĵo aŭ mesaĝo.",
 		"Mi ricevis <span style=\"color: #ff0000\">poŝton</span> (mesaĝon) de la banko."
+	],
+	"£:BASE-eklezio": [
+		"£:BASE-eklezio",
+		"Konfuzebla vortoparo: preĝejo ↔ eklezio",
+		"<i>'Preĝejo’</i> estas konstruaĵo, <i>‘eklezio’</i> estas religia komunumo.",
+		"<i>la katolika</i> <span style=\"color: #c9211e\"><i>preĝejo</i></span><i> (eklezio) publikigis anoncon al ĉiuj kristanoj</i><br>\n<br>\n<i>apud mia domo troviĝas bela</i> <span style=\"color: #c9211e\"><i>eklezio</i></span><i> (preĝejo)</i>"
+	],
+	"£:BASE-pregxejo": [
+		"£:BASE-pregxejo",
+		"Konfuzebla vortoparo: preĝejo ↔ eklezio",
+		"<i>'Preĝejo’</i> estas konstruaĵo, <i>‘eklezio’</i> estas religia komunumo.",
+		"<i>la katolika</i> <span style=\"color: #c9211e\"><i>preĝejo</i></span><i> (eklezio) publikigis anoncon al ĉiuj kristanoj</i><br>\n<br>\n<i>apud mia domo troviĝas bela</i> <span style=\"color: #c9211e\"><i>eklezio</i></span><i> (preĝejo)</i>"
 	],
 	"£:BASE-provizanto": [
 		"£:BASE-provizanto",
@@ -4200,6 +4408,12 @@ g_marks.types = {
 		"Anstataŭ <i>‘en hejmo’</i> aŭ <i>‘al hejmo’,</i> uzu la adverbojn <i>‘hejme’</i> aŭ <i>‘hejmen’.</i> Alternative vi povas almeti posedan pronomon:<br>\n<br>\n<i>Li iris</i> <span style=\"color: #ff0000\"><i>al hejmo</i></span><i>.</i><i> → Li iris hejmen. / Li iris al sia hejmo.</i>",
 		""
 	],
+	"£:BASE-belajxo&\"<belecoj?n?>\"": [
+		"£:BASE-belajxo&\"<belecoj?n?>\"",
+		"Malĝusta sufikso: -ec → aĵ",
+		"Ne konfuzu la sufiksojn -ec kaj -aĵ. La unua estas abstrakta trajto, la dua konkreta aĵo. En <i>‘la beleco de la junulino’</i> temas pri la fakto, ke ŝi estas bela, dum <i>‘la belaĵoj de la junulino’</i> celas ŝiajn korpopartoj, aŭ eble juvelojn.",
+		""
+	],
 	"£:BASE-tiraneco&\"<tiranismoj?n?>\"": [
 		"£:BASE-tiraneco&\"<tiranismoj?n?>\"",
 		"Malĝusta sufikso: tiranismo → tiraneco",
@@ -4253,6 +4467,12 @@ g_marks.types = {
 		"Malĝusta vortelekto: esti → farti",
 		"Oni ne diras <i>‘kiel vi estas?’</i> (angle: <i>how are you?</i>), sed <i>‘kiel vi fartas?’</i> Ankaŭ en la respondo, oni <i>fartas (pli) bone,</i> k.s.",
 		""
+	],
+	"£:BASE-igi&\"<farig.*>\"": [
+		"£:BASE-igi&\"<farig.*>\"",
+		"Malĝusta vortelekto: farigi → igi",
+		"'Farigi’ signifas igi iun alian fari ion, ekz. <i>‘farigi al si novan veston’.</i> Sed ne uzu la vorton en la senco ‘igi ion/iun x-a/o’, ekz. <i>‘igi lin milionulo’.</i>",
+		"La entrepreno <span style=\"color: #c9211e\">farigis</span> (igis) lin riĉa"
 	],
 	"£:BASE-preni&\"<hazard.*>\"": [
 		"£:BASE-preni&\"<hazard.*>\"",
@@ -4343,6 +4563,12 @@ g_marks.types = {
 		"Malĝusta vortelekto: personaĵo/eco → rolanto",
 		"'Personaĵoj’ povas esti persondetaloj (ekz. petitaj de la polico) aŭ personaj kunportaĵoj. <i>‘Personeco’</i> estas la individua, memstara ecaro de persono (angle: personality). Sed uzi <i>‘personaĵo’</i> aŭ <i>‘personeco’</i> en la senco de ‘rolanto/rolpersono/figuro’ en libro aŭ filmo estas falsa amiko (ekz. hispan-portugala).<br>\n<br>\nAnkaŭ evitu uzi <i>‘personaĵo’</i> en la senco de ‘jura/leĝa persono’ (ekz. registrita firmao).",
 		"La teatraĵo enhavis plurajn bibliajn <span style=\"color: #ff0000\">personaĵojn</span> (rolantojn)."
+	],
+	"£:BASE-figuro&\"<personec.*>\"": [
+		"£:BASE-figuro&\"<personec.*>\"",
+		"Malĝusta vortelekto: personeco → figuro",
+		"<i>'Personeco’</i> estas vorto por la baza psika ecaro de persono, la karaktero. La vorto ne uzeblas kun la senco de publika aŭ fikcia figuro, do gravulo, eminentulo, famulo aŭ rolanto en libro aŭ filmo. En la pluralo preskaŭ ĉiam temas pri eraro.",
+		"La plej meritaj <span style=\"color: #c9211e\">personecoj</span> (figuroj) de la Esperanto-movado"
 	],
 	"£:BASE-pli": [
 		"£:BASE-pli",
@@ -4479,7 +4705,7 @@ g_marks.types = {
 	"£:BASE-mortiga&\"<mortaj?n?>\"": [
 		"£:BASE-mortiga&\"<mortaj?n?>\"",
 		"Mankanta afikso: morta → mortiga",
-		"<i>'Morta’</i> estas stato, dum <i>‘mortiga’</i> rilatas al ago, evento, malsano aŭ veneno, kiu kaŭzas morton. Infekto, ekzemple, logike ne povas esti morta, sed ĝi povas estas mortiga. La uzo de <i>‘morta’</i> kun la signifo <i>‘mortiga’</i> estas nuntempe arkaika – prefere evitu ĝin.",
+		"<i>Por la plej multaj hodiaŭaj esperantistoj,</i> <i>'morta’</i> temas pri stato (= mortinta), dum <i>‘mortiga’</i> rilatas al ago, evento, malsano aŭ veneno, kiu kaŭzas morton. Infekto, ekzemple, logike ne povas esti morta, sed ĝi povas estas mortiga. La uzo de <i>‘morta’</i> kun la signifo <i>‘mortiga’</i> estas nuntempe arkaika – prefere evitu ĝin.<br>\n<br>\nVidu ankaŭ la deklaron de la Akademio de Esperanto pri <a target=\"_blank\" href=\"https://www.akademio-de-esperanto.org/decidoj/rezultstataj_adjektivoj/index.htmlr\">rezultstataj adjektivoj</a>.",
 		""
 	],
 	"£:BASE-samseksemulo": [
@@ -4830,6 +5056,12 @@ g_marks.types = {
 		"'Manki’ ne permesas rektan objekton. Io povas manki al mi, sed mi ne povas <span style=\"color: #ff0000\">manki</span><span style=\"color: #c9211e\"> ion.</span> Uzu <i>‘malhavi’</i> anstataŭ, aŭ revortumu la frazon kun <i>‘al’</i>!",
 		"Ni <span style=\"color: #ff0000\">mankas</span> kelkajn pecojn de la puzlo. (Mankas al ni kelkaj pecojn …, ni malhavas kelkajn pecojn ...)"
 	],
+	"£:BASE-vomema&\"<nauxz.*aj?n?>\"": [
+		"£:BASE-vomema&\"<nauxz.*aj?n?>\"",
+		"Transitiveco: naŭza → vomema",
+		"'Naŭzi’ estas transitiva verbo, do ‘<i>naŭza’</i> celas efikon al iu homo, ne la (vomeman) staton de homo.",
+		"Mi sentas min <span style=\"color: #c9211e\">naŭza</span> (vomema)"
+	],
 	"£:BASE-honorigi&\"<omagx.*>\"": [
 		"£:BASE-honorigi&\"<omagx.*>\"",
 		"Transitiveco: omaĝi → honorigi",
@@ -4887,7 +5119,7 @@ g_marks.types = {
 	"£:BASE-maldorma&\"<vekaj?n?>\"": [
 		"£:BASE-maldorma&\"<vekaj?n?>\"",
 		"Transitiveco: veka → maldorma/sendorma",
-		"La sola logika signifo de la adjektivo <i>‘veka’</i> estas ‘maldormiga’, prefere ne uzu ĝin kun la senco <i>‘maldorma/sendorma’.</i> La klarigo estas, ke <i>‘dormi’</i> estas netransitiva (angle: <i>wake up,</i> germane: <i>aufwachen</i>), dum <i>‘veki’</i> estas transitiva (angle: <i>wake s.o. up,</i> germane: <i>wecken</i>). Do eblas derivi <i>‘dorma’</i> kiel stato, sed ne <i>‘veka’.</i> ‘<i>Veka’</i> estas la horloĝo, bruo aŭ tuŝo, kiu vekas iun, ne lia posta (maldorma) stato.",
+		"La sola logika signifo de la adjektivo <i>‘veka’</i> estas ‘maldormiga’, prefere ne uzu ĝin kun la senco <i>‘maldorma/sendorma’.</i> La klarigo estas, ke <i>‘dormi’</i> estas netransitiva (angle: <i>wake up,</i> germane: <i>aufwachen</i>), dum <i>‘veki’</i> estas transitiva (angle: <i>wake s.o. up,</i> germane: <i>wecken</i>). Do eblas derivi <i>‘dorma’</i> kiel stato, sed ne <i>‘veka’.</i> ‘<i>Veka’</i> estas la horloĝo, bruo aŭ tuŝo, kiu vekas iun, ne lia posta (maldorma) stato.<br>\n<br>\nVidu ankaŭ la deklaron de la Akademio de Esperanto pri <a target=\"_blank\" href=\"https://www.akademio-de-esperanto.org/decidoj/rezultstataj_adjektivoj/index.htmlr\">rezultstataj adjektivoj</a>.",
 		"Ludoviko sidis longe <span style=\"color: #ff0000\">veka</span> (maldorma) en sia ĉambro."
 	],
 	"£:BASE-broso&\"<brosiloj?n?>": [
@@ -4927,11 +5159,30 @@ for (let k in g_marks.types) {
 	g_marks.types[k] = v;
 	g_marks.types_grammar.push(k);
 
+	for (let m in g_marks.yellow) {
+		if (k.indexOf(m + '&') === 0 || k.indexOf(m + '-') === 0) {
+			g_marks.yellow[k] = k;
+		}
+	}
+	for (let m in g_marks.blue) {
+		if (k.indexOf(m + '&') === 0 || k.indexOf(m + '-') === 0) {
+			g_marks.blue[k] = k;
+		}
+	}
+	for (let m in g_marks.purple) {
+		if (k.indexOf(m + '&') === 0 || k.indexOf(m + '-') === 0) {
+			g_marks.purple[k] = k;
+		}
+	}
+
 	if (g_marks.yellow.hasOwnProperty(k) || g_marks.blue.hasOwnProperty(k) || g_marks.purple.hasOwnProperty(k) || g_green.hasOwnProperty(k)) {
 		// Nothing
 	}
 	else if (/^£(nom.*|acc.*|DEL.*|PREADD.*)$/.test(k)) {
 		g_marks.blue[k] = k;
+	}
+	else if (/^£comma-$/.test(k)) {
+		g_marks.purple[k] = k;
 	}
 	else {
 		g_marks.red[k] = k;
