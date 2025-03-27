@@ -247,8 +247,8 @@ function getState() {
 		if (types.length) {
 			let ts = iters[it][1];
 			let html = '<table class="table-striped">';
-			html += '<thead><tr><th class="left">Type</th><th>+</th><th class="default"></th><th>-</th></tr></thead>';
-			html += '<tfoot><tr><th class="left">Type</th><th>+</th><th class="default"></th><th>-</th></tr></tfoot>';
+			html += '<thead><tr><th class="left">Type</th><th><i class="bi bi-check-lg"></i></th><th class="default"></th><th><i class="bi bi-x-lg"></i></th></tr></thead>';
+			html += '<tfoot><tr><th class="left">Type</th><th><i class="bi bi-check-lg"></i></th><th class="default"></th><th><i class="bi bi-x-lg"></i></th></tr></tfoot>';
 			html += '<tbody>';
 			for (let i=0 ; i<ts.length ; ++i) {
 				let t = ts[i];
