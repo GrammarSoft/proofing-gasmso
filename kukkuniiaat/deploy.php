@@ -50,7 +50,9 @@ if ($where !== 'release') {
 }
 $cwd = getcwd();
 chdir('/home/komma/repo-gas/git');
-echo shell_exec('git show-ref --verify --quiet refs/heads/release-kal && git checkout release-kal || git checkout --orphan release-kal');
+echo shell_exec('git checkout main');
+echo shell_exec('git pull --all --rebase --autostash');
+echo shell_exec('git checkout release-kal || git checkout --orphan release-kal');
 echo shell_exec('rm -rfv *');
 echo shell_exec("rsync -avcL --delete '$cwd/' ./ '--exclude=*.php' '--exclude=*.po' '--exclude=*.pot' '--exclude=*.svn' '--exclude=*.git'");
 echo shell_exec('git add -A .');
