@@ -189,6 +189,19 @@ function findElement(prefix, word, suffix) {
 		}
 		return sel;
 	}
+
+	// Retry close context, +/- 3 words
+	let cp = prefix.match(/((?:\s+\S+){1,3})\s*$/)[1];
+	let cs = suffix.match(/^\s*((?:\S+\s+){1,3})/)[1];
+	rx = '\\s*'+cp.replace(Const.NonLetter, '.*?')+'\\s*'+escapeRegExpTokens(word)+'\\s*'+cs.replace(Const.NonLetter, '.*?')+'\\s*';
+	Logger.log('Searching regex %s', rx);
+	for (let i=0 ; i<sects.length ; ++i) {
+		let sel = sects[i].findText(rx);
+		if (!sel) {
+			continue;
+		}
+		return sel;
+	}
 	return null;
 }
 
@@ -244,8 +257,13 @@ function selectInDocument(prefix, word, suffix) {
 	let rx = new RegExp('^(\\s*'+prefix.replace(Const.NonLetter, '[^]*?')+'\\s*)'+escapeRegExpTokens(word));
 	let m = rx.exec(txt);
 	if (!m) {
-		Logger.log('Did not match regex');
-		throw 'ERR_SELECT_NOMATCH';
+		let cp = prefix.match(/((?:\s+\S+){1,3})\s*$/)[1];
+		rx = new RegExp('^([^]*'+cp.replace(Const.NonLetter, '[^]*?')+'\\s*)'+escapeRegExpTokens(word));
+		m = rx.exec(txt);
+		if (!m) {
+			Logger.log('Did not match regex');
+			throw 'ERR_SELECT_NOMATCH';
+		}
 	}
 
 	let doc = DocumentApp.getActiveDocument();

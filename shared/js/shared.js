@@ -1752,7 +1752,7 @@ function nl2html(v) {
 }
 
 function l10n_detectLanguage() {
-	l10n.lang = navigator.language;
+	l10n.lang = ls_get('locale', navigator.language);
 	try {
 		if (window.hasOwnProperty('parent') && window.parent && window.parent.hasOwnProperty('UILANG2') && window.parent.UILANG2) {
 			l10n.lang = window.parent.UILANG2;
