@@ -51,6 +51,8 @@ if ($where !== 'grammar-epo') {
 }
 $cwd = getcwd();
 chdir('/home/komma/repo-gas/git');
+echo shell_exec('git checkout main');
+echo shell_exec('git pull --all --rebase --autostash');
 echo shell_exec('git checkout release-gs-epo || git checkout --orphan release-gs-epo');
 echo shell_exec('rm -rfv * .[a-f]* .[h-z]*');
 echo shell_exec("rsync -avcL --delete '$cwd/' ./ '--exclude=*.php' '--exclude=*.po' '--exclude=*.pot' '--exclude=*.svn' '--exclude=*.git'");
