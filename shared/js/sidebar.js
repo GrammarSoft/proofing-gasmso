@@ -1235,6 +1235,7 @@ function initSidebar() {
 
 	$('.btnLanguage').click(function() {
 		session.locale = l10n.lang = $(this).attr('data-which');
+		ls_set('locale', session.locale);
 		l10n_world();
 		overlay_pop();
 		matomo_event('ui', 'change-language', session.locale);
@@ -1466,6 +1467,13 @@ $(function() {
 });
 
 function showError(msg, args) {
+	if (typeof msg !== 'string') {
+		msg = msg.toString();
+	}
+	if (/ ERR_/.test(msg)) {
+		msg = msg.match(/ (ERR_\S+)/)[1];
+	}
+
 	if (!select_fail && msg == 'ERR_SELECT_NOTFOUND') {
 		console.log('Retrying select...');
 		$('#working').show();
