@@ -258,9 +258,9 @@ g_marks.types = {
 	],
 	"": [
 		"",
-		"Transitiveco: ŝtopigo → ŝtopiĝo, stopado",
-		"La vorto <i>‘ŝtopigo’</i> preskaŭ ĉiam estas eraro. Se temas pri trafiko aŭ fluo, vi verŝajne celis la ne-transitivan <i>‘ŝtopiĝo’</i>. Sed en la kunteksto de motoro aŭ maŝino ankaŭ povas esti, ke temas pri <i>‘stopado’</i> (haltigo) aŭ <i>‘stopiĝo’</i> (moviĝoĉeso).",
-		"La akcidento kaŭzis severan <span style=\"color: #ff0000\">ŝtopigon</span> (ŝtopiĝon) en la trafiko."
+		"Konfuza vortoparo: intera → interna",
+		"'Intera' signifas 'estante inter du aferoj' (ekz. 'intera periodo', 'intera kategorio'). La vorto foje konfuziĝas kun <i>'interna'</i> (ena), kredeble ĉar ties malo, <i>'ekstera',</i> ne enhavas 'n' post la 'r'.<br>\n<br>\nNotu ankaŭ, ke estas falsa amiko uzi <i>'intera'</i> (aŭ <i>'entera</i>') en la senco de <i>'tuta'.</i>",
+		"Sed la seruro ne funkciis, ĉar ĝi tiom rustiĝis, ke la <span style=\"color: #ff0000\">intera</span> (interna) mekanismo ne plu moveblis.<br>\n<br>\nIliaj koloj povas turniĝi 270 gradojn por vidi en aliaj direktoj sen movi siajn <span style=\"color: #ff0000\">enterajn</span> (tutajn) korpojn."
 	],
 	"£:BASE-...": [
 		"£:BASE-...",
@@ -3364,6 +3364,12 @@ g_marks.types = {
 		"En Esperanto, <i>‘rilaksi’</i> estas transitiva verbo, normale celante kondiĉojn, parametrojn aŭ muskolojn kiel objektojn. Homoj ne rilaksas, sed senstreĉiĝas.<br>\n<br>\nNotu, ke <i>'relaksi'</i> tute ne ekzistas en Esperanto, krom kun la stranga senco de 'ree havi diareon'. Devas esti aŭ (kun objekto) <i>'rilaksi'</i> aŭ (sen objekto) <i>'senstreĉiĝi'.</i>",
 		"Cxiu <span style=\"color: #ff0000\">rilaksis</span> (senstreĉiĝis) kaj auxskultis la muzikon.<br>\n<br>\nNi <span style=\"color: #ff0000\">relaksis</span> (senstreĉiĝis) trinkante varman ĉokoladon."
 	],
+	"£x-etype-lemma&\"<r[ie]laks.*>\"": [
+		"£x-etype-lemma&\"<r[ie]laks.*>\"",
+		"Falsa amiko: rilaksi/relaksi → senstreĉiĝi/rilaksi",
+		"En Esperanto, <i>‘rilaksi’</i> estas transitiva verbo, normale celante kondiĉojn, parametrojn aŭ muskolojn kiel objektojn. Homoj ne rilaksas, sed senstreĉiĝas.<br>\n<br>\nNotu, ke <i>'relaksi'</i> tute ne ekzistas en Esperanto, krom kun la stranga senco de 'ree havi diareon'. Devas esti aŭ (kun objekto) <i>'rilaksi'</i> aŭ (sen objekto) <i>'senstreĉiĝi'.</i>",
+		"Cxiu <span style=\"color: #ff0000\">rilaksis</span> (senstreĉiĝis) kaj auxskultis la muzikon.<br>\n<br>\nNi <span style=\"color: #ff0000\">relaksis</span> (senstreĉiĝis) trinkante varman ĉokoladon."
+	],
 	"£:BASE-kuracilo&\"<rimedoj?n?>": [
 		"£:BASE-kuracilo&\"<rimedoj?n?>",
 		"Falsa amiko: rimedo → kuracilo",
@@ -6357,6 +6363,66 @@ g_marks.types = {
 		"Vortklaso: dume → dum",
 		"La vorto <i>‘dume’</i> estas adverbo, ne konjunkcio. Por konkunkcia signifo, uzu <i>‘dum’.</i>",
 		"Kerna ideo de Esperanto ne iĝos realigita <span style=\"color: #ff0000\">dume</span> (dum) ekzistas mono en mondo ."
+	],
+	"£:BASE-manifestacio": [
+		"£:BASE-manifestacio",
+		"Falsa amiko: demonstracio → manifestacio",
+		"En Esperanto, <i>'demonstracio'</i> estas pruvo, la ago demonstri. Ne konfuzu tion kun <i>'manifestacio',</i> granda publika protestaranĝo, ofte en formo de marŝo kun mesaĝotabuloj. Notu ankaŭ, ke <i>'manifesto'</i> estas skriba deklaro, do ne la sama afero kiel <i>'manifestacio'.</i>",
+		"La pacmovado organizis paskajn <span style=\"color: #ff0000\">demonstraciojn</span> (manifestaciojn) en multaj urboj."
+	],
+	"£:BASE-diveni&\"<deven.*>\"": [
+		"£:BASE-diveni&\"<deven.*>\"",
+		"Falsa amiko: deveni → diveni",
+		"Homo <i>'devenas'</i> de iu loko, kaj vorto aŭ kutimo <i>'devenas'</i> de iu origino, sed oni <i>'divenas'</i> iun nekonatan fakton.",
+		"Estas malfacile deveni (diveni) la verajn intencojn de la prezidanto."
+	],
+	"£:BASE-farigxi&<deven.*>\"": [
+		"£:BASE-farigxi&<deven.*>\"",
+		"Falsa amiko: deveni → fariĝi",
+		"Estas (verŝajne franca) falsa amiko uzi la verbon <i>'deveni'</i> kun la signifo de <i>'fariĝi'</i> aŭ <i>'iĝi'.</i> Deveno temas pri la origino de iu aŭ io. Notu ankaŭ, ke la komplemento de <i>'fariĝi'</i> estas predikativo, ne objekto, do se vi uzis akuzativon post <i>'deveni'</i> korektu ĝin al nominativo.",
+		"La urbo <span style=\"color: #ff0000\">devenis</span> (fariĝis) la ĉefa<span style=\"color: #ff0000\">n</span> centro<span style=\"color: #ff0000\">n</span> (la ĉefa centro) de komerco en la regiono.<br>\n<br>\nLi <span style=\"color: #ff0000\">devenis</span> (iĝis) senatoro en 1876."
+	],
+	"£:BASE-agado": [
+		"£:BASE-agado",
+		"Falsa amiko: akcio → agado",
+		"En Esperanto, <i>'akcio'</i> estas valorpapero. Ne eblas uzi la vorton kun la signifo '(kunordigita) agado'. Povas temi pri (ekz. germana) falsa amiko.",
+		"La <span style=\"color: #ff0000\">akcio</span> (agado) estis tre sukcesa."
+	],
+	"£:BASE-renversi": [
+		"£:BASE-renversi",
+		"Falsa amiko: reversi → renversi",
+		"En Esperanto, <i>'reversi'</i> normale signifas rekudri vesto tiel, ke la interna flanko fariĝas la ekstera. Alia ebla signifo estas 're-versi' (ekz. poemon en alia lingvo). Ĉi tie tamen vi verŝajne celis <i>'renversi'</i> (inversigi, faligi inversigante).",
+		"Ne eblas <span style=\"color: #ff0000\">reversi</span> (renversi) tiun procezon."
+	],
+	"£x-etype-lemma&\"<reversigx.*>\"": [
+		"£x-etype-lemma&\"<reversigx.*>\"",
+		"Falsa amiko: reversi → renversi",
+		"En Esperanto, <i>'reversi'</i> normale signifas rekudri vesto tiel, ke la interna flanko fariĝas la ekstera. Alia ebla signifo estas 're-versi' (ekz. poemon en alia lingvo). Ĉi tie tamen vi verŝajne celis <i>'renversi'</i> (inversigi, faligi inversigante).",
+		"Ne eblas <span style=\"color: #ff0000\">reversi</span> (renversi) tiun procezon."
+	],
+	"£:BASE-interna": [
+		"£:BASE-interna",
+		"Konfuza vortoparo: intera → interna",
+		"'Intera' signifas 'estante inter du aferoj' (ekz. 'intera periodo', 'intera kategorio'). La vorto foje konfuziĝas kun <i>'interna'</i> (ena), kredeble ĉar ties malo, <i>'ekstera',</i> ne enhavas 'n' post la 'r'.<br>\n<br>\nNotu ankaŭ, ke estas falsa amiko uzi <i>'intera'</i> (aŭ <i>'entera</i>') en la senco de <i>'tuta'.</i>",
+		"Sed la seruro ne funkciis, ĉar ĝi tiom rustiĝis, ke la <span style=\"color: #ff0000\">intera</span> (interna) mekanismo ne plu moveblis.<br>\n<br>\nIliaj koloj povas turniĝi 270 gradojn por vidi en aliaj direktoj sen movi siajn <span style=\"color: #ff0000\">enterajn</span> (tutajn) korpojn."
+	],
+	"£:BASE-tuta&\"<[ie]nteraj?n?>\"": [
+		"£:BASE-tuta&\"<[ie]nteraj?n?>\"",
+		"Konfuza vortoparo: intera → interna",
+		"'Intera' signifas 'estante inter du aferoj' (ekz. 'intera periodo', 'intera kategorio'). La vorto foje konfuziĝas kun <i>'interna'</i> (ena), kredeble ĉar ties malo, <i>'ekstera',</i> ne enhavas 'n' post la 'r'.<br>\n<br>\nNotu ankaŭ, ke estas falsa amiko uzi <i>'intera'</i> (aŭ <i>'entera</i>') en la senco de <i>'tuta'.</i>",
+		"Sed la seruro ne funkciis, ĉar ĝi tiom rustiĝis, ke la <span style=\"color: #ff0000\">intera</span> (interna) mekanismo ne plu moveblis.<br>\n<br>\nIliaj koloj povas turniĝi 270 gradojn por vidi en aliaj direktoj sen movi siajn <span style=\"color: #ff0000\">enterajn</span> (tutajn) korpojn."
+	],
+	"£:BASE-(plej=)?(alta|sublima|granda|bona|altranga)": [
+		"£:BASE-(plej=)?(alta|sublima|granda|bona|altranga)",
+		"Falsa amiko: suprema → alta/altranga",
+		"En Esperanto, la vorto <i>'suprema'</i> estas nure matematika fakvorto. Ne ebla uzi ĝin kiel &quot;superlativon&quot; de <i>'alta', 'altranga', 'granda', 'bona'</i> aŭ simile.",
+		"<span style=\"color: #ff0000\"><i>Suprema</i></span><i> Kortumo → Alta Kortumo</i><br>\n<br>\n<i>Mi havis la tri</i> <span style=\"color: #ff0000\"><i>supremajn</i></span><i> (plej bonajn) instruistojn de la fakultato.</i>"
+	],
+	"£:BASE-klasikajxo": [
+		"£:BASE-klasikajxo",
+		"Mankanta afikso: klasiko → klasikaĵo",
+		"<i>'Klasiko'</i> estas malofta vorto, celanta la tuton de klasika periodo en arto. Ĉi tie vi verŝajne celas unuopa(j)n verkoj(j)n, do uzu <i>'klasikaĵo'.</i>",
+		"Li legis ĉiujn <span style=\"color: #ff0000\">klasikojn</span> (klasikaĵojn) de la Esperanta literaturo."
 	]
 };
 
