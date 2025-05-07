@@ -16,9 +16,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this project.  If not, see <http://www.gnu.org/licenses/>.
  */
+import * as s from './shared.js';
 'use strict';
 
-g_marks.yellow = {
+s.g.marks.yellow = {
 	'£proper': '£proper',
 	'£new': '£new',
 	'£abbreviation': '£abbreviation',
@@ -26,7 +27,7 @@ g_marks.yellow = {
 	'£compound': '£compound',
 };
 
-g_marks.purple = {
+s.g.marks.purple = {
 	'£comma': '£comma',
 	'£comma-FSstart': '£comma-FSstart',
 	'£comma-FSend': '£comma-FSend',
@@ -39,7 +40,7 @@ g_marks.purple = {
 	'£sentsplit': '£sentsplit',
 };
 
-g_marks.blue = {
+s.g.marks.blue = {
 	'£-io': '£-io',
 	'£-iu': '£-iu',
 	'£PREADD:subject': '£PREADD:subject',
@@ -84,10 +85,10 @@ g_marks.blue = {
 	'£x-etype-inner-pl': '£x-etype-inner-pl',
 };
 
-g_marks.types_comma = [];
-g_marks.types_grammar = [];
+s.g.marks.types_comma = [];
+s.g.marks.types_grammar = [];
 
-g_marks.types = {
+s.g.marks.types = {
 	"£x-etype-list": [
 		"£x-etype-list",
 		"Literumeraro trovita en listo de eraroj",
@@ -6714,87 +6715,87 @@ g_marks.types = {
 	]
 };
 
-let g_green = {
+s.g.green = {
 	'£green': '£green',
 	'£warning': '£warning',
 	'£clefting': '£clefting',
 };
 
-for (let k in g_marks.types) {
+for (let k in s.g.marks.types) {
 	let v = [
-		g_marks.types[k][1],
-		g_marks.types[k][2] + "<br>\n<br>\n<i>" + g_marks.types[k][3] + '</i>'
+		s.g.marks.types[k][1],
+		s.g.marks.types[k][2] + "<br>\n<br>\n<i>" + s.g.marks.types[k][3] + '</i>'
 		];
-	if (g_marks.types[k][1] === g_marks.types[k][2]) {
-		v[1] = '<i>' + g_marks.types[k][3] + '</i>';
+	if (s.g.marks.types[k][1] === s.g.marks.types[k][2]) {
+		v[1] = '<i>' + s.g.marks.types[k][3] + '</i>';
 	}
-	g_marks.types[k] = v;
-	g_marks.types_grammar.push(k);
+	s.g.marks.types[k] = v;
+	s.g.marks.types_grammar.push(k);
 
-	for (let m in g_marks.yellow) {
+	for (let m in s.g.marks.yellow) {
 		if (k.indexOf(m + '&') === 0 || k.indexOf(m + '-') === 0) {
-			g_marks.yellow[k] = k;
+			s.g.marks.yellow[k] = k;
 		}
 	}
-	for (let m in g_marks.blue) {
+	for (let m in s.g.marks.blue) {
 		if (k.indexOf(m + '&') === 0 || k.indexOf(m + '-') === 0) {
-			g_marks.blue[k] = k;
+			s.g.marks.blue[k] = k;
 		}
 	}
-	for (let m in g_marks.purple) {
+	for (let m in s.g.marks.purple) {
 		if (k.indexOf(m + '&') === 0 || k.indexOf(m + '-') === 0) {
-			g_marks.purple[k] = k;
+			s.g.marks.purple[k] = k;
 		}
 	}
 
-	if (g_marks.yellow.hasOwnProperty(k) || g_marks.blue.hasOwnProperty(k) || g_marks.purple.hasOwnProperty(k) || g_green.hasOwnProperty(k)) {
+	if (s.g.marks.yellow.hasOwnProperty(k) || s.g.marks.blue.hasOwnProperty(k) || s.g.marks.purple.hasOwnProperty(k) || s.g.green.hasOwnProperty(k)) {
 		// Nothing
 	}
 	else if (/^£(nom.*|acc.*|DEL.*|PREADD.*)$/.test(k)) {
-		g_marks.blue[k] = k;
+		s.g.marks.blue[k] = k;
 	}
 	else if (/^£comma-$/.test(k)) {
-		g_marks.purple[k] = k;
+		s.g.marks.purple[k] = k;
 	}
 	else {
-		g_marks.red[k] = k;
+		s.g.marks.red[k] = k;
 	}
 }
 
-g_marks.dict = ['(£error)'];
-for (let k in g_marks.yellow) {
-	g_marks.dict.push('('+escapeRegExp(k)+')');
+s.g.marks.dict = ['(£error)'];
+for (let k in s.g.marks.yellow) {
+	s.g.marks.dict.push('('+s.escapeRegExp(k)+')');
 }
-g_marks.dict = new RegExp('('+g_marks.dict.join('|')+')( |$)');
+s.g.marks.dict = new RegExp('('+s.g.marks.dict.join('|')+')( |$)');
 
-function l10n_marking_types(lang) {
-	g_options_default.types = {};
-	for (let k in g_marks.types) {
+s.m.l10n_marking_types = function(lang) {
+	s.g.options_default.types = {};
+	for (let k in s.g.marks.types) {
 		if (/^%(ok|nko)(-|$)/.test(k)) {
-			g_options_default.types[k] = 0;
+			s.g.options_default.types[k] = 0;
 		}
 		else {
-			g_options_default.types[k] = 1;
+			s.g.options_default.types[k] = 1;
 		}
 		if (k.indexOf('&') !== -1) {
 			let fk = k.substring(0, k.indexOf('&'));
 			let v = k.substring(k.indexOf('&')+1);
-			if (!g_marks.types_complex.hasOwnProperty(fk)) {
-				g_marks.types_complex[fk] = [];
+			if (!s.g.marks.types_complex.hasOwnProperty(fk)) {
+				s.g.marks.types_complex[fk] = [];
 			}
 			let vs = v.split(/\s+/);
 			let ana = [];
 			for (let i=0 ; i<vs.length ; ++i) {
 				ana.push(new RegExp(vs[i]));
 			}
-			g_marks.types_complex[fk].push({
+			s.g.marks.types_complex[fk].push({
 				ana: ana,
 				exp: k,
 			});
 		}
 	}
-	g_options_default.types["£new"] = 0;
-	g_options_default.types["£proper"] = 0;
+	s.g.options_default.types["£new"] = 0;
+	s.g.options_default.types["£proper"] = 0;
 }
 
-orderMarkings();
+s.orderMarkings();

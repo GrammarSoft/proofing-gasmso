@@ -1,33 +1,23 @@
-require('util').inspect.defaultOptions.depth = Infinity;
-const fs = require('fs');
+import util from 'node:util';
+util.inspect.defaultOptions.depth = Infinity;
 
-const g_conf_defaults = {};
-let $ = {
-	trim: function(s) {return s.trim();},
-	};
-let window = {};
-let g_impl = {
+import * as s from '../js/shared.js';
+import * as m from '../../gs-esperanto/js/mark-types.js';
+
+s.g._m = m;
+
+s.g.impl = {
 	parseError: console.log,
 	parseProgress: function() {},
 	beforeParseResult: function(t) { return t; },
 	parseChunkDone: function() {},
 	};
 
-let js = fs.readFileSync(__dirname + '/../js/shared.js', 'utf-8') + '';
-js = js.replace(/['"]use strict['"](;?)/g, '');
-js = js.replace(/\nlet\b/g, '\nvar');
-eval(js);
-
-js = fs.readFileSync(__dirname + '/../../gs-esperanto/js/mark-types.js', 'utf-8') + '';
-js = js.replace(/['"]use strict['"](;?)/g, '');
-js = js.replace(/\nlet\b/g, '\nvar');
-eval(js);
-
-g_tool = 'Grammar';
-to_send = [];
-to_send_i = 1;
-_live_options.types = {};
-_live_options.config = {
+s.g.tool = 'Grammar';
+s.g.to_send = [];
+s.g.to_send_i = 1;
+s.g._live_options.types = {};
+s.g._live_options.config = {
 	opt_useDictionary: false,
 	};
 
@@ -38,17 +28,9 @@ let tests = [
 
 for (let i=0 ; i<tests.length ; ++i) {
 	let t = tests[i];
-	to_send = t.t;
-	cache.Grammar = {};
+	s.g.to_send = t.t;
+	s.g.cache.Grammar = {};
 
-	let rv = _parseResult(t.rv);
-	console.log(marking_ranges);
-
-	let did = false;
-	if (!did) {
-		console.log(`${i+1} FAIL: Returned had no expected fields`);
-	}
-	else {
-		console.log(`${i+1} SUCCESS: ` + JSON.stringify(rv));
-	}
+	let rv = s._parseResult(t.rv);
+	console.log(s.g.marking_ranges);
 }

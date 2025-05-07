@@ -15,7 +15,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this project.  If not, see <http://www.gnu.org/licenses/>.
  */
-//'use strict';
+'use strict';
+
+export let g = {
+	impl: null,
+	};
+export let m = {
+	l10n_marking_types: function(lang) {},
+	};
 
 if (!Array.prototype.unique) {
 	Array.prototype.unique = function() {
@@ -60,7 +67,7 @@ if (typeof Object.assign !== 'function') {
 	});
 }
 
-function object_copy(a, b, c) {
+export function object_copy(a, b, c) {
 	let cp = Object.assign({}, a);
 	if (typeof b === 'object') {
 		cp = Object.assign(cp, b);
@@ -71,7 +78,7 @@ function object_copy(a, b, c) {
 	return cp;
 }
 
-function object_values(obj) {
+export function object_values(obj) {
 	let vals = [];
 	for (let k in obj) {
 		if (!obj.hasOwnProperty(k)) {
@@ -82,13 +89,13 @@ function object_values(obj) {
 	return vals;
 }
 
-function object_join(obj, s) {
+export function object_join(obj, s) {
 	return object_values(obj).join(s);
 }
 
 // From https://stackoverflow.com/a/43053803/145919
 let _f = (a, b) => [].concat(...a.map(a => b.map(b => [].concat(a, b))));
-let cartesian = (a, b, ...c) => b ? cartesian(_f(a, b), ...c) : a;
+export let cartesian = (a, b, ...c) => b ? cartesian(_f(a, b), ...c) : a;
 
 // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/repeat#Polyfill
 if (!String.prototype.repeat) {
@@ -207,11 +214,12 @@ if (!String.prototype.normalize) {
 	}
 }
 
-if (typeof ROOT_URL_SELF === 'undefined') {
-	ROOT_URL_SELF = '';
+let g_ROOT_URL_SELF = '';
+if (typeof ROOT_URL_SELF !== 'undefined') {
+	g_ROOT_URL_SELF = ROOT_URL_SELF;
 }
 
-const Defs = {
+export const Defs = {
 	CAP_ADMIN:    (1 <<  0),
 	CAP_COMMA:    (1 <<  1),
 	CAP_DANPROOF: (1 <<  2),
@@ -241,13 +249,13 @@ const Defs = {
 	'deucom-student': 'Kommatroll Student',
 };
 
-class GS_Analysis {
+export class GS_Analysis {
 	pos = '';
 	func = '';
 	raw = '';
 }
 
-class GS_Word {
+export class GS_Word {
 	word = '';
 	space = ' ';
 	mark = '';
@@ -267,7 +275,7 @@ class GS_Word {
 	}
 }
 
-class GS_Suggestion {
+export class GS_Suggestion {
 	word = '';
 	space = ' ';
 
@@ -283,7 +291,7 @@ class GS_Suggestion {
 	}
 }
 
-class GS_MarkRange {
+export class GS_MarkRange {
 	seg = 0;
 	begin = -1;
 	end = -1;
@@ -312,44 +320,44 @@ class GS_MarkRange {
 	}
 }
 
-const VERSION_PROTOCOL = 1;
-let MATOMO_ROOT = '//gramtrans.com/matomo/';
+export const VERSION_PROTOCOL = 1;
+g.MATOMO_ROOT = '//gramtrans.com/matomo/';
 
-const STR_SENT_BREAK = '\ue00a';
-const STR_NULLISH = '\ue00b';
-const STR_PLACEHOLDER = '\ue00c';
+export const STR_SENT_BREAK = '\ue00a';
+export const STR_NULLISH = '\ue00b';
+export const STR_PLACEHOLDER = '\ue00c';
 
 // Upper-case because we compare them to DOM nodeName
-let text_nodes = {'ADDRESS': true, 'ARTICLE': true, 'ASIDE': true, 'AUDIO': true, 'BLOCKQUOTE': true, 'BODY': true, 'CANVAS': true, 'DD': true, 'DIV': true, 'DL': true, 'FIELDSET': true, 'FIGCAPTION': true, 'FIGURE': true, 'FOOTER': true, 'FORM': true, 'H1': true, 'H2': true, 'H3': true, 'H4': true, 'H5': true, 'H6': true, 'HEADER': true, 'HGROUP': true, 'HTML': true, 'HR': true, 'LI': true, 'MAIN': true, 'NAV': true, 'NOSCRIPT': true, 'OL': true, 'OUTPUT': true, 'P': true, 'PRE': true, 'SECTION': true, 'TABLE': true, 'TD': true, 'TH': true, 'UL': true, 'VIDEO': true};
+g.text_nodes = {'ADDRESS': true, 'ARTICLE': true, 'ASIDE': true, 'AUDIO': true, 'BLOCKQUOTE': true, 'BODY': true, 'CANVAS': true, 'DD': true, 'DIV': true, 'DL': true, 'FIELDSET': true, 'FIGCAPTION': true, 'FIGURE': true, 'FOOTER': true, 'FORM': true, 'H1': true, 'H2': true, 'H3': true, 'H4': true, 'H5': true, 'H6': true, 'HEADER': true, 'HGROUP': true, 'HTML': true, 'HR': true, 'LI': true, 'MAIN': true, 'NAV': true, 'NOSCRIPT': true, 'OL': true, 'OUTPUT': true, 'P': true, 'PRE': true, 'SECTION': true, 'TABLE': true, 'TD': true, 'TH': true, 'UL': true, 'VIDEO': true};
 
-let g_dictionary = {};
-let g_dictionary_json = '{}';
-let _live_dictionary = {};
+g.dictionary = {};
+g.dictionary_json = '{}';
+g._live_dictionary = {};
 
-const g_access_token_defaults = {
+export const g_access_token_defaults = {
 	hmac: '{}',
 	session: '',
 	ai: [],
 };
-let g_access_token = object_copy(g_access_token_defaults);
-let g_access_hmac = {};
-let g_keepalive = null;
-let g_login_channel = '';
-let g_login_ws = null;
-let g_client = 'unknown';
-let g_anonymous = false;
+g.access_token = object_copy(g_access_token_defaults);
+g.access_hmac = {};
+g.keepalive = null;
+g.login_channel = '';
+g.login_ws = null;
+g.client = 'unknown';
+g.anonymous = false;
 
-let g_tts_speaker = null;
-let g_tts_tap = 0;
+g.tts_speaker = null;
+g.tts_tap = 0;
 
-let g_options = {};
-let g_options_json = {};
-let _live_options = {};
+g.options = {};
+g.options_json = {};
+g._live_options = {};
 
 // Letters we're likely to see in Danish, Norwegian, Swedish, Greenlandic
 // Can't rely on Unicode escapes or /u modifier because of IE11
-const Letters = '\\da-zA-ZŭŬĉĈĝĜĥĤĵĴŝŜÂâÊêÎîÔôÛûÃãĨĩÕõŨũÀàÈèÌìÒòÙùÁáÉéÍíÓóÚúÄäËëÏïÖöÜüÆæØøÅåĸ.,!;:';
-const Const = {
+export const Letters = '\\da-zA-ZŭŬĉĈĝĜĥĤĵĴŝŜÂâÊêÎîÔôÛûÃãĨĩÕõŨũÀàÈèÌìÒòÙùÁáÉéÍíÓóÚúÄäËëÏïÖöÜüÆæØøÅåĸ.,!;:';
+export const Const = {
 	LetterT: new RegExp('['+Letters+']+', 'i'),
 	NonLetter: new RegExp('[^'+Letters+']+', 'ig'),
 	NonLetterT: new RegExp('[^'+Letters+']+', 'i'),
@@ -362,22 +370,22 @@ const Const = {
 Const.Split_Array = Const.Split_String.split('');
 Const.Split_Regex = new RegExp('(['+Const.Split_String+'])');
 
-const func2label = [
+export const func2label = [
 	{rx:/^@<*SUBJ>*$/, f:'S', i:'x-lg', w:false}, // subject
 	{rx:/^@[FS]-<*SUBJ>*$/, f:'Sf', i:'x-lg', w:true}, // formal subject
 	{rx:/^@(FMV|FAUX|FS-.*|ICL-(?!AUX<).*)$/, f:'Vm', i:'circle-fill', w:false}, // main verb
 	{rx:/^@<*(DAT|IOBJ)>*$/, f:'Oi', i:'square-fill', w:false}, // indirect object
 	{rx:/^@<*(ACC|OBJ)>*$/, f:'Od', i:'triangle-fill', w:false}, // direct object
 	{rx:/^@<*(PIV)>*$/, f:'Op', i:'diamond-fill', w:false}, // prepositional object
-	{rx:/^@<*(ADV[SOL])>*$/, f:'A', i:ROOT_URL_SELF+'/imgs/bi-chevron-down-half.svg', w:false}, // adverbial
-	{rx:/^@<*PASS>*$/, f:'A', i:ROOT_URL_SELF+'/imgs/bi-chevron-down-half.svg', w:false}, // passive adjunct
+	{rx:/^@<*(ADV[SOL])>*$/, f:'A', i:g_ROOT_URL_SELF+'/imgs/bi-chevron-down-half.svg', w:false}, // adverbial
+	{rx:/^@<*PASS>*$/, f:'A', i:g_ROOT_URL_SELF+'/imgs/bi-chevron-down-half.svg', w:false}, // passive adjunct
 	{rx:/^@<*(SC)>*$/, f:'Cs', i:'x-circle', w:false}, // subject predicative/complement
 	{rx:/^@<*(OC)>*$/, f:'Co', i:'plus-circle', w:false}, // object predicative/complement
-	{rx:/^@<*(SA|OA)>*$/, f:'A', i:ROOT_URL_SELF+'/imgs/bi-chevron-down-half.svg', w:false}, // focus
-	{rx:/^@(<*FOC>*|>P)$/, f:'A', i:ROOT_URL_SELF+'/imgs/bi-chevron-down-half.svg', w:false}, // focus, including pre-pp
+	{rx:/^@<*(SA|OA)>*$/, f:'A', i:g_ROOT_URL_SELF+'/imgs/bi-chevron-down-half.svg', w:false}, // focus
+	{rx:/^@(<*FOC>*|>P)$/, f:'A', i:g_ROOT_URL_SELF+'/imgs/bi-chevron-down-half.svg', w:false}, // focus, including pre-pp
 ];
 
-let g_marks = {
+g.marks = {
 	types: {},
 	types_comma: [],
 	types_grammar: [],
@@ -399,6 +407,7 @@ let g_marks = {
 	purple: {},
 	blue: {},
 	info: {},
+	green: {},
 	order: [
 		[/^£:.*/, 10],
 		[/^£(upper|lower|comma)/, -10],
@@ -408,35 +417,38 @@ let g_marks = {
 	dict: {},
 };
 
-let segments_i = 0;
-let segments = [];
-let segment_ids = [];
-let marking_ranges = [];
-let to_send = null;
-let to_send_b = 0;
-let to_send_i = 0;
-let to_send_last = '';
-let ts_xhr = null;
-let ts_slow = null;
-let ts_fail = 0;
-let cache = {
+g.segments_i = 0;
+g.segments = [];
+g.segment_ids = [];
+g.marking_ranges = [];
+g.to_send = null;
+g.to_send_b = 0;
+g.to_send_i = 0;
+g.to_send_last = '';
+g.ts_xhr = null;
+g.ts_slow = null;
+g.ts_fail = 0;
+g.cache = {
 	Grammar: {},
 	Comma: {},
 };
 
-let g_tool = window.hasOwnProperty('g_tool') ? window.g_tool : null;
-let g_tools = {
+g.tool = null;
+if (typeof window !== 'undefined') {
+	g.tool = window.hasOwnProperty('g_tool') ? window.g_tool : null;
+}
+g.tools = {
 	grammar: false,
 	comma: false,
 };
-let session = {locale: 'da'};
+g.session = {locale: 'da'};
 
 // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-function escapeRegExp(string) {
+export function escapeRegExp(string) {
 	return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 }
 
-function escapeRegExpTokens(txt) {
+export function escapeRegExpTokens(txt) {
 	let ts = txt.split(/\s+/g);
 	for (let i=0 ; i<ts.length ; ++i) {
 		ts[i] = escapeRegExp(ts[i]);
@@ -444,36 +456,36 @@ function escapeRegExpTokens(txt) {
 	return ts.join('\\s+');
 }
 
-function is_nullish(s) {
+export function is_nullish(s) {
 	return (!s) || (s.length == 0) || (s === STR_NULLISH) || (s === STR_SENT_BREAK);
 }
 
-function loadOptions(s) {
+export function loadOptions(s) {
 	let nv = ls_get_try('options-'+s);
 
 	if (nv) {
-		if (g_options_json.hasOwnProperty(s) && nv === g_options_json[s]) {
-			return g_options[s];
+		if (g.options_json.hasOwnProperty(s) && nv === g.options_json[s]) {
+			return g.options[s];
 		}
-		g_options_json[s] = nv;
+		g.options_json[s] = nv;
 		nv = JSON.parse(nv);
 	}
 	else {
-		nv = object_copy(g_options_default);
+		nv = object_copy(g.options_default);
 	}
 
-	_live_options[s] = object_copy(nv);
+	g._live_options[s] = object_copy(nv);
 
 	['config', 'types'].forEach(function(key) {
-		_live_options[s][key] = object_copy(g_options_default[key]);
-		if (!_live_options.hasOwnProperty(key)) {
-			_live_options[key] = object_copy(g_options_default[key]);
+		g._live_options[s][key] = object_copy(g.options_default[key]);
+		if (!g._live_options.hasOwnProperty(key)) {
+			g._live_options[key] = object_copy(g.options_default[key]);
 		}
 		if (nv.hasOwnProperty(key)) {
 			for (let k in nv[key]) {
 				//console.log([k, nv[key][k]]);
-				_live_options[s][key][k] = nv[key][k];
-				_live_options[key][k] = nv[key][k];
+				g._live_options[s][key][k] = nv[key][k];
+				g._live_options[key][k] = nv[key][k];
 			}
 		}
 	});
@@ -481,47 +493,47 @@ function loadOptions(s) {
 	return nv;
 }
 
-function loadDictionary() {
+export function loadDictionary() {
 	let nv = ls_get_try('dictionary');
 	if (!nv) {
 		return;
 	}
-	if (nv === g_dictionary_json) {
+	if (nv === g.dictionary_json) {
 		return;
 	}
 
-	_live_dictionary = {};
+	g._live_dictionary = {};
 
-	g_dictionary_json = nv;
-	g_dictionary = JSON.parse(g_dictionary_json);
-	for (let word in g_dictionary) {
-		if (!g_dictionary.hasOwnProperty(word)) {
+	g.dictionary_json = nv;
+	g.dictionary = JSON.parse(g.dictionary_json);
+	for (let word in g.dictionary) {
+		if (!g.dictionary.hasOwnProperty(word)) {
 			continue;
 		}
-		_live_dictionary[word] = true;
-		_live_dictionary[uc_first(word)] = true;
-		_live_dictionary[word.toUpperCase()] = true;
+		g._live_dictionary[word] = true;
+		g._live_dictionary[uc_first(word)] = true;
+		g._live_dictionary[word.toUpperCase()] = true;
 	}
 }
 
-function isInDictionary(word) {
-	return _live_dictionary.hasOwnProperty(word);
+export function isInDictionary(word) {
+	return g._live_dictionary.hasOwnProperty(word);
 }
 
-function addToDictionary(word) {
-	if ($.trim(word).length === 0) {
+export function addToDictionary(word) {
+	if (word.trim().length === 0) {
 		return false;
 	}
 
-	if (!g_dictionary.hasOwnProperty(word)) {
+	if (!g.dictionary.hasOwnProperty(word)) {
 		//console.log(`Add to dict: ${word}`);
-		g_dictionary[word] = true;
-		_live_dictionary[word] = true;
-		_live_dictionary[uc_first(word)] = true;
-		_live_dictionary[word.toUpperCase()] = true;
+		g.dictionary[word] = true;
+		g._live_dictionary[word] = true;
+		g._live_dictionary[uc_first(word)] = true;
+		g._live_dictionary[word.toUpperCase()] = true;
 
-		g_dictionary_json = JSON.stringify(g_dictionary);
-		ls_set_try('dictionary', g_dictionary_json);
+		g.dictionary_json = JSON.stringify(g.dictionary);
+		ls_set_try('dictionary', g.dictionary_json);
 		impl_addToDictionary(word);
 		return true;
 	}
@@ -529,20 +541,20 @@ function addToDictionary(word) {
 	return false;
 }
 
-function removeFromDictionary(word) {
-	if ($.trim(word).length === 0) {
+export function removeFromDictionary(word) {
+	if (word.trim().length === 0) {
 		return false;
 	}
 
-	if (g_dictionary.hasOwnProperty(word)) {
+	if (g.dictionary.hasOwnProperty(word)) {
 		//console.log(`Remove from dict: ${word}`);
-		delete g_dictionary[word];
-		delete _live_dictionary[word];
-		delete _live_dictionary[uc_first(word)];
-		delete _live_dictionary[word.toUpperCase()];
+		delete g.dictionary[word];
+		delete g._live_dictionary[word];
+		delete g._live_dictionary[uc_first(word)];
+		delete g._live_dictionary[word.toUpperCase()];
 
-		g_dictionary_json = JSON.stringify(g_dictionary);
-		ls_set_try('dictionary', g_dictionary_json);
+		g.dictionary_json = JSON.stringify(g.dictionary);
+		ls_set_try('dictionary', g.dictionary_json);
 		impl_removeFromDictionary(word);
 		return true;
 	}
@@ -550,36 +562,36 @@ function removeFromDictionary(word) {
 	return false;
 }
 
-function is_upper(ch) {
+export function is_upper(ch) {
 	return (ch === ch.toUpperCase() && ch !== ch.toLowerCase());
 }
 
-function uc_first(str) {
+export function uc_first(str) {
 	return str.substr(0, 1).toUpperCase() + str.substr(1);
 }
 
-function lc_first(str) {
+export function lc_first(str) {
 	return str.substr(0, 1).toLowerCase() + str.substr(1);
 }
 
-function escHTML(t) {
+export function escHTML(t) {
 	let nt = t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
 	//console.log([t, nt]);
 	return nt;
 }
 
-function decHTML(t) {
+export function decHTML(t) {
 	let nt = t.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&');
 	//console.log([t, nt]);
 	return nt;
 }
 
-function slugify(t) {
+export function slugify(t) {
 	let nt = t.replace(/%+/g, 'p').replace(/£+/g, 'a').replace(/[^A-Za-z0-9]+/g, '-');
 	return nt;
 }
 
-function haveLocalStorage() {
+export function haveLocalStorage() {
 	try {
 		let storage = window.localStorage;
 		let x = 'LocalStorageTest';
@@ -592,7 +604,7 @@ function haveLocalStorage() {
 	return true;
 }
 
-function ls_get_try(key) {
+export function ls_get_try(key) {
 	let v = null;
 	try {
 		v = window.localStorage.getItem(key);
@@ -602,7 +614,7 @@ function ls_get_try(key) {
 	return v;
 }
 
-function ls_get(key, def) {
+export function ls_get(key, def) {
 	let v = ls_get_try(key);
 	if (v === null) {
 		if (def !== null && typeof def === 'object') {
@@ -618,7 +630,7 @@ function ls_get(key, def) {
 	return v;
 }
 
-function ls_set_try(key, val) {
+export function ls_set_try(key, val) {
 	try {
 		window.localStorage.setItem(key, val);
 	}
@@ -626,30 +638,30 @@ function ls_set_try(key, val) {
 	}
 }
 
-function ls_set(key, val) {
+export function ls_set(key, val) {
 	ls_set_try(key, JSON.stringify(val));
 }
 
-function ls_del(key) {
+export function ls_del(key) {
 	window.localStorage.removeItem(key);
 }
 
-function markingColor(types) {
+export function markingColor(types) {
 	let col = 'green';
 	for (let i=0 ; i<types.length ; ++i) {
-		if (g_marks.info.hasOwnProperty(types[i])) {
+		if (g.marks.info.hasOwnProperty(types[i])) {
 			col = 'info';
 		}
-		if (g_marks.yellow.hasOwnProperty(types[i])) {
+		if (g.marks.yellow.hasOwnProperty(types[i])) {
 			col = 'yellow';
 		}
-		if (g_marks.blue.hasOwnProperty(types[i])) {
+		if (g.marks.blue.hasOwnProperty(types[i])) {
 			col = 'blue';
 		}
-		if (g_marks.purple.hasOwnProperty(types[i])) {
+		if (g.marks.purple.hasOwnProperty(types[i])) {
 			col = 'purple';
 		}
-		if (g_marks.red.hasOwnProperty(types[i])) {
+		if (g.marks.red.hasOwnProperty(types[i])) {
 			col = 'red';
 			break;
 		}
@@ -662,41 +674,41 @@ function markingColor(types) {
 	return col;
 }
 
-function orderMarkings() {
-	order = {};
-	for (let m in g_marks.types) {
+export function orderMarkings() {
+	let order = {};
+	for (let m in g.marks.types) {
 		order[m] = 0;
-		for (let rx of g_marks.order) {
+		for (let rx of g.marks.order) {
 			if (rx[0].test(m)) {
 				order[m] = rx[1];
 			}
 		}
 	}
-	g_marks.order = order;
-	//console.log(g_marks.order);
+	g.marks.order = order;
+	//console.log(g.marks.order);
 }
 
-function sortMarkings(a, b) {
+export function sortMarkings(a, b) {
 	if (a === b) {
 		return 0;
 	}
-	if (!g_marks.order.hasOwnProperty(a)) {
+	if (!g.marks.order.hasOwnProperty(a)) {
 		return 1;
 	}
-	if (!g_marks.order.hasOwnProperty(b)) {
+	if (!g.marks.order.hasOwnProperty(b)) {
 		return -1;
 	}
-	return g_marks.order[b] - g_marks.order[a];
+	return g.marks.order[b] - g.marks.order[a];
 }
 
-function sortRanges(a, b) {
+export function sortRanges(a, b) {
 	if (a.seg == b.seg) {
 		return a.begin - b.begin;
 	}
 	return a.seg - b.seg;
 }
 
-function findTextNodes(nodes, filter) {
+export function findTextNodes(nodes, filter) {
 	let tns = [], wsx = /\S/;
 
 	if (!$.isArray(nodes)) {
@@ -726,7 +738,7 @@ function findTextNodes(nodes, filter) {
 	return tns;
 }
 
-function sanitize_result(txt) {
+export function sanitize_result(txt) {
 	if (txt.search(/\t[A-Z]+ @\S+/g) == -1) {
 		txt = txt.replace(/([ \t])@/g, '$1£');
 		console.log(txt);
@@ -792,14 +804,14 @@ function sanitize_result(txt) {
 	// Remove noise after sentences
 	txt = txt.replace(/(<\/s\d+>)[^<]*?$/, '$1');
 
-	if (g_tool === 'Comma') {
+	if (g.tool === 'Comma') {
 		txt = txt.replace(/(\n[^\t]+\t<R:[^>]+>)\n/, '$1 £error\n');
 	}
 
 	return txt;
 }
 
-function findToSend(prefix, word, suffix, casing, closer) {
+export function findToSend(prefix, word, suffix, casing, closer) {
 	//console.log([prefix, word, suffix, casing, closer]);
 	let prefix_s = prefix.replace(Const.NonLetter, '');
 	let word_s = word.replace(Const.NonLetter, '');
@@ -814,9 +826,9 @@ function findToSend(prefix, word, suffix, casing, closer) {
 		suffix_s = suffix_s.toLowerCase();
 	}
 
-	for (let i=0 ; i<to_send.length ; ++i) {
-		let t_org = to_send[i].t;
-		let t = to_send[i].t;
+	for (let i=0 ; i<g.to_send.length ; ++i) {
+		let t_org = g.to_send[i].t;
+		let t = g.to_send[i].t;
 		let found = true;
 
 		if (casing) {
@@ -1010,35 +1022,35 @@ function findToSend(prefix, word, suffix, casing, closer) {
 	return rv;
 }
 
-function _parseResult(rv) {
-	g_impl.parseProgress();
+export function _parseResult(rv) {
+	g.impl.parseProgress();
 
 	if (rv.hasOwnProperty('hmac')) {
-		g_access_token.hmac = rv.hmac;
+		g.access_token.hmac = rv.hmac;
 	}
 
 	if (!rv.hasOwnProperty('c')) {
-		g_impl.parseNoResult();
+		g.impl.parseNoResult();
 		return;
 	}
 
 	if (!rv.hasOwnProperty('v') || parseInt(rv.v) !== VERSION_PROTOCOL) {
-		g_impl.showWarning('WARN_VERSION_MISMATCH');
+		g.impl.showWarning('WARN_VERSION_MISMATCH');
 	}
 
 	let tid = parseInt(rv.t);
 
 	let txt = sanitize_result(rv.c);
-	txt = g_impl.beforeParseResult(txt);
+	txt = g.impl.beforeParseResult(txt);
 
 	let ps = [];
-	let nps = $.trim(txt.replace(/\n+<\/s>\n+/g, "\n\n")).split(/<\/s\d+>/);
+	let nps = txt.replace(/\n+<\/s>\n+/g, "\n\n").trim().split(/<\/s\d+>/);
 
 	// Where missing in result, copy from the cache
-	for (let k = to_send_b, p=0 ; k<to_send_i ; ++k) {
+	for (let k = g.to_send_b, p=0 ; k<g.to_send_i ; ++k) {
 		let found = false;
 		for (let i=p ; i<nps.length ; ++i) {
-			if (nps[i].indexOf('<s'+to_send[k].i+'>\n') !== -1) {
+			if (nps[i].indexOf('<s'+g.to_send[k].i+'>\n') !== -1) {
 				//console.log(`Par ${k} found in result`);
 				ps.push([tid, nps[i]]);
 				p = i;
@@ -1046,15 +1058,15 @@ function _parseResult(rv) {
 				break;
 			}
 		}
-		if (!found && to_send[k].h in cache[g_tool]) {
+		if (!found && g.to_send[k].h in g.cache[g.tool]) {
 			//console.log(`Par ${k} found in cache`);
-			ps.push([cache[g_tool][to_send[k].h].tid, '<s'+to_send[k].i+'>\n'+cache[g_tool][to_send[k].h].txt]);
+			ps.push([g.cache[g.tool][g.to_send[k].h].tid, '<s'+g.to_send[k].i+'>\n'+g.cache[g.tool][g.to_send[k].h].txt]);
 		}
 	}
 
 	for (let i=0 ; i<ps.length ; ++i) {
 		let tid = ps[i][0];
-		let cp = $.trim(ps[i][1]);
+		let cp = ps[i][1].trim();
 		if (!cp) {
 			continue;
 		}
@@ -1063,12 +1075,12 @@ function _parseResult(rv) {
 
 		let lines = cp.split(/\n/);
 		let id = parseInt(lines[0].replace(/^<s(.+)>$/, '$1'));
-		for (let k = to_send_b ; k<to_send_i ; ++k) {
-			if (to_send[k].i === id) {
-				otxt = to_send[k].t;
-				cache[g_tool][to_send[k].h] = {
+		for (let k = g.to_send_b ; k<g.to_send_i ; ++k) {
+			if (g.to_send[k].i === id) {
+				otxt = g.to_send[k].t;
+				g.cache[g.tool][g.to_send[k].h] = {
 					tid: tid,
-					txt: $.trim(cp.replace(/^<s.+>/g, '')),
+					txt: cp.replace(/^<s.+>/g, '').trim(),
 					};
 				break;
 			}
@@ -1084,9 +1096,9 @@ function _parseResult(rv) {
 				continue;
 			}
 
-			let w = new GS_Word(...$.trim(lines[j]).split(/\t/));
+			let w = new GS_Word(...lines[j].trim().split(/\t/));
 			let wf = '"<'+w.word+'>"';
-			w.word = $.trim(w.word.replace(/(\S)=/g, '$1 '));
+			w.word = w.word.replace(/(\S)=/g, '$1 ').trim();
 
 			w.ana.raw = ' ' + wf + ' ';
 			w.tid = tid;
@@ -1107,7 +1119,7 @@ function _parseResult(rv) {
 				let crs = [];
 				let had_r = false;
 				for (let k=0 ; k<ws.length ; ++k) {
-					ws[k] = $.trim(ws[k]);
+					ws[k] = ws[k].trim();
 					if (!ws[k]) {
 						continue;
 					}
@@ -1152,9 +1164,9 @@ function _parseResult(rv) {
 
 				let dnws = [];
 				for (let k=0 ; k<nws.length ; ++k) {
-					if (g_marks.types_complex.hasOwnProperty(nws[k])) {
+					if (g.marks.types_complex.hasOwnProperty(nws[k])) {
 						console.log(`Complex marking ${nws[k]}`);
-						let cs = g_marks.types_complex[nws[k]];
+						let cs = g.marks.types_complex[nws[k]];
 						let good = false;
 						for (let ci = 0 ; ci<cs.length ; ++ci) {
 							let c = cs[ci];
@@ -1178,11 +1190,11 @@ function _parseResult(rv) {
 						}
 					}
 
-					if (!g_marks.types.hasOwnProperty(nws[k])) {
+					if (!g.marks.types.hasOwnProperty(nws[k])) {
 						nws[k] = nws[k].replace(/^£:\S+/, '£:...');
 					}
 
-					if (g_marks.types.hasOwnProperty(nws[k]) || /^£(xor)?[<>]/.test(nws[k])) {
+					if (g.marks.types.hasOwnProperty(nws[k]) || /^£(xor)?[<>]/.test(nws[k])) {
 						dnws.push(nws[k]);
 					}
 					else {
@@ -1210,21 +1222,21 @@ function _parseResult(rv) {
 					if (nws[k] === '£sentsplit') {
 						had_sentsplit = true;
 					}
-					if (g_marks.to_upper.test(nws[k]) && prev_sentsplit) {
+					if (g.marks.to_upper.test(nws[k]) && prev_sentsplit) {
 						//console.log(`Skipping £upper due to £sentsplit`);
 						continue;
 					}
 					if (/^£(xor)?[<>]/.test(nws[k])) {
 						console.log(nws[k]);
 					}
-					else if (_live_options.types.hasOwnProperty(nws[k]) && !_live_options.types[nws[k]]) {
+					else if (g._live_options.types.hasOwnProperty(nws[k]) && !g._live_options.types[nws[k]]) {
 						continue;
 					}
 					none = false;
 					ws.push(nws[k]);
 				}
 
-				if (_live_options.config.opt_useDictionary && g_marks.dict.test(ws[0]) && isInDictionary(w.word)) {
+				if (g._live_options.config.opt_useDictionary && g.marks.dict.test(ws[0]) && isInDictionary(w.word)) {
 					//console.log(`Found ${w.word} in dictionary`);
 					ws = [];
 				}
@@ -1244,7 +1256,7 @@ function _parseResult(rv) {
 
 				// For case-folding, create a correction if none exists and fold all corrections to the desired case
 				for (let k=0 ; k<nws.length ; ++k) {
-					if (g_marks.to_upper.test(nws[k])) {
+					if (g.marks.to_upper.test(nws[k])) {
 						if (crs.length == 0) {
 							crs.push(w.word);
 						}
@@ -1252,7 +1264,7 @@ function _parseResult(rv) {
 							crs[c] = uc_first(crs[c]);
 						}
 					}
-					else if (g_marks.to_lower.test(nws[k])) {
+					else if (g.marks.to_lower.test(nws[k])) {
 						if (crs.length == 0) {
 							crs.push(w.word);
 						}
@@ -1290,12 +1302,12 @@ function _parseResult(rv) {
 					w.suggs = '';
 				}
 			}
-			if (g_marks.rx_ins_before.test(w.mark)) {
+			if (g.marks.rx_ins_before.test(w.mark)) {
 				let mos = w.mark.split(' ');
 				let mo = [];
 				let mw = [];
 				for (let k=0 ; k<mos.length ; ++k) {
-					if (g_marks.rx_ins_before.test(mos[k])) {
+					if (g.marks.rx_ins_before.test(mos[k])) {
 						mw.push(mos[k]);
 					}
 					else {
@@ -1326,7 +1338,7 @@ function _parseResult(rv) {
 			let good = true;
 			for (let j=0 ; j<words.length ; ++j) {
 				let w = words[j];
-				if (is_nullish(w.word) || g_marks.rx_ins.test(w.mark)) {
+				if (is_nullish(w.word) || g.marks.rx_ins.test(w.mark)) {
 					continue;
 				}
 				if (otxt.indexOf(w.word) == 0) {
@@ -1379,7 +1391,7 @@ function _parseResult(rv) {
 					let rx = /£(xor)?([<>])(\S+)/;
 					let span = rx.exec(words[j].mark);
 					if (span) {
-						let range = new GS_MarkRange(segments.length, j, words[j].mark, words[j].suggs, words[j].tid);
+						let range = new GS_MarkRange(g.segments.length, j, words[j].mark, words[j].suggs, words[j].tid);
 						let px = [];
 						let sx = [];
 						let wb = words[j].word;
@@ -1398,7 +1410,7 @@ function _parseResult(rv) {
 									if (!words[k].suggs) {
 										px = [words[k].word];
 									}
-									if (g_marks.rx_del.test(words[k].mark)) {
+									if (g.marks.rx_del.test(words[k].mark)) {
 										px = [''];
 										wb = '';
 									}
@@ -1406,7 +1418,7 @@ function _parseResult(rv) {
 									if (!words[j].suggs) {
 										sx = [words[j].word];
 									}
-									if (g_marks.rx_del.test(words[j].mark)) {
+									if (g.marks.rx_del.test(words[j].mark)) {
 										sx = [''];
 										we = '';
 									}
@@ -1433,7 +1445,7 @@ function _parseResult(rv) {
 									if (!words[j].suggs) {
 										px = [words[j].word];
 									}
-									if (g_marks.rx_del.test(words[j].mark)) {
+									if (g.marks.rx_del.test(words[j].mark)) {
 										px = [''];
 										wb = '';
 									}
@@ -1441,7 +1453,7 @@ function _parseResult(rv) {
 									if (!words[k].suggs) {
 										sx = [words[k].word];
 									}
-									if (g_marks.rx_del.test(words[k].mark)) {
+									if (g.marks.rx_del.test(words[k].mark)) {
 										sx = [''];
 										we = '';
 									}
@@ -1486,34 +1498,34 @@ function _parseResult(rv) {
 						}
 						range.suggs = sgs;
 						if (sgs.length) {
-							range.ef_mark = range.mark.replace(new RegExp(g_marks.rx_del, 'g'), ' ').replace(/  +/g, ' ').trim();
+							range.ef_mark = range.mark.replace(new RegExp(g.marks.rx_del, 'g'), ' ').replace(/  +/g, ' ').trim();
 						}
-						marking_ranges.push(range);
+						g.marking_ranges.push(range);
 					}
 				}
 			}
 			// Second loop handles everything else
 			for (let j=0 ; j<words.length ; ++j) {
 				if (words[j].mark) {
-					let range = new GS_MarkRange(segments.length, j, words[j].mark, words[j].suggs, words[j].tid);
+					let range = new GS_MarkRange(g.segments.length, j, words[j].mark, words[j].suggs, words[j].tid);
 					words[j].omark = words[j].mark;
 					words[j].osuggs = words[j].suggs;
 					words[j].mark = words[j].suggs = '';
 
-					if (g_marks.comp_left.test(range.mark)) {
+					if (g.marks.comp_left.test(range.mark)) {
 						range.begin -= 1;
 					}
-					else if (g_marks.comp_right.test(range.mark)) {
+					else if (g.marks.comp_right.test(range.mark)) {
 						range.end += 1;
 					}
-					else if (g_marks.comp_hyphen.test(range.mark)) {
+					else if (g.marks.comp_hyphen.test(range.mark)) {
 						range.end += 1;
 					}
-					else if (g_marks.comp_preswap.test(range.mark)) {
+					else if (g.marks.comp_preswap.test(range.mark)) {
 						range.begin -= 1;
 					}
 
-					if (g_marks.rx_ins_before.test(range.mark) || g_marks.rx_ins.test(range.mark)) {
+					if (g.marks.rx_ins_before.test(range.mark) || g.marks.rx_ins.test(range.mark)) {
 						range.ins = words[j];
 						range.suggs = [];
 						words[j] = new GS_Word(STR_NULLISH);
@@ -1522,7 +1534,7 @@ function _parseResult(rv) {
 						words[j].osuggs = range.ins.osuggs;
 					}
 
-					marking_ranges.push(range);
+					g.marking_ranges.push(range);
 				}
 			}
 			// Third loop resets marks and suggestions
@@ -1530,41 +1542,41 @@ function _parseResult(rv) {
 				words[j].mark = words[j].omark;
 				words[j].suggs = words[j].osuggs;
 			}
-			marking_ranges.sort(sortRanges);
-			for (let j=0 ; j<marking_ranges.length ; ++j) {
-				if (marking_ranges[j].mark && !marking_ranges[j].ef_mark) {
-					marking_ranges[j].ef_mark = marking_ranges[j].mark;
+			g.marking_ranges.sort(sortRanges);
+			for (let j=0 ; j<g.marking_ranges.length ; ++j) {
+				if (g.marking_ranges[j].mark && !g.marking_ranges[j].ef_mark) {
+					g.marking_ranges[j].ef_mark = g.marking_ranges[j].mark;
 				}
 			}
-			//console.log(marking_ranges);
+			//console.log(g.marking_ranges);
 
-			segment_ids[segments.length] = id;
-			segments.push(words);
+			g.segment_ids[g.segments.length] = id;
+			g.segments.push(words);
 		}
 	}
 
-	g_impl.parseChunkDone();
+	g.impl.parseChunkDone();
 }
 
-function parseResult(rv) {
+export function parseResult(rv) {
 	try {
 		_parseResult(rv);
 	}
 	catch (e) {
-		g_impl.parseError(e);
+		g.impl.parseError(e);
 	}
 }
 
-function sendTexts() {
-	g_impl.parseSendStart();
+export function sendTexts() {
+	g.impl.parseSendStart();
 	let text = '';
 
-	for (to_send_b = to_send_i ; to_send_i < to_send.length && text.length < Defs.MAX_RQ_SIZE ; ++to_send_i) {
-		let par = to_send[to_send_i];
+	for (g.to_send_b = g.to_send_i ; g.to_send_i < g.to_send.length && text.length < Defs.MAX_RQ_SIZE ; ++g.to_send_i) {
+		let par = g.to_send[g.to_send_i];
 
 		let marks = /((?:\S+\s+){0,2})(\S+?)(\S[\u0300-\u036F]+)((?:\s+\S+){0,2})/.exec(par.t);
 		if (marks && par.t !== par.t.normalize()) {
-			g_impl.showWarning('WARN_COMBINING_CHARACTER', {
+			g.impl.showWarning('WARN_COMBINING_CHARACTER', {
 				chr: marks[3],
 				cntx: marks[0],
 				});
@@ -1575,8 +1587,8 @@ function sendTexts() {
 			par.h = 'h-'+murmurHash3.x86.hash128(par.t) + '-' + par.t.length;
 		}
 
-		if (par.h in cache[g_tool]) {
-			//console.log(`Par ${par.i} found in cache`);
+		if (par.h in g.cache[g.tool]) {
+			//console.log(`Par ${par.i} found in g.cache`);
 			continue;
 		}
 
@@ -1592,83 +1604,83 @@ function sendTexts() {
 	}
 
 	if (text) {
-		text = g_impl.beforeSendTexts(text);
+		text = g.impl.beforeSendTexts(text);
 
-		to_send_last = text;
-		let url = ROOT_URL_GRAMMAR + '/callback.php?a=' + g_tools.grammar;
-		if (g_tool === 'Comma') {
-			url = ROOT_URL_GRAMMAR + '/callback.php?a=' + g_tools.comma;
+		g.to_send_last = text;
+		let url = ROOT_URL_GRAMMAR + '/callback.php?a=' + g.tools.grammar;
+		if (g.tool === 'Comma') {
+			url = ROOT_URL_GRAMMAR + '/callback.php?a=' + g.tools.comma;
 		}
 		let data = {
 			t: text,
 			r: ts_fail,
-			c: g_client,
+			c: g.client,
 			v: VERSION_PROTOCOL,
-			gdpr: _live_options.config.opt_confidential + 0,
-			SessionID: g_access_token.sessionid,
+			gdpr: g._live_options.config.opt_confidential + 0,
+			SessionID: g.access_token.sessionid,
 		};
 		ts_xhr = $.ajax({
 			url: url,
 			type: 'POST',
 			dataType: 'json',
-			headers: {HMAC: g_access_token.hmac},
+			headers: {HMAC: g.access_token.hmac},
 			data: data,
 		}).done(parseResult).fail(function() {
 			console.log(this);
-			g_impl.showError('ERR_POSTBACK');
+			g.impl.showError('ERR_POSTBACK');
 		});
 	}
 	else {
-		g_impl.parseSendEnd();
+		g.impl.parseSendEnd();
 	}
 }
 
-function checkParagraphs(doc) {
-	loadOptions((g_tool == 'Comma') ? SERVICES.Comma : SERVICES.Grammar);
+export function checkParagraphs(doc) {
+	loadOptions((g.tool == 'Comma') ? SERVICES.Comma : SERVICES.Grammar);
 	loadDictionary();
 
 	console.log(doc);
-	to_send = doc;
-	to_send_i = 0;
-	to_send_b = 0;
-	segments_i = 0;
-	segments = [];
-	segment_ids = [];
-	marking_ranges = [];
-	g_impl.parseCheckStart();
+	g.to_send = doc;
+	g.to_send_i = 0;
+	g.to_send_b = 0;
+	g.segments_i = 0;
+	g.segments = [];
+	g.segment_ids = [];
+	g.marking_ranges = [];
+	g.impl.parseCheckStart();
 	sendTexts();
 }
 
-function recheckParagraphs(doc) {
+export function recheckParagraphs(doc) {
 	if (ts_xhr) {
 		ts_xhr.abort();
 	}
 	ts_xhr = null;
 
-	for (let k = 0 ; k<to_send.length ; ++k) {
-		if (to_send[k].i === segment_ids[cmarking.s]) {
-			to_send.splice(k, 1, ...doc);
+	for (let k = 0 ; k<g.to_send.length ; ++k) {
+		if (g.to_send[k].i === g.segment_ids[cmarking.s]) {
+			g.to_send.splice(k, 1, ...doc);
 			break;
 		}
 	}
-	for (let k = 0 ; k<to_send.length ; ++k) {
-		to_send[k].i = k+1;
+	for (let k = 0 ; k<g.to_send.length ; ++k) {
+		g.to_send[k].i = k+1;
 	}
 
-	loadOptions((g_tool == 'Comma') ? SERVICES.Comma : SERVICES.Grammar);
+	loadOptions((g.tool == 'Comma') ? SERVICES.Comma : SERVICES.Grammar);
 	loadDictionary();
 
-	console.log(doc, to_send);
-	to_send_i = 0;
-	to_send_b = 0;
-	segments = [];
-	segment_ids = [];
-	marking_ranges = [];
-	g_impl.parseCheckStart();
+	console.log(doc, g.to_send);
+	g.to_send_i = 0;
+	g.to_send_b = 0;
+	g.segments = [];
+	g.segment_ids = [];
+	g.marking_ranges = [];
+	g.impl.parseCheckStart();
 	sendTexts();
 }
 
-function object2tsv(obj) {
+export function object2tsv(obj) {
 	let rv = '';
 
 	for (let k in obj) {
@@ -1683,7 +1695,7 @@ function object2tsv(obj) {
 	return rv;
 }
 
-function object2pot(obj) {
+export function object2pot(obj) {
 	let rv = '';
 
 	rv += 'msgid ""\n';
@@ -1706,7 +1718,7 @@ function object2pot(obj) {
 	return rv;
 }
 
-function object2po(obj, base) {
+export function object2po(obj, base) {
 	let rv = '';
 
 	rv += 'msgid ""\n';
@@ -1746,12 +1758,12 @@ function object2po(obj, base) {
 	return rv;
 }
 
-function nl2html(v) {
+export function nl2html(v) {
 	v = '<p>'+v.replace(/\n+<ul>/g, '</p><ul>').replace(/\n+<\/ul>/g, '</ul>').replace(/<\/ul>\n+/g, '</ul><p>').replace(/\n+<ol>/g, '</p><ol>').replace(/\n+<\/ol>/g, '</ol>').replace(/<\/ol>\n+/g, '</ol><p>').replace(/\n+<li>/g, '<li>').replace(/\n\n+/g, '</p><p>').replace(/\n/g, '<br>')+'</p>';
 	return v;
 }
 
-function l10n_detectLanguage() {
+export function l10n_detectLanguage() {
 	l10n.lang = ls_get('locale', navigator.language);
 	try {
 		if (window.hasOwnProperty('parent') && window.parent && window.parent.hasOwnProperty('UILANG2') && window.parent.UILANG2) {
@@ -1767,7 +1779,7 @@ function l10n_detectLanguage() {
 		l10n.lang = l10n.lang.replace(/^([^-_]+).*$/, '$1');
 	}
 	if (!l10n.s.hasOwnProperty(l10n.lang)) {
-		l10n.lang = g_options_default?.config?.opt_uiLang ?? 'en';
+		l10n.lang = g.options_default?.config?.opt_uiLang ?? 'en';
 	}
 	if (!l10n.s.hasOwnProperty(l10n.lang)) {
 		l10n.lang = 'en';
@@ -1778,7 +1790,7 @@ function l10n_detectLanguage() {
 	return l10n.lang;
 }
 
-function l10n_translate(s, g) {
+export function l10n_translate(s, g) {
 	s = '' + s; // Coerce to string
 
 	// Special case for the version triad
@@ -1849,11 +1861,11 @@ function l10n_translate(s, g) {
 	return t;
 }
 
-function l10n_translate_html(s, g) {
+export function l10n_translate_html(s, g) {
 	return nl2html(l10n_translate(s, g));
 }
 
-function _l10n_world_helper() {
+export function _l10n_world_helper() {
 	let e = $(this);
 	let k = e.attr('data-l10n');
 	let v = l10n_translate(k);
@@ -1871,7 +1883,7 @@ function _l10n_world_helper() {
 	}
 }
 
-function l10n_world(node) {
+export function l10n_world(node) {
 	if (!node) {
 		node = document;
 	}
@@ -1895,30 +1907,30 @@ function l10n_world(node) {
 		e.attr('placeholder', v);
 	});
 
-	if (node == document && typeof l10n_marking_types === 'function') {
-		l10n_marking_types(session.locale);
-		if (g_marks.types.hasOwnProperty('%k-stop') && !g_marks.types.hasOwnProperty('%x-to-stop')) {
-			g_marks.types['%x-to-stop'] = g_marks.types['%k-stop'];
-			g_marks.types_comma.push('%x-to-stop');
+	if (node == document && typeof m.l10n_marking_types === 'function') {
+		m.l10n_marking_types(session.locale);
+		if (g.marks.types.hasOwnProperty('%k-stop') && !g.marks.types.hasOwnProperty('%x-to-stop')) {
+			g.marks.types['%x-to-stop'] = g.marks.types['%k-stop'];
+			g.marks.types_comma.push('%x-to-stop');
 		}
 	}
 }
 
-function addScript(url) {
+export function addScript(url) {
 	console.log('Loading '+url);
 	let script = document.createElement('script');
 	script.src = url;
 	document.body.appendChild(script);
 }
 
-function addScriptDefer(url) {
+export function addScriptDefer(url) {
 	let script = document.createElement('script');
 	script.setAttribute('defer', true);
 	script.src = url;
 	document.body.appendChild(script);
 }
 
-function matomo_load() {
+export function matomo_load() {
 	if (window.hasOwnProperty('_paq')) {
 		console.log('Matomo already loaded');
 		return;
@@ -1931,13 +1943,13 @@ function matomo_load() {
 	(function() {
 		let u= MATOMO_ROOT;
 		_paq.push(['setTrackerUrl', u+'matomo.php']);
-		_paq.push(['setSiteId', g_impl.matomo_sid]);
+		_paq.push(['setSiteId', g.impl.matomo_sid]);
 		let d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
 		g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
 	})();
 }
 
-function matomo_event(cat, act, name, value) {
+export function matomo_event(cat, act, name, value) {
 	if (typeof _paq === 'undefined') {
 		console.log('Matomo not loaded yet');
 		return false;
@@ -1949,53 +1961,53 @@ function matomo_event(cat, act, name, value) {
 	_paq.push(['trackEvent', cat, act, name, value]);
 }
 
-function log_marking_action(data) {
+export function log_marking_action(data) {
 	let rq = {
 		a: 'marking-action',
 		data: data,
 		};
-	g_impl.callback(rq);
+	g.impl.callback(rq);
 }
 
-function contentLoaded() {
+export function contentLoaded() {
 	const CLIENT = window.hasOwnProperty('CLIENT') ? window.CLIENT : '';
 
 	if (CLIENT === 'adobe' || location.search.indexOf('host=adobe') !== -1) {
-		g_client = 'adobe';
+		g.client = 'adobe';
 		console.log('Adobe');
-		addScript(ROOT_URL_SELF+'/js/impl-adobe.js');
+		addScript(g_ROOT_URL_SELF+'/js/impl-adobe.js');
 	}
 	else if (CLIENT === 'web' || location.search.indexOf('host=web') !== -1) {
-		g_client = 'web';
+		g.client = 'web';
 		console.log('Web');
 	}
 	else if (CLIENT === 'word' || location.search.indexOf('host=word') !== -1 || location.search.indexOf('host=msoffice') !== -1 || location.search.indexOf('_host_Info=Word') !== -1) {
-		g_client = 'word';
+		g.client = 'word';
 		console.log('MS Office');
 		addScript('https://appsforoffice.microsoft.com/lib/1/hosted/office.js');
-		addScript(ROOT_URL_SELF+'/js/impl-officejs.js');
+		addScript(g_ROOT_URL_SELF+'/js/impl-officejs.js');
 	}
 	else if (CLIENT === 'outlook' || location.search.indexOf('host=outlook') !== -1) {
-		g_client = 'outlook';
+		g.client = 'outlook';
 		console.log('MS Office (Outlook)');
 		addScript('https://appsforoffice.microsoft.com/lib/1/hosted/office.js');
-		addScript(ROOT_URL_SELF+'/vendor/findAndReplaceDOMText.js');
-		addScript(ROOT_URL_SELF+'/js/impl-outlook.js');
+		addScript(g_ROOT_URL_SELF+'/vendor/findAndReplaceDOMText.js');
+		addScript(g_ROOT_URL_SELF+'/js/impl-outlook.js');
 	}
 	else {
-		g_client = 'gdocs';
+		g.client = 'gdocs';
 		console.log('Google');
-		addScript(ROOT_URL_SELF+'/js/impl-gas.js');
+		addScript(g_ROOT_URL_SELF+'/js/impl-gas.js');
 	}
 
 	let id = $(document.body).attr('id');
 	if (id === 'sidebar' || id === 'options' || id === 'dictionary') {
 		// Delay ever so slightly to force other scripts to load first
 		// No, defer doesn't work. No, async doesn't work either.
-		setTimeout(function() {addScript(ROOT_URL_SELF+'/js/'+id+'.js'); }, 100);
+		setTimeout(function() {addScript(g_ROOT_URL_SELF+'/js/'+id+'.js'); }, 100);
 	}
 
-	if (/^(word|outlook)$/.test(g_client) && /Trident|MSIE|Edge/.test(window.navigator.userAgent)) {
+	if (/^(word|outlook)$/.test(g.client) && /Trident|MSIE|Edge/.test(window.navigator.userAgent)) {
 		$('#working').hide();
 		$('#placeholder').html(l10n_translate_html('ERR_OFFICE_TOO_OLD'));
 	}
@@ -2009,3 +2021,5 @@ if (typeof document !== 'undefined') {
 		contentLoaded();
 	}
 }
+
+export default {};

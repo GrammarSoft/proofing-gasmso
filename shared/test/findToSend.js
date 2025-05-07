@@ -1,17 +1,9 @@
-require('util').inspect.defaultOptions.depth = Infinity;
-const fs = require('fs');
+import util from 'node:util';
+util.inspect.defaultOptions.depth = Infinity;
 
-const g_conf_defaults = {};
-let $ = function(){};
-let window = {};
+import * as shared from '../js/shared.js';
 
-let js = fs.readFileSync(__dirname + '/../js/shared.js', 'utf-8') + '';
-js = js.replace("$(window).on('load', function() {", 'let __ignore = (function() {');
-js = js.replace(/['"]use strict['"](;?)/g, '');
-js = js.replace(/\nlet\b/g, '\nvar');
-eval(js);
-
-to_send = [];
+shared.g.to_send = [];
 
 let tests = [
 	{t: 'abc def ghi', a: ['abc ', 'def', ' ghi'], e: {word: 'def'}},
@@ -39,17 +31,17 @@ let tests = [
 
 for (let i=0 ; i<tests.length ; ++i) {
 	let t = tests[i];
-	to_send = [];
+	shared.g.to_send = [];
 	if (t.hasOwnProperty('ts')) {
 		for (let j=0 ; j<t.ts.length ; ++j) {
-			to_send.push({t: t.ts[j]});
+			shared.g.to_send.push({t: t.ts[j]});
 		}
 	}
 	else {
-		to_send = [{t: t.t}];
+		shared.g.to_send = [{t: t.t}];
 	}
 
-	let rv = findToSend(t.a[0], t.a[1], t.a[2]);
+	let rv = shared.findToSend(t.a[0], t.a[1], t.a[2]);
 
 	let did = false;
 	for (let k in t.e) {
