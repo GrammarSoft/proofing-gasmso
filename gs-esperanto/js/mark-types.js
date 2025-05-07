@@ -100,6 +100,18 @@ g_marks.types = {
 		"La vorto estas leksike malĝusta: Ne temas pri simpla literumeraro aŭ pri gramatika eraro, sed pri laŭsignife malĝusta vortelekto, evitinda neologismo aŭ falsa amiko el alia lingvo.",
 		"<span style=\"color: #ff0000\">proceso</span> – procezo<br>\n<br>\n<span style=\"color: #ff0000\">oferi</span> – oferti<br>\n<br>\n<span style=\"color: #ff0000\">aŭdi</span> – aŭskulti<br>\n<br>\n<span style=\"color: #ff0000\">aŭtomatika</span> [aŭtomata]<br>\n<br>\n<span style=\"color: #ff0000\">demobilizi</span> [malmobilizi]<br>\n<br>\n<span style=\"color: #ff0000\">relacio</span> [rilato]"
 	],
+	"£x-etype-affix": [
+		"£x-etype-affix",
+		"Malĝusta afikso",
+		"La vorto estas teorie ebla, sed Lingvohelpilo pensas, ke vi elektis malĝustan afikson.<br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/prefiksoj\">prefiksoj</a> kaj <a target=\"_blank\" href=\"https://lernu.net/gramatiko/sufiksoj\">sufiksoj</a> .",
+		""
+	],
+	"£x-etype-affix&\"<.*ig.*>\"&\"[a-z]+um[a-z]+\"": [
+		"£x-etype-affix&\"<.*ig.*>\"&\"[a-z]+um[a-z]+\"",
+		"Malĝusta sufikso: -ig → -um",
+		"Post substantiva aŭ adjektiva radiko ‘x’ la sufikso ‘-ig’ signifas ‘igi esti x’. Ĉi tie ne temas pri tio, sed pri ‘provizi/trakti per x’. Konsideru uzi ‘-um’ anstataŭ ‘-ig’.<br>\n<br>\nNotu tamen, ke ekzistas multaj esceptoj, kie la tradicia lingvouzo tamen ne sekvas tiun distingon kaj \"erare\" uzas ‘-ig’ kun ĝuste la signifo de ‘provizi per’, ekz. <i>‘subtekstigi/subtitoligi’</i> (de filmoj).<br>\n<br>\nNotu plie, ke ekzistas teknika sufikso, ‘-iz’, kun la signifo de ‘provizi per’ kaj uzata precipe en kemio kaj por materialoj kaj surfacoj, ekz. <i>‘elektrizi’, ‘kapitalizi’, ‘asfaltizi’, ‘nikelizi’.</i>",
+		"Ŝi <span style=\"color: #ff0000\">sunkremigis</span> (sunkremumis) la infanojn."
+	],
 	"£x-etype-neo": [
 		"£x-etype-neo",
 		"Neologismo",
@@ -232,6 +244,12 @@ g_marks.types = {
 		"Tiu vorto estas kunmetaĵo, kie la unua parto estas radika kaj finiĝas per konsonantoparo malfacile prononcebla antaŭ dua parto, kiu mem komenciĝas per konsonanto. Lingvohelpilo proponas enmeti substantivan -o kiel ligovokalon por faciligi la prononcon.",
 		"<i>li</i><span style=\"color: #ff0000\"><i>br|f</i></span><i>orme → libroforme</i><br>\n<br>\n<i>e</i><span style=\"color: #ff0000\"><i>tn|l</i></span><i>ingvo → etnolingvo</i><br>\n<br>\n<i>a</i><span style=\"color: #ff0000\"><i>gl|p</i></span><i>lumo → agloplumo</i><br>\n<br>\n<i>tea</i><span style=\"color: #ff0000\"><i>tr|d</i></span><i>irektoro → teatrodirektoro</i><br>\n<br>\n<i>dese</i><span style=\"color: #ff0000\"><i>gn|m</i></span><i>aniero → desegnomaniero</i><br>\n<br>\n<i>li</i><span style=\"color: #ff0000\"><i>gn|str</i></span><i>uktura → lignostruktura</i>"
 	],
+	"£x-etype-poscomp": [
+		"£x-etype-poscomp",
+		"Malĝusta ligo-vokalo en kunmetaĵo",
+		"Tiu vorto estas kunmetaĵo, kie la unua parto estas adjektivo kaj la dua substantivo. Kutime tia kombino estas skribita en du partoj. Por ebligi la kunmeton, la unua parto devas esti substantiva. Forigu la ligovokalon ‘-a’ inter la du partoj, aŭ uzu ‘-o’, depende de belsoneco.",
+		"<span style=\"color: #ff0000\">rokobildoj</span> → rokbildoj"
+	],
 	"£compound": [
 		"£compound",
 		"Vorto ne en la vortaro, sed ebla analizo kiel kunmetaĵo",
@@ -258,9 +276,9 @@ g_marks.types = {
 	],
 	"": [
 		"",
-		"Konfuza vortoparo: intera → interna",
-		"'Intera' signifas 'estante inter du aferoj' (ekz. 'intera periodo', 'intera kategorio'). La vorto foje konfuziĝas kun <i>'interna'</i> (ena), kredeble ĉar ties malo, <i>'ekstera',</i> ne enhavas 'n' post la 'r'.<br>\n<br>\nNotu ankaŭ, ke estas falsa amiko uzi <i>'intera'</i> (aŭ <i>'entera</i>') en la senco de <i>'tuta'.</i>",
-		"Sed la seruro ne funkciis, ĉar ĝi tiom rustiĝis, ke la <span style=\"color: #ff0000\">intera</span> (interna) mekanismo ne plu moveblis.<br>\n<br>\nIliaj koloj povas turniĝi 270 gradojn por vidi en aliaj direktoj sen movi siajn <span style=\"color: #ff0000\">enterajn</span> (tutajn) korpojn."
+		"Transitiveco: ŝtopigo → ŝtopiĝo, stopado",
+		"La vorto <i>‘ŝtopigo’</i> preskaŭ ĉiam estas eraro. Se temas pri trafiko aŭ fluo, vi verŝajne celis la ne-transitivan <i>‘ŝtopiĝo’</i>. Sed en la kunteksto de motoro aŭ maŝino ankaŭ povas esti, ke temas pri <i>‘stopado’</i> (haltigo) aŭ <i>‘stopiĝo’</i> (moviĝoĉeso).",
+		"La akcidento kaŭzis severan <span style=\"color: #ff0000\">ŝtopigon</span> (ŝtopiĝon) en la trafiko."
 	],
 	"£:BASE-...": [
 		"£:BASE-...",
@@ -1450,6 +1468,18 @@ g_marks.types = {
 		"'Malĝusta’ signifas ‘erara’ (angle: <i>incorrect</i>), dum <i>‘maljusta’</i> signifas ‘kontraŭnorme malegala’ (angle: <i>injust</i>).",
 		"Dum horoj ili marŝis en la <span style=\"color: #c9211e\">maljusta</span> (malĝusta) direkto."
 	],
+	"£:BASE-majstro": [
+		"£:BASE-majstro",
+		"Falsa amiko / konfuzebla vortoparo: mastro → majstro → ĉampiono",
+		"Ne konfuzu <i>'mastro'</i> kaj <i>'majstro'</i> – la unua estas estro de servist(ar)o aŭ ejo aŭ la ringoj de Tolkien, la dua estas respektita lertulo aŭ spertulo, speciale pri arta aŭ metia fako, aŭ – kompreneble – LA majstro, Zamenhof.<br>\n<br>\nNotu ankaŭ, ke estas germana/dana falsa amiko, uzi <i>'majstro'</i> por sporta ĉampiono.",
+		"Mi ŝatas la pentraĵon de la renesancaj <span style=\"color: #ff0000\">mastroj</span> (majstroj).<br>\n<br>\nTrifoje li fariĝis olimpika <span style=\"color: #ff0000\">majstro</span> (ĉampiono)."
+	],
+	"£:BASE-cxampiono": [
+		"£:BASE-cxampiono",
+		"Falsa amiko / konfuzebla vortoparo: mastro → majstro → ĉampiono",
+		"Ne konfuzu <i>'mastro'</i> kaj <i>'majstro'</i> – la unua estas estro de servist(ar)o aŭ ejo aŭ la ringoj de Tolkien, la dua estas respektita lertulo aŭ spertulo, speciale pri arta aŭ metia fako, aŭ – kompreneble – LA majstro, Zamenhof.<br>\n<br>\nNotu ankaŭ, ke estas germana/dana falsa amiko, uzi <i>'majstro'</i> por sporta ĉampiono.",
+		"Mi ŝatas la pentraĵon de la renesancaj <span style=\"color: #ff0000\">mastroj</span> (majstroj).<br>\n<br>\nTrifoje li fariĝis olimpika <span style=\"color: #ff0000\">majstro</span> (ĉampiono)."
+	],
 	"£:BASE-maniero&\"<modoj?n?>\"": [
 		"£:BASE-maniero&\"<modoj?n?>\"",
 		"Falsa amiko / konfuzebla vortoparo: modo → maniero",
@@ -1579,11 +1609,23 @@ g_marks.types = {
 	"£:BASE-normo&\"<standardoj?n?>\"": [
 		"£:BASE-normo&\"<standardoj?n?>\"",
 		"Falsa amiko / konfuzebla vortoparo: standardo → normo",
-		"En Esperanto, <i>‘standardo’</i> estas insigno-flago de armeo, partio ktp. (angle: <i>banner</i>). Ne konfuzu tion kun <i>‘normo’.</i>",
-		"Tiu simbolo ne troviĝas en la unikoda <span style=\"color: #ff0000\">standardo</span> (normo)."
+		"En Esperanto, <i>‘standardo’</i> estas insigno-flago de armeo, partio ktp. (angle: <i>banner</i>). Ne konfuzu tion kun <i>‘normo’.</i> Kaj tute ne ekzistas <i>'standarto'.</i>",
+		"Tiu simbolo ne troviĝas en la unikoda <span style=\"color: #ff0000\">standardo</span> (normo).<br>\n<br>\nNecesas <span style=\"color: #ff0000\">standardigi</span> (normigi) la literumon de tiu vorto.<br>\n<br>\n<span style=\"color: #ff0000\">skribstandardo</span> (skribnormo)"
+	],
+	"£x-etype-lemma&\"<.*standar[dt].*>\"&\".*norm.*\"": [
+		"£x-etype-lemma&\"<.*standar[dt].*>\"&\".*norm.*\"",
+		"Falsa amiko / konfuzebla vortoparo: standardo → normo",
+		"En Esperanto, <i>‘standardo’</i> estas insigno-flago de armeo, partio ktp. (angle: <i>banner</i>). Ne konfuzu tion kun <i>‘normo’.</i> Kaj tute ne ekzistas <i>'standarto'.</i>",
+		"Tiu simbolo ne troviĝas en la unikoda <span style=\"color: #ff0000\">standardo</span> (normo).<br>\n<br>\nNecesas <span style=\"color: #ff0000\">standardigi</span> (normigi) la literumon de tiu vorto.<br>\n<br>\n<span style=\"color: #ff0000\">skribstandardo</span> (skribnormo)"
 	],
 	"£:BASE-sxtato": [
 		"£:BASE-sxtato",
+		"Falsa amiko / konfuzebla vortoparo: stato → ŝtato",
+		"Ne konfuzu <i>‘stato’</i> kaj <i>‘ŝtato’.</i> La unua temas pri momenta eco aŭ estomaniero (angle: <i>state = condition</i>), dum la dua havas signifon similan al ‘<i>lando</i>’ (angle: <i>state = country</i>).",
+		"La landopeco estis donacita de la greka <span style=\"color: #ff0000\">stato</span> (ŝtato)."
+	],
+	"£x-etype-lemma&\"<stat.*>\"&\"sxtat.*\"": [
+		"£x-etype-lemma&\"<stat.*>\"&\"sxtat.*\"",
 		"Falsa amiko / konfuzebla vortoparo: stato → ŝtato",
 		"Ne konfuzu <i>‘stato’</i> kaj <i>‘ŝtato’.</i> La unua temas pri momenta eco aŭ estomaniero (angle: <i>state = condition</i>), dum la dua havas signifon similan al ‘<i>lando</i>’ (angle: <i>state = country</i>).",
 		"La landopeco estis donacita de la greka <span style=\"color: #ff0000\">stato</span> (ŝtato)."
@@ -1714,6 +1756,24 @@ g_marks.types = {
 		"'Preventi’ signifas ‘antaŭmalhelpi’ (agon aŭ okazaĵon). Sed personon oni ne <i>preventas,</i> sed <i>malhelpas.</i> Kaj oni ne povas traduki la anglan plurvalentan strukturon <i>‘prevent sb. from doing s.th.’</i> per <i>‘preventi.</i> Tiucele uzu <i>‘malhelpi’</i>:<br>\n<br>\n<i>La malbona vetero</i> <span style=\"color: #ff0000\"><i>preventis</i></span><i> (malhelpis) la armeon transiri la monton.</i>",
 		""
 	],
+	"£x-etype-lemma&\"<.*acioj?n?>\"": [
+		"£x-etype-lemma&\"<.*acioj?n?>\"",
+		"Falsa amiko: -acio",
+		"Multaj falsaj amikoj en Esperanto ŝuldiĝas al pruntoj, el aliaj lingvoj, de latindevenaj substantivoj kun la finaĵo -acio, ekz. <i>'</i><span style=\"color: #ff0000\"><i>dokumentacio</i></span><i>' (dokumentaĵo),</i> <span style=\"color: #ff0000\"><i>'fondacio/fundacio</i></span><i>' (fondaĵo, fonduso), '</i><span style=\"color: #ff0000\"><i>kapitulacio</i></span><i>' (kapitulaco),</i> <span style=\"color: #ff0000\"><i>menstruacio</i></span><i>' (menstruo), '</i><span style=\"color: #ff0000\"><i>integracio</i></span><i>' (integrigo), '</i><span style=\"color: #ff0000\"><i>stagnacio</i></span><i>' (stagnado).</i> Antaŭ ol uzi substantivon kun '-acio', pripensu, ĉu ekzistas pli &quot;esperanta&quot; vortumo, uzante la radikon sen '-acio' aŭ kunmetaĵon kun pure esperanta sufikso.",
+		""
+	],
+	"£x-etype-lemma&\"<.*alaj?n?>\"": [
+		"£x-etype-lemma&\"<.*alaj?n?>\"",
+		"Falsa amiko: -ala",
+		"Multaj falsaj amikoj en Esperanto ŝuldiĝas al pruntoj, el aliaj lingvoj, de latindevenaj adjektivoj kun la finaĵo -al, ekz. <i>'</i><span style=\"color: #ff0000\"><i>nacionala</i></span><i>' (nacia),</i> <span style=\"color: #ff0000\"><i>rituala</i></span><i> (rita),</i> <span style=\"color: #ff0000\"><i>seksuala</i></span><i> (seksa),</i> <span style=\"color: #ff0000\"><i>globala</i></span><i> (tutmonda),</i> <span style=\"color: #ff0000\"><i>artificiala</i></span><i> (artefarita).</i> Antaŭ ol uzi adjektivon kun '-ala', pripensu, ĉu ekzistas pli &quot;esperanta&quot; vortumo, uzante la radikon sen '-al' aŭ kunmetaĵon kun pure esperanta sufikso.",
+		""
+	],
+	"£x-etype-lemma&\"<.*ionoj?n?>\"": [
+		"£x-etype-lemma&\"<.*ionoj?n?>\"",
+		"Falsa amiko: -iono",
+		"Kelkajj falsaj amikoj en Esperanto ŝuldiĝas al pruntoj, el aliaj lingvoj, de latindevenaj substantivoj kun la finaĵo -iono. La prunto fakte ofte funkcias, ekz. kun <i>'leciono', 'regiono'</i> kaj <i>'ĉampiono',</i> sed ne kun ekz. <i>'</i><span style=\"color: #ff0000\"><i>akciono</i></span><i>' (planago),</i> <span style=\"color: #ff0000\"><i>'misiono</i></span><i>' (misio), '</i><span style=\"color: #ff0000\"><i>versiono</i></span><i>' (versio),</i> <span style=\"color: #ff0000\"><i>diviziono</i></span><i>' (divizio), '</i><span style=\"color: #ff0000\"><i>uniono</i></span><i>' (unio), '</i><span style=\"color: #ff0000\"><i>paviliono</i></span><i>' (pavilono).</i> Antaŭ ol uzi (por vi novan) substantivon kun '-acio', pripensu, ĉu ekzistas pli &quot;esperanta&quot; vortumo, uzante la radikon kun '-io' anstataŭ '-iono', aŭ kunmetaĵon kun pure esperanta sufikso.",
+		""
+	],
 	"£:BASE-cxesigi&\"<abort.*>\"": [
 		"£:BASE-cxesigi&\"<abort.*>\"",
 		"Falsa amiko: aborti → ĉesigi",
@@ -1731,6 +1791,12 @@ g_marks.types = {
 		"Falsa amiko: adulto → plenkreskulo",
 		"Tio povas esti falsa amiko: <i>‘adulto’</i> signifas <i>‘ekstergeedza kromseksumado’,</i> dum plenkreskulo simple estas homo pli aĝa ol 18.",
 		""
+	],
+	"£:BASE-agado": [
+		"£:BASE-agado",
+		"Falsa amiko: akcio → agado",
+		"En Esperanto, <i>'akcio'</i> estas valorpapero. Ne eblas uzi la vorton kun la signifo '(kunordigita) agado'. Povas temi pri (ekz. germana) falsa amiko.",
+		"La <span style=\"color: #ff0000\">akcio</span> (agado) estis tre sukcesa."
 	],
 	"£:BASE-nuna&\"<aktualaj?n?>\"": [
 		"£:BASE-nuna&\"<aktualaj?n?>\"",
@@ -1876,6 +1942,12 @@ g_marks.types = {
 		"En Esperanto, oni <i>demandas</i> demandon aŭ personon pri io, sed <i>petas</i> helpon, monon, konsilon aŭ klarigon. Uzu ‘<i>demandi’</i>, se vi povas imagi demandosignon, sed <i>‘peti’</i>, se vi povas imagi voksignon <i>(Helpu! Donu monon!).</i> La esperanta <i>demandi</i> estas kognato de la franca <i>demander,</i> sed ne de la angla <i>demand.</i><br>\n<br>\n<i>Li demandis min, ĉu la trajno jam foriris.</i><br>\n<br>\n<i>Li</i> <span style=\"color: #ff0000\"><i>demandis</i></span><i> (petis) min varti la bebon dum kelkaj horoj.</i>",
 		""
 	],
+	"£:BASE-manifestacio": [
+		"£:BASE-manifestacio",
+		"Falsa amiko: demonstracio → manifestacio",
+		"En Esperanto, <i>'demonstracio'</i> estas pruvo, la ago demonstri. Ne konfuzu tion kun <i>'manifestacio',</i> granda publika protestaranĝo, ofte en formo de marŝo kun mesaĝotabuloj. Notu ankaŭ, ke <i>'manifesto'</i> estas skriba deklaro, do ne la sama afero kiel <i>'manifestacio'.</i>",
+		"La pacmovado organizis paskajn <span style=\"color: #ff0000\">demonstraciojn</span> (manifestaciojn) en multaj urboj."
+	],
 	"£:BASE-aparteni&\"<depend.*>\"": [
 		"£:BASE-aparteni&\"<depend.*>\"",
 		"Falsa amiko: dependi de → aparteni al",
@@ -1911,6 +1983,18 @@ g_marks.types = {
 		"Falsa amiko: determinita → senhezita",
 		"En Esperanto, <i>‘determini’</i> signifas ‘precizigi/eltrovi’, kaj la participo <i>‘determinita’</i> signifas pli-malpli <i>‘specifa’</i>. Ne uzu la verbon kun la senco de <i>‘senhezitigi’ (</i>angle: <i>convince</i>) aŭ la participon kun la senco <i>‘senhezita/rezoluta’</i> (angle: <i>determined</i>).",
 		"La policisto estis <span style=\"color: #ff0000\">determinita</span> (senhezita) trovi la krimulon"
+	],
+	"£:BASE-diveni&\"<deven.*>\"": [
+		"£:BASE-diveni&\"<deven.*>\"",
+		"Falsa amiko: deveni → diveni",
+		"Homo <i>'devenas'</i> de iu loko, kaj vorto aŭ kutimo <i>'devenas'</i> de iu origino, sed oni <i>'divenas'</i> iun nekonatan fakton.",
+		"Estas malfacile deveni (diveni) la verajn intencojn de la prezidanto."
+	],
+	"£:BASE-farigxi&<deven.*>\"": [
+		"£:BASE-farigxi&<deven.*>\"",
+		"Falsa amiko: deveni → fariĝi",
+		"Estas (verŝajne franca) falsa amiko uzi la verbon <i>'deveni'</i> kun la signifo de <i>'fariĝi'</i> aŭ <i>'iĝi'.</i> Deveno temas pri la origino de iu aŭ io. Notu ankaŭ, ke la komplemento de <i>'fariĝi'</i> estas predikativo, ne objekto, do se vi uzis akuzativon post <i>'deveni'</i> korektu ĝin al nominativo.",
+		"La urbo <span style=\"color: #ff0000\">devenis</span> (fariĝis) la ĉefa<span style=\"color: #ff0000\">n</span> centro<span style=\"color: #ff0000\">n</span> (la ĉefa centro) de komerco en la regiono.<br>\n<br>\nLi <span style=\"color: #ff0000\">devenis</span> (iĝis) senatoro en 1876."
 	],
 	"£:BASE-sxuldi&\"<dev.*>\"": [
 		"£:BASE-sxuldi&\"<dev.*>\"",
@@ -2284,6 +2368,12 @@ g_marks.types = {
 		"En Esperanto, <i>‘interioro’</i> estas endoma eco de mebloaranĝo ktp. Ne eblas uzi la vorton en la senco de <i>‘landinterno’</i> aŭ <i>‘landprofundo’</i> (angle: <i>interior,</i> germane: Hinterland). <i>‘Interiero’</i> estas misliterumo de <i>‘interioro’.</i><br>\n<br>\nNotu ankaŭ, ke la foje uzata, germaneca <i>‘hinterlando’</i> en Esperanto estas evitinda neologismo.",
 		"Bona Espero situas en la brazila <span style=\"color: #ff0000\">interiero</span> (landinterno)"
 	],
+	"£x-etype-(list|lemma)&\"<interpren.*>\"": [
+		"£x-etype-(list|lemma)&\"<interpren.*>\"",
+		"Falsa amiko: interpreno → entrepreno",
+		"En Esperanto, <i>'interpreno'</i> rilatas al la ago de interpreni (ekz. la manojn). Ne uzu tiun radikon anstataŭ vortoj kiel <i>'entrepreno'</i> kaj <i>'entreprenisto'.</i>",
+		"Okazis renkontiĝo por inan <span style=\"color: #ff0000\">interprenistoj</span> (entreprenistoj)."
+	],
 	"£:BASE-ekspoziciejo&\"<interpretejoj?n?>\"": [
 		"£:BASE-ekspoziciejo&\"<interpretejoj?n?>\"",
 		"Falsa amiko: interpretejo → ekspoziciejo",
@@ -2380,6 +2470,12 @@ g_marks.types = {
 		"En Esperanto, <i>‘kilo’</i> estas la suba, mallarĝa parto de ŝipo. Ne konfuzu la vorton kun la mezurunuo <i>‘kilogramo’.</i><br>\n<br>\n<i>Kiom da</i> <span style=\"color: #ff0000\"><i>kiloj</i></span><i> (kilogramoj) vi pezas?</i><br>\n<br>\nNotu, ke <i>‘kilo-’</i> ankaŭ estas prefikso, kun la signifo ‘mil’. Tamen normale ne eblas uzi la vorton memstare:<br>\n<br>\n<i>Li flugis 300</i> <span style=\"color: #ff0000\"><i>kilojn</i></span><i> (milojn) da kilometroj jare.</i>",
 		""
 	],
+	"£:BASE-kesto": [
+		"£:BASE-kesto",
+		"Falsa amiko: kisto → kesto",
+		"En Esperanto, <i>'kisto'</i> estas la sama kiel <i>'cisto' –</i> nenormala, enkorpa kavaĵo. Ne konfuzu tion kun <i>'kesto'</i> (germane: <i>Kiste</i>) aŭ <i>'ĉerko'</i> (dane: <i>kiste</i>)<i>.</i>",
+		"La vinboteloj venis en ligna <span style=\"color: #ff0000\">kisto</span> (kesto)."
+	],
 	"£:BASE-kivifrukto": [
 		"£:BASE-kivifrukto",
 		"Falsa amiko: kivio → kivo/kivifrukto",
@@ -2427,6 +2523,18 @@ g_marks.types = {
 		"Falsa amiko: kompreni sub → celi per",
 		"En Esperanto, <i>‘kompreni’</i> signifas ‘bone koni la signifon aŭ naturon de io’ aŭ ‘simpatii kun la motivoj aŭ intencoj de iu’ (angle: <i>understand,</i> germane: <i>verstehen</i>). Evitu diri <i>‘</i><span style=\"color: #ff0000\"><i>kompreni</i></span><i> ion (alian signifon)</i> <span style=\"color: #ff0000\"><i>sub</i></span><i> io (iu vorto/esprimo/koncepto’.</i> Pli bone eblas kapti tiun sencon per <i>‘</i><b><i>celi</i></b><i> ion (alian signifon)</i> <b><i>per</i></b><i> io (iu vorto)’</i> aŭ <i>‘</i><b><i>ligi</i></b><i> la signifon de …</i> <b><i>al</i></b><i> io (iu vorto)’.</i> Precipe en demandoj ankaŭ eblas tute nova sitakso: <i>‘</i><b><i>Kiel vi difinas tion</i></b><i> (iun vorton)?’</i>",
 		"Kion vi <span style=\"color: #ff0000\">komprenas sub</span> «interlingvistiko»? («Kion vi <b>celas per</b> interlingvistiko»? - Kiel vi difinas «interlingvistiko»?)"
+	],
+	"£:BASE-agordi&\"<konfigu.*>\"": [
+		"£:BASE-agordi&\"<konfigu.*>\"",
+		"Falsa amiko: konfiguri → agordi",
+		"'Konfiguri', se entute uzebla en Esperanto, devus signifi 'ludi rolon laŭ (sia) kono'. Sed tutcerte vi celas <i>'agordi' ĉi</i> tie.",
+		""
+	],
+	"£x-etype-lemma&\"<.*konfigur.*>\"": [
+		"£x-etype-lemma&\"<.*konfigur.*>\"",
+		"Falsa amiko: konfiguri → agordi",
+		"'Konfiguri', se entute uzebla en Esperanto, devus signifi 'ludi rolon laŭ (sia) kono'. Sed tutcerte vi celas <i>'agordi' ĉi</i> tie.",
+		""
 	],
 	"£:BASE-fini&\"<konklud.*>\"": [
 		"£:BASE-fini&\"<konklud.*>\"",
@@ -2944,6 +3052,18 @@ g_marks.types = {
 		"En Esperanto, <i>'organo'</i> estas aŭ anatomia aŭ societa. Por la muzikilo, uzu <i>'orgeno'.</i>",
 		"Li koncertis per trimanuala <span style=\"color: #ff0000\">organo</span> (orgeno)."
 	],
+	"£:BASE-paletro": [
+		"£:BASE-paletro",
+		"Falsa amiko: paleto → paletro/paledo",
+		"La vorto <i>'paleto'</i> devus signifi 'eta paleco', se entute ion. Kion vi celas, estas verŝajne aŭ <i>'paletro'</i> (de artisto, kun farboj) au <i>'paledo'</i> (transportplato el ligno).",
+		"La pejzaĝo brilis kun bunta <span style=\"color: #ff0000\">paleto</span> (paletro) de aŭtunaj folioj.<br>\n<br>\nSur ĉiu <span style=\"color: #ff0000\">paleto</span> (paledo) povas esti ducento da libroj."
+	],
+	"£:BASE-paledo": [
+		"£:BASE-paledo",
+		"Falsa amiko: paleto → paletro/paledo",
+		"La vorto <i>'paleto'</i> devus signifi 'eta paleco', se entute ion. Kion vi celas, estas verŝajne aŭ <i>'paletro'</i> (de artisto, kun farboj) au <i>'paledo'</i> (transportplato el ligno).",
+		"La pejzaĝo brilis kun bunta <span style=\"color: #ff0000\">paleto</span> (paletro) de aŭtunaj folioj.<br>\n<br>\nSur ĉiu <span style=\"color: #ff0000\">paleto</span> (paledo) povas esti ducento da libroj."
+	],
 	"£:BASE-papriko&\"<kapsikoj?n?>\"": [
 		"£:BASE-papriko&\"<kapsikoj?n?>\"",
 		"Falsa amiko: papriko → kapsiko",
@@ -3030,14 +3150,20 @@ g_marks.types = {
 	],
 	"£:BASE-posxto&\"<poston?>\"": [
 		"£:BASE-posxto&\"<poston?>\"",
-		"Falsa amiko: posto → poŝto/posteno",
-		"Oni sendas leterojn aŭ pakaĵojn per <i>'poŝto'. 'Posteno'</i> povas esti ofico aŭ loko taskita al soldato. <i>'Posto'</i> estas malofta vorto kun la sola ebla signifo de 'posttempo' aŭ 'malantaŭo'.",
+		"Falsa amiko: posto → poŝto/posteno/afiŝo",
+		"Oni sendas leterojn aŭ pakaĵojn per <i>'poŝto'. 'Posteno'</i> povas esti ofico aŭ loko taskita al soldato. <i>'Posto'</i> estas malofta vorto kun la sola ebla signifo de 'posttempo' aŭ 'malantaŭo'.<br>\n<br>\nNotu, ke lastatempe aldoniĝis plia falsamika uzo, celanta <i>'afiŝoj'</i> en sociaj retoj (angle: <i>post</i>)",
 		"Mi sendos la dokumentojn per <span style=\"color: #ff0000\">posto</span> (poŝto).<br>\n<br>\nLi forlasis sian <span style=\"color: #ff0000\">poston</span> (postenon) sen permeso."
 	],
 	"£:BASE-posteno&\"<postoj?n?>\"": [
 		"£:BASE-posteno&\"<postoj?n?>\"",
-		"Falsa amiko: posto → poŝto/posteno",
-		"Oni sendas leterojn aŭ pakaĵojn per <i>'poŝto'. 'Posteno'</i> povas esti ofico aŭ loko taskita al soldato. <i>'Posto'</i> estas malofta vorto kun la sola ebla signifo de 'posttempo' aŭ 'malantaŭo'.",
+		"Falsa amiko: posto → poŝto/posteno/afiŝo",
+		"Oni sendas leterojn aŭ pakaĵojn per <i>'poŝto'. 'Posteno'</i> povas esti ofico aŭ loko taskita al soldato. <i>'Posto'</i> estas malofta vorto kun la sola ebla signifo de 'posttempo' aŭ 'malantaŭo'.<br>\n<br>\nNotu, ke lastatempe aldoniĝis plia falsamika uzo, celanta <i>'afiŝoj'</i> en sociaj retoj (angle: <i>post</i>)",
+		"Mi sendos la dokumentojn per <span style=\"color: #ff0000\">posto</span> (poŝto).<br>\n<br>\nLi forlasis sian <span style=\"color: #ff0000\">poston</span> (postenon) sen permeso."
+	],
+	"£:BASE-afisxo&\"<postoj?n?>\"": [
+		"£:BASE-afisxo&\"<postoj?n?>\"",
+		"Falsa amiko: posto → poŝto/posteno/afiŝo",
+		"Oni sendas leterojn aŭ pakaĵojn per <i>'poŝto'. 'Posteno'</i> povas esti ofico aŭ loko taskita al soldato. <i>'Posto'</i> estas malofta vorto kun la sola ebla signifo de 'posttempo' aŭ 'malantaŭo'.<br>\n<br>\nNotu, ke lastatempe aldoniĝis plia falsamika uzo, celanta <i>'afiŝoj'</i> en sociaj retoj (angle: <i>post</i>)",
 		"Mi sendos la dokumentojn per <span style=\"color: #ff0000\">posto</span> (poŝto).<br>\n<br>\nLi forlasis sian <span style=\"color: #ff0000\">poston</span> (postenon) sen permeso."
 	],
 	"£:BASE-ebla&\"<poten.*>\"": [
@@ -3196,6 +3322,12 @@ g_marks.types = {
 		"En Esperanto, la ĝenerala vorto <i>'punkto'</i> povas esti, malgranda ronda signo, tempo- aŭ loko-punkto aŭ ero de temaro aŭ listo. Sed por mezuri (mal)sukceson en konkurso, uzu <i>'poento'.</i>",
 		"Partoprenantoj bezonas minimume 5 <span style=\"color: #ff0000\">punktojn</span> (poentojn) por eniri la duan rondon."
 	],
+	"£x-etype-lemma&\"<racial.*>\"&\"ra[cs].*\"": [
+		"£x-etype-lemma&\"<racial.*>\"&\"ra[cs].*\"",
+		"Falsa amiko: raciala → racia/rasa, racialisma → raciisma/rasisma",
+		"La adjektivo <i>'raciala'</i> ne ekzistas en Esperanto. Povas temi aŭ pri la filozofia vorto <i>'racia'</i> (logikpensa), kun latineca troa -al, aŭ pri la biologia/sociologia vorto <i>'rasa'</i> (subspecia)<i>,</i> pro angla falsa amiko <i>(racial).</i> Simile pri derivaĵoj: <i>'racialisma'</i> devas esti aŭ <i>'raciisma'</i> aŭ <i>'rasisma'.</i>",
+		""
+	],
 	"£:BASE-racia": [
 		"£:BASE-racia",
 		"Falsa amiko: racionala/-e → racia/-e",
@@ -3214,6 +3346,18 @@ g_marks.types = {
 		"'Racionala' estas matematika aŭ filozofia fakesprimo. En ĝenerala lingvo, kun la signifo 'logike rezona, malemocia', prefere uzu <i>'racia/racie'.</i>",
 		"Vere mankas <span style=\"color: #ff0000\">racionalaj</span> (raciaj) argumentoj por tiu decido."
 	],
+	"£:BASE-racio&\"<racionon?>\"": [
+		"£:BASE-racio&\"<racionon?>\"",
+		"Falsa amiko: raciono → racio",
+		"En Esperanto, <i>'raciono'</i> estas speco de nombro (racionalo). Ne konfuzu tion kun <i>'racio'</i> (logika penskapablo). Notu ankaŭ la anglan falsaamikan konfuzon kun <i>'manĝporcio'</i> aŭ <i>'provianto'</i> (angle: <i>rations</i>).",
+		""
+	],
+	"£:BASE-mangxporcio&\"<racionoj?n?>\"": [
+		"£:BASE-mangxporcio&\"<racionoj?n?>\"",
+		"Falsa amiko: raciono → racio",
+		"En Esperanto, <i>'raciono'</i> estas speco de nombro (racionalo). Ne konfuzu tion kun <i>'racio'</i> (logika penskapablo). Notu ankaŭ la anglan falsaamikan konfuzon kun <i>'manĝporcio'</i> aŭ <i>'provianto'</i> (angle: <i>rations</i>).",
+		""
+	],
 	"£:BASE-ramplo": [
 		"£:BASE-ramplo",
 		"Falsa amiko: rampo → ramplo",
@@ -3231,6 +3375,12 @@ g_marks.types = {
 		"Falsa amiko: rastro → rastrumo",
 		"En Esperanto, <i>'rastro'</i> estas hakfosilo uzata por senveprigi bedojn. Ne konfuzu tion kun <i>'rastrumo'</i> aŭ <i>'mikroreto'</i> aŭ <i>'punktreto' –</i> strukturo el horizontalaj kaj vertikalaj linioj.",
 		""
+	],
+	"£x-etype-lemma&\"<realiz.*>\"": [
+		"£x-etype-lemma&\"<realiz.*>\"",
+		"Falsa amiko: realizi → realigi/ekkompreni",
+		"En Esperanto, <i>'realizi'</i> ne ekzistas (ĝi devus signifi 'provizi per io reala). Temas pri angla falsa amiko. Uzu aŭ <i>'realigi'</i> (ekz. planon) aŭ <i>'ekkompreni'</i> (fakton).",
+		"<i>Daŭros jarojn realizi (realigi) tiun planon.</i><br>\n<br>\n<i>Subite li realizis (ekkomprenis), ke temis pri ŝerco.</i>"
 	],
 	"£:BASE-redaktado&\"<redakcioj?n?>\"": [
 		"£:BASE-redaktado&\"<redakcioj?n?>\"",
@@ -3280,6 +3430,12 @@ g_marks.types = {
 		"En Esperanto, ‘<i>referi</i>’ signifas ‘prezenti sciencan aŭ/kaj detalan raporton. La verbo estas netransitiva, do kun akuzativo aŭ ‘<i>ke</i>’ uzu ‘<i>raporti</i>’:<br>\n<br>\n<i>Li</i> <span style=\"color: #ff0000\"><i>referis</i></span><i> (raportis) la retiriĝon de la atakantoj. Li</i> <span style=\"color: #ff0000\"><i>referis</i></span><i> (raportis), ke ili retiriĝis.</i><br>\n<br>\nNe konfuzu ‘referi’ kaj ‘referenci’. Oni referencas akademian fonton, aŭtoron, verkon ktp., kaj nomo aŭ difino povas referenci al objekto, loko aŭ okazaĵo (angle: <i>refer to</i>).<br>\n<br>\n<i>La eseo multe</i> <span style=\"color: #ff0000\"><i>referis</i></span><i> (referencis) klasikajn aŭtorojn.</i><br>\n<br>\n<i>La nomo de la observatorio</i> <span style=\"color: #ff0000\"><i>referas</i></span><i> (referencas) al la varianta stelo Mira</i><br>\n<br>\n<i>La raporto</i> <span style=\"color: #ff0000\"><i>referas</i></span><i> (referencas) la aktualajn prezojn al la jaro 1990.</i><br>\n<br>\nLa franca versio de tiu falsa amiko estas <i>‘se référer à’:</i><br>\n<br>\n<i>S-ro Ceric</i><span style=\"color: #ff0000\"><i> referas sin</i> </span><i>(referencas, aludas) al glora pasinteco.</i><br>\n<br>\nAlia angla falsa amiko estas <i>‘refer sb./s.th. to’:</i><br>\n<br>\n<i>OGPU</i> <span style=\"color: #ff0000\"><i>referis</i></span><i> (plusendis) la aferon/petanton/mesaĝon al la Politburoo.</i>",
 		""
 	],
+	"£x-etype-list&\"<refugx.*>\"&\"rifugx.*\"": [
+		"£x-etype-list&\"<refugx.*>\"&\"rifugx.*\"",
+		"Falsa amiko: refuĝi → rifuĝi",
+		"'Refuĝi' signifas 'ree fuĝi'. Verŝajne vi celis <i>'rifuĝi', 'rifuĝanto'</i> ktp., kun la senco de 'serĉi protekton'.",
+		"Nur en la lasta momento mi povis <span style=\"color: #ff0000\">refuĝi</span> (rifuĝi) al la monaĥejo."
+	],
 	"£:BASE-regula&\"<regularaj?n?>\"": [
 		"£:BASE-regula&\"<regularaj?n?>\"",
 		"Falsa amiko: regulara → regula",
@@ -3316,6 +3472,12 @@ g_marks.types = {
 		"En Esperanto, la verbo <i>'rekordi'</i> esta netransitiva kaj simple signifas &quot;esti rekordo, esti rekorde alta&quot;. Ne konfuzu tion kun la ago de <i>'registri'</i> muzikon aŭ filmon (angle: <i>record</i>)",
 		"Li <span style=\"color: #ff0000\">rekordis</span> (registris) sian unuan sondiskon kiel 15-jarulo."
 	],
+	"£:BASE-anstatauxigi&\"<remplac.*>\"": [
+		"£:BASE-anstatauxigi&\"<remplac.*>\"",
+		"Falsa amiko: remplaci → anstataŭigi",
+		"'Remplaci', se entute uzata, devus signifi 'esti placo, kie oni remas' (en Venecio?). Sed tutcerte vi celas <i>'anstataŭigi'.</i>",
+		"En tiu kuko vi povas <span style=\"color: #ff0000\">remplaci</span> (anstataŭigi) la avelojn per juglandoj aŭ migdaloj."
+	],
 	"£:BASE-esplori&\"<resercx.*>\"": [
 		"£:BASE-esplori&\"<resercx.*>\"",
 		"Falsa amiko: reserĉi → esplori",
@@ -3333,6 +3495,18 @@ g_marks.types = {
 		"Falsa amiko: returni → reveni",
 		"En Esperanto, <i>‘returni’</i> signifas ‘turni iun/ion en la kontraŭan direkton’, kaj <i>‘returniĝi’</i> signifas ‘mem turniĝi en la kontraŭan direkton’ aŭ ‘ree turniĝi’. Sed nek unu nek la alia havas la sencon de <i>‘reveni/reiri’</i> (angle: <i>return</i>).",
 		"Li prenis la glason da lakto , kaj returnigxis (revenis/reiris) al la kabano ."
+	],
+	"£:BASE-renversi": [
+		"£:BASE-renversi",
+		"Falsa amiko: reversi → renversi",
+		"En Esperanto, <i>'reversi'</i> normale signifas rekudri vesto tiel, ke la interna flanko fariĝas la ekstera. Alia ebla signifo estas 're-versi' (ekz. poemon en alia lingvo). Ĉi tie tamen vi verŝajne celis <i>'renversi'</i> (inversigi, faligi inversigante).",
+		"Ne eblas <span style=\"color: #ff0000\">reversi</span> (renversi) tiun procezon."
+	],
+	"£x-etype-lemma&\"<reversigx.*>\"": [
+		"£x-etype-lemma&\"<reversigx.*>\"",
+		"Falsa amiko: reversi → renversi",
+		"En Esperanto, <i>'reversi'</i> normale signifas rekudri vesto tiel, ke la interna flanko fariĝas la ekstera. Alia ebla signifo estas 're-versi' (ekz. poemon en alia lingvo). Ĉi tie tamen vi verŝajne celis <i>'renversi'</i> (inversigi, faligi inversigante).",
+		"Ne eblas <span style=\"color: #ff0000\">reversi</span> (renversi) tiun procezon."
 	],
 	"£:BASE-distingivo": [
 		"£:BASE-distingivo",
@@ -3355,19 +3529,19 @@ g_marks.types = {
 	"£:BASE-senstrecxigxi&\"<r[ie]laks.*>\"": [
 		"£:BASE-senstrecxigxi&\"<r[ie]laks.*>\"",
 		"Falsa amiko: rilaksi/relaksi → senstreĉiĝi/rilaksi",
-		"En Esperanto, <i>‘rilaksi’</i> estas transitiva verbo, normale celante kondiĉojn, parametrojn aŭ muskolojn kiel objektojn. Homoj ne rilaksas, sed senstreĉiĝas.<br>\n<br>\nNotu, ke <i>'relaksi'</i> tute ne ekzistas en Esperanto, krom kun la stranga senco de 'ree havi diareon'. Devas esti aŭ (kun objekto) <i>'rilaksi'</i> aŭ (sen objekto) <i>'senstreĉiĝi'.</i>",
+		"En Esperanto, <i>‘rilaksi’</i> estas transitiva verbo, normale celante kondiĉojn, parametrojn aŭ muskolojn kiel objektojn. Homoj ne rilaksas, sed senstreĉiĝas.<br>\n<br>\nNotu, ke <i>'relaksi'</i> tute ne ekzistas en Esperanto, krom kun la stranga senco de 'ree havi diareon'. Devas esti aŭ (kun objekto) <i>'rilaksi'</i> aŭ (sen objekto) <i>'senstreĉiĝi'.</i> Simile, <i>'relaksigi'</i> devas esti <i>'rilaksi'</i>, kaj <i>'relaksiĝi'</i> devas esti <i>'senstreĉiĝi'.</i>",
 		"Cxiu <span style=\"color: #ff0000\">rilaksis</span> (senstreĉiĝis) kaj auxskultis la muzikon.<br>\n<br>\nNi <span style=\"color: #ff0000\">relaksis</span> (senstreĉiĝis) trinkante varman ĉokoladon."
 	],
 	"£:BASE-rilaksi": [
 		"£:BASE-rilaksi",
 		"Falsa amiko: rilaksi/relaksi → senstreĉiĝi/rilaksi",
-		"En Esperanto, <i>‘rilaksi’</i> estas transitiva verbo, normale celante kondiĉojn, parametrojn aŭ muskolojn kiel objektojn. Homoj ne rilaksas, sed senstreĉiĝas.<br>\n<br>\nNotu, ke <i>'relaksi'</i> tute ne ekzistas en Esperanto, krom kun la stranga senco de 'ree havi diareon'. Devas esti aŭ (kun objekto) <i>'rilaksi'</i> aŭ (sen objekto) <i>'senstreĉiĝi'.</i>",
+		"En Esperanto, <i>‘rilaksi’</i> estas transitiva verbo, normale celante kondiĉojn, parametrojn aŭ muskolojn kiel objektojn. Homoj ne rilaksas, sed senstreĉiĝas.<br>\n<br>\nNotu, ke <i>'relaksi'</i> tute ne ekzistas en Esperanto, krom kun la stranga senco de 'ree havi diareon'. Devas esti aŭ (kun objekto) <i>'rilaksi'</i> aŭ (sen objekto) <i>'senstreĉiĝi'.</i> Simile, <i>'relaksigi'</i> devas esti <i>'rilaksi'</i>, kaj <i>'relaksiĝi'</i> devas esti <i>'senstreĉiĝi'.</i>",
 		"Cxiu <span style=\"color: #ff0000\">rilaksis</span> (senstreĉiĝis) kaj auxskultis la muzikon.<br>\n<br>\nNi <span style=\"color: #ff0000\">relaksis</span> (senstreĉiĝis) trinkante varman ĉokoladon."
 	],
 	"£x-etype-lemma&\"<r[ie]laks.*>\"": [
 		"£x-etype-lemma&\"<r[ie]laks.*>\"",
 		"Falsa amiko: rilaksi/relaksi → senstreĉiĝi/rilaksi",
-		"En Esperanto, <i>‘rilaksi’</i> estas transitiva verbo, normale celante kondiĉojn, parametrojn aŭ muskolojn kiel objektojn. Homoj ne rilaksas, sed senstreĉiĝas.<br>\n<br>\nNotu, ke <i>'relaksi'</i> tute ne ekzistas en Esperanto, krom kun la stranga senco de 'ree havi diareon'. Devas esti aŭ (kun objekto) <i>'rilaksi'</i> aŭ (sen objekto) <i>'senstreĉiĝi'.</i>",
+		"En Esperanto, <i>‘rilaksi’</i> estas transitiva verbo, normale celante kondiĉojn, parametrojn aŭ muskolojn kiel objektojn. Homoj ne rilaksas, sed senstreĉiĝas.<br>\n<br>\nNotu, ke <i>'relaksi'</i> tute ne ekzistas en Esperanto, krom kun la stranga senco de 'ree havi diareon'. Devas esti aŭ (kun objekto) <i>'rilaksi'</i> aŭ (sen objekto) <i>'senstreĉiĝi'.</i> Simile, <i>'relaksigi'</i> devas esti <i>'rilaksi'</i>, kaj <i>'relaksiĝi'</i> devas esti <i>'senstreĉiĝi'.</i>",
 		"Cxiu <span style=\"color: #ff0000\">rilaksis</span> (senstreĉiĝis) kaj auxskultis la muzikon.<br>\n<br>\nNi <span style=\"color: #ff0000\">relaksis</span> (senstreĉiĝis) trinkante varman ĉokoladon."
 	],
 	"£:BASE-kuracilo&\"<rimedoj?n?>": [
@@ -3436,6 +3610,18 @@ g_marks.types = {
 		"Glandoj sekrecias sekreciaĵon. Ne konfuzu la procezon de <i>'sekrecio'</i> (do sekreciado) kun la produkto, <i>'sekreciaĵo'.</i> Notu ankaŭ la falsamikan similecon de la vorto <i>'sekreto'</i> (kaŝita scio).",
 		"La <span style=\"color: #ff0000\">sekreto</span> (sekreciaĵo) de mefito ege malbonodoras."
 	],
+	"£:BASE-semida": [
+		"£:BASE-semida",
+		"Falsa amiko: semita/o → semida/o",
+		"En Esperanto, la vortoj <i>'semita'</i> kaj <i>'semito'</i> estas participoj de <i>'semi'.</i> Por la etna signifo uzu <i>'semida'</i> kaj <i>'semido'.</i>",
+		"La <span style=\"color: #ff0000\">semita</span> (semida) kulturo estas tre malnova."
+	],
+	"£x-etype-(list|lemma)&\"<semitoj?n?>\"": [
+		"£x-etype-(list|lemma)&\"<semitoj?n?>\"",
+		"Falsa amiko: semita/o → semida/o",
+		"En Esperanto, la vortoj <i>'semita'</i> kaj <i>'semito'</i> estas participoj de <i>'semi'.</i> Por la etna signifo uzu <i>'semida'</i> kaj <i>'semido'.</i>",
+		"La <span style=\"color: #ff0000\">semita</span> (semida) kulturo estas tre malnova."
+	],
 	"£:BASE-frazo&\"<sentencoj?n?>\"": [
 		"£:BASE-frazo&\"<sentencoj?n?>\"",
 		"Falsa amiko: sentenco → frazo",
@@ -3463,8 +3649,8 @@ g_marks.types = {
 	"£:BASE-ejo&\"<sitoj?n?>\"": [
 		"£:BASE-ejo&\"<sitoj?n?>\"",
 		"Falsa amiko: sito → ejo",
-		"En Esperanto, <i>‘sito’</i> estas (nur) birdo (angle: <i>nuthatch</i>). Estas falsa amiko uzi la vorton kun la signifo <i>‘ejo’.</i>",
-		"En 1929 oni komencis elfosi la gravan arkeologian <span style=\"color: #ff0000\">siton</span> (ejon) de la antikva urbo Ugarito"
+		"En Esperanto, <i>'sito'</i> estas speco de birdo (pego). Por la falsamika angla <i>'site'</i> uzu <i>'ejo', 'loko'</i> aŭ <i>'retejo'.</i> Notu, ke ne helpas literumi <i>'sajto' –</i> tiu neologismo ne ekzistas en Esperanto.",
+		"Proksime estas fama arkeologia <span style=\"color: #ff0000\">sito</span> (ejo)."
 	],
 	"£:BASE-gamo&\"<skaloj?n?>\"": [
 		"£:BASE-gamo&\"<skaloj?n?>\"",
@@ -3514,11 +3700,23 @@ g_marks.types = {
 		"En Esperanto, <i>‘sojlo’</i> estas portoŝtono aŭ metafore transiro-linio inter du statoj, epokoj aŭ agoj. Estas (angla) falsa amiko uzi la vorton kun la signivo de <i>‘grundo’.</i>",
 		"La <span style=\"color: #ff0000\">sojlo</span> (grundo) en malnovaj inundo-ebenaĵoj estas aparte fekunda."
 	],
+	"£x-etype-lemma&\"<specializ.*>\"": [
+		"£x-etype-lemma&\"<specializ.*>\"",
+		"Falsa amiko: specializi → specialigi",
+		"La radiko <i>'specializ-'</i> ne ekzistas en Esperanto (ĝi devus signifi 'provizi per io speciala'). Do oni diras <i>'specialigi', 'specialiĝi', 'specialigita', 'speciala'</i> anstataŭ <span style=\"color: #ff0000\"><i>'specializi', 'specializiĝi', 'specializita', 'speciala'</i></span><i>.</i>",
+		""
+	],
 	"£:BASE-divenumi&\"<spekul.*>\"": [
 		"£:BASE-divenumi&\"<spekul.*>\"",
 		"Falsa amiko: spekuli → divenumi",
-		"La vortoj <i>‘spekuli’</i> kaj <i>‘spekulacio’</i> estas borsaj/financaj fakvortoj. La signifo de ‘divenumi’/’divene prognozi’ (germane: <i>spekulieren,</i> angle: <i>speculate</i>), pri faktoj aŭ okazaĵoj, estas falsa amiko.",
-		"Mi ne volas <span style=\"color: #c9211e\">spekuli</span> (divenumi) pri la rezultoj de la venonta baloto."
+		"La vortoj <i>‘spekuli’</i> kaj <i>‘spekulacio’</i> estas borsaj/financaj fakvortoj. La signifo de ‘divenumi’/’divene prognozi’ (germane: <i>spekulieren,</i> angle: <i>speculate</i>), pri faktoj aŭ okazaĵoj, estas falsa amiko.<br>\n<br>\nNotu, ke <i>'spekulaco'</i> estas sinonimo de <i>'spekulaso',</i> speco de spickuketo.",
+		"Mi ne volas <span style=\"color: #ff0000\">spekuli</span> (divenumi) pri la rezultoj de la venonta baloto.<br>\n<br>\nLia patro <span style=\"color: #ff0000\">spekulacis</span> (spekulaciis) kun valutoj."
+	],
+	"£x-etype-lemma&\"<spekulac.*>\"&\"spekulaci.*\"": [
+		"£x-etype-lemma&\"<spekulac.*>\"&\"spekulaci.*\"",
+		"Falsa amiko: spekuli → divenumi",
+		"La vortoj <i>‘spekuli’</i> kaj <i>‘spekulacio’</i> estas borsaj/financaj fakvortoj. La signifo de ‘divenumi’/’divene prognozi’ (germane: <i>spekulieren,</i> angle: <i>speculate</i>), pri faktoj aŭ okazaĵoj, estas falsa amiko.<br>\n<br>\nNotu, ke <i>'spekulaco'</i> estas sinonimo de <i>'spekulaso',</i> speco de spickuketo.",
+		"Mi ne volas <span style=\"color: #ff0000\">spekuli</span> (divenumi) pri la rezultoj de la venonta baloto.<br>\n<br>\nLia patro <span style=\"color: #ff0000\">spekulacis</span> (spekulaciis) kun valutoj."
 	],
 	"£:BASE-stamfi": [
 		"£:BASE-stamfi",
@@ -3540,9 +3738,15 @@ g_marks.types = {
 	],
 	"£:BASE-temo&\"<subjektoj?n?>\"": [
 		"£:BASE-temo&\"<subjektoj?n?>\"",
-		"Falsa amiko: subjekto → temo",
-		"En Esperanto, <i>‘subjekto’</i> estas precipe gramatika termino (frazparto). Ĝi ne estas uzebla kun la senco de <i>‘temo’.</i><br>\n<br>\nNotu, ke <i>‘subjekto’</i> fakte havas duan signifon, nome tiun de ‘jura individuo’: <i>politika/jura/ĉefurba subjekto.</i>",
-		"Jen anglalingva libro pri la <span style=\"color: #ff0000\">subjekto</span> (temo)."
+		"Falsa amiko: subjekto → temo/fako",
+		"En Esperanto, <i>‘subjekto’</i> estas precipe gramatika termino (frazparto). Ĝi ne estas uzebla kun la senco de <i>‘temo’</i> aŭ <i>'fako'.</i><br>\n<br>\nNotu, ke <i>‘subjekto’</i> fakte havas duan signifon, nome tiun de ‘jura individuo’: <i>politika/jura/ĉefurba subjekto.</i>",
+		"Jen anglalingva libro pri la <span style=\"color: #ff0000\">subjekto</span> (temo).<br>\n<br>\n<i>Li elektis novan</i> <span style=\"color: #ff0000\"><i>studsubjekton</i></span><i> (studfakon).</i>"
+	],
+	"£x-etype-lemma&\"<studsubjektoj?n?>\"&\"studfako\"": [
+		"£x-etype-lemma&\"<studsubjektoj?n?>\"&\"studfako\"",
+		"Falsa amiko: subjekto → temo/fako",
+		"En Esperanto, <i>‘subjekto’</i> estas precipe gramatika termino (frazparto). Ĝi ne estas uzebla kun la senco de <i>‘temo’</i> aŭ <i>'fako'.</i><br>\n<br>\nNotu, ke <i>‘subjekto’</i> fakte havas duan signifon, nome tiun de ‘jura individuo’: <i>politika/jura/ĉefurba subjekto.</i>",
+		"Jen anglalingva libro pri la <span style=\"color: #ff0000\">subjekto</span> (temo).<br>\n<br>\n<i>Li elektis novan</i> <span style=\"color: #ff0000\"><i>studsubjekton</i></span><i> (studfakon).</i>"
 	],
 	"£:BASE-cxambraro": [
 		"£:BASE-cxambraro",
@@ -3555,6 +3759,12 @@ g_marks.types = {
 		"Falsa amiko: superlativo → pinto",
 		"Prefere limigu la uzon de <i>‘superlativo’</i> al la gramatika senco. La metafora senco ‘pinto/ekstremo/kulmino’ ne estas internacie deĉifrebla.",
 		"Nu , sinjorino Brandeis estis la <span style=\"color: #ff0000\">superlativo</span> (pinto) de graveco ."
+	],
+	"£:BASE-(plej=)?(alta|sublima|granda|bona|altranga)": [
+		"£:BASE-(plej=)?(alta|sublima|granda|bona|altranga)",
+		"Falsa amiko: suprema → alta/altranga",
+		"En Esperanto, la vorto <i>'suprema'</i> estas nure matematika fakvorto. Ne ebla uzi ĝin kiel &quot;superlativon&quot; de <i>'alta', 'altranga', 'granda', 'bona'</i> aŭ simile.",
+		"<span style=\"color: #ff0000\"><i>Suprema</i></span><i> Kortumo → Alta Kortumo</i><br>\n<br>\n<i>Mi havis la tri</i> <span style=\"color: #ff0000\"><i>supremajn</i></span><i> (plej bonajn) instruistojn de la fakultato.</i>"
 	],
 	"£:BASE-preni&\"<tank.*>\"": [
 		"£:BASE-preni&\"<tank.*>\"",
@@ -3583,13 +3793,25 @@ g_marks.types = {
 	"£:BASE-termino": [
 		"£:BASE-termino",
 		"Falsa amiko: termo → termino, termino → fiksdato",
-		"En Esperanto, <i>'termo'</i> povas esti aŭ konsista parto de matematika objekto aŭ varmbanejo, precipe antikva. Ne konfuzu tion kun <i>'termino'</i> (fakesprimo).<br>\n<br>\nNotu ankaŭ, ke temas pri falsa amiko, se vi uzas <i>'termino'</i> kun tempa senco.",
+		"En Esperanto, <i>'termo'</i> povas esti aŭ konsista parto de matematika objekto aŭ varmbanejo, precipe antikva. Ne konfuzu tion kun <i>'termino'</i> (fakesprimo) aŭ <i>'(ofic)periodo'</i> (angle: <i>term</i>).<br>\n<br>\nNotu ankaŭ, ke temas pri falsa amiko, se vi uzas <i>'termino'</i> kun tempa senco.",
 		"<i>Nova fako bezonas novajn</i> <span style=\"color: #ff0000\"><i>termojn</i></span><i> (terminojn).</i><br>\n<br>\nIli interkonsentis pri nova <span style=\"color: #ff0000\">termino</span> (fiksdato)."
 	],
 	"£:BASE-fiksdato": [
 		"£:BASE-fiksdato",
 		"Falsa amiko: termo → termino, termino → fiksdato",
-		"En Esperanto, <i>'termo'</i> povas esti aŭ konsista parto de matematika objekto aŭ varmbanejo, precipe antikva. Ne konfuzu tion kun <i>'termino'</i> (fakesprimo).<br>\n<br>\nNotu ankaŭ, ke temas pri falsa amiko, se vi uzas <i>'termino'</i> kun tempa senco.",
+		"En Esperanto, <i>'termo'</i> povas esti aŭ konsista parto de matematika objekto aŭ varmbanejo, precipe antikva. Ne konfuzu tion kun <i>'termino'</i> (fakesprimo) aŭ <i>'(ofic)periodo'</i> (angle: <i>term</i>).<br>\n<br>\nNotu ankaŭ, ke temas pri falsa amiko, se vi uzas <i>'termino'</i> kun tempa senco.",
+		"<i>Nova fako bezonas novajn</i> <span style=\"color: #ff0000\"><i>termojn</i></span><i> (terminojn).</i><br>\n<br>\nIli interkonsentis pri nova <span style=\"color: #ff0000\">termino</span> (fiksdato)."
+	],
+	"£:BASE-periodo&\"<.*term.*>\"": [
+		"£:BASE-periodo&\"<.*term.*>\"",
+		"Falsa amiko: termo → termino, termino → fiksdato",
+		"En Esperanto, <i>'termo'</i> povas esti aŭ konsista parto de matematika objekto aŭ varmbanejo, precipe antikva. Ne konfuzu tion kun <i>'termino'</i> (fakesprimo) aŭ <i>'(ofic)periodo'</i> (angle: <i>term</i>).<br>\n<br>\nNotu ankaŭ, ke temas pri falsa amiko, se vi uzas <i>'termino'</i> kun tempa senco.",
+		"<i>Nova fako bezonas novajn</i> <span style=\"color: #ff0000\"><i>termojn</i></span><i> (terminojn).</i><br>\n<br>\nIli interkonsentis pri nova <span style=\"color: #ff0000\">termino</span> (fiksdato)."
+	],
+	"£x-etype-lemma&\"<.*term.*>\"&\".*periodo.*\"": [
+		"£x-etype-lemma&\"<.*term.*>\"&\".*periodo.*\"",
+		"Falsa amiko: termo → termino, termino → fiksdato",
+		"En Esperanto, <i>'termo'</i> povas esti aŭ konsista parto de matematika objekto aŭ varmbanejo, precipe antikva. Ne konfuzu tion kun <i>'termino'</i> (fakesprimo) aŭ <i>'(ofic)periodo'</i> (angle: <i>term</i>).<br>\n<br>\nNotu ankaŭ, ke temas pri falsa amiko, se vi uzas <i>'termino'</i> kun tempa senco.",
 		"<i>Nova fako bezonas novajn</i> <span style=\"color: #ff0000\"><i>termojn</i></span><i> (terminojn).</i><br>\n<br>\nIli interkonsentis pri nova <span style=\"color: #ff0000\">termino</span> (fiksdato)."
 	],
 	"£:kunteksto&\"<termoj>\"": [
@@ -3597,6 +3819,12 @@ g_marks.types = {
 		"Falsa amiko: termoj → kunteksto",
 		"Ne ekzistas en Esperanto analogo de la angla esprimo <i>‘in terms of’.</i> Uzu <i>‘en kunteksto de’</i> aŭ simile.",
 		"Euxropo devas plibonigxi en <span style=\"color: #ff0000\">termoj</span> (konteksto) de novigo"
+	],
+	"£:BASE&\"<.*ton[ao]j?n?>\"": [
+		"£:BASE&\"<.*ton[ao]j?n?>\"",
+		"Falsa amiko: tono/-tona → etiketo/-etiketa",
+		"La kerna signifo de <i>'tono'</i> en Esperanto estas 'muzika sono', aŭ – figursence – 'nuanco de koloro aŭ voĉo'. En kelkaj lingvoj, ĉi-lasta inkluzivas ankaŭ, kiu en Esperanto nomiĝas <i>(konduta) 'etiketo'.</i> Do prefere diru <i>'laŭetiketa'</i> anstataŭ <span style=\"color: #ff0000\"><i>'bontona'</i> </span>kaj <i>'kontraŭetiketa'</i> anstataŭ<span style=\"color: #ff0000\"></span> <span style=\"color: #ff0000\"><i>'malbontona'</i></span>",
+		"Li faris <span style=\"color: #ff0000\">bontonan</span> (laŭetiketan) viziton al la nova urbestro."
 	],
 	"£:BASE-eltrovi&\"<trov.*>\"": [
 		"£:BASE-eltrovi&\"<trov.*>\"",
@@ -3639,6 +3867,12 @@ g_marks.types = {
 		"Falsa amiko: turniĝi → fariĝi",
 		"En Esperanto, <i>‘turniĝi’</i> signifas ‘rondiri surloke’ aŭ ‘ŝanĝi direkton’. Estas (angla) falsa amiko uzi la vorton kun la signifo de <i>‘fariĝi’</i> (angle: <i>become</i>)<i>.</i>",
 		"La tankatako <span style=\"color: #ff0000\">turniĝis</span> (fariĝis) kompleta katastrofo.<br>\n<br>\nLi hieraŭ <span style=\"color: #ff0000\">turniĝis</span> (fariĝis) 50."
+	],
+	"£x-etype-lemma&\"<tut.*e>\"": [
+		"£x-etype-lemma&\"<tut.*e>\"",
+		"Falsa amiko: tut- → ĉiu-",
+		"En Esperanto, la adjektivo <i>'tuta'</i> signifas 'kompleta/plena'. Ĝi ne povas havi la signifon de 'ĉiu', kiel en romanidaj lingvoj, special en pluralo. Do kunmetaĵoj kiel <span style=\"color: #ff0000\"><i>'tutmaniere', 'tutnuance', 'tut(o)kaze', 'tutflanke'</i></span><i></i> devas esti <i>'ĉiumaniere',</i> '<i>ĉiunuance</i>', <i>'ĉiu(o)kaze', 'ĉiuflanke'.</i>",
+		""
 	],
 	"£:nur&\"<unue>\"": [
 		"£:nur&\"<unue>\"",
@@ -3730,6 +3964,12 @@ g_marks.types = {
 		"Nur homoj, bestoj kaj plantoj povas esti striktasence <i>vivaj.</i> Metafore aliaj aferoj povas esti vivaj en la senco de <i>‘viveca’</i> (angle: <i>lively</i>) kaj eble <i>‘moviĝanta’.</i> Se uzi la vorton kun la signifo ‘ne surbendigita’ (ekz. koncerto) estas iom nelogika falsa amiko. Konsideru uzi <i>‘realtempa’</i> anstataŭe, aŭ <i>‘ĉeesta’,</i> eble <i>senpera’, ‘aktuala’,</i> depende de la kunteksto.",
 		"Mi preferas <span style=\"color: #ff0000\">vivan</span> (ĉeestan) muzikon al surbendigoj."
 	],
+	"£:BASE-vocxdoni": [
+		"£:BASE-vocxdoni",
+		"Falsa amiko: voĉi → voĉdoni",
+		"En moderna Esperanto, <i>'voĉi'</i> estas (malofta) sinonimo de <i>'diri'.</i> La signifo de <i>'voĉdoni'</i> estas arkaika, laŭ PIV.",
+		"Venontfoje mi <span style=\"color: #ff0000\">voĉos</span> (voĉdonos) por alia partio."
+	],
 	"£:BASE-ordinara&\"<vulgaraj?n?>\"": [
 		"£:BASE-ordinara&\"<vulgaraj?n?>\"",
 		"Falsa amiko: vulgara – ordinara – popularigi",
@@ -3742,6 +3982,24 @@ g_marks.types = {
 		"La kerna signifo de <i>‘vulgara’</i> en Esperanto estas ‘malbontona/malbongusta’, kaj la vorto ĉiam estas negativa. Prefere ne uzu ĝin en la senco <i>‘ordinara/komuna’.</i> Tiu uzo venas de la latinepoka ligo inter ‘komuna/popola’ kaj ‘pleba/senkultura’ kaj facile povas krei ambiguecon kaj miskomprenojn, precipe en la komunikado kun ne-eŭropanoj.<br>\n<br>\nTio ankaŭ validas por la verbo <i>‘vulgarigi’,</i> kies kerna signifo kaj tono estas negativaj.<i></i> Prefere ne uzu ĝin en la (neŭtra aŭ pozitiva) senco <i>‘popularigi’.</i>",
 		"Ili vivas en tute <span style=\"color: #ff0000\">vulgara</span> (ordinara) domo."
 	],
+	"£:BASE-socia&\"<social.*>\"": [
+		"£:BASE-socia&\"<social.*>\"",
+		"False frient / konfuzebla vortoparo: sociala → socia",
+		"La adjektivo <i>'sociala'</i> celas la kvaliton de la vivkondiĉoj de civitanoj. <i>'Socia'</i> estas pli neŭtrala vorto kaj simple informas, ke temas pri la socio, la ŝtata komunumo. La diferenco ankaŭ videblas en kunmetaĵoj – do <i>'socipsikologio',</i> ne <i>'</i><span style=\"color: #ff0000\"><i>socialpsikologio</i></span><i>',</i> kaj <i>'socialhelpo',</i> ne <i>'</i><span style=\"color: #ff0000\"><i>socihelpo</i></span><i>'.</i>",
+		"Ili apartenas al malsamaj <span style=\"color: #ff0000\">socialaj</span> (sociaj) klasoj."
+	],
+	"£x-etype-lemma&\"<social.*>\"&\"soci[^a].*\"": [
+		"£x-etype-lemma&\"<social.*>\"&\"soci[^a].*\"",
+		"False frient / konfuzebla vortoparo: sociala → socia",
+		"La adjektivo <i>'sociala'</i> celas la kvaliton de la vivkondiĉoj de civitanoj. <i>'Socia'</i> estas pli neŭtrala vorto kaj simple informas, ke temas pri la socio, la ŝtata komunumo. La diferenco ankaŭ videblas en kunmetaĵoj – do <i>'socipsikologio',</i> ne <i>'</i><span style=\"color: #ff0000\"><i>socialpsikologio</i></span><i>',</i> kaj <i>'socialhelpo',</i> ne <i>'</i><span style=\"color: #ff0000\"><i>socihelpo</i></span><i>'.</i>",
+		"Ili apartenas al malsamaj <span style=\"color: #ff0000\">socialaj</span> (sociaj) klasoj."
+	],
+	"£x-etype-lemma&\"<soci[^a].*>\"&\"social.*\"": [
+		"£x-etype-lemma&\"<soci[^a].*>\"&\"social.*\"",
+		"False frient / konfuzebla vortoparo: sociala → socia",
+		"La adjektivo <i>'sociala'</i> celas la kvaliton de la vivkondiĉoj de civitanoj. <i>'Socia'</i> estas pli neŭtrala vorto kaj simple informas, ke temas pri la socio, la ŝtata komunumo. La diferenco ankaŭ videblas en kunmetaĵoj – do <i>'socipsikologio',</i> ne <i>'</i><span style=\"color: #ff0000\"><i>socialpsikologio</i></span><i>',</i> kaj <i>'socialhelpo',</i> ne <i>'</i><span style=\"color: #ff0000\"><i>socihelpo</i></span><i>'.</i>",
+		"Ili apartenas al malsamaj <span style=\"color: #ff0000\">socialaj</span> (sociaj) klasoj."
+	],
 	"£nil&\"<gxi>\"": [
 		"£nil&\"<gxi>\"",
 		"Formala subjekto: ĝi",
@@ -3753,6 +4011,18 @@ g_marks.types = {
 		"Hispanismo: a + acc",
 		"La litero <i>‘a’</i> estas erara ĉi tie, Lingvohelpilo proponas forigi ĉin. Eble vi celis la artikolon <i>‘la’</i> aŭ la prepozicion <i>‘al’,</i> sed la konteksto ne klare subtenas tion. Povas esti, ke temas pri hispanismo – markado de akuzativo uzante la (hispanan) prepozicio <i>‘a’.</i>",
 		"Mia filino banis <span style=\"color: #ff0000\">[a]</span> sian hundinon kun la hoso ."
+	],
+	"£:BASE-interna": [
+		"£:BASE-interna",
+		"Konfuza vortoparo: intera → interna",
+		"'Intera' signifas 'estante inter du aferoj' (ekz. 'intera periodo', 'intera kategorio'). La vorto foje konfuziĝas kun <i>'interna'</i> (ena), kredeble ĉar ties malo, <i>'ekstera',</i> ne enhavas 'n' post la 'r'.<br>\n<br>\nNotu ankaŭ, ke estas falsa amiko uzi <i>'intera'</i> (aŭ <i>'entera</i>') en la senco de <i>'tuta'.</i>",
+		"Sed la seruro ne funkciis, ĉar ĝi tiom rustiĝis, ke la <span style=\"color: #ff0000\">intera</span> (interna) mekanismo ne plu moveblis.<br>\n<br>\nIliaj koloj povas turniĝi 270 gradojn por vidi en aliaj direktoj sen movi siajn <span style=\"color: #ff0000\">enterajn</span> (tutajn) korpojn."
+	],
+	"£:BASE-tuta&\"<[ie]nteraj?n?>\"": [
+		"£:BASE-tuta&\"<[ie]nteraj?n?>\"",
+		"Konfuza vortoparo: intera → interna",
+		"'Intera' signifas 'estante inter du aferoj' (ekz. 'intera periodo', 'intera kategorio'). La vorto foje konfuziĝas kun <i>'interna'</i> (ena), kredeble ĉar ties malo, <i>'ekstera',</i> ne enhavas 'n' post la 'r'.<br>\n<br>\nNotu ankaŭ, ke estas falsa amiko uzi <i>'intera'</i> (aŭ <i>'entera</i>') en la senco de <i>'tuta'.</i>",
+		"Sed la seruro ne funkciis, ĉar ĝi tiom rustiĝis, ke la <span style=\"color: #ff0000\">intera</span> (interna) mekanismo ne plu moveblis.<br>\n<br>\nIliaj koloj povas turniĝi 270 gradojn por vidi en aliaj direktoj sen movi siajn <span style=\"color: #ff0000\">enterajn</span> (tutajn) korpojn."
 	],
 	"£:BASE-granato": [
 		"£:BASE-granato",
@@ -3771,6 +4041,18 @@ g_marks.types = {
 		"Konfuzebla vortgrupo: granato ↔ grenato ↔ grenado",
 		"En Esperanto oni distingas inter tri radikoj, kiuj en kelkaj lingvoj ĉiuj estas ‘granat’. <i>‘Granato’</i> mem estas ruĝa arbofrukto, ene kun multaj eroj. <i>‘grenato’</i> estas juvelmineralo, kaj <i>‘grenado’</i> estas manĵetebla eksplodaĵo.",
 		"<i>La</i> <span style=\"color: #ff0000\"><i>granato</i></span><i> (grenado) eksplodis en la moskeo.</i><br>\n<br>\n<i>Suko el</i> <span style=\"color: #ff0000\"><i>grenatoj</i></span><i> (granatoj) estas tre bongusta.</i><br>\n<br>\n<i>La broĉo del bluzo estis el ĉeĥaj</i> <span style=\"color: #ff0000\"><i>granatoj</i></span><i> (grenatoj).</i>"
+	],
+	"£:BASE-grafikajxo": [
+		"£:BASE-grafikajxo",
+		"Konfuzebla vortogrupo grafo/grafiko → grafikaĵo/grafismo",
+		"En Esperanto, <i>'grafiko'</i> estas la arto reprezenti ion per linia desegnaĵo. La desegnaĵo mem nomiĝas <i>'grafikaĵo'.</i> La falsa amiko <i>'grafo'</i> estas, en Esperanto, nobela titolo.<br>\n<br>\nNotu ankaŭ, ke se vi celas skribsistemo, prefere uzu <i>'grafismo'.</i>",
+		"Vidu la <span style=\"color: #ff0000\">grafikon</span> (grafikaĵon) sur paĝo 5"
+	],
+	"£:BASE-grafismo": [
+		"£:BASE-grafismo",
+		"Konfuzebla vortogrupo grafo/grafiko → grafikaĵo/grafismo",
+		"En Esperanto, <i>'grafiko'</i> estas la arto reprezenti ion per linia desegnaĵo. La desegnaĵo mem nomiĝas <i>'grafikaĵo'.</i> La falsa amiko <i>'grafo'</i> estas, en Esperanto, nobela titolo.<br>\n<br>\nNotu ankaŭ, ke se vi celas skribsistemo, prefere uzu <i>'grafismo'.</i>",
+		"Vidu la <span style=\"color: #ff0000\">grafikon</span> (grafikaĵon) sur paĝo 5"
 	],
 	"£:BASE-finia&\"<finitaj?n?>\"": [
 		"£:BASE-finia&\"<finitaj?n?>\"",
@@ -3805,43 +4087,55 @@ g_marks.types = {
 	"£:BASE-fonduso": [
 		"£:BASE-fonduso",
 		"Konfuzebla vortogrupo: fondo ↔fundo ↔ fonto/fontano ↔ fonduso/fondaĵo",
-		"Eblas konfuzi la vorton <i>‘fondo’</i> kun<i> ‘fundo’, ‘fonto’/’fontano’</i> kaj <i>‘fonduso’/’fondaĵo’,</i> kaj depende de la gepatra lingvo ankaŭ povas ekzisti falsaj amikoj en tiu vortogrupo.<br>\n<br>\n<i>‘</i><b><i>Fondo</i></b><i>’</i> mem estas ago kaj venas de la verbo <i>‘fondi’</i> (angle: <i>found</i>), do temas pri la estigo de ekz. asocio, urbo aŭ ĝuste <i>fondaĵo</i>.<br>\n<br>\n<i>‘</i><b><i>Fundo</i></b><i>’</i> estas la vertikale plej malsupra aŭ horizontale plej malantaŭa parto de io kava, ekz. de glaso, botelo (angle: <i>bottom</i>), kaverno, ĉambro aŭ koridoro (angle: <i>far end</i>).<br>\n<br>\n<i>‘</i><b><i>Fonto</i></b><i>’</i> estas la origino de akvofluo (angle: <i>source, well</i>), lumo ktp., aŭ figursence de informoj. Notu, ke por artefarita ŝprucakv(ej)o ekzistas aparta vorto, <i>‘</i><b><i>fontano</i></b><i>’</i> (angle: <i>fountain</i>).<br>\n<br>\n<i>‘</i><b><i>Fonduso</i></b><i>’</i> kaj <i>‘</i><b><i>fondaĵo</i></b><i>’</i>, fine, estas finance-juraj terminoj. <i>‘Fonduso’</i> estas kapitalo jure destinita al specifa celo (angle: <i>fund</i>), kaj tipe administrata de asocio, firmao aŭ ĝuste <i>‘fondaĵo’,</i> t.e. fondusadministra asocio (angle: <i>foundation)</i>. La lingvouzo tamen ne klare distingas inter <i>fonduso</i> kaj <i>fondaĵo,</i> kaj ambaŭ povas havi nomojn kaj statutojn, fari decidojn, agi publike ktp. Eventuale preferu <i>‘fondaĵo’,</i> se temas pri vera (ekz. bonfara) asocio, kun dungitoj, estraro, jarkunveno ktp., rezervante la vorton <i>‘fonduso’</i> por \"monpotoj\", do la rezervita kapitalo. Se oni faras la proponitan distingon, fondaĵo povas havi (unu aŭ plurajn) fonduso(j)n, sed ne inverse.",
+		"Eblas konfuzi la vorton <i>‘fondo’</i> kun<i> ‘fundo’, 'fono', ‘fonto’/’fontano’</i> kaj <i>‘fonduso’/’fondaĵo’,</i> kaj depende de la gepatra lingvo ankaŭ povas ekzisti falsaj amikoj en tiu vortogrupo.<br>\n<br>\n<i>‘</i><b><i>Fondo</i></b><i>’</i> mem estas ago kaj venas de la verbo <i>‘fondi’</i> (angle: <i>found</i>), do temas pri la estigo de ekz. asocio, urbo aŭ ĝuste <i>fondaĵo</i>.<br>\n<br>\n<i>‘</i><b><i>Fundo</i></b><i>’</i> estas la vertikale plej malsupra aŭ horizontale plej malantaŭa parto de io kava, ekz. de glaso, botelo (angle: <i>bottom</i>), kaverno, ĉambro aŭ koridoro (angle: <i>far end</i>).<br>\n<br>\n<b><i>'Fono'</i> </b>estas kion oni vidas malantaŭe aŭ fore, kontraste al la fokusita aŭ reliefigita objekto, ankaŭ en figura senco.<br>\n<br>\n<i>‘</i><b><i>Fonto</i></b><i>’</i> estas la origino de akvofluo (angle: <i>source, well</i>), lumo ktp., aŭ figursence de informoj. Notu, ke por artefarita ŝprucakv(ej)o ekzistas aparta vorto, <i>‘</i><b><i>fontano</i></b><i>’</i> (angle: <i>fountain</i>).<br>\n<br>\n<i>‘</i><b><i>Fonduso</i></b><i>’</i> kaj <i>‘</i><b><i>fondaĵo</i></b><i>’</i>, fine, estas finance-juraj terminoj. <i>‘Fonduso’</i> estas kapitalo jure destinita al specifa celo (angle: <i>fund</i>), kaj tipe administrata de asocio, firmao aŭ ĝuste <i>‘fondaĵo’,</i> t.e. fondusadministra asocio (angle: <i>foundation)</i>. La lingvouzo tamen ne klare distingas inter <i>fonduso</i> kaj <i>fondaĵo,</i> kaj ambaŭ povas havi nomojn kaj statutojn, fari decidojn, agi publike ktp. Eventuale preferu <i>‘fondaĵo’,</i> se temas pri vera (ekz. bonfara) asocio, kun dungitoj, estraro, jarkunveno ktp., rezervante la vorton <i>‘fonduso’</i> por \"monpotoj\", do la rezervita kapitalo. Se oni faras la proponitan distingon, fondaĵo povas havi (unu aŭ plurajn) fonduso(j)n, sed ne inverse.",
 		"La <span style=\"color: #ff0000\">fondo</span> (fundo) de la kaverno estis tute malhela.<br>\n<br>\nInter la rokoj plaŭdis eta <span style=\"color: #ff0000\">fondo</span> (fonto).<br>\n<br>\nLa abonhelpa <span style=\"color: #ff0000\">fondo</span> (fonduso) de Monato pagos por vi.<br>\n<br>\nLi laboras por naturprotekta <span style=\"color: #ff0000\">fondo</span> (fondaĵo).<br>\n<br>\n<i>UEA estis</i> <span style=\"color: #ff0000\"><i>fundita</i></span><i> (fondita) en 1908.</i>"
 	],
 	"£:BASE-fundo": [
 		"£:BASE-fundo",
 		"Konfuzebla vortogrupo: fondo ↔fundo ↔ fonto/fontano ↔ fonduso/fondaĵo",
-		"Eblas konfuzi la vorton <i>‘fondo’</i> kun<i> ‘fundo’, ‘fonto’/’fontano’</i> kaj <i>‘fonduso’/’fondaĵo’,</i> kaj depende de la gepatra lingvo ankaŭ povas ekzisti falsaj amikoj en tiu vortogrupo.<br>\n<br>\n<i>‘</i><b><i>Fondo</i></b><i>’</i> mem estas ago kaj venas de la verbo <i>‘fondi’</i> (angle: <i>found</i>), do temas pri la estigo de ekz. asocio, urbo aŭ ĝuste <i>fondaĵo</i>.<br>\n<br>\n<i>‘</i><b><i>Fundo</i></b><i>’</i> estas la vertikale plej malsupra aŭ horizontale plej malantaŭa parto de io kava, ekz. de glaso, botelo (angle: <i>bottom</i>), kaverno, ĉambro aŭ koridoro (angle: <i>far end</i>).<br>\n<br>\n<i>‘</i><b><i>Fonto</i></b><i>’</i> estas la origino de akvofluo (angle: <i>source, well</i>), lumo ktp., aŭ figursence de informoj. Notu, ke por artefarita ŝprucakv(ej)o ekzistas aparta vorto, <i>‘</i><b><i>fontano</i></b><i>’</i> (angle: <i>fountain</i>).<br>\n<br>\n<i>‘</i><b><i>Fonduso</i></b><i>’</i> kaj <i>‘</i><b><i>fondaĵo</i></b><i>’</i>, fine, estas finance-juraj terminoj. <i>‘Fonduso’</i> estas kapitalo jure destinita al specifa celo (angle: <i>fund</i>), kaj tipe administrata de asocio, firmao aŭ ĝuste <i>‘fondaĵo’,</i> t.e. fondusadministra asocio (angle: <i>foundation)</i>. La lingvouzo tamen ne klare distingas inter <i>fonduso</i> kaj <i>fondaĵo,</i> kaj ambaŭ povas havi nomojn kaj statutojn, fari decidojn, agi publike ktp. Eventuale preferu <i>‘fondaĵo’,</i> se temas pri vera (ekz. bonfara) asocio, kun dungitoj, estraro, jarkunveno ktp., rezervante la vorton <i>‘fonduso’</i> por \"monpotoj\", do la rezervita kapitalo. Se oni faras la proponitan distingon, fondaĵo povas havi (unu aŭ plurajn) fonduso(j)n, sed ne inverse.",
+		"Eblas konfuzi la vorton <i>‘fondo’</i> kun<i> ‘fundo’, 'fono', ‘fonto’/’fontano’</i> kaj <i>‘fonduso’/’fondaĵo’,</i> kaj depende de la gepatra lingvo ankaŭ povas ekzisti falsaj amikoj en tiu vortogrupo.<br>\n<br>\n<i>‘</i><b><i>Fondo</i></b><i>’</i> mem estas ago kaj venas de la verbo <i>‘fondi’</i> (angle: <i>found</i>), do temas pri la estigo de ekz. asocio, urbo aŭ ĝuste <i>fondaĵo</i>.<br>\n<br>\n<i>‘</i><b><i>Fundo</i></b><i>’</i> estas la vertikale plej malsupra aŭ horizontale plej malantaŭa parto de io kava, ekz. de glaso, botelo (angle: <i>bottom</i>), kaverno, ĉambro aŭ koridoro (angle: <i>far end</i>).<br>\n<br>\n<b><i>'Fono'</i> </b>estas kion oni vidas malantaŭe aŭ fore, kontraste al la fokusita aŭ reliefigita objekto, ankaŭ en figura senco.<br>\n<br>\n<i>‘</i><b><i>Fonto</i></b><i>’</i> estas la origino de akvofluo (angle: <i>source, well</i>), lumo ktp., aŭ figursence de informoj. Notu, ke por artefarita ŝprucakv(ej)o ekzistas aparta vorto, <i>‘</i><b><i>fontano</i></b><i>’</i> (angle: <i>fountain</i>).<br>\n<br>\n<i>‘</i><b><i>Fonduso</i></b><i>’</i> kaj <i>‘</i><b><i>fondaĵo</i></b><i>’</i>, fine, estas finance-juraj terminoj. <i>‘Fonduso’</i> estas kapitalo jure destinita al specifa celo (angle: <i>fund</i>), kaj tipe administrata de asocio, firmao aŭ ĝuste <i>‘fondaĵo’,</i> t.e. fondusadministra asocio (angle: <i>foundation)</i>. La lingvouzo tamen ne klare distingas inter <i>fonduso</i> kaj <i>fondaĵo,</i> kaj ambaŭ povas havi nomojn kaj statutojn, fari decidojn, agi publike ktp. Eventuale preferu <i>‘fondaĵo’,</i> se temas pri vera (ekz. bonfara) asocio, kun dungitoj, estraro, jarkunveno ktp., rezervante la vorton <i>‘fonduso’</i> por \"monpotoj\", do la rezervita kapitalo. Se oni faras la proponitan distingon, fondaĵo povas havi (unu aŭ plurajn) fonduso(j)n, sed ne inverse.",
+		"La <span style=\"color: #ff0000\">fondo</span> (fundo) de la kaverno estis tute malhela.<br>\n<br>\nInter la rokoj plaŭdis eta <span style=\"color: #ff0000\">fondo</span> (fonto).<br>\n<br>\nLa abonhelpa <span style=\"color: #ff0000\">fondo</span> (fonduso) de Monato pagos por vi.<br>\n<br>\nLi laboras por naturprotekta <span style=\"color: #ff0000\">fondo</span> (fondaĵo).<br>\n<br>\n<i>UEA estis</i> <span style=\"color: #ff0000\"><i>fundita</i></span><i> (fondita) en 1908.</i>"
+	],
+	"£:BASE-fono": [
+		"£:BASE-fono",
+		"Konfuzebla vortogrupo: fondo ↔fundo ↔ fonto/fontano ↔ fonduso/fondaĵo",
+		"Eblas konfuzi la vorton <i>‘fondo’</i> kun<i> ‘fundo’, 'fono', ‘fonto’/’fontano’</i> kaj <i>‘fonduso’/’fondaĵo’,</i> kaj depende de la gepatra lingvo ankaŭ povas ekzisti falsaj amikoj en tiu vortogrupo.<br>\n<br>\n<i>‘</i><b><i>Fondo</i></b><i>’</i> mem estas ago kaj venas de la verbo <i>‘fondi’</i> (angle: <i>found</i>), do temas pri la estigo de ekz. asocio, urbo aŭ ĝuste <i>fondaĵo</i>.<br>\n<br>\n<i>‘</i><b><i>Fundo</i></b><i>’</i> estas la vertikale plej malsupra aŭ horizontale plej malantaŭa parto de io kava, ekz. de glaso, botelo (angle: <i>bottom</i>), kaverno, ĉambro aŭ koridoro (angle: <i>far end</i>).<br>\n<br>\n<b><i>'Fono'</i> </b>estas kion oni vidas malantaŭe aŭ fore, kontraste al la fokusita aŭ reliefigita objekto, ankaŭ en figura senco.<br>\n<br>\n<i>‘</i><b><i>Fonto</i></b><i>’</i> estas la origino de akvofluo (angle: <i>source, well</i>), lumo ktp., aŭ figursence de informoj. Notu, ke por artefarita ŝprucakv(ej)o ekzistas aparta vorto, <i>‘</i><b><i>fontano</i></b><i>’</i> (angle: <i>fountain</i>).<br>\n<br>\n<i>‘</i><b><i>Fonduso</i></b><i>’</i> kaj <i>‘</i><b><i>fondaĵo</i></b><i>’</i>, fine, estas finance-juraj terminoj. <i>‘Fonduso’</i> estas kapitalo jure destinita al specifa celo (angle: <i>fund</i>), kaj tipe administrata de asocio, firmao aŭ ĝuste <i>‘fondaĵo’,</i> t.e. fondusadministra asocio (angle: <i>foundation)</i>. La lingvouzo tamen ne klare distingas inter <i>fonduso</i> kaj <i>fondaĵo,</i> kaj ambaŭ povas havi nomojn kaj statutojn, fari decidojn, agi publike ktp. Eventuale preferu <i>‘fondaĵo’,</i> se temas pri vera (ekz. bonfara) asocio, kun dungitoj, estraro, jarkunveno ktp., rezervante la vorton <i>‘fonduso’</i> por \"monpotoj\", do la rezervita kapitalo. Se oni faras la proponitan distingon, fondaĵo povas havi (unu aŭ plurajn) fonduso(j)n, sed ne inverse.",
 		"La <span style=\"color: #ff0000\">fondo</span> (fundo) de la kaverno estis tute malhela.<br>\n<br>\nInter la rokoj plaŭdis eta <span style=\"color: #ff0000\">fondo</span> (fonto).<br>\n<br>\nLa abonhelpa <span style=\"color: #ff0000\">fondo</span> (fonduso) de Monato pagos por vi.<br>\n<br>\nLi laboras por naturprotekta <span style=\"color: #ff0000\">fondo</span> (fondaĵo).<br>\n<br>\n<i>UEA estis</i> <span style=\"color: #ff0000\"><i>fundita</i></span><i> (fondita) en 1908.</i>"
 	],
 	"£:BASE-fonto": [
 		"£:BASE-fonto",
 		"Konfuzebla vortogrupo: fondo ↔fundo ↔ fonto/fontano ↔ fonduso/fondaĵo",
-		"Eblas konfuzi la vorton <i>‘fondo’</i> kun<i> ‘fundo’, ‘fonto’/’fontano’</i> kaj <i>‘fonduso’/’fondaĵo’,</i> kaj depende de la gepatra lingvo ankaŭ povas ekzisti falsaj amikoj en tiu vortogrupo.<br>\n<br>\n<i>‘</i><b><i>Fondo</i></b><i>’</i> mem estas ago kaj venas de la verbo <i>‘fondi’</i> (angle: <i>found</i>), do temas pri la estigo de ekz. asocio, urbo aŭ ĝuste <i>fondaĵo</i>.<br>\n<br>\n<i>‘</i><b><i>Fundo</i></b><i>’</i> estas la vertikale plej malsupra aŭ horizontale plej malantaŭa parto de io kava, ekz. de glaso, botelo (angle: <i>bottom</i>), kaverno, ĉambro aŭ koridoro (angle: <i>far end</i>).<br>\n<br>\n<i>‘</i><b><i>Fonto</i></b><i>’</i> estas la origino de akvofluo (angle: <i>source, well</i>), lumo ktp., aŭ figursence de informoj. Notu, ke por artefarita ŝprucakv(ej)o ekzistas aparta vorto, <i>‘</i><b><i>fontano</i></b><i>’</i> (angle: <i>fountain</i>).<br>\n<br>\n<i>‘</i><b><i>Fonduso</i></b><i>’</i> kaj <i>‘</i><b><i>fondaĵo</i></b><i>’</i>, fine, estas finance-juraj terminoj. <i>‘Fonduso’</i> estas kapitalo jure destinita al specifa celo (angle: <i>fund</i>), kaj tipe administrata de asocio, firmao aŭ ĝuste <i>‘fondaĵo’,</i> t.e. fondusadministra asocio (angle: <i>foundation)</i>. La lingvouzo tamen ne klare distingas inter <i>fonduso</i> kaj <i>fondaĵo,</i> kaj ambaŭ povas havi nomojn kaj statutojn, fari decidojn, agi publike ktp. Eventuale preferu <i>‘fondaĵo’,</i> se temas pri vera (ekz. bonfara) asocio, kun dungitoj, estraro, jarkunveno ktp., rezervante la vorton <i>‘fonduso’</i> por \"monpotoj\", do la rezervita kapitalo. Se oni faras la proponitan distingon, fondaĵo povas havi (unu aŭ plurajn) fonduso(j)n, sed ne inverse.",
+		"Eblas konfuzi la vorton <i>‘fondo’</i> kun<i> ‘fundo’, 'fono', ‘fonto’/’fontano’</i> kaj <i>‘fonduso’/’fondaĵo’,</i> kaj depende de la gepatra lingvo ankaŭ povas ekzisti falsaj amikoj en tiu vortogrupo.<br>\n<br>\n<i>‘</i><b><i>Fondo</i></b><i>’</i> mem estas ago kaj venas de la verbo <i>‘fondi’</i> (angle: <i>found</i>), do temas pri la estigo de ekz. asocio, urbo aŭ ĝuste <i>fondaĵo</i>.<br>\n<br>\n<i>‘</i><b><i>Fundo</i></b><i>’</i> estas la vertikale plej malsupra aŭ horizontale plej malantaŭa parto de io kava, ekz. de glaso, botelo (angle: <i>bottom</i>), kaverno, ĉambro aŭ koridoro (angle: <i>far end</i>).<br>\n<br>\n<b><i>'Fono'</i> </b>estas kion oni vidas malantaŭe aŭ fore, kontraste al la fokusita aŭ reliefigita objekto, ankaŭ en figura senco.<br>\n<br>\n<i>‘</i><b><i>Fonto</i></b><i>’</i> estas la origino de akvofluo (angle: <i>source, well</i>), lumo ktp., aŭ figursence de informoj. Notu, ke por artefarita ŝprucakv(ej)o ekzistas aparta vorto, <i>‘</i><b><i>fontano</i></b><i>’</i> (angle: <i>fountain</i>).<br>\n<br>\n<i>‘</i><b><i>Fonduso</i></b><i>’</i> kaj <i>‘</i><b><i>fondaĵo</i></b><i>’</i>, fine, estas finance-juraj terminoj. <i>‘Fonduso’</i> estas kapitalo jure destinita al specifa celo (angle: <i>fund</i>), kaj tipe administrata de asocio, firmao aŭ ĝuste <i>‘fondaĵo’,</i> t.e. fondusadministra asocio (angle: <i>foundation)</i>. La lingvouzo tamen ne klare distingas inter <i>fonduso</i> kaj <i>fondaĵo,</i> kaj ambaŭ povas havi nomojn kaj statutojn, fari decidojn, agi publike ktp. Eventuale preferu <i>‘fondaĵo’,</i> se temas pri vera (ekz. bonfara) asocio, kun dungitoj, estraro, jarkunveno ktp., rezervante la vorton <i>‘fonduso’</i> por \"monpotoj\", do la rezervita kapitalo. Se oni faras la proponitan distingon, fondaĵo povas havi (unu aŭ plurajn) fonduso(j)n, sed ne inverse.",
 		"La <span style=\"color: #ff0000\">fondo</span> (fundo) de la kaverno estis tute malhela.<br>\n<br>\nInter la rokoj plaŭdis eta <span style=\"color: #ff0000\">fondo</span> (fonto).<br>\n<br>\nLa abonhelpa <span style=\"color: #ff0000\">fondo</span> (fonduso) de Monato pagos por vi.<br>\n<br>\nLi laboras por naturprotekta <span style=\"color: #ff0000\">fondo</span> (fondaĵo).<br>\n<br>\n<i>UEA estis</i> <span style=\"color: #ff0000\"><i>fundita</i></span><i> (fondita) en 1908.</i>"
 	],
 	"£:BASE-fondajxo": [
 		"£:BASE-fondajxo",
 		"Konfuzebla vortogrupo: fondo ↔fundo ↔ fonto/fontano ↔ fonduso/fondaĵo",
-		"Eblas konfuzi la vorton <i>‘fondo’</i> kun<i> ‘fundo’, ‘fonto’/’fontano’</i> kaj <i>‘fonduso’/’fondaĵo’,</i> kaj depende de la gepatra lingvo ankaŭ povas ekzisti falsaj amikoj en tiu vortogrupo.<br>\n<br>\n<i>‘</i><b><i>Fondo</i></b><i>’</i> mem estas ago kaj venas de la verbo <i>‘fondi’</i> (angle: <i>found</i>), do temas pri la estigo de ekz. asocio, urbo aŭ ĝuste <i>fondaĵo</i>.<br>\n<br>\n<i>‘</i><b><i>Fundo</i></b><i>’</i> estas la vertikale plej malsupra aŭ horizontale plej malantaŭa parto de io kava, ekz. de glaso, botelo (angle: <i>bottom</i>), kaverno, ĉambro aŭ koridoro (angle: <i>far end</i>).<br>\n<br>\n<i>‘</i><b><i>Fonto</i></b><i>’</i> estas la origino de akvofluo (angle: <i>source, well</i>), lumo ktp., aŭ figursence de informoj. Notu, ke por artefarita ŝprucakv(ej)o ekzistas aparta vorto, <i>‘</i><b><i>fontano</i></b><i>’</i> (angle: <i>fountain</i>).<br>\n<br>\n<i>‘</i><b><i>Fonduso</i></b><i>’</i> kaj <i>‘</i><b><i>fondaĵo</i></b><i>’</i>, fine, estas finance-juraj terminoj. <i>‘Fonduso’</i> estas kapitalo jure destinita al specifa celo (angle: <i>fund</i>), kaj tipe administrata de asocio, firmao aŭ ĝuste <i>‘fondaĵo’,</i> t.e. fondusadministra asocio (angle: <i>foundation)</i>. La lingvouzo tamen ne klare distingas inter <i>fonduso</i> kaj <i>fondaĵo,</i> kaj ambaŭ povas havi nomojn kaj statutojn, fari decidojn, agi publike ktp. Eventuale preferu <i>‘fondaĵo’,</i> se temas pri vera (ekz. bonfara) asocio, kun dungitoj, estraro, jarkunveno ktp., rezervante la vorton <i>‘fonduso’</i> por \"monpotoj\", do la rezervita kapitalo. Se oni faras la proponitan distingon, fondaĵo povas havi (unu aŭ plurajn) fonduso(j)n, sed ne inverse.",
+		"Eblas konfuzi la vorton <i>‘fondo’</i> kun<i> ‘fundo’, 'fono', ‘fonto’/’fontano’</i> kaj <i>‘fonduso’/’fondaĵo’,</i> kaj depende de la gepatra lingvo ankaŭ povas ekzisti falsaj amikoj en tiu vortogrupo.<br>\n<br>\n<i>‘</i><b><i>Fondo</i></b><i>’</i> mem estas ago kaj venas de la verbo <i>‘fondi’</i> (angle: <i>found</i>), do temas pri la estigo de ekz. asocio, urbo aŭ ĝuste <i>fondaĵo</i>.<br>\n<br>\n<i>‘</i><b><i>Fundo</i></b><i>’</i> estas la vertikale plej malsupra aŭ horizontale plej malantaŭa parto de io kava, ekz. de glaso, botelo (angle: <i>bottom</i>), kaverno, ĉambro aŭ koridoro (angle: <i>far end</i>).<br>\n<br>\n<b><i>'Fono'</i> </b>estas kion oni vidas malantaŭe aŭ fore, kontraste al la fokusita aŭ reliefigita objekto, ankaŭ en figura senco.<br>\n<br>\n<i>‘</i><b><i>Fonto</i></b><i>’</i> estas la origino de akvofluo (angle: <i>source, well</i>), lumo ktp., aŭ figursence de informoj. Notu, ke por artefarita ŝprucakv(ej)o ekzistas aparta vorto, <i>‘</i><b><i>fontano</i></b><i>’</i> (angle: <i>fountain</i>).<br>\n<br>\n<i>‘</i><b><i>Fonduso</i></b><i>’</i> kaj <i>‘</i><b><i>fondaĵo</i></b><i>’</i>, fine, estas finance-juraj terminoj. <i>‘Fonduso’</i> estas kapitalo jure destinita al specifa celo (angle: <i>fund</i>), kaj tipe administrata de asocio, firmao aŭ ĝuste <i>‘fondaĵo’,</i> t.e. fondusadministra asocio (angle: <i>foundation)</i>. La lingvouzo tamen ne klare distingas inter <i>fonduso</i> kaj <i>fondaĵo,</i> kaj ambaŭ povas havi nomojn kaj statutojn, fari decidojn, agi publike ktp. Eventuale preferu <i>‘fondaĵo’,</i> se temas pri vera (ekz. bonfara) asocio, kun dungitoj, estraro, jarkunveno ktp., rezervante la vorton <i>‘fonduso’</i> por \"monpotoj\", do la rezervita kapitalo. Se oni faras la proponitan distingon, fondaĵo povas havi (unu aŭ plurajn) fonduso(j)n, sed ne inverse.",
 		"La <span style=\"color: #ff0000\">fondo</span> (fundo) de la kaverno estis tute malhela.<br>\n<br>\nInter la rokoj plaŭdis eta <span style=\"color: #ff0000\">fondo</span> (fonto).<br>\n<br>\nLa abonhelpa <span style=\"color: #ff0000\">fondo</span> (fonduso) de Monato pagos por vi.<br>\n<br>\nLi laboras por naturprotekta <span style=\"color: #ff0000\">fondo</span> (fondaĵo).<br>\n<br>\n<i>UEA estis</i> <span style=\"color: #ff0000\"><i>fundita</i></span><i> (fondita) en 1908.</i>"
 	],
 	"£:BASE-fondo": [
 		"£:BASE-fondo",
 		"Konfuzebla vortogrupo: fondo ↔fundo ↔ fonto/fontano ↔ fonduso/fondaĵo",
-		"Eblas konfuzi la vorton <i>‘fondo’</i> kun<i> ‘fundo’, ‘fonto’/’fontano’</i> kaj <i>‘fonduso’/’fondaĵo’,</i> kaj depende de la gepatra lingvo ankaŭ povas ekzisti falsaj amikoj en tiu vortogrupo.<br>\n<br>\n<i>‘</i><b><i>Fondo</i></b><i>’</i> mem estas ago kaj venas de la verbo <i>‘fondi’</i> (angle: <i>found</i>), do temas pri la estigo de ekz. asocio, urbo aŭ ĝuste <i>fondaĵo</i>.<br>\n<br>\n<i>‘</i><b><i>Fundo</i></b><i>’</i> estas la vertikale plej malsupra aŭ horizontale plej malantaŭa parto de io kava, ekz. de glaso, botelo (angle: <i>bottom</i>), kaverno, ĉambro aŭ koridoro (angle: <i>far end</i>).<br>\n<br>\n<i>‘</i><b><i>Fonto</i></b><i>’</i> estas la origino de akvofluo (angle: <i>source, well</i>), lumo ktp., aŭ figursence de informoj. Notu, ke por artefarita ŝprucakv(ej)o ekzistas aparta vorto, <i>‘</i><b><i>fontano</i></b><i>’</i> (angle: <i>fountain</i>).<br>\n<br>\n<i>‘</i><b><i>Fonduso</i></b><i>’</i> kaj <i>‘</i><b><i>fondaĵo</i></b><i>’</i>, fine, estas finance-juraj terminoj. <i>‘Fonduso’</i> estas kapitalo jure destinita al specifa celo (angle: <i>fund</i>), kaj tipe administrata de asocio, firmao aŭ ĝuste <i>‘fondaĵo’,</i> t.e. fondusadministra asocio (angle: <i>foundation)</i>. La lingvouzo tamen ne klare distingas inter <i>fonduso</i> kaj <i>fondaĵo,</i> kaj ambaŭ povas havi nomojn kaj statutojn, fari decidojn, agi publike ktp. Eventuale preferu <i>‘fondaĵo’,</i> se temas pri vera (ekz. bonfara) asocio, kun dungitoj, estraro, jarkunveno ktp., rezervante la vorton <i>‘fonduso’</i> por \"monpotoj\", do la rezervita kapitalo. Se oni faras la proponitan distingon, fondaĵo povas havi (unu aŭ plurajn) fonduso(j)n, sed ne inverse.",
+		"Eblas konfuzi la vorton <i>‘fondo’</i> kun<i> ‘fundo’, 'fono', ‘fonto’/’fontano’</i> kaj <i>‘fonduso’/’fondaĵo’,</i> kaj depende de la gepatra lingvo ankaŭ povas ekzisti falsaj amikoj en tiu vortogrupo.<br>\n<br>\n<i>‘</i><b><i>Fondo</i></b><i>’</i> mem estas ago kaj venas de la verbo <i>‘fondi’</i> (angle: <i>found</i>), do temas pri la estigo de ekz. asocio, urbo aŭ ĝuste <i>fondaĵo</i>.<br>\n<br>\n<i>‘</i><b><i>Fundo</i></b><i>’</i> estas la vertikale plej malsupra aŭ horizontale plej malantaŭa parto de io kava, ekz. de glaso, botelo (angle: <i>bottom</i>), kaverno, ĉambro aŭ koridoro (angle: <i>far end</i>).<br>\n<br>\n<b><i>'Fono'</i> </b>estas kion oni vidas malantaŭe aŭ fore, kontraste al la fokusita aŭ reliefigita objekto, ankaŭ en figura senco.<br>\n<br>\n<i>‘</i><b><i>Fonto</i></b><i>’</i> estas la origino de akvofluo (angle: <i>source, well</i>), lumo ktp., aŭ figursence de informoj. Notu, ke por artefarita ŝprucakv(ej)o ekzistas aparta vorto, <i>‘</i><b><i>fontano</i></b><i>’</i> (angle: <i>fountain</i>).<br>\n<br>\n<i>‘</i><b><i>Fonduso</i></b><i>’</i> kaj <i>‘</i><b><i>fondaĵo</i></b><i>’</i>, fine, estas finance-juraj terminoj. <i>‘Fonduso’</i> estas kapitalo jure destinita al specifa celo (angle: <i>fund</i>), kaj tipe administrata de asocio, firmao aŭ ĝuste <i>‘fondaĵo’,</i> t.e. fondusadministra asocio (angle: <i>foundation)</i>. La lingvouzo tamen ne klare distingas inter <i>fonduso</i> kaj <i>fondaĵo,</i> kaj ambaŭ povas havi nomojn kaj statutojn, fari decidojn, agi publike ktp. Eventuale preferu <i>‘fondaĵo’,</i> se temas pri vera (ekz. bonfara) asocio, kun dungitoj, estraro, jarkunveno ktp., rezervante la vorton <i>‘fonduso’</i> por \"monpotoj\", do la rezervita kapitalo. Se oni faras la proponitan distingon, fondaĵo povas havi (unu aŭ plurajn) fonduso(j)n, sed ne inverse.",
 		"La <span style=\"color: #ff0000\">fondo</span> (fundo) de la kaverno estis tute malhela.<br>\n<br>\nInter la rokoj plaŭdis eta <span style=\"color: #ff0000\">fondo</span> (fonto).<br>\n<br>\nLa abonhelpa <span style=\"color: #ff0000\">fondo</span> (fonduso) de Monato pagos por vi.<br>\n<br>\nLi laboras por naturprotekta <span style=\"color: #ff0000\">fondo</span> (fondaĵo).<br>\n<br>\n<i>UEA estis</i> <span style=\"color: #ff0000\"><i>fundita</i></span><i> (fondita) en 1908.</i>"
 	],
 	"£:BASE-fontano": [
 		"£:BASE-fontano",
 		"Konfuzebla vortogrupo: fondo ↔fundo ↔ fonto/fontano ↔ fonduso/fondaĵo",
-		"Eblas konfuzi la vorton <i>‘fondo’</i> kun<i> ‘fundo’, ‘fonto’/’fontano’</i> kaj <i>‘fonduso’/’fondaĵo’,</i> kaj depende de la gepatra lingvo ankaŭ povas ekzisti falsaj amikoj en tiu vortogrupo.<br>\n<br>\n<i>‘</i><b><i>Fondo</i></b><i>’</i> mem estas ago kaj venas de la verbo <i>‘fondi’</i> (angle: <i>found</i>), do temas pri la estigo de ekz. asocio, urbo aŭ ĝuste <i>fondaĵo</i>.<br>\n<br>\n<i>‘</i><b><i>Fundo</i></b><i>’</i> estas la vertikale plej malsupra aŭ horizontale plej malantaŭa parto de io kava, ekz. de glaso, botelo (angle: <i>bottom</i>), kaverno, ĉambro aŭ koridoro (angle: <i>far end</i>).<br>\n<br>\n<i>‘</i><b><i>Fonto</i></b><i>’</i> estas la origino de akvofluo (angle: <i>source, well</i>), lumo ktp., aŭ figursence de informoj. Notu, ke por artefarita ŝprucakv(ej)o ekzistas aparta vorto, <i>‘</i><b><i>fontano</i></b><i>’</i> (angle: <i>fountain</i>).<br>\n<br>\n<i>‘</i><b><i>Fonduso</i></b><i>’</i> kaj <i>‘</i><b><i>fondaĵo</i></b><i>’</i>, fine, estas finance-juraj terminoj. <i>‘Fonduso’</i> estas kapitalo jure destinita al specifa celo (angle: <i>fund</i>), kaj tipe administrata de asocio, firmao aŭ ĝuste <i>‘fondaĵo’,</i> t.e. fondusadministra asocio (angle: <i>foundation)</i>. La lingvouzo tamen ne klare distingas inter <i>fonduso</i> kaj <i>fondaĵo,</i> kaj ambaŭ povas havi nomojn kaj statutojn, fari decidojn, agi publike ktp. Eventuale preferu <i>‘fondaĵo’,</i> se temas pri vera (ekz. bonfara) asocio, kun dungitoj, estraro, jarkunveno ktp., rezervante la vorton <i>‘fonduso’</i> por \"monpotoj\", do la rezervita kapitalo. Se oni faras la proponitan distingon, fondaĵo povas havi (unu aŭ plurajn) fonduso(j)n, sed ne inverse.",
+		"Eblas konfuzi la vorton <i>‘fondo’</i> kun<i> ‘fundo’, 'fono', ‘fonto’/’fontano’</i> kaj <i>‘fonduso’/’fondaĵo’,</i> kaj depende de la gepatra lingvo ankaŭ povas ekzisti falsaj amikoj en tiu vortogrupo.<br>\n<br>\n<i>‘</i><b><i>Fondo</i></b><i>’</i> mem estas ago kaj venas de la verbo <i>‘fondi’</i> (angle: <i>found</i>), do temas pri la estigo de ekz. asocio, urbo aŭ ĝuste <i>fondaĵo</i>.<br>\n<br>\n<i>‘</i><b><i>Fundo</i></b><i>’</i> estas la vertikale plej malsupra aŭ horizontale plej malantaŭa parto de io kava, ekz. de glaso, botelo (angle: <i>bottom</i>), kaverno, ĉambro aŭ koridoro (angle: <i>far end</i>).<br>\n<br>\n<b><i>'Fono'</i> </b>estas kion oni vidas malantaŭe aŭ fore, kontraste al la fokusita aŭ reliefigita objekto, ankaŭ en figura senco.<br>\n<br>\n<i>‘</i><b><i>Fonto</i></b><i>’</i> estas la origino de akvofluo (angle: <i>source, well</i>), lumo ktp., aŭ figursence de informoj. Notu, ke por artefarita ŝprucakv(ej)o ekzistas aparta vorto, <i>‘</i><b><i>fontano</i></b><i>’</i> (angle: <i>fountain</i>).<br>\n<br>\n<i>‘</i><b><i>Fonduso</i></b><i>’</i> kaj <i>‘</i><b><i>fondaĵo</i></b><i>’</i>, fine, estas finance-juraj terminoj. <i>‘Fonduso’</i> estas kapitalo jure destinita al specifa celo (angle: <i>fund</i>), kaj tipe administrata de asocio, firmao aŭ ĝuste <i>‘fondaĵo’,</i> t.e. fondusadministra asocio (angle: <i>foundation)</i>. La lingvouzo tamen ne klare distingas inter <i>fonduso</i> kaj <i>fondaĵo,</i> kaj ambaŭ povas havi nomojn kaj statutojn, fari decidojn, agi publike ktp. Eventuale preferu <i>‘fondaĵo’,</i> se temas pri vera (ekz. bonfara) asocio, kun dungitoj, estraro, jarkunveno ktp., rezervante la vorton <i>‘fonduso’</i> por \"monpotoj\", do la rezervita kapitalo. Se oni faras la proponitan distingon, fondaĵo povas havi (unu aŭ plurajn) fonduso(j)n, sed ne inverse.",
 		"La <span style=\"color: #ff0000\">fondo</span> (fundo) de la kaverno estis tute malhela.<br>\n<br>\nInter la rokoj plaŭdis eta <span style=\"color: #ff0000\">fondo</span> (fonto).<br>\n<br>\nLa abonhelpa <span style=\"color: #ff0000\">fondo</span> (fonduso) de Monato pagos por vi.<br>\n<br>\nLi laboras por naturprotekta <span style=\"color: #ff0000\">fondo</span> (fondaĵo).<br>\n<br>\n<i>UEA estis</i> <span style=\"color: #ff0000\"><i>fundita</i></span><i> (fondita) en 1908.</i>"
 	],
 	"£:BASE-fondi": [
 		"£:BASE-fondi",
 		"Konfuzebla vortogrupo: fondo ↔fundo ↔ fonto/fontano ↔ fonduso/fondaĵo",
-		"Eblas konfuzi la vorton <i>‘fondo’</i> kun<i> ‘fundo’, ‘fonto’/’fontano’</i> kaj <i>‘fonduso’/’fondaĵo’,</i> kaj depende de la gepatra lingvo ankaŭ povas ekzisti falsaj amikoj en tiu vortogrupo.<br>\n<br>\n<i>‘</i><b><i>Fondo</i></b><i>’</i> mem estas ago kaj venas de la verbo <i>‘fondi’</i> (angle: <i>found</i>), do temas pri la estigo de ekz. asocio, urbo aŭ ĝuste <i>fondaĵo</i>.<br>\n<br>\n<i>‘</i><b><i>Fundo</i></b><i>’</i> estas la vertikale plej malsupra aŭ horizontale plej malantaŭa parto de io kava, ekz. de glaso, botelo (angle: <i>bottom</i>), kaverno, ĉambro aŭ koridoro (angle: <i>far end</i>).<br>\n<br>\n<i>‘</i><b><i>Fonto</i></b><i>’</i> estas la origino de akvofluo (angle: <i>source, well</i>), lumo ktp., aŭ figursence de informoj. Notu, ke por artefarita ŝprucakv(ej)o ekzistas aparta vorto, <i>‘</i><b><i>fontano</i></b><i>’</i> (angle: <i>fountain</i>).<br>\n<br>\n<i>‘</i><b><i>Fonduso</i></b><i>’</i> kaj <i>‘</i><b><i>fondaĵo</i></b><i>’</i>, fine, estas finance-juraj terminoj. <i>‘Fonduso’</i> estas kapitalo jure destinita al specifa celo (angle: <i>fund</i>), kaj tipe administrata de asocio, firmao aŭ ĝuste <i>‘fondaĵo’,</i> t.e. fondusadministra asocio (angle: <i>foundation)</i>. La lingvouzo tamen ne klare distingas inter <i>fonduso</i> kaj <i>fondaĵo,</i> kaj ambaŭ povas havi nomojn kaj statutojn, fari decidojn, agi publike ktp. Eventuale preferu <i>‘fondaĵo’,</i> se temas pri vera (ekz. bonfara) asocio, kun dungitoj, estraro, jarkunveno ktp., rezervante la vorton <i>‘fonduso’</i> por \"monpotoj\", do la rezervita kapitalo. Se oni faras la proponitan distingon, fondaĵo povas havi (unu aŭ plurajn) fonduso(j)n, sed ne inverse.",
+		"Eblas konfuzi la vorton <i>‘fondo’</i> kun<i> ‘fundo’, 'fono', ‘fonto’/’fontano’</i> kaj <i>‘fonduso’/’fondaĵo’,</i> kaj depende de la gepatra lingvo ankaŭ povas ekzisti falsaj amikoj en tiu vortogrupo.<br>\n<br>\n<i>‘</i><b><i>Fondo</i></b><i>’</i> mem estas ago kaj venas de la verbo <i>‘fondi’</i> (angle: <i>found</i>), do temas pri la estigo de ekz. asocio, urbo aŭ ĝuste <i>fondaĵo</i>.<br>\n<br>\n<i>‘</i><b><i>Fundo</i></b><i>’</i> estas la vertikale plej malsupra aŭ horizontale plej malantaŭa parto de io kava, ekz. de glaso, botelo (angle: <i>bottom</i>), kaverno, ĉambro aŭ koridoro (angle: <i>far end</i>).<br>\n<br>\n<b><i>'Fono'</i> </b>estas kion oni vidas malantaŭe aŭ fore, kontraste al la fokusita aŭ reliefigita objekto, ankaŭ en figura senco.<br>\n<br>\n<i>‘</i><b><i>Fonto</i></b><i>’</i> estas la origino de akvofluo (angle: <i>source, well</i>), lumo ktp., aŭ figursence de informoj. Notu, ke por artefarita ŝprucakv(ej)o ekzistas aparta vorto, <i>‘</i><b><i>fontano</i></b><i>’</i> (angle: <i>fountain</i>).<br>\n<br>\n<i>‘</i><b><i>Fonduso</i></b><i>’</i> kaj <i>‘</i><b><i>fondaĵo</i></b><i>’</i>, fine, estas finance-juraj terminoj. <i>‘Fonduso’</i> estas kapitalo jure destinita al specifa celo (angle: <i>fund</i>), kaj tipe administrata de asocio, firmao aŭ ĝuste <i>‘fondaĵo’,</i> t.e. fondusadministra asocio (angle: <i>foundation)</i>. La lingvouzo tamen ne klare distingas inter <i>fonduso</i> kaj <i>fondaĵo,</i> kaj ambaŭ povas havi nomojn kaj statutojn, fari decidojn, agi publike ktp. Eventuale preferu <i>‘fondaĵo’,</i> se temas pri vera (ekz. bonfara) asocio, kun dungitoj, estraro, jarkunveno ktp., rezervante la vorton <i>‘fonduso’</i> por \"monpotoj\", do la rezervita kapitalo. Se oni faras la proponitan distingon, fondaĵo povas havi (unu aŭ plurajn) fonduso(j)n, sed ne inverse.",
+		"La <span style=\"color: #ff0000\">fondo</span> (fundo) de la kaverno estis tute malhela.<br>\n<br>\nInter la rokoj plaŭdis eta <span style=\"color: #ff0000\">fondo</span> (fonto).<br>\n<br>\nLa abonhelpa <span style=\"color: #ff0000\">fondo</span> (fonduso) de Monato pagos por vi.<br>\n<br>\nLi laboras por naturprotekta <span style=\"color: #ff0000\">fondo</span> (fondaĵo).<br>\n<br>\n<i>UEA estis</i> <span style=\"color: #ff0000\"><i>fundita</i></span><i> (fondita) en 1908.</i>"
+	],
+	"£x-etype-lemma&\"<fonbildo.*>\"": [
+		"£x-etype-lemma&\"<fonbildo.*>\"",
+		"Konfuzebla vortogrupo: fondo ↔fundo ↔ fonto/fontano ↔ fonduso/fondaĵo",
+		"Eblas konfuzi la vorton <i>‘fondo’</i> kun<i> ‘fundo’, 'fono', ‘fonto’/’fontano’</i> kaj <i>‘fonduso’/’fondaĵo’,</i> kaj depende de la gepatra lingvo ankaŭ povas ekzisti falsaj amikoj en tiu vortogrupo.<br>\n<br>\n<i>‘</i><b><i>Fondo</i></b><i>’</i> mem estas ago kaj venas de la verbo <i>‘fondi’</i> (angle: <i>found</i>), do temas pri la estigo de ekz. asocio, urbo aŭ ĝuste <i>fondaĵo</i>.<br>\n<br>\n<i>‘</i><b><i>Fundo</i></b><i>’</i> estas la vertikale plej malsupra aŭ horizontale plej malantaŭa parto de io kava, ekz. de glaso, botelo (angle: <i>bottom</i>), kaverno, ĉambro aŭ koridoro (angle: <i>far end</i>).<br>\n<br>\n<b><i>'Fono'</i> </b>estas kion oni vidas malantaŭe aŭ fore, kontraste al la fokusita aŭ reliefigita objekto, ankaŭ en figura senco.<br>\n<br>\n<i>‘</i><b><i>Fonto</i></b><i>’</i> estas la origino de akvofluo (angle: <i>source, well</i>), lumo ktp., aŭ figursence de informoj. Notu, ke por artefarita ŝprucakv(ej)o ekzistas aparta vorto, <i>‘</i><b><i>fontano</i></b><i>’</i> (angle: <i>fountain</i>).<br>\n<br>\n<i>‘</i><b><i>Fonduso</i></b><i>’</i> kaj <i>‘</i><b><i>fondaĵo</i></b><i>’</i>, fine, estas finance-juraj terminoj. <i>‘Fonduso’</i> estas kapitalo jure destinita al specifa celo (angle: <i>fund</i>), kaj tipe administrata de asocio, firmao aŭ ĝuste <i>‘fondaĵo’,</i> t.e. fondusadministra asocio (angle: <i>foundation)</i>. La lingvouzo tamen ne klare distingas inter <i>fonduso</i> kaj <i>fondaĵo,</i> kaj ambaŭ povas havi nomojn kaj statutojn, fari decidojn, agi publike ktp. Eventuale preferu <i>‘fondaĵo’,</i> se temas pri vera (ekz. bonfara) asocio, kun dungitoj, estraro, jarkunveno ktp., rezervante la vorton <i>‘fonduso’</i> por \"monpotoj\", do la rezervita kapitalo. Se oni faras la proponitan distingon, fondaĵo povas havi (unu aŭ plurajn) fonduso(j)n, sed ne inverse.",
 		"La <span style=\"color: #ff0000\">fondo</span> (fundo) de la kaverno estis tute malhela.<br>\n<br>\nInter la rokoj plaŭdis eta <span style=\"color: #ff0000\">fondo</span> (fonto).<br>\n<br>\nLa abonhelpa <span style=\"color: #ff0000\">fondo</span> (fonduso) de Monato pagos por vi.<br>\n<br>\nLi laboras por naturprotekta <span style=\"color: #ff0000\">fondo</span> (fondaĵo).<br>\n<br>\n<i>UEA estis</i> <span style=\"color: #ff0000\"><i>fundita</i></span><i> (fondita) en 1908.</i>"
 	],
 	"£:BASE-glacio": [
@@ -4774,6 +5068,12 @@ g_marks.types = {
 		"'Komisio' estas tasko aŭ taskigo. Estas arkaismo uzi la vorto en la senco de <i>'komisiono'</i> (grupo de taskigitoj).<br>\n<br>\nNotu, ke <i>'komisio'</i> nur celas la taskon, ne eventualan pagon ricevotan pro la tasko. Por tio, uzu <i>'komisipago'.</i>",
 		"La verdikto estos decidita de <span style=\"color: #ff0000\">komisio</span> (komisiono) konstituita de militistaj oficiroj."
 	],
+	"£x-etype-lemma&\".*komisionoj?n?\"": [
+		"£x-etype-lemma&\".*komisionoj?n?\"",
+		"Konfuzebla vortoparo: komisio → komisiono",
+		"'Komisio' estas tasko aŭ taskigo. Estas arkaismo uzi la vorto en la senco de <i>'komisiono'</i> (grupo de taskigitoj).<br>\n<br>\nNotu, ke <i>'komisio'</i> nur celas la taskon, ne eventualan pagon ricevotan pro la tasko. Por tio, uzu <i>'komisipago'.</i>",
+		"La verdikto estos decidita de <span style=\"color: #ff0000\">komisio</span> (komisiono) konstituita de militistaj oficiroj."
+	],
 	"£:BASE-rekompenci": [
 		"£:BASE-rekompenci",
 		"Konfuzebla vortoparo: kompensi → rekompenci",
@@ -4989,6 +5289,12 @@ g_marks.types = {
 		"Konfuzebla vortoparo: maso → amaso",
 		"Ne konfuzu <i>‘maso’</i> kun <i>‘amaso’.</i> La unua, <i>‘maso’</i> havas du signifojn: (a) senforma kunbuliĝo de io aŭ (b) la fizika eco mezurita en (kilo)gramoj. Dume, <i>‘amaso’</i> estas alta kvanto da io.",
 		"<i>La nova veturilo estis</i> <span style=\"color: #ff0000\"><i>mase</i></span><i> (amase) produktita.</i><br>\n<br>\n<i>Lia parolado incitis la popolajn</i> <span style=\"color: #ff0000\"><i>masojn</i></span><i> (amasojn).</i>"
+	],
+	"£x-etype-(list|lemma)&\"<.+materioj?n?>\"": [
+		"£x-etype-(list|lemma)&\"<.+materioj?n?>\"",
+		"Konfuzebla vortoparo: materio → materialo",
+		"'Materio' estas fizika termino, por ĉio mas-hava. <i>'Materialo'</i> enhavas la aspekto de celo kaj uzo (por kio?). Do, estas <i>'krudmaterialo'</i> kaj <i>'instrumaterialo',</i> ne <i>'</i><span style=\"color: #ff0000\"><i>krudmaterio</i></span><i>'</i> kaj <i>'</i><span style=\"color: #ff0000\"><i>instrumaterio</i></span><i>'.</i>",
+		""
 	],
 	"£:BASE-medikamento": [
 		"£:BASE-medikamento",
@@ -5224,6 +5530,18 @@ g_marks.types = {
 		"'Retpoŝto’ estas reta mesaĝoservo, do la sistemo mem, dum <i>‘retmesaĝo’</i> estas la unuopa mesaĝo, kiun oni sendas al specifa <i>‘retpoŝtadreso’.</i><br>\n<br>\nNotu tamen, ke – analoge al la uzo de <i>‘poŝto’ –</i> <i>‘retpoŝto’</i> ankaŭ estas uzata por ĉiu el la distribuoj de retmesaĝoj, kun la signifo de ‘retmesaĝaro’:<br>\n<br>\n<i>Mi ĵus skribis retmesaĝon al vi.</i> SED: <i>Mi ĵus legis mian retpoŝton de la lastaj tagoj.</i>",
 		"Donu al mi vian <span style=\"color: #ff0000\">retpoŝton</span> (retpoŝtadreson)!<br>\n<br>\nMultaj <span style=\"color: #ff0000\">retpoŝtoj</span> (retmesaĝoj) nuntempe estas spamo."
 	],
+	"£:BASE-relativa": [
+		"£:BASE-relativa",
+		"Konfuzebla vortoparo: rilativa → relativa",
+		"La adjektivo <i>'rilativa'</i> signifas 'gramatike relativa', kaj ĝi nur uzeblas en gramatika kunteksto, ekz. <i>'rilativa pronomo/adverbo'.</i> En aliaj kuntekstoj, uzu <i>'relativa'.</i> Fakte, estas plej sekure uzi <i>'relativa'</i> ajnakaze, ĉar ĝi ankaŭ uzeblas, kie estas permesate uzi <i>'rilativa'.</i> Ĉi lasta aperas en PIV, sed ne en ReVo.",
+		"<span style=\"color: #ff0000\"><i>rilativecteorio</i></span><i> (relativecteorio)</i><br>\n<br>\n<i>La</i> <span style=\"color: #ff0000\"><i>rilativa</i></span><i> (relativa) rapideco estas ĉ. 500 km/h</i>"
+	],
+	"£x-etype-list&\"<rilativ.*>\"&\"relativ.*\"": [
+		"£x-etype-list&\"<rilativ.*>\"&\"relativ.*\"",
+		"Konfuzebla vortoparo: rilativa → relativa",
+		"La adjektivo <i>'rilativa'</i> signifas 'gramatike relativa', kaj ĝi nur uzeblas en gramatika kunteksto, ekz. <i>'rilativa pronomo/adverbo'.</i> En aliaj kuntekstoj, uzu <i>'relativa'.</i> Fakte, estas plej sekure uzi <i>'relativa'</i> ajnakaze, ĉar ĝi ankaŭ uzeblas, kie estas permesate uzi <i>'rilativa'.</i> Ĉi lasta aperas en PIV, sed ne en ReVo.",
+		"<span style=\"color: #ff0000\"><i>rilativecteorio</i></span><i> (relativecteorio)</i><br>\n<br>\n<i>La</i> <span style=\"color: #ff0000\"><i>rilativa</i></span><i> (relativa) rapideco estas ĉ. 500 km/h</i>"
+	],
 	"£:BASE-roma&\"<romanaj?n?>\"": [
 		"£:BASE-roma&\"<romanaj?n?>\"",
 		"Konfuzebla vortoparo: romana → roma",
@@ -5346,6 +5664,12 @@ g_marks.types = {
 	],
 	"£:BASE-sxpuro": [
 		"£:BASE-sxpuro",
+		"Konfuzebla vortoparo: spuro ↔ ŝpuro",
+		"La vortparo <i>‘spuro’</i> kaj <i>‘ŝpuro’</i> kaŭzas multajn erarojn. <i>‘Spuro’</i> estas postsigno, dum <i>‘ŝpuro’</i> celas la trakan larĝecon de fervojo. Ĉi-lasta estas teknika termino kaj tial relative malofta. Kontrolu, ĉu vi faris eraron ĉi tie.",
+		"<i>Oni trovis</i> <span style=\"color: #ff0000\"><i>ŝpurojn</i></span><i> (spurojn) de dinosaŭroj en la regiono.</i><br>\n<br>\n<i>La fervojo en Turkio uzas norman</i> <span style=\"color: #ff0000\"><i>spuron</i></span><i> (ŝpuron).</i>"
+	],
+	"£x-etype-lemma&\"<.+sxpuroj?n?>\"&\".*spuro\"": [
+		"£x-etype-lemma&\"<.+sxpuroj?n?>\"&\".*spuro\"",
 		"Konfuzebla vortoparo: spuro ↔ ŝpuro",
 		"La vortparo <i>‘spuro’</i> kaj <i>‘ŝpuro’</i> kaŭzas multajn erarojn. <i>‘Spuro’</i> estas postsigno, dum <i>‘ŝpuro’</i> celas la trakan larĝecon de fervojo. Ĉi-lasta estas teknika termino kaj tial relative malofta. Kontrolu, ĉu vi faris eraron ĉi tie.",
 		"<i>Oni trovis</i> <span style=\"color: #ff0000\"><i>ŝpurojn</i></span><i> (spurojn) de dinosaŭroj en la regiono.</i><br>\n<br>\n<i>La fervojo en Turkio uzas norman</i> <span style=\"color: #ff0000\"><i>spuron</i></span><i> (ŝpuron).</i>"
@@ -5494,6 +5818,12 @@ g_marks.types = {
 		"La vorteto <i>‘ol’</i> estas uzata por komparo:<br>\n<br>\n<i>Li estas pli (mal)granda ol sia frato.</i> <i>Li parolas pli rapide ol li pensas.</i><br>\n<br>\nAnkaŭ eblas uzi la vorton kiel konjunkcion por tempa komparo. Sed iom nelogike, tio eblas nur kun <i>‘antaŭ’,</i> ne kun <i>‘post’:</i><br>\n<br>\n<i>Pensu antaŭ ol paroli!</i><br>\n<br>\n<i>Mi aerumis la ĉambron, antaŭ ol vi venis.</i><br>\n<br>\nSed ne:<br>\n<br>\n(a)<i> ?Purigu la kafmaŝinon post</i> <span style=\"color: #ff0000\"><i>ol</i></span><i> uzi ĝin.</i><br>\n<br>\n(b)<i> ?Ili aĉetis pli grandan domon post</i> <span style=\"color: #ff0000\"><i>ol</i></span><i> la bebo naskiĝis.</i><br>\n<br>\nNecesas vortumi alimaniere, sen <i>‘ol’</i>. Kun infinitivo(a) estas plej bone ŝanĝi ĝi al substantivo <i>(… post uzado)</i> au subpropozicio <i>(… post kiam vi uzis ĝin).</i> La \"nuda\" infinitivo <i>(...post uzi ĝin)</i> sonas iom strange, kvankam ne estas vera eraro.<br>\n<br>\nSe post <i>‘post ol’</i> jam venas subpropozicio (b), eblas simple uzi la konjunkcion <i>‘kiam’ (… post kiam la bebo naskiĝis)</i>",
 		""
 	],
+	"£x-etype-lemma&\"<priv[ei]l[ie].*>\"": [
+		"£x-etype-lemma&\"<priv[ei]l[ie].*>\"",
+		"Malfacila vorto: privilegii",
+		"La celita vorto estas <i>'privilegii'</i> aŭ <i>'privilegio',</i> ne <i>'</i><span style=\"color: #ff0000\"><i>privilegi</i></span><i>'</i> aŭ <i>'</i><span style=\"color: #ff0000\"><i>privilego</i></span><i>'.</i> Ankaŭ ne uzu -ig <i>(</i><span style=\"color: #ff0000\"><i>privilegigi</i></span><i>).</i> Notu krome la e/i sonsimilecon inter <i>'</i><span style=\"color: #ff0000\"><i>privilig</i></span><i>-'</i> kaj <i>'</i><span style=\"color: #ff0000\"><i>priveleg</i></span><i>-'</i> (malĝustaj) kaj <i>'privileg-'</i> (ĝusta).",
+		""
+	],
 	"£:BASE-parkejo&\"<parkumoj?n?>\"": [
 		"£:BASE-parkejo&\"<parkumoj?n?>\"",
 		"Malĝusta afikso: parkumo → parkejo",
@@ -5564,7 +5894,7 @@ g_marks.types = {
 		"£:per&\"<kun>\"",
 		"Malĝusta prepozicio: kun → per",
 		"La prepozicio <i>‘kun’</i> signifas ‘kune kun’ (persono) au ‘havanta’ (econ/aĵon), dum <i>‘per’</i> signifas ‘uze de’. Kiam temas pri ilo, kiu estas uzita por iu celo, prefere uzu <i>‘per’.</i>",
-		"Li tranĉis la panon <span style=\"color: #ff0000\">kun</span> (per) malnova poŝtranĉilo.<br>\n<br>\n<i>Li iris antaŭen, hezite,</i> <span style=\"color: #ff0000\"><i>kun</i></span><i> (per) mallongaj, malrapidaj paŝoj.</i>"
+		"Li tranĉis la panon <span style=\"color: #ff0000\">kun</span> (per) malnova poŝtranĉilo.<br>\n<br>\n<i>Li iris antaŭen, hezite,</i> <span style=\"color: #ff0000\"><i>kun</i></span><i> (per) mallongaj, malrapidaj paŝoj.</i><br>\n<br>\n<i>Kelkaj fanatikuloj eĉ proponis anstataŭigi la oficialan lingvon de la lando</i> <span style=\"color: #ff0000\"><i>kun</i></span><i> (per) Esperanto.</i>"
 	],
 	"£:en&\"<po>\"": [
 		"£:en&\"<po>\"",
@@ -5902,6 +6232,12 @@ g_marks.types = {
 		"Oni povas daŭrigi ion kio povas kontinui – staton, laboron, migradon. Povas temi pri aktivecoj, ankaŭ propraj, sed devas esti substantivo. Estas nekutime uzi infinitivon post <i>‘daŭrigi’.</i> Simple uzu <i>‘plu’</i> aŭ <i>‘plue’:</i><br>\n<br>\n<i>Ili daŭrigis la migradon.</i><br>\n<br>\n<i>Ili</i> <span style=\"color: #ff0000\"><i>daŭrigis migri</i> </span><i>(Ili plue migris).</i><br>\n<br>\nPIV eksplicite rekomendas eviti la infinitivan sintakson, kaj ReVo ignoras ĝin.",
 		""
 	],
+	"£:BASE-klasikajxo": [
+		"£:BASE-klasikajxo",
+		"Mankanta afikso: klasiko → klasikaĵo",
+		"<i>'Klasiko'</i> estas malofta vorto, celanta la tuton de klasika periodo en arto. Ĉi tie vi verŝajne celas unuopa(j)n verkoj(j)n, do uzu <i>'klasikaĵo'.</i>",
+		"Li legis ĉiujn <span style=\"color: #ff0000\">klasikojn</span> (klasikaĵojn) de la Esperanta literaturo."
+	],
 	"£:BASE-mangxajxo": [
 		"£:BASE-mangxajxo",
 		"Mankanta afikso: manĝo → manĝaĵo",
@@ -6088,6 +6424,12 @@ g_marks.types = {
 		"La vortoj <i>‘softvaro’</i> kaj <i>‘hardvaro’</i> estas neologismoj. PIV rekomendas anstataŭe <i>‘programaro’</i> kaj <i>‘aparataro’,</i> kaj ReVo tute ne mencias ilin. La vortoj tamen estas relative oftaj (25% de la uzo por <i>‘softvaro’,</i> kaj 8% de la uzo por <i>‘hardvaro’</i>). Do ne temas pri vera eraro. Lingvohelpilo rekomendas fari ŝanĝon en ĝeneralaj tekstoj, se ne fakaj. Decidu vi!",
 		"Por povi ludi tiun ludon bone, vi bezonas novan <span style=\"color: #ff0000\">hardvaron</span> (aparataron)."
 	],
+	"£x-etype-lemma&\"<tutor.*>\"": [
+		"£x-etype-lemma&\"<tutor.*>\"",
+		"Neologismo: tutor-",
+		"En Esperanto, ne ekzistas la radiko <i>'tutor-'</i> (angle: <i>tutor</i>). Verŝajne vi celas <i>'helpinstruisto',</i> sed foje sufiĉas <i>'instruanto'.</i> Notu la similsignifan vorton <i>'mentoro'</i> – saĝa gvidanto de junulo.",
+		""
+	],
 	"£x-etype-lemma&\"<koncernantoj?n?>\"": [
 		"£x-etype-lemma&\"<koncernantoj?n?>\"",
 		"Participo-eraro: koncernanto → koncernato",
@@ -6140,6 +6482,12 @@ g_marks.types = {
 		"£:BASE-pludauxri",
 		"Sufikso-eraro: daŭriĝi → daŭrigi/pludaŭri",
 		"<i>'Daŭri’</i> estas netransitiva verbo kaj prenas akuzativon nur por mezuri tempo <i>(La vojaĝo daŭros 7 horojn).</i> Tio signifas, ke ne eblas aldoni <i>-iĝ,</i> kaj ke necesas uzi <i>-ig,</i> se oni celas pluigon de agado aŭ procezo.<br>\n<br>\nLa milito <span style=\"color: #ff0000\">daŭriĝis</span> (daŭris) 4 jarojn.<br>\n<br>\n<i>Mi ne plu povas</i> <span style=\"color: #ff0000\"><i>daŭriĝi</i></span><i> (daŭrigi) tiel.</i><br>\n<br>\n<i>Li lasis la junulon</i> <span style=\"color: #ff0000\"><i>daŭriĝi</i></span><i> (daŭrigi).</i><br>\n<br>\nSe mankas tempa akuzativo aŭ tempa prepozicia grupo <i>(ĝis morgaŭ),</i> konsideru uzi <i>‘pludaŭri’</i> anstataŭ simpla <i>‘daŭri’:</i><br>\n<br>\n<i>Ni aŭdis, ke la a drinkado</i> <span style=\"color: #ff0000\"><i>daŭriĝis</i></span><i> (pludaŭris), la gastoj kantis ĥore.</i><br>\n<br>\nTrovu ekzemplojn en <a target=\"_blank\" href=\"https://reta-vortaro.de/\">ReVo</a> aŭ – per la 2 butonoj apud la korektopropono – en CorpusEye kaj PIV.",
+		""
+	],
+	"£x-etype-list&\"<tia.*>\"&\"tiu.*\"": [
+		"£x-etype-list&\"<tia.*>\"&\"tiu.*\"",
+		"Tabelvorto: tia- → tiu-",
+		"'Kia' signifas 'kiuspeca' (kun adjektiva respondo), dum <i>'kiu'</i> signifas 'kiu el pluraj' (kun identiga respondo). Tiuj signifoj ne ŝanĝiĝas en kunmetaĵoj. Do estas strange diri <span style=\"color: #ff0000\"><i>'tiadirekte', 'tiafaka', 'tiaflanka', 'tiafoje', 'tianivele'</i></span><i></i> ktp. Devas esti <i>'tiudirekte', tiufaka', 'tiuflanka', 'tiufoje', 'tiunivele'</i> ktp., ĉar ne eblas demandi <i>'what kind of direction/side/level'</i>. Simila testo en la germana estas <i>'Welche Seite, welches Mal?'</i> (ne <i>'was für eine Art von Seite</i> [flanko]<i>, was fïür eine Art von Mal</i> [fojo]<i>?).</i><br>\n<br>\nKompare estas tute bone diri <i>'kiaspeca', 'kiakolora', 'kiaforma'.</i>",
 		""
 	],
 	"£:tia&\"<tio>\"": [
@@ -6363,66 +6711,6 @@ g_marks.types = {
 		"Vortklaso: dume → dum",
 		"La vorto <i>‘dume’</i> estas adverbo, ne konjunkcio. Por konkunkcia signifo, uzu <i>‘dum’.</i>",
 		"Kerna ideo de Esperanto ne iĝos realigita <span style=\"color: #ff0000\">dume</span> (dum) ekzistas mono en mondo ."
-	],
-	"£:BASE-manifestacio": [
-		"£:BASE-manifestacio",
-		"Falsa amiko: demonstracio → manifestacio",
-		"En Esperanto, <i>'demonstracio'</i> estas pruvo, la ago demonstri. Ne konfuzu tion kun <i>'manifestacio',</i> granda publika protestaranĝo, ofte en formo de marŝo kun mesaĝotabuloj. Notu ankaŭ, ke <i>'manifesto'</i> estas skriba deklaro, do ne la sama afero kiel <i>'manifestacio'.</i>",
-		"La pacmovado organizis paskajn <span style=\"color: #ff0000\">demonstraciojn</span> (manifestaciojn) en multaj urboj."
-	],
-	"£:BASE-diveni&\"<deven.*>\"": [
-		"£:BASE-diveni&\"<deven.*>\"",
-		"Falsa amiko: deveni → diveni",
-		"Homo <i>'devenas'</i> de iu loko, kaj vorto aŭ kutimo <i>'devenas'</i> de iu origino, sed oni <i>'divenas'</i> iun nekonatan fakton.",
-		"Estas malfacile deveni (diveni) la verajn intencojn de la prezidanto."
-	],
-	"£:BASE-farigxi&<deven.*>\"": [
-		"£:BASE-farigxi&<deven.*>\"",
-		"Falsa amiko: deveni → fariĝi",
-		"Estas (verŝajne franca) falsa amiko uzi la verbon <i>'deveni'</i> kun la signifo de <i>'fariĝi'</i> aŭ <i>'iĝi'.</i> Deveno temas pri la origino de iu aŭ io. Notu ankaŭ, ke la komplemento de <i>'fariĝi'</i> estas predikativo, ne objekto, do se vi uzis akuzativon post <i>'deveni'</i> korektu ĝin al nominativo.",
-		"La urbo <span style=\"color: #ff0000\">devenis</span> (fariĝis) la ĉefa<span style=\"color: #ff0000\">n</span> centro<span style=\"color: #ff0000\">n</span> (la ĉefa centro) de komerco en la regiono.<br>\n<br>\nLi <span style=\"color: #ff0000\">devenis</span> (iĝis) senatoro en 1876."
-	],
-	"£:BASE-agado": [
-		"£:BASE-agado",
-		"Falsa amiko: akcio → agado",
-		"En Esperanto, <i>'akcio'</i> estas valorpapero. Ne eblas uzi la vorton kun la signifo '(kunordigita) agado'. Povas temi pri (ekz. germana) falsa amiko.",
-		"La <span style=\"color: #ff0000\">akcio</span> (agado) estis tre sukcesa."
-	],
-	"£:BASE-renversi": [
-		"£:BASE-renversi",
-		"Falsa amiko: reversi → renversi",
-		"En Esperanto, <i>'reversi'</i> normale signifas rekudri vesto tiel, ke la interna flanko fariĝas la ekstera. Alia ebla signifo estas 're-versi' (ekz. poemon en alia lingvo). Ĉi tie tamen vi verŝajne celis <i>'renversi'</i> (inversigi, faligi inversigante).",
-		"Ne eblas <span style=\"color: #ff0000\">reversi</span> (renversi) tiun procezon."
-	],
-	"£x-etype-lemma&\"<reversigx.*>\"": [
-		"£x-etype-lemma&\"<reversigx.*>\"",
-		"Falsa amiko: reversi → renversi",
-		"En Esperanto, <i>'reversi'</i> normale signifas rekudri vesto tiel, ke la interna flanko fariĝas la ekstera. Alia ebla signifo estas 're-versi' (ekz. poemon en alia lingvo). Ĉi tie tamen vi verŝajne celis <i>'renversi'</i> (inversigi, faligi inversigante).",
-		"Ne eblas <span style=\"color: #ff0000\">reversi</span> (renversi) tiun procezon."
-	],
-	"£:BASE-interna": [
-		"£:BASE-interna",
-		"Konfuza vortoparo: intera → interna",
-		"'Intera' signifas 'estante inter du aferoj' (ekz. 'intera periodo', 'intera kategorio'). La vorto foje konfuziĝas kun <i>'interna'</i> (ena), kredeble ĉar ties malo, <i>'ekstera',</i> ne enhavas 'n' post la 'r'.<br>\n<br>\nNotu ankaŭ, ke estas falsa amiko uzi <i>'intera'</i> (aŭ <i>'entera</i>') en la senco de <i>'tuta'.</i>",
-		"Sed la seruro ne funkciis, ĉar ĝi tiom rustiĝis, ke la <span style=\"color: #ff0000\">intera</span> (interna) mekanismo ne plu moveblis.<br>\n<br>\nIliaj koloj povas turniĝi 270 gradojn por vidi en aliaj direktoj sen movi siajn <span style=\"color: #ff0000\">enterajn</span> (tutajn) korpojn."
-	],
-	"£:BASE-tuta&\"<[ie]nteraj?n?>\"": [
-		"£:BASE-tuta&\"<[ie]nteraj?n?>\"",
-		"Konfuza vortoparo: intera → interna",
-		"'Intera' signifas 'estante inter du aferoj' (ekz. 'intera periodo', 'intera kategorio'). La vorto foje konfuziĝas kun <i>'interna'</i> (ena), kredeble ĉar ties malo, <i>'ekstera',</i> ne enhavas 'n' post la 'r'.<br>\n<br>\nNotu ankaŭ, ke estas falsa amiko uzi <i>'intera'</i> (aŭ <i>'entera</i>') en la senco de <i>'tuta'.</i>",
-		"Sed la seruro ne funkciis, ĉar ĝi tiom rustiĝis, ke la <span style=\"color: #ff0000\">intera</span> (interna) mekanismo ne plu moveblis.<br>\n<br>\nIliaj koloj povas turniĝi 270 gradojn por vidi en aliaj direktoj sen movi siajn <span style=\"color: #ff0000\">enterajn</span> (tutajn) korpojn."
-	],
-	"£:BASE-(plej=)?(alta|sublima|granda|bona|altranga)": [
-		"£:BASE-(plej=)?(alta|sublima|granda|bona|altranga)",
-		"Falsa amiko: suprema → alta/altranga",
-		"En Esperanto, la vorto <i>'suprema'</i> estas nure matematika fakvorto. Ne ebla uzi ĝin kiel &quot;superlativon&quot; de <i>'alta', 'altranga', 'granda', 'bona'</i> aŭ simile.",
-		"<span style=\"color: #ff0000\"><i>Suprema</i></span><i> Kortumo → Alta Kortumo</i><br>\n<br>\n<i>Mi havis la tri</i> <span style=\"color: #ff0000\"><i>supremajn</i></span><i> (plej bonajn) instruistojn de la fakultato.</i>"
-	],
-	"£:BASE-klasikajxo": [
-		"£:BASE-klasikajxo",
-		"Mankanta afikso: klasiko → klasikaĵo",
-		"<i>'Klasiko'</i> estas malofta vorto, celanta la tuton de klasika periodo en arto. Ĉi tie vi verŝajne celas unuopa(j)n verkoj(j)n, do uzu <i>'klasikaĵo'.</i>",
-		"Li legis ĉiujn <span style=\"color: #ff0000\">klasikojn</span> (klasikaĵojn) de la Esperanta literaturo."
 	]
 };
 
