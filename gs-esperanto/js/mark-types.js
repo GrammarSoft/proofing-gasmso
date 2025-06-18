@@ -746,7 +746,7 @@ s.g.marks.types = {
 	"£igx": [
 		"£igx",
 		"Mankanta afikso: -iĝ",
-		"Legu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/sufiksoj\">sufiksoj</a> (-iĝ)",
+		"Aldonu la sufikxon -iĝ!<br>\n<br>\nOni uzas -iĝ por esprimi transiron al alia \"esto-stato\". ‘A x-iĝas’ signifas ‘A ekestas x’. Tipe do temas pri adjektiva aŭ substantiva radiko:<br>\n<br>\n<i>– Li malsan</i><b><i>iĝ</i></b><i>is = Li ekestis malsana.</i><br>\n<br>\n<i>– Li prezidant</i><b><i>iĝ</i></b><i>is = Li ekestis prezidanto.</i><br>\n<br>\nVerboj kun -iĝ estas netransitivaj. Se oni uzas -iĝ kun transitiva radiko, la rezulto similas pasivon sen eksplicita aganto (dana -s-pasivo aŭ \"refleksiva\" se-pasivo/medialo en la hispana):<br>\n<br>\n– <i>Oni elektis lin → Li estis elektita → Li elekt</i><b><i>iĝ</i></b><i>is</i><br>\n<br>\nNotu, ke eblas uzi -iĝ ankaŭ kiel radikon, kun la signifo de ‘fariĝi/ekesti’:<br>\n<br>\n<i>– Ĉiu plenkreskulo povas</i> <b><i>iĝi</i></b><i> (fariĝi/ekesti) membro de la asocio.</i><br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/sufiksoj\">sufiksoj</a> (-iĝ)",
 		"Kiam <span style=\"color: #ff0000\">komencas</span> [komenciĝas] la koncerto?"
 	],
 	"£igx&\"<sent.*>\"": [
@@ -6769,13 +6769,13 @@ for (let k in s.g.marks.yellow) {
 s.g.marks.dict = new RegExp('('+s.g.marks.dict.join('|')+')( |$)');
 
 s.m.l10n_marking_types = function(lang) {
-	s.g.options_default.types = {};
+	g_options_default.types = {};
 	for (let k in s.g.marks.types) {
 		if (/^%(ok|nko)(-|$)/.test(k)) {
-			s.g.options_default.types[k] = 0;
+			g_options_default.types[k] = 0;
 		}
 		else {
-			s.g.options_default.types[k] = 1;
+			g_options_default.types[k] = 1;
 		}
 		if (k.indexOf('&') !== -1) {
 			let fk = k.substring(0, k.indexOf('&'));
@@ -6794,8 +6794,8 @@ s.m.l10n_marking_types = function(lang) {
 			});
 		}
 	}
-	s.g.options_default.types["£new"] = 0;
-	s.g.options_default.types["£proper"] = 0;
+	g_options_default.types["£new"] = 0;
+	g_options_default.types["£proper"] = 0;
 }
 
 s.orderMarkings();

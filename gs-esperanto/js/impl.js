@@ -48,7 +48,7 @@ const g_options_default = {
 	types: {},
 };
 
-function _impl_callback(data) {
+function _impl_callback(data, S) {
 	if (typeof data === 'undefined' || !data) {
 		data = {};
 	}
@@ -56,7 +56,7 @@ function _impl_callback(data) {
 		url: ROOT_URL_GRAMMAR + '/callback.php',
 		type: 'POST',
 		dataType: 'json',
-		headers: {HMAC: g_access_token.hmac},
+		headers: {HMAC: S.g.access_token.hmac},
 		data: data,
 	});
 }
@@ -65,14 +65,14 @@ function impl_dataKeepalive() {
 	return {a: 'keepalive'};
 }
 
-function impl_startLogin() {
+function impl_startLogin(d) {
 	$('.optComma').prop('checked', false);
 	$('.chkGrammarToComma').hide();
 	$('.btnCheckComma').hide();
 	$('.comma-specific').hide();
-	g_tools.grammar = impl_canGrammar();
-	g_tools.comma = impl_canComma();
-	loginKeepalive(true);
+	d.S.g.tools.grammar = impl_canGrammar();
+	d.S.g.tools.comma = impl_canComma();
+	d.loginKeepalive(true);
 }
 
 function impl_canGrammar() {
@@ -103,14 +103,14 @@ function impl_openDictionary(word) {
 	g_impl.openExternal('https://vortaro.net/#'+encodeURIComponent(word)+'_kd', 'Plena Ilustrita Vortaro de Esperanto 2020');
 }
 
-function impl_loadUserdata() {
-	if (g_anonymous) {
+function impl_loadUserdata(S) {
+	if (S.g.anonymous) {
 		return false;
 	}
 
-	let svcs = object_join(SERVICES, ',');
+	let svcs = S.object_join(SERVICES, ',');
 
-	_impl_callback({'a': 'options-load', 's': svcs}).done(function(rv) {
+	_impl_callback({'a': 'options-load', 's': svcs}, S).done(function(rv) {
 		if (!rv.hasOwnProperty('options')) {
 			return;
 		}
@@ -119,56 +119,56 @@ function impl_loadUserdata() {
 
 		for (let s in rv.options) {
 			delete rv.options[s]['_loaded'];
-			g_options[s] = object_copy(rv.options[s]);
-			g_options_json[s] = JSON.stringify(g_options[s]);
-			ls_set_try('options-'+s, g_options_json[s]);
-			rvs.push(loadOptions(s));
+			S.g.options[s] = S.object_copy(rv.options[s]);
+			S.g.options_json[s] = JSON.stringify(S.g.options[s]);
+			S.ls_set_try('options-'+s, S.g.options_json[s]);
+			rvs.push(S.loadOptions(s));
 		}
 
 		['config', 'types'].forEach(function(key) {
-			_live_options[key] = object_copy(g_options_default[key]);
+			S.g._live_options[key] = S.object_copy(g_options_default[key]);
 			for (let i=0 ; i<rvs.length ; ++i) {
 				for (let k in rvs[i][key]) {
-					_live_options[key][k] = rvs[i][key][k];
+					S.g._live_options[key][k] = rvs[i][key][k];
 				}
 			}
 		});
 	});
 
-	_impl_callback({'a': 'dict-load'}).done(function(rv) {
+	_impl_callback({'a': 'dict-load'}, S).done(function(rv) {
 		if (!rv.hasOwnProperty('dict')) {
 			return;
 		}
 
 		for (let i=0 ; i<rv.dict.length ; ++i) {
 			let word = rv.dict[i];
-			if (g_dictionary.hasOwnProperty(word)) {
+			if (S.g.dictionary.hasOwnProperty(word)) {
 				continue;
 			}
 			//console.log(`Add to dict: ${word}`);
-			g_dictionary[word] = true;
-			_live_dictionary[word] = true;
-			_live_dictionary[uc_first(word)] = true;
-			_live_dictionary[word.toUpperCase()] = true;
+			S.g.dictionary[word] = true;
+			S.g._live_dictionary[word] = true;
+			S.g._live_dictionary[S.uc_first(word)] = true;
+			S.g._live_dictionary[word.toUpperCase()] = true;
 		}
 
-		g_dictionary_json = JSON.stringify(g_dictionary);
-		ls_set_try('dictionary', g_dictionary_json);
+		S.g.dictionary_json = JSON.stringify(S.g.dictionary);
+		S.ls_set_try('dictionary', S.g.dictionary_json);
 	});
 }
 
-function impl_addToDictionary(word) {
-	if (g_anonymous) {
+function impl_addToDictionary(word, S) {
+	if (S.g.anonymous) {
 		return false;
 	}
-	_impl_callback({'a': 'dict-add', 'w': word});
+	_impl_callback({'a': 'dict-add', 'w': word}, S);
 }
 
-function impl_removeFromDictionary(word) {
-	if (g_anonymous) {
+function impl_removeFromDictionary(word, S) {
+	if (S.g.anonymous) {
 		return false;
 	}
-	_impl_callback({'a': 'dict-del', 'w': word});
+	_impl_callback({'a': 'dict-del', 'w': word}, S);
 }
 
 function impl_beforeSendTexts(txt) {

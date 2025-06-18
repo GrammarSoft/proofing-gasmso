@@ -293,7 +293,7 @@ function impl_getSelectedPars() {
 		let pars = context.document.getSelection().paragraphs;
 		return _impl_getPars(context, pars);
 	}).catch(function(error) {
-		showError(JSON.stringify(error));
+		g_impl.showError(JSON.stringify(error));
 		if (error instanceof OfficeExtension.Error) {
 			console.log('Debug info: ' + JSON.stringify(error.debugInfo));
 		}
@@ -305,7 +305,7 @@ function impl_getAllPars() {
 		let pars = context.document.body.paragraphs;
 		return _impl_getPars(context, pars);
 	}).catch(function(error) {
-		showError(JSON.stringify(error));
+		g_impl.showError(JSON.stringify(error));
 		if (error instanceof OfficeExtension.Error) {
 			console.log('Debug info: ' + JSON.stringify(error.debugInfo));
 		}

@@ -17,12 +17,121 @@
  */
 'use strict';
 
-export let g = {
-	impl: null,
-	};
-export let m = {
-	l10n_marking_types: function(lang) {},
-	};
+let GLOBAL = null;
+if (typeof window !== 'undefined') {
+	GLOBAL = window;
+}
+else if (typeof global !== 'undefined') {
+	GLOBAL = global;
+}
+else {
+	throw new Error('This module needs global state');
+}
+
+export const g_access_token_defaults = {
+	hmac: '{}',
+	session: '',
+	ai: [],
+};
+
+export function init() {
+	if (!GLOBAL.hasOwnProperty('gs_shared_init')) {
+		GLOBAL._gs_g = {
+			impl: null,
+			};
+		GLOBAL._gs_m = {
+			l10n_marking_types: function(lang) {},
+			};
+
+		let g = GLOBAL._gs_g;
+
+		g.MATOMO_ROOT = '//gramtrans.com/matomo/';
+
+		// Upper-case because we compare them to DOM nodeName
+		g.text_nodes = {'ADDRESS': true, 'ARTICLE': true, 'ASIDE': true, 'AUDIO': true, 'BLOCKQUOTE': true, 'BODY': true, 'CANVAS': true, 'DD': true, 'DIV': true, 'DL': true, 'FIELDSET': true, 'FIGCAPTION': true, 'FIGURE': true, 'FOOTER': true, 'FORM': true, 'H1': true, 'H2': true, 'H3': true, 'H4': true, 'H5': true, 'H6': true, 'HEADER': true, 'HGROUP': true, 'HTML': true, 'HR': true, 'LI': true, 'MAIN': true, 'NAV': true, 'NOSCRIPT': true, 'OL': true, 'OUTPUT': true, 'P': true, 'PRE': true, 'SECTION': true, 'TABLE': true, 'TD': true, 'TH': true, 'UL': true, 'VIDEO': true};
+
+		g.dictionary = {};
+		g.dictionary_json = '{}';
+		g._live_dictionary = {};
+
+		g.access_token = object_copy(g_access_token_defaults);
+		g.access_hmac = {};
+		g.keepalive = null;
+		g.login_channel = '';
+		g.login_ws = null;
+		g.client = 'unknown';
+		g.anonymous = false;
+
+		g.tts_speaker = null;
+		g.tts_tap = 0;
+
+		g.options = {};
+		g.options_json = {};
+		g._live_options = {};
+
+		g.marks = {
+			types: {},
+			types_comma: [],
+			types_grammar: [],
+			types_complex: {},
+
+			comp_left: /[£%]-comp( |&|$)/,
+			comp_right: /[£%]comp-?( |&|$)/,
+			comp_hyphen: /[£%]comp-:-( |&|$)/,
+			comp_preswap: /[£%]PRESWAP( |&|$)/,
+			to_upper: /£upper( |&|$)/,
+			to_lower: /£lower( |&|$)/,
+			rx_ins: /(£comma|£insert\S*|%ko|%k)( |-|&|$)/,
+			rx_ins_before: /((?:%ko|%k|£comma)(?:-\S+)?)(?: |&|$)/,
+			rx_del: /(£nil|£no-comma|%nok|%ok|%nko)( |-|&|$)/,
+			rx_editable: /£(vfin|no-refl)/,
+
+			red: {},
+			yellow: {},
+			purple: {},
+			blue: {},
+			info: {},
+			green: {},
+			order: [
+				[/^£:.*/, 10],
+				[/^£(upper|lower|comma)/, -10],
+				[/^£green/, -20],
+			],
+
+			dict: {},
+		};
+
+		g.segments_i = 0;
+		g.segments = [];
+		g.segment_ids = [];
+		g.marking_ranges = [];
+		g.to_send = null;
+		g.to_send_b = 0;
+		g.to_send_i = 0;
+		g.to_send_last = '';
+		g.ts_xhr = null;
+		g.ts_slow = null;
+		g.ts_fail = 0;
+		g.cache = {
+			Grammar: {},
+			Comma: {},
+		};
+
+		g.tool = GLOBAL.hasOwnProperty('g_tool') ? GLOBAL.g_tool : null;
+		g.tools = {
+			grammar: false,
+			comma: false,
+		};
+		g.session = {locale: 'da'};
+
+		GLOBAL.gs_shared_init = true;
+	}
+	return {g: GLOBAL._gs_g, m: GLOBAL._gs_m};
+}
+
+let gb = init();
+export let g = gb.g;
+export let m = gb.m;
 
 if (!Array.prototype.unique) {
 	Array.prototype.unique = function() {
@@ -321,38 +430,10 @@ export class GS_MarkRange {
 }
 
 export const VERSION_PROTOCOL = 1;
-g.MATOMO_ROOT = '//gramtrans.com/matomo/';
 
 export const STR_SENT_BREAK = '\ue00a';
 export const STR_NULLISH = '\ue00b';
 export const STR_PLACEHOLDER = '\ue00c';
-
-// Upper-case because we compare them to DOM nodeName
-g.text_nodes = {'ADDRESS': true, 'ARTICLE': true, 'ASIDE': true, 'AUDIO': true, 'BLOCKQUOTE': true, 'BODY': true, 'CANVAS': true, 'DD': true, 'DIV': true, 'DL': true, 'FIELDSET': true, 'FIGCAPTION': true, 'FIGURE': true, 'FOOTER': true, 'FORM': true, 'H1': true, 'H2': true, 'H3': true, 'H4': true, 'H5': true, 'H6': true, 'HEADER': true, 'HGROUP': true, 'HTML': true, 'HR': true, 'LI': true, 'MAIN': true, 'NAV': true, 'NOSCRIPT': true, 'OL': true, 'OUTPUT': true, 'P': true, 'PRE': true, 'SECTION': true, 'TABLE': true, 'TD': true, 'TH': true, 'UL': true, 'VIDEO': true};
-
-g.dictionary = {};
-g.dictionary_json = '{}';
-g._live_dictionary = {};
-
-export const g_access_token_defaults = {
-	hmac: '{}',
-	session: '',
-	ai: [],
-};
-g.access_token = object_copy(g_access_token_defaults);
-g.access_hmac = {};
-g.keepalive = null;
-g.login_channel = '';
-g.login_ws = null;
-g.client = 'unknown';
-g.anonymous = false;
-
-g.tts_speaker = null;
-g.tts_tap = 0;
-
-g.options = {};
-g.options_json = {};
-g._live_options = {};
 
 // Letters we're likely to see in Danish, Norwegian, Swedish, Greenlandic
 // Can't rely on Unicode escapes or /u modifier because of IE11
@@ -385,64 +466,6 @@ export const func2label = [
 	{rx:/^@(<*FOC>*|>P)$/, f:'A', i:g_ROOT_URL_SELF+'/imgs/bi-chevron-down-half.svg', w:false}, // focus, including pre-pp
 ];
 
-g.marks = {
-	types: {},
-	types_comma: [],
-	types_grammar: [],
-	types_complex: {},
-
-	comp_left: /[£%]-comp( |&|$)/,
-	comp_right: /[£%]comp-?( |&|$)/,
-	comp_hyphen: /[£%]comp-:-( |&|$)/,
-	comp_preswap: /[£%]PRESWAP( |&|$)/,
-	to_upper: /£upper( |&|$)/,
-	to_lower: /£lower( |&|$)/,
-	rx_ins: /(£comma|£insert\S*|%ko|%k)( |-|&|$)/,
-	rx_ins_before: /((?:%ko|%k|£comma)(?:-\S+)?)(?: |&|$)/,
-	rx_del: /(£nil|£no-comma|%nok|%ok|%nko)( |-|&|$)/,
-	rx_editable: /£(vfin|no-refl)/,
-
-	red: {},
-	yellow: {},
-	purple: {},
-	blue: {},
-	info: {},
-	green: {},
-	order: [
-		[/^£:.*/, 10],
-		[/^£(upper|lower|comma)/, -10],
-		[/^£green/, -20],
-	],
-
-	dict: {},
-};
-
-g.segments_i = 0;
-g.segments = [];
-g.segment_ids = [];
-g.marking_ranges = [];
-g.to_send = null;
-g.to_send_b = 0;
-g.to_send_i = 0;
-g.to_send_last = '';
-g.ts_xhr = null;
-g.ts_slow = null;
-g.ts_fail = 0;
-g.cache = {
-	Grammar: {},
-	Comma: {},
-};
-
-g.tool = null;
-if (typeof window !== 'undefined') {
-	g.tool = window.hasOwnProperty('g_tool') ? window.g_tool : null;
-}
-g.tools = {
-	grammar: false,
-	comma: false,
-};
-g.session = {locale: 'da'};
-
 // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 export function escapeRegExp(string) {
 	return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
@@ -471,15 +494,15 @@ export function loadOptions(s) {
 		nv = JSON.parse(nv);
 	}
 	else {
-		nv = object_copy(g.options_default);
+		nv = object_copy(g_options_default);
 	}
 
 	g._live_options[s] = object_copy(nv);
 
 	['config', 'types'].forEach(function(key) {
-		g._live_options[s][key] = object_copy(g.options_default[key]);
+		g._live_options[s][key] = object_copy(g_options_default[key]);
 		if (!g._live_options.hasOwnProperty(key)) {
-			g._live_options[key] = object_copy(g.options_default[key]);
+			g._live_options[key] = object_copy(g_options_default[key]);
 		}
 		if (nv.hasOwnProperty(key)) {
 			for (let k in nv[key]) {
@@ -593,7 +616,7 @@ export function slugify(t) {
 
 export function haveLocalStorage() {
 	try {
-		let storage = window.localStorage;
+		let storage = GLOBAL.localStorage;
 		let x = 'LocalStorageTest';
 		storage.setItem(x, x);
 		storage.removeItem(x);
@@ -607,7 +630,7 @@ export function haveLocalStorage() {
 export function ls_get_try(key) {
 	let v = null;
 	try {
-		v = window.localStorage.getItem(key);
+		v = GLOBAL.localStorage.getItem(key);
 	}
 	catch (e) {
 	}
@@ -632,7 +655,7 @@ export function ls_get(key, def) {
 
 export function ls_set_try(key, val) {
 	try {
-		window.localStorage.setItem(key, val);
+		GLOBAL.localStorage.setItem(key, val);
 	}
 	catch (e) {
 	}
@@ -643,7 +666,7 @@ export function ls_set(key, val) {
 }
 
 export function ls_del(key) {
-	window.localStorage.removeItem(key);
+	GLOBAL.localStorage.removeItem(key);
 }
 
 export function markingColor(types) {
@@ -1766,20 +1789,20 @@ export function nl2html(v) {
 export function l10n_detectLanguage() {
 	l10n.lang = ls_get('locale', navigator.language);
 	try {
-		if (window.hasOwnProperty('parent') && window.parent && window.parent.hasOwnProperty('UILANG2') && window.parent.UILANG2) {
-			l10n.lang = window.parent.UILANG2;
+		if (GLOBAL.hasOwnProperty('parent') && GLOBAL.parent && GLOBAL.parent.hasOwnProperty('UILANG2') && GLOBAL.parent.UILANG2) {
+			l10n.lang = GLOBAL.parent.UILANG2;
 		}
 	}
 	catch (DOMException) {
 	}
-	if (window.hasOwnProperty('UILANG2') && window.UILANG2) {
-		l10n.lang = window.UILANG2;
+	if (GLOBAL.hasOwnProperty('UILANG2') && GLOBAL.UILANG2) {
+		l10n.lang = GLOBAL.UILANG2;
 	}
 	if (!l10n.s.hasOwnProperty(l10n.lang)) {
 		l10n.lang = l10n.lang.replace(/^([^-_]+).*$/, '$1');
 	}
 	if (!l10n.s.hasOwnProperty(l10n.lang)) {
-		l10n.lang = g.options_default?.config?.opt_uiLang ?? 'en';
+		l10n.lang = g_options_default?.config?.opt_uiLang ?? 'en';
 	}
 	if (!l10n.s.hasOwnProperty(l10n.lang)) {
 		l10n.lang = 'en';
@@ -1790,7 +1813,7 @@ export function l10n_detectLanguage() {
 	return l10n.lang;
 }
 
-export function l10n_translate(s, g) {
+export function l10n_translate(s, rpl) {
 	s = '' + s; // Coerce to string
 
 	// Special case for the version triad
@@ -1804,7 +1827,7 @@ export function l10n_translate(s, g) {
 		return PRODUCT_DOMAIN;
 	}
 
-	let l = session.locale;
+	let l = g.session.locale;
 	let t = '';
 
 	if (!l10n.s.hasOwnProperty(l)) {
@@ -1853,7 +1876,7 @@ export function l10n_translate(s, g) {
 		rx = /%([A-Za-z0-9]+)%/;
 		m = null;
 		while ((m = rx.exec(t)) !== null) {
-			t = t.replace(m[0], g[m[1]]);
+			t = t.replace(m[0], rpl[m[1]]);
 			did = true;
 		}
 	} while (did);
@@ -1908,7 +1931,7 @@ export function l10n_world(node) {
 	});
 
 	if (node == document && typeof m.l10n_marking_types === 'function') {
-		m.l10n_marking_types(session.locale);
+		m.l10n_marking_types(g.session.locale);
 		if (g.marks.types.hasOwnProperty('%k-stop') && !g.marks.types.hasOwnProperty('%x-to-stop')) {
 			g.marks.types['%x-to-stop'] = g.marks.types['%k-stop'];
 			g.marks.types_comma.push('%x-to-stop');
@@ -1923,6 +1946,14 @@ export function addScript(url) {
 	document.body.appendChild(script);
 }
 
+export function addScriptModule(url) {
+	console.log('Loading '+url);
+	let script = document.createElement('script');
+	script.setAttribute('type', 'module');
+	script.src = url;
+	document.body.appendChild(script);
+}
+
 export function addScriptDefer(url) {
 	let script = document.createElement('script');
 	script.setAttribute('defer', true);
@@ -1931,21 +1962,21 @@ export function addScriptDefer(url) {
 }
 
 export function matomo_load() {
-	if (window.hasOwnProperty('_paq')) {
+	if (GLOBAL.hasOwnProperty('_paq')) {
 		console.log('Matomo already loaded');
 		return;
 	}
 
 	console.log('Loading Matomo');
-	let _paq = window._paq = window._paq || [];
+	let _paq = GLOBAL._paq = GLOBAL._paq || [];
 	_paq.push(['trackPageView']);
 	_paq.push(['enableLinkTracking']);
 	(function() {
-		let u= MATOMO_ROOT;
+		let u= g.MATOMO_ROOT;
 		_paq.push(['setTrackerUrl', u+'matomo.php']);
 		_paq.push(['setSiteId', g.impl.matomo_sid]);
-		let d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-		g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+		let d=document, n=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+		n.async=true; n.src=u+'matomo.js'; s.parentNode.insertBefore(n,s);
 	})();
 }
 
@@ -1970,7 +2001,12 @@ export function log_marking_action(data) {
 }
 
 export function contentLoaded() {
-	const CLIENT = window.hasOwnProperty('CLIENT') ? window.CLIENT : '';
+	if (GLOBAL.hasOwnProperty('gs_did_shared')) {
+		return;
+	}
+	GLOBAL.gs_did_shared = true;
+
+	const CLIENT = GLOBAL.hasOwnProperty('CLIENT') ? GLOBAL.CLIENT : '';
 
 	if (CLIENT === 'adobe' || location.search.indexOf('host=adobe') !== -1) {
 		g.client = 'adobe';
@@ -2004,16 +2040,16 @@ export function contentLoaded() {
 	if (id === 'sidebar' || id === 'options' || id === 'dictionary') {
 		// Delay ever so slightly to force other scripts to load first
 		// No, defer doesn't work. No, async doesn't work either.
-		setTimeout(function() {addScript(g_ROOT_URL_SELF+'/js/'+id+'.js'); }, 100);
+		setTimeout(function() {addScriptModule(g_ROOT_URL_SELF+'/js/'+id+'.js'); }, 100);
 	}
 
-	if (/^(word|outlook)$/.test(g.client) && /Trident|MSIE|Edge/.test(window.navigator.userAgent)) {
+	if (/^(word|outlook)$/.test(g.client) && /Trident|MSIE|Edge/.test(GLOBAL.navigator.userAgent)) {
 		$('#working').hide();
 		$('#placeholder').html(l10n_translate_html('ERR_OFFICE_TOO_OLD'));
 	}
 }
 
-if (typeof document !== 'undefined') {
+if (typeof window !== 'undefined' && typeof document !== 'undefined') {
 	if (document.readyState === 'loading') {
 		$(window).on('load', contentLoaded);
 	}
