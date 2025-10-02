@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2024 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2025 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
@@ -69,7 +69,7 @@ function impl_startLogin() {
 	$('.optComma').prop('checked', false);
 	$('.chkGrammarToComma').hide();
 	$('.btnCheckComma').hide();
-	$('.comma-specific').hide();
+	$('.canComma').hide();
 	g_tools.grammar = impl_canGrammar();
 	g_tools.comma = impl_canComma();
 	loginKeepalive(true);

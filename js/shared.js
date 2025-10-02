@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2024 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2025 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -84,6 +84,35 @@ function object_values(obj) {
 
 function object_join(obj, s) {
 	return object_values(obj).join(s);
+}
+
+function u_reverse(str) {
+	return [...str].reverse().join('');
+}
+
+function u_length(str) {
+	return [...str].length;
+}
+
+function common_prefix(strs) {
+	if (!strs[0] || strs.length ==  1) {
+		return strs[0] || '';
+	}
+
+	let i = 0;
+	while (strs[0][i] && strs.every(w => w[i] === strs[0][i])) {
+		i++;
+	}
+
+	return strs[0].substr(0, i);
+}
+
+function common_suffix(strs) {
+	strs = [].concat(strs);
+	for (let i=0 ; i<strs.length ; ++i) {
+		strs[i] = u_reverse(strs[i]);
+	}
+	return u_reverse(common_prefix(strs));
 }
 
 // From https://stackoverflow.com/a/43053803/145919
@@ -357,7 +386,7 @@ const Const = {
 	SuffixNonLetterT: new RegExp('[^'+Letters+']+$', 'i'),
 	OnlyNonLetterT: new RegExp('^[^'+Letters+']*$', 'i'),
 	SpaceOrEmpty: /^\s*$/,
-	Split_String: ' ,.?!"#¤%&/()=@£${}|*^¨~/\\½§<>:;-',
+	Split_String: '\u0005 ,.?!"#¤%&/()=@£${}|*^¨~/\\½§<>:;-',
 };
 Const.Split_Array = Const.Split_String.split('');
 Const.Split_Regex = new RegExp('(['+Const.Split_String+'])');
@@ -429,6 +458,7 @@ let g_tools = {
 	grammar: false,
 	comma: false,
 };
+
 let session = {locale: 'da'};
 
 // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions

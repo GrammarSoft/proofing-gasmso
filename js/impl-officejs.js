@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2024 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2025 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -20,15 +20,19 @@
 let _impl_options = null;
 
 function _impl_findElement_selectWord(state) {
-	let rngs = state.sel.search(state.word);
+	let rngs = state.sel.search(state.word.replace(/\u0005/g, ''));
 
 	state.context.load(rngs, 'text');
 	return state.context.sync().then(function () {
 		//console.log(state);
+		if (!rngs.items.length) {
+			showError('ERR_SELECT_NOTFOUND');
+			return state.context.sync();
+		}
 		let rng = rngs.items[rngs.items.length - 1];
 		rng.select();
 		if (state.func) {
-			return state.func(state.context, state.par, rng);
+			return state.func(state, rng);
 		}
 		return state.context.sync();
 	});
@@ -54,7 +58,8 @@ function _impl_findElement_pars(state) {
 						return state.context.sync().then(function () {
 							rngs = rngs.items;
 							state.prefix += state.word;
-							let rx_pfx = new RegExp(escapeRegExp(state.prefix) + '\\s*$');
+							let rx_pfx = new RegExp('.*' + escapeRegExp(state.prefix) + '['+Const.Split_String+']?\\s*$');
+							////console.log(rx_pfx);
 							state.par = pars[i];
 							state.sel = rngs[0].getRange();
 
@@ -62,6 +67,7 @@ function _impl_findElement_pars(state) {
 							let ri = 0;
 							for ( ; ri<rngs.length ; ++ri) {
 								pfx += rngs[ri].text;
+								////console.log(pfx);
 								state.sel = state.sel.expandTo(rngs[ri]);
 								if (state.closer) {
 									if (rx_pfx.test(pfx)) {
@@ -100,12 +106,13 @@ function _impl_findElement(prefix, word, suffix, func) {
 		txt: txt.t,
 		func: func,
 		closer: false,
+		insert: false,
 		};
 
 	Word.run(function(context) {
 		state.context = context;
 		let body = state.context.document.body;
-		state.rngs = body.search($.trim(state.txt.substr(0, 255)));
+		state.rngs = body.search($.trim(state.txt.substr(0, 255)).replace(/\u0005/, ''));
 
 		state.context.load(state.rngs, 'text');
 		return state.context.sync().then(function () {
@@ -120,11 +127,12 @@ function _impl_findElement(prefix, word, suffix, func) {
 					state.suffix = sx[1];
 				}
 				let txt = state.prefix + state.word + state.suffix;
-				state.rngs = body.search(txt);
+				state.rngs = body.search(txt.replace(/\u0005/g, ''));
 
 				state.context.load(state.rngs, 'text');
 				return state.context.sync().then(function () {
 					state.rngs = state.rngs.items;
+					////console.log(state);
 					if (state.rngs.length == 0) {
 						showError('ERR_SELECT_NOTFOUND');
 						return context.sync();
@@ -150,50 +158,106 @@ function impl_selectInDocument(prefix, word, suffix) {
 	_impl_findElement(prefix, word, suffix, didSelect);
 }
 
-function _impl_reloadPar(context, par, rpl, func) {
-	let before = par.text;
-	let ss = par.search('  ');
-	context.load(ss, 'text');
-	return context.sync().then(function() {
+function _impl_reloadPar(state, rpl, func) {
+	let before = state.par.text;
+	let ss = state.par.search('  ');
+	state.context.load(ss, 'text');
+	return state.context.sync().then(function() {
 		ss = ss.items;
 		for (let si=0 ; si<ss.length ; ++si) {
 			ss[si].insertText(' ', 'Replace');
 		}
 
-		context.load(par, 'text');
-		return context.sync().then(function() {
+		state.context.load(state.par, 'text');
+		return state.context.sync().then(function() {
 			if (func) {
-				func({before: before, after: par.text, rpl: rpl});
+				func({before: before, after: state.par.text, rpl: rpl});
 			}
 		});
 	});
 }
 
-function impl_replaceInDocument(prefix, word, rpl, suffix) {
-	_impl_findElement(prefix, word, suffix, function(context, par, rng) {
-		rng.insertText(rpl, 'Replace');
-		return _impl_reloadPar(context, par, rpl, didReplace);
+function _impl_replaceHelper(state, rng, rpl, comment) {
+	if (g_impl.oneshot) {
+		state.context.document.changeTrackingMode = Word.ChangeTrackingMode.trackAll;
+	}
+	if (state.insert) {
+		let pfx = common_prefix([rng.text, rpl]);
+		let sfx = common_suffix([rng.text, rpl]);
+		////console.log([pfx, sfx, rng.text, rpl]);
+		if (pfx.length == 0) {
+			rng = rng.getRange(Word.RangeLocation.start);
+			rpl = rpl.substr(0, rpl.length - sfx.length);
+		}
+		else if (sfx.length == 0) {
+			rng = rng.getRange(Word.RangeLocation.end);
+			rpl = rpl.substr(pfx.length);
+		}
+		else {
+			rng = rng.search(' ').getFirst().getRange(Word.RangeLocation.start);
+			rpl = rpl.substring(pfx.length, rpl.length - sfx.length);
+			if (!/^[,.!?;:]$/.test(rpl)) {
+				rpl = ' '+rpl;
+			}
+		}
+		////console.log([rng, rpl]);
+	}
+	rng.insertText(rpl, 'Replace');
+	rng.select();
+	if (g_impl.oneshot) {
+		state.context.document.changeTrackingMode = Word.ChangeTrackingMode.off;
+		if (comment) {
+			let c = state.context.document.getSelection().insertComment(comment);
+			c.load();
+			c.set({
+				//content: 'hubba bubba',
+				contentRange: {bold: true, hyperlink: 'https://dr.dk/'},
+			});
+			//console.log(c);
+		}
+	}
+	return state.context;
+}
+
+function impl_replaceInDocument(prefix, word, rpl, suffix, comment) {
+	_impl_findElement(prefix, word, suffix, function(state, rng) {
+		return _impl_replaceHelper(state, rng, rpl, comment).sync().then(function() {
+			return _impl_reloadPar(state, rpl, didReplace);
+		});
 	});
 }
 
-function impl_replaceInDocumentSilent(prefix, word, rpl, suffix) {
-	_impl_findElement(prefix, word, suffix, function(context, par, rng) {
-		rng.insertText(rpl, 'Replace');
-		return _impl_reloadPar(context, par, rpl, didReplaceSilent);
+function impl_replaceInDocumentSilent(prefix, word, rpl, suffix, comment) {
+	_impl_findElement(prefix, word, suffix, function(state, rng) {
+		return _impl_replaceHelper(state, rng, rpl, comment).sync().then(function() {
+			return _impl_reloadPar(state, rpl, didReplaceSilent);
+		});
 	});
 }
 
-function impl_insertInDocument(prefix, word, rpl, suffix) {
-	_impl_findElement(prefix, word, suffix, function(context, par, rng) {
-		rng.insertText(rpl, 'Replace');
-		return _impl_reloadPar(context, par, rpl, didInsert);
+function impl_insertInDocument(prefix, word, rpl, suffix, comment) {
+	_impl_findElement(prefix, word, suffix, function(state, rng) {
+		state.insert = true;
+		return _impl_replaceHelper(state, rng, rpl, comment).sync().then(function() {
+			return _impl_reloadPar(state, rpl, didInsert);
+		});
 	});
 }
 
-function impl_removeInDocument(prefix, word, rpl, suffix) {
-	_impl_findElement(prefix, word, suffix, function(context, par, rng) {
-		rng.insertText(rpl, 'Replace');
-		return _impl_reloadPar(context, par, rpl, didRemove);
+function impl_removeInDocument(prefix, word, rpl, suffix, comment) {
+	_impl_findElement(prefix, word, suffix, function(state, rng) {
+		return _impl_replaceHelper(state, rng, rpl, comment).sync().then(function() {
+			return _impl_reloadPar(state, rpl, didRemove);
+		});
+	});
+}
+
+function impl_commentInDocument(prefix, word, rpl, suffix, comment) {
+	_impl_findElement(prefix, word, suffix, function(state, rng) {
+		if (comment) {
+			state.context.document.getSelection().insertComment(comment);
+		}
+		return _impl_reloadPar(state, rpl, didComment);
 	});
 }
 

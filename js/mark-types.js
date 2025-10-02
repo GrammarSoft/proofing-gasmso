@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2024 GrammarSoft ApS <info£grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2025 GrammarSoft ApS <info£grammarsoft.com> at https://grammarsoft.com/
  * Linguistic backend by Eckhard Bick <eckhard.bick£gmail.com>
  * Frontend by Tino Didriksen <mail£tinodidriksen.com>
  *
@@ -42,8 +42,10 @@ g_marks.purple = {
 g_marks.blue = {
 	'£-io': '£-io',
 	'£-iu': '£-iu',
-	'£PREADD:subject': '£PREADD:subject',
+	'£DEL': '£DEL',
+	'£PREADD': '£PREADD',
 	'£PRESWAP': '£PRESWAP',
+	'£acc': '£acc',
 	'£adj': '£adj',
 	'£ado': '£ado',
 	'£adv': '£adv',
@@ -64,6 +66,7 @@ g_marks.blue = {
 	'£ki-': '£ki-',
 	'£nil': '£nil',
 	'£no-refl': '£no-refl',
+	'£nom': '£nom',
 	'£noun': '£noun',
 	'£ordinal': '£ordinal',
 	'£os': '£os',
@@ -244,11 +247,41 @@ g_marks.types = {
 		"Tiu vorto estas kunmetaĵo, kie la unua parto estas radika kaj finiĝas per konsonantoparo malfacile prononcebla antaŭ dua parto, kiu mem komenciĝas per konsonanto. Lingvohelpilo proponas enmeti substantivan -o kiel ligovokalon por faciligi la prononcon.",
 		"<i>li</i><span style=\"color: #ff0000\"><i>br|f</i></span><i>orme → libroforme</i><br>\n<br>\n<i>e</i><span style=\"color: #ff0000\"><i>tn|l</i></span><i>ingvo → etnolingvo</i><br>\n<br>\n<i>a</i><span style=\"color: #ff0000\"><i>gl|p</i></span><i>lumo → agloplumo</i><br>\n<br>\n<i>tea</i><span style=\"color: #ff0000\"><i>tr|d</i></span><i>irektoro → teatrodirektoro</i><br>\n<br>\n<i>dese</i><span style=\"color: #ff0000\"><i>gn|m</i></span><i>aniero → desegnomaniero</i><br>\n<br>\n<i>li</i><span style=\"color: #ff0000\"><i>gn|str</i></span><i>uktura → lignostruktura</i>"
 	],
-	"£x-etype-poscomp": [
-		"£x-etype-poscomp",
-		"Malĝusta ligo-vokalo en kunmetaĵo",
+	"£x-etype-poscomp-ao&\".*o\"": [
+		"£x-etype-poscomp-ao&\".*o\"",
+		"Malĝusta ligo-vokalo en kunmetaĵo: -a + -o",
 		"Tiu vorto estas kunmetaĵo, kie la unua parto estas adjektivo kaj la dua substantivo. Kutime tia kombino estas skribita en du partoj. Por ebligi la kunmeton, la unua parto devas esti substantiva. Forigu la ligovokalon ‘-a’ inter la du partoj, aŭ uzu ‘-o’, depende de belsoneco.",
-		"<span style=\"color: #ff0000\">rokobildoj</span> → rokbildoj"
+		"<span style=\"color: #ff0000\">rokabildoj</span> → rokbildoj<br>\n<br>\n<span style=\"color: #ff0000\">montrafenestron</span> → montrofenestro"
+	],
+	"£x-etype-poscomp-ao&\".*[ae]\"": [
+		"£x-etype-poscomp-ao&\".*[ae]\"",
+		"Malĝusta ligo-vokalo en kunmetaĵo: -a + -a",
+		"Tiu vorto estas adjektiva kunmetaĵo, kie la ligovokalo -a ankaŭ markas la unuan parton kiel adjektivon, sed kie ambaŭ partoj estas radikoj pli ofte uzataj kiel substantivoj. Konsideru forigi la ligovokalon ‘-a’ inter la du partoj, aŭ uzu ‘-o’, depende de belsoneco.<br>\n<br>\nEkzemple tute bonas <i>‘lastatempa’</i> kaj <i>‘triagrada’,</i> ĉar la unuaj partoj, <i>‘lasta’</i> kaj <i>‘tria’,</i> estas adjektivaj radikoj. Sed sonas malpli bone kun <i>‘</i><span style=\"color: #ff0000\"><i>monapuna</i></span><i>’</i> kaj <i>‘</i><span style=\"color: #ff0000\"><i>piedapilka</i></span><i>’,</i> ĉar la unuaj partoj, <i>‘mono/a’</i> kaj <i>‘piedo/a’</i> estas substantivaj radikoj.",
+		""
+	],
+	"£x-etype-poscomp-eo&\".*o\"": [
+		"£x-etype-poscomp-eo&\".*o\"",
+		"Malĝusta ligo-vokalo en kunmetaĵo: -e + -o",
+		"Tiu vorto estas substantiva kunmetaĵo, kie la unua parto estas substantivo, sed havas adverban ligovokalon (-e). Forigu la ligovokalon ‘-e’ inter la du partoj, aŭ uzu ‘-o’, depende de belsoneco.",
+		"<span style=\"color: #ff0000\">ferietago</span> → feritago"
+	],
+	"£x-etype-poscomp-oe&\".*[ae]\"": [
+		"£x-etype-poscomp-oe&\".*[ae]\"",
+		"Malĝusta ligo-vokalo en kunmetaĵo",
+		"En tiu kunmetaĵo vi uzis -o kiel ligovokalon, dum la senco de la unua parto estas adverba. Estas pli bone uzi -e aŭ nenion.",
+		"<span style=\"color: #ff0000\"><i>longodaŭra</i></span><i> → longedaŭra</i>"
+	],
+	"£x-etype-poscomp-oa&\".*[ae]\"": [
+		"£x-etype-poscomp-oa&\".*[ae]\"",
+		"Malĝusta ligo-vokalo en kunmetaĵo",
+		"En tiu kunmetaĵo vi uzis -o kiel ligovokalon, dum la senco de la unua parto estas adjektiva. Estas pli bone uzi -a aŭ nenion.",
+		"<span style=\"color: #ff0000\"><i>lokolingve</i></span><i> → lokalingve</i>"
+	],
+	"£x-etype-poscomp-ea&\".*[ae]\"": [
+		"£x-etype-poscomp-ea&\".*[ae]\"",
+		"Malĝusta ligo-vokalo en kunmetaĵo",
+		"En tiu kunmetaĵo vi uzis -e kiel ligovokalon, dum la senco de la unua parto estas adjektiva. Estas pli bone uzi -a aŭ nenion.",
+		"<span style=\"color: #ff0000\"><i>lasteminute</i></span><i> → lastminute</i>"
 	],
 	"£compound": [
 		"£compound",
@@ -745,7 +778,7 @@ g_marks.types = {
 	"£igx": [
 		"£igx",
 		"Mankanta afikso: -iĝ",
-		"Legu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/sufiksoj\">sufiksoj</a> (-iĝ)",
+		"Aldonu la sufikxon -iĝ!<br>\n<br>\nOni uzas -iĝ por esprimi transiron al alia \"esto-stato\". ‘A x-iĝas’ signifas ‘A ekestas x’. Tipe do temas pri adjektiva aŭ substantiva radiko:<br>\n<br>\n<i>– Li malsan</i><b><i>iĝ</i></b><i>is = Li ekestis malsana.</i><br>\n<br>\n<i>– Li prezidant</i><b><i>iĝ</i></b><i>is = Li ekestis prezidanto.</i><br>\n<br>\nVerboj kun -iĝ estas netransitivaj. Se oni uzas -iĝ kun transitiva radiko, la rezulto similas pasivon sen eksplicita aganto (dana -s-pasivo aŭ \"refleksiva\" se-pasivo/medialo en la hispana):<br>\n<br>\n– <i>Oni elektis lin → Li estis elektita → Li elekt</i><b><i>iĝ</i></b><i>is</i><br>\n<br>\nNotu, ke eblas uzi -iĝ ankaŭ kiel radikon, kun la signifo de ‘fariĝi/ekesti’:<br>\n<br>\n<i>– Ĉiu plenkreskulo povas</i> <b><i>iĝi</i></b><i> (fariĝi/ekesti) membro de la asocio.</i><br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/sufiksoj\">sufiksoj</a> (-iĝ)",
 		"Kiam <span style=\"color: #ff0000\">komencas</span> [komenciĝas] la koncerto?"
 	],
 	"£igx&\"<sent.*>\"": [
@@ -801,6 +834,12 @@ g_marks.types = {
 		"Mankanta afikso: -ad",
 		"Oni uzas la sufikson ‘-ad’ por esprimi daŭran agon (ekz. <i>kantadi = longe kanti</i>). Kun o-finaĵo, tiu sufikso permesas substantivigi verbojn, ekzemple post prepozicioj, kiuj ne permesas infinitivon.<br>\n<br>\nLegu pli en la Lernu!-paĝo pri <a target=\"_blank\" href=\"https://lernu.net/gramatiko/sufiksoj\">sufiksoj</a> (-ad)",
 		"Post <span style=\"color: #ff0000\">vendi</span> la domon [post <b>vendado</b> de la domo]<br>\n<br>\nLi pensas pri <span style=\"color: #ff0000\">veni</span> [venado] al Eŭropo"
+	],
+	"£deligado": [
+		"£deligado",
+		"Transitiveco-problemo: -igo → -ado",
+		"La verba radiko de tiu vorto jam estas transitiva, do ne havas sencon meti ‘-ig’. Anstataŭigu ‘-igo’ per ‘-ado’.",
+		"<span style=\"color: #ff0000\"><i>remodligo</i></span><i> → remodlado</i><br>\n<br>\n<span style=\"color: #ff0000\"><i>malarmigo</i></span><i> → malarmado</i>"
 	],
 	"£ado&INF": [
 		"£ado&INF",
@@ -946,6 +985,18 @@ g_marks.types = {
 		"Okazis konflikto inter sintaksaj etikedoj dum la analizo de la frazo, kio povas indiki eraron – aŭ de la sistemo (plej verŝajne) aŭ de vi (kontrolu!).<br>\n<br>\nEkz. ne eblas havi, sen kunordigo, du subjektojn aŭ du objekton de la sama tipo en la sama (sub)propozicio. En tiu kazo povas esti, ke mankas aŭ troas akuzativo en la markita vorto, aŭ ke ĝi bezonas prepozicion.",
 		"En 1949 la registaro SUBJ&gt; prenis la sunan kalendaron ŝtata <span style=\"color: #ff0000\">kalendaro</span> &lt;SUBJ [… prenis la sunan kalendaron <b>kiel</b> ŝtata<b>n</b> kalendaro<b>n</b>]"
 	],
+	"£:BASE-uzata": [
+		"£:BASE-uzata",
+		"Adjektivo anstataŭ participo",
+		"Adjektivoj kreitaj el transitivaj verbaj radikoj per simpla '-a'-finaĵo kutime estas agaj, analogaj al '-ado'-substantivoj. Ekz.<i> 'uza interfaco' (interfaco por uzado), 'tajla ilo' (ilo por tajlado). '</i>Se vi celas la rezulton de la ago, uzu pasivan participon: <i>'uzata por kuiri', 'tajlita ŝtono',</i> ne <i>'</i><span style=\"color: #ff0000\"><i>uza por kuiri</i></span><i>'</i> aŭ <i>'</i><span style=\"color: #ff0000\"><i>tajla ŝtono'</i></span><i>.</i>",
+		""
+	],
+	"£:BASE-tajlita": [
+		"£:BASE-tajlita",
+		"Adjektivo anstataŭ participo",
+		"Adjektivoj kreitaj el transitivaj verbaj radikoj per simpla '-a'-finaĵo kutime estas agaj, analogaj al '-ado'-substantivoj. Ekz.<i> 'uza interfaco' (interfaco por uzado), 'tajla ilo' (ilo por tajlado). '</i>Se vi celas la rezulton de la ago, uzu pasivan participon: <i>'uzata por kuiri', 'tajlita ŝtono',</i> ne <i>'</i><span style=\"color: #ff0000\"><i>uza por kuiri</i></span><i>'</i> aŭ <i>'</i><span style=\"color: #ff0000\"><i>tajla ŝtono'</i></span><i>.</i>",
+		""
+	],
 	"£:BASE-impona&\"<impozantaj?n?>\"": [
 		"£:BASE-impona&\"<impozantaj?n?>\"",
 		"Alilingvismo: impozanta → impona",
@@ -1028,6 +1079,12 @@ g_marks.types = {
 		"£:BASE-angio",
 		"Ambigueco: vazo → angio",
 		"La kerna signifo de <i>‘vazo’</i> estas ‘ujo’. Tamen, en anatomiaj kaj medicinaj terminoj la vorto ankaŭ funkcias kun morfemo kun la signifo <i>‘angio/vaskulo’</i> (sangotubo). Prefere ne uzu <i>‘vazo’</i> kiel memstaran vorton kun tiu medicina senco.",
+		""
+	],
+	"£x-etype-lemma&\"<en(ricx|kompas|nov|sem|sklav).*ig.*>\"": [
+		"£x-etype-lemma&\"<en(ricx|kompas|nov|sem|sklav).*ig.*>\"",
+		"Angla prunttraduko: en-/in-",
+		"Anglaj prunttradukoj (laŭpartaj tradukoj) ne maloftas en Esperanto, sed povas kaŭzi falsamikajn erarojn. Tiel ne ĉiam eblas traduki la prefikson 'en-' aŭ 'in-' rekte al esperanta 'en-'. Ne eblas diri <i>'</i><span style=\"color: #ff0000\"><i>ensklavigi</i></span><i>'</i> (angle: <i>enslave</i>), <i>'</i><span style=\"color: #ff0000\"><i>enriĉigi</i></span><i>'</i> (angle: <i>enrich</i>), <i>'</i><span style=\"color: #ff0000\"><i>enkompasi</i></span><i>'</i> (angle: <i>encompass</i>), <i>'</i><span style=\"color: #ff0000\"><i>ennovigi</i></span><i>'</i> (angle: <i>innovate</i>). En '-ig' verboj ofte sufiĉas simple forlasi la 'en-' <i>(sklavigi, riĝigi, 'novigi'</i>). Sed foje necesas tute alia radiko, ekz. <span style=\"color: #ff0000\"><i>enkompasi</i></span><i> → ampleksi</i> (angle: <i>encompass</i>)<i>,</i> <span style=\"color: #ff0000\"><i>enlarĝi</i></span><i> → pligrandigi</i> (angle: <i>enlarge</i>)<i>,</i> <span style=\"color: #ff0000\"><i>enlisti</i></span><i> → registri</i> (angle: <i>enlist).</i><br>\n<br>\nNotu, ke tiu prunttraduka eraro ne nur koncernas verbojn, sed ankaŭ aliajn vortklasojn, ekz. <i>'</i><span style=\"color: #ff0000\"><i>enĝenerale</i></span><i>' (ĝenerale,</i> angle: <i>in general</i>)",
 		""
 	],
 	"£:BASE-revizii&\"<revid.*>\"": [
@@ -1174,6 +1231,12 @@ g_marks.types = {
 		"En Esperanto, <i>'tableto'</i> simple estas eta tablo. Por la diversaj alilingvaj falsaj amikoj oni uzas <i>'tablojdo'</i> (medicina premaĵo), <i>'pleto'</i> (plato por servi manĝaĵojn aŭ trinkaĵojn) kaj <i>'tabulkomputilo/platkomputilo'.</i> Por ĉiuj tri iuj foje uzas <i>'tabledo',</i> sed tio ne estas oficiala Esperanta vorto.",
 		"Trifoje tage manĝu po tri <span style=\"color: #ff0000\">tabletojn</span> (tablojdojn) kun akvo.<br>\n<br>\nLa kelnero alportis drinkaĵojn sur arĝenta <span style=\"color: #ff0000\">tableto</span> (pleto).<br>\n<br>\nVi povas uzi la programon per saĝtelefono aŭ tabledo (platkomputilo)"
 	],
+	"£x-etype-lemma&\"<.*breto.*>\"&\"(tabul.*|.*tabulo)\"": [
+		"£x-etype-lemma&\"<.*breto.*>\"&\"(tabul.*|.*tabulo)\"",
+		"Falsa amiko / konfuzebla vortogrupo: tableto/tabledo → tablojdo/pleto",
+		"En Esperanto, <i>'tableto'</i> simple estas eta tablo. Por la diversaj alilingvaj falsaj amikoj oni uzas <i>'tablojdo'</i> (medicina premaĵo), <i>'pleto'</i> (plato por servi manĝaĵojn aŭ trinkaĵojn) kaj <i>'tabulkomputilo/platkomputilo'.</i> Por ĉiuj tri iuj foje uzas <i>'tabledo',</i> sed tio ne estas oficiala Esperanta vorto.",
+		"Trifoje tage manĝu po tri <span style=\"color: #ff0000\">tabletojn</span> (tablojdojn) kun akvo.<br>\n<br>\nLa kelnero alportis drinkaĵojn sur arĝenta <span style=\"color: #ff0000\">tableto</span> (pleto).<br>\n<br>\nVi povas uzi la programon per saĝtelefono aŭ tabledo (platkomputilo)"
+	],
 	"£:BASE-materiismo&\"<materialismon?>\"": [
 		"£:BASE-materiismo&\"<materialismon?>\"",
 		"Falsa amiko / konfuzebla vortoparo",
@@ -1191,6 +1254,30 @@ g_marks.types = {
 		"Falsa amiko / konfuzebla vortoparo",
 		"'Sinapo' estas planto, <i>'mustardo'</i> spicaĵo el tiu planto.",
 		"La salatsaŭco enhavis multe da <span style=\"color: #ff0000\">sinapo</span> (mustardo) kaj iom da vasabio."
+	],
+	"£:BASE-kuzo": [
+		"£:BASE-kuzo",
+		"Falsa amiko / konfuzebla vortoparo",
+		"'Kuzeno' estas problema vorto. Ĝi povas esti aŭ misprononco de <i>'kuseno'</i> aŭ falsamika variaĵo de <i>'kuzo'</i> (filo de onklo aŭ onklino, angle: <i>cousin</i>). Krome povas temi pri intenca, genrisma alternativo por <i>'gekuzo'.</i>",
+		""
+	],
+	"£:BASE-kuseno": [
+		"£:BASE-kuseno",
+		"Falsa amiko / konfuzebla vortoparo",
+		"'Kuzeno' estas problema vorto. Ĝi povas esti aŭ misprononco de <i>'kuseno'</i> aŭ falsamika variaĵo de <i>'kuzo'</i> (filo de onklo aŭ onklino, angle: <i>cousin</i>). Krome povas temi pri intenca, genrisma alternativo por <i>'gekuzo'.</i>",
+		""
+	],
+	"£:BASE-datumo&\"<datojn?>\"": [
+		"£:BASE-datumo&\"<datojn?>\"",
+		"Falsa amiko / konfuzebla vortoparo",
+		"<i>'Datoj'</i> estas kalendaraj datoj. Por komputile stokitaj informeroj uzu <i>'datumoj'</i> aŭ <i>'datenoj'.</i>",
+		"Protektu viajn personajn <span style=\"color: #ff0000\">datojn</span> (datumojn)!"
+	],
+	"£x-etype-lemma&\"<.*datoumjn?>\"&\".*dato\"": [
+		"£x-etype-lemma&\"<.*datoumjn?>\"&\".*dato\"",
+		"Falsa amiko / konfuzebla vortoparo",
+		"<i>'Datoj'</i> estas kalendaraj datoj. Por komputile stokitaj informeroj uzu <i>'datumoj'</i> aŭ <i>'datenoj'.</i>",
+		"Protektu viajn personajn <span style=\"color: #ff0000\">datojn</span> (datumojn)!"
 	],
 	"£:BASE-afekcii": [
 		"£:BASE-afekcii",
@@ -1257,6 +1344,12 @@ g_marks.types = {
 		"Falsa amiko / konfuzebla vortoparo: buklo → buko",
 		"'Buklo’ estas haro (angle: <i>lock, curl</i>), dum <i>‘buko’</i> (angle: <i>buckle</i>) estas fermilo uzata por fiksi zonon aŭ rubandon. Trovu difinojn kaj ekzemplojn en <a target=\"_blank\" href=\"https://reta-vortaro.de/\">ReVo</a>!",
 		""
+	],
+	"£:BASE-cxelo": [
+		"£:BASE-cxelo",
+		"Falsa amiko / konfuzebla vortoparo: celulo → ĉelo",
+		"En Esperanto, <i>'celuloj'</i> estas kavetoj en osto, ekz. <i>etmoidaj celuloj.</i> Ne konfuzu tion kun <i>'ĉelo'</i> en la senco de elementa vivaĵo.",
+		"Makrofago estas kunordiga <span style=\"color: #ff0000\">celulo</span> (ĉelo) de la imunsistemo."
 	],
 	"£:BASE-sceno&\"<cxenoj?n?>\"": [
 		"£:BASE-sceno&\"<cxenoj?n?>\"",
@@ -1510,6 +1603,12 @@ g_marks.types = {
 		"La vorto <i>‘necesi’</i> estas netransitiva (angle: <i>be necessary</i>).Povas temi pri hispana falsa amiko. En Esperanto, oni ne <span style=\"color: #ff0000\"><i>necesas ion</i></span><i>,</i> sed <i>bezonas ion</i> (angle: <i>need,</i> hispane: <i>necessitar</i>).",
 		"Mi <span style=\"color: #ff0000\">necesas</span> (bezonas) novan jakon."
 	],
+	"£:BASE-neuxtra": [
+		"£:BASE-neuxtra",
+		"Falsa amiko / konfuzebla vortoparo: neŭtrala → neŭtra",
+		"Lingvo, politiko aŭ homo povas esti <i>'neŭtrala',</i> sed por fiziko, elektro kaj gramatiko oni uzas la adjektivon <i>'neŭtra'.</i>",
+		""
+	],
 	"£:BASE-origina": [
 		"£:BASE-origina",
 		"Falsa amiko / konfuzebla vortoparo: originala/e → origina/e",
@@ -1551,6 +1650,12 @@ g_marks.types = {
 		"Falsa amiko / konfuzebla vortoparo: rezignacii/o → rezigni/o",
 		"<i>'Rezignacio’</i> estas psika stato, de \"kontraŭŝata akcepto pro fortomanko\", kaj <i>‘rezignacii’</i> signifas eniri tiun staton (angle: <i>state of being resigned</i>). Ne konfuzu tion kun la ago de <i>‘rezigni’</i> (angle: <i>give up</i>)<i>,</i> kiu permesas objekton: Oni povas <i>rezigni monon, postenon, tronon,</i> aŭ, kun infinitivo, <i>rezigni fari ion.</i> Substantive oni diras <i>rezigno je/pri io.</i>",
 		"Li energie gvidis la firmaon ĝis sia <span style=\"color: #ff0000\">rezignacio</span> (rezigno) en 2011."
+	],
+	"£:BASE-rekordo": [
+		"£:BASE-rekordo",
+		"Falsa amiko / konfuzebla vortoparo: rikordo → rekordo",
+		"'rikordo' estas datenopo, fakvorto el komputiko. Ne konfuzu tion kun <i>'rekordo'</i> (la pleja de io).",
+		"Li starigis novan mondan <span style=\"color: #ff0000\">rikordon</span> (rekordon)."
 	],
 	"£:BASE-elekti&\"<selekt.*>\"": [
 		"£:BASE-elekti&\"<selekt.*>\"",
@@ -1756,23 +1861,35 @@ g_marks.types = {
 		"'Preventi’ signifas ‘antaŭmalhelpi’ (agon aŭ okazaĵon). Sed personon oni ne <i>preventas,</i> sed <i>malhelpas.</i> Kaj oni ne povas traduki la anglan plurvalentan strukturon <i>‘prevent sb. from doing s.th.’</i> per <i>‘preventi.</i> Tiucele uzu <i>‘malhelpi’</i>:<br>\n<br>\n<i>La malbona vetero</i> <span style=\"color: #ff0000\"><i>preventis</i></span><i> (malhelpis) la armeon transiri la monton.</i>",
 		""
 	],
-	"£x-etype-lemma&\"<.*acioj?n?>\"": [
-		"£x-etype-lemma&\"<.*acioj?n?>\"",
+	"£x-etype-lemma&\"<.*aci(oj?n?|i|[aiou]s)>\"": [
+		"£x-etype-lemma&\"<.*aci(oj?n?|i|[aiou]s)>\"",
 		"Falsa amiko: -acio",
-		"Multaj falsaj amikoj en Esperanto ŝuldiĝas al pruntoj, el aliaj lingvoj, de latindevenaj substantivoj kun la finaĵo -acio, ekz. <i>'</i><span style=\"color: #ff0000\"><i>dokumentacio</i></span><i>' (dokumentaĵo),</i> <span style=\"color: #ff0000\"><i>'fondacio/fundacio</i></span><i>' (fondaĵo, fonduso), '</i><span style=\"color: #ff0000\"><i>kapitulacio</i></span><i>' (kapitulaco),</i> <span style=\"color: #ff0000\"><i>menstruacio</i></span><i>' (menstruo), '</i><span style=\"color: #ff0000\"><i>integracio</i></span><i>' (integrigo), '</i><span style=\"color: #ff0000\"><i>stagnacio</i></span><i>' (stagnado).</i> Antaŭ ol uzi substantivon kun '-acio', pripensu, ĉu ekzistas pli &quot;esperanta&quot; vortumo, uzante la radikon sen '-acio' aŭ kunmetaĵon kun pure esperanta sufikso.",
+		"Multaj falsaj amikoj en Esperanto ŝuldiĝas al pruntoj, el aliaj lingvoj, de latindevenaj substantivoj kun la finaĵo -acio, ekz. <i>'</i><span style=\"color: #ff0000\"><i>dokumentacio</i></span><i>' (dokumentaĵo),</i> <span style=\"color: #ff0000\"><i>'fondacio/fundacio</i></span><i>' (fondaĵo, fonduso), '</i><span style=\"color: #ff0000\"><i>kapitulacio</i></span><i>' (kapitulaco), '</i><span style=\"color: #ff0000\"><i>menstruacio</i></span><i>' (menstruo), '</i><span style=\"color: #ff0000\"><i>integracio</i></span><i>' (integrigo), '</i><span style=\"color: #ff0000\"><i>stagnacio</i></span><i>' (stagnado).</i> Antaŭ ol uzi substantivon kun '-acio', pripensu, ĉu ekzistas pli &quot;esperanta&quot; vortumo, uzante la radikon sen '-acio' aŭ kunmetaĵon kun pure esperanta sufikso.",
 		""
 	],
 	"£x-etype-lemma&\"<.*alaj?n?>\"": [
 		"£x-etype-lemma&\"<.*alaj?n?>\"",
 		"Falsa amiko: -ala",
-		"Multaj falsaj amikoj en Esperanto ŝuldiĝas al pruntoj, el aliaj lingvoj, de latindevenaj adjektivoj kun la finaĵo -al, ekz. <i>'</i><span style=\"color: #ff0000\"><i>nacionala</i></span><i>' (nacia),</i> <span style=\"color: #ff0000\"><i>rituala</i></span><i> (rita),</i> <span style=\"color: #ff0000\"><i>seksuala</i></span><i> (seksa),</i> <span style=\"color: #ff0000\"><i>globala</i></span><i> (tutmonda),</i> <span style=\"color: #ff0000\"><i>artificiala</i></span><i> (artefarita).</i> Antaŭ ol uzi adjektivon kun '-ala', pripensu, ĉu ekzistas pli &quot;esperanta&quot; vortumo, uzante la radikon sen '-al' aŭ kunmetaĵon kun pure esperanta sufikso.",
+		"Multaj falsaj amikoj en Esperanto ŝuldiĝas al pruntoj, el aliaj lingvoj, de latindevenaj adjektivoj kun la finaĵo -al, ekz. <i>'</i><span style=\"color: #ff0000\"><i>nacionala</i></span><i>' (nacia), '</i><span style=\"color: #ff0000\"><i>rituala'</i></span><i> (rita), '</i><span style=\"color: #ff0000\"><i>seksuala'</i></span><i> (seksa), '</i><span style=\"color: #ff0000\"><i>globala'</i></span><i> (tutmonda), '</i><span style=\"color: #ff0000\"><i>artificiala'</i></span><i> (artefarita).</i> Antaŭ ol uzi adjektivon kun '-ala', pripensu, ĉu ekzistas pli &quot;esperanta&quot; vortumo, uzante la radikon sen '-al' aŭ kunmetaĵon kun pure esperanta sufikso.",
+		""
+	],
+	"£x-etype-lemma&\"<.*ativa>\"": [
+		"£x-etype-lemma&\"<.*ativa>\"",
+		"Falsa amiko: -ativa",
+		"Multaj falsaj amikoj en Esperanto ŝuldiĝas al pruntoj, el aliaj lingvoj, de latindevenaj kun la finaĵo -ativa, ekz. <i>'</i><span style=\"color: #ff0000\"><i>administrativa</i></span><i>' (administra), '</i><span style=\"color: #ff0000\"><i>informativa</i></span><i>' (informhava), '</i><span style=\"color: #ff0000\"><i>kreativa</i></span><i>' (kreiva), '</i><span style=\"color: #ff0000\"><i>lukrativa</i></span><i>' (lukra).</i> Antaŭ ol uzi adjektivon kun '-ativa', pripensu, ĉu ekzistas pli &quot;esperanta&quot; vortumo, uzante la radikon sen '-ativ', kun nur <i>'-iv'</i> aŭ kun dua radiko kiel '-hava'.",
+		""
+	],
+	"£x-etype-lemma&\"<.*ikaj?n?>\"": [
+		"£x-etype-lemma&\"<.*ikaj?n?>\"",
+		"Falsa amiko: -ika/e",
+		"Kelkaj falsaj amikoj en Esperanto ŝuldiĝas al pruntoj, el aliaj lingvoj, de latindevenaj substantivoj kun la finaĵo -ika/e (angle: <i>-ic/ical,</i> germane: <i>-isch</i>). La prunto fakte plej ofte funkcias, ekz. kun <i>'grafika', 'polemika', 'praktika'</i> ktp.<i>,</i> sed ne kun ekz. <i>'</i><span style=\"color: #ff0000\"><i>empirika</i></span><i>' (empiria),</i> <span style=\"color: #ff0000\"><i>'identika</i></span><i>' (identa), '</i><span style=\"color: #ff0000\"><i>tematika</i></span><i>' (tema).</i> Antaŭ ol uzi (por vi novan) substantivon kun '-ika', pripensu, ĉu ekzistas pli &quot;esperanta&quot; vortumo, uzante la radikon kun simple '-a' aŭ '-ia' anstataŭ '-ika'.<br>\n<br>\nNotu, ke foje vortformo kun '-ika' kunekzistas kun pli simpla '-(i)a' versio, ekz. <i>'</i><b><i>arkaika</i></b><i>/arkaa', 'pragmatika/</i><b><i>pragmata</i></b><i>'</i> aŭ <i>'ekzotika/ekzota'.</i> En tiuj kazoj ne ekzistas fiksa regulo kion preferi. Ekzemple, <i>'arkaika'</i> pli oftas ol <i>'arkaa',</i> sed <i>'praktika'</i> malpli oftas ol <i>'pragmata',</i> dum <i>'ekzotika'</i> kaj <i>'ekzota'</i> plimalpli samoftas.",
 		""
 	],
 	"£x-etype-lemma&\"<.*ionoj?n?>\"": [
 		"£x-etype-lemma&\"<.*ionoj?n?>\"",
 		"Falsa amiko: -iono",
-		"Kelkajj falsaj amikoj en Esperanto ŝuldiĝas al pruntoj, el aliaj lingvoj, de latindevenaj substantivoj kun la finaĵo -iono. La prunto fakte ofte funkcias, ekz. kun <i>'leciono', 'regiono'</i> kaj <i>'ĉampiono',</i> sed ne kun ekz. <i>'</i><span style=\"color: #ff0000\"><i>akciono</i></span><i>' (planago),</i> <span style=\"color: #ff0000\"><i>'misiono</i></span><i>' (misio), '</i><span style=\"color: #ff0000\"><i>versiono</i></span><i>' (versio),</i> <span style=\"color: #ff0000\"><i>diviziono</i></span><i>' (divizio), '</i><span style=\"color: #ff0000\"><i>uniono</i></span><i>' (unio), '</i><span style=\"color: #ff0000\"><i>paviliono</i></span><i>' (pavilono).</i> Antaŭ ol uzi (por vi novan) substantivon kun '-acio', pripensu, ĉu ekzistas pli &quot;esperanta&quot; vortumo, uzante la radikon kun '-io' anstataŭ '-iono', aŭ kunmetaĵon kun pure esperanta sufikso.",
-		""
+		"Kelkaj falsaj amikoj en Esperanto ŝuldiĝas al pruntoj, el aliaj lingvoj, de latindevenaj substantivoj kun la finaĵo -iono. La prunto fakte ofte funkcias, ekz. kun <i>'leciono', 'regiono'</i> kaj <i>'ĉampiono',</i> sed ne kun ekz. <i>'</i><span style=\"color: #ff0000\"><i>akciono</i></span><i>' (planago),</i> <span style=\"color: #ff0000\"><i>'misiono</i></span><i>' (misio), '</i><span style=\"color: #ff0000\"><i>versiono</i></span><i>' (versio),</i> <span style=\"color: #ff0000\"><i>diviziono</i></span><i>' (divizio), '</i><span style=\"color: #ff0000\"><i>uniono</i></span><i>' (unio), '</i><span style=\"color: #ff0000\"><i>paviliono</i></span><i>' (pavilono).</i> Antaŭ ol uzi (por vi novan) substantivon kun '-iono', pripensu, ĉu ekzistas pli &quot;esperanta&quot; vortumo, uzante la radikon kun '-io' anstataŭ '-iono', aŭ kunmetaĵon kun pure esperanta sufikso.",
+		"<span style=\"color: #ff0000\">funkciono</span> → funkcio"
 	],
 	"£:BASE-cxesigi&\"<abort.*>\"": [
 		"£:BASE-cxesigi&\"<abort.*>\"",
@@ -1911,6 +2028,12 @@ g_marks.types = {
 		"Falsa amiko: balanci → ekvilibrigi",
 		"En Esperanto, <i>‘balanci’</i> signifas tien-reen movon de korpoparto aŭ objekto (simile al <i>‘svingi’)</i>, sen ekvilibriga aspekto. Kun tia, uzu <i>‘ekvilibrigi’ (buĝeton, premon, pilkon sur fingro).</i> Notu ankaŭ, ke ‘<i>balanci’</i> estas transitiva! Do:<br>\n<br>\nFinfine, ni <span style=\"color: #ff0000\">balancis</span> (ekvilibrigis) la buĝeton.<br>\n<br>\nFinfine, la buĝeto <span style=\"color: #ff0000\">balancas</span> (ekvilibras).",
 		""
+	],
+	"£:BASE-trinkejo": [
+		"£:BASE-trinkejo",
+		"Falsa amiko: baro → trinkejo",
+		"En Esperanto, <i>'baro'</i> estas bariero, limo, malhelpajxo. Ne konfuzu tion kun <i>'trinkejo'</i> aŭ <i>'drinkejo'</i> (angle: <i>bar</i>).",
+		"Ili pasigis kelkajn horojn en la stacidoma <span style=\"color: #c9211e\">baro</span> (trinkejo)."
 	],
 	"£:BASE-formularo&\"<blanketoj?n?>\"": [
 		"£:BASE-formularo&\"<blanketoj?n?>\"",
@@ -2140,6 +2263,24 @@ g_marks.types = {
 		"Tio povas esti franca falsa amiko. En Esperanto, <i>‘envii’</i> signifas deziri ton, kion alia posedas, kaj (negative) emocii pri tion. Oni do envias ion al iu, aŭ iun pro io. Sed ne eblas uzi la vorton kun la senco de <i>‘emi’,</i> kun infinitivo.",
 		"Mi <span style=\"color: #ff0000\">envias</span> (emas) iri al la plaĝo"
 	],
+	"£:BASE-engagxigxi&\"<envolv.*>\"": [
+		"£:BASE-engagxigxi&\"<envolv.*>\"",
+		"Falsa amiko: envolvi → engaĝi/signifi",
+		"En Esperanto, <i>'envolvi'</i> signifas 'volve kovri' (ekz. aĝon en pakpapero), kaj eĉ la figurasence normale temas pri volvado, ekz. de pejzaĝo en nebulo aŭ konstruaĵo en fumo. Estas falsa amiko uzi la vorton kun la signifo de <i>'engaĝ(iĝ)i en aktivaĵo'</i> aŭ <i>'signifi/implici agon'</i> (angle: <i>involve).</i><br>\n<br>\nLa angleca uzo de <i>'envolvi'</i> estas tamen jam tiom ofta, ke kelkaj dirus, ke ne plu temas pri grava eraro.",
+		"<i>Li entuziasme</i> <span style=\"color: #ff0000\"><i>envolvis sin</i></span><i> (engaĝiĝis) en la kvartala teatro.</i><br>\n<br>\n<i>Tiu solvo</i> <span style=\"color: #ff0000\"><i>envolvus</i></span><i> (signifus) laboron kun danĝeraj substancoj.</i>"
+	],
+	"£:BASE-engagxi&\"<envolv.*>\"": [
+		"£:BASE-engagxi&\"<envolv.*>\"",
+		"Falsa amiko: envolvi → engaĝi/signifi",
+		"En Esperanto, <i>'envolvi'</i> signifas 'volve kovri' (ekz. aĝon en pakpapero), kaj eĉ la figurasence normale temas pri volvado, ekz. de pejzaĝo en nebulo aŭ konstruaĵo en fumo. Estas falsa amiko uzi la vorton kun la signifo de <i>'engaĝ(iĝ)i en aktivaĵo'</i> aŭ <i>'signifi/implici agon'</i> (angle: <i>involve).</i><br>\n<br>\nLa angleca uzo de <i>'envolvi'</i> estas tamen jam tiom ofta, ke kelkaj dirus, ke ne plu temas pri grava eraro.",
+		"<i>Li entuziasme</i> <span style=\"color: #ff0000\"><i>envolvis sin</i></span><i> (engaĝiĝis) en la kvartala teatro.</i><br>\n<br>\n<i>Tiu solvo</i> <span style=\"color: #ff0000\"><i>envolvus</i></span><i> (signifus) laboron kun danĝeraj substancoj.</i>"
+	],
+	"£:BASE-signifi&\"<envolv.*>\"": [
+		"£:BASE-signifi&\"<envolv.*>\"",
+		"Falsa amiko: envolvi → engaĝi/signifi",
+		"En Esperanto, <i>'envolvi'</i> signifas 'volve kovri' (ekz. aĝon en pakpapero), kaj eĉ la figurasence normale temas pri volvado, ekz. de pejzaĝo en nebulo aŭ konstruaĵo en fumo. Estas falsa amiko uzi la vorton kun la signifo de <i>'engaĝ(iĝ)i en aktivaĵo'</i> aŭ <i>'signifi/implici agon'</i> (angle: <i>involve).</i><br>\n<br>\nLa angleca uzo de <i>'envolvi'</i> estas tamen jam tiom ofta, ke kelkaj dirus, ke ne plu temas pri grava eraro.",
+		"<i>Li entuziasme</i> <span style=\"color: #ff0000\"><i>envolvis sin</i></span><i> (engaĝiĝis) en la kvartala teatro.</i><br>\n<br>\n<i>Tiu solvo</i> <span style=\"color: #ff0000\"><i>envolvus</i></span><i> (signifus) laboron kun danĝeraj substancoj.</i>"
+	],
 	"£:BASE-akutigo&\"<eskal.*>\"": [
 		"£:BASE-akutigo&\"<eskal.*>\"",
 		"Falsa amiko: eskalo → akutigo",
@@ -2199,6 +2340,18 @@ g_marks.types = {
 		"Falsa amiko: flugilo → alo",
 		"Esperanto havas du malsamajn vortojn por la laŭvorta kaj la metafora signifoj de la angla <i>‘wing’</i> aŭ la germana <i>‘Flügel’,</i> nome <i>‘flugilo’</i> (de ekz. birdo) kaj <i>‘alo’</i> (de ekz. konstruaĵo aŭ organizo).",
 		"Ili estis membroj de la armea <span style=\"color: #ff0000\">flugilo</span> (alo) de Hamas."
+	],
+	"£:BASE-ekstremdekstr.*": [
+		"£:BASE-ekstremdekstr.*",
+		"Falsa amiko: fordekstr- → ekstremdekstr-",
+		"La angla esprimo <i>'far right'</i> ne funkcias laŭlitere en esperanto. Devas esti <i>'ekstremdekstro', 'ekstremdekstrularo', 'ekstremdekstrema'</i> ktp. anstataŭ <span style=\"color: #ff0000\"><i>'fordekstro', 'fordekstrularo', 'fordekstrema'</i></span><i>.</i>",
+		""
+	],
+	"£x-etype-lemma&\"<fordekstr.*>\"": [
+		"£x-etype-lemma&\"<fordekstr.*>\"",
+		"Falsa amiko: fordekstr- → ekstremdekstr-",
+		"La angla esprimo <i>'far right'</i> ne funkcias laŭlitere en esperanto. Devas esti <i>'ekstremdekstro', 'ekstremdekstrularo', 'ekstremdekstrema'</i> ktp. anstataŭ <span style=\"color: #ff0000\"><i>'fordekstro', 'fordekstrularo', 'fordekstrema'</i></span><i>.</i>",
+		""
 	],
 	"£:BASE-maltrafi&\"<forpas.*>\"": [
 		"£:BASE-maltrafi&\"<forpas.*>\"",
@@ -2326,6 +2479,24 @@ g_marks.types = {
 		"Origine en Esperanto, <i>'idiosinkrazio'</i> estis medicina esprimo kun la signifo 'trosentemo al io'. Sed fakte la vorto estas pli ofte uzata kun la ĝenerallingva senco de &quot;apartiga, individua eco&quot;. PIV listigas nur la duan signifon, ReVo rekomendas la unuan. Do estas malfacile diri, ke temas pri vera eraro ĉi tie, decidu vi mem!",
 		"La <span style=\"color: #ff0000\">idiosinkrazioj</span> (apartaĵoj) de la naciaj lingvoj malfaciligas lernadon."
 	],
+	"£:BASE-.*piktogramo": [
+		"£:BASE-.*piktogramo",
+		"Falsa amiko: ikono → piktogramo",
+		"En Esperanto, <i>'ikono'</i> estas religia bildo aŭ – metafore – adorata famul(in)o. Ne eblas uzi la vorton kun la senco <i>'piktogramo/bildsimbolo'</i> (angle: <i>icon</i>).",
+		"La programo uzas klarajn, facile kompreneblajn <span style=\"color: #ff0000\">ikonojn</span> (piktogramojn)."
+	],
+	"£:BASE-imago&\"<imaginoj?n?>\"": [
+		"£:BASE-imago&\"<imaginoj?n?>\"",
+		"Falsa amiko: imagino/i ..&gt; imago/i, imagina → imaginara",
+		"En Esperanto, <i>'imagino'</i> estas la plenkreska formo de papilio aŭ simile. Ne konfuzu tion kun <i>'imago'</i> (mensa bildo). Same, <i>'</i><span style=\"color: #ff0000\"><i>imagini</i></span><i>'</i> devas esti <i>'imagi',</i> kaj per <i>'</i><span style=\"color: #ff0000\"><i>imagina</i></span><i>'</i> oni verŝajne celas <i>'imagita'</i> aŭ <i>'imaginara'.</i>",
+		"La novaĵo sufiĉe impresis la popolan <span style=\"color: #ff0000\">imaginon</span> (imagon)."
+	],
+	"£x-etype-lemma&\"<imagin.*>\"": [
+		"£x-etype-lemma&\"<imagin.*>\"",
+		"Falsa amiko: imagino/i ..&gt; imago/i, imagina → imaginara",
+		"En Esperanto, <i>'imagino'</i> estas la plenkreska formo de papilio aŭ simile. Ne konfuzu tion kun <i>'imago'</i> (mensa bildo). Same, <i>'</i><span style=\"color: #ff0000\"><i>imagini</i></span><i>'</i> devas esti <i>'imagi',</i> kaj per <i>'</i><span style=\"color: #ff0000\"><i>imagina</i></span><i>'</i> oni verŝajne celas <i>'imagita'</i> aŭ <i>'imaginara'.</i>",
+		"La novaĵo sufiĉe impresis la popolan <span style=\"color: #ff0000\">imaginon</span> (imagon)."
+	],
 	"£:BASE-imponi&\"<impres.*>\"": [
 		"£:BASE-imponi&\"<impres.*>\"",
 		"Falsa amiko: impresi → imponi",
@@ -2349,6 +2520,18 @@ g_marks.types = {
 		"Falsa amiko: instanco → okazo",
 		"En Esperanto, <i>‘instanco’</i> estas juĝa/jura aŭtoritato (angle: <i>court, authority</i>) aŭ foje, evitinde, institucio en pli ĝenerala senco. Ne eblas uzi la vorton kun la signifo de ‘unuopa apero/okazo/kopio’ (angle: <i>instance</i>).",
 		"<i>La polico esploras tri novajn</i> <span style=\"color: #ff0000\"><i>instancojn</i></span><i> (okazojn) de pafilouzo.</i><br>\n<br>\n<i>Fermu ĉiujn</i> <span style=\"color: #ff0000\"><i>instancojn</i></span><i> (okazojn) de la programo!</i>"
+	],
+	"£:BASE-instant.*": [
+		"£:BASE-instant.*",
+		"Falsa amiko: instant- → tuj-",
+		"La radiko <i>'</i><span style=\"color: #ff0000\"><i>instant</i></span><i>-'</i> ne ekzistas en Esperanto. La substantivo <i>'</i><span style=\"color: #ff0000\"><i>instanto</i></span><i>'</i> estu <i>'momento'</i> (angle: <i>instant</i>)<i>,</i> kaj la adjektivoj <i>'</i><span style=\"color: #ff0000\"><i>instanta</i></span><i>'</i> aŭ <i>'</i><span style=\"color: #ff0000\"><i>instantanea</i></span><i>'</i> (angle: instantaneous) estu <i>'tuja'.</i> Uzu <i>'tuj-'</i> ankaŭ en kunmetaĵoj kiel <i>'</i><span style=\"color: #ff0000\"><i>instantnudeloj</i></span><i>' (tujnudeloj), '</i><span style=\"color: #ff0000\"><i>instantfoto</i></span><i>'</i> (<i>tujfoto</i>) aŭ <i>'</i><span style=\"color: #ff0000\"><i>instanta</i></span><i> kafo'</i> (<i>tuja kafo, tujpreta kafo).</i>",
+		""
+	],
+	"£x-etype-lemma&\"<instant.*>\"": [
+		"£x-etype-lemma&\"<instant.*>\"",
+		"Falsa amiko: instant- → tuj-",
+		"La radiko <i>'</i><span style=\"color: #ff0000\"><i>instant</i></span><i>-'</i> ne ekzistas en Esperanto. La substantivo <i>'</i><span style=\"color: #ff0000\"><i>instanto</i></span><i>'</i> estu <i>'momento'</i> (angle: <i>instant</i>)<i>,</i> kaj la adjektivoj <i>'</i><span style=\"color: #ff0000\"><i>instanta</i></span><i>'</i> aŭ <i>'</i><span style=\"color: #ff0000\"><i>instantanea</i></span><i>'</i> (angle: instantaneous) estu <i>'tuja'.</i> Uzu <i>'tuj-'</i> ankaŭ en kunmetaĵoj kiel <i>'</i><span style=\"color: #ff0000\"><i>instantnudeloj</i></span><i>' (tujnudeloj), '</i><span style=\"color: #ff0000\"><i>instantfoto</i></span><i>'</i> (<i>tujfoto</i>) aŭ <i>'</i><span style=\"color: #ff0000\"><i>instanta</i></span><i> kafo'</i> (<i>tuja kafo, tujpreta kafo).</i>",
+		""
 	],
 	"£:BASE-esenca&\"<integraj?n?>\"": [
 		"£:BASE-esenca&\"<integraj?n?>\"",
@@ -2542,6 +2725,12 @@ g_marks.types = {
 		"En Esperanto, ‘<i>konkludi’</i> nur temas pri logika rezonado, ne eblas <i>konkludi</i> agon, kurson, procezon aŭ simile. Por tiu senco, simple uzu <i>‘fini’.</i>",
 		"Li sukcese <span style=\"color: #ff0000\">konkludis</span> (finis) la lastan jaron de la liceo."
 	],
+	"£:BASE-bankroto&\"<konkursoj?n?>\"": [
+		"£:BASE-bankroto&\"<konkursoj?n?>\"",
+		"Falsa amiko: konkurso → bankroto",
+		"En Esperanto, <i>'konkurso'</i> estas aranĝita konkuro (ekz. sporta, ŝtata, pripostena). Ne konfuzu tion kun <i>'bankroto',</i> financa fiasko malhelpanta firmaon aŭ personon daŭrigi siajn komercajn aktivaĵojn (germane/dane: <i>Konkurs</i>)",
+		"La kreskantaj ŝuldoj finfine kaŭzis la <span style=\"color: #ff0000\">konkurson</span> (bankroton) de la firmao."
+	],
 	"£:BASE-kohero&\"<konsistencoj?n?>\"": [
 		"£:BASE-kohero&\"<konsistencoj?n?>\"",
 		"Falsa amiko: konsistenca/o → kohera/o",
@@ -2652,6 +2841,12 @@ g_marks.types = {
 	],
 	"£:BASE-laŭreguleco&\"<korektecoj?n?>\"": [
 		"£:BASE-laŭreguleco&\"<korektecoj?n?>\"",
+		"Falsa amiko: korekta → ĝusta",
+		"En Esperanto, <i>‘korekti’</i> estas transitiva verbo, do se oni uzas ĝin kiel adjektivo, tiu ankaŭ fariĝas transitiva (angle: <i>correcting</i>): <i>korekta laboro</i> (la laboro korekti ion)<i>, korektaj ŝanĝetoj</i> (ŝanĝoj faritaj por korekti ion). Ne eblas uzi <i>‘korekta’</i> kun la senco de <i>‘ĝusta’</i> (= ‘senerara’, angle: <i>correct</i>). Simile <i>‘korekteco’</i> devas esti <i>‘ĝusteco’</i> (de fakto/aserto) aŭ (politika) <i>‘laŭreguleco/bonkonduteco’,</i> kaj anstataŭ <i>‘malkorektaĵo’</i> prefere simple uzu <i>‘eraro’.</i><br>\n<br>\nVidu ankaŭ la deklaron de la Akademio de Esperanto pri <a target=\"_blank\" href=\"https://www.akademio-de-esperanto.org/decidoj/rezultstataj_adjektivoj/index.htmlr\">rezultstataj adjektivoj</a>.",
+		"Tiu frazo ne estas <span style=\"color: #ff0000\">korekta</span> (ĝusta)."
+	],
+	"£x-etype-lemma&\"gxusteco\"": [
+		"£x-etype-lemma&\"gxusteco\"",
 		"Falsa amiko: korekta → ĝusta",
 		"En Esperanto, <i>‘korekti’</i> estas transitiva verbo, do se oni uzas ĝin kiel adjektivo, tiu ankaŭ fariĝas transitiva (angle: <i>correcting</i>): <i>korekta laboro</i> (la laboro korekti ion)<i>, korektaj ŝanĝetoj</i> (ŝanĝoj faritaj por korekti ion). Ne eblas uzi <i>‘korekta’</i> kun la senco de <i>‘ĝusta’</i> (= ‘senerara’, angle: <i>correct</i>). Simile <i>‘korekteco’</i> devas esti <i>‘ĝusteco’</i> (de fakto/aserto) aŭ (politika) <i>‘laŭreguleco/bonkonduteco’,</i> kaj anstataŭ <i>‘malkorektaĵo’</i> prefere simple uzu <i>‘eraro’.</i><br>\n<br>\nVidu ankaŭ la deklaron de la Akademio de Esperanto pri <a target=\"_blank\" href=\"https://www.akademio-de-esperanto.org/decidoj/rezultstataj_adjektivoj/index.htmlr\">rezultstataj adjektivoj</a>.",
 		"Tiu frazo ne estas <span style=\"color: #ff0000\">korekta</span> (ĝusta)."
@@ -2812,6 +3007,18 @@ g_marks.types = {
 		"Ne konfuzu <i>‘lento’</i> kun <i>‘lenso’</i>. La unua estas manĝebla semo, la alia optika instrumento.",
 		"Necesas purigi la <span style=\"color: #ff0000\">lenton</span> (lenson) de via telefono."
 	],
+	"£x-etype-lemma&\"<link.*>&\"lig.*\"": [
+		"£x-etype-lemma&\"<link.*>&\"lig.*\"",
+		"Falsa amiko: linki → ligi, linko → ligilo",
+		"En Esperanto, la verbo <i>'linki'</i> ne ekzistas, kaj <i>'linko'</i> estas rabobesto. Ne konfuzu tion kun <i>'ligi'</i> kaj<i> 'ligilo'</i> (angle: <i>link</i>).",
+		"Mi sendas <span style=\"color: #ff0000\">linkon</span> (ligilo) al mia hejmpaĝo.<br>\n<br>\nLa pafilo <span style=\"color: #ff0000\">linkas</span> (ligas) lin al al murdoloko."
+	],
+	"£:BASE-ligilo": [
+		"£:BASE-ligilo",
+		"Falsa amiko: linki → ligi, linko → ligilo",
+		"En Esperanto, la verbo <i>'linki'</i> ne ekzistas, kaj <i>'linko'</i> estas rabobesto. Ne konfuzu tion kun <i>'ligi'</i> kaj<i> 'ligilo'</i> (angle: <i>link</i>).",
+		"Mi sendas <span style=\"color: #ff0000\">linkon</span> (ligilo) al mia hejmpaĝo.<br>\n<br>\nLa pafilo <span style=\"color: #ff0000\">linkas</span> (ligas) lin al al murdoloko."
+	],
 	"£:BASE-ligilo&\"<linkoj?n?>\"": [
 		"£:BASE-ligilo&\"<linkoj?n?>\"",
 		"Falsa amiko: linko → ligilo",
@@ -2913,6 +3120,12 @@ g_marks.types = {
 		"Falsa amiko: metro → metroo",
 		"En Esperanto, <i>'metro'</i> estas nur mezurunuo, dum la subtera trajnosistemo nomiĝas <i>'metroo'.</i>",
 		"La <span style=\"color: #ff0000\">metro</span> (metroo) de Londono estas mondfama."
+	],
+	"£x-etype-lemma&\"<mez.*>\"&\"duon.*\"": [
+		"£x-etype-lemma&\"<mez.*>\"&\"duon.*\"",
+		"Falsa amiko: mez- → duon-",
+		"La kerna signifo de la prefikso <i>'mez-'</i> estas 'averaĝa/mezuma', ekz. <i>'mezgranda', 'mezklera'.</i> Alia, ne vere regula, uzo estas <i>'mez-'</i> anstataŭ <i>'-mezo',</i> ekz. <i>'mezsomere' (somermeze), 'mezjara' (jarmeza').</i> Sed uzi la prefikson kun la signifo <i>'duon-'</i> estas falsamika. Ofte temas pri aŭ-aŭ statoj sen iu senchava averaĝo, ekz. <i>'</i><span style=\"color: #ff0000\"><i>meznuda</i></span><i>' (duonnuda), '</i><span style=\"color: #ff0000\"><i>mezbakita</i></span><i>' (duonbakita), '</i><span style=\"color: #ff0000\"><i>mezflua</i></span><i>' (mezflua), '</i><span style=\"color: #ff0000\"><i>mezmaratono</i></span><i>' (duonmaratono).</i><br>\n<br>\nNotu ankaŭ la pejorativan slangan uzon de <i>'mez-'</i> kun la signifo de 'mal-x-eta' aŭ 'ne tre x-a' (por plus-konceptoj), ekz. <i>'mezbona' (malboneta, ne tro bona).</i>",
+		""
 	],
 	"£:BASE-mimado": [
 		"£:BASE-mimado",
@@ -3064,6 +3277,12 @@ g_marks.types = {
 		"La vorto <i>'paleto'</i> devus signifi 'eta paleco', se entute ion. Kion vi celas, estas verŝajne aŭ <i>'paletro'</i> (de artisto, kun farboj) au <i>'paledo'</i> (transportplato el ligno).",
 		"La pejzaĝo brilis kun bunta <span style=\"color: #ff0000\">paleto</span> (paletro) de aŭtunaj folioj.<br>\n<br>\nSur ĉiu <span style=\"color: #ff0000\">paleto</span> (paledo) povas esti ducento da libroj."
 	],
+	"£x-etype-lemma&\".*paletro\"": [
+		"£x-etype-lemma&\".*paletro\"",
+		"Falsa amiko: paleto → paletro/paledo",
+		"La vorto <i>'paleto'</i> devus signifi 'eta paleco', se entute ion. Kion vi celas, estas verŝajne aŭ <i>'paletro'</i> (de artisto, kun farboj) au <i>'paledo'</i> (transportplato el ligno).",
+		"La pejzaĝo brilis kun bunta <span style=\"color: #ff0000\">paleto</span> (paletro) de aŭtunaj folioj.<br>\n<br>\nSur ĉiu <span style=\"color: #ff0000\">paleto</span> (paledo) povas esti ducento da libroj."
+	],
 	"£:BASE-papriko&\"<kapsikoj?n?>\"": [
 		"£:BASE-papriko&\"<kapsikoj?n?>\"",
 		"Falsa amiko: papriko → kapsiko",
@@ -3124,6 +3343,18 @@ g_marks.types = {
 		"En Esperanto, <i>'pizo'</i> estas legomo. Por la itala platbakaĵo, uzu <i>'pico'.</i>",
 		"Mi mendis vegetaran <span style=\"color: #ff0000\">pizon</span> (picon)."
 	],
+	"£:BASE-loko&\"<placon?>\"": [
+		"£:BASE-loko&\"<placon?>\"",
+		"Falsa amiko: placo → loko",
+		"En Esperanto, <i>'placo'</i> signifas 'urba placo'. Ne konfuzu tion kun <i>'loko'</i> aŭ <i>'spaco'.</i>",
+		"<i>Restu sur via</i> <span style=\"color: #ff0000\"><i>placo</i></span><i> (loko)!</i><br>\n<br>\n<i>Li perdis sian</i> <span style=\"color: #ff0000\"><i>laborplacon</i></span><i> (laborlokon).</i>"
+	],
+	"£x-etype-lemma&\"<.*placoj?n?>\"&\".*loko\"": [
+		"£x-etype-lemma&\"<.*placoj?n?>\"&\".*loko\"",
+		"Falsa amiko: placo → loko",
+		"En Esperanto, <i>'placo'</i> signifas 'urba placo'. Ne konfuzu tion kun <i>'loko'</i> aŭ <i>'spaco'.</i>",
+		"<i>Restu sur via</i> <span style=\"color: #ff0000\"><i>placo</i></span><i> (loko)!</i><br>\n<br>\n<i>Li perdis sian</i> <span style=\"color: #ff0000\"><i>laborplacon</i></span><i> (laborlokon).</i>"
+	],
 	"£:BASE-gipso&\"<plastroj?n?>\"": [
 		"£:BASE-gipso&\"<plastroj?n?>\"",
 		"Falsa amiko: plastro → gipso",
@@ -3162,6 +3393,12 @@ g_marks.types = {
 	],
 	"£:BASE-afisxo&\"<postoj?n?>\"": [
 		"£:BASE-afisxo&\"<postoj?n?>\"",
+		"Falsa amiko: posto → poŝto/posteno/afiŝo",
+		"Oni sendas leterojn aŭ pakaĵojn per <i>'poŝto'. 'Posteno'</i> povas esti ofico aŭ loko taskita al soldato. <i>'Posto'</i> estas malofta vorto kun la sola ebla signifo de 'posttempo' aŭ 'malantaŭo'.<br>\n<br>\nNotu, ke lastatempe aldoniĝis plia falsamika uzo, celanta <i>'afiŝoj'</i> en sociaj retoj (angle: <i>post</i>)",
+		"Mi sendos la dokumentojn per <span style=\"color: #ff0000\">posto</span> (poŝto).<br>\n<br>\nLi forlasis sian <span style=\"color: #ff0000\">poston</span> (postenon) sen permeso."
+	],
+	"£x-etype-lemma&\"<.*postoj?n?>\"": [
+		"£x-etype-lemma&\"<.*postoj?n?>\"",
 		"Falsa amiko: posto → poŝto/posteno/afiŝo",
 		"Oni sendas leterojn aŭ pakaĵojn per <i>'poŝto'. 'Posteno'</i> povas esti ofico aŭ loko taskita al soldato. <i>'Posto'</i> estas malofta vorto kun la sola ebla signifo de 'posttempo' aŭ 'malantaŭo'.<br>\n<br>\nNotu, ke lastatempe aldoniĝis plia falsamika uzo, celanta <i>'afiŝoj'</i> en sociaj retoj (angle: <i>post</i>)",
 		"Mi sendos la dokumentojn per <span style=\"color: #ff0000\">posto</span> (poŝto).<br>\n<br>\nLi forlasis sian <span style=\"color: #ff0000\">poston</span> (postenon) sen permeso."
@@ -3561,6 +3798,12 @@ g_marks.types = {
 		"Falsa amiko: roli → ruli, ruliĝi",
 		"En Esperanto, <i>‘roli’</i> rilatas al teatra aŭ filma rolo, aŭ laŭbezona funkcio (angle: <i>role</i>). Ne konfuzu tion kun la transitiva verbo <i>‘ruli’</i> (angle: <i>roll</i>).",
 		"La infano <span style=\"color: #ff0000\">rolis</span> (rulis) pilkon laŭ la strato."
+	],
+	"£:BASE-onidiro": [
+		"£:BASE-onidiro",
+		"Falsa amiko: rumoro → onidiro",
+		"En Esperanto, <i>'rumoro'</i> estas multvoĉa bruo. Ne eblas uzi la vorton kun la signifo de <i>'onidiro'</i> (angle: <i>rumour</i>).",
+		"Mi aŭdis <span style=\"color: #ff0000\">rumoron</span> (onidiron) ke venos tria sezono de la serio."
 	],
 	"£:BASE-rombo&\"<rutoj?n?>\"": [
 		"£:BASE-rombo&\"<rutoj?n?>\"",
@@ -4012,6 +4255,12 @@ g_marks.types = {
 		"La litero <i>‘a’</i> estas erara ĉi tie, Lingvohelpilo proponas forigi ĉin. Eble vi celis la artikolon <i>‘la’</i> aŭ la prepozicion <i>‘al’,</i> sed la konteksto ne klare subtenas tion. Povas esti, ke temas pri hispanismo – markado de akuzativo uzante la (hispanan) prepozicio <i>‘a’.</i>",
 		"Mia filino banis <span style=\"color: #ff0000\">[a]</span> sian hundinon kun la hoso ."
 	],
+	"£x-etype-(list|lemma)&\"<es[kpt].*>\"&\"s[kpt].*\"": [
+		"£x-etype-(list|lemma)&\"<es[kpt].*>\"&\"s[kpt].*\"",
+		"Hispanismo: es[kpt]- → s[kpt]",
+		"Esperanto-vortoj ofte similas hispanajn vortojn, kaj tio foje kaŭzas &quot;hispanigon&quot; de esperanta vorto. Unu tia influo estas meti ekstran 'e-' antaŭ t.n. &quot;malpura 's-', do antaŭ 'sk-', 'sp-' aŭ 'st-', ekz. <i>'</i><span style=\"color: #ff0000\"><i>esporto</i></span><i>' (sporto), '</i><span style=\"color: #ff0000\"><i>estudo</i></span><i>' (studo), '</i><span style=\"color: #ff0000\"><i>esklavo</i></span><i>' (sklavo).</i>",
+		""
+	],
 	"£:BASE-interna": [
 		"£:BASE-interna",
 		"Konfuza vortoparo: intera → interna",
@@ -4155,6 +4404,12 @@ g_marks.types = {
 		"Konfuzebla vortogrupo: glaco → glacio ↔ glaciaĵo → glaĉero",
 		"Ekzistas en Esperanto manpleno da substantivoj bazitaj sur la romanida radiko ‘glac’. La kerna vorto estas <i>‘glacio’</i> (frostigita akvo). Sed manĝebla glacio nomiĝas <i>‘glaciaĵo’,</i> kaj granda pejzaĝa glacio-maso nomiĝas <i>‘glaĉero’.</i> Krome ekzistas la vorto <i>‘glaco’</i> por glacie glata, travidebla plata vitropeco en ekz. fenestro en domo aŭ veturilo. Precipe <i>‘glace’</i> kaŭzas falsamikan uzon, antataŭ <i>‘glacio’</i> aŭ <i>‘glaciaĵo’.</i>",
 		"La <span style=\"color: #ff0000\">glacioj</span> (glaĉeroj) degelas en la Himalajo.<br>\n<br>\nEstis bongusta <span style=\"color: #ff0000\">glaco</span> (glaciaĵo).<br>\n<br>\nLa plejparto de Gronlando estas kovrita de 3 kilometroj da <span style=\"color: #ff0000\">glaco</span> (glacio)."
+	],
+	"£:BASE-helico&\"<heliks?oj?n?>\"": [
+		"£:BASE-helico&\"<heliks?oj?n?>\"",
+		"Konfuzebla vortogrupo: heliko/helikso → helico",
+		"'Heliko’ estas ŝlima besto kun konko, parenca al limako. <i>'Helikso'</i> estas anatomia vorto por la orelrando. <i>‘Helico’</i> estas teknika vorto por ŝraŭba formo, kaj por la puŝantaj helicoj de ŝipo aŭ aviadilo.<br>\n<br>\nNotu, ke oni ankaŭ povas uzi la vorton <i>‘heliko’</i> kiel sinonimo de arobo (£-signo).",
+		"DNA havas la formon de duobla <span style=\"color: #ff0000\">heliko</span> (helico)."
 	],
 	"£:BASE-humanisma": [
 		"£:BASE-humanisma",
@@ -4346,31 +4601,37 @@ g_marks.types = {
 		"£:BASE-proceduro",
 		"Konfuzebla vortogrupo: procezo – proceso – proceduro – prilaboro",
 		"Ekzistas kvar konfuzeblaj radikoj komenciĝantaj per <i>‘proce...’.</i> La diferenco inter <i>‘procezo’</i> kaj <i>‘proceso’</i> estas la uzokampo: <i>‘proceso’</i> estas jura termino (angle: <i>lawsuit</i>), dum <i>‘procezo’</i> estas ĝenerala vorto por disvolviĝanta sinsekvo de eventoj, natura aŭ planita (angle: <i>process</i>). En pluraj lingvoj ambaŭ tradukiĝas same (ekz. germane: <i>Prozess</i>).<br>\n<br>\n'Procedo’ estas difinita agmaniero por atingi iun celon (angle: <i>method, ways</i>), <i>‘proceduro’</i> estas pli normigita, kompleksa procedaro (angle: <i>procedure</i>), speciale en jura, administra kaj komputila kunteksto. Notu, ke ne eblas uzi nek unu nek la alian celante kompletan, konkretan juran <i>proceson</i> kontraŭ iu persono aŭ firmao.<br>\n<br>\nNotu, ke kelkaj verbigas <i>‘procezo’</i> al <i>‘procezi’,</i> kun la transitiva signifo de ‘prilabori’. Ne konfuzu tion kun <i>‘procesi’,</i> kiu signifas ‘realigi juran proceson (kontraŭ).",
-		"Ni devas haltigi la <span style=\"color: #ff0000\">proceson</span> (procezon) de senarbarigo.<br>\n<br>\nOni <span style=\"color: #ff0000\">procesas</span> (prilaboras) la agrikulturajn produktojn surloke."
+		"Ni devas haltigi la <span style=\"color: #ff0000\">proceson</span> (procezon) de senarbarigo.<br>\n<br>\nOni <span style=\"color: #ff0000\">procesas</span> (prilaboras) la agrikulturajn produktojn surloke.<br>\n<br>\n<span style=\"color: #ff0000\">elektoproceso</span> → elektoprocezo"
 	],
 	"£:BASE-proceso": [
 		"£:BASE-proceso",
 		"Konfuzebla vortogrupo: procezo – proceso – proceduro – prilaboro",
 		"Ekzistas kvar konfuzeblaj radikoj komenciĝantaj per <i>‘proce...’.</i> La diferenco inter <i>‘procezo’</i> kaj <i>‘proceso’</i> estas la uzokampo: <i>‘proceso’</i> estas jura termino (angle: <i>lawsuit</i>), dum <i>‘procezo’</i> estas ĝenerala vorto por disvolviĝanta sinsekvo de eventoj, natura aŭ planita (angle: <i>process</i>). En pluraj lingvoj ambaŭ tradukiĝas same (ekz. germane: <i>Prozess</i>).<br>\n<br>\n'Procedo’ estas difinita agmaniero por atingi iun celon (angle: <i>method, ways</i>), <i>‘proceduro’</i> estas pli normigita, kompleksa procedaro (angle: <i>procedure</i>), speciale en jura, administra kaj komputila kunteksto. Notu, ke ne eblas uzi nek unu nek la alian celante kompletan, konkretan juran <i>proceson</i> kontraŭ iu persono aŭ firmao.<br>\n<br>\nNotu, ke kelkaj verbigas <i>‘procezo’</i> al <i>‘procezi’,</i> kun la transitiva signifo de ‘prilabori’. Ne konfuzu tion kun <i>‘procesi’,</i> kiu signifas ‘realigi juran proceson (kontraŭ).",
-		"Ni devas haltigi la <span style=\"color: #ff0000\">proceson</span> (procezon) de senarbarigo.<br>\n<br>\nOni <span style=\"color: #ff0000\">procesas</span> (prilaboras) la agrikulturajn produktojn surloke."
+		"Ni devas haltigi la <span style=\"color: #ff0000\">proceson</span> (procezon) de senarbarigo.<br>\n<br>\nOni <span style=\"color: #ff0000\">procesas</span> (prilaboras) la agrikulturajn produktojn surloke.<br>\n<br>\n<span style=\"color: #ff0000\">elektoproceso</span> → elektoprocezo"
 	],
 	"£:BASE-procesi": [
 		"£:BASE-procesi",
 		"Konfuzebla vortogrupo: procezo – proceso – proceduro – prilaboro",
 		"Ekzistas kvar konfuzeblaj radikoj komenciĝantaj per <i>‘proce...’.</i> La diferenco inter <i>‘procezo’</i> kaj <i>‘proceso’</i> estas la uzokampo: <i>‘proceso’</i> estas jura termino (angle: <i>lawsuit</i>), dum <i>‘procezo’</i> estas ĝenerala vorto por disvolviĝanta sinsekvo de eventoj, natura aŭ planita (angle: <i>process</i>). En pluraj lingvoj ambaŭ tradukiĝas same (ekz. germane: <i>Prozess</i>).<br>\n<br>\n'Procedo’ estas difinita agmaniero por atingi iun celon (angle: <i>method, ways</i>), <i>‘proceduro’</i> estas pli normigita, kompleksa procedaro (angle: <i>procedure</i>), speciale en jura, administra kaj komputila kunteksto. Notu, ke ne eblas uzi nek unu nek la alian celante kompletan, konkretan juran <i>proceson</i> kontraŭ iu persono aŭ firmao.<br>\n<br>\nNotu, ke kelkaj verbigas <i>‘procezo’</i> al <i>‘procezi’,</i> kun la transitiva signifo de ‘prilabori’. Ne konfuzu tion kun <i>‘procesi’,</i> kiu signifas ‘realigi juran proceson (kontraŭ).",
-		"Ni devas haltigi la <span style=\"color: #ff0000\">proceson</span> (procezon) de senarbarigo.<br>\n<br>\nOni <span style=\"color: #ff0000\">procesas</span> (prilaboras) la agrikulturajn produktojn surloke."
+		"Ni devas haltigi la <span style=\"color: #ff0000\">proceson</span> (procezon) de senarbarigo.<br>\n<br>\nOni <span style=\"color: #ff0000\">procesas</span> (prilaboras) la agrikulturajn produktojn surloke.<br>\n<br>\n<span style=\"color: #ff0000\">elektoproceso</span> → elektoprocezo"
 	],
 	"£:BASE-procezo": [
 		"£:BASE-procezo",
 		"Konfuzebla vortogrupo: procezo – proceso – proceduro – prilaboro",
 		"Ekzistas kvar konfuzeblaj radikoj komenciĝantaj per <i>‘proce...’.</i> La diferenco inter <i>‘procezo’</i> kaj <i>‘proceso’</i> estas la uzokampo: <i>‘proceso’</i> estas jura termino (angle: <i>lawsuit</i>), dum <i>‘procezo’</i> estas ĝenerala vorto por disvolviĝanta sinsekvo de eventoj, natura aŭ planita (angle: <i>process</i>). En pluraj lingvoj ambaŭ tradukiĝas same (ekz. germane: <i>Prozess</i>).<br>\n<br>\n'Procedo’ estas difinita agmaniero por atingi iun celon (angle: <i>method, ways</i>), <i>‘proceduro’</i> estas pli normigita, kompleksa procedaro (angle: <i>procedure</i>), speciale en jura, administra kaj komputila kunteksto. Notu, ke ne eblas uzi nek unu nek la alian celante kompletan, konkretan juran <i>proceson</i> kontraŭ iu persono aŭ firmao.<br>\n<br>\nNotu, ke kelkaj verbigas <i>‘procezo’</i> al <i>‘procezi’,</i> kun la transitiva signifo de ‘prilabori’. Ne konfuzu tion kun <i>‘procesi’,</i> kiu signifas ‘realigi juran proceson (kontraŭ).",
-		"Ni devas haltigi la <span style=\"color: #ff0000\">proceson</span> (procezon) de senarbarigo.<br>\n<br>\nOni <span style=\"color: #ff0000\">procesas</span> (prilaboras) la agrikulturajn produktojn surloke."
+		"Ni devas haltigi la <span style=\"color: #ff0000\">proceson</span> (procezon) de senarbarigo.<br>\n<br>\nOni <span style=\"color: #ff0000\">procesas</span> (prilaboras) la agrikulturajn produktojn surloke.<br>\n<br>\n<span style=\"color: #ff0000\">elektoproceso</span> → elektoprocezo"
 	],
 	"£:BASE-prilabori&\"<proce.*>\"": [
 		"£:BASE-prilabori&\"<proce.*>\"",
 		"Konfuzebla vortogrupo: procezo – proceso – proceduro – prilaboro",
 		"Ekzistas kvar konfuzeblaj radikoj komenciĝantaj per <i>‘proce...’.</i> La diferenco inter <i>‘procezo’</i> kaj <i>‘proceso’</i> estas la uzokampo: <i>‘proceso’</i> estas jura termino (angle: <i>lawsuit</i>), dum <i>‘procezo’</i> estas ĝenerala vorto por disvolviĝanta sinsekvo de eventoj, natura aŭ planita (angle: <i>process</i>). En pluraj lingvoj ambaŭ tradukiĝas same (ekz. germane: <i>Prozess</i>).<br>\n<br>\n'Procedo’ estas difinita agmaniero por atingi iun celon (angle: <i>method, ways</i>), <i>‘proceduro’</i> estas pli normigita, kompleksa procedaro (angle: <i>procedure</i>), speciale en jura, administra kaj komputila kunteksto. Notu, ke ne eblas uzi nek unu nek la alian celante kompletan, konkretan juran <i>proceson</i> kontraŭ iu persono aŭ firmao.<br>\n<br>\nNotu, ke kelkaj verbigas <i>‘procezo’</i> al <i>‘procezi’,</i> kun la transitiva signifo de ‘prilabori’. Ne konfuzu tion kun <i>‘procesi’,</i> kiu signifas ‘realigi juran proceson (kontraŭ).",
-		"Ni devas haltigi la <span style=\"color: #ff0000\">proceson</span> (procezon) de senarbarigo.<br>\n<br>\nOni <span style=\"color: #ff0000\">procesas</span> (prilaboras) la agrikulturajn produktojn surloke."
+		"Ni devas haltigi la <span style=\"color: #ff0000\">proceson</span> (procezon) de senarbarigo.<br>\n<br>\nOni <span style=\"color: #ff0000\">procesas</span> (prilaboras) la agrikulturajn produktojn surloke.<br>\n<br>\n<span style=\"color: #ff0000\">elektoproceso</span> → elektoprocezo"
+	],
+	"£x-etype-lemma&\"<.*procesoj?n?>\"&\".*procezo\"": [
+		"£x-etype-lemma&\"<.*procesoj?n?>\"&\".*procezo\"",
+		"Konfuzebla vortogrupo: procezo – proceso – proceduro – prilaboro",
+		"Ekzistas kvar konfuzeblaj radikoj komenciĝantaj per <i>‘proce...’.</i> La diferenco inter <i>‘procezo’</i> kaj <i>‘proceso’</i> estas la uzokampo: <i>‘proceso’</i> estas jura termino (angle: <i>lawsuit</i>), dum <i>‘procezo’</i> estas ĝenerala vorto por disvolviĝanta sinsekvo de eventoj, natura aŭ planita (angle: <i>process</i>). En pluraj lingvoj ambaŭ tradukiĝas same (ekz. germane: <i>Prozess</i>).<br>\n<br>\n'Procedo’ estas difinita agmaniero por atingi iun celon (angle: <i>method, ways</i>), <i>‘proceduro’</i> estas pli normigita, kompleksa procedaro (angle: <i>procedure</i>), speciale en jura, administra kaj komputila kunteksto. Notu, ke ne eblas uzi nek unu nek la alian celante kompletan, konkretan juran <i>proceson</i> kontraŭ iu persono aŭ firmao.<br>\n<br>\nNotu, ke kelkaj verbigas <i>‘procezo’</i> al <i>‘procezi’,</i> kun la transitiva signifo de ‘prilabori’. Ne konfuzu tion kun <i>‘procesi’,</i> kiu signifas ‘realigi juran proceson (kontraŭ).",
+		"Ni devas haltigi la <span style=\"color: #ff0000\">proceson</span> (procezon) de senarbarigo.<br>\n<br>\nOni <span style=\"color: #ff0000\">procesas</span> (prilaboras) la agrikulturajn produktojn surloke.<br>\n<br>\n<span style=\"color: #ff0000\">elektoproceso</span> → elektoprocezo"
 	],
 	"£:BASE-pruvi": [
 		"£:BASE-pruvi",
@@ -4760,19 +5021,31 @@ g_marks.types = {
 		"£:BASE-falti",
 		"Konfuzebla vortoparo: falti ↔ faldi",
 		"Oni faldas faldeblajn objektojn, ekz. paperon, seĝon, manojn aŭ gambojn. Faltoj, aliflanke, rilatas al surfacaj trajtoj, tipe haŭtaj faltoj en vizaĝo kaj faltitaj brovoj. Sed ankaŭ tereno aŭ, je alia skalo, montoj povas havi haltojn.<br>\n<br>\nLa paro <i>faldo/falto</i> estas tipa ekzemplo pri kiel Esperanto uzas malsamajn, sed similajn konsonantojn aŭ vokalojn por eviti eblan ambiguecon en la etimologia fontovorto (‘ĉi tie germana ‘<i>Falte’/’falten’)</i>",
-		"La vino bele <span style=\"color: #ff0000\">faltis</span> (faldis) la buŝtukojn.<br>\n<br>\nŜia vizaĵo estis plena je ridetaj <span style=\"color: #ff0000\">faldoj</span> (faltoj)."
+		"La vino bele <span style=\"color: #ff0000\">faltis</span> (faldis) la buŝtukojn.<br>\n<br>\nŜia vizaĵo estis plena je ridetaj <span style=\"color: #ff0000\">faldoj</span> (faltoj).<br>\n<br>\n<span style=\"color: #ff0000\">faltbiciklo</span> (faldbiciklo)"
 	],
 	"£:BASE-falto": [
 		"£:BASE-falto",
 		"Konfuzebla vortoparo: falti ↔ faldi",
 		"Oni faldas faldeblajn objektojn, ekz. paperon, seĝon, manojn aŭ gambojn. Faltoj, aliflanke, rilatas al surfacaj trajtoj, tipe haŭtaj faltoj en vizaĝo kaj faltitaj brovoj. Sed ankaŭ tereno aŭ, je alia skalo, montoj povas havi haltojn.<br>\n<br>\nLa paro <i>faldo/falto</i> estas tipa ekzemplo pri kiel Esperanto uzas malsamajn, sed similajn konsonantojn aŭ vokalojn por eviti eblan ambiguecon en la etimologia fontovorto (‘ĉi tie germana ‘<i>Falte’/’falten’)</i>",
-		"La vino bele <span style=\"color: #ff0000\">faltis</span> (faldis) la buŝtukojn.<br>\n<br>\nŜia vizaĵo estis plena je ridetaj <span style=\"color: #ff0000\">faldoj</span> (faltoj)."
+		"La vino bele <span style=\"color: #ff0000\">faltis</span> (faldis) la buŝtukojn.<br>\n<br>\nŜia vizaĵo estis plena je ridetaj <span style=\"color: #ff0000\">faldoj</span> (faltoj).<br>\n<br>\n<span style=\"color: #ff0000\">faltbiciklo</span> (faldbiciklo)"
 	],
 	"£:BASE-faldi": [
 		"£:BASE-faldi",
 		"Konfuzebla vortoparo: falti ↔ faldi",
 		"Oni faldas faldeblajn objektojn, ekz. paperon, seĝon, manojn aŭ gambojn. Faltoj, aliflanke, rilatas al surfacaj trajtoj, tipe haŭtaj faltoj en vizaĝo kaj faltitaj brovoj. Sed ankaŭ tereno aŭ, je alia skalo, montoj povas havi haltojn.<br>\n<br>\nLa paro <i>faldo/falto</i> estas tipa ekzemplo pri kiel Esperanto uzas malsamajn, sed similajn konsonantojn aŭ vokalojn por eviti eblan ambiguecon en la etimologia fontovorto (‘ĉi tie germana ‘<i>Falte’/’falten’)</i>",
-		"La vino bele <span style=\"color: #ff0000\">faltis</span> (faldis) la buŝtukojn.<br>\n<br>\nŜia vizaĵo estis plena je ridetaj <span style=\"color: #ff0000\">faldoj</span> (faltoj)."
+		"La vino bele <span style=\"color: #ff0000\">faltis</span> (faldis) la buŝtukojn.<br>\n<br>\nŜia vizaĵo estis plena je ridetaj <span style=\"color: #ff0000\">faldoj</span> (faltoj).<br>\n<br>\n<span style=\"color: #ff0000\">faltbiciklo</span> (faldbiciklo)"
+	],
+	"£x-etype-lemma&\"<fald.*>\"&\"falt.*\"": [
+		"£x-etype-lemma&\"<fald.*>\"&\"falt.*\"",
+		"Konfuzebla vortoparo: falti ↔ faldi",
+		"Oni faldas faldeblajn objektojn, ekz. paperon, seĝon, manojn aŭ gambojn. Faltoj, aliflanke, rilatas al surfacaj trajtoj, tipe haŭtaj faltoj en vizaĝo kaj faltitaj brovoj. Sed ankaŭ tereno aŭ, je alia skalo, montoj povas havi haltojn.<br>\n<br>\nLa paro <i>faldo/falto</i> estas tipa ekzemplo pri kiel Esperanto uzas malsamajn, sed similajn konsonantojn aŭ vokalojn por eviti eblan ambiguecon en la etimologia fontovorto (‘ĉi tie germana ‘<i>Falte’/’falten’)</i>",
+		"La vino bele <span style=\"color: #ff0000\">faltis</span> (faldis) la buŝtukojn.<br>\n<br>\nŜia vizaĵo estis plena je ridetaj <span style=\"color: #ff0000\">faldoj</span> (faltoj).<br>\n<br>\n<span style=\"color: #ff0000\">faltbiciklo</span> (faldbiciklo)"
+	],
+	"£x-etype-lemma&\"<falt.*>\"&\"fald.*\"": [
+		"£x-etype-lemma&\"<falt.*>\"&\"fald.*\"",
+		"Konfuzebla vortoparo: falti ↔ faldi",
+		"Oni faldas faldeblajn objektojn, ekz. paperon, seĝon, manojn aŭ gambojn. Faltoj, aliflanke, rilatas al surfacaj trajtoj, tipe haŭtaj faltoj en vizaĝo kaj faltitaj brovoj. Sed ankaŭ tereno aŭ, je alia skalo, montoj povas havi haltojn.<br>\n<br>\nLa paro <i>faldo/falto</i> estas tipa ekzemplo pri kiel Esperanto uzas malsamajn, sed similajn konsonantojn aŭ vokalojn por eviti eblan ambiguecon en la etimologia fontovorto (‘ĉi tie germana ‘<i>Falte’/’falten’)</i>",
+		"La vino bele <span style=\"color: #ff0000\">faltis</span> (faldis) la buŝtukojn.<br>\n<br>\nŜia vizaĵo estis plena je ridetaj <span style=\"color: #ff0000\">faldoj</span> (faltoj).<br>\n<br>\n<span style=\"color: #ff0000\">faltbiciklo</span> (faldbiciklo)"
 	],
 	"£:BASE-foto": [
 		"£:BASE-foto",
@@ -4852,6 +5125,12 @@ g_marks.types = {
 		"'Greno’ estas manĝebla herboplanto (ekz. tritiko, aveno, sekalo, hordeo, maizo), dum <i>‘grajno’</i> estas eta ero de io senstruktura, ekzemple de hajlo, sablo aŭ ĝuste de greno. La vorto ankaŭ povas havi la signifon de ‘semgrajno’ kaj havas metaforajn uzojn: <i>grajno da vero, grajno da malbono.</i>",
 		"La firmao vendas transgenajn <span style=\"color: #ff0000\">grajnojn</span> (grenojn).<br>\n<br>\nLa Safrankardelo manĝas <span style=\"color: #ff0000\">grenojn</span> (grajnojn) de herboj kaj de floroj."
 	],
+	"£x-etype-lemma&\"<.*grenoj?n?>\"&\".*grajno\"": [
+		"£x-etype-lemma&\"<.*grenoj?n?>\"&\".*grajno\"",
+		"Konfuzebla vortoparo: greno ↔ grajno",
+		"'Greno’ estas manĝebla herboplanto (ekz. tritiko, aveno, sekalo, hordeo, maizo), dum <i>‘grajno’</i> estas eta ero de io senstruktura, ekzemple de hajlo, sablo aŭ ĝuste de greno. La vorto ankaŭ povas havi la signifon de ‘semgrajno’ kaj havas metaforajn uzojn: <i>grajno da vero, grajno da malbono.</i>",
+		"La firmao vendas transgenajn <span style=\"color: #ff0000\">grajnojn</span> (grenojn).<br>\n<br>\nLa Safrankardelo manĝas <span style=\"color: #ff0000\">grenojn</span> (grajnojn) de herboj kaj de floroj."
+	],
 	"£:BASE-cxesi&\"<halt.*>r": [
 		"£:BASE-cxesi&\"<halt.*>r",
 		"Konfuzebla vortoparo: halti → ĉesi",
@@ -4863,12 +5142,6 @@ g_marks.types = {
 		"Konfuzebla vortoparo: ĥano ↔ kano",
 		"'Kano’ estas planto, dum <i>‘ĥano’</i> estas titolo de turka aŭ mongola reganto.",
 		"Ĉiuj timis la grandan <span style=\"color: #c9211e\">kanon</span> (ĥanon)."
-	],
-	"£:BASE-helico&\"<helikoj?n?>\"": [
-		"£:BASE-helico&\"<helikoj?n?>\"",
-		"Konfuzebla vortoparo: heliko → helico",
-		"'Heliko’ estas ŝlima besto kun konko, parenca al limako. <i>‘Helico’</i> estas teknika vorto por ŝraŭba formo, kaj por la puŝantaj helicoj de ŝipo aŭ aviadilo.<br>\n<br>\nNotu, ke oni ankaŭ povas uzi la vorton <i>‘heliko’</i> kiel sinonimo de arobo (£-signo).",
-		"DNA havas la formon de duobla <span style=\"color: #ff0000\">heliko</span> (helico)."
 	],
 	"£:BASE-hierarkio": [
 		"£:BASE-hierarkio",
@@ -4912,8 +5185,8 @@ g_marks.types = {
 		"Oni <i>implicas</i> fakton aŭ circonstancon (angle: <i>imply</i>), sed <i>implikas</i> personon aŭ aĵon. <i>‘Implici’</i> signifas ‘supozigi’ aŭ ‘logike sekviki’, <i>‘impliki’</i> signifas ‘ĝene entordigi/enplektigi’ (angle: <i>entangle</i>):<br>\n<br>\n<i>Ĉu vi volas implici, ke UEA estas sektisma?</i><br>\n<br>\n<i>Li sin implikis per siaj agoj.</i><br>\n<br>\nTrovu ekzemplojn en <a target=\"_blank\" href=\"https://reta-vortaro.de/\">ReVo</a> aŭ – per la 2 butonoj apud la korektopropono – en CorpusEye kaj PIV.",
 		"Lia silento <span style=\"color: #ff0000\">implikas</span> (implicas) konsenton.<br>\n<br>\nLi estis <span style=\"color: #ff0000\">implicita</span> (implikita) en la krimon."
 	],
-	"£:BASE-imposto": [
-		"£:BASE-imposto",
+	"£:BASE-.*impost.*&\"<.*imposxt.*>\"": [
+		"£:BASE-.*impost.*&\"<.*imposxt.*>\"",
 		"Konfuzebla vortoparo: impoŝto → imposto",
 		"'Impoŝto’ estas bazŝtono sub volbo aŭ arĉo – malofte uzata vorto. Plej verŝajne vi celas la vorton <i>‘imposto’,</i> kiu signifas ‘deviga civitana pago al la ŝato\".",
 		"La registaro denove altigis la <span style=\"color: #ff0000\">impoŝtojn</span> (impostojn)."
@@ -4941,6 +5214,12 @@ g_marks.types = {
 		"Konfuzebla vortoparo: intenca ↔ intensa",
 		"Ne konfuzu <i>‘intenca’</i> kun <i>‘intensa’</i>. La unua signifas \"konscia/vola\", la dua signifas ‘plenforta/energia’.",
 		"Vi ne kopiis la mesaĝon al Petro. Ĉu <span style=\"color: #ff0000\">intense</span> (intence)?<br>\n<br>\nMi volas organizi <span style=\"color: #ff0000\">intencan</span> (intensan) semajnfinan kurson."
+	],
+	"£:BASE-intensa&\"<intensiv.*>\"": [
+		"£:BASE-intensa&\"<intensiv.*>\"",
+		"Konfuzebla vortoparo: intensiva → intensa",
+		"'Intensa' estas pli ĝenerala ol <i>'intensiva'.</i> La unua simple signifas 'altgrada' aŭ 'plenforta/energia'. <i>'Intensiva'</i> implicas konscian agadon kaj uzon de fortostreĉo, ekz. <i>'intensiva agrikulturo/batalo/medicino/terapio'</i>. Ne eblas uzi ĝin en la senco de <i>'intensa lumo/sono/febro/varmo'.</i> Ĉiam eblas uzi <i>'intensa'</i> anstataŭ <i>'intensiva',</i> sed ne inverse.",
+		"<i>Li sentis</i> <span style=\"color: #ff0000\"><i>intensivan</i></span><i> (intensan) doloron en la dorso.</i>"
 	],
 	"£:BASE-irido": [
 		"£:BASE-irido",
@@ -5134,6 +5413,18 @@ g_marks.types = {
 		"Oni <i>konas</i> ion aŭ iun, ĉar oni jam antaŭe renkontis, vidis aŭ spertis la koncernan aferon (germane: <i>kennen</i>). ‘<i>Scii’</i> signifas havi precisan mensan informaron pri io (germane: <i>wissen</i>). Ambaŭ verboj estas transitivaj, sed <i>‘koni’</i> havas substantivan komplementon, dum <i>scii</i> permesas infinitivon aŭ propozician <i>ke-</i>komplementon. Oni <i>konas</i> urbon aŭ personon, sed <i>scias</i> naĝi aŭ<i> scias</i> lingvon. Notu, ke oni ofte uzas <i>‘scipovi’</i> kun infinitiva aŭ substantiva komplemento, sed ne kun <i>ke-</i>propozicio.",
 		"Ĉu vi <span style=\"color: #ff0000\">konas</span> (scias/scipovas) la francan?<br>\n<br>\n<i>Mi</i> <span style=\"color: #ff0000\"><i>scias</i></span><i> (konas) bonan lignaĵiston, kiu povas helpi vin.</i>"
 	],
+	"£:BASE-konzolo": [
+		"£:BASE-konzolo",
+		"Konfuzebla vortoparo: konsolo → konzolo",
+		"<i>'Konsolo'</i> estas la ago konsoli, aŭ konsola fakto. Ne konfuzu tion kun <i>'konzolo',</i> ĉemura plato aŭ mebloplato, aŭ – en komputila aŭ ludmaŝina kunteksto - rega terminalo.",
+		"Li aĉetis novan <span style=\"color: #ff0000\">ludkonsolon</span> (ludkonzolon) por sia filo."
+	],
+	"£x-etype-lemma&\"<.*konsoloj?n?>\"&\".*konzolo\"": [
+		"£x-etype-lemma&\"<.*konsoloj?n?>\"&\".*konzolo\"",
+		"Konfuzebla vortoparo: konsolo → konzolo",
+		"<i>'Konsolo'</i> estas la ago konsoli, aŭ konsola fakto. Ne konfuzu tion kun <i>'konzolo',</i> ĉemura plato aŭ mebloplato, aŭ – en komputila aŭ ludmaŝina kunteksto - rega terminalo.",
+		"Li aĉetis novan <span style=\"color: #ff0000\">ludkonsolon</span> (ludkonzolon) por sia filo."
+	],
 	"£:BASE-kramfo": [
 		"£:BASE-kramfo",
 		"Konfuzebla vortoparo: krampo → kramfo",
@@ -5290,6 +5581,12 @@ g_marks.types = {
 		"Ne konfuzu <i>‘maso’</i> kun <i>‘amaso’.</i> La unua, <i>‘maso’</i> havas du signifojn: (a) senforma kunbuliĝo de io aŭ (b) la fizika eco mezurita en (kilo)gramoj. Dume, <i>‘amaso’</i> estas alta kvanto da io.",
 		"<i>La nova veturilo estis</i> <span style=\"color: #ff0000\"><i>mase</i></span><i> (amase) produktita.</i><br>\n<br>\n<i>Lia parolado incitis la popolajn</i> <span style=\"color: #ff0000\"><i>masojn</i></span><i> (amasojn).</i>"
 	],
+	"£x-etype-lemma&\"amas.*>\"": [
+		"£x-etype-lemma&\"amas.*>\"",
+		"Konfuzebla vortoparo: maso → amaso",
+		"Ne konfuzu <i>‘maso’</i> kun <i>‘amaso’.</i> La unua, <i>‘maso’</i> havas du signifojn: (a) senforma kunbuliĝo de io aŭ (b) la fizika eco mezurita en (kilo)gramoj. Dume, <i>‘amaso’</i> estas alta kvanto da io.",
+		"<i>La nova veturilo estis</i> <span style=\"color: #ff0000\"><i>mase</i></span><i> (amase) produktita.</i><br>\n<br>\n<i>Lia parolado incitis la popolajn</i> <span style=\"color: #ff0000\"><i>masojn</i></span><i> (amasojn).</i>"
+	],
 	"£x-etype-(list|lemma)&\"<.+materioj?n?>\"": [
 		"£x-etype-(list|lemma)&\"<.+materioj?n?>\"",
 		"Konfuzebla vortoparo: materio → materialo",
@@ -5330,19 +5627,25 @@ g_marks.types = {
 		"£:BASE-oferti&\"<ofer.*>\"",
 		"Konfuzebla vortoparo: oferi → oferti → proponi/ebligi",
 		"Ne konfuzu <i>‘oferi’</i> kaj <i>‘oferti’. ‘Oferi’</i> signifas ‘fordonaci ion multvaloran’ kaj implicas malhavosenton, riton aŭ damaĝon (angle: <i>sacrifice</i>). Oni oferas beston, sangon, vivon, tempon aŭ grandan monsumon. <i>‘Oferti’</i> signifas ‘proponi varon, servon aŭ – propran - (help)agon (angle: <i>offer</i>).<br>\n<br>\nNur homoj povas oferi kaj striktasence ankaŭ nur homoj povas oferti. Estas falsamika influo diri, ke <i>‘urbo ofertas vidindaĵojn’,</i> aŭ ke iu <i>‘sistemo ofertas facilan retvendadon’.</i> Konsideru uzi vortojn kiel <i>‘proponi’</i> aŭ <i>‘ebligi’</i> anstataŭ.",
-		"<i>La patrino</i> <span style=\"color: #ff0000\"><i>oferis</i></span><i> (ofertis) kuketojn al la gastoj.</i><br>\n<br>\n<i>Li</i> <span style=\"color: #ff0000\"><i>oferis</i></span><i> (ofertis) helpi en la kuirejo.</i>"
+		"<i>La patrino</i> <span style=\"color: #ff0000\"><i>oferis</i></span><i> (ofertis) kuketojn al la gastoj.</i><br>\n<br>\n<i>Li</i> <span style=\"color: #ff0000\"><i>oferis</i></span><i> (ofertis) helpi en la kuirejo.</i><br>\n<br>\n<i>bona</i> <span style=\"color: #ff0000\"><i>laborofero</i></span><i> (laboroferto)</i>"
 	],
 	"£:BASE-proponi&\"<ofer.*>\"": [
 		"£:BASE-proponi&\"<ofer.*>\"",
 		"Konfuzebla vortoparo: oferi → oferti → proponi/ebligi",
 		"Ne konfuzu <i>‘oferi’</i> kaj <i>‘oferti’. ‘Oferi’</i> signifas ‘fordonaci ion multvaloran’ kaj implicas malhavosenton, riton aŭ damaĝon (angle: <i>sacrifice</i>). Oni oferas beston, sangon, vivon, tempon aŭ grandan monsumon. <i>‘Oferti’</i> signifas ‘proponi varon, servon aŭ – propran - (help)agon (angle: <i>offer</i>).<br>\n<br>\nNur homoj povas oferi kaj striktasence ankaŭ nur homoj povas oferti. Estas falsamika influo diri, ke <i>‘urbo ofertas vidindaĵojn’,</i> aŭ ke iu <i>‘sistemo ofertas facilan retvendadon’.</i> Konsideru uzi vortojn kiel <i>‘proponi’</i> aŭ <i>‘ebligi’</i> anstataŭ.",
-		"<i>La patrino</i> <span style=\"color: #ff0000\"><i>oferis</i></span><i> (ofertis) kuketojn al la gastoj.</i><br>\n<br>\n<i>Li</i> <span style=\"color: #ff0000\"><i>oferis</i></span><i> (ofertis) helpi en la kuirejo.</i>"
+		"<i>La patrino</i> <span style=\"color: #ff0000\"><i>oferis</i></span><i> (ofertis) kuketojn al la gastoj.</i><br>\n<br>\n<i>Li</i> <span style=\"color: #ff0000\"><i>oferis</i></span><i> (ofertis) helpi en la kuirejo.</i><br>\n<br>\n<i>bona</i> <span style=\"color: #ff0000\"><i>laborofero</i></span><i> (laboroferto)</i>"
 	],
 	"£:BASE-ebligi&\"<ofer.*>\"": [
 		"£:BASE-ebligi&\"<ofer.*>\"",
 		"Konfuzebla vortoparo: oferi → oferti → proponi/ebligi",
 		"Ne konfuzu <i>‘oferi’</i> kaj <i>‘oferti’. ‘Oferi’</i> signifas ‘fordonaci ion multvaloran’ kaj implicas malhavosenton, riton aŭ damaĝon (angle: <i>sacrifice</i>). Oni oferas beston, sangon, vivon, tempon aŭ grandan monsumon. <i>‘Oferti’</i> signifas ‘proponi varon, servon aŭ – propran - (help)agon (angle: <i>offer</i>).<br>\n<br>\nNur homoj povas oferi kaj striktasence ankaŭ nur homoj povas oferti. Estas falsamika influo diri, ke <i>‘urbo ofertas vidindaĵojn’,</i> aŭ ke iu <i>‘sistemo ofertas facilan retvendadon’.</i> Konsideru uzi vortojn kiel <i>‘proponi’</i> aŭ <i>‘ebligi’</i> anstataŭ.",
-		"<i>La patrino</i> <span style=\"color: #ff0000\"><i>oferis</i></span><i> (ofertis) kuketojn al la gastoj.</i><br>\n<br>\n<i>Li</i> <span style=\"color: #ff0000\"><i>oferis</i></span><i> (ofertis) helpi en la kuirejo.</i>"
+		"<i>La patrino</i> <span style=\"color: #ff0000\"><i>oferis</i></span><i> (ofertis) kuketojn al la gastoj.</i><br>\n<br>\n<i>Li</i> <span style=\"color: #ff0000\"><i>oferis</i></span><i> (ofertis) helpi en la kuirejo.</i><br>\n<br>\n<i>bona</i> <span style=\"color: #ff0000\"><i>laborofero</i></span><i> (laboroferto)</i>"
+	],
+	"£x-etype-lemma&\"<.*oferoj?n?>\"&\".*oferto\"": [
+		"£x-etype-lemma&\"<.*oferoj?n?>\"&\".*oferto\"",
+		"Konfuzebla vortoparo: oferi → oferti → proponi/ebligi",
+		"Ne konfuzu <i>‘oferi’</i> kaj <i>‘oferti’. ‘Oferi’</i> signifas ‘fordonaci ion multvaloran’ kaj implicas malhavosenton, riton aŭ damaĝon (angle: <i>sacrifice</i>). Oni oferas beston, sangon, vivon, tempon aŭ grandan monsumon. <i>‘Oferti’</i> signifas ‘proponi varon, servon aŭ – propran - (help)agon (angle: <i>offer</i>).<br>\n<br>\nNur homoj povas oferi kaj striktasence ankaŭ nur homoj povas oferti. Estas falsamika influo diri, ke <i>‘urbo ofertas vidindaĵojn’,</i> aŭ ke iu <i>‘sistemo ofertas facilan retvendadon’.</i> Konsideru uzi vortojn kiel <i>‘proponi’</i> aŭ <i>‘ebligi’</i> anstataŭ.",
+		"<i>La patrino</i> <span style=\"color: #ff0000\"><i>oferis</i></span><i> (ofertis) kuketojn al la gastoj.</i><br>\n<br>\n<i>Li</i> <span style=\"color: #ff0000\"><i>oferis</i></span><i> (ofertis) helpi en la kuirejo.</i><br>\n<br>\n<i>bona</i> <span style=\"color: #ff0000\"><i>laborofero</i></span><i> (laboroferto)</i>"
 	],
 	"£:BASE-oficejo&\"<oficoj?n?>\"": [
 		"£:BASE-oficejo&\"<oficoj?n?>\"",
@@ -5385,6 +5688,18 @@ g_marks.types = {
 		"Konfuzebla vortoparo: parketo → pargeto",
 		"<i>'Parketo'</i> estas eta parko. Por la plankospeco, uzu <i>'pargeto'.</i>",
 		"Nudaj piedoj kuris sur la glata <span style=\"color: #ff0000\">parketo</span> (pargeto)."
+	],
+	"£:BASE-partikulo": [
+		"£:BASE-partikulo",
+		"Konfuzebla vortoparo: partikulo ↔ partiko",
+		"'Partikulo' estas gramatika termino (speco de vortklaso), dum <i>'partiklo'</i> estas ĝenerala kaj fizika termino (malgranda ero de io).",
+		"<i>La akcelilo produktas multajn malsamajn</i> radioaktivajn <span style=\"color: #ff0000\">partikulojn</span> (partiklojn)<br>\n<br>\nLa urbo havas tre altan densecon de aeraj <span style=\"color: #ff0000\">partikuloj</span> (partikloj)<br>\n<br>\nLa vorto 'ĉu' estas demanda <span style=\"color: #ff0000\">partiklo</span> (partikulo)."
+	],
+	"£:BASE-partiklo": [
+		"£:BASE-partiklo",
+		"Konfuzebla vortoparo: partikulo ↔ partiko",
+		"'Partikulo' estas gramatika termino (speco de vortklaso), dum <i>'partiklo'</i> estas ĝenerala kaj fizika termino (malgranda ero de io).",
+		"<i>La akcelilo produktas multajn malsamajn</i> radioaktivajn <span style=\"color: #ff0000\">partikulojn</span> (partiklojn)<br>\n<br>\nLa urbo havas tre altan densecon de aeraj <span style=\"color: #ff0000\">partikuloj</span> (partikloj)<br>\n<br>\nLa vorto 'ĉu' estas demanda <span style=\"color: #ff0000\">partiklo</span> (partikulo)."
 	],
 	"£:BASE-pauxzo": [
 		"£:BASE-pauxzo",
@@ -5433,6 +5748,18 @@ g_marks.types = {
 		"Konfuzebla vortoparo: plaĉi ↔ ŝati",
 		"La verbo <i>‘plaĉi’</i> (france: <i>plaire,</i> germane: <i>gefallen</i>) estas netransitiva: <i>Io plaĉas al iu.</i> Kun rekta objekto, uzu <i>‘ŝati’: Iu ŝatas ion.</i>",
 		"Mi <span style=\"color: #ff0000\">plaĉas</span> naĝi en la maro. (Mi ŝatas naĝi en la maro. Aŭ alternative: <b>Al</b> <b>mi</b> plaĉas naĝi en la maro.)<br>\n<br>\nTio ne <span style=\"color: #ff0000\">ŝatis</span> (plaĉis) al lia amikino."
+	],
+	"£:BASE-plato": [
+		"£:BASE-plato",
+		"Konfuzebla vortoparo: plado → plato",
+		"'Plado' estas servotelero aŭ manĝoaranĝo, menuero. <i>'Plato',</i> aliflanke, estas objekto malpli dika ol longa kaj larĝa.",
+		"Tektonaj <span style=\"color: #ff0000\">plado</span> (platoj)<br>\n<br>\nSur la muro estis <span style=\"color: #ff0000\">metala</span> plado (plato) kun jarindiko"
+	],
+	"£x-etype-lemma&\"<.*pladoj?n>\"&\"plato\"": [
+		"£x-etype-lemma&\"<.*pladoj?n>\"&\"plato\"",
+		"Konfuzebla vortoparo: plado → plato",
+		"'Plado' estas servotelero aŭ manĝoaranĝo, menuero. <i>'Plato',</i> aliflanke, estas objekto malpli dika ol longa kaj larĝa.",
+		"Tektonaj <span style=\"color: #ff0000\">plado</span> (platoj)<br>\n<br>\nSur la muro estis <span style=\"color: #ff0000\">metala</span> plado (plato) kun jarindiko"
 	],
 	"£:BASE-mesagxo&\"<posxtoj?n?>\"": [
 		"£:BASE-mesagxo&\"<posxtoj?n?>\"",
@@ -5582,13 +5909,25 @@ g_marks.types = {
 		"£:BASE-senco",
 		"Konfuzebla vortoparo: senco ↔ senso",
 		"Ĝenerale, la uzo de la vorto 'senco’ estas simila al tiu de <i>‘signifo’</i> (de ekz. vorto aŭ esprimo)<i>.</i> Krome, se io <i>havas sencon,</i> ĝi estas memevidenta. Ne konfuzu <i>‘senco’</i> kun <i>‘senso’,</i> kiu estas anatomia vorto kaj celas la kapablon percepti per sensorgano (ekz. <i>vidi</i>, <i>aŭdi</i> ktp.)",
-		"<i>Tiu vorto havas kaj ĝeneralan kaj metaforan</i> <span style=\"color: #ff0000\"><i>sensojn</i></span><i> (sencojn).</i><br>\n<br>\n<i>Al li mankas ĉia</i> <span style=\"color: #ff0000\"><i>diplomatia</i></span><i> senco (senso).</i>"
+		"<i>Tiu vorto havas kaj ĝeneralan kaj metaforan</i> <span style=\"color: #ff0000\"><i>sensojn</i></span><i> (sencojn).</i><br>\n<br>\n<i>Al li mankas ĉia</i> <span style=\"color: #ff0000\"><i>diplomatia</i></span><i> senco (senso).</i><br>\n<br>\n<span style=\"color: #ff0000\"><i>flarsenco</i></span><i> → flarsenso</i>"
 	],
 	"£:BASE-senso": [
 		"£:BASE-senso",
 		"Konfuzebla vortoparo: senco ↔ senso",
 		"Ĝenerale, la uzo de la vorto 'senco’ estas simila al tiu de <i>‘signifo’</i> (de ekz. vorto aŭ esprimo)<i>.</i> Krome, se io <i>havas sencon,</i> ĝi estas memevidenta. Ne konfuzu <i>‘senco’</i> kun <i>‘senso’,</i> kiu estas anatomia vorto kaj celas la kapablon percepti per sensorgano (ekz. <i>vidi</i>, <i>aŭdi</i> ktp.)",
-		"<i>Tiu vorto havas kaj ĝeneralan kaj metaforan</i> <span style=\"color: #ff0000\"><i>sensojn</i></span><i> (sencojn).</i><br>\n<br>\n<i>Al li mankas ĉia</i> <span style=\"color: #ff0000\"><i>diplomatia</i></span><i> senco (senso).</i>"
+		"<i>Tiu vorto havas kaj ĝeneralan kaj metaforan</i> <span style=\"color: #ff0000\"><i>sensojn</i></span><i> (sencojn).</i><br>\n<br>\n<i>Al li mankas ĉia</i> <span style=\"color: #ff0000\"><i>diplomatia</i></span><i> senco (senso).</i><br>\n<br>\n<span style=\"color: #ff0000\"><i>flarsenco</i></span><i> → flarsenso</i>"
+	],
+	"£x-etype-lemma&<.*sensoj?n?>\"&\".*senco\"": [
+		"£x-etype-lemma&<.*sensoj?n?>\"&\".*senco\"",
+		"Konfuzebla vortoparo: senco ↔ senso",
+		"Ĝenerale, la uzo de la vorto 'senco’ estas simila al tiu de <i>‘signifo’</i> (de ekz. vorto aŭ esprimo)<i>.</i> Krome, se io <i>havas sencon,</i> ĝi estas memevidenta. Ne konfuzu <i>‘senco’</i> kun <i>‘senso’,</i> kiu estas anatomia vorto kaj celas la kapablon percepti per sensorgano (ekz. <i>vidi</i>, <i>aŭdi</i> ktp.)",
+		"<i>Tiu vorto havas kaj ĝeneralan kaj metaforan</i> <span style=\"color: #ff0000\"><i>sensojn</i></span><i> (sencojn).</i><br>\n<br>\n<i>Al li mankas ĉia</i> <span style=\"color: #ff0000\"><i>diplomatia</i></span><i> senco (senso).</i><br>\n<br>\n<span style=\"color: #ff0000\"><i>flarsenco</i></span><i> → flarsenso</i>"
+	],
+	"£x-etype-lemma&<.*sencoj?n?>\"&\".*senso\"": [
+		"£x-etype-lemma&<.*sencoj?n?>\"&\".*senso\"",
+		"Konfuzebla vortoparo: senco ↔ senso",
+		"Ĝenerale, la uzo de la vorto 'senco’ estas simila al tiu de <i>‘signifo’</i> (de ekz. vorto aŭ esprimo)<i>.</i> Krome, se io <i>havas sencon,</i> ĝi estas memevidenta. Ne konfuzu <i>‘senco’</i> kun <i>‘senso’,</i> kiu estas anatomia vorto kaj celas la kapablon percepti per sensorgano (ekz. <i>vidi</i>, <i>aŭdi</i> ktp.)",
+		"<i>Tiu vorto havas kaj ĝeneralan kaj metaforan</i> <span style=\"color: #ff0000\"><i>sensojn</i></span><i> (sencojn).</i><br>\n<br>\n<i>Al li mankas ĉia</i> <span style=\"color: #ff0000\"><i>diplomatia</i></span><i> senco (senso).</i><br>\n<br>\n<span style=\"color: #ff0000\"><i>flarsenco</i></span><i> → flarsenso</i>"
 	],
 	"£:BASE-senso&\"<sentoj?n?>": [
 		"£:BASE-senso&\"<sentoj?n?>",
@@ -5739,6 +6078,12 @@ g_marks.types = {
 		"Konfuzebla vortoparo: triviala ↔ bagatela",
 		"<i>'Triviala’</i> signifas ‘aĉe vulgara’, sed ĉi tie vi verŝajne celas <i>‘bagatela’,</i> kun la senco ‘malgrava/malkonsiderinda’.",
 		"La artikolo nur enhavas <span style=\"color: #ff0000\">trivialajn</span> (bagatelajn) informojn."
+	],
+	"£:BASE-trumpeto": [
+		"£:BASE-trumpeto",
+		"Konfuzebla vortoparo: trompeto → trumpeto",
+		"'Trompeto' estas eta trompo. Por la muzika instrumento uzu <i>'trumpeto'.</i>",
+		""
 	],
 	"£:BASE-gajni&\"<venk.*>\"": [
 		"£:BASE-gajni&\"<venk.*>\"",
@@ -6232,6 +6577,12 @@ g_marks.types = {
 		"Oni povas daŭrigi ion kio povas kontinui – staton, laboron, migradon. Povas temi pri aktivecoj, ankaŭ propraj, sed devas esti substantivo. Estas nekutime uzi infinitivon post <i>‘daŭrigi’.</i> Simple uzu <i>‘plu’</i> aŭ <i>‘plue’:</i><br>\n<br>\n<i>Ili daŭrigis la migradon.</i><br>\n<br>\n<i>Ili</i> <span style=\"color: #ff0000\"><i>daŭrigis migri</i> </span><i>(Ili plue migris).</i><br>\n<br>\nPIV eksplicite rekomendas eviti la infinitivan sintakson, kaj ReVo ignoras ĝin.",
 		""
 	],
+	"£:BASE-.*kompilajxo": [
+		"£:BASE-.*kompilajxo",
+		"Mankanta afikso: -ajx",
+		"'Kompilo' estas ago. Por kolekto de kantoj aŭ tekstoj prefere uzu <i>'kompilaĵo'.</i>",
+		"La <span style=\"color: #ff0000\">kompilo</span> (kompilaĵo) enhavas liajn ĉefajn verkojn el la lasta jardeko."
+	],
 	"£:BASE-klasikajxo": [
 		"£:BASE-klasikajxo",
 		"Mankanta afikso: klasiko → klasikaĵo",
@@ -6435,6 +6786,12 @@ g_marks.types = {
 		"Participo-eraro: koncernanto → koncernato",
 		"Verŝajne ĉi tie vi celas <i>‘koncernato’</i> (pasiva participo)<i>,</i> do la personon, kiun io koncernas. <i>‘Koncernanto’</i> (aktiva participo) estus persono koncernanta alian personon.",
 		"£:el"
+	],
+	"£:BASE-.*eg[aeio]&\"<eg.*>\"": [
+		"£:BASE-.*eg[aeio]&\"<eg.*>\"",
+		"Pozicio de afikso: eg- → -eg",
+		"La morfemo <i>'-eg'</i> estas sufikso, ne prefikso. Do kvankam teorie eblus uzi 'eg-' kiel substantivigitan unuan parton, prefere ne diru <i>'</i><span style=\"color: #ff0000\"><i>egabunde</i></span><i>', '</i><span style=\"color: #ff0000\"><i>egriĉa</i></span><i>', '</i><span style=\"color: #ff0000\"><i>egdelekti</i></span><i>'</i> aŭ <i>'</i><span style=\"color: #ff0000\"><i>egordo</i></span><i>',</i> sed <i>'abundege', 'riĉega', 'delektegi'</i> kaj <i>'ordego'.</i>",
+		""
 	],
 	"£insert&\"<kiel>\"": [
 		"£insert&\"<kiel>\"",
@@ -6732,29 +7089,23 @@ for (let k in g_marks.types) {
 	g_marks.types_grammar.push(k);
 
 	for (let m in g_marks.yellow) {
-		if (k.indexOf(m + '&') === 0 || k.indexOf(m + '-') === 0) {
+		if (k.indexOf(m + '&') === 0 || k.indexOf(m + '-') === 0 || k.indexOf(m + ':') === 0) {
 			g_marks.yellow[k] = k;
 		}
 	}
 	for (let m in g_marks.blue) {
-		if (k.indexOf(m + '&') === 0 || k.indexOf(m + '-') === 0) {
+		if (k.indexOf(m + '&') === 0 || k.indexOf(m + '-') === 0 || k.indexOf(m + ':') === 0) {
 			g_marks.blue[k] = k;
 		}
 	}
 	for (let m in g_marks.purple) {
-		if (k.indexOf(m + '&') === 0 || k.indexOf(m + '-') === 0) {
+		if (k.indexOf(m + '&') === 0 || k.indexOf(m + '-') === 0 || k.indexOf(m + ':') === 0) {
 			g_marks.purple[k] = k;
 		}
 	}
 
 	if (g_marks.yellow.hasOwnProperty(k) || g_marks.blue.hasOwnProperty(k) || g_marks.purple.hasOwnProperty(k) || g_green.hasOwnProperty(k)) {
 		// Nothing
-	}
-	else if (/^£(nom.*|acc.*|DEL.*|PREADD.*)$/.test(k)) {
-		g_marks.blue[k] = k;
-	}
-	else if (/^£comma-$/.test(k)) {
-		g_marks.purple[k] = k;
 	}
 	else {
 		g_marks.red[k] = k;
@@ -6785,6 +7136,9 @@ function l10n_marking_types(lang) {
 			let vs = v.split(/\s+/);
 			let ana = [];
 			for (let i=0 ; i<vs.length ; ++i) {
+				if (/"<.+?>"/.test(vs[i]) && /[ucghjs]x/i.test(vs[i])) {
+					vs[i] = vs[i].replace(/ux/g, '(?:ux|uh|ŭ)').replace(/cx/g, '(?:cx|ch|ĉ)').replace(/gx/g, '(?:gx|gh|ĝ)').replace(/hx/g, '(?:hx|hh|ĥ)').replace(/jx/g, '(?:jx|jh|ĵ)').replace(/sx/g, '(?:sx|sh|ŝ)');
+				}
 				ana.push(new RegExp(vs[i]));
 			}
 			g_marks.types_complex[fk].push({
