@@ -420,7 +420,7 @@ msgstr "Grammateket"
 msgid "TXT_COMMA_ABOUT"
 msgstr "N/A"
 
-# Copyright 2016-2024 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af MV-Nordic, Part of Vitec Software Group.
+# Copyright 2016-2025 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af MV-Nordic, Part of Vitec Software Group.
 msgid "TXT_COMMA_COPYRIGHT"
 msgstr "N/A"
 
@@ -459,7 +459,7 @@ msgstr ""
 "\n"
 "Grammateket kan användas när du arbetar med läs- och skrivverktygen IntoWords och CD-ORD. Grammateket ger också tillgång till lätt uppslag i IntoWords Ordbok."
 
-# Copyright 2016-2024 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af MV-Nordic, Part of Vitec Software Group.
+# Copyright 2016-2025 GrammarSoft ApS. Alle rettigheder forbeholdt.\nDistribueret af MV-Nordic, Part of Vitec Software Group.
 msgid "TXT_GRAMMAR_COPYRIGHT"
 msgstr "Copyright ???"
 

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2024 Tino Didriksen Consult <consult@tinodidriksen.com> at https://tinodidriksen.com/
+ * Copyright 2016-2025 Tino Didriksen Consult <consult@tinodidriksen.com> at https://tinodidriksen.com/
  * Linguistic backend by Oqaasileriffik (https://oqaasileriffik.gl/)
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
@@ -56,7 +56,7 @@ function impl_startLogin() {
 	$('.optComma').prop('checked', false);
 	$('.chkGrammarToComma').hide();
 	$('.btnCheckComma').hide();
-	$('.comma-specific').hide();
+	$('.canComma').hide();
 	g_tools.grammar = impl_canGrammar();
 	g_tools.comma = impl_canComma();
 

@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2024 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2025 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -156,6 +156,10 @@ function queueOption(e, key, k, v) {
 function typeChanged() {
 	let k = $(this).attr('name');
 	let v = $(this).val();
+
+	if (/^\d+$/.test(v)) {
+		v = parseInt(v);
+	}
 
 	matomo_event('typeChanged', k, v);
 	queueOption(this, 'types', k, v);

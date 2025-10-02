@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2024 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2025 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -105,7 +105,7 @@ l10n.s.dan = {
 	TITLE_SIDEBAR: "{PRODUCT_NAME}",
 	TXT_DICTIONARY_HINT: "Her kan du tilføje, rette eller fjerne ord fra din ordbog.",
 	TXT_GRAMMAR_ABOUT: "{PRODUCT_NAME} hjælper dig med at fange og fjerne stave- og slåfejl i dine tekster.",
-	TXT_GRAMMAR_COPYRIGHT: "Copyright 2019-2024 Oqaasileriffik.",
+	TXT_GRAMMAR_COPYRIGHT: "Copyright 2019-2025 Oqaasileriffik.",
 	TXT_GRAMMAR_HINT: "Vil du have tjekket din markering eller hele teksten?",
 	TXT_GRAMMAR_HINT_NS: "I Outlook kan man kun tjekke hele teksten.",
 	TXT_GRAMMAR_INTRO: "Først skal du tjekke din tekst for stavning.",
@@ -188,7 +188,7 @@ l10n.s.eng = {
 	TITLE_SIDEBAR: "{PRODUCT_NAME}",
 	TXT_DICTIONARY_HINT: "From here you can add, edit, or remove words from your dictionary.",
 	TXT_GRAMMAR_ABOUT: "{PRODUCT_NAME} will help you catch spelling and typing errors in your texts.",
-	TXT_GRAMMAR_COPYRIGHT: "Copyright 2019-2024 Oqaasileriffik.",
+	TXT_GRAMMAR_COPYRIGHT: "Copyright 2019-2025 Oqaasileriffik.",
 	TXT_GRAMMAR_HINT: "Do you want the selection or the whole document checked?",
 	TXT_GRAMMAR_HINT_NS: "In Outlook you can only check the whole text.",
 	TXT_GRAMMAR_INTRO: "First you should check the document's spelling.",
@@ -279,7 +279,7 @@ l10n.s.kal = {
 	TITLE_SIDEBAR: "{PRODUCT_NAME}",
 	TXT_DICTIONARY_HINT: "Uani oqaatsimik ilanngussisinnaavutit, naqqiillutit peersillutilluunniit.",
 	TXT_GRAMMAR_ABOUT: "{PRODUCT_NAME}ip naqinnerliukkat nassaaralugillu peertassavai.",
-	TXT_GRAMMAR_COPYRIGHT: "Copyright 2019-2024 Oqaasileriffik.",
+	TXT_GRAMMAR_COPYRIGHT: "Copyright 2019-2025 Oqaasileriffik.",
 	TXT_GRAMMAR_HINT: "Toqqakkat taamaallaat misissortikkusuppiuk imalt. allataq tamaat?",
 	TXT_GRAMMAR_SUPPORT: "Una aqqutigalugu ikiorneqarsinnaavutit <a href=\"https://kukkuniiaat.gl/\" target=\"_blank\">Oqaasileriffik</a>.",
 	TXT_HYPHENATE_HINT: "Nalunaakkat imminik ingerlasumik kittoraateeralersorneqarsinnaapput.",

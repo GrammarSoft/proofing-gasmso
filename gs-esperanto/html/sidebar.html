@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
- Copyright 2016-2024 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ Copyright 2016-2025 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  Linguistic backend by Eckhard Bick <eckhard.bick@gmail.com>
  Frontend by Tino Didriksen <mail@tinodidriksen.com>
 
@@ -23,7 +23,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title data-l10n="TITLE_SIDEBAR">…</title>
 	<base target="_top">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11/font/bootstrap-icons.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13/font/bootstrap-icons.css">
 	<script defer src="https://lingvohelpilo.visl.dk/gas/dev/gs-esperanto/vendor/jquery.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://lingvohelpilo.visl.dk/gas/dev/gs-esperanto/css/shared.css">
 	<link rel="stylesheet" type="text/css" href="https://lingvohelpilo.visl.dk/gas/dev/gs-esperanto/css/sidebar.css">
@@ -154,7 +154,7 @@
 <label class="crbox"><input type="checkbox" class="optComma" checked><span class="checkbox"></span><span data-l10n="LBL_COMMA_AFTER">…</span></label>
 </div>
 
-<hr class="tall">
+<div class="spacer divider"></div>
 
 <h1 data-l10n="HDR_COMMA">…</h1>
 <div class="text">
@@ -278,6 +278,49 @@
 </div>
 </div>
 
+<!-- Oneshot -->
+
+<div class="sidebar" id="chkWelcomeOneshot">
+<h1 data-l10n="HDR_ONESHOT">…</h1>
+<div class="text">
+	<span data-l10n="TXT_ONESHOT_HINT">…</span>
+</div>
+<div class="buttonbar backed">
+	<button class="btn-orange btnCheckSelected toolGrammar isOneshot" data-l10n="BTN_EXEC_SELECTED">…</button>
+	<button class="btn-lightblue btnCheckAll toolGrammar isOneshot" data-l10n="BTN_EXEC_ALL">…</button>
+</div>
+<div class="text">
+<label class="crbox"><input type="checkbox" class="optOneshotShort"><span class="checkbox"></span><span data-l10n="LBL_ONESHOT_SHORT">…</span></label>
+</div>
+
+<div class="spacer divider"></div>
+<div class="text center">
+	<button class="btn-blue btnOneshotClose" data-l10n="BTN_ONESHOT_CLOSE">…</button>
+</div>
+</div>
+
+<div class="sidebar" id="chkOneshotProgress">
+<h1 data-l10n="HDR_ONESHOT">…</h1>
+<div class="text center">
+	<span data-l10n="POP_WORKING">…</span>
+</div>
+<div class="text chkProgress">
+	<div class="chkProgressContainer"><div class="chkProgressBar"></div></div>
+</div>
+</div>
+
+<div class="sidebar" id="chkOneshotDone">
+<h1 data-l10n="HDR_ONESHOT">…</h1>
+<div class="text">
+	<span data-l10n="TXT_ONESHOT_DONE">…</span>
+</div>
+
+<div class="spacer divider"></div>
+<div class="text center">
+	<button class="btn-blue btnOneshotClose" data-l10n="BTN_ONESHOT_CLOSE">…</button>
+</div>
+</div>
+
 <!-- Grammar -->
 
 <div class="sidebar" id="chkWelcomeGrammar">
@@ -286,9 +329,9 @@
 	<span data-l10n="TXT_GRAMMAR_HINT">…</span>
 </div>
 <div class="buttonbar backed">
-	<button class="btn-blue btnCheckAuto" data-l10n="BTN_EXEC_CONTINUOUS">…</button>
-	<button class="btn-orange btnCheckSelected" data-l10n="BTN_EXEC_SELECTED">…</button>
-	<button class="btn-lightblue btnCheckAll" data-l10n="BTN_EXEC_ALL">…</button>
+	<button class="btn-blue btnCheckAuto toolGrammar" data-l10n="BTN_EXEC_CONTINUOUS">…</button>
+	<button class="btn-orange btnCheckSelected toolGrammar" data-l10n="BTN_EXEC_SELECTED">…</button>
+	<button class="btn-lightblue btnCheckAll toolGrammar" data-l10n="BTN_EXEC_ALL">…</button>
 </div>
 <div class="text chkGrammarToComma">
 <label class="crbox"><input type="checkbox" class="optComma" checked><span class="checkbox"></span><span data-l10n="LBL_COMMA_AFTER">…</span></label>
@@ -296,6 +339,13 @@
 <div class="text chkProgress">
 	<div class="chkProgressContainer"><div class="chkProgressBar"></div></div>
 </div>
+
+<span class="canOneshot canNormalize">
+<div class="spacer divider"></div>
+<div class="text center">
+	<button class="btn-blue btnOneshotOpen"><span data-l10n="BTN_ONESHOT_OPEN">…</span> <i class="bi bi-list-check"></i></button>
+</div>
+</span>
 </div>
 
 <div class="sidebar" id="chkDoneGrammar">
@@ -314,9 +364,9 @@
 	<span data-l10n="TXT_COMMA_HINT">…</span>
 </div>
 <div class="buttonbar backed">
-	<button class="btn-blue btnCheckAuto" data-l10n="BTN_EXEC_CONTINUOUS">…</button>
-	<button class="btn-orange btnCheckSelected" data-l10n="BTN_EXEC_SELECTED">…</button>
-	<button class="btn-lightblue btnCheckAll" data-l10n="BTN_EXEC_ALL">…</button>
+	<button class="btn-blue btnCheckAuto toolComma" data-l10n="BTN_EXEC_CONTINUOUS">…</button>
+	<button class="btn-orange btnCheckSelected toolComma" data-l10n="BTN_EXEC_SELECTED">…</button>
+	<button class="btn-lightblue btnCheckAll toolComma" data-l10n="BTN_EXEC_ALL">…</button>
 </div>
 <div class="text chkProgress">
 	<div class="chkProgressContainer"><div class="chkProgressBar"></div></div>
