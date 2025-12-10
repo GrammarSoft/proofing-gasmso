@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2022 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2025 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -85,6 +85,39 @@ function object_values(obj) {
 function object_join(obj, s) {
 	return object_values(obj).join(s);
 }
+
+function u_reverse(str) {
+	return [...str].reverse().join('');
+}
+
+function u_length(str) {
+	return [...str].length;
+}
+
+function common_prefix(strs) {
+	if (!strs[0] || strs.length ==  1) {
+		return strs[0] || '';
+	}
+
+	let i = 0;
+	while (strs[0][i] && strs.every(w => w[i] === strs[0][i])) {
+		i++;
+	}
+
+	return strs[0].substr(0, i);
+}
+
+function common_suffix(strs) {
+	strs = [].concat(strs);
+	for (let i=0 ; i<strs.length ; ++i) {
+		strs[i] = u_reverse(strs[i]);
+	}
+	return u_reverse(common_prefix(strs));
+}
+
+// From https://stackoverflow.com/a/43053803/145919
+let _f = (a, b) => [].concat(...a.map(a => b.map(b => [].concat(a, b))));
+let cartesian = (a, b, ...c) => b ? cartesian(_f(a, b), ...c) : a;
 
 // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/repeat#Polyfill
 if (!String.prototype.repeat) {
@@ -219,9 +252,6 @@ const Defs = {
 	CAP_COMMA_ENG_TRIAL: (1 <<  8),
 	CAP_COMMA_DEU:       (1 <<  9),
 	CAP_COMMA_DEU_TRIAL: (1 << 10),
-	TYPE_COMP_RIGHT:  (1 <<  0),
-	TYPE_COMP_LEFT:   (1 <<  1),
-	TYPE_COMP_HYPHEN: (1 <<  2),
 	MAX_SESSIONS: 5,
 	MAX_RQ_SIZE: 4096,
 	'comma-commercial': 'Kommaforslag Erhverv',
@@ -239,17 +269,84 @@ const Defs = {
 	'deucom-private': 'Kommatroll Private',
 	'deucom-student': 'Kommatroll Student',
 };
-Defs.TYPE_COMP = Defs.TYPE_COMP_LEFT|Defs.TYPE_COMP_RIGHT;
 
-const WF_WORD  = 0;
-const WF_MARK  = 1;
-const WF_SUGGS = 2;
-const WF_MERGE = 3;
-const WF_ANA   = 4;
-const WF_TID   = 5;
-const NUM_WF   = 6;
+class GS_Analysis {
+	pos = '';
+	func = '';
+	raw = '';
+}
+
+class GS_Word {
+	word = '';
+	space = ' ';
+	mark = '';
+	suggs = '';
+	oword = null;
+	omark = '';
+	osuggs = '';
+	ana = new GS_Analysis();
+	tid = 0;
+
+	constructor(word, mark) {
+		if (typeof mark === 'undefined') {
+			mark = '';
+		}
+		this.word = word;
+		this.mark = mark;
+	}
+}
+
+class GS_Suggestion {
+	word = '';
+	space = ' ';
+
+	constructor(word, space) {
+		if (typeof space === 'undefined') {
+			space = ' ';
+		}
+		if (word === '' || word === STR_NULLISH) {
+			space = '';
+		}
+		this.word = word;
+		this.space = space;
+	}
+}
+
+class GS_MarkRange {
+	seg = 0;
+	begin = -1;
+	end = -1;
+	mark = '';
+	ef_mark = '';
+	suggs = [];
+	tid = 0;
+	ins = null;
+
+	constructor(seg, begin, mark, suggs, tid) {
+		this.seg = seg;
+		this.begin = begin;
+		this.end = begin + 1;
+		this.mark = mark;
+		this.ef_mark = mark;
+		if (typeof suggs === 'string') {
+			if (suggs) {
+				suggs = suggs.split('\t').map(function(e) { return [new GS_Suggestion(e)]; });
+			}
+			else {
+				suggs = [];
+			}
+		}
+		this.suggs = suggs;
+		this.tid = tid;
+	}
+}
 
 const VERSION_PROTOCOL = 1;
+let MATOMO_ROOT = '//gramtrans.com/matomo/';
+
+const STR_SENT_BREAK = '\ue00a';
+const STR_NULLISH = '\ue00b';
+const STR_PLACEHOLDER = '\ue00c';
 
 // Upper-case because we compare them to DOM nodeName
 let text_nodes = {'ADDRESS': true, 'ARTICLE': true, 'ASIDE': true, 'AUDIO': true, 'BLOCKQUOTE': true, 'BODY': true, 'CANVAS': true, 'DD': true, 'DIV': true, 'DL': true, 'FIELDSET': true, 'FIGCAPTION': true, 'FIGURE': true, 'FOOTER': true, 'FORM': true, 'H1': true, 'H2': true, 'H3': true, 'H4': true, 'H5': true, 'H6': true, 'HEADER': true, 'HGROUP': true, 'HTML': true, 'HR': true, 'LI': true, 'MAIN': true, 'NAV': true, 'NOSCRIPT': true, 'OL': true, 'OUTPUT': true, 'P': true, 'PRE': true, 'SECTION': true, 'TABLE': true, 'TD': true, 'TH': true, 'UL': true, 'VIDEO': true};
@@ -269,6 +366,7 @@ let g_keepalive = null;
 let g_login_channel = '';
 let g_login_ws = null;
 let g_client = 'unknown';
+let g_anonymous = false;
 
 let g_tts_speaker = null;
 let g_tts_tap = 0;
@@ -279,7 +377,7 @@ let _live_options = {};
 
 // Letters we're likely to see in Danish, Norwegian, Swedish, Greenlandic
 // Can't rely on Unicode escapes or /u modifier because of IE11
-const Letters = '\\da-zA-ZÂâÊêÎîÔôÛûÃãĨĩÕõŨũÀàÈèÌìÒòÙùÁáÉéÍíÓóÚúÄäËëÏïÖöÜüÆæØøÅåĸ.,!;:';
+const Letters = '\\da-zA-ZŭŬĉĈĝĜĥĤĵĴŝŜÂâÊêÎîÔôÛûÃãĨĩÕõŨũÀàÈèÌìÒòÙùÁáÉéÍíÓóÚúÄäËëÏïÖöÜüÆæØøÅåĸ.,!;:';
 const Const = {
 	LetterT: new RegExp('['+Letters+']+', 'i'),
 	NonLetter: new RegExp('[^'+Letters+']+', 'ig'),
@@ -288,7 +386,7 @@ const Const = {
 	SuffixNonLetterT: new RegExp('[^'+Letters+']+$', 'i'),
 	OnlyNonLetterT: new RegExp('^[^'+Letters+']*$', 'i'),
 	SpaceOrEmpty: /^\s*$/,
-	Split_String: ' ,.?!"#¤%&/()=@£${}|*^¨~/\\½§<>:;-',
+	Split_String: '\u0005 ,.?!"#¤%&/()=@£${}|*^¨~/\\½§<>:;-',
 };
 Const.Split_Array = Const.Split_String.split('');
 Const.Split_Regex = new RegExp('(['+Const.Split_String+'])');
@@ -296,7 +394,7 @@ Const.Split_Regex = new RegExp('(['+Const.Split_String+'])');
 const func2label = [
 	{rx:/^@<*SUBJ>*$/, f:'S', i:'x-lg', w:false}, // subject
 	{rx:/^@[FS]-<*SUBJ>*$/, f:'Sf', i:'x-lg', w:true}, // formal subject
-	{rx:/^@FMV$/, f:'Vm', i:'circle-fill', w:false}, // main verb
+	{rx:/^@(FMV|FAUX|FS-.*|ICL-(?!AUX<).*)$/, f:'Vm', i:'circle-fill', w:false}, // main verb
 	{rx:/^@<*(DAT|IOBJ)>*$/, f:'Oi', i:'square-fill', w:false}, // indirect object
 	{rx:/^@<*(ACC|OBJ)>*$/, f:'Od', i:'triangle-fill', w:false}, // direct object
 	{rx:/^@<*(PIV)>*$/, f:'Op', i:'diamond-fill', w:false}, // prepositional object
@@ -308,8 +406,41 @@ const func2label = [
 	{rx:/^@(<*FOC>*|>P)$/, f:'A', i:ROOT_URL_SELF+'/imgs/bi-chevron-down-half.svg', w:false}, // focus, including pre-pp
 ];
 
-let markings = [];
-let marking_ids = [];
+let g_marks = {
+	types: {},
+	types_comma: [],
+	types_grammar: [],
+	types_complex: {},
+
+	comp_left: /[£%]-comp( |&|$)/,
+	comp_right: /[£%]comp-?( |&|$)/,
+	comp_hyphen: /[£%]comp-:-( |&|$)/,
+	comp_preswap: /[£%]PRESWAP( |&|$)/,
+	to_upper: /£upper( |&|$)/,
+	to_lower: /£lower( |&|$)/,
+	rx_ins: /(£comma|£insert\S*|%ko|%k)( |-|&|$)/,
+	rx_ins_before: /((?:%ko|%k|£comma)(?:-\S+)?)(?: |&|$)/,
+	rx_del: /(£nil|£no-comma|%nok|%ok|%nko)( |-|&|$)/,
+	rx_editable: /£(vfin|no-refl)/,
+
+	red: {},
+	yellow: {},
+	purple: {},
+	blue: {},
+	info: {},
+	order: [
+		[/^£:.*/, 10],
+		[/^£(upper|lower|comma)/, -10],
+		[/^£green/, -20],
+	],
+
+	dict: {},
+};
+
+let segments_i = 0;
+let segments = [];
+let segment_ids = [];
+let marking_ranges = [];
 let to_send = null;
 let to_send_b = 0;
 let to_send_i = 0;
@@ -327,6 +458,7 @@ let g_tools = {
 	grammar: false,
 	comma: false,
 };
+
 let session = {locale: 'da'};
 
 // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
@@ -340,6 +472,10 @@ function escapeRegExpTokens(txt) {
 		ts[i] = escapeRegExp(ts[i]);
 	}
 	return ts.join('\\s+');
+}
+
+function is_nullish(s) {
+	return (!s) || (s.length == 0) || (s === STR_NULLISH) || (s === STR_SENT_BREAK);
 }
 
 function loadOptions(s) {
@@ -531,13 +667,19 @@ function ls_del(key) {
 function markingColor(types) {
 	let col = 'green';
 	for (let i=0 ; i<types.length ; ++i) {
-		if (types_info.hasOwnProperty(types[i])) {
+		if (g_marks.info.hasOwnProperty(types[i])) {
 			col = 'info';
 		}
-		if (types_yellow.hasOwnProperty(types[i])) {
+		if (g_marks.yellow.hasOwnProperty(types[i])) {
 			col = 'yellow';
 		}
-		if (types_red.hasOwnProperty(types[i])) {
+		if (g_marks.blue.hasOwnProperty(types[i])) {
+			col = 'blue';
+		}
+		if (g_marks.purple.hasOwnProperty(types[i])) {
+			col = 'purple';
+		}
+		if (g_marks.red.hasOwnProperty(types[i])) {
 			col = 'red';
 			break;
 		}
@@ -548,6 +690,40 @@ function markingColor(types) {
 		}
 	}
 	return col;
+}
+
+function orderMarkings() {
+	order = {};
+	for (let m in g_marks.types) {
+		order[m] = 0;
+		for (let rx of g_marks.order) {
+			if (rx[0].test(m)) {
+				order[m] = rx[1];
+			}
+		}
+	}
+	g_marks.order = order;
+	////console.log(g_marks.order);
+}
+
+function sortMarkings(a, b) {
+	if (a === b) {
+		return 0;
+	}
+	if (!g_marks.order.hasOwnProperty(a)) {
+		return 1;
+	}
+	if (!g_marks.order.hasOwnProperty(b)) {
+		return -1;
+	}
+	return g_marks.order[b] - g_marks.order[a];
+}
+
+function sortRanges(a, b) {
+	if (a.seg == b.seg) {
+		return a.begin - b.begin;
+	}
+	return a.seg - b.seg;
 }
 
 function findTextNodes(nodes, filter) {
@@ -590,6 +766,9 @@ function sanitize_result(txt) {
 
 	// Special case
 	txt = txt.replace(/£x-etype-case/g, '£upper');
+
+	// Puntuation on a line of its own should be a sentence break
+	txt = txt.replace(/\n([.?!:])\n/g, '\n$1\n\n');
 
 	// Workaround for bug https://trello.com/c/ixmc92EB
 	txt = txt.replace(/.'.\t£proper\n"/g, '.\n"');
@@ -772,7 +951,7 @@ function findToSend(prefix, word, suffix, casing, closer) {
 			}
 		}
 		else if (Const.PrefixNonLetterT.test(word)) {
-			while (p_off > 1 && Const.NonLetterT.test(t.charAt(p_off-1))) {
+			while (p_off > 1 && Const.NonLetterT.test(t.charAt(p_off-1)) && !/\s/.test(t.charAt(p_off-1))) {
 				--p_off;
 			}
 		}
@@ -788,7 +967,7 @@ function findToSend(prefix, word, suffix, casing, closer) {
 			}
 		}
 		else if (Const.SuffixNonLetterT.test(word)) {
-			while (w_off < t.length && Const.NonLetterT.test(t.charAt(w_off))) {
+			while (w_off < t.length && Const.NonLetterT.test(t.charAt(w_off)) && !/\s/.test(t.charAt(w_off))) {
 				++w_off;
 			}
 		}
@@ -880,6 +1059,8 @@ function _parseResult(rv) {
 	let tid = parseInt(rv.t);
 
 	let txt = sanitize_result(rv.c);
+	txt = g_impl.beforeParseResult(txt);
+
 	let ps = [];
 	let nps = $.trim(txt.replace(/\n+<\/s>\n+/g, "\n\n")).split(/<\/s\d+>/);
 
@@ -908,10 +1089,13 @@ function _parseResult(rv) {
 			continue;
 		}
 
+		let otxt = '';
+
 		let lines = cp.split(/\n/);
 		let id = parseInt(lines[0].replace(/^<s(.+)>$/, '$1'));
 		for (let k = to_send_b ; k<to_send_i ; ++k) {
 			if (to_send[k].i === id) {
+				otxt = to_send[k].t;
 				cache[g_tool][to_send[k].h] = {
 					tid: tid,
 					txt: $.trim(cp.replace(/^<s.+>/g, '')),
@@ -930,24 +1114,23 @@ function _parseResult(rv) {
 				continue;
 			}
 
-			let w = $.trim(lines[j]).split(/\t/);
-			w[WF_WORD] = $.trim(w[WF_WORD].replace(/(\S)=/g, '$1 '));
+			let w = new GS_Word(...$.trim(lines[j]).split(/\t/));
+			let wf = '"<'+w.word+'>"';
+			w.word = $.trim(w.word.replace(/(\S)=/g, '$1 '));
 
-			while (w.length < NUM_WF) {
-				w.push('');
-			}
-			w[WF_MERGE] = 0;
-			w[WF_ANA] = {pos:'', func:''};
-			w[WF_TID] = tid;
+			w.ana.raw = ' ' + wf + ' ';
+			w.tid = tid;
 
-			if (w[WF_WORD] === '') {
+			if (w.word === '') {
+				w.word = STR_SENT_BREAK;
+				w.space = '';
 				words.push(w);
 				continue;
 			}
 
-			if (w.length > 1) {
-				let ws = w[WF_MARK].split(/ /g);
-				w = [w[WF_WORD], '', '', 0, {pos:'', func:''}, tid];
+			if (w.mark) {
+				let ws = w.mark.split(/ /g);
+				w.mark = '';
 
 				let nws = [];
 				let rs = [];
@@ -962,7 +1145,7 @@ function _parseResult(rv) {
 					if (ws[k].indexOf('<R:') === 0) {
 						let n = ws[k].substr(3);
 						n = n.substr(0, n.length-1).replace(/(\S)=/g, '$1 ');
-						if (n === w[WF_WORD]) {
+						if (n === w.word) {
 							//console.log(n);
 							continue;
 						}
@@ -973,19 +1156,20 @@ function _parseResult(rv) {
 					if (ws[k].indexOf('<AFR:') === 0) {
 						let n = ws[k].substr(5);
 						n = n.substr(0, n.length-1).replace(/(\S)=/g, '$1 ');
-						if (n === w[WF_WORD]) {
+						if (n === w.word) {
 							//console.log(n);
 							continue;
 						}
 						crs.push(n);
 						continue;
 					}
-					if (!marking_types.hasOwnProperty(ws[k])) {
+					if (!/^[%£]/.test(ws[k])) {
+						w.ana.raw += ws[k] + ' ';
 						if (/^[A-Z]+$/.test(ws[k])) {
-							w[WF_ANA].pos = ws[k];
+							w.ana.pos = ws[k];
 						}
 						else if (/^@/.test(ws[k])) {
-							w[WF_ANA].func = ws[k];
+							w.ana.func = ws[k];
 						}
 						else {
 							//console.log('Unknown marking/tag ' + ws[k]);
@@ -995,6 +1179,48 @@ function _parseResult(rv) {
 						nws.push(ws[k]);
 					}
 				}
+
+				let dnws = [];
+				for (let k=0 ; k<nws.length ; ++k) {
+					if (g_marks.types_complex.hasOwnProperty(nws[k])) {
+						//console.log(`Complex marking ${nws[k]}`);
+						let cs = g_marks.types_complex[nws[k]];
+						let good = false;
+						for (let ci = 0 ; ci<cs.length ; ++ci) {
+							let c = cs[ci];
+							good = true;
+							for (let a=0 ; a<c.ana.length ; ++a) {
+								//console.log(`Complex testing ${c.ana[a]} in ${w.ana.raw}`);
+								if (!c.ana[a].test(w.ana.raw)) {
+									//console.log(`Complex not-found ${nws[k]}`);
+									good = false;
+									break;
+								}
+							}
+							if (good) {
+								//console.log(`Complex found ${nws[k]} => ${c.exp}`);
+								dnws.push(c.exp);
+								break;
+							}
+						}
+						if (good) {
+							continue;
+						}
+					}
+
+					if (!g_marks.types.hasOwnProperty(nws[k])) {
+						nws[k] = nws[k].replace(/^£:\S+/, '£:...');
+					}
+
+					if (g_marks.types.hasOwnProperty(nws[k]) || /^£(xor)?[<>]/.test(nws[k])) {
+						dnws.push(nws[k]);
+					}
+					else {
+						//console.log('Unknown marking/tag ' + nws[k]);
+					}
+				}
+				nws = dnws;
+
 				crs = rs.concat(crs);
 				// Remove £sentsplit from last token
 				if (j == lines.length-1 && nws.length == 1 && nws[0] === '£sentsplit') {
@@ -1014,19 +1240,22 @@ function _parseResult(rv) {
 					if (nws[k] === '£sentsplit') {
 						had_sentsplit = true;
 					}
-					if (types_to_upper.test(nws[k]) && prev_sentsplit) {
+					if (g_marks.to_upper.test(nws[k]) && prev_sentsplit) {
 						////console.log(`Skipping £upper due to £sentsplit`);
 						continue;
 					}
-					if (_live_options.types.hasOwnProperty(nws[k]) && !_live_options.types[nws[k]]) {
+					if (/^£(xor)?[<>]/.test(nws[k])) {
+						//console.log(nws[k]);
+					}
+					else if (_live_options.types.hasOwnProperty(nws[k]) && !_live_options.types[nws[k]]) {
 						continue;
 					}
 					none = false;
 					ws.push(nws[k]);
 				}
 
-				if (_live_options.config.opt_useDictionary && types_dictionary.test(ws[0]) && isInDictionary(w[0])) {
-					////console.log(`Found ${w[0]} in dictionary`);
+				if (_live_options.config.opt_useDictionary && g_marks.dict.test(ws[0]) && isInDictionary(w.word)) {
+					////console.log(`Found ${w.word} in dictionary`);
 					ws = [];
 				}
 
@@ -1034,28 +1263,28 @@ function _parseResult(rv) {
 				if (ws.length && none) {
 					////console.log(`Vitec MV whitelist no-match: ${ws}`);
 					if (ws.indexOf('£insert') !== -1) {
-						w[WF_WORD] = ' ';
+						w.word = ' ';
 					}
 					ws = [];
 				}
-				nws = ws;
+				nws = ws.unique().sort(sortMarkings);
 				if (nws.length == 0) {
 					crs = [];
 				}
 
 				// For case-folding, create a correction if none exists and fold all corrections to the desired case
 				for (let k=0 ; k<nws.length ; ++k) {
-					if (types_to_upper.test(nws[k])) {
+					if (g_marks.to_upper.test(nws[k])) {
 						if (crs.length == 0) {
-							crs.push(w[WF_WORD]);
+							crs.push(w.word);
 						}
 						for (let c=0 ; c<crs.length ; ++c) {
 							crs[c] = uc_first(crs[c]);
 						}
 					}
-					else if (types_to_lower.test(nws[k])) {
+					else if (g_marks.to_lower.test(nws[k])) {
 						if (crs.length == 0) {
-							crs.push(w[WF_WORD]);
+							crs.push(w.word);
 						}
 						for (let c=0 ; c<crs.length ; ++c) {
 							crs[c] = lc_first(crs[c]);
@@ -1076,121 +1305,271 @@ function _parseResult(rv) {
 						crs = [crs[0]];
 					}
 					crs = crs.unique();
-					w[WF_SUGGS] = crs.join('\t');
+					w.suggs = crs.join('\t');
 					////console.log(crs);
 				}
 				if (nws.length) {
-					nws = nws.unique();
-					w[WF_MARK] = nws.join(' ');
-					if (w[WF_MARK].indexOf(' ') !== -1) {
-						w[WF_MARK] = w[WF_MARK].replace(/ £error /g, ' ').replace(/ £error$/g, '').replace(/^£error /g, '');
-					}
-
-					if (w[WF_MARK].indexOf('£-comp') !== -1) {
-						w[WF_MERGE] |= Defs.TYPE_COMP_LEFT;
-					}
-					if (types_comp_right.test(w[WF_MARK])) {
-						w[WF_MERGE] |= Defs.TYPE_COMP_RIGHT;
-					}
-					if (w[WF_MARK].indexOf('£comp-:-') !== -1) {
-						w[WF_MERGE] |= Defs.TYPE_COMP_RIGHT | Defs.TYPE_COMP_HYPHEN;
+					w.mark = nws.join(' ');
+					if (w.mark.indexOf(' ') !== -1) {
+						w.mark = w.mark.replace(/ £error /g, ' ').replace(/ £error$/g, '').replace(/^£error /g, '');
 					}
 
 					had_mark = true;
 				}
 				else {
-					w[WF_SUGGS] = '';
+					w.suggs = '';
 				}
 			}
-			if (w.length > 1 && /(%ko|%k)( |-|$)/.test(w[1])) {
-				let wo = [w[WF_WORD], '', '', 0, w[WF_ANA], w[WF_TID]];
-				w[WF_WORD] = ',';
-				if (w[WF_MARK].indexOf('%k-stop') !== -1) {
-					w[WF_WORD] = '.';
+			if (g_marks.rx_ins_before.test(w.mark)) {
+				let mos = w.mark.split(' ');
+				let mo = [];
+				let mw = [];
+				for (let k=0 ; k<mos.length ; ++k) {
+					if (g_marks.rx_ins_before.test(mos[k])) {
+						mw.push(mos[k]);
+					}
+					else {
+						mo.push(mos[k]);
+					}
 				}
-				w[WF_ANA] = {pos: 'PU', func: ''};
+				let wo = new GS_Word(w.word, mo.join(' '));
+				wo.ana.pos = w.ana.pos;
+				wo.ana.func = w.ana.func;
+				wo.ana.raw = w.ana.raw;
+				wo.suggs = w.suggs;
+				wo.tid = w.tid;
+
+				w = new GS_Word(',', mw.join(' '));
+				if (w.mark.indexOf('%k-stop') !== -1) {
+					w.word = '.';
+				}
+				w.ana.pos = 'PU';
 				words.push(w);
 				w = wo;
 			}
 			words.push(w);
 		}
-		if (had_mark) {
-			// Pre-merge compound errors with the token they're supposed to be with, respecting other corrections to either side of the merge
-			for (let j=0 ; j<words.length ; ) {
-				if (words[j].length > 1 && words[j][WF_MERGE] & Defs.TYPE_COMP) {
-					let ts = words[j][WF_MARK];
-					let wx = '';
-					let px = '';
-					let sx = '';
-					let ana = words[j][WF_ANA];
-					let tid = words[j][WF_TID];
-					if (words[j][WF_MERGE] & Defs.TYPE_COMP_LEFT) {
-						if (words[j-1].length > 1 && words[j-1][WF_MARK]) {
-							ts += ' '+words[j-1][WF_MARK];
-						}
-						wx = words[j-1][WF_WORD] + ' ' + words[j][WF_WORD];
-						px = words[j-1][WF_WORD];
-						if (words[j-1].length > 1 && words[j-1][WF_SUGGS]) {
-							px = words[j-1][WF_SUGGS];
-						}
-						sx = words[j][WF_WORD];
-						if (words[j][WF_SUGGS]) {
-							sx = words[j][WF_SUGGS];
-						}
-					}
-					if (words[j][WF_MERGE] & Defs.TYPE_COMP_RIGHT) {
-						if (words[j+1].length > 1 && words[j+1][WF_MARK]) {
-							ts += ' '+words[j+1][WF_MARK];
-						}
-						wx = words[j][WF_WORD] + ' ' + words[j+1][WF_WORD];
-						px = words[j][WF_WORD];
-						if (words[j][WF_SUGGS]) {
-							px = words[j][WF_SUGGS];
-						}
-						sx = words[j+1][WF_WORD];
-						if (words[j+1].length > 1 && words[j+1][WF_SUGGS]) {
-							sx = words[j+1][WF_SUGGS];
-						}
-						ana = words[j+1][WF_ANA];
-					}
 
-					let has_uc = (wx !== wx.toLowerCase());
-
-					px = px.split(/\t/);
-					sx = sx.split(/\t/);
-					let space = '';
-					if (words[j][WF_MERGE] & Defs.TYPE_COMP_HYPHEN) {
-						space = '‐';
-					}
-					let es = [];
-					for (let p=0 ; p<px.length ; ++p) {
-						for (let s=0 ; s<sx.length ; ++s) {
-							if (!has_uc && sx[s] !== sx[s].toLowerCase()) {
-								//console.log('Discarding case-different suffix: ' + sx[s]);
-								continue;
-							}
-							es.push(px[p] + space + sx[s]);
-						}
-					}
-					let flags = words[j][WF_MERGE];
-
-					let nw = [wx, ts.split(/ /).unique().join(' ').replace(/ +/g, ' '), es.join('\t'), 0, ana, tid];
-					words[j] = nw;
-
-					if (flags & Defs.TYPE_COMP_LEFT) {
-						words.splice(j-1, 1);
-					}
-					else {
-						words.splice(j+1, 1);
-						++j;
-					}
+		// Try to fix backend's mangling of symbols, by detecting non-letters and adopting them from the input text
+		if (otxt) {
+			let rx = /^([^a-zA-Z0-9])/;
+			let good = true;
+			for (let j=0 ; j<words.length ; ++j) {
+				let w = words[j];
+				if (is_nullish(w.word) || g_marks.rx_ins.test(w.mark)) {
+					continue;
+				}
+				if (otxt.indexOf(w.word) == 0) {
+					otxt = otxt.substr(w.word.length).trim();
 				}
 				else {
-					++j;
+					let ws = w.word.split(/([^a-zA-Z0-9])/);
+					for (let k=0 ; k<ws.length ; ++k) {
+						if (otxt.indexOf(ws[k]) == 0) {
+							otxt = otxt.substr(ws[k].length).trim();
+						}
+						else {
+							let m = rx.exec(otxt);
+							if (m) {
+								ws[k] = m[1];
+								otxt = otxt.substr(ws[k].length).trim();
+							}
+							else {
+								good = false;
+								//console.log([w, ws, j]);
+								break;
+							}
+						}
+					}
+					if (good) {
+						let sgs = words[j].suggs.split('\t');
+						for (let k=0 ; k<sgs.length ; ++k) {
+							let sg = sgs[k].split(/([^a-zA-Z0-9])/);
+							if (sg.length === ws.length) {
+								for (let m=0 ; m<ws.length ; ++m) {
+									if (/^[^a-zA-Z0-9]$/.test(sg[m])) {
+										sg[m] = ws[m];
+									}
+								}
+								sgs[k] = sg.join('');
+							}
+						}
+						words[j].suggs = sgs.join('\t');
+						let nw = ws.join('');
+						words[j].word = nw;
+					}
 				}
 			}
-			marking_ids[markings.length] = id;
-			markings.push(words);
+		}
+
+		if (had_mark) {
+			// First loop only handles spanning marks so they can eat types behind them
+			for (let j=0 ; j<words.length ; ++j) {
+				if (words[j].mark) {
+					let rx = /£(xor)?([<>])(\S+)/;
+					let span = rx.exec(words[j].mark);
+					if (span) {
+						let range = new GS_MarkRange(segments.length, j, words[j].mark, words[j].suggs, words[j].tid);
+						let px = [];
+						let sx = [];
+						let wb = words[j].word;
+						let we = '';
+						if (span[2] == '<') {
+							for (let k=j-1 ; k>-1 ; --k) {
+								if (!words[k].word) {
+									break;
+								}
+								if (words[k].mark.indexOf('£'+span[3]) !== -1) {
+									we = wb;
+									wb = words[k].word;
+									range.begin = k;
+									range.mark = (words[k].mark + ' ' + words[j].mark).replace(rx, '').replace(/  +/g, ' ').trim().split(' ').unique().join(' ');
+									px = words[k].suggs.split('\t');
+									if (!words[k].suggs) {
+										px = [words[k].word];
+									}
+									if (g_marks.rx_del.test(words[k].mark)) {
+										px = [''];
+										wb = '';
+									}
+									sx = words[j].suggs.split('\t');
+									if (!words[j].suggs) {
+										sx = [words[j].word];
+									}
+									if (g_marks.rx_del.test(words[j].mark)) {
+										sx = [''];
+										we = '';
+									}
+									words[j].omark = words[j].mark;
+									words[j].osuggs = words[j].suggs;
+									words[k].omark = words[k].mark;
+									words[k].osuggs = words[k].suggs;
+									words[j].mark = words[k].mark = '';
+									words[j].suggs = words[k].suggs = '';
+									break;
+								}
+							}
+						}
+						else if (span[2] == '>') {
+							for (let k=j+1 ; k<words.length ; ++k) {
+								if (!words[k].word) {
+									break;
+								}
+								if (words[k].mark.indexOf('£'+span[3]) !== -1) {
+									we = words[k].word;
+									range.end = k + 1;
+									range.mark = (words[j].mark + ' ' + words[k].mark).replace(rx, '').replace(/  +/g, ' ').trim().split(' ').unique().join(' ');
+									px = words[j].suggs.split('\t');
+									if (!words[j].suggs) {
+										px = [words[j].word];
+									}
+									if (g_marks.rx_del.test(words[j].mark)) {
+										px = [''];
+										wb = '';
+									}
+									sx = words[k].suggs.split('\t');
+									if (!words[k].suggs) {
+										sx = [words[k].word];
+									}
+									if (g_marks.rx_del.test(words[k].mark)) {
+										sx = [''];
+										we = '';
+									}
+									words[j].omark = words[j].mark;
+									words[j].osuggs = words[j].suggs;
+									words[k].omark = words[k].mark;
+									words[k].osuggs = words[k].suggs;
+									words[j].mark = words[k].mark = '';
+									words[j].suggs = words[k].suggs = '';
+									break;
+								}
+							}
+						}
+
+						let sgs = [];
+						if (span[1] === 'xor') {
+							for (let s=0 ; s<sx.length ; ++s) {
+								let sug = Array(range.end - range.begin);
+								sug.fill(new GS_Suggestion(STR_PLACEHOLDER));
+								sug[0] = new GS_Suggestion(wb);
+								sug[sug.length-1] = new GS_Suggestion(sx[s]);
+								sgs.push(sug);
+							}
+							for (let p=0 ; p<px.length ; ++p) {
+								let sug = Array(range.end - range.begin);
+								sug.fill(new GS_Suggestion(STR_PLACEHOLDER));
+								sug[0] = new GS_Suggestion(px[p]);
+								sug[sug.length-1] = new GS_Suggestion(we);
+								sgs.push(sug);
+							}
+						}
+						else {
+							for (let p=0 ; p<px.length ; ++p) {
+								for (let s=0 ; s<sx.length ; ++s) {
+									let sug = Array(range.end - range.begin);
+									sug.fill(new GS_Suggestion(STR_PLACEHOLDER));
+									sug[0] = new GS_Suggestion(px[p]);
+									sug[sug.length-1] = new GS_Suggestion(sx[s]);
+									sgs.push(sug);
+								}
+							}
+						}
+						range.suggs = sgs;
+						if (sgs.length) {
+							range.ef_mark = range.mark.replace(new RegExp(g_marks.rx_del, 'g'), ' ').replace(/  +/g, ' ').trim();
+						}
+						marking_ranges.push(range);
+					}
+				}
+			}
+			// Second loop handles everything else
+			for (let j=0 ; j<words.length ; ++j) {
+				if (words[j].mark) {
+					let range = new GS_MarkRange(segments.length, j, words[j].mark, words[j].suggs, words[j].tid);
+					words[j].omark = words[j].mark;
+					words[j].osuggs = words[j].suggs;
+					words[j].mark = words[j].suggs = '';
+
+					if (g_marks.comp_left.test(range.mark)) {
+						range.begin -= 1;
+					}
+					else if (g_marks.comp_right.test(range.mark)) {
+						range.end += 1;
+					}
+					else if (g_marks.comp_hyphen.test(range.mark)) {
+						range.end += 1;
+					}
+					else if (g_marks.comp_preswap.test(range.mark)) {
+						range.begin -= 1;
+					}
+
+					if (g_marks.rx_ins_before.test(range.mark) || g_marks.rx_ins.test(range.mark)) {
+						range.ins = words[j];
+						range.suggs = [];
+						words[j] = new GS_Word(STR_NULLISH);
+						words[j].oword = range.ins.word;
+						words[j].omark = range.ins.omark;
+						words[j].osuggs = range.ins.osuggs;
+					}
+
+					marking_ranges.push(range);
+				}
+			}
+			// Third loop resets marks and suggestions
+			for (let j=0 ; j<words.length ; ++j) {
+				words[j].mark = words[j].omark;
+				words[j].suggs = words[j].osuggs;
+			}
+			marking_ranges.sort(sortRanges);
+			for (let j=0 ; j<marking_ranges.length ; ++j) {
+				if (marking_ranges[j].mark && !marking_ranges[j].ef_mark) {
+					marking_ranges[j].ef_mark = marking_ranges[j].mark;
+				}
+			}
+			////console.log(marking_ranges);
+
+			segment_ids[segments.length] = id;
+			segments.push(words);
 		}
 	}
 
@@ -1243,6 +1622,8 @@ function sendTexts() {
 	}
 
 	if (text) {
+		text = g_impl.beforeSendTexts(text);
+
 		to_send_last = text;
 		let url = ROOT_URL_GRAMMAR + '/callback.php?a=' + g_tools.grammar;
 		if (g_tool === 'Comma') {
@@ -1280,8 +1661,39 @@ function checkParagraphs(doc) {
 	to_send = doc;
 	to_send_i = 0;
 	to_send_b = 0;
-	markings = [];
-	marking_ids = [];
+	segments_i = 0;
+	segments = [];
+	segment_ids = [];
+	marking_ranges = [];
+	g_impl.parseCheckStart();
+	sendTexts();
+}
+
+function recheckParagraphs(doc) {
+	if (ts_xhr) {
+		ts_xhr.abort();
+	}
+	ts_xhr = null;
+
+	for (let k = 0 ; k<to_send.length ; ++k) {
+		if (to_send[k].i === segment_ids[cmarking.s]) {
+			to_send.splice(k, 1, ...doc);
+			break;
+		}
+	}
+	for (let k = 0 ; k<to_send.length ; ++k) {
+		to_send[k].i = k+1;
+	}
+
+	loadOptions((g_tool == 'Comma') ? SERVICES.Comma : SERVICES.Grammar);
+	loadDictionary();
+
+	//console.log(doc, to_send);
+	to_send_i = 0;
+	to_send_b = 0;
+	segments = [];
+	segment_ids = [];
+	marking_ranges = [];
 	g_impl.parseCheckStart();
 	sendTexts();
 }
@@ -1365,17 +1777,30 @@ function object2po(obj, base) {
 }
 
 function nl2html(v) {
-	v = '<p>'+v.replace(/\n+<ul>/g, '</p><ul>').replace(/\n+<\/ul>/g, '</ul>').replace(/<\/ul>\n+/g, '</ul><p>').replace(/\n+<li>/g, '<li>').replace(/\n\n+/g, '</p><p>').replace(/\n/g, '<br>')+'</p>';
+	v = '<p>'+v.replace(/\n+<ul>/g, '</p><ul>').replace(/\n+<\/ul>/g, '</ul>').replace(/<\/ul>\n+/g, '</ul><p>').replace(/\n+<ol>/g, '</p><ol>').replace(/\n+<\/ol>/g, '</ol>').replace(/<\/ol>\n+/g, '</ol><p>').replace(/\n+<li>/g, '<li>').replace(/\n\n+/g, '</p><p>').replace(/\n/g, '<br>')+'</p>';
 	return v;
 }
 
 function l10n_detectLanguage() {
-	l10n.lang = navigator.language;
+	l10n.lang = ls_get('locale', navigator.language);
+	try {
+		if (window.hasOwnProperty('parent') && window.parent && window.parent.hasOwnProperty('UILANG2') && window.parent.UILANG2) {
+			l10n.lang = window.parent.UILANG2;
+		}
+	}
+	catch (DOMException) {
+	}
 	if (window.hasOwnProperty('UILANG2') && window.UILANG2) {
 		l10n.lang = window.UILANG2;
 	}
 	if (!l10n.s.hasOwnProperty(l10n.lang)) {
 		l10n.lang = l10n.lang.replace(/^([^-_]+).*$/, '$1');
+	}
+	if (!l10n.s.hasOwnProperty(l10n.lang)) {
+		l10n.lang = g_options_default?.config?.opt_uiLang ?? 'en';
+	}
+	if (!l10n.s.hasOwnProperty(l10n.lang)) {
+		l10n.lang = 'en';
 	}
 	if (!l10n.s.hasOwnProperty(l10n.lang)) {
 		l10n.lang = 'da';
@@ -1400,6 +1825,9 @@ function l10n_translate(s, g) {
 	let l = session.locale;
 	let t = '';
 
+	if (!l10n.s.hasOwnProperty(l)) {
+		l = 'en';
+	}
 	if (!l10n.s.hasOwnProperty(l)) {
 		l = 'da';
 	}
@@ -1490,12 +1918,18 @@ function l10n_world(node) {
 		let v = l10n_translate(k);
 		e.attr('href', v);
 	});
+	$(node).find('[data-l10n-placeholder]').each(function() {
+		let e = $(this);
+		let k = e.attr('data-l10n-placeholder');
+		let v = l10n_translate(k);
+		e.attr('placeholder', v);
+	});
 
 	if (node == document && typeof l10n_marking_types === 'function') {
 		l10n_marking_types(session.locale);
-		if (marking_types.hasOwnProperty('%k-stop') && !marking_types.hasOwnProperty('%x-to-stop')) {
-			marking_types['%x-to-stop'] = marking_types['%k-stop'];
-			marking_types_comma.push('%x-to-stop');
+		if (g_marks.types.hasOwnProperty('%k-stop') && !g_marks.types.hasOwnProperty('%x-to-stop')) {
+			g_marks.types['%x-to-stop'] = g_marks.types['%k-stop'];
+			g_marks.types_comma.push('%x-to-stop');
 		}
 	}
 }
@@ -1525,7 +1959,7 @@ function matomo_load() {
 	_paq.push(['trackPageView']);
 	_paq.push(['enableLinkTracking']);
 	(function() {
-		let u="//gramtrans.com/matomo/";
+		let u= MATOMO_ROOT;
 		_paq.push(['setTrackerUrl', u+'matomo.php']);
 		_paq.push(['setSiteId', g_impl.matomo_sid]);
 		let d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
@@ -1534,6 +1968,10 @@ function matomo_load() {
 }
 
 function matomo_event(cat, act, name, value) {
+	if (typeof _paq === 'undefined') {
+		//console.log('Matomo not loaded yet');
+		return false;
+	}
 	//console.log([cat, act, name, value]);
 	if (typeof act === 'undefined' || !act) {
 		act = cat;
@@ -1555,8 +1993,6 @@ function contentLoaded() {
 	if (CLIENT === 'adobe' || location.search.indexOf('host=adobe') !== -1) {
 		g_client = 'adobe';
 		//console.log('Adobe');
-		addScript(ROOT_URL_SELF+'/vendor/CSInterface.js');
-		addScript(ROOT_URL_SELF+'/vendor/Vulcan.js');
 		addScript(ROOT_URL_SELF+'/js/impl-adobe.js');
 	}
 	else if (CLIENT === 'web' || location.search.indexOf('host=web') !== -1) {
@@ -1586,13 +2022,20 @@ function contentLoaded() {
 	if (id === 'sidebar' || id === 'options' || id === 'dictionary') {
 		// Delay ever so slightly to force other scripts to load first
 		// No, defer doesn't work. No, async doesn't work either.
-		setTimeout(function() {addScript(ROOT_URL_SELF+'/js/'+id+'.js'); matomo_load();}, 100);
+		setTimeout(function() {addScript(ROOT_URL_SELF+'/js/'+id+'.js'); }, 100);
+	}
+
+	if (/^(word|outlook)$/.test(g_client) && /Trident|MSIE|Edge/.test(window.navigator.userAgent)) {
+		$('#working').hide();
+		$('#placeholder').html(l10n_translate_html('ERR_OFFICE_TOO_OLD'));
 	}
 }
 
-if (document.readyState === 'loading') {
-	$(window).on('load', contentLoaded);
-}
-else {
-	contentLoaded();
+if (typeof document !== 'undefined') {
+	if (document.readyState === 'loading') {
+		$(window).on('load', contentLoaded);
+	}
+	else {
+		contentLoaded();
+	}
 }

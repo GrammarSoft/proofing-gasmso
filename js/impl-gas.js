@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2022 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2025 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -56,6 +56,10 @@ function impl_showOptions(g_tool) {
 	return google.script.run.withFailureHandler(showError).showOptions(g_tool);
 }
 
+function impl_recheckSelectedPars() {
+	return google.script.run.withSuccessHandler(recheckParagraphs).withFailureHandler(showError).getSelectedPars();
+}
+
 function impl_getSelectedPars() {
 	return google.script.run.withSuccessHandler(checkParagraphs).withFailureHandler(showError).getSelectedPars();
 }
@@ -67,3 +71,5 @@ function impl_getAllPars() {
 function impl_showDictionary(text) {
 	return google.script.run.withFailureHandler(showError).showDictionary(text);
 }
+
+g_impl.loaded = true;

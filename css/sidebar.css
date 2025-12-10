@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2022 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2025 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -30,17 +30,20 @@ label span {
 	margin-top: 10px;
 }
 
-#working {
+#placeholder, #working {
 	position: absolute;
 	left: 0;
 	right: 0;
 	top: 0;
 	bottom: 0;
 	background-color: #fff;
-	opacity: 0.75;
 	z-index: 9999999;
 	text-align: center;
+	padding-top: 50px;
+}
+#working {
 	padding-top: 200px;
+	opacity: 0.75;
 	font-size: 24px;
 }
 
@@ -88,6 +91,10 @@ label span {
 	position: absolute;
 	right: 0;
 	top: 0;
+	white-space: nowrap;
+}
+.suggestion-lookup span {
+	display: inline-block;
 }
 
 .chkExplainLess img, .chkExplainMore img {
@@ -121,6 +128,10 @@ label span {
 	font-style: italic;
 	font-weight: bold;
 }
+.marking-enhance {
+	border: 1px solid;
+	border-radius: 3px;
+}
 .marking-grammar {
 }
 .marking-comma {
@@ -145,6 +156,18 @@ label span {
 }
 .marking-info.alt:after {
 	content: " ⓘ";
+}
+.marking-purple {
+	color: #c22bc2;
+}
+.marking-purple.alt:after {
+	content: " ℧";
+}
+.marking-blue {
+	color: #2b2bc2;
+}
+.marking-blue.alt:after {
+	content: " ↯";
 }
 .marking-green {
 	color: #419641;
@@ -171,6 +194,12 @@ label span {
 	height: 19px;
 	margin-right: 3px;
 	margin-left: -3px;
+	font-size: 19px;
+	line-height: 13px;
+}
+.bi.icon {
+	margin-right: 0;
+	margin-left: 0;
 }
 .icon-input {
 	background-image: url('../imgs/icon-input.png');

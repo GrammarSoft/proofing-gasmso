@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016-2022 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
+ * Copyright 2016-2025 GrammarSoft ApS <info@grammarsoft.com> at https://grammarsoft.com/
  * Frontend by Tino Didriksen <mail@tinodidriksen.com>
  *
  * This project is free software: you can redistribute it and/or modify
@@ -58,6 +58,11 @@ iframe {
 	margin: 0;
 	width: 100%;
 	height: 100%;
+}
+
+textarea {
+	min-height: 15ex;
+	min-width: 90%;
 }
 
 .supportBtn {
@@ -167,7 +172,7 @@ ul {
 
 .spacer {
 	display: block;
-	height: 18px;
+	margin: 36px 0;
 }
 .divider {
 	border-bottom: 1px dotted #ccc;
@@ -269,6 +274,20 @@ button {
 	background-color: #097ab3;
 }
 
+.btn-green {
+	background-color: #18aa18;
+}
+.btn-green:hover, .btn-green:focus {
+	background-color: #128012;
+}
+
+.btn-red {
+	background-color: #aa1818;
+}
+.btn-red:hover, .btn-red:focus {
+	background-color: #801212;
+}
+
 a, .link {
 	text-decoration: none;
 	cursor: pointer;
@@ -350,7 +369,13 @@ input[type="text"] {
 	border: 2px solid #4a90e2;
 	width: 100%;
 	padding: 3px;
-	margin: 0;
+	margin: 5px 0;
+	line-height: 18px;
+	min-height: 30px;
+}
+
+.w20 {
+	width: 20ex !important;
 }
 
 th, td {
@@ -377,6 +402,12 @@ thead, tfoot {
 }
 .type-k, .type-green {
 	color: #419641;
+}
+.type-purple {
+	color: #c22bc2;
+}
+.type-blue {
+	color: #2b2bc2;
 }
 .type-other {
 	color: #666;
@@ -556,6 +587,10 @@ thead, tfoot {
 }
 .flex-cols input {
 	display: none;
+}
+
+.is-invalid {
+	border: 2px solid #aa1818;
 }
 
 footer {

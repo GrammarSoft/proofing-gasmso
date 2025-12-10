@@ -510,7 +510,7 @@ CSInterface.prototype.loadBinAsync = function(urlName,callback)
         xhr.open('GET', urlName, true);
         xhr.onerror = function ()
         {
-  		  //console.log("Unable to load snapshot from given URL");
+  		  ////console.log("Unable to load snapshot from given URL");
   		  return false;
 		};
         xhr.send();
@@ -522,13 +522,13 @@ CSInterface.prototype.loadBinAsync = function(urlName,callback)
             }
             else if(typeof callback !== "undefined")
             {
-                //console.log("Provided callback is not a function");
+                ////console.log("Provided callback is not a function");
             }
         }
     }
     catch(err)
     {
-        //console.log(err);
+        ////console.log(err);
         return false;
     }
 
@@ -566,7 +566,7 @@ CSInterface.prototype.loadBinSync  = function(pathName)
     }
     catch(err)
     {
-        //console.log(err);
+        ////console.log(err);
         return false;
     }
     //control should not come here
