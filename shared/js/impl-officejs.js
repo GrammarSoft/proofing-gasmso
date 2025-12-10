@@ -202,19 +202,13 @@ function _impl_replaceHelper(state, rng, rpl, comment) {
 		}
 		//console.log([rng, rpl]);
 	}
+	if (comment) {
+		state.context.document.getSelection().insertComment(comment);
+	}
 	rng.insertText(rpl, 'Replace');
 	rng.select();
 	if (g_impl.oneshot) {
 		state.context.document.changeTrackingMode = Word.ChangeTrackingMode.off;
-		if (comment) {
-			let c = state.context.document.getSelection().insertComment(comment);
-			c.load();
-			c.set({
-				//content: 'hubba bubba',
-				contentRange: {bold: true, hyperlink: 'https://dr.dk/'},
-			});
-			console.log(c);
-		}
 	}
 	return state.context;
 }
@@ -420,3 +414,4 @@ g_impl.init = function(func) {
 };
 
 g_impl.loaded = true;
+g_impl.canOneshot = true;

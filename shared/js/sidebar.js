@@ -1030,9 +1030,11 @@ function loginKeepalive(init) {
 			g_tools.comma = impl_canComma();
 
 			if (g_tools.grammar && g_tools.comma) {
+				$('.canGrammar').show();
 				$('.chkGrammarToComma').show();
 				$('.btnCheckComma').show();
 				$('.canComma').show();
+				$('.canGrammarAndComma').show();
 				switchSidebar('#chkWelcomeShared');
 			}
 			else if (g_tools.comma) {
@@ -1040,14 +1042,17 @@ function loginKeepalive(init) {
 				$('.btnCheckGrammar').hide();
 				$('.btnCheckComma').show();
 				$('.canComma').show();
+				$('.canGrammarAndComma').hide();
 				switchSidebar('#chkWelcomeComma');
 				g_tool = 'Comma';
 			}
 			else {
+				$('.canGrammar').show();
 				$('.optComma').prop('checked', false);
 				$('.chkGrammarToComma').hide();
 				$('.btnCheckComma').hide();
 				$('.canComma').hide();
+				$('.canGrammarAndComma').hide();
 				switchSidebar('#chkWelcomeGrammar');
 			}
 			$('.btnOptions').show();
@@ -1177,6 +1182,9 @@ function initSidebar() {
 	}
 	if (!g_impl.hasOwnProperty('beforeParseResult')) {
 		g_impl.beforeParseResult = function(t) { return t; };
+	}
+	if (!g_impl.hasOwnProperty('canOneshot')) {
+		g_impl.canOneshot = false;
 	}
 	g_impl.oneshot = false;
 
@@ -1384,6 +1392,10 @@ function initSidebar() {
 		switchSidebar('#chkWelcome' + g_tool);
 		matomo_event('ui', 'check-comma');
 	});
+	$('.canOneshot').hide();
+	if (g_impl.canOneshot) {
+		$('.canOneshot').show();
+	}
 	$('.btnOneshotOpen').click(function() {
 		g_impl.oneshot = true;
 		switchSidebar('#chkWelcomeOneshot');

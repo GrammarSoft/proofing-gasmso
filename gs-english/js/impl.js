@@ -65,7 +65,7 @@ function impl_dataKeepalive() {
 }
 
 function impl_startLogin() {
-	$('.grammar-specific').hide();
+	$('.canGrammar').hide();
 	loginKeepalive(true);
 }
 
