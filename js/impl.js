@@ -84,6 +84,7 @@ function impl_canComma() {
 }
 
 function impl_openCorpus(query) {
+	/*
 	query = query.replace(/ŭ/g, 'ux');
 	query = query.replace(/Ŭ/ig, 'Ux');
 	query = query.replace(/ĉ/g, 'cx');
@@ -96,6 +97,7 @@ function impl_openCorpus(query) {
 	query = query.replace(/Ĵ/ig, 'Jx');
 	query = query.replace(/ŝ/g, 'sx');
 	query = query.replace(/Ŝ/ig, 'Sx');
+	//*/
 	g_impl.openExternal('https://corp.visl.dk/m/?l=epo&s=s&c[epo_uniq_ttt]=1&c[epo_wikipedia]=1&c[epo_literature]=1&c[epo_periodicals]=1&c[epo_crawl]=1&q='+encodeURIComponent(query), 'Corpus Query');
 }
 

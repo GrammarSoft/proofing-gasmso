@@ -216,6 +216,7 @@ l10n.s.dan = {
 	TXT_MUST_LOGIN: "Du skal logge ind for at bruge dette værktøj.",
 	TXT_ONESHOT_DONE: "Alle forbedringsforslag er nu blevet til kommentarer i dokumentet selv. Gem det for offline brug og/eller send det til en medarbejder, studerende osv.",
 	TXT_ONESHOT_HINT: "Indføjer automatisk alle ændringsforslag i dokumentet som kommentarer, så at de kan redigeres offline eller sendes til relevant modtager.",
+	TXT_ONESHOT_NOT_BOTH: "Det er kun muligt at køre ét af værktøjerne på et givent stykke tekst. Hvis du vil køre et andet værktøj skal du først fjerne de indsatte markeringer og kommentare.",
 	TXT_SUBSCRIBE: "Opret abonnement eller anmod om prøveadgang via <a href=\"https://{PRODUCT_DOMAIN}/\" target=\"_blank\">{PRODUCT_DOMAIN}</a>",
 	TXT_SUBSCRIBE_FREE: "Opret bruger gratis på <a href=\"https://{PRODUCT_DOMAIN}/\" target=\"_blank\">{PRODUCT_DOMAIN}</a>",
 	TXT_WHAT_IS: "{PRODUCT_NAME} hjælper dig med at sætte komma - dvs. tilføjer manglende kommaer og fjerner eller flytter forkerte kommaer.",
